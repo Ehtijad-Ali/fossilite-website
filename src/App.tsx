@@ -1,25 +1,41 @@
 import { Route, Routes } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
-import { Navbar, Footer } from "./components";
+import { Navbar, Footer, ScrollToTop } from "./components";
 import './App.css'
-import { Home, Products } from './views'
-import About from './views/About/About'
+import { Home } from './views'
 
-// Defer the chat widget (and its animation code) until after first paint —
-// it's not needed for the initial render.
-const AIChat = lazy(() =>
-  import('./components/AIChat').then((m) => ({ default: m.AIChat })),
-)
+// Defer everything that isn't the landing page — keeps first paint lean.
+const AIChat = lazy(() => import('./components/AIChat').then((m) => ({ default: m.AIChat })))
+const About = lazy(() => import('./views/About/About'))
+const Products = lazy(() => import('./views/Products/Products'))
+const Pricing = lazy(() => import('./views/Pricing/Pricing'))
+const Contact = lazy(() => import('./views/Contact/Contact'))
+const Login = lazy(() => import('./views/Login/Login'))
+const Resources = lazy(() => import('./views/Resources/Resources'))
+const Privacy = lazy(() => import('./views/Legal/Privacy'))
+const Terms = lazy(() => import('./views/Legal/Terms'))
+const Cookies = lazy(() => import('./views/Legal/Cookies'))
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/prodcuts' element={<Products />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/products' element={<Products />} />
+          <Route path='/prodcuts' element={<Products />} />
+          <Route path='/pricing' element={<Pricing />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/resources' element={<Resources />} />
+          <Route path='/privacy' element={<Privacy />} />
+          <Route path='/terms' element={<Terms />} />
+          <Route path='/cookies' element={<Cookies />} />
+        </Routes>
+      </Suspense>
       <Footer />
       <Suspense fallback={null}>
         <AIChat />

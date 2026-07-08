@@ -1,3 +1,5 @@
 export * from './Navbar'
 export * from './Footer'
 export * from './AIChat'
+export * from './PageHero'
+export { ScrollToTop } from './ScrollToTop'

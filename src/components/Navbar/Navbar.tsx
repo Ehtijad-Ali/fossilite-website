@@ -4,7 +4,8 @@ import {
   List, ListItem, ListItemButton, ListItemText,
   Toolbar, Button,
 } from "@mui/material";
-import { LightMode, Brightness2, Close } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
+import { useNavigate, useLocation } from "react-router-dom";
 import { MenuIconLight, MenuIconDark, RightArrow } from "../../assets/Icons";
 import logoLight from "../../assets/FossiliteLogoNavy.svg";
 import logoDark from "../../assets/FossiliteLogo.svg";
@@ -14,13 +15,15 @@ import { scrollToSection } from "../../utils/scrollToSection";
 
 const drawerWidth = 280;
 
-// ── Nav items now map to section IDs on the page ──────────────────────────────
-const navItems = [
-  { label: "About",     id: "about"     },
-  { label: "Products",  id: "products"  },
-  { label: "Solutions", id: "solutions" },
-  { label: "Resources", id: "resources" },
-  { label: "Use Cases", id: "use-cases" },
+// ── Nav items map to a route (`to`) or an in-page section (`id`) ───────────────
+type NavItem = { label: string; to?: string; id?: string };
+const navItems: NavItem[] = [
+  { label: "Home",      to: "/"         },
+  { label: "About",     to: "/about"     },
+  { label: "Products",  to: "/products" },
+  { label: "Resources", to: "/resources" },
+  { label: "Pricing",   to: "/pricing"   },
+  { label: "Contact",   to: "/contact"  },
 ];
 
 const nasalizationFont = {
@@ -28,83 +31,14 @@ const nasalizationFont = {
   letterSpacing: "0.05em",
 };
 
-// ── Theme toggle pill ─────────────────────────────────────────────────────────
-const ThemeToggle: React.FC<{
-  mode: "light" | "dark";
-  onToggle: () => void;
-  isDark: boolean;
-}> = ({ mode, onToggle, isDark }) => {
-  const tokens = useSharedTokens();
-  const T = {
-    toggleBg: tokens.surfaceSubtle,
-    toggleBorder: tokens.border,
-    toggleBorderHover: tokens.accent,
-    toggleKnob: tokens.primaryText,
-    toggleIcon: isDark ? "#3a3a3a" : "#BBC0C6",
-  };
-  return (
-    <Box
-      role="switch"
-      aria-checked={isDark}
-      aria-label="Toggle colour theme"
-      tabIndex={0}
-      onClick={onToggle}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onToggle(); }}
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        width: "60px",
-        height: "30px",
-        backgroundColor: T.toggleBg,
-        border: `0.5px solid ${T.toggleBorder}`,
-        borderRadius: "15px",
-        cursor: "pointer",
-        position: "relative",
-        px: "5px",
-        outline: "none",
-        "&:hover": { borderColor: T.toggleBorderHover },
-        "&:focus-visible": {
-          boxShadow: isDark
-            ? "0 0 0 2px rgba(187,192,198,0.4)"
-            : "0 0 0 2px rgba(0,25,50,0.25)",
-        },
-        transition: "border-color 0.2s ease, background-color 0.4s ease",
-      }}
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: mode === "dark" ? "34px" : "4px",
-          transform: "translateY(-50%)",
-          width: "22px",
-          height: "22px",
-          backgroundColor: T.toggleKnob,
-          borderRadius: "50%",
-          zIndex: 2,
-          transition: "left 0.3s cubic-bezier(0.34,1.56,0.64,1), background-color 0.4s ease",
-        }}
-      />
-      <LightMode sx={{ color: T.toggleIcon, fontSize: "14px", zIndex: 1, transition: "color 0.4s ease" }} />
-      <Brightness2
-        sx={{
-          color: T.toggleIcon,
-          fontSize: "14px",
-          zIndex: 1,
-          transform: "rotate(150deg)",
-          transition: "color 0.4s ease",
-        }}
-      />
-    </Box>
-  );
-};
-
 // ── Main Navbar ───────────────────────────────────────────────────────────────
 export const Navbar: React.FC<any> = (props) => {
-  const { mode, toggleMode } = useThemeMode();
+  const { mode } = useThemeMode();
   const isDark = mode === "dark";
   const tokens = useSharedTokens();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const T = {
     scrolledBg: isDark ? "rgba(22,22,22,0.92)" : "rgba(255,244,227,0.92)",
     border: tokens.border,
@@ -125,40 +59,45 @@ export const Navbar: React.FC<any> = (props) => {
   };
   const { window } = props;
 
-  const [mobileOpen, setMobileOpen]   = useState(false);
-  const [scrolled, setScrolled]       = useState(false);
-  const [activeId, setActiveId]       = useState("");
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
 
   const logo = isDark ? logoDark : logoLight;
 
-  // ── Track scroll position to highlight active section ─────────────────────
+  const isActive = (item: NavItem) => {
+    if (item.id) return false; // in-page sections aren't route-tracked
+    if (item.to === "/products") return location.pathname.startsWith("/pro");
+    return location.pathname === item.to;
+  };
+
+  // Navigate a nav item — routes go via router; section links scroll (jumping
+  // back to Home first if we're on another page).
+  const handleNav = (item: NavItem) => {
+    setMobileOpen(false);
+    if (item.id) {
+      if (location.pathname === "/") {
+        scrollToSection(item.id);
+      } else {
+        navigate("/");
+        requestAnimationFrame(() => requestAnimationFrame(() => scrollToSection(item.id!)));
+      }
+      return;
+    }
+    if (item.to) navigate(item.to);
+  };
+
+  // ── Track scroll position for the glass background ────────────────────────
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(globalThis.scrollY > 20);
-
-      // Find which section is currently in view
-      const offsets = navItems
-        .map(({ id }) => {
-          const el = document.getElementById(id);
-          if (!el) return null;
-          return { id, top: el.getBoundingClientRect().top };
-        })
-        .filter(Boolean) as { id: string; top: number }[];
-
-     const filtered = offsets.filter((o) => o.top <= 120);
-      const current = filtered[filtered.length - 1];
-
-      setActiveId(current?.id ?? "");
-    };
-
+    const onScroll = () => setScrolled(globalThis.scrollY > 20);
     globalThis.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => globalThis.removeEventListener("scroll", onScroll);
   }, []);
 
   const handleDrawerToggle = () => setMobileOpen((p) => !p);
 
-  const handleNavClick = (id: string) => {
-    scrollToSection(id);
+  const go = (to: string) => {
+    navigate(to);
     setMobileOpen(false);
   };
 
@@ -175,7 +114,7 @@ export const Navbar: React.FC<any> = (props) => {
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
-        <Box component="img" src={logo} alt="logo" sx={{ width: "100px", height: "auto" }} />
+        <Box component="img" src={logo} alt="logo" sx={{ width: "100px", height: "auto", cursor: "pointer" }} onClick={() => go("/")} />
         <IconButton
           onClick={handleDrawerToggle}
           aria-label="Close navigation"
@@ -193,12 +132,12 @@ export const Navbar: React.FC<any> = (props) => {
       </Box>
 
       <List sx={{ flex: 1, p: 0 }}>
-        {navItems.map(({ label, id }) => {
-          const active = activeId === id;
+        {navItems.map((item) => {
+          const active = isActive(item);
           return (
-            <ListItem key={id} disablePadding>
+            <ListItem key={item.label} disablePadding>
               <ListItemButton
-                onClick={() => handleNavClick(id)}
+                onClick={() => handleNav(item)}
                 sx={{
                   py: "14px",
                   px: 0,
@@ -224,7 +163,7 @@ export const Navbar: React.FC<any> = (props) => {
                       transition: "background-color 0.2s ease",
                     }}
                   />
-                  <ListItemText primary={label} />
+                  <ListItemText primary={item.label} />
                 </Box>
               </ListItemButton>
             </ListItem>
@@ -232,9 +171,27 @@ export const Navbar: React.FC<any> = (props) => {
         })}
       </List>
 
-      <Box sx={{ mt: 3, display: "flex", flexDirection: "column", gap: 2 }}>
+      <Box sx={{ mt: 3, display: "flex", flexDirection: "column", gap: 1.5 }}>
         <Button
-          onClick={() => handleNavClick("contact")}
+          onClick={() => go("/login")}
+          sx={{
+            width: "100%",
+            py: "12px",
+            borderRadius: "8px",
+            color: T.textPrimary,
+            fontSize: "12px",
+            fontWeight: 500,
+            textTransform: "none",
+            ...nasalizationFont,
+            border: `0.5px solid transparent`,
+            transition: "background-color 0.2s ease",
+            "&:hover": { backgroundColor: T.iconBtnHoverBg },
+          }}
+        >
+          Log in
+        </Button>
+        <Button
+          onClick={() => go("/contact")}
           endIcon={<RightArrow />}
           sx={{
             width: "100%",
@@ -256,7 +213,6 @@ export const Navbar: React.FC<any> = (props) => {
         >
           Book a Demo
         </Button>
-        {/* <ThemeToggle mode={mode} onToggle={toggleMode} isDark={isDark} /> */}
       </Box>
     </Box>
   );
@@ -289,9 +245,9 @@ export const Navbar: React.FC<any> = (props) => {
             alignItems: "center",
           }}
         >
-          {/* Logo — scrolls back to top */}
+          {/* Logo — navigates home */}
           <Box
-            onClick={() => globalThis.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => go("/")}
             sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
           >
             <Box
@@ -309,12 +265,12 @@ export const Navbar: React.FC<any> = (props) => {
 
           {/* Desktop nav links */}
           <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: "2px" }}>
-            {navItems.map(({ label, id }) => {
-              const active = activeId === id;
+            {navItems.map((item) => {
+              const active = isActive(item);
               return (
                 <Button
-                  key={id}
-                  onClick={() => handleNavClick(id)}
+                  key={item.label}
+                  onClick={() => handleNav(item)}
                   disableRipple
                   sx={{
                     color: active ? T.textPrimary : T.textSecondary,
@@ -346,17 +302,35 @@ export const Navbar: React.FC<any> = (props) => {
                     "&:hover::after": { transform: "scaleX(1)" },
                   }}
                 >
-                  {label}
+                  {item.label}
                 </Button>
               );
             })}
           </Box>
 
-          {/* Desktop right: CTA (theme toggle removed — light theme only for now) */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: "14px" }}>
-            {/* <ThemeToggle mode={mode} onToggle={toggleMode} isDark={isDark} /> */}
+          {/* Desktop right: Log in + CTA */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: "10px" }}>
             <Button
-              onClick={() => handleNavClick("contact")}
+              onClick={() => go("/login")}
+              disableRipple
+              sx={{
+                px: "14px",
+                py: "8px",
+                color: location.pathname === "/login" ? T.textPrimary : T.textSecondary,
+                fontSize: "12px",
+                fontWeight: 500,
+                textTransform: "none",
+                borderRadius: "8px",
+                minWidth: 0,
+                ...nasalizationFont,
+                transition: "color 0.2s ease, background-color 0.2s ease",
+                "&:hover": { color: T.textPrimary, backgroundColor: T.surfaceSubtle },
+              }}
+            >
+              Log in
+            </Button>
+            <Button
+              onClick={() => go("/contact")}
               endIcon={<RightArrow />}
               sx={{
                 px: "18px",

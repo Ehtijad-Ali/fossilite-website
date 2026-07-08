@@ -1,36 +1,179 @@
-import { FC, useState, useEffect, useRef } from "react";
+import { FC, ReactNode, useState, useEffect, useRef } from "react";
 import { Box, Grid2 as Grid, Stack, Typography } from "@mui/material";
 import * as THREE from "three";
 import { useSharedTokens } from "../../../../theme/sharedTokens";
+import { useInView } from "../../../../hooks/useInView";
 
-const PRINCIPLES = [
+// ── Principle icons (inline SVG, inherit currentColor) ────────────────────────
+const IconSearch = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
+    <path d="m20 20-3.2-3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+  </svg>
+);
+const IconBlueprint = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.8" />
+    <path d="M3 9h18M9 21V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+  </svg>
+);
+const IconFunnel = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M3 5h18l-7 8v6l-4-2v-4L3 5Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+  </svg>
+);
+const IconRocket = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M9 12l3 3M15 4c3 1 5 3 6 6-3 3-7 5-9 5l-3-3c0-2 2-6 5-9 .3-.3.7-.6 1-1Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" strokeLinecap="round" />
+    <circle cx="15" cy="10" r="1.4" fill="currentColor" />
+  </svg>
+);
+
+const IconArrow: FC<{ color: string }> = ({ color }) => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M5 12h14M13 6l6 6-6 6" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const PRINCIPLES: { index: string; title: string; body: string; speed: number; icon: ReactNode }[] = [
   {
     index: "01", title: "Identify the Problem",
     body: "We listen closely to understand your workflows, operational challenges, and areas slowing your team down.",
-    speed: 3.0,
+    speed: 3.0, icon: <IconSearch />,
   },
   {
     index: "02", title: "Architect.",
     body: "Using proven workflows and implementation experience, we design a system tailored around your operational needs.",
-    speed: 6.0,
+    speed: 6.0, icon: <IconBlueprint />,
   },
   {
     index: "03", title: "Bottlenecks.",
     body: "We identify repetitive processes, inefficiencies, and manual dependencies that create friction in day-to-day operations.",
-    speed: 1.5,
+    speed: 1.5, icon: <IconFunnel />,
   },
   {
     index: "04", title: "Deliver.",
     body: "We deploy a custom-built solution designed to integrate smoothly into the way your business already operates.",
-    speed: 4.5,
+    speed: 4.5, icon: <IconRocket />,
   },
 ];
+
+// ── Single principle card (own reveal-on-scroll) ──────────────────────────────
+const PrincipleCard: FC<{
+  principle: (typeof PRINCIPLES)[number];
+  index: number;
+  active: boolean;
+  onHover: (i: number | null) => void;
+  colors: {
+    cardBg: string; cardHoverBg: string; accent: string; index: string;
+    title: string; body: string; iconBg: string; iconBorder: string; border: string;
+  };
+}> = ({ principle, index, active, onHover, colors }) => {
+  const { ref, visible } = useInView(0.2);
+
+  return (
+    <Box
+      ref={ref}
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={() => onHover(null)}
+      sx={{
+        position: "relative",
+        overflow: "hidden",
+        p: { xs: "28px", sm: "36px" },
+        height: "100%",
+        backgroundColor: active ? colors.cardHoverBg : colors.cardBg,
+        cursor: "default",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${index * 90}ms,
+                     transform 0.6s cubic-bezier(0.22,1,0.36,1) ${index * 90}ms,
+                     background-color 0.35s ease`,
+      }}
+    >
+      {/* Left accent bar */}
+      <Box sx={{
+        position: "absolute", top: 0, left: 0, width: "4px", height: "100%",
+        backgroundColor: colors.accent,
+        transform: active ? "scaleY(1)" : "scaleY(0)",
+        transformOrigin: "top",
+        transition: "transform 0.35s cubic-bezier(0.22,1,0.36,1)",
+      }} />
+
+      {/* Ghost number */}
+      <Typography aria-hidden sx={{
+        position: "absolute", right: "18px", bottom: "-10px",
+        fontFamily: "Prompt", fontWeight: 700, lineHeight: 1,
+        fontSize: { xs: "90px", sm: "120px" },
+        color: colors.accent,
+        opacity: active ? 0.08 : 0.035,
+        transition: "opacity 0.35s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1)",
+        transform: active ? "translateY(-6px)" : "translateY(0)",
+        userSelect: "none", pointerEvents: "none",
+      }}>
+        {principle.index}
+      </Typography>
+
+      {/* Top row: icon + index label */}
+      <Box sx={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", mb: "24px" }}>
+        <Box sx={{
+          width: "44px", height: "44px", borderRadius: "11px",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          backgroundColor: colors.iconBg,
+          border: `0.5px solid ${active ? colors.accent : colors.iconBorder}`,
+          color: active ? colors.accent : colors.index,
+          transition: "color 0.3s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)",
+          transform: active ? "translateY(-2px)" : "none",
+        }}>
+          {principle.icon}
+        </Box>
+        <Typography sx={{
+          fontSize: "11px", fontFamily: "Prompt", letterSpacing: "0.08em",
+          color: active ? colors.accent : colors.index, transition: "color 0.3s ease",
+        }}>
+          {principle.index}
+        </Typography>
+      </Box>
+
+      <Typography sx={{
+        position: "relative", zIndex: 1,
+        fontSize: { xs: "18px", sm: "20px" }, fontWeight: 500,
+        color: colors.title, mb: "12px", letterSpacing: "-0.01em",
+        transition: "color 0.4s ease",
+      }}>
+        {principle.title}
+      </Typography>
+
+      <Typography sx={{
+        position: "relative", zIndex: 1,
+        fontSize: "14px", color: colors.body, lineHeight: 1.75,
+        transition: "color 0.4s ease", maxWidth: "460px",
+      }}>
+        {principle.body}
+      </Typography>
+
+      {/* Hover reveal row */}
+      <Box sx={{
+        position: "relative", zIndex: 1,
+        display: "flex", alignItems: "center", gap: "8px", mt: "20px",
+        opacity: active ? 1 : 0,
+        transform: active ? "translateX(0)" : "translateX(-8px)",
+        transition: "opacity 0.3s ease, transform 0.3s ease",
+      }}>
+        <Typography sx={{ fontSize: "12px", fontWeight: 500, color: colors.accent, letterSpacing: "0.04em" }}>
+          Step {principle.index}
+        </Typography>
+        <IconArrow color={colors.accent} />
+      </Box>
+    </Box>
+  );
+};
 
 export const FirstGeneralSection: FC = () => {
   const T = useSharedTokens();
   const isLight = !T.isDark;
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const hoveredIndexRef = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef  = useRef<THREE.WebGLRenderer | null>(null);
   const animationRef = useRef<number | null>(null);
@@ -50,12 +193,23 @@ export const FirstGeneralSection: FC = () => {
   const indexColor    = T.mutedText;
   const titleColor    = T.primaryText;
   const bodyColor     = T.secondaryText;
-  // Brand accent used on hover (Midnight on light, Cream on dark)
   const accentColor   = T.accent;
+
+  const cardColors = {
+    cardBg, cardHoverBg, accent: accentColor, index: indexColor,
+    title: titleColor, body: bodyColor,
+    iconBg: T.surfaceSubtle, iconBorder: T.pillBorder, border: borderColor,
+  };
 
   const defaultParticleColor = T.particlePrimary;
   const hoverParticleColor   = T.accent === "#001932" ? 0x001932 : 0xBBC0C6;
 
+  const setHover = (i: number | null) => {
+    hoveredIndexRef.current = i;
+    setHoveredIndex(i);
+  };
+
+  // ── Three.js particle rings (scene built ONCE — hover read via ref) ───────
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -114,16 +268,17 @@ export const FirstGeneralSection: FC = () => {
     const animate = () => {
       animationRef.current = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
+      const hovered = hoveredIndexRef.current;
 
       particleSystems.forEach((system, idx) => {
         const baseSpeed    = PRINCIPLES[idx].speed;
-        const currentSpeed = hoveredIndex === idx ? baseSpeed * 2.5 : baseSpeed * 0.5;
+        const currentSpeed = hovered === idx ? baseSpeed * 2.5 : baseSpeed * 0.5;
         system.rotation.z  = t * 0.05 * currentSpeed * (idx % 2 === 0 ? 1 : -1);
         system.rotation.x  = Math.sin(t * 0.2) * 0.2;
 
         const material = materialsRef.current[idx];
         if (material) {
-          if (hoveredIndex === idx) {
+          if (hovered === idx) {
             material.size    = 0.25;
             material.opacity = 0.9;
             material.color.lerp(new THREE.Color(hoverParticleColor), 0.1);
@@ -160,7 +315,8 @@ export const FirstGeneralSection: FC = () => {
       }
       renderer.dispose();
     };
-  }, [hoveredIndex, T.isDark]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [T.isDark]);
 
   return (
     <Box id="solutions" sx={{
@@ -228,56 +384,22 @@ export const FirstGeneralSection: FC = () => {
         <Grid container spacing={{ xs: "1px", md: "1px" }} sx={{
           backgroundColor: gridGapColor,
           border: `2px solid ${gridBorder}`,
+          borderRadius: "16px",
+          overflow: "hidden",
+          isolation: "isolate",
+          boxShadow: T.boxShadow,
           transition: "background-color 0.4s ease, border-color 0.4s ease",
         }}>
           {PRINCIPLES.map((p, i) => (
-            <Grid key={p.index} size={{ xs: 12, sm: 6 }}>
-              <Box
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                sx={{
-                  p: { xs: "28px", sm: "36px" },
-                  backgroundColor: cardBg,
-                  height: "100%",
-                  transition: "all 0.3s ease",
-                  cursor: "crosshair",
-                  position: "relative",
-                  "&:hover": { backgroundColor: cardHoverBg },
-                }}
-              >
-                {/* Accent bar */}
-                <Box sx={{
-                  position: "absolute", top: 0, left: 0,
-                  width: "4px", height: "100%",
-                  backgroundColor: hoveredIndex === i ? accentColor : "transparent",
-                  transition: "background-color 0.3s ease",
-                }} />
-
-                <Typography sx={{
-                  fontSize: "11px",
-                  color: hoveredIndex === i ? accentColor : indexColor,
-                  fontFamily: "Prompt", mb: "20px",
-                  letterSpacing: "0.04em",
-                  transition: "color 0.3s ease",
-                }}>
-                  {p.index}
-                </Typography>
-
-                <Typography sx={{
-                  fontSize: { xs: "18px", sm: "20px" },
-                  fontWeight: 500, color: titleColor,
-                  mb: "12px", letterSpacing: "-0.01em",
-                  transition: "color 0.4s ease",
-                }}>
-                  {p.title}
-                </Typography>
-
-                <Typography sx={{
-                  fontSize: "14px", color: bodyColor,
-                  lineHeight: 1.75, transition: "color 0.4s ease",
-                }}>
-                  {p.body}
-                </Typography>
+            <Grid key={p.index} size={{ xs: 12, sm: 6 }} sx={{ display: "flex" }}>
+              <Box sx={{ width: "100%" }}>
+                <PrincipleCard
+                  principle={p}
+                  index={i}
+                  active={hoveredIndex === i}
+                  onHover={setHover}
+                  colors={cardColors}
+                />
               </Box>
             </Grid>
           ))}

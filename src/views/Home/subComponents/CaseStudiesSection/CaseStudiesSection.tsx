@@ -1,6 +1,8 @@
 import { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useThemeMode } from "../../../../theme/theme";
+import { useInView } from "../../../../hooks/useInView";
+import { scrollToSection } from "../../../../utils/scrollToSection";
 import outfitVideo from "../../../../assets/videos/outfit.mp4";
 import arTileVideo from "../../../../assets/videos/ar-tile.mp4";
 
@@ -15,31 +17,24 @@ const getTokens = (isLight: boolean) => ({
   // Outer mockup card
   cardBorder:    isLight ? "#d9c9b0" : "#2a2a2a",
   cardCorner:    "#C3A87C",            // warm tan corner accents
-  // Inner white panel (form)
-  panelBg:       isLight ? "#ffffff" : "#1a1a1a",
-  panelText:     isLight ? "#001932" : "#FFF4E3",
-  panelSub:      isLight ? "#9a9384" : "#8a8a8a",
-  panelLabel:    isLight ? "#9a9384" : "#8a8a8a",
-  pillBorder:    isLight ? "#e3ddd0" : "#2a2a2a",
-  pillText:      isLight ? "#3a3a3a" : "#BBC0C6",
-  pillBg:        isLight ? "#ffffff" : "#161616",
+  cardHoverShadow: isLight
+    ? "0 26px 60px rgba(0,25,50,0.16)"
+    : "0 26px 60px rgba(0,0,0,0.55)",
   // Gold / tan accent
   gold:          "#C3A87C",
   goldSoftBg:    "rgba(195,168,124,0.14)",
+  // Tag pill
+  tagBg:         isLight ? "rgba(255,255,255,0.9)" : "rgba(22,22,22,0.85)",
+  tagText:       isLight ? "#001932" : "#FFF4E3",
+  tagBorder:     isLight ? "#e3ddd0" : "#2a2a2a",
   // Caption
   captionTitle:  isLight ? "#001932" : "#FFF4E3",
   captionBody:   isLight ? "#4a4a6a" : "#BBC0C6",
+  metricValue:   isLight ? "#001932" : "#FFF4E3",
+  metricLabel:   isLight ? "#9a9384" : "#8a8a8a",
+  linkColor:     isLight ? "#001932" : "#FFF4E3",
   // Placeholder
   placeholderBg: isLight ? "#ece3d4" : "#222",
-  placeholderFg: isLight ? "#b6a98f" : "#555",
-  // Phone chrome
-  chromeBg:      isLight ? "#ffffff" : "#1a1a1a",
-  chromeBorder:  isLight ? "#e3ddd0" : "#2a2a2a",
-  phoneIcon:     "#2F6FE4",            // blue action icons in the top bar
-  toggleBg:      isLight ? "#E9EFFB" : "#1e2a44",
-  toggleIcon:    "#2F6FE4",
-  addressBg:     isLight ? "#f3ede2" : "#222",
-  addressText:   isLight ? "#6a6356" : "#BBC0C6",
 });
 
 const nasal = { fontFamily: "Prompt" };
@@ -47,10 +42,10 @@ const nasal = { fontFamily: "Prompt" };
 // ── Corner brackets for the mockup cards ─────────────────────────────────────
 const CardCorners: FC<{ color: string }> = ({ color }) => (
   <>
-    <Box sx={{ position: "absolute", top: "12px", left: "12px", width: "16px", height: "16px", borderTop: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}` }} />
-    <Box sx={{ position: "absolute", top: "12px", right: "12px", width: "16px", height: "16px", borderTop: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}` }} />
-    <Box sx={{ position: "absolute", bottom: "12px", left: "12px", width: "16px", height: "16px", borderBottom: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}` }} />
-    <Box sx={{ position: "absolute", bottom: "12px", right: "12px", width: "16px", height: "16px", borderBottom: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}` }} />
+    <Box sx={{ position: "absolute", top: "12px", left: "12px", width: "16px", height: "16px", borderTop: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}`, zIndex: 3, pointerEvents: "none" }} />
+    <Box sx={{ position: "absolute", top: "12px", right: "12px", width: "16px", height: "16px", borderTop: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}`, zIndex: 3, pointerEvents: "none" }} />
+    <Box sx={{ position: "absolute", bottom: "12px", left: "12px", width: "16px", height: "16px", borderBottom: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}`, zIndex: 3, pointerEvents: "none" }} />
+    <Box sx={{ position: "absolute", bottom: "12px", right: "12px", width: "16px", height: "16px", borderBottom: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}`, zIndex: 3, pointerEvents: "none" }} />
   </>
 );
 
@@ -103,8 +98,67 @@ const LazyVideo: FC<{ src: string; radius?: string; T: ReturnType<typeof getToke
   );
 };
 
-// ── Shared framed-mockup-card styling ─────────────────────────────────────────
-// `ratio` (set per card) keeps the card's width:height proportion as it scales.
+// ── Media well: zoom-on-hover video + gradient + play button + live badge ─────
+const CardMedia: FC<{ src: string; tag: string; T: ReturnType<typeof getTokens> }> = ({ src, tag, T }) => (
+  <Box sx={{ position: "relative", width: "100%", height: "100%", borderRadius: "10px", overflow: "hidden" }}>
+    {/* zoom layer */}
+    <Box className="cs-zoom" sx={{ width: "100%", height: "100%", transition: "transform 0.6s cubic-bezier(0.22,1,0.36,1)" }}>
+      <LazyVideo src={src} radius="10px" T={T} />
+    </Box>
+
+    {/* category tag */}
+    <Box sx={{
+      position: "absolute", top: "16px", left: "16px", zIndex: 2,
+      display: "inline-flex", alignItems: "center", gap: "6px",
+      px: "10px", py: "5px", borderRadius: "99px",
+      backgroundColor: T.tagBg, border: `0.5px solid ${T.tagBorder}`,
+      backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
+    }}>
+      <Box sx={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: T.gold }} />
+      <Typography sx={{ fontSize: "10.5px", fontWeight: 600, color: T.tagText, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+        {tag}
+      </Typography>
+    </Box>
+
+    {/* live badge */}
+    <Box sx={{
+      position: "absolute", bottom: "16px", left: "16px", zIndex: 2,
+      display: "inline-flex", alignItems: "center", gap: "6px",
+      px: "9px", py: "4px", borderRadius: "99px",
+      backgroundColor: "rgba(0,0,0,0.45)", backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
+    }}>
+      <Box sx={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#3BC77A", animation: "csPulse 2s ease-in-out infinite", "@keyframes csPulse": { "0%,100%": { opacity: 1 }, "50%": { opacity: 0.3 } } }} />
+      <Typography sx={{ fontSize: "9.5px", fontWeight: 600, color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+        Live demo
+      </Typography>
+    </Box>
+
+    {/* hover overlay + play */}
+    <Box className="cs-overlay" sx={{
+      position: "absolute", inset: 0, zIndex: 1, opacity: 0,
+      background: "linear-gradient(180deg, rgba(0,25,50,0) 40%, rgba(0,25,50,0.35) 100%)",
+      transition: "opacity 0.4s ease", pointerEvents: "none",
+    }} />
+    <Box className="cs-play" sx={{
+      position: "absolute", top: "50%", left: "50%", zIndex: 2,
+      transform: "translate(-50%,-50%) scale(0.8)", opacity: 0,
+      width: "54px", height: "54px", borderRadius: "50%",
+      backgroundColor: "rgba(255,255,255,0.92)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      transition: "opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)",
+      pointerEvents: "none",
+      boxShadow: "0 8px 24px rgba(0,0,0,0.28)",
+    }}>
+      <Box component="span" sx={{
+        width: 0, height: 0, ml: "3px",
+        borderTop: "8px solid transparent", borderBottom: "8px solid transparent",
+        borderLeft: "13px solid #001932",
+      }} />
+    </Box>
+  </Box>
+);
+
+// ── Shared framed-mockup-card styling (now interactive) ───────────────────────
 const cardFrame = (T: ReturnType<typeof getTokens>) => ({
   position: "relative" as const,
   width: "100%",
@@ -115,19 +169,86 @@ const cardFrame = (T: ReturnType<typeof getTokens>) => ({
   display: "flex",
   alignItems: "stretch",
   justifyContent: "center",
+  cursor: "pointer",
+  transition: "border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1)",
+  "&:hover": {
+    borderColor: T.gold,
+    boxShadow: T.cardHoverShadow,
+    transform: "translateY(-4px)",
+    "& .cs-zoom": { transform: "scale(1.06)" },
+    "& .cs-overlay": { opacity: 1 },
+    "& .cs-play": { opacity: 1, transform: "translate(-50%,-50%) scale(1)" },
+  },
 });
 
-// ── Case-study caption (title + body) ─────────────────────────────────────────
-const Caption: FC<{ T: ReturnType<typeof getTokens>; title: string; body: string }> = ({ T, title, body }) => (
-  <>
-    <Typography sx={{ ...nasal, fontSize: { xs: "18px", sm: "20px" }, fontWeight: 500, color: T.captionTitle, mb: "10px" }}>
-      {title}
-    </Typography>
-    <Typography sx={{ fontSize: "14px", color: T.captionBody, lineHeight: 1.75, width: "100%" }}>
-      {body}
-    </Typography>
-  </>
+// ── Arrow glyph ───────────────────────────────────────────────────────────────
+const Arrow: FC<{ color: string }> = ({ color }) => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M5 12h14M13 6l6 6-6 6" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
 );
+
+// ── Case-study caption (tag · title · body · metrics · CTA) ────────────────────
+interface Metric { value: string; label: string }
+const Caption: FC<{
+  T: ReturnType<typeof getTokens>;
+  title: string;
+  body: string;
+  metrics: Metric[];
+}> = ({ T, title, body, metrics }) => {
+  const { ref, visible } = useInView(0.2);
+  return (
+    <Box
+      ref={ref}
+      sx={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)",
+      }}
+    >
+      <Typography sx={{ ...nasal, fontSize: { xs: "18px", sm: "20px" }, fontWeight: 500, color: T.captionTitle, mb: "10px" }}>
+        {title}
+      </Typography>
+      <Typography sx={{ fontSize: "14px", color: T.captionBody, lineHeight: 1.75, width: "100%" }}>
+        {body}
+      </Typography>
+
+      {/* Result metrics */}
+      <Box sx={{
+        display: "flex", flexWrap: "wrap", gap: "18px 28px",
+        mt: "20px", pt: "20px", borderTop: `0.5px solid ${T.border}`,
+      }}>
+        {metrics.map((m) => (
+          <Box key={m.label}>
+            <Typography sx={{ ...nasal, fontSize: { xs: "20px", sm: "22px" }, fontWeight: 600, color: T.metricValue, lineHeight: 1, mb: "5px" }}>
+              {m.value}
+            </Typography>
+            <Typography sx={{ fontSize: "11px", color: T.metricLabel, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+              {m.label}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+
+      {/* CTA */}
+      <Box
+        component="button"
+        type="button"
+        onClick={() => scrollToSection("contact")}
+        sx={{
+          mt: "22px", display: "inline-flex", alignItems: "center", gap: "8px",
+          background: "none", border: "none", cursor: "pointer", p: 0, font: "inherit",
+          fontFamily: "Prompt", fontSize: "13px", fontWeight: 500, color: T.linkColor,
+          "& svg": { transition: "transform 0.25s ease" },
+          "&:hover svg": { transform: "translateX(4px)" },
+        }}
+      >
+        Start a project like this
+        <Arrow color={T.linkColor} />
+      </Box>
+    </Box>
+  );
+};
 
 // ── Main section ─────────────────────────────────────────────────────────────
 export const CaseStudiesSection: FC = () => {
@@ -189,13 +310,25 @@ export const CaseStudiesSection: FC = () => {
     }}>
       {/* Header */}
       <Box ref={headerRef} sx={{ mb: { xs: "48px", md: "64px" }, transform: `translateY(${headerShift}px)` }}>
-        <Typography sx={{
-          fontSize: "11px", color: T.eyebrow,
-          letterSpacing: "0.08em", textTransform: "uppercase",
-          fontWeight: 600, mb: "16px", transition: "color 0.4s ease",
-        }}>
-          ✦ Case Studies
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", mb: "16px" }}>
+          <Typography sx={{
+            fontSize: "11px", color: T.eyebrow,
+            letterSpacing: "0.08em", textTransform: "uppercase",
+            fontWeight: 600, transition: "color 0.4s ease",
+          }}>
+            ✦ Case Studies
+          </Typography>
+          <Box sx={{
+            display: { xs: "none", sm: "inline-flex" }, alignItems: "center", gap: "8px",
+            px: "12px", py: "6px", borderRadius: "99px",
+            border: `0.5px solid ${T.tagBorder}`, backgroundColor: T.goldSoftBg,
+          }}>
+            <Box sx={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: T.gold }} />
+            <Typography sx={{ fontSize: "11px", fontWeight: 500, color: T.eyebrow, letterSpacing: "0.03em" }}>
+              2 featured projects
+            </Typography>
+          </Box>
+        </Box>
         <Typography sx={{
           ...nasal, fontSize: { xs: "32px", sm: "44px", md: "52px" },
           fontWeight: 500, lineHeight: 1.1, letterSpacing: "-0.02em",
@@ -235,7 +368,7 @@ export const CaseStudiesSection: FC = () => {
         {/* Outfit card — in flow, so it defines the cards-row height */}
         <Box ref={outfitCardRef} sx={{ ...cardFrame(T), gridArea: "ocard", aspectRatio: "1000 / 542" }}>
           <CardCorners color={T.cardCorner} />
-          <LazyVideo src={outfitVideo} radius="10px" T={T} />
+          <CardMedia src={outfitVideo} tag="AI · Fashion" T={T} />
         </Box>
 
         {/* Floor card — wrapper fills the row; the card is pinned to its bottom
@@ -250,7 +383,7 @@ export const CaseStudiesSection: FC = () => {
             bottom: 0,
           }}>
             <CardCorners color={T.cardCorner} />
-            <LazyVideo src={arTileVideo} radius="10px" T={T} />
+            <CardMedia src={arTileVideo} tag="AR · Retail" T={T} />
           </Box>
         </Box>
 
@@ -260,6 +393,11 @@ export const CaseStudiesSection: FC = () => {
             T={T}
             title="AI-Powered Outfit"
             body="AI analyzes user preferences, wardrobe selections, and style inputs to generate curated outfit combinations tailored to individual fashion choices and occasions."
+            metrics={[
+              { value: "+42%", label: "Engagement" },
+              { value: "3.5×", label: "Faster styling" },
+              { value: "12k+", label: "Outfits generated" },
+            ]}
           />
         </Box>
         <Box sx={{ gridArea: "fcap", mt: "28px" }}>
@@ -267,6 +405,10 @@ export const CaseStudiesSection: FC = () => {
             T={T}
             title="Floor Visualization"
             body="Customers take a photo of their room, and AR-Tile finds the best flooring match."
+            metrics={[
+              { value: "68%", label: "Fewer returns" },
+              { value: "2.4×", label: "Conversion" },
+            ]}
           />
         </Box>
       </Box>

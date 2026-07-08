@@ -1,6 +1,7 @@
 // src/components/PageLoader/PageLoader.tsx
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logoWhite from "../assets/FossiliteLogo.svg";
 
 interface Props { onFinish: () => void; }
 
@@ -176,23 +177,20 @@ export const PageLoader = ({ onFinish }: Props) => {
               }}
             />
 
-            {/* Brand name */}
-            <motion.h1
-              initial={{ opacity: 0, y: 18, scale: 0.88 }}
-              animate={{ opacity: 1, y: 0,  scale: 1    }}
+            {/* Brand logo */}
+            <motion.img
+              src={logoWhite}
+              alt="Fossilite"
+              initial={{ opacity: 0, y: 18, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.9, delay: 0.1, ease: [0.34, 1.56, 0.64, 1] }}
               style={{
-                fontSize: "clamp(28px, 5vw, 42px)",
-                fontWeight: 500,
-                color: "#fff",
-                letterSpacing: "-0.025em",
-                fontFamily: "Prompt" ,
-                margin: 0,
-                textShadow: "0 0 40px rgba(255,255,255,0.12)",
+                width: "clamp(120px, 22vw, 180px)",
+                height: "auto",
+                display: "block",
+                filter: "drop-shadow(0 0 40px rgba(255,255,255,0.14))",
               }}
-            >
-              Fossilite AI
-            </motion.h1>
+            />
 
             {/* Tagline */}
             <motion.p

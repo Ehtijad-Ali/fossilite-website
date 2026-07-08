@@ -6,7 +6,7 @@ import { useThemeMode } from "../../../../theme/theme";
 import { replyFor } from "../../../../utils/assistantReplies";
 import { scrollToSection } from "../../../../utils/scrollToSection";
 
-type ChatMsg = { role: "user" | "bot"; text: string };
+type ChatMsg = { role: "user" | "bot"; text: string; action?: "contact" | "cases" };
 
 // ─────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -150,7 +150,15 @@ export const ChatBoxSection: FC = () => {
   const [conversation, setConversation] = useState<ChatMsg[]>([]);
   const [typing,       setTyping]       = useState(false);
   const threadRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const replyTimer = useRef<number>(0);
+
+  // Selecting a suggestion fills the composer (ChatGPT/Claude style) — the user
+  // then presses send / Enter to submit. It does NOT auto-answer.
+  const fillInput = (text: string) => {
+    setValue(text);
+    setTimeout(() => inputRef.current?.focus(), 0);
+  };
 
   const send = (text: string) => {
     const trimmed = text.trim();
@@ -160,13 +168,12 @@ export const ChatBoxSection: FC = () => {
     setTyping(true);
 
     const { text: answer, action } = replyFor(trimmed);
+    // Reply time scales a little with answer length so it feels considered.
+    const delay = Math.min(1600, 750 + answer.length * 4);
     replyTimer.current = window.setTimeout(() => {
       setTyping(false);
-      setConversation((c) => [...c, { role: "bot", text: answer }]);
-      if (action) {
-        window.setTimeout(() => scrollToSection(action === "contact" ? "contact" : "case-studies"), 1400);
-      }
-    }, 1100);
+      setConversation((c) => [...c, { role: "bot", text: answer, action }]);
+    }, delay);
   };
 
   const resetChat = () => {
@@ -375,14 +382,11 @@ export const ChatBoxSection: FC = () => {
 
       ctx.restore();
 
-      // 3D tilt — applied ONLY to cardTiltRef (visual shell)
-      // Never touches the input element directly
-      if (cardTiltRef.current) {
-        const rotX = (sy - 0.5) * 14;
-        const rotY = (sx - 0.5) * -14;
-        cardTiltRef.current.style.transform =
-          `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(10px)`;
-      }
+      // NOTE: the card's 3D tilt was removed. Re-transforming the card every
+      // frame (perspective + rotate + translateZ) made clicks on the chips and
+      // input unreliable — a click could land between frames as the card moved.
+      // The canvas background, glow and focus states keep the section lively
+      // while guaranteeing every control is clickable.
 
       rafRef.current = requestAnimationFrame(draw);
     };
@@ -398,6 +402,11 @@ export const ChatBoxSection: FC = () => {
   }, []);
 
   const hasValue = value.trim().length > 0;
+
+  // Suggestions the visitor hasn't asked yet — shown as persistent follow-ups.
+  const askedSet = new Set(conversation.filter((m) => m.role === "user").map((m) => m.text));
+  const remainingSuggestions = SUGGESTIONS.filter((s) => !askedSet.has(s));
+  const started = conversation.length > 0 || typing;
 
   // ─────────────────────────────────────────────────────────────────
   // RENDER
@@ -434,14 +443,23 @@ export const ChatBoxSection: FC = () => {
         }}
       />
 
-      <Box sx={{ maxWidth: "720px", mx: "auto", position: "relative", zIndex: 2 }}>
+      <Box sx={{
+        maxWidth: "1200px", mx: "auto", position: "relative", zIndex: 2,
+        display: "grid",
+        gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+        gap: { xs: "44px", md: "56px", lg: "72px" },
+        alignItems: "center",
+      }}>
+
+        {/* ══ LEFT — section copy ══ */}
+        <Box>
 
         {/* Label */}
         <Typography sx={{
           fontSize: "11px", color: T.label, letterSpacing: "0.10em",
-          textTransform: "uppercase", textAlign: "center", mb: "20px",
+          textTransform: "uppercase", textAlign: "left", mb: "20px",
           fontWeight: 500, display: "flex", alignItems: "center",
-          justifyContent: "center", gap: "8px",
+          justifyContent: "flex-start", gap: "8px",
           opacity:   mounted ? 1 : 0,
           transform: mounted ? "translateY(0)" : "translateY(12px)",
           transitionProperty:       "color, opacity, transform",
@@ -456,9 +474,9 @@ export const ChatBoxSection: FC = () => {
 
         {/* Headline */}
         <Typography component="h2" sx={{
-          fontSize: { xs: "28px", sm: "38px", md: "48px" }, fontWeight: 600,
-          color: T.headline, textAlign: "center", lineHeight: 1.10,
-          letterSpacing: "-0.03em", mb: "14px",
+          fontSize: { xs: "34px", sm: "42px", md: "48px" }, fontWeight: 600,
+          color: T.headline, textAlign: "left", lineHeight: 1.08,
+          letterSpacing: "-0.03em", mb: "16px",
           fontFamily: "Prompt",
           opacity:   mounted ? 1 : 0,
           transform: mounted ? "translateY(0)" : "translateY(16px)",
@@ -472,9 +490,9 @@ export const ChatBoxSection: FC = () => {
 
         {/* Sub-text */}
         <Typography sx={{
-          fontSize: { xs: "14px", sm: "16px" }, color: T.sub,
-          textAlign: "center", maxWidth: "560px", mx: "auto",
-          lineHeight: 1.7, mb: "44px",
+          fontSize: { xs: "15px", sm: "16px" }, color: T.sub,
+          textAlign: "left", maxWidth: "460px",
+          lineHeight: 1.75, mb: "0px",
           fontFamily: "Prompt", fontStyle: "italic",
           opacity:   mounted ? 1 : 0,
           transform: mounted ? "translateY(0)" : "translateY(14px)",
@@ -486,6 +504,47 @@ export const ChatBoxSection: FC = () => {
           From repetitive tasks to disconnected operations, we build systems
           that simplify workflows and support how your business actually runs.
         </Typography>
+
+        {/* Topics it's best at */}
+        <Box sx={{ mt: "32px" }}>
+          <Typography sx={{ fontSize: "10px", color: T.chipText, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, mb: "12px" }}>
+            Best at answering
+          </Typography>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+            {["RAG pipelines", "AI agents", "LangChain", "Vector search"].map((t) => (
+              <Box key={t} sx={{ px: "12px", py: "7px", borderRadius: "8px", border: `0.5px solid ${T.chipBorder}`, backgroundColor: T.cardBg }}>
+                <Typography sx={{ fontSize: "12px", color: T.chipText, whiteSpace: "nowrap" }}>{t}</Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Why it's useful — fills the column to match the chat card height */}
+        <Box sx={{ mt: "36px", pt: "32px", borderTop: `0.5px solid ${T.chipBorder}`, display: "flex", flexDirection: "column", gap: "20px" }}>
+          {[
+            { title: "Instant, grounded answers", sub: "Responses drawn from real sources — not guesswork." },
+            { title: "Reviewed by engineers", sub: "100% of what we ship is checked by a human." },
+            { title: "Built to run in production", sub: "Durable systems, not throwaway demos." },
+          ].map((f) => (
+            <Box key={f.title} sx={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+              <Box sx={{
+                width: "30px", height: "30px", borderRadius: "9px", flexShrink: 0, mt: "1px",
+                border: `0.5px solid ${T.chipBorder}`, backgroundColor: T.cardBg,
+                display: "flex", alignItems: "center", justifyContent: "center", color: T.headline,
+              }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </Box>
+              <Box>
+                <Typography sx={{ fontSize: "14px", fontWeight: 600, color: T.headline, fontFamily: "Prompt", lineHeight: 1.4 }}>{f.title}</Typography>
+                <Typography sx={{ fontSize: "12.5px", color: T.sub, lineHeight: 1.5 }}>{f.sub}</Typography>
+              </Box>
+            </Box>
+          ))}
+        </Box>
+
+        </Box>
+        {/* ══ RIGHT — chat UI ══ */}
+        <Box>
 
         {/* ── Card area ──────────────────────────────────────────────
             cardWrapRef  = outer div, used ONLY for getBoundingClientRect()
@@ -512,13 +571,16 @@ export const ChatBoxSection: FC = () => {
             ref={cardTiltRef}
             sx={{ transformStyle: "preserve-3d", willChange: "transform" }}
           >
-            {/* Card surface */}
+            {/* Card surface — a proper chat window (header / messages / composer) */}
             <Box sx={{
               background:   T.cardBg,
               border:       "0.5px solid",
               borderColor:  focused ? T.cardBorderFocus : T.cardBorderIdle,
               borderRadius: "18px",
-              p:            { xs: "24px", sm: "28px" },
+              p:            0,
+              display:      "flex",
+              flexDirection:"column",
+              height:       { xs: "460px", sm: "500px" },
               position:     "relative",
               overflow:     "hidden",
               transition:   "border-color 0.3s ease, background-color 0.5s ease, box-shadow 0.4s ease",
@@ -534,66 +596,130 @@ export const ChatBoxSection: FC = () => {
                 "@keyframes borderSpin": { to: { transform: "rotate(360deg)" } },
               } : { content: '""', display: "none" },
             }}>
-              {/* ── Live conversation thread ──────────────────────────
-                  Appears once the visitor asks a question. Bot replies
-                  stream in after a short typing delay (frontend only). */}
-              {(conversation.length > 0 || typing) && (
-                <Box sx={{ position: "relative", zIndex: 1, mb: "16px" }}>
-                  {/* Thread header + reset */}
+              {/* ── Window header (always visible) ── */}
+              <Box sx={{
+                position: "relative", zIndex: 1, flexShrink: 0,
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                px: { xs: "16px", sm: "20px" }, py: "13px",
+                borderBottom: `0.5px solid ${T.chipBorder}`,
+                backgroundColor: T.cardBg,
+              }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: "9px" }}>
                   <Box sx={{
-                    display: "flex", alignItems: "center", justifyContent: "space-between",
-                    mb: "12px", pb: "10px", borderBottom: `0.5px solid ${T.chipBorder}`,
+                    position: "relative", width: "30px", height: "30px", borderRadius: "50%",
+                    backgroundColor: T.btnActiveBg, color: T.btnActiveColor,
+                    display: "flex", alignItems: "center", justifyContent: "center",
                   }}>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: "7px" }}>
-                      <Box sx={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "#3BC77A" }} />
-                      <Typography sx={{ fontSize: "12px", fontWeight: 600, color: T.headline, letterSpacing: "0.02em" }}>
-                        Fossilite AI
-                      </Typography>
-                    </Box>
-                    <Box
-                      component="button"
-                      type="button"
-                      onClick={resetChat}
-                      sx={{
-                        background: "none", border: "none", cursor: "pointer", font: "inherit",
-                        fontFamily: "Prompt", fontSize: "11px", color: T.chipText,
-                        letterSpacing: "0.04em", transition: "color 0.2s ease",
-                        "&:hover": { color: T.headline },
-                      }}
-                    >
-                      New chat
-                    </Box>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    <Box sx={{ position: "absolute", bottom: "-1px", right: "-1px", width: "9px", height: "9px", borderRadius: "50%", backgroundColor: "#3BC77A", border: `2px solid ${T.cardBg}` }} />
                   </Box>
-
-                  {/* Messages */}
+                  <Box>
+                    <Typography sx={{ fontSize: "13px", fontWeight: 600, color: T.headline, lineHeight: 1.2 }}>Fossilite AI</Typography>
+                    <Typography sx={{ fontSize: "10.5px", color: T.sub, lineHeight: 1.2 }}>Online · replies instantly</Typography>
+                  </Box>
+                </Box>
+                {conversation.length > 0 && (
                   <Box
-                    ref={threadRef}
+                    component="button"
+                    type="button"
+                    onClick={resetChat}
                     sx={{
-                      maxHeight: "260px", overflowY: "auto",
-                      display: "flex", flexDirection: "column", gap: "10px", pr: "4px",
-                      "&::-webkit-scrollbar": { width: "5px" },
-                      "&::-webkit-scrollbar-thumb": { backgroundColor: T.chipBorder, borderRadius: "3px" },
+                      display: "inline-flex", alignItems: "center", gap: "5px",
+                      background: "none", border: `0.5px solid ${T.chipBorder}`, cursor: "pointer",
+                      font: "inherit", fontFamily: "Prompt", fontSize: "11px", color: T.chipText,
+                      px: "10px", py: "5px", borderRadius: "7px",
+                      transition: "color 0.2s ease, border-color 0.2s ease",
+                      "&:hover": { color: T.headline, borderColor: T.chipBorderHover },
                     }}
                   >
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 2.3 5.6M4 12V7m0 5h5" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    New chat
+                  </Box>
+                )}
+              </Box>
+
+              {/* ── Messages area (empty-state greeting until first message) ── */}
+              <Box
+                ref={threadRef}
+                sx={{
+                  position: "relative", zIndex: 1, flex: 1, minHeight: 0, overflowY: "auto",
+                  display: "flex", flexDirection: "column", gap: "10px",
+                  px: { xs: "16px", sm: "20px" }, py: "18px",
+                  "&::-webkit-scrollbar": { width: "5px" },
+                  "&::-webkit-scrollbar-thumb": { backgroundColor: T.chipBorder, borderRadius: "3px" },
+                }}
+              >
+                {conversation.length === 0 && !typing ? (
+                  <Box sx={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: "14px", px: "16px" }}>
+                    <Box sx={{ width: "50px", height: "50px", borderRadius: "50%", backgroundColor: T.btnActiveBg, color: T.btnActiveColor, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </Box>
+                    <Box>
+                      <Typography sx={{ fontSize: "17px", fontWeight: 600, color: T.headline, fontFamily: "Prompt", mb: "5px" }}>
+                        How can I help you build with AI?
+                      </Typography>
+                      <Typography sx={{ fontSize: "13px", color: T.sub, maxWidth: "300px", mx: "auto", lineHeight: 1.6 }}>
+                        Pick a suggestion below or type your own question, then press send.
+                      </Typography>
+                    </Box>
+                  </Box>
+                ) : (
+                  <>
                     {conversation.map((m, i) => {
                       const isBot = m.role === "bot";
+                      if (!isBot) {
+                        return (
+                          <Box key={i} sx={{ display: "flex", justifyContent: "flex-end" }}>
+                            <Box sx={{
+                              maxWidth: "84%", px: "13px", py: "9px",
+                              fontSize: "13.5px", lineHeight: 1.6,
+                              borderRadius: "13px 13px 4px 13px",
+                              backgroundColor: T.btnActiveBg, color: T.btnActiveColor,
+                              animation: "chatIn 0.35s cubic-bezier(0.22,1,0.36,1)",
+                              "@keyframes chatIn": { from: { opacity: 0, transform: "translateY(8px)" }, to: { opacity: 1, transform: "translateY(0)" } },
+                            }}>
+                              {m.text}
+                            </Box>
+                          </Box>
+                        );
+                      }
                       return (
-                        <Box key={i} sx={{ display: "flex", justifyContent: isBot ? "flex-start" : "flex-end" }}>
+                        <Box key={i} sx={{ display: "flex", gap: "8px", alignItems: "flex-start", animation: "chatIn 0.35s cubic-bezier(0.22,1,0.36,1)", "@keyframes chatIn": { from: { opacity: 0, transform: "translateY(8px)" }, to: { opacity: 1, transform: "translateY(0)" } } }}>
+                          {/* Assistant avatar */}
                           <Box sx={{
-                            maxWidth: "84%",
-                            px: "13px", py: "9px",
-                            fontSize: "13.5px", lineHeight: 1.6,
-                            borderRadius: isBot ? "13px 13px 13px 4px" : "13px 13px 4px 13px",
-                            backgroundColor: isBot ? (isLight ? "#ffffff" : "#242424") : T.btnActiveBg,
-                            color: isBot ? T.headline : T.btnActiveColor,
-                            border: isBot ? `0.5px solid ${T.chipBorder}` : "none",
-                            animation: "chatIn 0.35s cubic-bezier(0.22,1,0.36,1)",
-                            "@keyframes chatIn": {
-                              from: { opacity: 0, transform: "translateY(8px)" },
-                              to:   { opacity: 1, transform: "translateY(0)" },
-                            },
+                            width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0, mt: "2px",
+                            backgroundColor: T.btnActiveBg, color: T.btnActiveColor,
+                            display: "flex", alignItems: "center", justifyContent: "center",
                           }}>
-                            {m.text}
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                          </Box>
+                          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "8px", maxWidth: "84%" }}>
+                            <Box sx={{
+                              px: "13px", py: "9px", fontSize: "13.5px", lineHeight: 1.6,
+                              borderRadius: "13px 13px 13px 4px",
+                              backgroundColor: isLight ? "#ffffff" : "#242424",
+                              color: T.headline, border: `0.5px solid ${T.chipBorder}`,
+                            }}>
+                              {m.text}
+                            </Box>
+                            {m.action && (
+                              <Box
+                                component="button"
+                                type="button"
+                                onClick={() => scrollToSection(m.action === "contact" ? "contact" : "case-studies")}
+                                sx={{
+                                  display: "inline-flex", alignItems: "center", gap: "7px",
+                                  px: "13px", py: "8px", borderRadius: "8px", cursor: "pointer",
+                                  font: "inherit", fontFamily: "Prompt", fontSize: "12.5px", fontWeight: 600,
+                                  backgroundColor: T.btnActiveBg, color: T.btnActiveColor, border: "none",
+                                  transition: "background-color 0.2s ease, transform 0.15s ease",
+                                  "&:hover": { backgroundColor: T.btnActiveHover, transform: "translateY(-1px)" },
+                                }}
+                              >
+                                {m.action === "contact" ? "Talk to the team" : "See our work"}
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                              </Box>
+                            )}
                           </Box>
                         </Box>
                       );
@@ -601,7 +727,14 @@ export const ChatBoxSection: FC = () => {
 
                     {/* Typing indicator */}
                     {typing && (
-                      <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+                      <Box sx={{ display: "flex", gap: "8px", alignItems: "flex-start" }}>
+                        <Box sx={{
+                          width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0, mt: "2px",
+                          backgroundColor: T.btnActiveBg, color: T.btnActiveColor,
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                        }}>
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                        </Box>
                         <Box sx={{
                           display: "flex", gap: "4px", alignItems: "center",
                           px: "14px", py: "11px",
@@ -624,22 +757,64 @@ export const ChatBoxSection: FC = () => {
                         </Box>
                       </Box>
                     )}
-                  </Box>
-                </Box>
-              )}
+                  </>
+                )}
+              </Box>
 
-              {/* ── Input ─────────────────────────────────────────────
-                  All pointer events are default here.
-                  The input receives clicks normally because:
-                  1. Canvas has pointer-events:none
-                  2. Section has NO cursor override
-                  3. cardTiltRef only applies CSS transform (no pointer blocking)
-                  4. Section mousemove listener uses passive:true
-              ──────────────────────────────────────────────────────── */}
-              <Box sx={{ position: "relative", zIndex: 1 }}>
+              {/* ── Composer: suggestions (fill the input) + input row ── */}
+              <Box sx={{
+                position: "relative", zIndex: 1, flexShrink: 0,
+                borderTop: `0.5px solid ${T.chipBorder}`, backgroundColor: T.cardBg,
+                px: { xs: "14px", sm: "16px" }, py: "14px",
+                display: "flex", flexDirection: "column", gap: "12px",
+              }}>
+                {/* Suggestions — selecting one fills the composer, then press send */}
+                {!typing && remainingSuggestions.length > 0 && (
+                  <Box>
+                    <Typography sx={{
+                      fontSize: "10px", color: T.chipText, letterSpacing: "0.1em",
+                      textTransform: "uppercase", fontWeight: 600, mb: "9px",
+                      display: "flex", alignItems: "center", gap: "6px",
+                    }}>
+                      <Box component="span" sx={{ width: "12px", height: "1px", backgroundColor: T.chipBorder }} />
+                      {started ? "Ask a follow-up" : "Try asking"}
+                    </Typography>
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                      {remainingSuggestions.map((s) => (
+                        <Box
+                          key={s}
+                          onClick={() => fillInput(s)}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") fillInput(s); }}
+                          sx={{
+                            display: "flex", alignItems: "center", gap: "7px",
+                            px: "12px", py: "7px",
+                            border: `0.5px solid ${T.chipBorder}`,
+                            borderRadius: "99px", cursor: "pointer", userSelect: "none",
+                            backgroundColor: T.inputBg,
+                            transition: "border-color 0.25s ease, background-color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+                            "&:hover": { borderColor: T.chipBorderHover, backgroundColor: T.chipBgHover, transform: "translateY(-2px)", "& .chip-plus": { color: T.headline } },
+                            "&:active": { transform: "scale(0.97)" },
+                            "&:focus-visible": { outline: `2px solid ${T.cardBorderFocus}`, outlineOffset: "2px" },
+                          }}
+                        >
+                          <Box component="span" className="chip-plus" sx={{ color: T.chipBorderHover, display: "flex", transition: "color 0.2s ease" }}>
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
+                          </Box>
+                          <Typography sx={{ fontSize: "12px", color: T.chipText, lineHeight: 1.4, whiteSpace: "nowrap" }}>{s}</Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  </Box>
+                )}
+
+                {/* Input row */}
+                <Box sx={{ position: "relative" }}>
                 <TextField
                   fullWidth
-                  placeholder="Why is the sun yellow?"
+                  inputRef={inputRef}
+                  placeholder="Message Fossilite AI…"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
                   onFocus={() => setFocused(true)}
@@ -713,54 +888,10 @@ export const ChatBoxSection: FC = () => {
                 />
               </Box>
 
-              {/* Suggestion chips — shown before the first question */}
-              {conversation.length === 0 && !typing && (
-              <Box sx={{
-                display: "flex", flexWrap: "wrap", gap: "8px", mt: "16px",
-                position: "relative", zIndex: 1,
-              }}>
-                {SUGGESTIONS.map((s, idx) => (
-                  <Box
-                    key={s}
-                    onClick={() => send(s)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") send(s); }}
-                    sx={{
-                      px: "12px", py: "6px",
-                      border:       `0.5px solid ${T.chipBorder}`,
-                      borderRadius: "99px",
-                      cursor:       "pointer",
-                      userSelect:   "none",
-                      opacity:      mounted ? 1 : 0,
-                      transform:    mounted ? "translateY(0) scale(1)" : "translateY(8px) scale(0.95)",
-                      transitionProperty:       "border-color, background-color, opacity, transform",
-                      transitionDuration:       "0.25s, 0.25s, 0.5s, 0.5s",
-                      transitionDelay:          `0s, 0s, ${0.48 + idx * 0.07}s, ${0.48 + idx * 0.07}s`,
-                      transitionTimingFunction: "cubic-bezier(0.34,1.56,0.64,1)",
-                      "&:hover": {
-                        borderColor:     T.chipBorderHover,
-                        backgroundColor: T.chipBgHover,
-                        transform:       "translateY(-2px) scale(1.03)",
-                      },
-                      "&:active": { transform: "scale(0.97)" },
-                      "&:focus-visible": {
-                        outline: `2px solid ${T.cardBorderFocus}`, outlineOffset: "2px",
-                      },
-                    }}
-                  >
-                    <Typography sx={{
-                      fontSize: "12px", color: T.chipText,
-                      lineHeight: 1.4, transition: "color 0.3s ease", whiteSpace: "nowrap",
-                    }}>
-                      {s}
-                    </Typography>
-                  </Box>
-                ))}
               </Box>
-              )}
             </Box>
           </Box>
+        </Box>
         </Box>
       </Box>
     </Box>

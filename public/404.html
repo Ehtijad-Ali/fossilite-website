@@ -3,26 +3,26 @@
   <head>
     <meta charset="utf-8" />
     <title>Fossilite AI</title>
-    <!-- GitHub Pages has no server-side SPA fallback: any unknown path (deep
-         link or refresh) serves this file. It encodes the requested path into a
-         query string and redirects to the app root, where the decode snippet in
-         index.html restores it and hands off to the router.
-         pathSegmentsToKeep = 1 keeps the /fossilite-website/ project base. -->
     <script type="text/javascript">
+      // Redirect to index.html with the path encoded in the query string
       var pathSegmentsToKeep = 1;
       var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      var newUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
         l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
         l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
         (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+        l.hash;
+      if (newUrl !== l.href) {
+        l.replace(newUrl);
+      }
     </script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/fossilite-website/assets/index-DOGZAOMz.js"></script>
-    <link rel="stylesheet" crossorigin href="/fossilite-website/assets/index-CWi5zsIw.css">
+    <!-- If JavaScript is disabled, show a message -->
+    <noscript>
+      <p style="text-align: center; padding: 20px; font-family: sans-serif;">
+        Please enable JavaScript to view this site.
+      </p>
+    </noscript>
   </body>
 </html>

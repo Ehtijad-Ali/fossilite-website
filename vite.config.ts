@@ -2,6 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  // GitHub Pages serves this project site from /fossilite-website/. Without this
+  // base, every built asset URL points at the domain root and 404s → blank screen.
+  base: '/fossilite-website/',
   plugins: [react()],
   assetsInclude: ['**/*.glb', '**/*.gltf'], // 👈 Add this line
   build: {

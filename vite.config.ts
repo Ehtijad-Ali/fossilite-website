@@ -22,11 +22,11 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (!id.includes('node_modules')) return
+          // Split heavy libraries into their own chunks
           if (id.includes('three') || id.includes('@react-three')) return 'three'
           if (id.includes('framer-motion') || id.includes('/motion/')) return 'motion'
           if (id.includes('@mui') || id.includes('@emotion')) return 'mui'
-          if (id.includes('react-router') || id.includes('/react-dom/') || id.includes('/react/')) return 'react'
-          return 'vendor'
+          // Don't create a separate react chunk - let it stay in vendor to avoid circular deps
         },
       },
     },

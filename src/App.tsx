@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { Navbar, Footer, ScrollToTop } from "./components";
 import './App.css'
@@ -34,6 +34,8 @@ function App() {
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/terms' element={<Terms />} />
           <Route path='/cookies' element={<Cookies />} />
+          {/* Unknown paths fall back to home rather than an empty shell */}
+          <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
       </Suspense>
       <Footer />

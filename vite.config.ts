@@ -2,9 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  // GitHub Pages serves this project site from /fossilite-website/. Without this
-  // base, every built asset URL points at the domain root and 404s → blank screen.
-  base: '/fossilite-website/',
+  // Base path differs per host: Vercel (and local) serve from the domain root,
+  // while GitHub Pages serves this project site from /fossilite-website/. Vercel
+  // sets VERCEL=1 during its build, so we key off that. BrowserRouter reads the
+  // same value via import.meta.env.BASE_URL, so routing follows automatically.
+  base: process.env.VERCEL ? '/' : '/fossilite-website/',
   plugins: [react()],
   assetsInclude: ['**/*.glb', '**/*.gltf'], // 👈 Add this line
   build: {

@@ -12,6 +12,7 @@ import {
   TestimonialsSection,
   IntegrationsSection,
   FaqSection,
+  CommentToAnimationSection,
 } from "./subComponents";
 import { Layout } from "../../layout";
 
@@ -27,6 +28,7 @@ export const Home: FC = () => {
         <FirstGeneralSection />
         <SecondImageSection />
         <IntegrationsSection />
+        <CommentToAnimationSection />
         <TestimonialsSection />
         <FaqSection />
         <SecondGeneralSection />

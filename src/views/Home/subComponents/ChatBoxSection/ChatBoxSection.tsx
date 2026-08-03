@@ -3,6 +3,8 @@ import { FC, useState, useEffect, useRef } from "react";
 import { Box, Typography, TextField, InputAdornment, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useThemeMode } from "../../../../theme/theme";
+import { FONT_DISPLAY } from "../../../../theme/fonts";
+import { sectionFrameSx } from "../../_kit/frame";
 import { replyFor } from "../../../../utils/assistantReplies";
 import { scrollToSection } from "../../../../utils/scrollToSection";
 
@@ -79,32 +81,32 @@ const TOKENS = {
     selection:        "rgba(0,25,50,0.15)",
   },
   dark: {
-    bg:               "#161616",
+    bg:               "#0e1a2b",
     canvasDC:         "187,192,198",
     dotBase:          0.025, rippleMult: 0.08, glowMult: 0.40,
     lineBase:         0.07,  lineBoost:  0.18, partBright: 0.60, ringAlpha: 1.00,
     label:            "#BBC0C6",
     headline:         "#FFF4E3",
     sub:              "#BBC0C6",
-    cardBg:           "#1e1e1e",
-    cardBorderIdle:   "#2a2a2a",
+    cardBg:           "#172b44",
+    cardBorderIdle:   "#263b57",
     cardBorderFocus:  "#BBC0C6",
     cardShadow:       "none",
     focusShadow:      "0 0 0 1px rgba(187,192,198,0.12),0 12px 40px rgba(0,0,0,0.5)",
-    inputBg:          "#161616",
-    inputBorder:      "#2a2a2a",
+    inputBg:          "#0e1a2b",
+    inputBorder:      "#263b57",
     inputBorderHover: "#3a3a3a",
     inputBorderFocus: "#BBC0C6",
     inputText:        "#FFF4E3",
     placeholder:      "#3a3a3a",
-    chipBorder:       "#2a2a2a",
+    chipBorder:       "#263b57",
     chipBorderHover:  "#BBC0C6",
-    chipBgHover:      "#1e1e1e",
+    chipBgHover:      "#172b44",
     chipText:         "#BBC0C6",
     btnActiveBg:      "#FFF4E3",
     btnActiveColor:   "#001932",
     btnActiveHover:   "#e0d8cc",
-    btnIdleBg:        "#2a2a2a",
+    btnIdleBg:        "#263b57",
     btnIdleColor:     "#3a3a3a",
     star:             "#FFF4E3",
     conicGrad:        "conic-gradient(from 0deg,transparent,rgba(187,192,198,0.10) 20%,transparent 40%)",
@@ -444,7 +446,7 @@ export const ChatBoxSection: FC = () => {
       />
 
       <Box sx={{
-        maxWidth: "1200px", mx: "auto", position: "relative", zIndex: 2,
+        maxWidth: "1200px", mx: "auto", position: "relative", zIndex: 2, ...sectionFrameSx,
         display: "grid",
         gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
         gap: { xs: "44px", md: "56px", lg: "72px" },
@@ -474,10 +476,10 @@ export const ChatBoxSection: FC = () => {
 
         {/* Headline */}
         <Typography component="h2" sx={{
-          fontSize: { xs: "34px", sm: "42px", md: "48px" }, fontWeight: 600,
-          color: T.headline, textAlign: "left", lineHeight: 1.08,
-          letterSpacing: "-0.03em", mb: "16px",
-          fontFamily: "Prompt",
+          fontSize: { xs: "36px", sm: "46px", md: "54px" }, fontWeight: 500,
+          color: T.headline, textAlign: "left", lineHeight: 1.04,
+          letterSpacing: "-0.02em", mb: "16px",
+          fontFamily: FONT_DISPLAY,
           opacity:   mounted ? 1 : 0,
           transform: mounted ? "translateY(0)" : "translateY(16px)",
           transitionProperty:       "color, opacity, transform",

@@ -11,8 +11,8 @@ const getPalette = (mode: 'light' | 'dark') => ({
   },
 
   background: {
-    default: mode === 'light' ? '#ffffff' : '#040404', // page bg
-    paper:   mode === 'light' ? '#f5f5f5' : '#080808', // card / surface bg
+    default: mode === 'light' ? '#ffffff' : '#0e1a2b', // page bg (navy monograph)
+    paper:   mode === 'light' ? '#f5f5f5' : '#13233a', // card / surface bg
   },
 
   text: {

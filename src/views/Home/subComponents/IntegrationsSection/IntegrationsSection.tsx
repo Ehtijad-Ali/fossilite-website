@@ -1,6 +1,8 @@
 import { FC, useEffect, useRef, useState, ReactNode } from "react";
 import { Box, Typography } from "@mui/material";
 import { useSharedTokens } from "../../../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../../../theme/fonts";
+import { sectionFrameSx } from "../../_kit/frame";
 
 // ── Reveal-on-scroll hook ─────────────────────────────────────────────────────
 function useInView(threshold = 0.15) {
@@ -96,7 +98,7 @@ export const IntegrationsSection: FC = () => {
         transition: "background-color 0.4s ease, border-color 0.4s ease",
       }}
     >
-      <Box sx={{ maxWidth: "1120px", mx: "auto" }}>
+      <Box sx={{ maxWidth: "1120px", mx: "auto", ...sectionFrameSx }}>
         {/* Header */}
         <Box sx={{ textAlign: "center", maxWidth: "600px", mx: "auto", mb: { xs: "48px", md: "64px" } }}>
           <Typography
@@ -113,12 +115,12 @@ export const IntegrationsSection: FC = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: { xs: "32px", sm: "44px", md: "52px" },
+              fontSize: { xs: "32px", sm: "46px", md: "54px" },
               fontWeight: 500,
-              lineHeight: 1.1,
+              lineHeight: 1.06,
               letterSpacing: "-0.02em",
               color: T.headline,
-              fontFamily: "Prompt",
+              fontFamily: FONT_DISPLAY,
               mb: "18px",
             }}
           >

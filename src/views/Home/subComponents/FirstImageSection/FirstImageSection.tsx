@@ -3,6 +3,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import * as THREE from "three";
 import { Snowflake, Sparkles } from "lucide-react";
 import { useSharedTokens } from "../../../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../../../theme/fonts";
 import AgentTerminal from "../../../../components/AgentTerminal/AgentTerminal";
 import { PerformanceNodes } from "../../../../components/model3DAnimation";
 
@@ -206,16 +207,16 @@ export const FirstImageSection: FC = () => {
       <Typography sx={{
         fontSize: { xs: "30px", sm: "38px", md: "46px", lg: "52px" },
         fontWeight: 500, color: T.primaryText,
-        lineHeight: 1.1, letterSpacing: "-0.025em",
-        fontFamily: "Prompt", mb: "12px",
+        lineHeight: 1.06, letterSpacing: "-0.02em",
+        fontFamily: FONT_DISPLAY, mb: "12px",
         transition: "color 0.4s ease",
       }}>
         Built for scale,
       </Typography>
       <Typography sx={{
         fontSize: { xs: "30px", sm: "38px", md: "46px", lg: "52px" },
-        fontWeight: 500, lineHeight: 1.1,
-        letterSpacing: "-0.025em", fontFamily: "Prompt",
+        fontWeight: 500, lineHeight: 1.06,
+        letterSpacing: "-0.02em", fontFamily: FONT_DISPLAY,
         color: T.fadedText, transition: "color 0.4s ease",
       }}>
         not just for demos.

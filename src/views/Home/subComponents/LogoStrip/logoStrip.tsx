@@ -20,8 +20,8 @@ export const LogoStrip: FC = () => {
   const rafRef    = useRef<number>(0);
 
   // ── Theme tokens ────────────────────────────────────────────────────────
-  const bgColor     = isLight ? "#FFF4E3" : "#161616";
-  const borderColor = isLight ? "#d9c9b0" : "#2a2a2a";
+  const bgColor     = isLight ? "#FFF4E3" : "#0e1a2b";
+  const borderColor = isLight ? "#d9c9b0" : "#263b57";
   const labelColor  = isLight ? "#6a6a6a" : "#BBC0C6";
   const dc          = isLight ? "0,25,50"  : "187,192,198"; // Midnight / GreyCloud
 

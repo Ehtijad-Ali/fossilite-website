@@ -40,12 +40,12 @@ export const Navbar: React.FC<any> = (props) => {
   const location = useLocation();
 
   const T = {
-    scrolledBg: isDark ? "rgba(22,22,22,0.92)" : "rgba(255,244,227,0.92)",
-    border: tokens.border,
+    scrolledBg: isDark ? "rgba(11,20,34,0.82)" : "rgba(255,244,227,0.92)",
+    border: isDark ? "rgba(195,168,124,0.18)" : tokens.border,
     textPrimary: tokens.primaryText,
     textSecondary: tokens.secondaryText,
     surfaceSubtle: tokens.surfaceSubtle,
-    activeDot: tokens.primaryText,
+    activeDot: isDark ? "#C3A87C" : tokens.primaryText,
     ctaBorder: tokens.border,
     ctaHoverBg: tokens.primaryText,
     ctaHoverText: isDark ? "#001932" : "#FFF4E3",

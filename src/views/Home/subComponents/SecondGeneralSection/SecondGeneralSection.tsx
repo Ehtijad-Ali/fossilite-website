@@ -1,11 +1,13 @@
 import { FC, FormEvent, useEffect, useRef, useState } from "react";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { RightArrow } from "../../../../assets/Icons";
+import { Box, Stack, TextField, Typography } from "@mui/material";
 import { useSharedTokens } from "../../../../theme/sharedTokens";
+import { FONT_DISPLAY, FONT_MONO } from "../../../../theme/fonts";
+
+const GOLD = "#C3A87C";
 
 // ── Tiny hook: fires once when element enters viewport ────────────────────────
 function useInView(threshold = 0.15) {
-  const ref  = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -48,64 +50,36 @@ const Reveal: FC<RevealProps> = ({ children, delay = 0, from = "bottom" }) => {
   );
 };
 
-// ── Animated counter ──────────────────────────────────────────────────────────
-const AnimatedNumber: FC<{ target: string; color: string; visible: boolean; delay: number }> = ({
-  target, color, visible, delay,
-}) => {
-  const [display, setDisplay] = useState("0");
+// ── Gold corner brackets (monograph plate) ────────────────────────────────────
+const Corners: FC = () => (
+  <>
+    {[
+      { top: 12, left: 12, bt: 1, bl: 1 },
+      { top: 12, right: 12, bt: 1, br: 1 },
+      { bottom: 12, left: 12, bb: 1, bl: 1 },
+      { bottom: 12, right: 12, bb: 1, br: 1 },
+    ].map((c, i) => (
+      <Box key={i} sx={{
+        position: "absolute", width: "16px", height: "16px", zIndex: 3, pointerEvents: "none",
+        top: c.top, bottom: c.bottom, left: c.left, right: c.right,
+        borderTop: c.bt ? `1.5px solid ${GOLD}` : undefined,
+        borderBottom: c.bb ? `1.5px solid ${GOLD}` : undefined,
+        borderLeft: c.bl ? `1.5px solid ${GOLD}` : undefined,
+        borderRight: c.br ? `1.5px solid ${GOLD}` : undefined,
+      }} />
+    ))}
+  </>
+);
 
-  const numMatch = /^\d+/.test(target);
-  const num      = numMatch ? parseInt(target, 10) : 0;
-  const suffix   = target.replace(/^\d+/, "");
-
-  useEffect(() => {
-    if (!visible) return;
-    if (!numMatch) { setDisplay(target); return; }
-
-    let rafId: number;
-    let start: number | null = null;
-    const duration = 1200;
-
-    const step = (ts: number) => {
-      if (!start) start = ts;
-      const prog  = Math.min((ts - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - prog, 3);
-      setDisplay(`${Math.round(eased * num)}${suffix}`);
-      if (prog < 1) { rafId = requestAnimationFrame(step); }
-    };
-
-    const timer = setTimeout(() => { rafId = requestAnimationFrame(step); }, delay);
-
-    return () => {
-      clearTimeout(timer);
-      cancelAnimationFrame(rafId);
-    };
-  }, [visible, target, delay, numMatch, num, suffix]);
-
-  return (
-    <Typography sx={{
-      fontSize: { xs: "22px", sm: "28px" }, fontWeight: 500,
-      color, lineHeight: 1,
-      transition: "color 0.4s ease",
-      fontVariantNumeric: "tabular-nums",
-    }}>
-      {display}
-    </Typography>
-  );
-};
+const STEPS = [
+  { n: "01", pre: "A ", strong: "20-minute call", post: " this week — we mostly listen." },
+  { n: "02", pre: "A ", strong: "written build plan", post: " within 48 hours — scope, price, timeline." },
+  { n: "03", pre: "",  strong: "Weekly demos", post: " of the real system from week three." },
+];
 
 // ── Main component ────────────────────────────────────────────────────────────
 export const SecondGeneralSection: FC = () => {
   const T = useSharedTokens();
-  const isDark = T.isDark;
-
-  const { ref: statsRef, visible: statsVisible } = useInView(0.3);
-
-  const STATS = [
-    { num: "50+",   label: "Clients shipped"   },
-    { num: "12+",   label: "Countries"         },
-    { num: "6 wks", label: "Avg. MVP delivery" },
-  ];
 
   // ── Contact form ──
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -117,24 +91,22 @@ export const SecondGeneralSection: FC = () => {
     setSent(true);
   };
 
-  const inputSx = {
-    "& .MuiOutlinedInput-root": {
-      backgroundColor: T.inputBg,
-      borderRadius: "8px",
-      color: T.inputText,
-      fontSize: "14px",
-      transition: "border-color 0.2s ease",
-      "& fieldset": { borderColor: T.inputBorder, borderWidth: "0.5px" },
-      "&:hover fieldset": { borderColor: T.inputHoverBorder },
-      "&.Mui-focused fieldset": { borderColor: T.inputFocusBorder, borderWidth: "1px" },
-    },
-    "& .MuiInputLabel-root": { color: T.inputLabel, fontSize: "14px" },
-    "& .MuiInputLabel-root.Mui-focused": { color: T.inputFocusBorder },
+  const label = (text: string) => (
+    <Typography sx={{ fontFamily: "Prompt", fontSize: "12.5px", fontWeight: 600, color: T.formTitle, mb: "4px" }}>
+      {text}
+    </Typography>
+  );
+  const fieldSx = {
+    "& .MuiInput-root": { color: T.inputText, fontSize: "14px", fontFamily: "Prompt" },
+    "& .MuiInput-input::placeholder": { color: T.placeholder, opacity: 1 },
+    "& .MuiInput-underline:before": { borderBottomColor: T.inputBorder },
+    "& .MuiInput-underline:hover:not(.Mui-disabled):before": { borderBottomColor: GOLD },
+    "& .MuiInput-underline:after": { borderBottomColor: GOLD },
   };
 
   return (
     <Box
-     id="contact"
+      id="contact"
       sx={{
         backgroundColor: T.bg,
         borderTop: `0.5px solid ${T.border}`,
@@ -155,205 +127,168 @@ export const SecondGeneralSection: FC = () => {
         backgroundSize: "60px 60px",
         zIndex: 0, pointerEvents: "none",
       }} />
-
-      {/* Centre radial glow */}
       <Box sx={{
-        position: "absolute", top: "50%", left: "50%",
+        position: "absolute", top: "40%", left: "30%",
         transform: "translate(-50%, -50%)",
-        width: "600px", height: "400px",
-        background: T.radialGlow,
-        zIndex: 0, pointerEvents: "none",
-        transition: "background 0.5s ease",
+        width: "620px", height: "420px", maxWidth: "80%",
+        background: T.radialGlow, zIndex: 0, pointerEvents: "none",
       }} />
 
-      {/* Content — pitch on the left, contact form on the right */}
       <Box
         sx={{
           position: "relative", zIndex: 2,
-          maxWidth: "1200px", mx: "auto",
+          maxWidth: "1240px", mx: "auto",
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-          gap: { xs: "56px", md: "72px" },
+          gap: { xs: "48px", md: "80px" },
           alignItems: "center",
         }}
       >
-        {/* LEFT — pitch + submit + stats */}
-        <Stack alignItems="flex-start" textAlign="left" gap={4}>
-
-          {/* Eyebrow */}
+        {/* LEFT — pitch + steps */}
+        <Stack alignItems="flex-start" textAlign="left" gap={3}>
           <Reveal delay={0}>
             <Typography sx={{
-              fontSize: "11px", color: T.eyebrow,
-              letterSpacing: "0.10em", textTransform: "uppercase", fontWeight: 500,
-              transition: "color 0.4s ease",
+              fontFamily: FONT_MONO, fontSize: "11px", color: GOLD,
+              letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: 500,
             }}>
               ✦ Let's talk
             </Typography>
           </Reveal>
 
-          {/* Headline block */}
-          <Box>
-            <Reveal delay={80}>
-              <Typography sx={{
-                fontSize: { xs: "36px", sm: "48px", md: "56px", lg: "64px" },
-                fontWeight: 600, color: T.headline,
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
-                fontFamily: "Prompt",
-                transition: "color 0.4s ease",
-              }}>
-                Ready to ship
-              </Typography>
-            </Reveal>
-
-            <Reveal delay={160}>
-              <Typography sx={{
-                fontSize: { xs: "36px", sm: "48px", md: "56px", lg: "64px" },
-                fontWeight: 500,
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
-                fontFamily: "Prompt",
-                ...(isDark
-                  ? { color: "transparent", WebkitTextStroke: `1.5px ${T.headlineStroke}` }
-                  : { color: T.headlineFaded }
-                ),
-                transition: "color 0.4s ease",
-              }}>
-                production AI?
-              </Typography>
-            </Reveal>
-          </Box>
-
-          {/* Subtext */}
-          <Reveal delay={240}>
+          <Reveal delay={80}>
             <Typography sx={{
-              fontSize: { xs: "14px", sm: "16px" }, color: T.subText,
-              maxWidth: "480px",
-              lineHeight: 1.8,
-              fontFamily: "Prompt", fontStyle: "italic",
-              transition: "color 0.4s ease",
+              fontSize: { xs: "40px", sm: "54px", md: "62px", lg: "70px" },
+              fontWeight: 500, color: T.headline,
+              lineHeight: 1.0, letterSpacing: "-0.02em", fontFamily: FONT_DISPLAY,
             }}>
-              Build systems that remove operational bottlenecks, reduce repetitive
-              work, and support scalable execution across your business.
+              Start with an hour.
             </Typography>
           </Reveal>
 
-          {/* Social proof strip — animated counters */}
-          <Box
-            ref={statsRef}
-            sx={{
-              mt: "8px", pt: "32px",
-              borderTop: `0.5px solid ${T.statsDivider}`,
-              width: "100%", maxWidth: "480px",
-              display: "flex", justifyContent: "flex-start",
-              gap: { xs: "28px", sm: "56px" },
-              transition: "border-color 0.4s ease",
-            }}
-          >
-            {STATS.map(({ num, label }, i) => (
-              <Box
-                key={label}
-                textAlign="center"
-                sx={{
-                  opacity:   statsVisible ? 1 : 0,
-                  transform: statsVisible ? "translateY(0)" : "translateY(16px)",
-                  transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 100}ms,
-                               transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 100}ms`,
-                }}
-              >
-                <AnimatedNumber
-                  target={num}
-                  color={T.statsNum}
-                  visible={statsVisible}
-                  delay={i * 120}
-                />
-                <Typography sx={{
-                  fontSize: "11px", color: T.statsLabel,
-                  mt: "6px", letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  transition: "color 0.4s ease",
-                }}>
-                  {label}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
+          <Reveal delay={140}>
+            <Box sx={{ width: "48px", height: "1.5px", backgroundColor: GOLD, mt: "4px" }} />
+          </Reveal>
 
+          <Reveal delay={200}>
+            <Typography sx={{ fontSize: { xs: "14px", sm: "16px" }, color: T.subText, maxWidth: "440px", lineHeight: 1.8, fontFamily: "Prompt" }}>
+              Tell us what's slowing your team down. Here's exactly what happens next:
+            </Typography>
+          </Reveal>
+
+          {/* Steps card */}
+          <Reveal delay={260}>
+            <Box sx={{
+              width: "100%", maxWidth: "480px",
+              border: `0.5px solid ${T.border}`, borderRadius: "16px",
+              backgroundColor: "rgba(255,255,255,0.02)",
+              px: { xs: "20px", sm: "28px" }, py: "10px",
+            }}>
+              {STEPS.map((s, i) => (
+                <Box key={s.n} sx={{
+                  display: "flex", alignItems: "baseline", gap: "16px",
+                  py: "16px",
+                  borderBottom: i < STEPS.length - 1 ? `0.5px solid ${T.border}` : "none",
+                }}>
+                  <Typography sx={{ fontFamily: FONT_MONO, fontSize: "10.5px", color: GOLD, letterSpacing: "0.08em", flexShrink: 0 }}>
+                    {s.n}
+                  </Typography>
+                  <Typography sx={{ fontFamily: "Prompt", fontSize: "14px", color: T.subText, lineHeight: 1.6 }}>
+                    {s.pre}
+                    <Box component="span" sx={{ color: T.headline, fontWeight: 600 }}>{s.strong}</Box>
+                    {s.post}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Reveal>
+
+          <Reveal delay={320}>
+            <Typography sx={{ fontFamily: FONT_MONO, fontSize: "11px", color: T.mutedText, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              Prefer email?{" "}
+              <Box component="a" href="mailto:hello@fossilite.ai" sx={{ color: T.headline, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                hello@fossilite.ai
+              </Box>
+            </Typography>
+          </Reveal>
         </Stack>
 
-        {/* RIGHT — contact form */}
+        {/* RIGHT — contact form (monograph plate) */}
         <Reveal delay={200} from="right">
-          <Box component="form" onSubmit={handleSubmit} sx={{
-            p: { xs: "24px", sm: "32px" },
-            borderRadius: "16px",
-            backgroundColor: T.formBg,
-            border: `0.5px solid ${T.formBorder}`,
-            transition: "background-color 0.4s ease, border-color 0.4s ease",
-          }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+              position: "relative",
+              p: { xs: "28px", sm: "40px" },
+              borderRadius: "18px",
+              backgroundColor: "rgba(255,255,255,0.015)",
+              border: `0.5px solid rgba(195,168,124,0.22)`,
+              boxShadow: "0 24px 60px rgba(0,20,45,0.28)",
+            }}
+          >
+            <Corners />
             {sent ? (
-              <Stack alignItems="center" justifyContent="center" gap={1.5} sx={{ minHeight: "260px", textAlign: "center" }}>
-                <Typography sx={{ fontFamily: "Prompt", fontSize: "22px", color: T.formTitle }}>
-                  Thanks for reaching out
+              <Stack alignItems="center" justifyContent="center" gap={1.5} sx={{ minHeight: "300px", textAlign: "center" }}>
+                <Typography sx={{ fontFamily: FONT_DISPLAY, fontSize: "26px", color: T.formTitle }}>
+                  Thanks — talk soon.
                 </Typography>
-                <Typography sx={{ fontSize: "14px", color: T.formSub, lineHeight: 1.7, maxWidth: "320px" }}>
-                  We've received your message and will get back to you shortly.
+                <Typography sx={{ fontFamily: "Prompt", fontSize: "14px", color: T.formSub, lineHeight: 1.7, maxWidth: "320px" }}>
+                  We've got it. Expect a reply within one business day.
                 </Typography>
               </Stack>
             ) : (
               <>
-                <Typography sx={{ fontFamily: "Prompt", fontSize: { xs: "18px", sm: "20px" }, color: T.formTitle }}>
+                <Typography sx={{ fontFamily: FONT_DISPLAY, fontSize: { xs: "22px", sm: "24px" }, fontWeight: 500, color: T.formTitle }}>
                   Tell us about your project
                 </Typography>
-                <Typography sx={{ fontSize: "13px", color: T.formSub, mt: "6px", mb: "24px", lineHeight: 1.6 }}>
+                <Typography sx={{ fontFamily: "Prompt", fontSize: "13px", color: T.formSub, mt: "6px", mb: "26px", lineHeight: 1.6 }}>
                   Share a few details and we'll be in touch within one business day.
                 </Typography>
 
                 <Stack gap={2.5}>
-                  <TextField
-                    required label="Name" fullWidth size="small"
-                    value={form.name} onChange={handleChange("name")} sx={inputSx}
-                  />
-                  <TextField
-                    required type="email" label="Email" fullWidth size="small"
-                    value={form.email} onChange={handleChange("email")} sx={inputSx}
-                  />
-                  <TextField
-                    required label="Message" fullWidth multiline minRows={4}
-                    value={form.message} onChange={handleChange("message")} sx={inputSx}
-                  />
+                  <Box>
+                    {label("Name *")}
+                    <TextField required variant="standard" fullWidth placeholder="Your name"
+                      value={form.name} onChange={handleChange("name")} sx={fieldSx} />
+                  </Box>
+                  <Box>
+                    {label("Work email *")}
+                    <TextField required type="email" variant="standard" fullWidth placeholder="you@company.com"
+                      value={form.email} onChange={handleChange("email")} sx={fieldSx} />
+                  </Box>
+                  <Box>
+                    {label("What's slowing your team down? *")}
+                    <TextField required variant="standard" fullWidth multiline minRows={3}
+                      placeholder="e.g. Our ops team re-types 400 supplier invoices a week…"
+                      value={form.message} onChange={handleChange("message")} sx={fieldSx} />
+                  </Box>
 
-                  <Button
-                    type="submit" fullWidth endIcon={<RightArrow />}
+                  <Box
+                    component="button"
+                    type="submit"
                     sx={{
-                      mt: "4px", py: "13px",
-                      backgroundColor: T.ctaPrimaryBg,
-                      color:           T.ctaPrimaryText,
-                      fontSize: "14px", fontWeight: 500,
-                      textTransform: "none", borderRadius: "8px",
-                      letterSpacing: "0.01em",
-                      transition: "background-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease",
-                      boxShadow: isDark
-                        ? "0 4px 20px rgba(255,244,227,0.12)"
-                        : "0 4px 20px rgba(0,25,50,0.18)",
-                      "&:hover": {
-                        backgroundColor: T.ctaPrimaryHover,
-                        transform: "translateY(-2px)",
-                        boxShadow: isDark
-                          ? "0 8px 32px rgba(255,244,227,0.18)"
-                          : "0 8px 32px rgba(0,25,50,0.26)",
-                      },
-                      "&:active": { transform: "scale(0.97)" },
-                      "& .MuiButton-endIcon svg": { filter: T.ctaPrimaryIcon },
+                      mt: "10px", width: "100%", cursor: "pointer", border: "none",
+                      borderRadius: "10px", py: "15px",
+                      backgroundColor: T.ctaPrimaryBg, color: T.ctaPrimaryText,
+                      fontFamily: "Prompt", fontSize: "14px", fontWeight: 600,
+                      display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px",
+                      transition: "background-color 0.25s ease, transform 0.2s ease",
+                      "&:hover": { backgroundColor: T.ctaPrimaryHover, transform: "translateY(-2px)" },
+                      "&:active": { transform: "scale(0.98)" },
                     }}
                   >
-                    Work with us
-                  </Button>
+                    Book the hour
+                    <Box component="span" sx={{ opacity: 0.7 }}>›</Box>
+                  </Box>
+
+                  <Typography sx={{ fontFamily: "Prompt", fontSize: "12px", color: T.mutedText, textAlign: "center", lineHeight: 1.6, mt: "2px" }}>
+                    No newsletter, no spam — just a reply within one business day.
+                  </Typography>
                 </Stack>
               </>
             )}
           </Box>
         </Reveal>
-
       </Box>
     </Box>
   );

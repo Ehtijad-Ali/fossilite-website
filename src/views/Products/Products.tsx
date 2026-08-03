@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 import { PageHero } from "../../components";
 import { useInView } from "../../hooks/useInView";
 import CodeImageOneLight from "../../assets/Images/CodeImages/CodeImageOneLight.gif";
@@ -89,7 +90,7 @@ const ProductRow: FC<{ product: Product; index: number; T: ReturnType<typeof use
         <Typography sx={{ fontSize: "11px", color: T.accent, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, mb: "16px" }}>
           {product.tag}
         </Typography>
-        <Typography sx={{ fontSize: { xs: "28px", sm: "36px" }, fontWeight: 600, color: T.headline, fontFamily: "Prompt", letterSpacing: "-0.02em", mb: "16px" }}>
+        <Typography sx={{ fontSize: { xs: "28px", sm: "36px" }, fontWeight: 600, color: T.headline, fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: "16px" }}>
           {product.title}
         </Typography>
         <Typography sx={{ fontSize: "15px", color: T.secondaryText, lineHeight: 1.8, mb: "24px", maxWidth: "440px" }}>
@@ -204,7 +205,7 @@ export const Products: FC = () => {
             <Typography sx={{ fontSize: "11px", color: T.eyebrow, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, mb: "16px" }}>
               ✦ Built into every system
             </Typography>
-            <Typography sx={{ fontSize: { xs: "28px", sm: "40px" }, fontWeight: 500, color: T.headline, fontFamily: "Prompt", letterSpacing: "-0.02em" }}>
+            <Typography sx={{ fontSize: { xs: "28px", sm: "40px" }, fontWeight: 500, color: T.headline, fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em" }}>
               Standard on{" "}
               <Box component="span" sx={{ color: T.headlineFaded }}>every build.</Box>
             </Typography>
@@ -261,7 +262,7 @@ export const Products: FC = () => {
             boxShadow: T.boxShadow,
           }}
         >
-          <Typography sx={{ fontSize: { xs: "26px", sm: "38px" }, fontWeight: 600, color: T.headline, fontFamily: "Prompt", letterSpacing: "-0.02em", mb: "14px" }}>
+          <Typography sx={{ fontSize: { xs: "26px", sm: "38px" }, fontWeight: 600, color: T.headline, fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: "14px" }}>
             Not sure which fits?
           </Typography>
           <Typography sx={{ fontSize: "15px", color: T.secondaryText, lineHeight: 1.75, maxWidth: "480px", mx: "auto", mb: "30px" }}>

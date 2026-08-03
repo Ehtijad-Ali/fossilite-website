@@ -1,6 +1,8 @@
 import { FC, useState, useRef, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { useSharedTokens } from "../../../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../../../theme/fonts";
+import { sectionFrameSx } from "../../_kit/frame";
 
 const FAQS = [
   {
@@ -143,6 +145,7 @@ export const FaqSection: FC = () => {
         sx={{
           maxWidth: "1100px",
           mx: "auto",
+          ...sectionFrameSx,
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "0.85fr 1.15fr" },
           gap: { xs: "40px", md: "72px" },
@@ -165,12 +168,12 @@ export const FaqSection: FC = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: { xs: "32px", sm: "40px", md: "48px" },
+              fontSize: { xs: "32px", sm: "42px", md: "50px" },
               fontWeight: 500,
-              lineHeight: 1.1,
+              lineHeight: 1.06,
               letterSpacing: "-0.02em",
               color: T.headline,
-              fontFamily: "Prompt",
+              fontFamily: FONT_DISPLAY,
               mb: "16px",
             }}
           >

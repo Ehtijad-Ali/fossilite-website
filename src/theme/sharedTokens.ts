@@ -8,10 +8,10 @@ export const useSharedTokens = () => {
   return {
     isDark,
     // Core palette
-    bg: isDark ? "#161616" : "#FFF4E3",
-    bgAlt: isDark ? "#1a1a1a" : "#ffffff",
-    bgAlt2: isDark ? "#1e1e1e" : "#fdf6ec",
-    border: isDark ? "#2a2a2a" : "#d9c9b0",
+    bg: isDark ? "#0e1a2b" : "#FFF4E3",
+    bgAlt: isDark ? "#13233a" : "#ffffff",
+    bgAlt2: isDark ? "#172b44" : "#fdf6ec",
+    border: isDark ? "#263b57" : "#d9c9b0",
     borderLight: isDark ? "#3a3a3a" : "#BBC0C6",
     
     // Text hierarchy
@@ -19,22 +19,22 @@ export const useSharedTokens = () => {
     secondaryText: isDark ? "#BBC0C6" : "#4a4a6a",
     fadedText: isDark ? "#3a3a3a" : "#BBC0C6",
     mutedText: isDark ? "#8a8a8a" : "#9a9384",
-    eyebrow: isDark ? "#BBC0C6" : "#4a4a6a",
+    eyebrow: isDark ? "#C3A87C" : "#4a4a6a",
     headline: isDark ? "#FFF4E3" : "#001932",
     headlineStroke: isDark ? "rgba(255,244,227,0.18)" : undefined,
     headlineFaded: isDark ? "#3a3a3a" : "#BBC0C6",
     subText: isDark ? "#BBC0C6" : "#4a4a6a",
     
     // Accents
-    accent: isDark ? "#BBC0C6" : "#001932",
-    accentGlow: isDark ? "rgba(187,192,198,0.08)" : "rgba(0,25,50,0.06)",
+    accent: isDark ? "#C3A87C" : "#001932",
+    accentGlow: isDark ? "rgba(195,168,124,0.10)" : "rgba(0,25,50,0.06)",
     
     // UI elements
-    surfaceSubtle: isDark ? "#1e1e1e" : "#f0e8da",
-    tagBg: isDark ? "#1e1e1e" : "#f5ede0",
-    pillBorder: isDark ? "#2a2a2a" : "#d9c9b0",
-    cardBg: isDark ? "#1a1a1a" : "#ffffff",
-    cardBgAlt: isDark ? "#1e1e1e" : "#fdf6ec",
+    surfaceSubtle: isDark ? "#172b44" : "#f0e8da",
+    tagBg: isDark ? "#172b44" : "#f5ede0",
+    pillBorder: isDark ? "#263b57" : "#d9c9b0",
+    cardBg: isDark ? "#13233a" : "#ffffff",
+    cardBgAlt: isDark ? "#172b44" : "#fdf6ec",
     stroke: isDark ? "rgba(187,192,198,0.10)" : "rgba(0,25,50,0.10)",
     glowTop: isDark
       ? "linear-gradient(90deg, transparent, rgba(187,192,198,0.12), transparent)"
@@ -48,26 +48,26 @@ export const useSharedTokens = () => {
     ctaPrimaryBg: isDark ? "#FFF4E3" : "#001932",
     ctaPrimaryText: isDark ? "#001932" : "#FFF4E3",
     ctaPrimaryHover: isDark ? "#e0d8cc" : "#0a2a4a",
-    ctaSecBorder: isDark ? "#2a2a2a" : "#d9c9b0",
+    ctaSecBorder: isDark ? "#263b57" : "#d9c9b0",
     ctaSecText: isDark ? "#BBC0C6" : "#4a4a6a",
     ctaSecHoverText: isDark ? "#FFF4E3" : "#001932",
     ctaSecHoverBorder: isDark ? "#BBC0C6" : "#001932",
     
     // Form elements
     inputBg: "transparent",
-    inputBorder: isDark ? "#2a2a2a" : "#d9c9b0",
+    inputBorder: isDark ? "#263b57" : "#d9c9b0",
     inputHoverBorder: isDark ? "#3a3a3a" : "#C3A87C",
     inputFocusBorder: isDark ? "#BBC0C6" : "#001932",
     inputText: isDark ? "#FFF4E3" : "#001932",
     inputLabel: isDark ? "#8a8a8a" : "#9a9384",
     inputColor: isDark ? "#FFF4E3" : "#001932",
-    inputDivider: isDark ? "#2a2a2a" : "#d9c9b0",
+    inputDivider: isDark ? "#263b57" : "#d9c9b0",
     inputShadow: isDark ? "none" : "0 2px 8px rgba(0,25,50,0.05)",
     placeholder: isDark ? "#3a3a3a" : "#BBC0C6",
     
     // Contact form
     formBg: "transparent",
-    formBorder: isDark ? "#2a2a2a" : "#d9c9b0",
+    formBorder: isDark ? "#263b57" : "#d9c9b0",
     formTitle: isDark ? "#FFF4E3" : "#001932",
     formSub: isDark ? "#BBC0C6" : "#4a4a6a",
     
@@ -80,9 +80,9 @@ export const useSharedTokens = () => {
     copyright: isDark ? "#BBC0C6" : "#4a4a6a",
     linkColor: isDark ? "#BBC0C6" : "#4a4a6a",
     linkHover: isDark ? "#FFF4E3" : "#001932",
-    socialBorder: isDark ? "#2a2a2a" : "#d9c9b0",
+    socialBorder: isDark ? "#263b57" : "#d9c9b0",
     socialHoverBorder: isDark ? "#BBC0C6" : "#001932",
-    socialHoverBg: isDark ? "#1e1e1e" : "#f0e8da",
+    socialHoverBg: isDark ? "#172b44" : "#f0e8da",
     socialIconFilter: isDark ? "invert(1) brightness(0.85)" : "brightness(0)",
     socialOpacity: isDark ? 0.7 : 0.55,
     newsletterDesc: isDark ? "#BBC0C6" : "#4a4a6a",
@@ -91,10 +91,15 @@ export const useSharedTokens = () => {
     sendActiveIcon: isDark ? "#001932" : "#FFF4E3",
     sendActiveHover: isDark ? "#e0d8cc" : "#0a2a4a",
     sendIdleIcon: isDark ? "#3a3a3a" : "#BBC0C6",
-    sendIdleHoverBg: isDark ? "#1e1e1e" : "#f0e8da",
-    
+    sendIdleHoverBg: isDark ? "#172b44" : "#f0e8da",
+    // Oversized ghost wordmark — painted through a mask so it reads on both
+    // backgrounds (the raw SVG is navy and vanishes on the dark bg).
+    ghostFill: isDark
+      ? "linear-gradient(180deg, rgba(255,244,227,0.34) 0%, rgba(195,168,124,0.16) 100%)"
+      : "linear-gradient(180deg, rgba(0,25,50,0.26) 0%, rgba(0,25,50,0.10) 100%)",
+
     // Stats
-    statsDivider: isDark ? "#2a2a2a" : "#d9c9b0",
+    statsDivider: isDark ? "#263b57" : "#d9c9b0",
     statsNum: isDark ? "#FFF4E3" : "#001932",
     statsLabel: isDark ? "#BBC0C6" : "#4a4a6a",
     

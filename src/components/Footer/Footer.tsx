@@ -5,6 +5,7 @@ import logoLight from "../../assets/FossiliteLogoNavy.svg";
 import logoDark from "../../assets/FossiliteLogo.svg";
 import ghostWordmark from "../../assets/Images/Featured/Fossilite.svg";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 import {
   RightArrow,
   FacebookIcon,
@@ -189,8 +190,8 @@ export const Footer: FC = () => {
           }} />
           <Box sx={{ position: "relative", zIndex: 1 }}>
             <Typography sx={{
-              fontSize: { xs: "26px", sm: "34px", md: "40px" },
-              fontWeight: 600, color: T.headline, fontFamily: "Prompt",
+              fontSize: { xs: "28px", sm: "36px", md: "42px" },
+              fontWeight: 500, color: T.headline, fontFamily: FONT_DISPLAY,
               letterSpacing: "-0.02em", lineHeight: 1.1, mb: "10px",
             }}>
               Ready to ship production AI?
@@ -370,17 +371,23 @@ export const Footer: FC = () => {
       {/* ══ GHOST WORDMARK ════════════════════════════════════════════════ */}
       <Box sx={{ py: { xs: "18px", md: "24px" }, borderBottom: `0.5px solid ${T.border}`, overflow: "hidden", display: "flex", justifyContent: "center" }}>
         <Box
-          component="img"
-          src={ghostWordmark}
-          alt="Fossilite"
           aria-hidden="true"
           sx={{
             width: "100%",
             maxWidth: { xs: "88%", md: "80%", lg: "1000px" },
-            height: "auto",
+            aspectRatio: "684 / 109",
+            background: T.ghostFill,
+            maskImage: `url(${ghostWordmark})`,
+            WebkitMaskImage: `url(${ghostWordmark})`,
+            maskRepeat: "no-repeat",
+            WebkitMaskRepeat: "no-repeat",
+            maskSize: "contain",
+            WebkitMaskSize: "contain",
+            maskPosition: "center",
+            WebkitMaskPosition: "center",
             userSelect: "none",
             pointerEvents: "none",
-            display: "block",
+            transition: "background 0.4s ease",
           }}
         />
       </Box>

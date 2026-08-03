@@ -1,6 +1,7 @@
 import { FC, FormEvent, useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 import { PageHero } from "../../components";
 import { RightArrow } from "../../assets/Icons";
 
@@ -265,7 +266,7 @@ export const Contact: FC = () => {
           <Typography sx={{ fontSize: "11px", color: T.eyebrow, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, mb: "16px", textAlign: "center" }}>
             ✦ Before you ask
           </Typography>
-          <Typography sx={{ fontSize: { xs: "28px", sm: "38px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: "Prompt", letterSpacing: "-0.02em", mb: { xs: "32px", md: "48px" } }}>
+          <Typography sx={{ fontSize: { xs: "28px", sm: "38px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: { xs: "32px", md: "48px" } }}>
             Common questions.
           </Typography>
 

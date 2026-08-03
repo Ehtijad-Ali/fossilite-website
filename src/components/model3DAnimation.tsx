@@ -35,7 +35,7 @@ interface Node3D { x: number; y: number; z: number }
 export const PerformanceNodes: FC = () => {
   const { mode } = useThemeMode();
   const isDark   = mode === "dark";
-  const bgColor  = isDark ? "#161616" : "#FFF4E3";   // match the site background
+  const bgColor  = isDark ? "#0e1a2b" : "#FFF4E3";   // match the site background
 
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef    = useRef<HTMLCanvasElement>(null);

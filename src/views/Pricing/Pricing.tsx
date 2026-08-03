@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 import { PageHero } from "../../components";
 import { useInView } from "../../hooks/useInView";
 
@@ -360,7 +361,7 @@ export const Pricing: FC = () => {
           <Typography sx={{ fontSize: "11px", color: T.eyebrow, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, mb: "16px", textAlign: "center" }}>
             ✦ Compare plans
           </Typography>
-          <Typography sx={{ fontSize: { xs: "28px", sm: "40px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: "Prompt", letterSpacing: "-0.02em", mb: { xs: "36px", md: "52px" } }}>
+          <Typography sx={{ fontSize: { xs: "28px", sm: "40px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: { xs: "36px", md: "52px" } }}>
             Everything, side by side.
           </Typography>
 
@@ -442,7 +443,7 @@ export const Pricing: FC = () => {
           <Typography sx={{ fontSize: "11px", color: T.eyebrow, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, mb: "16px", textAlign: "center" }}>
             ✦ Pricing questions
           </Typography>
-          <Typography sx={{ fontSize: { xs: "28px", sm: "38px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: "Prompt", letterSpacing: "-0.02em", mb: { xs: "32px", md: "48px" } }}>
+          <Typography sx={{ fontSize: { xs: "28px", sm: "38px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: { xs: "32px", md: "48px" } }}>
             Good to know.
           </Typography>
 
@@ -521,7 +522,7 @@ export const Pricing: FC = () => {
             boxShadow: T.boxShadow,
           }}
         >
-          <Typography sx={{ fontSize: { xs: "26px", sm: "38px" }, fontWeight: 600, color: T.headline, fontFamily: "Prompt", letterSpacing: "-0.02em", mb: "14px" }}>
+          <Typography sx={{ fontSize: { xs: "26px", sm: "38px" }, fontWeight: 600, color: T.headline, fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: "14px" }}>
             Still weighing it up?
           </Typography>
           <Typography sx={{ fontSize: "15px", color: T.secondaryText, lineHeight: 1.75, maxWidth: "480px", mx: "auto", mb: "30px" }}>

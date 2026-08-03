@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 import { Box, Typography } from "@mui/material";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 
 interface PageHeroProps {
   eyebrow: string;
@@ -65,7 +66,7 @@ export const PageHero: FC<PageHeroProps> = ({ eyebrow, title, titleAccent, subti
         <Typography
           sx={{
             fontSize: "11px",
-            color: T.eyebrow,
+            color: "#C3A87C",
             letterSpacing: "0.14em",
             textTransform: "uppercase",
             fontWeight: 600,
@@ -79,12 +80,12 @@ export const PageHero: FC<PageHeroProps> = ({ eyebrow, title, titleAccent, subti
 
         <Typography
           sx={{
-            fontSize: { xs: "40px", sm: "58px", md: "72px" },
+            fontSize: { xs: "42px", sm: "60px", md: "76px" },
             fontWeight: 500,
-            lineHeight: 1.03,
-            letterSpacing: "-0.03em",
+            lineHeight: 1.0,
+            letterSpacing: "-0.02em",
             color: T.headline,
-            fontFamily: "Prompt",
+            fontFamily: FONT_DISPLAY,
             animation: "phRise 0.8s cubic-bezier(0.22,1,0.36,1) 0.08s both",
             "@keyframes phRise": { from: { opacity: 0, transform: "translateY(26px)" }, to: { opacity: 1, transform: "none" } },
           }}

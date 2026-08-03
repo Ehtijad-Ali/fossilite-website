@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 import { PageHero } from "../../components";
 
 // ── Content model ─────────────────────────────────────────────────────────────
@@ -156,7 +157,7 @@ export const LegalLayout: FC<LegalLayoutProps> = ({
                   <Typography sx={{ fontSize: "13px", color: T.accent, fontFamily: "Prompt", fontWeight: 600, lineHeight: 1.3, flexShrink: 0 }}>
                     {String(i + 1).padStart(2, "0")}
                   </Typography>
-                  <Typography component="h2" sx={{ fontSize: { xs: "20px", sm: "24px" }, fontWeight: 600, color: T.headline, fontFamily: "Prompt", letterSpacing: "-0.01em", lineHeight: 1.3 }}>
+                  <Typography component="h2" sx={{ fontSize: { xs: "20px", sm: "24px" }, fontWeight: 600, color: T.headline, fontFamily: FONT_DISPLAY, letterSpacing: "-0.01em", lineHeight: 1.3 }}>
                     {s.heading}
                   </Typography>
                 </Box>

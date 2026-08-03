@@ -1,20 +1,22 @@
 import { FC, useState, useRef, useEffect, useCallback } from "react";
 import { Box, Grid2 as Grid, Stack, Typography } from "@mui/material";
 import { useThemeMode } from "../../../../theme/theme";
+import { FONT_DISPLAY } from "../../../../theme/fonts";
+import { sectionFrameSx } from "../../_kit/frame";
 
 // ── Design tokens (site cream/navy palette) ──────────────────────────────────
 const getTokens = (isDark: boolean) => ({
-  bg:            isDark ? "#161616" : "#FFF4E3",
+  bg:            isDark ? "#0e1a2b" : "#FFF4E3",
   headline:      isDark ? "#FFF4E3" : "#001932",
   headlineFaded: isDark ? "#3a3a3a" : "#BBC0C6",
   body:          isDark ? "#BBC0C6" : "#4a4a6a",
   eyebrow:       isDark ? "#BBC0C6" : "#4a4a6a",
-  divider:       isDark ? "#2a2a2a" : "#d9c9b0",
-  cardBg:        isDark ? "#141414" : "#FBF3E4",
-  cardBorder:    isDark ? "#2a2a2a" : "#d9c9b0",
+  divider:       isDark ? "#263b57" : "#d9c9b0",
+  cardBg:        isDark ? "#101d31" : "#FBF3E4",
+  cardBorder:    isDark ? "#263b57" : "#d9c9b0",
   cardBorderHover: isDark ? "#BBC0C6" : "#001932",
-  inputBg:       isDark ? "#161616" : "#fdf6ec",
-  inputBorder:   isDark ? "#2a2a2a" : "#d9c9b0",
+  inputBg:       isDark ? "#0e1a2b" : "#fdf6ec",
+  inputBorder:   isDark ? "#263b57" : "#d9c9b0",
   inputFocus:    isDark ? "#BBC0C6" : "#001932",
   inputText:     isDark ? "#FFF4E3" : "#001932",
   placeholder:   isDark ? "#3a3a3a" : "#BBC0C6",
@@ -440,20 +442,33 @@ const NetworkCanvas: FC<{ text: string; T: ReturnType<typeof getTokens> }> = ({ 
     return () => cancelAnimationFrame(rafRef.current);
   }, [tick]);
 
-  // keep canvas resolution crisp
+  // keep canvas resolution crisp — a ResizeObserver catches the case (common on
+  // mobile / SPA re-entry) where the card measures 0px at mount and only gets
+  // its real size a frame or two later, so the canvas never stays blank.
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
+      if (!rect.width || !rect.height) return; // not laid out yet — wait for next observation
       const dpr = window.devicePixelRatio || 1;
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
       dprRef.current = dpr;
-      canvas.width = Math.max(1, Math.round(rect.width * dpr));
-      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        snapRef.current = true; // re-fit the graph to the new size immediately
+      }
     };
     resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
     window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
   // ── pointer interaction: drag a node · click empty space to ripple ─────────
@@ -553,7 +568,7 @@ export const CommentToAnimationSection: FC = () => {
         backgroundSize: "60px 60px",
       }} />
 
-      <Box sx={{ position: "relative", zIndex: 1, maxWidth: "1320px", mx: "auto" }}>
+      <Box sx={{ position: "relative", zIndex: 1, maxWidth: "1320px", mx: "auto", ...sectionFrameSx }}>
         <Grid container spacing={{ xs: 9, sm: 10, md: 12, lg: 14 }} alignItems="center">
 
           {/* Left: content + input */}
@@ -565,9 +580,9 @@ export const CommentToAnimationSection: FC = () => {
             <Stack direction="column" gap={3}>
               <Reveal from="left" delay={80}>
                 <Typography sx={{
-                  fontSize: { xs: "28px", sm: "36px", md: "44px" },
-                  fontWeight: 600, color: T.headline,
-                  lineHeight: 1.1, letterSpacing: "-0.02em", fontFamily: "Prompt",
+                  fontSize: { xs: "30px", sm: "38px", md: "46px" },
+                  fontWeight: 500, color: T.headline,
+                  lineHeight: 1.06, letterSpacing: "-0.02em", fontFamily: FONT_DISPLAY,
                   transition: "color 0.4s ease",
                 }}>
                   Type anything.{" "}

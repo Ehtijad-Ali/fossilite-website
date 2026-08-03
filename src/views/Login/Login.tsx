@@ -2,6 +2,7 @@ import { FC, FormEvent, useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 import logoNavy from "../../assets/FossiliteLogoNavy.svg";
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -139,7 +140,7 @@ export const Login: FC = () => {
             {/* Logo + heading */}
             <Box sx={{ textAlign: "center", mb: "26px" }}>
               <Box component="img" src={logoNavy} alt="Fossilite" sx={{ width: "116px", height: "auto", mb: "22px" }} />
-              <Typography sx={{ fontSize: "24px", fontWeight: 600, color: T.headline, fontFamily: "Prompt", letterSpacing: "-0.02em" }}>
+              <Typography sx={{ fontSize: "24px", fontWeight: 600, color: T.headline, fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em" }}>
                 Welcome back
               </Typography>
               <Typography sx={{ fontSize: "14px", color: T.secondaryText, mt: "6px" }}>

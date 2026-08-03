@@ -8,11 +8,14 @@ import {
   SecondImageSection,
   SecondGeneralSection,
   ChatBoxSection,
-  CaseStudiesSection,
   TestimonialsSection,
   IntegrationsSection,
   FaqSection,
   CommentToAnimationSection,
+  ArchaeologyGraphsSection,
+  GradientDescentSection,
+  ConfidenceFieldSection,
+  FieldworkSection,
 } from "./subComponents";
 import { Layout } from "../../layout";
 
@@ -24,10 +27,13 @@ export const Home: FC = () => {
         <LogoStrip />
         <ChatBoxSection />
         <FirstImageSection />
-        <CaseStudiesSection />
+        <ArchaeologyGraphsSection />
         <FirstGeneralSection />
+        <FieldworkSection />
+        <GradientDescentSection />
         <SecondImageSection />
         <IntegrationsSection />
+        <ConfidenceFieldSection />
         <CommentToAnimationSection />
         <TestimonialsSection />
         <FaqSection />

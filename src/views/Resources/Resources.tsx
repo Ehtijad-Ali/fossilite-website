@@ -1,6 +1,7 @@
 import { FC, useMemo, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 import { PageHero } from "../../components";
 import { useInView } from "../../hooks/useInView";
 import Img1 from "../../assets/Images/CodeImages/CodeImage1Light.png";
@@ -300,7 +301,7 @@ export const Resources: FC = () => {
           border: `1px solid ${T.gridBorder}`, backgroundColor: T.cardBgAlt, boxShadow: T.boxShadow,
           p: { xs: "36px 26px", md: "56px" }, textAlign: "center",
         }}>
-          <Typography sx={{ fontSize: { xs: "26px", sm: "34px" }, fontWeight: 600, color: T.headline, fontFamily: "Prompt", letterSpacing: "-0.02em", mb: "12px" }}>
+          <Typography sx={{ fontSize: { xs: "26px", sm: "34px" }, fontWeight: 600, color: T.headline, fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: "12px" }}>
             Get insights in your inbox
           </Typography>
           <Typography sx={{ fontSize: "15px", color: T.secondaryText, lineHeight: 1.7, maxWidth: "440px", mx: "auto", mb: "28px" }}>

@@ -1,6 +1,8 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useSharedTokens } from "../../../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../../../theme/fonts";
+import { sectionFrameSx } from "../../_kit/frame";
 
 // ── Tiny hook: reveals once the element enters the viewport ───────────────────
 function useInView(threshold = 0.15) {
@@ -96,12 +98,12 @@ export const TestimonialsSection: FC = () => {
         </Typography>
         <Typography
           sx={{
-            fontSize: { xs: "32px", sm: "44px", md: "52px" },
+            fontSize: { xs: "32px", sm: "46px", md: "54px" },
             fontWeight: 500,
-            lineHeight: 1.1,
+            lineHeight: 1.06,
             letterSpacing: "-0.02em",
             color: T.headline,
-            fontFamily: "Prompt",
+            fontFamily: FONT_DISPLAY,
           }}
         >
           Trusted by teams{" "}
@@ -119,6 +121,7 @@ export const TestimonialsSection: FC = () => {
           gap: { xs: "20px", md: "24px" },
           maxWidth: "1200px",
           mx: "auto",
+          ...sectionFrameSx,
         }}
       >
         {TESTIMONIALS.map((t, i) => (

@@ -2,6 +2,7 @@ import { FC, ReactNode, useState, useEffect, useRef } from "react";
 import { Box, Grid2 as Grid, Stack, Typography } from "@mui/material";
 import * as THREE from "three";
 import { useSharedTokens } from "../../../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../../../theme/fonts";
 import { useInView } from "../../../../hooks/useInView";
 
 // ── Principle icons (inline SVG, inherit currentColor) ────────────────────────
@@ -356,10 +357,10 @@ export const FirstGeneralSection: FC = () => {
               ✦ Why we're different
             </Typography>
             <Typography sx={{
-              fontSize: { xs: "32px", sm: "44px", md: "56px" },
+              fontSize: { xs: "32px", sm: "46px", md: "58px" },
               fontWeight: 500, color: headlineColor,
-              lineHeight: 1.1, letterSpacing: "-0.02em",
-              fontFamily: "Prompt" , maxWidth: "520px",
+              lineHeight: 1.05, letterSpacing: "-0.02em",
+              fontFamily: FONT_DISPLAY, maxWidth: "520px",
               transition: "color 0.4s ease",
             }}>
               We consult and{" "}

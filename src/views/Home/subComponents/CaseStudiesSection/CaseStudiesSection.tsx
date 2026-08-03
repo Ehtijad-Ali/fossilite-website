@@ -8,14 +8,14 @@ import arTileVideo from "../../../../assets/videos/ar-tile.mp4";
 
 // ── Theme tokens ─────────────────────────────────────────────────────────────
 const getTokens = (isLight: boolean) => ({
-  bg:            isLight ? "#FFF4E3" : "#161616",
-  border:        isLight ? "#d9c9b0" : "#2a2a2a",
+  bg:            isLight ? "#FFF4E3" : "#0e1a2b",
+  border:        isLight ? "#d9c9b0" : "#263b57",
   eyebrow:       isLight ? "#001932" : "#BBC0C6",
   headline:      isLight ? "#001932" : "#FFF4E3",
   headlineFaded: isLight ? "#BBC0C6" : "#3a3a3a",
   subText:       isLight ? "#4a4a6a" : "#BBC0C6",
   // Outer mockup card
-  cardBorder:    isLight ? "#d9c9b0" : "#2a2a2a",
+  cardBorder:    isLight ? "#d9c9b0" : "#263b57",
   cardCorner:    "#C3A87C",            // warm tan corner accents
   cardHoverShadow: isLight
     ? "0 26px 60px rgba(0,25,50,0.16)"
@@ -26,7 +26,7 @@ const getTokens = (isLight: boolean) => ({
   // Tag pill
   tagBg:         isLight ? "rgba(255,255,255,0.9)" : "rgba(22,22,22,0.85)",
   tagText:       isLight ? "#001932" : "#FFF4E3",
-  tagBorder:     isLight ? "#e3ddd0" : "#2a2a2a",
+  tagBorder:     isLight ? "#e3ddd0" : "#263b57",
   // Caption
   captionTitle:  isLight ? "#001932" : "#FFF4E3",
   captionBody:   isLight ? "#4a4a6a" : "#BBC0C6",

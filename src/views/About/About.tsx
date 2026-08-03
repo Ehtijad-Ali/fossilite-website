@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSharedTokens } from "../../theme/sharedTokens";
+import { FONT_DISPLAY } from "../../theme/fonts";
 import { PageHero } from "../../components";
 import { useInView } from "../../hooks/useInView";
 
@@ -98,9 +99,9 @@ export const About: FC = () => {
               fontSize: { xs: "24px", sm: "32px", md: "38px" },
               fontWeight: 500,
               color: T.headline,
-              lineHeight: 1.35,
+              lineHeight: 1.25,
               letterSpacing: "-0.02em",
-              fontFamily: "Prompt",
+              fontFamily: FONT_DISPLAY,
             }}
           >
             To make intelligent systems{" "}
@@ -118,7 +119,7 @@ export const About: FC = () => {
           <Typography sx={{ fontSize: "11px", color: T.eyebrow, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, mb: "16px", textAlign: "center" }}>
             ✦ What we believe
           </Typography>
-          <Typography sx={{ fontSize: { xs: "28px", sm: "40px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: "Prompt", letterSpacing: "-0.02em", mb: { xs: "40px", md: "60px" } }}>
+          <Typography sx={{ fontSize: { xs: "28px", sm: "40px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: { xs: "40px", md: "60px" } }}>
             Principles we build on.
           </Typography>
 
@@ -169,7 +170,7 @@ export const About: FC = () => {
           <Typography sx={{ fontSize: "11px", color: T.eyebrow, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, mb: "16px", textAlign: "center" }}>
             ✦ How we work
           </Typography>
-          <Typography sx={{ fontSize: { xs: "28px", sm: "40px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: "Prompt", letterSpacing: "-0.02em", mb: { xs: "40px", md: "60px" } }}>
+          <Typography sx={{ fontSize: { xs: "28px", sm: "40px" }, fontWeight: 500, color: T.headline, textAlign: "center", fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: { xs: "40px", md: "60px" } }}>
             From friction to{" "}
             <Box component="span" sx={{ color: T.headlineFaded }}>finished system.</Box>
           </Typography>
@@ -274,7 +275,7 @@ export const About: FC = () => {
             boxShadow: T.boxShadow,
           }}
         >
-          <Typography sx={{ fontSize: { xs: "26px", sm: "38px" }, fontWeight: 600, color: T.headline, fontFamily: "Prompt", letterSpacing: "-0.02em", mb: "14px" }}>
+          <Typography sx={{ fontSize: { xs: "26px", sm: "38px" }, fontWeight: 500, color: T.headline, fontFamily: FONT_DISPLAY, letterSpacing: "-0.02em", mb: "14px" }}>
             Let's build something durable.
           </Typography>
           <Typography sx={{ fontSize: "15px", color: T.secondaryText, lineHeight: 1.75, maxWidth: "480px", mx: "auto", mb: "30px" }}>

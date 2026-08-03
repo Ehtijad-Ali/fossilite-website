@@ -15,7 +15,7 @@ const ThemeModeContext = createContext<{
   mode: 'light' | 'dark';
 }>({
   toggleMode: () => {},
-  mode: 'light',                      // ← light only for now (dark code kept, disabled)
+  mode: 'dark',                       // ← dark monograph theme, site-wide
 });
 
 export const useThemeMode = () => useContext(ThemeModeContext);
@@ -25,7 +25,7 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   // Dark theme is fully implemented but disabled. To re-enable theme switching,
   // restore the useState + toggleMode below and re-add the <ThemeToggle /> in the
   // Navbar. All `isDark ? … : …` branches throughout the app remain intact.
-  const mode: 'light' | 'dark' = 'light';
+  const mode: 'light' | 'dark' = 'dark';
   const toggleMode = () => {};
 
   // const [mode, setMode] = useState<'light' | 'dark'>('dark'); // ← dark by default

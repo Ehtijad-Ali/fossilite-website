@@ -1,29 +1,24 @@
 import { FC, useEffect, useRef, useState } from "react";
-import { Box, Grid2 as Grid, Stack, Typography } from "@mui/material";
-import CodeImage4LightExtraction from "../../../../assets/Images/CodeImages/CodeImage4LightExtraction.gif";
-import CodeImage4Dark            from "../../../../assets/Images/CodeImages/codeImage4DarkExtraction.gif";
+import { Box, Stack, Typography } from "@mui/material";
 import CodeImage5Light           from "../../../../assets/Images/CodeImages/Code5imageLight.gif";
 import CodeImage5Dark            from "../../../../assets/Images/CodeImages/codeImage5Dark.gif";
 import CodeImage6Light           from "../../../../assets/Images/CodeImages/Code6imageLight.gif";
 import CodeImage6Dark            from "../../../../assets/Images/CodeImages/codeImage6Dark.gif";
 import { useThemeMode } from "../../../../theme/theme";
+import { FONT_DISPLAY } from "../../../../theme/fonts";
+import { sectionFrameSx } from "../../_kit/frame";
 
 // ── Design tokens (your exact palette) ───────────────────────────────────────
 const getTokens = (isDark: boolean) => ({
-  bg:             isDark ? "#161616" : "#FFF4E3",
-  border:         isDark ? "#2a2a2a" : "#d9c9b0",
-  cardBg:         isDark ? "#161616" : "#FFF4E3",
-  cardBgAlt:      isDark ? "#161616" : "#FFF4E3",
+  bg:             isDark ? "#0e1a2b" : "#FFF4E3",
+  border:         isDark ? "#263b57" : "#d9c9b0",
+  cardBg:         isDark ? "#0e1a2b" : "#FFF4E3",
   headline:       isDark ? "#FFF4E3" : "#001932",
   headlineFaded:  isDark ? "#3a3a3a" : "#BBC0C6",
   body:           isDark ? "#BBC0C6" : "#4a4a6a",
   eyebrow:        isDark ? "#BBC0C6" : "#4a4a6a",
-  divider:        isDark ? "#2a2a2a" : "#d9c9b0",
-  checkBorder:    isDark ? "#2a2a2a" : "#d9c9b0",
-  checkBg:        isDark ? "#161616" : "#FFF4E3",
-  checkDot:       isDark ? "#BBC0C6" : "#001932",
-  featureText:    isDark ? "#BBC0C6" : "#4a4a6a",
-  imgBorder:      isDark ? "#2a2a2a" : "#d9c9b0",
+  divider:        isDark ? "#263b57" : "#d9c9b0",
+  imgBorder:      isDark ? "#263b57" : "#d9c9b0",
   imgBorderHover: isDark ? "#BBC0C6" : "#001932",
   topGlow:        isDark
     ? "linear-gradient(90deg, transparent, rgba(187,192,198,0.14), transparent)"
@@ -36,13 +31,6 @@ const getTokens = (isDark: boolean) => ({
     : "0 6px 28px rgba(0,25,50,0.07)",
   gridLine:       isDark ? "rgba(187,192,198,0.025)" : "rgba(0,25,50,0.035)",
 });
-
-const FEATURE_ITEMS = [
-  "Automated data extraction",
-  "Real-time processing",
-  "Multi-modal support",
-  "Enterprise-ready APIs",
-];
 
 // ── Shared: fires once when element enters viewport ───────────────────────────
 function useInView(threshold = 0.15) {
@@ -179,83 +167,14 @@ const ImageCard: FC<ImageCardProps> = ({
   );
 };
 
-// ── Section label ─────────────────────────────────────────────────────────────
-interface SectionLabelProps {
-  label: string;
-  index: string;
-  T: ReturnType<typeof getTokens>;
-}
-const SectionLabel: FC<SectionLabelProps> = ({ label, index, T }) => (
-  <Box sx={{ display: "flex", alignItems: "center", gap: "12px", mb: "24px" }}>
-    <Typography sx={{
-      fontSize: "11px", color: T.eyebrow,
-      fontWeight: 500, letterSpacing: "0.08em", fontFamily: "Prompt" ,
-      transition: "color 0.4s ease",
-    }}>
-      {index}
-    </Typography>
-    <Box sx={{
-      flex: 1, height: "0.5px",
-      backgroundColor: T.divider,
-      transition: "background-color 0.4s ease",
-    }} />
-    <Typography sx={{
-      fontSize: "11px", color: T.eyebrow,
-      letterSpacing: "0.10em", textTransform: "uppercase", fontWeight: 500,
-      transition: "color 0.4s ease",
-    }}>
-      {label}
-    </Typography>
-  </Box>
-);
-
-// ── Staggered checklist item ──────────────────────────────────────────────────
-const CheckItem: FC<{ item: string; delay: number; T: ReturnType<typeof getTokens>; visible: boolean }> = ({
-  item, delay, T, visible,
-}) => (
-  <Box
-    sx={{
-      display: "flex", alignItems: "center", gap: "10px",
-      opacity:   visible ? 1 : 0,
-      transform: visible ? "translateX(0)" : "translateX(-16px)",
-      transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${delay}ms,
-                   transform 0.6s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
-    }}
-  >
-    <Box sx={{
-      width: "16px", height: "16px", borderRadius: "4px",
-      border: `0.5px solid ${T.checkBorder}`,
-      backgroundColor: T.checkBg,
-      display: "flex", alignItems: "center", justifyContent: "center",
-      flexShrink: 0,
-      transition: "background-color 0.5s ease, border-color 0.5s ease",
-    }}>
-      <Box sx={{
-        width: "6px", height: "6px", borderRadius: "2px",
-        backgroundColor: T.checkDot,
-        transition: "background-color 0.4s ease",
-      }} />
-    </Box>
-    <Typography sx={{
-      fontSize: "13px", color: T.featureText,
-      lineHeight: 1.5, transition: "color 0.4s ease",
-    }}>
-      {item}
-    </Typography>
-  </Box>
-);
-
 // ── Main component ────────────────────────────────────────────────────────────
 export const SecondImageSection: FC = () => {
   const { mode } = useThemeMode();
   const isDark = mode === "dark";
   const T = getTokens(isDark);
 
-  const CodeImage4 = isDark ? CodeImage4Dark : CodeImage4LightExtraction;
   const CodeImage5 = isDark ? CodeImage5Dark : CodeImage5Light;
   const CodeImage6 = isDark ? CodeImage6Dark : CodeImage6Light;
-
-  const { ref: checkRef, visible: checkVisible } = useInView(0.2);
 
   return (
     <Box sx={{
@@ -276,101 +195,9 @@ export const SecondImageSection: FC = () => {
         backgroundSize: "60px 60px",
       }} />
 
-      <Box   sx={{ position: "relative", zIndex: 1 }}>
+      <Box sx={{ position: "relative", zIndex: 1, maxWidth: "1240px", mx: "auto", ...sectionFrameSx }}>
 
-        {/* ══ BLOCK 1 — Text left, Image right ══════════════════════════════ */}
-        <Grid id="resources" container spacing={{ xs: 6, md: 10 }} alignItems="center">
-
-          {/* Left: text */}
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Reveal from="left" delay={0}>
-              <SectionLabel label="Capabilities" index="03" T={T} />
-            </Reveal>
-
-            <Stack direction="column" gap={3}>
-              <Reveal from="left" delay={80}>
-                <Typography sx={{
-                  fontSize: { xs: "28px", sm: "36px", md: "44px" },
-                  fontWeight: 600, color: T.headline,
-                  lineHeight: 1.1, letterSpacing: "-0.02em",
-                  fontFamily: "Prompt" ,
-                  transition: "color 0.4s ease",
-                }}>
-                  Intelligent extraction,{" "}
-                  <Box component="span" sx={{
-                    color: T.headlineFaded,
-                    transition: "color 0.4s ease",
-                  }}>
-                    at any scale.
-                  </Box>
-                </Typography>
-              </Reveal>
-
-              {[
-                "Transform repetitive operational tasks into streamlined workflows through intelligent automation and connected systems.",
-                "Built to improve consistency, reduce manual effort, and support scalable execution across teams.",
-              ].map((text, i) => (
-                <Reveal key={i} from="left" delay={160 + i * 80}>
-                  <Typography sx={{
-                    fontSize: "15px", color: T.body,
-                    lineHeight: 1.85, maxWidth: "440px",
-                    transition: "color 0.4s ease",
-                  }}>
-                    {text}
-                  </Typography>
-                </Reveal>
-              ))}
-            </Stack>
-
-            {/* Checklist — staggered on scroll */}
-            <Box
-              ref={checkRef}
-              sx={{
-                mt: "36px", pt: "28px",
-                borderTop: `0.5px solid ${T.divider}`,
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "16px",
-                transition: "border-color 0.4s ease",
-              }}
-            >
-              {FEATURE_ITEMS.map((item, i) => (
-                <CheckItem
-                  key={item}
-                  item={item}
-                  delay={i * 90}
-                  T={T}
-                  visible={checkVisible}
-                />
-              ))}
-            </Box>
-          </Grid>
-
-          {/* Right: image with tilt */}
-          <Grid size={{ xs: 12, md: 6 }}>
-            <ImageCard
-              src={CodeImage4}
-              glow={T.topGlow}
-              shadow={T.imgShadow}
-              border={T.imgBorder}
-              borderHover={T.imgBorderHover}
-              cardBg={T.cardBg}
-              boxShadow={T.boxShadow}
-              delay={200}
-              maxW={{ xs: "90%", md: "90%" }}
-            />
-          </Grid>
-        </Grid>
-
-        {/* ══ DIVIDER ════════════════════════════════════════════════════════ */}
-        <Box sx={{
-          my: { xs: "80px", sm: "100px", md: "130px" },
-          height: "0.5px",
-          backgroundColor: T.divider,
-          transition: "background-color 0.4s ease",
-        }} />
-
-        {/* ══ BLOCK 2 — Centred heading + side-by-side images ════════════════ */}
+        {/* ══ Centred heading + side-by-side images ════════════════════════════ */}
         <Stack id="use-cases" direction="column" alignItems="center" gap={0}>
 
           <Reveal delay={0}>
@@ -386,10 +213,10 @@ export const SecondImageSection: FC = () => {
 
           <Reveal delay={80}>
             <Typography sx={{
-              fontSize: { xs: "28px", sm: "40px", md: "52px" },
-              fontWeight: 600, color: T.headline,
-              lineHeight: 1.1, letterSpacing: "-0.02em",
-              fontFamily: "Prompt",
+              fontSize: { xs: "30px", sm: "42px", md: "54px" },
+              fontWeight: 500, color: T.headline,
+              lineHeight: 1.06, letterSpacing: "-0.02em",
+              fontFamily: FONT_DISPLAY,
               textAlign: "center", maxWidth: "640px", mb: "16px",
               transition: "color 0.4s ease",
             }}>

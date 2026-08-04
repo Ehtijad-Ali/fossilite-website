@@ -91,6 +91,25 @@ export interface Exercise {
   time: string;
 }
 
+/**
+ * A copyable code block. Rendered with a copy button and a language tag.
+ *
+ * Code here is teaching material, so it must actually run. Two rules:
+ *   - No invented APIs. Every method, parameter and model ID must exist.
+ *   - Show the whole thing. A snippet that omits imports or error handling
+ *     teaches a beginner to write code that doesn't work.
+ */
+export interface CodeExample {
+  title: string;
+  /** Highlight.js-style language id — "python", "typescript", "bash", "json". */
+  language: string;
+  /** What this demonstrates and why it's worth copying. */
+  intro: string;
+  code: string;
+  /** Optional call-out for the non-obvious line. */
+  note?: string;
+}
+
 export interface Faq {
   q: string;
   /** Kept under ~60 words: FAQ rich results truncate beyond that. */
@@ -154,6 +173,8 @@ export interface Guide {
   businessApplications: string[];
   lifeApplications: string[];
   exercises: Exercise[];
+  /** Optional — only guides where running code is the point carry these. */
+  codeExamples?: CodeExample[];
   checklist: string[];
   faqs: Faq[];
   tools: Tool[];

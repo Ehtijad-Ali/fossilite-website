@@ -293,6 +293,150 @@ export const guide: Guide = {
     },
   ],
 
+  codeExamples: [
+    {
+      title: "The diagnostic pass — run this on every new file",
+      language: "python",
+      intro:
+        "Before writing a single line of cleaning code, characterise what you actually have. Make this a snippet you reuse; the two minutes it takes routinely saves an afternoon.",
+      code: `import pandas as pd
+
+
+def inspect(df: pd.DataFrame, name: str = "dataset") -> None:
+    """Standard first look. Run before touching anything."""
+    print(f"=== {name}: {df.shape[0]:,} rows x {df.shape[1]} columns ===\\n")
+
+    print("--- dtypes and missing ---")
+    summary = pd.DataFrame({
+        "dtype": df.dtypes,
+        "missing": df.isna().sum(),
+        "missing_%": (df.isna().mean() * 100).round(1),
+        "distinct": df.nunique(),
+    })
+    print(summary.to_string(), "\\n")
+
+    # An 'object' dtype on a column you expected to be numeric is the single
+    # most common signal that the file contains something unexpected.
+    suspect = [c for c in df.columns if df[c].dtype == "object" and c.lower().endswith(
+        ("amount", "price", "total", "qty", "count", "id")
+    )]
+    if suspect:
+        print(f"!! Expected-numeric columns read as text: {suspect}\\n")
+
+    print("--- categorical values ---")
+    for col in df.select_dtypes(include="object").columns:
+        n = df[col].nunique(dropna=False)
+        if n <= 25:                                # small enough to print in full
+            print(f"{col} ({n}):")
+            print(df[col].value_counts(dropna=False).to_string(), "\\n")
+        else:
+            print(f"{col}: {n} distinct values (too many to list)\\n")
+
+    print("--- ten random rows ---")
+    print(df.sample(min(10, len(df))).to_string())
+
+
+df = pd.read_csv("orders.csv")
+inspect(df, "orders")`,
+      note:
+        "`value_counts(dropna=False)` is the highest-yield line here. Fifty-three distinct country values in a dataset covering twelve countries is a finding, and this is where you see it.",
+    },
+    {
+      title: "The join that silently doubles your revenue",
+      language: "python",
+      intro:
+        "Joins fail quietly in both directions — duplicate keys multiply rows, type mismatches drop them, and the script completes cleanly either way. Assert the row count instead of hoping.",
+      code: `def safe_merge(
+    left: pd.DataFrame,
+    right: pd.DataFrame,
+    on: str,
+    how: str = "left",
+    expect_rows: int | None = None,
+) -> pd.DataFrame:
+    """Merge with the checks you'd otherwise mean to do and forget."""
+
+    # 1. Type mismatch silently drops every row. Catch it before merging:
+    #    an int64 key will never match an object key holding "00123".
+    if left[on].dtype != right[on].dtype:
+        raise TypeError(
+            f"Key '{on}' has dtype {left[on].dtype} on the left and "
+            f"{right[on].dtype} on the right — these will never match."
+        )
+
+    # 2. Duplicate keys on the right multiply rows. This is the one that
+    #    inflates totals in a direction that looks like a good month.
+    dupes = right[on].duplicated().sum()
+    if dupes and how in ("left", "inner"):
+        raise ValueError(
+            f"Right side has {dupes} duplicate '{on}' values — the merge would "
+            f"multiply rows. Deduplicate first, or use validate='one_to_many' "
+            f"if the fan-out is intentional."
+        )
+
+    before = len(left)
+    merged = left.merge(right, on=on, how=how, validate="many_to_one")
+
+    expected = expect_rows if expect_rows is not None else before
+    if len(merged) != expected:
+        raise ValueError(
+            f"Row count changed unexpectedly: {before:,} -> {len(merged):,} "
+            f"(expected {expected:,})."
+        )
+
+    unmatched = merged[right.columns.drop(on)[0]].isna().sum()
+    if unmatched:
+        print(f"note: {unmatched:,} rows had no match in the right table")
+
+    return merged
+
+
+orders = safe_merge(orders, customers, on="customer_id")`,
+      note:
+        "pandas' own `validate=` argument does much of this and is criminally underused. `validate=\"many_to_one\"` raises immediately if the right side isn't unique on the key — one keyword, one whole class of silent error prevented.",
+    },
+    {
+      title: "Deciding what missing means, column by column",
+      language: "python",
+      intro:
+        "A blanket `fillna(0)` invents data wherever missing meant 'not collected', and every downstream average is then wrong in a smooth, plausible way. Make the decision explicit and reviewable.",
+      code: `# Each entry is a judgement about how the data was collected, not a default.
+MISSING_POLICY = {
+    "discount_pct":   ("fill", 0,        "no discount recorded means none applied"),
+    "delivery_date":  ("keep", None,     "not yet delivered — genuinely unknown"),
+    "customer_email": ("drop", None,     "required field; a blank is a broken record"),
+    "region":         ("fill", "UNKNOWN", "keep the row, flag the gap explicitly"),
+    "satisfaction":   ("keep", None,     "not surveyed != neutral score; do NOT fill"),
+}
+
+
+def apply_missing_policy(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    for col, (action, value, reason) in MISSING_POLICY.items():
+        if col not in df.columns:
+            continue
+        n = df[col].isna().sum()
+        if not n:
+            continue
+
+        if action == "fill":
+            df[col] = df[col].fillna(value)
+            print(f"{col}: filled {n:,} with {value!r} ({reason})")
+        elif action == "drop":
+            df = df[df[col].notna()]
+            print(f"{col}: dropped {n:,} rows ({reason})")
+        else:  # "keep"
+            print(f"{col}: left {n:,} missing ({reason})")
+
+    unhandled = [c for c in df.columns if df[c].isna().any() and c not in MISSING_POLICY]
+    if unhandled:
+        raise ValueError(f"No missing-value policy defined for: {unhandled}")
+
+    return df`,
+      note:
+        "The final check is the part that matters over time. When a new column appears upstream with blanks in it, the pipeline stops and asks you to make a decision rather than quietly applying a default nobody chose.",
+    },
+  ],
+
   checklist: [
     "I inspect dtypes and missing values immediately after loading any file",
     "Raw data is read-only and never edited by hand",

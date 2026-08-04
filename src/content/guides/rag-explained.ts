@@ -276,6 +276,182 @@ export const guide: Guide = {
     },
   ],
 
+  codeExamples: [
+    {
+      title: "Structure-aware chunking with inherited headings",
+      language: "python",
+      intro:
+        "The single highest-impact piece of code in a RAG pipeline. Splitting on headings rather than character count keeps chunks self-contained, and prepending the section path makes each one meaningful on its own.",
+      code: `import re
+
+
+def chunk_markdown(text: str, doc_title: str, max_chars: int = 1500) -> list[dict]:
+    """Split on headings, carry the section path into each chunk's text."""
+    chunks: list[dict] = []
+    path: list[str] = []          # current heading hierarchy, e.g. ["Refunds", "Enterprise"]
+    buffer: list[str] = []
+
+    def flush() -> None:
+        body = "\\n".join(buffer).strip()
+        if not body:
+            return
+        # The prefix is what makes a chunk embeddable on its own. Without it,
+        # "After 30 days: no refund" has no idea which policy it belongs to.
+        prefix = " > ".join([doc_title, *path])
+        chunks.append({
+            "text": f"{prefix}\\n\\n{body}",
+            "section": prefix,
+            "source": doc_title,
+        })
+        buffer.clear()
+
+    for line in text.splitlines():
+        heading = re.match(r"^(#{1,6})\\s+(.*)", line)
+        if heading:
+            flush()
+            level = len(heading.group(1))
+            path[:] = path[: level - 1] + [heading.group(2).strip()]
+            continue
+
+        buffer.append(line)
+        if sum(len(l) for l in buffer) > max_chars:
+            flush()
+            # Overlap: keep the last two lines so a split sentence isn't orphaned.
+            buffer.extend(line for line in buffer[-2:])
+
+    flush()
+    return chunks`,
+      note:
+        "The `prefix` line is doing most of the work. A bare paragraph embeds ambiguously; the same paragraph prefixed with 'Refund Policy > Enterprise' embeds where a query about enterprise refunds will actually find it.",
+    },
+    {
+      title: "Hybrid retrieval with reciprocal rank fusion",
+      language: "python",
+      intro:
+        "Semantic search misses exact identifiers; keyword search misses paraphrases. Running both and fusing the rankings covers each other's blind spots — and RRF needs no score normalisation, which is why it's the pragmatic default.",
+      code: `def reciprocal_rank_fusion(
+    rankings: list[list[str]], k: int = 60, top_n: int = 20
+) -> list[str]:
+    """Merge several ranked ID lists into one. Higher = better.
+
+    RRF scores by POSITION, not by score, so you can fuse a cosine
+    similarity ranking with a BM25 ranking without normalising anything.
+    """
+    scores: dict[str, float] = {}
+    for ranking in rankings:
+        for position, chunk_id in enumerate(ranking):
+            scores[chunk_id] = scores.get(chunk_id, 0.0) + 1.0 / (k + position + 1)
+    ranked = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
+    return [chunk_id for chunk_id, _ in ranked[:top_n]]
+
+
+def retrieve(query: str, user_id: str, top_n: int = 20) -> list[dict]:
+    # Permission filtering happens BEFORE the similarity search, not after.
+    # Filtering afterwards leaks information through result counts.
+    allowed = permissions.visible_chunk_ids(user_id)
+
+    semantic = vector_store.search(query, filter_ids=allowed, limit=50)
+    keyword = bm25_index.search(query, filter_ids=allowed, limit=50)
+
+    fused_ids = reciprocal_rank_fusion(
+        [[c["id"] for c in semantic], [c["id"] for c in keyword]], top_n=top_n
+    )
+    return [chunk_store[cid] for cid in fused_ids]`,
+      note:
+        "Note the ordering: permissions constrain the candidate set before ranking. Retrieving first and filtering after is the mistake that turns an access-control boundary into a suggestion.",
+    },
+    {
+      title: "Grounded generation with a refusal path",
+      language: "python",
+      intro:
+        "Vector search always returns something, so the model will always have chunks — relevant or not. A relevance floor plus explicit permission to decline is what stops it answering from unrelated material.",
+      code: `import anthropic
+
+client = anthropic.Anthropic()
+
+RELEVANCE_FLOOR = 0.35   # tune against your own labelled query set
+
+SYSTEM = """Answer using ONLY the documents provided below.
+
+Rules:
+1. Before each claim, quote the sentence that supports it, in quotation marks,
+   followed by its source name.
+2. If the documents do not contain the answer, reply exactly:
+   NOT FOUND IN PROVIDED DOCUMENTS
+3. Do not use knowledge from outside these documents.
+4. If two documents conflict, say so and quote both."""
+
+
+def answer(question: str, user_id: str) -> str:
+    chunks = retrieve(question, user_id)
+    chunks = [c for c in chunks if c["score"] >= RELEVANCE_FLOOR][:5]
+
+    # Nothing cleared the floor: refuse here, in code, rather than handing the
+    # model weak matches and hoping it declines on its own.
+    if not chunks:
+        return "NOT FOUND IN PROVIDED DOCUMENTS"
+
+    context = "\\n\\n---\\n\\n".join(
+        f"[{c['source']} — {c['section']}, updated {c['updated']}]\\n{c['text']}"
+        for c in chunks
+    )
+
+    response = client.messages.create(
+        model="claude-opus-5",
+        max_tokens=16000,
+        system=SYSTEM,
+        messages=[{
+            "role": "user",
+            "content": (
+                f"<documents>\\n{context}\\n</documents>\\n\\n"
+                f"QUESTION: {question}"
+            ),
+        }],
+    )
+    return response.content[0].text`,
+      note:
+        "The date is included in the chunk text, not only in metadata — models reason about currency far better when they can see it in the context they're reading.",
+    },
+    {
+      title: "Measuring retrieval separately from generation",
+      language: "python",
+      intro:
+        "The diagnostic that saves weeks. If the correct chunk was never retrieved, no prompt change will fix the answer — and this tells you which half to work on.",
+      code: `# Each case: a question plus the chunk id that should answer it.
+EVAL_SET = [
+    {"q": "How long is enterprise parental leave in Germany?", "chunk_id": "hr-de-04"},
+    {"q": "What does error ERR_4412 mean?",                    "chunk_id": "ts-errors-12"},
+    {"q": "Who is the CEO of a company we've never heard of?", "chunk_id": None},  # must refuse
+]
+
+
+def evaluate_retrieval(k: int = 5) -> None:
+    hits = misses = correct_refusals = false_answers = 0
+
+    for case in EVAL_SET:
+        retrieved = [c["id"] for c in retrieve(case["q"], user_id="eval")[:k]]
+
+        if case["chunk_id"] is None:
+            # Out-of-scope question: retrieving nothing above the floor is CORRECT.
+            if not retrieved:
+                correct_refusals += 1
+            else:
+                false_answers += 1
+                print(f"SHOULD HAVE REFUSED: {case['q']!r} -> {retrieved}")
+        elif case["chunk_id"] in retrieved:
+            hits += 1
+        else:
+            misses += 1
+            print(f"MISS: {case['q']!r} -> got {retrieved}, wanted {case['chunk_id']}")
+
+    answerable = hits + misses
+    print(f"\\nrecall@{k}: {hits}/{answerable} = {hits / answerable:.0%}")
+    print(f"correct refusals: {correct_refusals}, false answers: {false_answers}")`,
+      note:
+        "Include out-of-scope questions in the set. A pipeline scoring 95% recall while confidently answering questions its corpus can't address is worse than one scoring 85% and refusing correctly.",
+    },
+  ],
+
   checklist: [
     "Chunks follow document structure, with overlap and inherited headings",
     "Every chunk carries metadata: source, section, date, access level",

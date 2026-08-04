@@ -365,14 +365,16 @@ export const guide: Guide = {
   ],
 
   internalLinks: [
+    { slug: "building-your-first-ai-agent", anchor: "build one yourself in about forty lines", context: "In the introduction" },
+    { slug: "designing-agent-tools", anchor: "designing the tool surface properly", context: "In the tools concept" },
     { slug: "how-large-language-models-work", anchor: "the model underneath the agent", context: "In the introduction" },
     { slug: "prompt-engineering-fundamentals", anchor: "writing the prompts that drive the loop", context: "In the reasoning concept" },
     { slug: "evaluating-ai-systems", anchor: "evaluating end-to-end rather than per step", context: "In the evaluation learning path step" },
   ],
 
   relatedGuides: [
-    "how-large-language-models-work",
-    "prompt-engineering-fundamentals",
+    "building-your-first-ai-agent",
+    "designing-agent-tools",
     "evaluating-ai-systems",
   ],
 

@@ -1,0 +1,222 @@
+{
+  "source": "Unsplash",
+  "licence": "https://unsplash.com/license",
+  "images": [
+    {
+      "slug": "how-machine-learning-actually-works",
+      "id": "ucCnuzUHcwA",
+      "photographer": "Arthur Zanoni",
+      "profile": "https://unsplash.com/@koppzanoni",
+      "page": "https://unsplash.com/photos/abstract-flowing-waves-of-turquoise-light-ucCnuzUHcwA",
+      "description": "blue neon waves ttt",
+      "file": "1600x1067 100KB"
+    },
+    {
+      "slug": "neural-networks-explained",
+      "id": "rR95ZJbFE14",
+      "photographer": "Michael Afonso",
+      "profile": "https://unsplash.com/@mafonso",
+      "page": "https://unsplash.com/photos/red-and-blue-light-digital-wallpaper-rR95ZJbFE14",
+      "description": "Abstract edit applied to texture. ",
+      "file": "1600x1000 36KB"
+    },
+    {
+      "slug": "how-large-language-models-work",
+      "id": "9SABtP1KBWk",
+      "photographer": "Aakash Dhage",
+      "profile": "https://unsplash.com/@aakashdhage",
+      "page": "https://unsplash.com/photos/an-abstract-black-and-white-photograph-of-a-clock-9SABtP1KBWk",
+      "description": "an abstract black and white photograph of a clock",
+      "file": "1600x900 42KB"
+    },
+    {
+      "slug": "prompt-engineering-fundamentals",
+      "id": "GkinCd2enIY",
+      "photographer": "Raphael Schaller",
+      "profile": "https://unsplash.com/@raphaelphotoch",
+      "page": "https://unsplash.com/photos/closeup-photo-of-cutout-decors-GkinCd2enIY",
+      "description": "Typesetting in wood",
+      "file": "1600x1067 91KB"
+    },
+    {
+      "slug": "rag-explained",
+      "id": "Ai0xvTkk8Ug",
+      "photographer": "Bee",
+      "profile": "https://unsplash.com/@bee_bee_bee",
+      "page": "https://unsplash.com/photos/antique-leather-bound-books-on-library-shelves-behind-a-grate-Ai0xvTkk8Ug",
+      "description": "Antique leather-bound books on library shelves behind a grate.",
+      "file": "1600x1067 167KB"
+    },
+    {
+      "slug": "what-is-artificial-intelligence",
+      "id": "gb37v81_Ni4",
+      "photographer": "Claudio Guglieri",
+      "profile": "https://unsplash.com/@claudioguglieri",
+      "page": "https://unsplash.com/photos/dark-blue-abstract-background-with-grid-lines-gb37v81_Ni4",
+      "description": "Cutting Mat Wallpaper (blue) for Apple Display Studio",
+      "file": "1600x900 32KB"
+    },
+    {
+      "slug": "ai-agents-explained",
+      "id": "GmvH5v9l3K4",
+      "photographer": "Tim Mossholder",
+      "profile": "https://unsplash.com/@timmossholder",
+      "page": "https://unsplash.com/photos/cogs-and-gears-GmvH5v9l3K4",
+      "description": "Geared Up",
+      "file": "1600x1067 371KB"
+    },
+    {
+      "slug": "building-your-first-ai-agent",
+      "id": "onmnIAcFsgs",
+      "photographer": "Shaawn",
+      "profile": "https://unsplash.com/@themelessly",
+      "page": "https://unsplash.com/photos/a-bottle-of-wine-sitting-next-to-other-items-onmnIAcFsgs",
+      "description": "A bottle of wine sitting next to other items",
+      "file": "1600x900 11KB"
+    },
+    {
+      "slug": "designing-agent-tools",
+      "id": "jyCjpeLIFS0",
+      "photographer": "Nakul",
+      "profile": "https://unsplash.com/@nakul_in",
+      "page": "https://unsplash.com/photos/black-and-silver-dslr-camera-jyCjpeLIFS0",
+      "description": "My camera gear",
+      "file": "1600x900 53KB"
+    },
+    {
+      "slug": "building-agents-with-langchain",
+      "id": "uAusAI4Vxr8",
+      "photographer": "Mohamed Marey",
+      "profile": "https://unsplash.com/@abushihabmarey",
+      "page": "https://unsplash.com/photos/a-metal-chain-stretches-horizontally-across-a-dark-background-uAusAI4Vxr8",
+      "description": "A metal chain stretches horizontally across a dark background.",
+      "file": "1600x1067 30KB"
+    },
+    {
+      "slug": "building-agents-with-langgraph",
+      "id": "nEVokEciWBA",
+      "photographer": "Milad Fakurian",
+      "profile": "https://unsplash.com/@fakurian",
+      "page": "https://unsplash.com/photos/a-black-and-white-photo-of-a-black-and-white-background-nEVokEciWBA",
+      "description": "In my role as a brand identity designer and 3D artist, I share personal, non-commercial experiences here. The lack of substantial interaction on this platform is disheartening. As my work is fueled by curiosity, I invite you to message me on Instagram or LinkedIn to share your thoughts. Your feedback is crucial in maintaining my motivation and curiosity. Instagram: FAKURIANDESIGN",
+      "file": "1600x1132 98KB"
+    },
+    {
+      "slug": "building-agents-with-crewai",
+      "id": "jJG06SPvkTQ",
+      "photographer": "Wanghao SANG",
+      "profile": "https://unsplash.com/@starsang",
+      "page": "https://unsplash.com/photos/a-group-of-people-standing-on-a-boat-in-the-water-jJG06SPvkTQ",
+      "description": "Rowing competition in Hong Kong",
+      "file": "1600x1200 201KB"
+    },
+    {
+      "slug": "building-agents-with-autogen",
+      "id": "VaEMz6OV__I",
+      "photographer": "Logan Voss",
+      "profile": "https://unsplash.com/@loganvoss",
+      "page": "https://unsplash.com/photos/a-picture-of-a-computer-screen-with-a-pattern-on-it-VaEMz6OV__I",
+      "description": "Liquid Cooled | Blender",
+      "file": "1600x900 257KB"
+    },
+    {
+      "slug": "choosing-an-agent-framework",
+      "id": "92mi3g08_BU",
+      "photographer": "Bernd 📷 Dittrich",
+      "profile": "https://unsplash.com/@hdbernd",
+      "page": "https://unsplash.com/photos/an-aerial-view-of-a-road-surrounded-by-trees-92mi3g08_BU",
+      "description": "An aerial view of a crossroad surrounded by agricultural fields with rows of crops, showing a palette of autumnal colors, with trees sporting yellow and red foliage.",
+      "file": "1600x1198 563KB"
+    },
+    {
+      "slug": "agent-memory-and-context",
+      "id": "Ph4ZJrwf4x8",
+      "photographer": "Daniel Forsman",
+      "profile": "https://unsplash.com/@danielforsman",
+      "page": "https://unsplash.com/photos/a-hand-pulls-a-card-from-the-librarys-card-catalog-Ph4ZJrwf4x8",
+      "description": "Card catalog at Stockholm public library",
+      "file": "1600x1067 49KB"
+    },
+    {
+      "slug": "evaluating-ai-systems",
+      "id": "TSd3YPU3szw",
+      "photographer": "Filip Filipov",
+      "profile": "https://unsplash.com/@fildum",
+      "page": "https://unsplash.com/photos/black-and-white-analog-gauge-TSd3YPU3szw",
+      "description": "black and white analog gauge",
+      "file": "1600x1200 52KB"
+    },
+    {
+      "slug": "data-cleaning-fundamentals",
+      "id": "TWkAexXZwEQ",
+      "photographer": "Jonah Townsley",
+      "profile": "https://unsplash.com/@jonah_t",
+      "page": "https://unsplash.com/photos/grid-of-dark-squares-on-white-background-TWkAexXZwEQ",
+      "description": "Grid of dark squares on white background",
+      "file": "1600x1067 85KB"
+    },
+    {
+      "slug": "python-for-data-work",
+      "id": "NYcUkFJuxg0",
+      "photographer": "FONG",
+      "profile": "https://unsplash.com/@fongsoul",
+      "page": "https://unsplash.com/photos/a-computer-screen-with-a-bunch-of-text-on-it-NYcUkFJuxg0",
+      "description": "a computer screen with a bunch of text on it",
+      "file": "1600x1200 45KB"
+    },
+    {
+      "slug": "cybersecurity-basics-for-builders",
+      "id": "OnI_TNcIv9U",
+      "photographer": "Tyler",
+      "profile": "https://unsplash.com/@tylergm",
+      "page": "https://unsplash.com/photos/a-rack-of-electronic-equipment-in-a-dark-room-OnI_TNcIv9U",
+      "description": "a rack of electronic equipment in a dark room",
+      "file": "1600x900 57KB"
+    },
+    {
+      "slug": "deep-work-and-focus",
+      "id": "wT0oU24OJYU",
+      "photographer": "Avtar Singh",
+      "profile": "https://unsplash.com/@avtar9w",
+      "page": "https://unsplash.com/photos/nighttime-desk-scene-with-laptop-lamp-and-city-lights-wT0oU24OJYU",
+      "description": "Macbook pro side view",
+      "file": "1600x1067 49KB"
+    },
+    {
+      "slug": "clear-writing-that-gets-read",
+      "id": "kJPf1CcAIGM",
+      "photographer": "Hal Gatewood",
+      "profile": "https://unsplash.com/@halacious",
+      "page": "https://unsplash.com/photos/a-black-and-white-photo-of-a-light-in-the-dark-kJPf1CcAIGM",
+      "description": "a black and white photo of a light in the dark",
+      "file": "1600x1067 94KB"
+    },
+    {
+      "slug": "learning-faster",
+      "id": "OkMtxyQylc8",
+      "photographer": "Priscilla Du Preez 🇨🇦",
+      "profile": "https://unsplash.com/@priscilladupreez",
+      "page": "https://unsplash.com/photos/opened-book-OkMtxyQylc8",
+      "description": "A book lays open ",
+      "file": "1600x1067 30KB"
+    },
+    {
+      "slug": "building-habits-that-stick",
+      "id": "Tjxgv4G3UkM",
+      "photographer": "Sebastian Schuster",
+      "profile": "https://unsplash.com/@sschusterphotoart",
+      "page": "https://unsplash.com/photos/monochrome-perspective-of-a-modern-buildings-repetitive-windows-Tjxgv4G3UkM",
+      "description": "Facade of an office building",
+      "file": "1600x1200 119KB"
+    },
+    {
+      "slug": "time-management-systems-compared",
+      "id": "MeDnPYfVtEY",
+      "photographer": "Michael Glazier",
+      "profile": "https://unsplash.com/@mglazier98",
+      "page": "https://unsplash.com/photos/a-city-street-filled-with-lots-of-traffic-at-night-MeDnPYfVtEY",
+      "description": "a city street filled with lots of traffic at night",
+      "file": "1600x1067 142KB"
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import {
 } from "../../content";
 import type { Guide } from "../../content/types";
 import { useSeo, collectionSchema, breadcrumbSchema } from "../../hooks/useSeo";
+import { GuideHero } from "./GuidePlate";
 
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace';
 type T = ReturnType<typeof useSharedTokens>;
@@ -52,7 +53,7 @@ const GuideCard: FC<{ g: Guide; index: number; T: T }> = ({ g, index, T }) => {
         flexDirection: "column",
         textDecoration: "none",
         overflow: "hidden",
-        p: { xs: "24px 22px 20px", md: "28px 26px 22px" },
+        p: 0,
         borderRadius: "18px",
         border: `0.5px solid ${T.border}`,
         // A whisper of warmth in the corner rather than a flat fill — reads as
@@ -116,6 +117,21 @@ const GuideCard: FC<{ g: Guide; index: number; T: T }> = ({ g, index, T }) => {
         />
       ))}
 
+      {/* Generated plate art — square-topped so it meets the card edge cleanly */}
+      <Box
+        sx={{
+          "& > *": {
+            borderRadius: 0,
+            border: "none",
+            borderBottom: `0.5px solid ${T.border}`,
+            boxShadow: "none",
+          },
+        }}
+      >
+        <GuideHero guide={g} height="150px" />
+      </Box>
+
+      <Box sx={{ p: { xs: "20px 22px 18px", md: "22px 26px 20px" }, display: "flex", flexDirection: "column", flex: 1 }}>
       {/* Plate number + classification */}
       <Box sx={{ display: "flex", alignItems: "center", gap: "10px", mb: "16px" }}>
         <Typography
@@ -197,6 +213,7 @@ const GuideCard: FC<{ g: Guide; index: number; T: T }> = ({ g, index, T }) => {
         >
           Read →
         </Typography>
+      </Box>
       </Box>
     </Box>
   );

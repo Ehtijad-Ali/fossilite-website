@@ -17,6 +17,7 @@ import {
   faqSchema,
   breadcrumbSchema,
 } from "../../hooks/useSeo";
+import { GuideHero } from "./GuidePlate";
 
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace';
 const GOLD = "#C3A87C";
@@ -686,6 +687,11 @@ export const GuideDetail: FC = () => {
           <Typography sx={{ fontSize: { xs: "16px", sm: "18px" }, lineHeight: 1.75, color: T.secondaryText, maxWidth: "660px", mb: "26px" }}>
             {guide.metaDescription}
           </Typography>
+
+          {/* Hero visual — generated plate, or photography when a guide has one */}
+          <Box sx={{ mb: "28px" }}>
+            <GuideHero guide={guide} />
+          </Box>
 
           {/* Specimen-plate spec strip: bracketed, mono-labelled, hairline-divided */}
           <Box

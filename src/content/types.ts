@@ -161,6 +161,17 @@ export interface Guide {
   /** Minutes. Computed at author time from the real word count. */
   readingTime: number;
 
+  /**
+   * Optional hero photography. When absent — the default — the guide renders
+   * a generated monograph plate derived from its slug, which is deterministic,
+   * on-brand and carries no licensing question.
+   *
+   * Only set this with an image you have actually looked at and whose licence
+   * permits commercial use. `credit` is required by most free-photo licences
+   * even when attribution is described as optional.
+   */
+  heroImage?: { src: string; alt: string; credit?: string };
+
   // ── Body (maps 1:1 to the required guide structure) ───────────────────────
   intro: string[];
   whyItMatters: string[];

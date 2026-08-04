@@ -249,15 +249,48 @@ export const GuidePlate: FC<{ guide: Guide; height?: Record<string, string> | st
 };
 
 /**
- * Hero visual for a guide. Uses `heroImage` when a guide supplies one, and
- * falls back to the generated plate otherwise — so real photography can be
- * dropped in per-guide later without touching this file's callers.
+ * Drop-in hero images, by filename convention.
+ *
+ * Save a file as `src/assets/Images/guides/<guide-slug>.jpg` and it is used
+ * automatically — no code change. This exists so images can be added by
+ * someone who can actually look at them, without editing a guide file.
+ *
+ * `.jpg`, `.jpeg`, `.png` and `.webp` all work. Vite hashes and optimises
+ * them at build time, so they're served like any other bundled asset.
+ */
+const conventionImages = import.meta.glob<{ default: string }>(
+  "../../assets/Images/guides/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+
+const CONVENTION_BY_SLUG: Record<string, string> = Object.fromEntries(
+  Object.entries(conventionImages).map(([path, mod]) => {
+    const slug = path.split("/").pop()!.replace(/\.(jpg|jpeg|png|webp)$/i, "");
+    return [slug, mod.default];
+  }),
+);
+
+/**
+ * Hero visual for a guide, in priority order:
+ *   1. An explicit `heroImage` on the guide (lets you set alt text + credit)
+ *   2. A file matching the slug in assets/Images/guides
+ *   3. The generated plate
  */
 export const GuideHero: FC<{ guide: Guide; height?: Record<string, string> | string }> = ({
   guide,
   height,
 }) => {
-  if (!guide.heroImage) return <GuidePlate guide={guide} height={height} />;
+  const conventionSrc = CONVENTION_BY_SLUG[guide.slug];
+
+  const image =
+    guide.heroImage ??
+    (conventionSrc
+      ? // Falls back to the guide title for alt text. Setting `heroImage`
+        // explicitly gives you better alt text and a credit line.
+        { src: conventionSrc, alt: guide.title, credit: undefined }
+      : undefined);
+
+  if (!image) return <GuidePlate guide={guide} height={height} />;
 
   return (
     <Box
@@ -274,8 +307,8 @@ export const GuideHero: FC<{ guide: Guide; height?: Record<string, string> | str
     >
       <Box
         component="img"
-        src={guide.heroImage.src}
-        alt={guide.heroImage.alt}
+        src={image.src}
+        alt={image.alt}
         loading="lazy"
         sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
       />
@@ -288,7 +321,7 @@ export const GuideHero: FC<{ guide: Guide; height?: Record<string, string> | str
             "linear-gradient(180deg, rgba(10,18,32,0.30) 0%, rgba(10,18,32,0.10) 40%, rgba(10,18,32,0.75) 100%)",
         }}
       />
-      {guide.heroImage.credit && (
+      {image.credit && (
         <Typography
           sx={{
             position: "absolute", bottom: "12px", right: "18px", zIndex: 2,
@@ -296,7 +329,7 @@ export const GuideHero: FC<{ guide: Guide; height?: Record<string, string> | str
             color: "rgba(240,232,214,0.55)",
           }}
         >
-          {guide.heroImage.credit}
+          {image.credit}
         </Typography>
       )}
     </Box>

@@ -136,10 +136,21 @@ const PriceCard: FC<{ tier: Tier; yearly: boolean; index: number; T: ReturnType<
         flexDirection: "column",
         p: { xs: "28px", sm: "34px" },
         borderRadius: "20px",
-        backgroundColor: tier.featured ? (T.isDark ? "#101418" : "#ffffff") : T.cardBg,
+        // Featured tier sits on a deeper navy than the others so it reads as
+        // raised, with the same gold wash used on the monograph plates. It was
+        // #101418 — a charcoal left behind when the site moved to navy, which
+        // made this one card render near-black against navy neighbours.
+        backgroundColor: tier.featured ? (T.isDark ? "#0d1b2e" : "#ffffff") : T.cardBg,
+        backgroundImage: tier.featured
+          ? T.isDark
+            ? "radial-gradient(120% 90% at 50% 0%, rgba(195,168,124,0.10) 0%, transparent 62%)"
+            : "radial-gradient(120% 90% at 50% 0%, rgba(195,168,124,0.14) 0%, transparent 62%)"
+          : "none",
         border: `${tier.featured ? "1.5px" : "0.5px"} solid ${tier.featured ? T.accent : T.border}`,
         boxShadow: tier.featured
-          ? (T.isDark ? "0 24px 60px rgba(0,0,0,0.5)" : "0 24px 60px rgba(0,25,50,0.14)")
+          ? (T.isDark
+              ? "0 24px 60px rgba(0,10,25,0.55), 0 0 0 1px rgba(195,168,124,0.10)"
+              : "0 24px 60px rgba(0,25,50,0.14)")
           : T.boxShadow,
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(28px)",

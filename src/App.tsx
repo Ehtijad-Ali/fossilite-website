@@ -12,6 +12,8 @@ const Pricing = lazy(() => import('./views/Pricing/Pricing'))
 const Contact = lazy(() => import('./views/Contact/Contact'))
 const Login = lazy(() => import('./views/Login/Login'))
 const Resources = lazy(() => import('./views/Resources/Resources'))
+const GuideDetail = lazy(() => import('./views/Resources/GuideDetail'))
+const Prompts = lazy(() => import('./views/Prompts/Prompts'))
 const Privacy = lazy(() => import('./views/Legal/Privacy'))
 const Terms = lazy(() => import('./views/Legal/Terms'))
 const Cookies = lazy(() => import('./views/Legal/Cookies'))
@@ -31,6 +33,10 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/login' element={<Login />} />
           <Route path='/resources' element={<Resources />} />
+          {/* Category browse reuses the library index, scoped by :category. */}
+          <Route path='/resources/category/:category' element={<Resources />} />
+          <Route path='/resources/:slug' element={<GuideDetail />} />
+          <Route path='/prompts' element={<Prompts />} />
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/terms' element={<Terms />} />
           <Route path='/cookies' element={<Cookies />} />

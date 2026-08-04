@@ -1,1 +1,2 @@
-export * from "./Resources";
+export { Resources } from "./Resources";
+export { GuideDetail } from "./GuideDetail";

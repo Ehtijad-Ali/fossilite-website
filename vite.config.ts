@@ -21,6 +21,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // The resource library is imported by two lazy routes (the index and
+          // the guide page), so Rollup would otherwise hoist all guide prose
+          // into the shared entry chunk and ship it on the landing page. Pin it
+          // to its own chunk that only those routes pull in.
+          if (id.includes('/src/content/')) return 'content'
           if (!id.includes('node_modules')) return
           // Split heavy libraries into their own chunks
           if (id.includes('three') || id.includes('@react-three')) return 'three'

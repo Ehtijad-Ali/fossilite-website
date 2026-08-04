@@ -639,7 +639,7 @@ export const GradientDescentSection: FC = () => (
     kicker="The Mathematics"
     title="Every model rolls"
     titleFaded="downhill."
-    body="Learning is optimisation. The model measures its error as a surface and takes the steepest step down, again and again, until the loss settles at the bottom. Watch the descent trace its path across the landscape."
+    body="Learning is optimisation. The model measures its error as a surface and takes the steepest step down, again and again, until the loss settles in a minimum. Not always the deepest one — where it lands depends on where it started, which is why the run below restarts from a new point each time."
     specs={[
       { k: "Method", v: "Gradient descent" },
       { k: "Update", v: "θ ← θ − η∇L" },
@@ -657,10 +657,10 @@ export const ConfidenceFieldSection: FC = () => (
     kicker="Uncertainty"
     title="A surface of"
     titleFaded="confidence."
-    body="Every prediction carries a probability. We render it as a landscape — peaks where the model is sure, valleys where it isn't. Samples that fall below the threshold plane are the ones we route to a human. AI drafts; a person decides."
+    body="Every prediction carries a confidence score — and a raw score is not yet a probability. We calibrate it first, then render it as a landscape: peaks where the model is genuinely reliable, valleys where it isn't. Samples below the threshold plane are routed to a human. AI drafts; a person decides."
     specs={[
-      { k: "Estimate", v: "P(y | x)" },
-      { k: "Threshold", v: "0.95 → human" },
+      { k: "Estimate", v: "Calibrated P(y | x)" },
+      { k: "Threshold", v: "Tuned per use case" },
       { k: "Review", v: "Human-in-the-loop" },
     ]}
     plateLabel="PL. 08 · CONFIDENCE FIELD — LIVE"

@@ -41,6 +41,15 @@ export const replyFor = (input: string): AssistantReply => {
   if (has(q, "integrat", "stack", "openai", "anthropic", "slack", "github", "notion", "tool"))
     return { text: "We connect natively with OpenAI, Anthropic, Slack, GitHub, Notion, Google, Figma and Zapier — so intelligence flows into the tools your team already uses, rather than forcing a rip-and-replace." };
 
+  if (has(q, "learn", "guide", "tutorial", "course", "beginner", "study", "resource"))
+    return { text: "We publish a free resource library — in-depth guides on machine learning, LLMs, prompt engineering, RAG, business and communication, plus a prompt library for ChatGPT, Claude and Gemini. Every guide includes worked examples, exercises and a checklist. Head to Resources in the nav to browse it." };
+
+  if (has(q, "prompt", "prompting"))
+    return { text: "Prompting well is specification, not magic phrases: state the role, the audience, the constraints and the output format, give one worked example, and let the model say when it doesn't know. Our Prompt Library has ready-to-use prompts for ChatGPT, Claude and Gemini, each with what it does and how to improve the result." };
+
+  if (has(q, "hallucinat", "made up", "makes things up", "inaccurate", "wrong answer"))
+    return { text: "Hallucination isn't a bug — a language model generates plausible continuations, so when it lacks the knowledge it still produces something plausible. You reduce it by grounding the model in retrieved documents, requiring verbatim quotes, giving it explicit permission to say \"not found\", and keeping a human on anything consequential. That's how we build every system here." };
+
   // ── Business intents ──
   if (has(q, "fast", "long", "time", "week", "timeline", "how soon"))
     return { text: "Most MVPs ship in about six weeks — roughly 40–60% faster delivery than a traditional build, with 100% human review on everything before it goes live." };

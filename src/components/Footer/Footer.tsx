@@ -45,6 +45,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Explore",
     links: [
       { label: "Resources", to: "/resources" },
+      { label: "Prompt Library", to: "/prompts" },
       { label: "Use Cases", id: "use-cases" },
     ],
   },

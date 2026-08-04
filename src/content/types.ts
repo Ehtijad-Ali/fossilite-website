@@ -119,8 +119,12 @@ export interface Faq {
 export interface Tool {
   name: string;
   what: string;
-  /** "Free", "Freemium", "Paid" — set honestly, readers notice. */
-  cost: "Free" | "Freemium" | "Paid";
+  /**
+   * Set honestly, readers notice. "Varies" is for build-it-yourself
+   * components and professional services where no list price exists —
+   * don't use it to dodge saying "Paid".
+   */
+  cost: "Free" | "Freemium" | "Paid" | "Varies";
   url?: string;
 }
 

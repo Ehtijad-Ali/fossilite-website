@@ -22,6 +22,56 @@
       "file": "1600x1067 118KB"
     },
     {
+      "slug": "ai-for-customer-support",
+      "id": "MC-a6-nusL0",
+      "photographer": "Albert Stoynov",
+      "profile": "https://unsplash.com/@albertstoynov",
+      "page": "https://unsplash.com/photos/a-modern-interior-features-windows-and-geometric-accents-MC-a6-nusL0",
+      "description": "An empty, warmly lit, room",
+      "matchScore": 6,
+      "file": "1600x1067 49KB"
+    },
+    {
+      "slug": "ai-for-hiring-and-hr",
+      "id": "q8fe785r5nU",
+      "photographer": "Andrea De Santis",
+      "profile": "https://unsplash.com/@santesson89",
+      "page": "https://unsplash.com/photos/an-empty-room-with-white-walls-and-a-black-door-q8fe785r5nU",
+      "description": "Empty office space ",
+      "matchScore": 4,
+      "file": "1600x1067 41KB"
+    },
+    {
+      "slug": "ai-for-marketing-teams",
+      "id": "0Bt_3aHVB6w",
+      "photographer": "Sergei Wing",
+      "profile": "https://unsplash.com/@sergeiwing",
+      "page": "https://unsplash.com/photos/empty-brown-and-white-building-0Bt_3aHVB6w",
+      "description": "empty brown and white building",
+      "matchScore": 4,
+      "file": "1600x1067 162KB"
+    },
+    {
+      "slug": "ai-for-operations-and-workflow",
+      "id": "vuzcJ9tl5v8",
+      "photographer": "Fer Troulik",
+      "profile": "https://unsplash.com/@fertroulik",
+      "page": "https://unsplash.com/photos/interior-of-an-abandoned-industrial-warehouse-with-exposed-beams-vuzcJ9tl5v8",
+      "description": "Abandoned industrial factory structure, showing exposed steel framework and demolition in progress. A striking view of decay, light, and architectural skeleton against a clear blue sky.",
+      "matchScore": 10,
+      "file": "1600x900 241KB"
+    },
+    {
+      "slug": "ai-for-sales-teams",
+      "id": "a0X9tAAxzaA",
+      "photographer": "Dimmis Vart",
+      "profile": "https://unsplash.com/@dimmisvart",
+      "page": "https://unsplash.com/photos/white-concrete-building-with-glass-windows-a0X9tAAxzaA",
+      "description": "Empty floor. White walls.• Пустой этаж, белые стены.",
+      "matchScore": 5,
+      "file": "1600x1200 22KB"
+    },
+    {
       "slug": "api-integration-that-doesnt-break",
       "id": "iZe21DzHnUg",
       "photographer": "Winston Chen",
@@ -201,6 +251,16 @@
       "page": "https://unsplash.com/photos/opened-book-OkMtxyQylc8",
       "description": "A book lays open ",
       "file": "1600x1067 30KB"
+    },
+    {
+      "slug": "measuring-ai-roi-in-business",
+      "id": "HuWm7malJ18",
+      "photographer": "Petr",
+      "profile": "https://unsplash.com/@mpetrucho",
+      "page": "https://unsplash.com/photos/green-potted-plant-on-white-ceramic-floor-tiles-HuWm7malJ18",
+      "description": "Waiting area at the manager's office",
+      "matchScore": 4,
+      "file": "1600x1078 105KB"
     },
     {
       "slug": "neural-networks-explained",

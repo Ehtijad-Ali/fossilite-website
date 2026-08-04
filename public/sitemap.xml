@@ -67,13 +67,37 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fossilite.ai/resources/category/api-integration</loc>
+    <loc>https://fossilite.ai/resources/category/customer-support</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/category/people-and-hiring</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/category/marketing</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fossilite.ai/resources/category/automation</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/category/sales</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/category/api-integration</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -127,6 +151,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://fossilite.ai/resources/category/business-strategy</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://fossilite.ai/resources/category/deep-learning</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -171,6 +201,36 @@
   <url>
     <loc>https://fossilite.ai/resources/ai-agents-explained</loc>
     <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/ai-for-customer-support</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/ai-for-hiring-and-hr</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/ai-for-marketing-teams</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/ai-for-operations-and-workflow</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/ai-for-sales-teams</loc>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -285,6 +345,12 @@
   <url>
     <loc>https://fossilite.ai/resources/learning-faster</loc>
     <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fossilite.ai/resources/measuring-ai-roi-in-business</loc>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

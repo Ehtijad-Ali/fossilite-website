@@ -86,6 +86,26 @@ const THEMES = [
     ],
   },
   {
+    // Business guides deliberately avoid the "team smiling in a meeting room"
+    // register — it's the stock cliché that most cheapens a page.
+    query: "modern office interior architecture empty minimal light",
+    want: ["office", "interior", "building", "architecture", "minimal", "window", "desk", "light"],
+    avoid: ["smiling", "handshake", "meeting", "group", "team", "portrait", "laughing"],
+    guides: [
+      "ai-for-customer-support",
+      "ai-for-sales-teams",
+      "ai-for-marketing-teams",
+      "ai-for-hiring-and-hr",
+      "measuring-ai-roi-in-business",
+    ],
+  },
+  {
+    query: "warehouse industrial interior structure",
+    want: ["industrial", "warehouse", "logistics", "machinery", "conveyor", "factory", "pattern", "structure"],
+    avoid: ["person", "worker", "smiling", "portrait"],
+    guides: ["ai-for-operations-and-workflow"],
+  },
+  {
     query: "long exposure light trails night abstract motion",
     want: ["light", "trail", "night", "motion", "long exposure", "abstract", "city", "blur"],
     avoid: ["person", "portrait", "smiling"],

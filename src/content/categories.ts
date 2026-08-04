@@ -29,6 +29,8 @@ export const CATEGORIES: Category[] = [
   { slug: "startup-growth", name: "Startup Growth", track: "Business & Growth", blurb: "Finding a repeatable channel before you spend money scaling it." },
   { slug: "saas", name: "SaaS", track: "Business & Growth", blurb: "The economics and mechanics of software sold as a subscription." },
   { slug: "finance-basics", name: "Finance Basics", track: "Business & Growth", blurb: "Reading the numbers that decide whether you survive." },
+  { slug: "customer-support", name: "Customer Support", track: "Business & Growth", blurb: "Answering customers well at volume, without losing the thread that keeps them." },
+  { slug: "people-and-hiring", name: "People & Hiring", track: "Business & Growth", blurb: "Finding, choosing and keeping the people your business depends on." },
 
   // ── Life & Career ─────────────────────────────────────────────────────────
   { slug: "productivity", name: "Productivity", track: "Life & Career", blurb: "Getting meaningful work done without burning yourself out." },

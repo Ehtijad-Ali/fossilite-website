@@ -144,6 +144,27 @@ export interface InternalLink {
   context: string;
 }
 
+/**
+ * A real, named person — never a company and never invented.
+ *
+ * Published as `Person` structured data, so it is a claim to readers and to
+ * search engines about who stands behind the work. Search engines weigh
+ * demonstrable expertise, and a byline nobody can verify undermines that
+ * rather than helping.
+ *
+ * Everything past `name` is optional so an unconfirmed detail can be omitted
+ * instead of guessed at. The renderer and the schema both skip what's absent.
+ */
+export interface Author {
+  name: string;
+  /** Job title as it would appear on LinkedIn. */
+  role?: string;
+  /** One or two sentences establishing why this person can write this. */
+  bio?: string;
+  /** LinkedIn or personal site — strengthens the Person schema. */
+  url?: string;
+}
+
 export interface Guide {
   // ── Identity & SEO ────────────────────────────────────────────────────────
   slug: string;
@@ -161,7 +182,8 @@ export interface Guide {
   level: Level;
   /** ISO date — surfaced as dateModified in Article schema. */
   updated: string;
-  author: string;
+  /** Import one from `content/authors.ts` — never write a byline inline. */
+  author: Author;
   /** Minutes. Computed at author time from the real word count. */
   readingTime: number;
 

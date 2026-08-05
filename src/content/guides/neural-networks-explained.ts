@@ -1,4 +1,5 @@
 import type { Guide } from "../types";
+import { EHTIJAD_ALI } from "../authors";
 
 export const guide: Guide = {
   slug: "neural-networks-explained",
@@ -17,7 +18,7 @@ export const guide: Guide = {
   category: "deep-learning",
   level: "Intermediate",
   updated: "2026-08-04",
-  author: "Fossilite Engineering",
+  author: EHTIJAD_ALI,
   readingTime: 14,
 
   intro: [

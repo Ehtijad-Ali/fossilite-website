@@ -1,4 +1,5 @@
 import type { Guide } from "../types";
+import { EHTIJAD_ALI } from "../authors";
 
 export const guide: Guide = {
   slug: "api-integration-that-doesnt-break",
@@ -17,7 +18,7 @@ export const guide: Guide = {
   category: "api-integration",
   level: "Intermediate",
   updated: "2026-08-05",
-  author: "Fossilite Engineering",
+  author: EHTIJAD_ALI,
   readingTime: 12,
 
   intro: [

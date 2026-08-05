@@ -1,4 +1,5 @@
 import type { Guide } from "../types";
+import { EHTIJAD_ALI } from "../authors";
 
 export const guide: Guide = {
   slug: "finding-your-first-clients",
@@ -17,7 +18,7 @@ export const guide: Guide = {
   category: "freelancing",
   level: "Beginner",
   updated: "2026-08-04",
-  author: "Fossilite",
+  author: EHTIJAD_ALI,
   readingTime: 12,
 
   intro: [

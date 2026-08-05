@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import type { Author } from "../content/types";
+
 // The canonical production origin. Guides are indexed against this regardless of
 // which host serves the bundle, so canonical/OG URLs don't fragment across the
 // GitHub Pages and Vercel deployments.
@@ -107,7 +109,7 @@ export const articleSchema = (g: {
   metaDescription: string;
   slug: string;
   updated: string;
-  author: string;
+  author: Author;
   keywords: string[];
 }) => ({
   "@context": "https://schema.org",
@@ -116,7 +118,17 @@ export const articleSchema = (g: {
   description: g.metaDescription,
   datePublished: g.updated,
   dateModified: g.updated,
-  author: { "@type": "Organization", name: g.author },
+  // Person, not Organization. Google's guidance on people-first content asks
+  // who wrote a piece, and a company name is not an answer to that. Optional
+  // fields are dropped rather than emitted empty — a blank jobTitle in the
+  // markup is worse than no jobTitle.
+  author: {
+    "@type": "Person",
+    name: g.author.name,
+    ...(g.author.role ? { jobTitle: g.author.role } : {}),
+    ...(g.author.bio ? { description: g.author.bio } : {}),
+    ...(g.author.url ? { url: g.author.url } : {}),
+  },
   publisher: { "@type": "Organization", name: SITE_NAME },
   keywords: g.keywords.join(", "),
   mainEntityOfPage: {

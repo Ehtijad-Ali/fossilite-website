@@ -713,7 +713,7 @@ export const GuideDetail: FC = () => {
           >
             <Corners inset="9px" />
             {[
-              ["Author", guide.author],
+              ["Author", guide.author.name],
               ["Updated", new Date(guide.updated).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })],
               ["Reading time", `${guide.readingTime} min`],
               ["Sections", String(shown.length)],
@@ -1048,6 +1048,47 @@ export const GuideDetail: FC = () => {
                 <Typography sx={{ fontSize: "14.5px", lineHeight: 1.7, color: T.secondaryText, mt: "3px" }}>{r.note}</Typography>
               </Box>
             ))}
+
+            {/* The byline. Rendered only once there's something to say beyond
+                the name — the name alone is already in the header strip, and a
+                near-empty "About the author" card reads as an unfinished
+                template rather than as credibility. */}
+            {guide.author.bio && (
+              <Box
+                sx={{
+                  position: "relative", mt: "40px", p: { xs: "22px", sm: "26px" },
+                  borderRadius: "14px", border: `0.5px solid ${T.border}`,
+                  backgroundColor: T.cardBg,
+                  backgroundImage: T.isDark
+                    ? "linear-gradient(180deg, rgba(195,168,124,0.05), transparent 70%)"
+                    : "linear-gradient(180deg, rgba(195,168,124,0.08), transparent 70%)",
+                }}
+              >
+                <Corners inset="9px" />
+                <Label T={T}>Written by</Label>
+                <Typography
+                  component={guide.author.url ? "a" : "div"}
+                  {...(guide.author.url
+                    ? { href: guide.author.url, target: "_blank", rel: "noopener noreferrer me" }
+                    : {})}
+                  sx={{
+                    display: "block", mt: "8px", fontFamily: FONT_DISPLAY, fontSize: "21px",
+                    fontWeight: 600, color: T.headline, textDecoration: "none",
+                    "&:hover": guide.author.url ? { color: "#C3A87C" } : {},
+                  }}
+                >
+                  {guide.author.name}
+                </Typography>
+                {guide.author.role && (
+                  <Typography sx={{ fontFamily: MONO, fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: T.mutedText, mt: "4px" }}>
+                    {guide.author.role}
+                  </Typography>
+                )}
+                <Typography sx={{ fontSize: "14.5px", lineHeight: 1.75, color: T.secondaryText, mt: "12px" }}>
+                  {guide.author.bio}
+                </Typography>
+              </Box>
+            )}
 
             {links.length > 0 && (
               <Box sx={{ mt: "36px", p: "22px", borderRadius: "14px", border: `0.5px solid ${T.border}`, backgroundColor: T.cardBgAlt }}>

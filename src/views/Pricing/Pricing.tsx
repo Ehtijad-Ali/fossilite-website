@@ -387,7 +387,15 @@ export const Pricing: FC = () => {
                   borderBottom: `0.5px solid ${T.border}`,
                 }}
               >
-                <Box sx={{ p: { xs: "18px 20px", md: "22px 26px" } }} />
+                {/* Empty corner cell, pinned to match the label column below it
+                    so the tier names don't slide underneath a transparent gap. */}
+                <Box
+                  sx={{
+                    p: { xs: "18px 20px", md: "22px 26px" },
+                    position: "sticky", left: 0, zIndex: 1,
+                    backgroundColor: T.cardBgAlt,
+                  }}
+                />
                 {TIER_NAMES.map((name, i) => (
                   <Box key={name} sx={{ p: { xs: "18px 16px", md: "22px 20px" }, textAlign: "center", backgroundColor: TIERS[i].featured ? T.accentGlow : "transparent" }}>
                     <Typography sx={{ fontSize: { xs: "15px", md: "17px" }, fontWeight: 600, color: T.headline, fontFamily: "Prompt" }}>
@@ -412,11 +420,28 @@ export const Pricing: FC = () => {
                         gridTemplateColumns: "1.4fr repeat(3, 1fr)",
                         borderBottom: `0.5px solid ${T.border}`,
                         "&:last-of-type": { borderBottom: "none" },
-                        "&:hover": { backgroundColor: T.surfaceSubtle },
+                        // The pinned label cell is opaque, so the row hover has
+                        // to be applied to it explicitly or it stays unhighlighted.
+                        "&:hover": {
+                          backgroundColor: T.surfaceSubtle,
+                          "& > :first-of-type": { backgroundColor: T.surfaceSubtle },
+                        },
                         transition: "background-color 0.2s ease",
                       }}
                     >
-                      <Box sx={{ p: { xs: "14px 20px", md: "16px 26px" }, display: "flex", alignItems: "center" }}>
+                      {/* Pinned while the table scrolls sideways. At 680px
+                          minimum width this table always scrolls on a phone,
+                          and without this you lose track of which feature the
+                          ticks belong to. Needs its own background, or the
+                          columns underneath show through as it passes. */}
+                      <Box
+                        sx={{
+                          p: { xs: "14px 20px", md: "16px 26px" },
+                          display: "flex", alignItems: "center",
+                          position: "sticky", left: 0, zIndex: 1,
+                          backgroundColor: T.cardBg,
+                        }}
+                      >
                         <Typography sx={{ fontSize: "13.5px", color: T.primaryText, fontWeight: 500 }}>{row.label}</Typography>
                       </Box>
                       {row.values.map((v, i) => (

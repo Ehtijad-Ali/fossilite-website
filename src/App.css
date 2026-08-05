@@ -1,4 +1,53 @@
 body {
   font-family: 'Prompt', sans-serif;
-  zoom: 1.08;
+}
+
+/*
+ * `body { zoom: 1.08 }` used to live here, scaling the whole layout up 8%.
+ * It had to go: zoom scales layout but not the viewport units or the
+ * viewport-relative positioning inside it, so anything sized in vw/vh or
+ * pinned with `position: fixed` overshot the screen by 8% — which is a
+ * horizontal scrollbar on phones, and a full-width fixed bar (the guide
+ * reading-progress indicator) running off the right edge. Browsers also
+ * disagree on the details: Chrome's legacy zoom, the standardised zoom in
+ * Chrome 128+, and Firefox 126+ resolve viewport units inside a zoomed
+ * element differently, so the same page rendered differently per device.
+ *
+ * Type sizes are set explicitly throughout the app, so removing this makes
+ * the site render at the size it's actually written for.
+ */
+
+/* Nothing should be able to scroll the page sideways. Wide content — the
+   pricing comparison table, code blocks — scrolls inside its own container
+   instead, which is already set up where it's needed. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Media never forces the page wider than the screen. */
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+/* Long URLs and unbroken strings wrap rather than pushing the layout out. */
+body {
+  overflow-wrap: break-word;
+}
+
+/* Honour the OS "reduce motion" setting. The site leans on scroll and entrance
+   animation; on a phone that's also a battery and comfort question. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

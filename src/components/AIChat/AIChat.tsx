@@ -157,7 +157,10 @@ export const AIChat: FC = () => {
               right: 24,
               zIndex: 1400,
               width: "min(380px, calc(100vw - 32px))",
-              height: "min(560px, calc(100vh - 48px))",
+              // dvh, not vh: on a phone `100vh` is the height with the address
+              // bar hidden, so a panel sized against it is taller than the
+              // screen whenever the bar is showing — which is most of the time.
+              height: "min(560px, calc(100dvh - 48px))",
               borderRadius: 20,
               overflow: "hidden",
               display: "flex",

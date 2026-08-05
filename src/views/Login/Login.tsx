@@ -86,7 +86,9 @@ export const Login: FC = () => {
         position: "relative",
         overflow: "hidden",
         backgroundColor: T.bg,
-        minHeight: "100vh",
+        // dvh so the panel isn't taller than a phone screen with the address
+        // bar showing. minHeight, so it still grows if the form overflows.
+        minHeight: "100dvh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

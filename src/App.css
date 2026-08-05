@@ -19,11 +19,20 @@ body {
 
 /* Nothing should be able to scroll the page sideways. Wide content — the
    pricing comparison table, code blocks — scrolls inside its own container
-   instead, which is already set up where it's needed. */
+   instead, which is already set up where it's needed.
+ *
+ * `clip`, not `hidden`: `overflow: hidden` turns the element into a scroll
+ * container, and `position: sticky` sticks to its nearest scroll container —
+ * so `overflow-x: hidden` here silently breaks every sticky element on the
+ * site (the guide contents rail, the legal-page rail, the pinned pricing
+ * column). `clip` cuts the overflow without creating that container.
+ *
+ * This is a backstop, not the fix. Nothing should be overflowing in the first
+ * place; if something does, prefer finding it over relying on this. */
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Media never forces the page wider than the screen. */

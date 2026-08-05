@@ -384,17 +384,9 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Machine learning is not magic and it is not thinking. It is a systematic search for numbers that make a function's outputs less wrong, guided by examples you supplied and judged by a metric you chose. Both of those choices are yours, which is precisely why the interesting failures are rarely mathematical — they're failures of judgement about data and about what success should mean.",
-    "If you take one habit from this guide, make it evaluation. The ability to look at an impressive result and ask 'what was it tested on, and could that number be lying to me?' is worth more than fluency in any framework. Frameworks change every few years. That question doesn't.",
     "Start small and start honest. Train something on data you understand, evaluate it properly, and read its mistakes one by one. You'll learn more from one carefully evaluated model than from ten tutorials that only ever showed you the happy path.",
   ],
 
-  cta: {
-    headline: "Building something real with machine learning?",
-    body: "We design and ship production ML systems — with the evaluation, monitoring and human oversight that keep them working after launch day.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

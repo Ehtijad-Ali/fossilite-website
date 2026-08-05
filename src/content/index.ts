@@ -48,7 +48,7 @@ export const relatedFor = (guide: Guide, limit = 3): Guide[] => {
 
 /** Internal links, filtered to published targets only. */
 export const resolvedInternalLinks = (guide: Guide) =>
-  guide.internalLinks.filter((l) => BY_SLUG.has(l.slug));
+  (guide.internalLinks ?? []).filter((l) => BY_SLUG.has(l.slug));
 
 /** Categories that actually hold published guides, with their counts. */
 export const activeCategories = () =>

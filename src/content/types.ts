@@ -198,28 +198,59 @@ export interface Guide {
    */
   heroImage?: { src: string; alt: string; credit?: string };
 
-  // ── Body (maps 1:1 to the required guide structure) ───────────────────────
+  // ── Body ──────────────────────────────────────────────────────────────────
+  //
+  // Only the first block is required. Everything after it is optional on
+  // purpose: when every section is mandatory, every guide comes out the same
+  // shape and length, and uniform shape across a whole library is the loudest
+  // signal that nobody decided what each piece needed. Carry a section because
+  // this guide has something to put in it. An empty array renders nothing and
+  // drops out of the contents rail.
+
   intro: string[];
-  whyItMatters: string[];
   coreConcepts: Concept[];
-  learningPath: PathStep[];
   examples: Example[];
   mistakes: Mistake[];
-  bestPractices: string[];
-  proTips: string[];
-  businessApplications: string[];
-  lifeApplications: string[];
-  exercises: Exercise[];
-  /** Optional — only guides where running code is the point carry these. */
-  codeExamples?: CodeExample[];
-  checklist: string[];
   faqs: Faq[];
-  tools: Tool[];
-  resources: LearningResource[];
-  internalLinks: InternalLink[];
   relatedGuides: string[];
-  conclusion: string[];
-  cta: { headline: string; body: string; label: string; href: string };
+
+  /** The stakes. Skip it when the title already answers "why should I care". */
+  whyItMatters?: string[];
+  /** A sequenced path. Only for guides someone works through over weeks. */
+  learningPath?: PathStep[];
+  /**
+   * How to do it well. Rendered as one section with `proTips`, not two —
+   * "Best practices" followed by "Professional tips" is the same section
+   * printed twice under different names.
+   *
+   * Keep these to short, checkable rules.
+   */
+  bestPractices?: string[];
+  /** Longer notes from doing the work. A paragraph each, not one-liners. */
+  proTips?: string[];
+  businessApplications?: string[];
+  /** Only where it's genuinely true. Most technical guides have none. */
+  lifeApplications?: string[];
+  exercises?: Exercise[];
+  /** Only guides where running code is the point carry these. */
+  codeExamples?: CodeExample[];
+  checklist?: string[];
+  tools?: Tool[];
+  resources?: LearningResource[];
+  internalLinks?: InternalLink[];
+  /**
+   * Rendered as "Where to start" — the one thing to do this week, not a
+   * summary. Every guide used to close with three paragraphs whose first two
+   * restated the intro, which is the shape of a school essay rather than of
+   * advice. If what you're about to write is a recap, leave it out.
+   */
+  conclusion?: string[];
+  /**
+   * Optional, and better left off than made generic. When 35 guides end with
+   * the same button, it stops reading as an offer and starts reading as
+   * furniture. Say something specific to this guide's reader or say nothing.
+   */
+  cta?: { headline: string; body: string; label: string; href: string };
 }
 
 // ─── Prompt library ──────────────────────────────────────────────────────────

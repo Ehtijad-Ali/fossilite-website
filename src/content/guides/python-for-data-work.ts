@@ -302,7 +302,6 @@ export const guide: Guide = {
         "Before writing a single line of cleaning code, characterise what you actually have. Make this a snippet you reuse; the two minutes it takes routinely saves an afternoon.",
       code: `import pandas as pd
 
-
 def inspect(df: pd.DataFrame, name: str = "dataset") -> None:
     """Standard first look. Run before touching anything."""
     print(f"=== {name}: {df.shape[0]:,} rows x {df.shape[1]} columns ===\\n")
@@ -335,7 +334,6 @@ def inspect(df: pd.DataFrame, name: str = "dataset") -> None:
 
     print("--- ten random rows ---")
     print(df.sample(min(10, len(df))).to_string())
-
 
 df = pd.read_csv("orders.csv")
 inspect(df, "orders")`,
@@ -390,7 +388,6 @@ inspect(df, "orders")`,
 
     return merged
 
-
 orders = safe_merge(orders, customers, on="customer_id")`,
       note:
         "pandas' own `validate=` argument does much of this and is criminally underused. `validate=\"many_to_one\"` raises immediately if the right side isn't unique on the key — one keyword, one whole class of silent error prevented.",
@@ -408,7 +405,6 @@ MISSING_POLICY = {
     "region":         ("fill", "UNKNOWN", "keep the row, flag the gap explicitly"),
     "satisfaction":   ("keep", None,     "not surveyed != neutral score; do NOT fill"),
 }
-
 
 def apply_missing_policy(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
@@ -506,17 +502,9 @@ def apply_missing_policy(df: pd.DataFrame) -> pd.DataFrame:
   relatedGuides: ["how-machine-learning-actually-works", "neural-networks-explained"],
 
   conclusion: [
-    "The Python that data work needs is a small, learnable subset: a handful of data structures, one library, and a set of habits about inspecting and checking your data. You do not need a computer science education to become the person on your team who can answer questions with evidence instead of estimates.",
-    "The habits matter more than the syntax, and they're the part most courses omit entirely. Check dtypes on load. Decide what missing means. Assert your row counts after joins. Keep raw data read-only. These take seconds each and they prevent the specific failures that turn a confident analysis into a wrong one.",
     "Start with a file from your own work rather than a tutorial dataset. Real data is messy in ways that clean examples never are, and that mess is the actual skill you're building.",
   ],
 
-  cta: {
-    headline: "Drowning in manual data work?",
-    body: "We build reliable data pipelines and automation — the kind that runs on a schedule and tells you when something upstream breaks.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

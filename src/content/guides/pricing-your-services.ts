@@ -346,17 +346,9 @@ export const guide: Guide = {
   relatedGuides: ["validating-a-product-idea", "clear-writing-that-gets-read"],
 
   conclusion: [
-    "Pricing is a business decision, not a self-assessment. The number you charge should follow from what the outcome is worth to the client, what the work costs you to deliver properly, and what risk you're absorbing — none of which are measures of your worth as a person, however much it feels that way when you say the number out loud.",
-    "The two changes with the largest effect are both structural rather than numerical: find out what the problem costs before you quote, and present options instead of a single price. Together they move the conversation from 'is this person expensive' to 'which version of this do we want', which is a conversation you can win.",
     "Start with the floor calculation this week. Most people who do it discover they've been charging below cost once unpaid time is counted honestly — and that single number makes every subsequent pricing decision much easier to hold.",
   ],
 
-  cta: {
-    headline: "Pricing a project you're not sure how to scope?",
-    body: "We scope and price AI systems against business outcomes, not hours. Tell us the problem and we'll tell you what it takes.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

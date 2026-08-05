@@ -99,7 +99,6 @@ from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermi
 from autogen_agentchat.ui import Console
 from autogen_ext.models.anthropic import AnthropicChatCompletionClient
 
-
 async def main() -> None:
     # NOTE: this client accepts temperature/top_p/top_k, but current Claude
     # models reject them. Leave them unset — see the note below this block.
@@ -136,7 +135,6 @@ async def main() -> None:
     await Console(team.run_stream(task="Draft a brief for a new API product."))
     await model_client.close()
 
-
 asyncio.run(main())`,
       note:
         "The sampling-parameter gotcha is real and easy to miss: `AnthropicChatCompletionClient` exposes `temperature`, `top_p` and `top_k`, but current Claude models reject them with a 400. Don't set them — and if you hit an unexplained 400, check whether a default is being sent.",
@@ -159,7 +157,6 @@ asyncio.run(main())`,
     if not hits:
         return f"No documentation matched '{query}'."
     return "\\n\\n".join(f"[{h['title']}]\\n{h['text']}" for h in hits)
-
 
 researcher = AssistantAgent(
     name="researcher",
@@ -352,12 +349,6 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     "Complex problem decomposition where the right sequence emerges from discussion rather than being knowable up front.",
   ],
 
-  lifeApplications: [
-    "Recognising that adding people to a discussion has a coordination cost that grows faster than the headcount — the same curve that makes group chats expensive here.",
-    "Noticing when a review has become agreement rather than checking, which is what a critic without independent information produces.",
-    "Understanding why long meetings drift from their agenda: the original goal ends up buried, and the fix is restating it rather than continuing.",
-  ],
-
   exercises: [
     {
       title: "The non-terminating run",
@@ -459,15 +450,14 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
   ],
 
   conclusion: [
-    "AutoGen treats multi-agent work as conversation, and where the work genuinely is a dialogue — critique, refinement, negotiation — that framing is the right one. The composable termination conditions are the best answer to 'when do we stop?' that any of these frameworks offers.",
-    "The costs are real and worth naming. Everything is async, the v0.4 redesign invalidated most of the tutorials you'll find, and re-sending the conversation each turn makes token spend grow quadratically. Small teams, hard message caps, and `Console` during development are what keep it manageable.",
     "As with every framework in this category: build the single-agent baseline first. AutoGen's overhead is the highest of the three, so the bar it has to clear is correspondingly higher — and when it clears it, you'll know exactly why.",
   ],
 
   cta: {
-    headline: "Weighing up a multi-agent architecture?",
-    body: "We design agentic systems around what the task needs — including saying when a conversation between agents is the wrong shape for it.",
-    label: "Talk to our team",
+    headline: "Conversation patterns getting expensive?",
+    body:
+      "Group chat scales badly, and the fix is structural rather than a better prompt. We can help you find where the tokens are going.",
+    label: "Talk through your build",
     href: "/contact",
   },
 };

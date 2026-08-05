@@ -255,12 +255,6 @@ export const guide: Guide = {
     "Inbox triage for shared operational mailboxes, classifying and routing with context attached.",
   ],
 
-  lifeApplications: [
-    "Asking whether a recurring obligation still needs to exist — the same question that deletes work in a business deletes it in a week.",
-    "Recognising that a frequent short task costs more than an occasional long one.",
-    "Noticing when a process step is a workaround for a problem that was fixed years ago.",
-  ],
-
   exercises: [
     {
       title: "The two-week inventory",
@@ -364,15 +358,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Operations is the best place in most businesses to apply AI, because the work is genuinely repetitive, the cost is already measurable, and errors are caught internally. It's also where AI's actual new capability matters — handling input that resists rules, which is what back-office work is full of.",
-    "The method is unglamorous and it works. Rank by annual hours rather than irritation. Map the process and delete what can't justify itself. Separate extraction from validation from action. Route by consequence, not just confidence. Alert on silence as well as failure. Keep the manual path documented.",
     "Start by mapping one process properly and asking of every step what would happen if you stopped. That afternoon deletes more work than the automation would have saved, and it makes whatever you build afterwards worth building.",
   ],
 
   cta: {
-    headline: "Sure there's waste in your operations but not where?",
-    body: "We map operational processes, identify the work that genuinely pays back, and build the validation and monitoring that keeps it running.",
-    label: "Talk to our team",
+    headline: "Back-office process eating hours?",
+    body:
+      "Map it before automating it — sometimes that alone is the answer. We'll walk a process with you and say honestly whether AI belongs in it.",
+    label: "Walk a process with us",
     href: "/contact",
   },
 };

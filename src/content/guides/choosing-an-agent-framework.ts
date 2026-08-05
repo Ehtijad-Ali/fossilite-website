@@ -109,20 +109,17 @@ while step < MAX_STEPS:
     results = [run_tool(b) for b in response.content if b.type == "tool_use"]
     messages.append({"role": "user", "content": results})
 
-
 # ─── LangChain ───────────────────────────────────────────────────────
 # The loop disappears. You get the ecosystem and tracing.
 from langchain.agents import create_agent
 agent = create_agent(model=model, tools=[get_weather])
 agent.invoke({"messages": [{"role": "user", "content": "..."}]})
 
-
 # ─── LangGraph ───────────────────────────────────────────────────────
 # The loop returns as something you control — plus durable state.
 from langgraph.prebuilt import create_react_agent
 agent = create_react_agent(model, [get_weather], checkpointer=checkpointer)
 agent.invoke({"messages": [...]}, {"configurable": {"thread_id": "user-123"}})
-
 
 # ─── CrewAI ──────────────────────────────────────────────────────────
 # You describe a team. Note what you're now paying for: two contexts.
@@ -132,7 +129,6 @@ crew = Crew(
     process=Process.sequential,
 )
 crew.kickoff(inputs={"topic": "..."})
-
 
 # ─── AutoGen ─────────────────────────────────────────────────────────
 # You describe a conversation. Every turn re-sends the whole history.
@@ -287,12 +283,6 @@ await Console(team.run_stream(task="..."))`,
     "Migration planning when an existing agent has outgrown its framework, where knowing the destination's model prevents a second migration.",
   ],
 
-  lifeApplications: [
-    "Choosing tools by naming the capability you're missing rather than by which is most capable overall — a habit that generalises well beyond software.",
-    "Recognising that a comparison producing no clear winner usually means the wrong question was asked.",
-    "Noticing when added structure is ceremony rather than capability, in processes as much as in code.",
-  ],
-
   exercises: [
     {
       title: "The workflow test",
@@ -394,15 +384,14 @@ await Console(team.run_stream(task="..."))`,
   ],
 
   conclusion: [
-    "There's no ranking here, only a fit. LangChain for ecosystem breadth. LangGraph for control flow, durable state and human approval. CrewAI for role decomposition. AutoGen for genuinely conversational work. The raw SDK for a single agent with a few tools, which describes more real projects than the framework discourse suggests.",
-    "Two questions decide almost all of it. Can the steps be written down in advance — in which case build a workflow and stop. And if not, what specific capability does a plain SDK loop lack? That second answer names your framework in a sentence.",
     "Whatever you pick, the reliability work is unchanged. Step limits, guardrails in code, verification against independent sources, and a human in front of anything irreversible. No library supplies those, and every one of them needs them.",
   ],
 
   cta: {
-    headline: "Weighing up an agent architecture?",
-    body: "We scope agentic systems against what the task actually requires — including saying when a workflow beats an agent, and when no framework beats all of them.",
-    label: "Talk to our team",
+    headline: "Still stuck between two frameworks?",
+    body:
+      "Usually the answer is that the choice matters less than the part you're avoiding. We're happy to be the second opinion.",
+    label: "Get a second opinion",
     href: "/contact",
   },
 };

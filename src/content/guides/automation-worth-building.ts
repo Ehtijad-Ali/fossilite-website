@@ -356,15 +356,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "The decision is mostly arithmetic that people skip. Rank by frequency rather than irritation, include maintenance in the payback, check the process is stable, and confirm someone will own it. Anything that only just breaks even on those terms will lose, because build estimates are optimistic and maintenance estimates are worse.",
-    "The highest-return move isn't building at all. Ask who consumes the output, and try stopping the task for a month. A meaningful share of recurring work is producing something nobody reads or checking something that stopped failing years ago, and deleting it beats any automation you could write.",
     "When you do build, start boring. Automate the repetitive middle, leave judgement to a person, and make failure loud enough that you'll know within a day. A dull automation still running in two years is worth more than an ambitious one that broke in March and nobody noticed.",
   ],
 
   cta: {
-    headline: "Working out what's worth automating?",
-    body: "We map operations, identify the work that genuinely pays back, and say plainly when the answer is to delete a step rather than automate it.",
-    label: "Talk to our team",
+    headline: "Have a list and no idea what's first?",
+    body:
+      "Ranking it takes an afternoon and usually removes half the list. We'll do that with you before anyone writes code.",
+    label: "Rank your list with us",
     href: "/contact",
   },
 };

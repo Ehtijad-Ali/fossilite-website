@@ -353,17 +353,9 @@ export const guide: Guide = {
   relatedGuides: ["deep-work-and-focus", "building-habits-that-stick"],
 
   conclusion: [
-    "Time management systems are tools with specific purposes, not competing philosophies. Capture systems stop you dropping things. Blocking creates runway. Work-in-progress limits address over-commitment. Timers get you started. Choosing between them without knowing which problem you have is why the adoption cycle keeps repeating.",
-    "Two things are worth carrying regardless of which you pick. Fragmentation costs more than your output suggests — it's paid in stress rather than in missed deadlines — so anything that reduces switching is worth more than it looks. And no system fixes a workload that exceeds your hours; only removing commitments does that.",
     "Spend the next week diagnosing rather than adopting. Note what actually goes wrong each day. One category will dominate, and once you can name it, the choice mostly makes itself.",
   ],
 
-  cta: {
-    headline: "Losing the week to work that shouldn't need a person?",
-    body: "We automate the repetitive work that fragments a team's days, so the protected time goes to work that actually needs judgement.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

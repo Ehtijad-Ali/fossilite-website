@@ -369,17 +369,9 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "A neural network is a stack of weighted sums separated by a simple non-linear function, trained by computing how each weight contributed to the error and adjusting it. Nothing in that sentence is beyond a determined beginner. The power comes from scale and from automatic differentiation, not from any individual idea being difficult.",
-    "The two things worth carrying away are these. Non-linearity is what makes depth meaningful — without it, a hundred layers have the capacity of one. And a network optimises the loss you gave it on the data you gave it, which means its failures are almost always traceable to those two choices rather than to the architecture everyone wants to tune.",
     "If you do one thing from this guide, build a two-layer network from scratch without a framework. It takes a weekend, and afterwards no deep learning code will ever look like magic again.",
   ],
 
-  cta: {
-    headline: "Building with deep learning?",
-    body: "We design and ship production neural systems — with the baselines, evaluation and monitoring that keep them honest after launch.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

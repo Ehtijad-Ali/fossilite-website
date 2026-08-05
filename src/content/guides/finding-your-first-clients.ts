@@ -360,17 +360,9 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Finding your first clients is a direct, unscalable activity, and its unscalability is the advantage. Narrow your offer until people can recognise themselves in it. Identify specific individuals who own the problem. Lead with something genuinely useful about their situation. Ask your existing network who they know rather than whether they need you.",
-    "The sequencing matters more than any individual tactic. Outreach first, because it produces conversations in days and tells you how buyers describe their problem. Content later, once you have delivered outcomes to write about. Doing these in the wrong order is the most expensive common mistake, and it's the order most advice implies.",
     "Start this week with the one-sentence offer and twenty named people. If you can't find twenty, that's the most useful thing you'll learn all month — and it's better to learn it now than after six months of posting.",
   ],
 
-  cta: {
-    headline: "Won the client and need to deliver?",
-    body: "We partner with independent consultants and small studios to build the technical work behind their engagements.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

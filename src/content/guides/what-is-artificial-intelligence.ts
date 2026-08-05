@@ -333,15 +333,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Artificial intelligence is a goal, not a technology, and the systems currently pursuing it all work the same fundamental way: they find statistical patterns in data they were given and apply them to new inputs. That's genuinely powerful and genuinely limited, and both halves matter.",
-    "The most useful habit this understanding gives you is a question rather than an opinion. Not 'is this real AI?' but 'what was it trained on, what exactly does it do, how does it fail, and who checks?' Those questions cut through marketing in both directions — they deflate overclaiming and they also reveal the quiet, unglamorous systems that are genuinely working.",
     "Pick one AI product you already use and answer those four questions about it this week. If you can't, that's information too.",
   ],
 
   cta: {
-    headline: "Trying to work out what AI can actually do for you?",
-    body: "We map operations, find the tasks where AI genuinely helps, and say plainly when it doesn't.",
-    label: "Talk to our team",
+    headline: "Not sure which part of this applies to you?",
+    body:
+      "The useful first conversation is usually about your work, not about AI. Tell us what takes your team the most time and we'll tell you honestly whether this technology helps.",
+    label: "Ask us where to start",
     href: "/contact",
   },
 };

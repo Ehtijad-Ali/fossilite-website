@@ -353,17 +353,9 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "The central finding is inconvenient and useful: the study methods that feel most productive are largely the least effective, and the effective ones feel like failing. Retrieval beats review. Spacing beats cramming. Mixed practice beats blocked practice. All three feel worse in the moment and win at delay.",
-    "Which means the main obstacle isn't discipline or capacity — it's being willing to feel less competent during the session in exchange for actually retaining the material. The confidence produced by re-reading is real, and it's the thing misleading you.",
     "Change one thing this week. After your next learning session, close everything and write what you remember on a blank page before checking. The gap between what you thought you knew and what you produced is the most useful piece of feedback in this guide.",
   ],
 
-  cta: {
-    headline: "Building a team that needs to learn fast?",
-    body: "We design AI systems your people can actually understand and operate — with the documentation and training to match.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

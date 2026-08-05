@@ -243,12 +243,6 @@ export const guide: Guide = {
     "Summarising campaign performance data into readable narrative for stakeholders.",
   ],
 
-  lifeApplications: [
-    "Recognising generated content as a reader — and noticing how quickly it stops being worth finishing.",
-    "Understanding that when production becomes free, the scarce thing is having something to say.",
-    "Checking a statistic before repeating it, which is a habit worth more than any content technique.",
-  ],
-
   exercises: [
     {
       title: "Mine your own tickets",
@@ -346,15 +340,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "When producing competent content costs almost nothing, competent content stops being an advantage. What stays scarce is original data, a real customer story, a genuine point of view — and none of those come from a model. AI multiplies whatever substance you bring it, including none.",
-    "So use it where multiplication is the point: repurposing something good across formats, synthesising research you couldn't otherwise afford, mining the customer language already sitting in your support system, and generating variants for tests to decide between.",
     "The one discipline that protects everything else is review. Every piece needs a named person who has read it and checked its claims. If your publishing rate has outgrown that, the rate is what's wrong.",
   ],
 
   cta: {
-    headline: "Getting more output but not more results?",
-    body: "We help marketing teams use AI where it compounds — research, repurposing and testing — rather than where it just adds volume.",
-    label: "Talk to our team",
+    headline: "Producing more and getting less back?",
+    body:
+      "When production becomes free, the scarce thing is having something worth saying. We'd rather help you with that than with volume.",
+    label: "Talk about your content",
     href: "/contact",
   },
 };

@@ -366,15 +366,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Prompt engineering is specification under constraints, addressed to a system that cannot ask you what you meant. Every reliable technique in this guide — role and audience, worked examples, explicit structure, reasoning before conclusions, permission to decline — is a way of removing ambiguity that the model would otherwise resolve on your behalf, using the most statistically ordinary interpretation available.",
-    "The step that separates people who get consistent results from people who get occasional good ones is evaluation. Without a fixed set of test cases you're not engineering anything; you're remembering your successes. Twenty inputs and an honest score is a low bar and almost nobody clears it.",
     "Pick one task you do repeatedly this week. Write a real specification for it, build twenty test cases, and iterate until it works without editing. That single exercise will teach you more than any list of prompt templates, and unlike the templates, the skill will still be worth something in three years.",
   ],
 
   cta: {
-    headline: "Need prompts that hold up in production?",
-    body: "We build evaluated, version-controlled prompt systems with guardrails and human review — the difference between a demo and a dependable product.",
-    label: "Talk to our team",
+    headline: "Prompts working in testing and failing in production?",
+    body:
+      "That gap is a measurement problem more often than a wording problem. We can help you find out which one you have.",
+    label: "Get your prompts reviewed",
     href: "/contact",
   },
 };

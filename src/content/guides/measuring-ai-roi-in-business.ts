@@ -252,12 +252,6 @@ export const guide: Guide = {
     "Budget forecasting for inference and maintenance, which are ongoing and routinely under-provisioned.",
   ],
 
-  lifeApplications: [
-    "Evaluating any tool or subscription: what does this replace, what does it cost including my time, and how would I know if it stopped being worth it?",
-    "Noticing when a saving is theoretical — time freed that simply becomes other time spent is a pattern well beyond business.",
-    "Deciding the threshold before you see the result, which is the same discipline that makes any personal experiment meaningful.",
-  ],
-
   exercises: [
     {
       title: "Capture a baseline",
@@ -360,15 +354,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "An AI business case that holds up is mostly arithmetic that people skip. Measure the manual baseline before building, because you cannot reconstruct it afterwards. Price the errors, not just the efficiency. Count review and maintenance, which don't appear on any invoice. And name the mechanism that converts saved time into money, or present it as the qualitative benefit it is.",
-    "The two documented cases here are worth more than any vendor deck. One shows measured, substantial gains that looked different eighteen months later. The other shows a modest per-unit error becoming a nine-figure write-down because each prediction triggered an irreversible action. Neither was a technical failure.",
     "Start with two weeks of measuring one process, changing nothing. It's the cheapest step, it's the only irreversible one, and almost nobody does it.",
   ],
 
   cta: {
-    headline: "Need to know whether an AI project will pay back?",
-    body: "We scope AI work against measured baselines and honest cost models — including telling you when the numbers don't support it.",
-    label: "Talk to our team",
+    headline: "Need a number before you can get approval?",
+    body:
+      "We'll help you build a case with a threshold set in advance, so the project can be judged honestly rather than defended after the fact.",
+    label: "Build the business case",
     href: "/contact",
   },
 };

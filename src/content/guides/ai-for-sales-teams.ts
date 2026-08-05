@@ -243,12 +243,6 @@ export const guide: Guide = {
     "Onboarding new reps by summarising account history they'd otherwise take weeks to absorb.",
   ],
 
-  lifeApplications: [
-    "Recognising generated outreach when you receive it — and understanding why it lands worse than an honest generic note.",
-    "Preparing properly for any important conversation, which is the same discipline the research brief encodes.",
-    "Noticing when more activity is being used to solve what is actually a fit or positioning problem.",
-  ],
-
   exercises: [
     {
       title: "The time audit",
@@ -346,15 +340,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "The reliable AI wins in sales sit either side of the conversation. Research that gets a rep genuinely prepared. Notes, CRM updates and follow-up drafts that stop admin eating the week. Both are internal, both are measurable, and neither risks anything customer-facing.",
-    "The application everyone leads with — more outreach, faster — is the one with the worst returns and a failure mode that reaches your invoices. If reply rates are falling, that's a fit or message problem, and sending more is scaling the wrong thing.",
     "Start by finding out where the week actually goes, then audit your CRM. Both are unglamorous, both take about two weeks, and together they usually reveal that the highest-value project isn't the one anyone was excited about.",
   ],
 
   cta: {
-    headline: "Want your reps selling instead of doing admin?",
-    body: "We build sales systems that handle research, notes and follow-up drafting — keeping the conversation, and the judgement, with your team.",
-    label: "Talk to our team",
+    headline: "Want the admin back without the outreach risk?",
+    body:
+      "Research and call-notes automation pays back quickly and puts nothing customer-facing at stake. That's usually where we start.",
+    label: "Talk about your sales workflow",
     href: "/contact",
   },
 };

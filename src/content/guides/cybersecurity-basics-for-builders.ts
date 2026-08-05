@@ -368,17 +368,9 @@ export const guide: Guide = {
   relatedGuides: ["prompt-engineering-fundamentals", "evaluating-ai-systems"],
 
   conclusion: [
-    "The measured reality of how breaches begin is reassuring rather than intimidating. Credentials, people and unpatched systems dominate. Sophisticated technical attacks exist, and they are not what most organisations lose to.",
-    "That means the work is boring and it works. Unique passwords from a manager. Multi-factor authentication, strongest on email. Least privilege with quarterly review. Fast patching. Secrets out of code. A backup you have actually restored from. A one-page plan, and people who feel safe reporting mistakes.",
     "None of that requires a specialist or a budget. Pick the two you haven't done — for most people that's MFA on everything and testing a restore — and do them this week. It's the highest return available on a few hours of unglamorous work.",
   ],
 
-  cta: {
-    headline: "Building something that handles real data?",
-    body: "We build production systems with access control, secret management and monitoring designed in from the start.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

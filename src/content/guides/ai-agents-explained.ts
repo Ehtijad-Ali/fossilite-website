@@ -380,15 +380,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "An agent is a model in a loop with tools. That framing makes both the appeal and the difficulty obvious: the ability to act is what makes it useful, and per-step uncertainty compounding across a chain is what makes it fragile. Ten steps that each usually work is not a system that usually works.",
-    "The designs that survive production share a shape. Short chains rather than long autonomy. Constraints enforced in code rather than requested in prompts. Human approval wherever an action can't be undone. Complete tracing, because you will need to reconstruct what happened. And evaluation on whole tasks rather than individual steps.",
     "Before building one, spend a day implementing your task as a fixed workflow with model calls at specific points. If it performs comparably — and it often does — you've saved yourself a category of problem. If it doesn't, you now know exactly what the autonomy is buying.",
   ],
 
   cta: {
-    headline: "Thinking about putting an agent into production?",
-    body: "We build agentic systems with real guardrails, tracing and human checkpoints — designed for the day something goes wrong, not just the demo.",
-    label: "Talk to our team",
+    headline: "Have a process that might suit an agent?",
+    body:
+      "Most don't, and we'd rather say so early than build one. Describe the workflow and we'll tell you whether it needs an agent, a script, or nothing.",
+    label: "Get an honest read on it",
     href: "/contact",
   },
 };

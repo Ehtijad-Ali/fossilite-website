@@ -350,17 +350,9 @@ export const guide: Guide = {
   relatedGuides: ["prompt-engineering-fundamentals", "validating-a-product-idea"],
 
   conclusion: [
-    "Clear writing is not a gift and it isn't about vocabulary. It comes from deciding what you want before you start, putting it first, choosing concrete words over abstract ones, and cutting what doesn't earn its place. Every one of those is a decision rather than a talent, which means every one is available to you immediately.",
-    "The highest-leverage habit is separating drafting from editing. Write fast and badly to find out what you think, then edit slowly and ruthlessly to make it clear. Trying to do both at once is what makes writing feel hard and produces the cautious, padded prose that fills most inboxes.",
     "Try one thing on your next document: state the point and the ask in the first three lines, then cut a third of what follows. It takes ten extra minutes and it will change the responses you get.",
   ],
 
-  cta: {
-    headline: "Want your ideas to land?",
-    body: "Clear thinking and clear systems are the same discipline. See how we design AI workflows that people actually understand and use.",
-    label: "Explore our work",
-    href: "/products",
-  },
 };
 
 export default guide;

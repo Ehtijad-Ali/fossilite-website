@@ -95,7 +95,6 @@ export const guide: Guide = {
 from langchain_anthropic import ChatAnthropic
 from langchain_core.tools import tool
 
-
 @tool
 def get_weather(city: str) -> str:
     """Get the current weather for a city.
@@ -108,7 +107,6 @@ def get_weather(city: str) -> str:
     """
     fake = {"Lisbon": "19C, clear", "Manchester": "11C, raining"}
     return fake.get(city, f"No data for {city}")
-
 
 model = ChatAnthropic(model="claude-opus-5", max_tokens=16000)
 
@@ -154,13 +152,11 @@ for message in result["messages"]:
         "Two things the framework genuinely saves you writing. Streaming gives responsive UX on long runs; structured output makes the result safe to feed into another system.",
       code: `from pydantic import BaseModel, Field
 
-
 class WeatherComparison(BaseModel):
     """Structured result so downstream code never parses prose."""
     warmer_city: str = Field(description="Which city is warmer")
     difference_c: float = Field(description="Temperature difference in Celsius")
     umbrella_needed: bool = Field(description="True if either city has rain")
-
 
 structured_agent = create_agent(
     model=model,
@@ -173,7 +169,6 @@ result = structured_agent.invoke({
 })
 answer: WeatherComparison = result["structured_response"]
 print(answer.warmer_city, answer.difference_c, answer.umbrella_needed)
-
 
 # Streaming: yields incremental state as the agent works.
 for chunk in agent.stream(
@@ -324,12 +319,6 @@ for chunk in agent.stream(
     "Prototyping: the fastest path from idea to a working agent with tracing, before deciding what to build properly.",
   ],
 
-  lifeApplications: [
-    "Learning to read framework source rather than only its documentation — a transferable skill this library rewards.",
-    "Evaluating any tool by asking what it replaces and whether you'd rather own that code.",
-    "Recognising when a dependency has stopped earning its complexity, which is a judgement most people make too late.",
-  ],
-
   exercises: [
     {
       title: "Loop versus framework",
@@ -426,15 +415,14 @@ for chunk in agent.stream(
   ],
 
   conclusion: [
-    "LangChain's modern agent interface is thin enough to be worth using and thick enough to be worth understanding. `create_agent` handles the loop, the `@tool` decorator derives your schemas, and the ecosystem gives you providers, integrations and tracing you'd otherwise build.",
-    "The judgement call is what you're adopting it for. The integration surface and LangSmith are genuine leverage. Avoiding forty lines of loop code is not — and teams that adopt for that reason tend to end up with an abstraction they don't understand wrapped around a problem they hadn't yet felt.",
     "Build the raw loop first, then come back. Everything here reads differently once you can see what's underneath it.",
   ],
 
   cta: {
-    headline: "Building on LangChain and hitting the limits?",
-    body: "We design agentic systems with the guardrails, tracing and evaluation that frameworks leave to you.",
-    label: "Talk to our team",
+    headline: "Running LangChain in production?",
+    body:
+      "We work in it daily, including the parts that only show up under load. If something is behaving badly, we've probably seen it.",
+    label: "Talk through your build",
     href: "/contact",
   },
 };

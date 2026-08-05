@@ -153,7 +153,6 @@ for block in response.content:
     fake_data = {"Lisbon": "19C, clear", "Manchester": "11C, raining"}
     return fake_data.get(city, f"No data for {city}")
 
-
 messages = [{"role": "user", "content": "What's the weather in Lisbon?"}]
 
 response = client.messages.create(
@@ -194,7 +193,6 @@ print(final.content[0].text)`,
 
 MAX_STEPS = 10  # not optional: an uncapped agent can loop until your bill notices
 
-
 def run_tool(name: str, args: dict) -> tuple[str, bool]:
     """Return (output, is_error). Never raise — the model can't see exceptions."""
     try:
@@ -206,7 +204,6 @@ def run_tool(name: str, args: dict) -> tuple[str, bool]:
         return f"Invalid arguments for {name}: {e}", True
     except Exception as e:
         return f"{name} failed: {e}", True
-
 
 def run_agent(user_input: str) -> str:
     messages = [{"role": "user", "content": user_input}]
@@ -239,7 +236,6 @@ def run_agent(user_input: str) -> str:
         messages.append({"role": "user", "content": results})
 
     return f"Stopped after {MAX_STEPS} steps without finishing."
-
 
 print(run_agent("Compare the weather in Lisbon and Manchester."))`,
       note:
@@ -303,7 +299,6 @@ print(run_agent("Compare the weather in Lisbon and Manchester."))`,
         "Anything irreversible needs a person in front of it. The gate belongs in the tool function, not in the prompt — a prompt is a request, and a request is not a control.",
       code: `DESTRUCTIVE = {"send_email", "delete_record", "make_payment"}
 
-
 def run_tool_with_approval(name: str, args: dict) -> tuple[str, bool]:
     if name in DESTRUCTIVE:
         print(f"\\n  AGENT WANTS TO: {name}")
@@ -326,7 +321,6 @@ from anthropic.lib.tools import beta_tool
 
 client = Anthropic()
 
-
 @beta_tool
 def get_weather(city: str) -> str:
     """Get the current weather for a city.
@@ -339,7 +333,6 @@ def get_weather(city: str) -> str:
     """
     fake_data = {"Lisbon": "19C, clear", "Manchester": "11C, raining"}
     return fake_data.get(city, f"No data for {city}")
-
 
 runner = client.beta.messages.tool_runner(
     model="claude-opus-5",
@@ -629,15 +622,14 @@ print(final_message.content[0].text)`,
   ],
 
   conclusion: [
-    "An agent is a loop around one mechanism: the model requests an action, your code executes it, the result goes back. Everything else — guardrails, approval gates, step limits, error handling — is engineering around that cycle, and all of it lives in code you control rather than in the prompt.",
-    "Having built one by hand, you can now read framework documentation critically and tell which parts are earning their complexity. You can also tell when a task doesn't need an agent at all, which is a more common answer than the current enthusiasm suggests.",
     "Take the loop from example 3, point it at a genuinely tedious task in your own work, and run it with the tool-call logging on. The first trace where it does something you didn't expect is where the real learning starts.",
   ],
 
   cta: {
-    headline: "Ready to put an agent somewhere it matters?",
-    body: "We build agentic systems with real guardrails, tracing and human checkpoints — designed for the day something goes wrong, not just the demo.",
-    label: "Talk to our team",
+    headline: "Built the prototype and hit the wall?",
+    body:
+      "The distance between a working demo and something people rely on is where we spend most of our time. Bring what you have.",
+    label: "Talk through your prototype",
     href: "/contact",
   },
 };

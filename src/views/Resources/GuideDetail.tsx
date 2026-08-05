@@ -38,26 +38,39 @@ const Corners: FC<{ color?: string; inset?: string }> = ({ color = GOLD, inset =
 );
 
 // Section ids double as the table-of-contents anchors and the h2 targets.
+//
+// `has` decides whether a guide shows the section at all. Sections used to be
+// hardcoded, so all 36 guides rendered the same 19 headings whether or not they
+// had anything to put under them — which is why they all read alike. Now the
+// contents rail is a description of this guide rather than of the template.
+//
+// Two former sections are gone as separate entries: "Professional tips" now
+// renders inside "How to do this well" (it was the same section twice under
+// different names), and "Conclusion" moved ahead of the reference material,
+// because a conclusion printed after "Related guides" reads as a mistake.
 const SECTIONS = [
-  { id: "introduction", label: "Introduction" },
-  { id: "why-it-matters", label: "Why this matters" },
-  { id: "core-concepts", label: "Core concepts" },
-  { id: "learning-path", label: "Learning path" },
-  { id: "examples", label: "Real-world examples" },
-  { id: "mistakes", label: "Common mistakes" },
-  { id: "best-practices", label: "Best practices" },
-  { id: "pro-tips", label: "Professional tips" },
-  { id: "business-applications", label: "Business applications" },
-  { id: "life-applications", label: "Life applications" },
-  { id: "code", label: "Code examples" },
-  { id: "exercises", label: "Practical exercises" },
-  { id: "checklist", label: "Checklist" },
-  { id: "prompts", label: "Prompts" },
-  { id: "faq", label: "FAQ" },
-  { id: "tools", label: "Recommended tools" },
-  { id: "resources", label: "Learning resources" },
-  { id: "related", label: "Related guides" },
-  { id: "conclusion", label: "Conclusion" },
+  { id: "introduction", label: "Introduction", has: () => true },
+  { id: "why-it-matters", label: "Why this matters", has: (g: Guide) => !!g.whyItMatters?.length },
+  { id: "core-concepts", label: "Core concepts", has: (g: Guide) => !!g.coreConcepts.length },
+  { id: "learning-path", label: "Learning path", has: (g: Guide) => !!g.learningPath?.length },
+  { id: "examples", label: "Real-world examples", has: (g: Guide) => !!g.examples.length },
+  { id: "mistakes", label: "Common mistakes", has: (g: Guide) => !!g.mistakes.length },
+  {
+    id: "practice",
+    label: "How to do this well",
+    has: (g: Guide) => !!g.bestPractices?.length || !!g.proTips?.length,
+  },
+  { id: "business-applications", label: "Business applications", has: (g: Guide) => !!g.businessApplications?.length },
+  { id: "life-applications", label: "Life applications", has: (g: Guide) => !!g.lifeApplications?.length },
+  { id: "code", label: "Code examples", has: (g: Guide) => !!g.codeExamples?.length },
+  { id: "exercises", label: "Practical exercises", has: (g: Guide) => !!g.exercises?.length },
+  { id: "checklist", label: "Checklist", has: (g: Guide) => !!g.checklist?.length },
+  { id: "conclusion", label: "Where to start", has: (g: Guide) => !!g.conclusion?.length },
+  { id: "prompts", label: "Prompts", has: (_g: Guide, promptCount: number) => promptCount > 0 },
+  { id: "faq", label: "FAQ", has: (g: Guide) => !!g.faqs.length },
+  { id: "tools", label: "Recommended tools", has: (g: Guide) => !!g.tools?.length },
+  { id: "resources", label: "Learning resources", has: (g: Guide) => !!g.resources?.length },
+  { id: "related", label: "Related guides", has: (g: Guide) => !!g.relatedGuides.length },
 ] as const;
 
 // ─── Reading hooks ───────────────────────────────────────────────────────────
@@ -551,12 +564,7 @@ export const GuideDetail: FC = () => {
   // Computed before the early return so the scroll-spy hook below is never
   // called conditionally.
   const shown = useMemo(
-    () =>
-      SECTIONS.filter(
-        (s) =>
-          (s.id !== "prompts" || prompts.length > 0) &&
-          (s.id !== "code" || (guide?.codeExamples?.length ?? 0) > 0),
-      ),
+    () => (guide ? SECTIONS.filter((s) => s.has(guide, prompts.length)) : []),
     [guide, prompts.length],
   );
   const sectionIds = useMemo(() => shown.map((s) => s.id), [shown]);
@@ -858,8 +866,12 @@ export const GuideDetail: FC = () => {
               ))}
             </Box>
 
-            <H2 id="why-it-matters" index={num("why-it-matters")} T={T}>Why this matters</H2>
-            {guide.whyItMatters.map((p, i) => <P key={i} T={T}>{p}</P>)}
+            {guide.whyItMatters?.length ? (
+              <>
+                <H2 id="why-it-matters" index={num("why-it-matters")} T={T}>Why this matters</H2>
+                {guide.whyItMatters.map((p, i) => <P key={i} T={T}>{p}</P>)}
+              </>
+            ) : null}
 
             <H2 id="core-concepts" index={num("core-concepts")} T={T}>Core concepts, explained simply</H2>
             {guide.coreConcepts.map((c) => (
@@ -876,8 +888,10 @@ export const GuideDetail: FC = () => {
               </Card>
             ))}
 
-            <H2 id="learning-path" index={num("learning-path")} T={T}>Step-by-step learning path</H2>
-            {guide.learningPath.map((s, i) => (
+            {guide.learningPath?.length ? (
+              <H2 id="learning-path" index={num("learning-path")} T={T}>Step-by-step learning path</H2>
+            ) : null}
+            {guide.learningPath?.map((s, i) => (
               <Box key={s.title} sx={{ display: "flex", gap: "18px", mb: "26px" }}>
                 <Typography sx={{ fontFamily: MONO, fontSize: "12px", color: "#C3A87C", pt: "3px", flexShrink: 0, width: "26px" }}>
                   {String(i + 1).padStart(2, "0")}
@@ -946,17 +960,41 @@ export const GuideDetail: FC = () => {
               </Card>
             ))}
 
-            <H2 id="best-practices" index={num("best-practices")} T={T}>Best practices</H2>
-            <Bullets items={guide.bestPractices} T={T} />
+            {/* One section, two registers: the short checkable rules, then the
+                longer notes. These were two H2s — "Best practices" followed by
+                "Professional tips" — which is one section printed twice. */}
+            {guide.bestPractices?.length || guide.proTips?.length ? (
+              <>
+                <H2 id="practice" index={num("practice")} T={T}>How to do this well</H2>
+                {guide.bestPractices?.length ? <Bullets items={guide.bestPractices} T={T} /> : null}
+                {guide.proTips?.map((t, i) => (
+                  <Typography
+                    key={i}
+                    sx={{
+                      fontSize: "15.5px", lineHeight: 1.8, color: T.secondaryText,
+                      pl: "16px", mt: i === 0 ? "26px" : "16px",
+                      borderLeft: `2px solid ${GOLD}44`,
+                    }}
+                  >
+                    {t}
+                  </Typography>
+                ))}
+              </>
+            ) : null}
 
-            <H2 id="pro-tips" index={num("pro-tips")} T={T}>Professional tips</H2>
-            <Bullets items={guide.proTips} T={T} />
+            {guide.businessApplications?.length ? (
+              <>
+                <H2 id="business-applications" index={num("business-applications")} T={T}>Business applications</H2>
+                <Bullets items={guide.businessApplications} T={T} />
+              </>
+            ) : null}
 
-            <H2 id="business-applications" index={num("business-applications")} T={T}>Business applications</H2>
-            <Bullets items={guide.businessApplications} T={T} />
-
-            <H2 id="life-applications" index={num("life-applications")} T={T}>Life applications</H2>
-            <Bullets items={guide.lifeApplications} T={T} />
+            {guide.lifeApplications?.length ? (
+              <>
+                <H2 id="life-applications" index={num("life-applications")} T={T}>Life applications</H2>
+                <Bullets items={guide.lifeApplications} T={T} />
+              </>
+            ) : null}
 
             {guide.codeExamples && guide.codeExamples.length > 0 && (
               <>
@@ -970,8 +1008,10 @@ export const GuideDetail: FC = () => {
               </>
             )}
 
-            <H2 id="exercises" index={num("exercises")} T={T}>Practical exercises</H2>
-            {guide.exercises.map((e) => (
+            {guide.exercises?.length ? (
+              <H2 id="exercises" index={num("exercises")} T={T}>Practical exercises</H2>
+            ) : null}
+            {guide.exercises?.map((e) => (
               <Card key={e.title} T={T}>
                 <H3 T={T}>{e.title}</H3>
                 <Typography sx={{ fontSize: "15.5px", lineHeight: 1.8, color: T.secondaryText, mb: "12px" }}>{e.brief}</Typography>
@@ -988,8 +1028,22 @@ export const GuideDetail: FC = () => {
               </Card>
             ))}
 
-            <H2 id="checklist" index={num("checklist")} T={T}>Checklist</H2>
-            <Checklist items={guide.checklist} T={T} />
+            {guide.checklist?.length ? (
+              <>
+                <H2 id="checklist" index={num("checklist")} T={T}>Checklist</H2>
+                <Checklist items={guide.checklist} T={T} />
+              </>
+            ) : null}
+
+            {/* Sits here, ahead of the reference material. It used to render
+                after "Related guides", which put the closing paragraphs below a
+                grid of links to other pages. */}
+            {guide.conclusion?.length ? (
+              <>
+                <H2 id="conclusion" index={num("conclusion")} T={T}>Where to start</H2>
+                {guide.conclusion.map((p, i) => <P key={i} T={T}>{p}</P>)}
+              </>
+            ) : null}
 
             {prompts.length > 0 && (
               <>
@@ -1005,8 +1059,10 @@ export const GuideDetail: FC = () => {
             <H2 id="faq" index={num("faq")} T={T}>Frequently asked questions</H2>
             <FaqList faqs={guide.faqs} T={T} />
 
-            <H2 id="tools" index={num("tools")} T={T}>Recommended tools</H2>
-            {guide.tools.map((t) => (
+            {guide.tools?.length ? (
+              <H2 id="tools" index={num("tools")} T={T}>Recommended tools</H2>
+            ) : null}
+            {guide.tools?.map((t) => (
               <Box key={t.name} sx={{ display: "flex", gap: "16px", py: "14px", borderBottom: `0.5px solid ${T.border}`, alignItems: "flex-start" }}>
                 <Box sx={{ flex: 1 }}>
                   <Typography
@@ -1027,8 +1083,10 @@ export const GuideDetail: FC = () => {
               </Box>
             ))}
 
-            <H2 id="resources" index={num("resources")} T={T}>Learning resources</H2>
-            {guide.resources.map((r) => (
+            {guide.resources?.length ? (
+              <H2 id="resources" index={num("resources")} T={T}>Learning resources</H2>
+            ) : null}
+            {guide.resources?.map((r) => (
               <Box key={r.title} sx={{ py: "14px", borderBottom: `0.5px solid ${T.border}` }}>
                 <Box sx={{ display: "flex", gap: "10px", alignItems: "baseline", flexWrap: "wrap" }}>
                   <Typography
@@ -1108,7 +1166,9 @@ export const GuideDetail: FC = () => {
               </Box>
             )}
 
-            <H2 id="related" index={num("related")} T={T}>Related guides</H2>
+            {related.length > 0 && (
+              <H2 id="related" index={num("related")} T={T}>Related guides</H2>
+            )}
             <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" }, gap: "16px" }}>
               {related.map((r) => (
                 <Box
@@ -1133,36 +1193,34 @@ export const GuideDetail: FC = () => {
               ))}
             </Box>
 
-            <H2 id="conclusion" index={num("conclusion")} T={T}>Conclusion</H2>
-            {guide.conclusion.map((p, i) => <P key={i} T={T}>{p}</P>)}
-
-            {/* CTA */}
-            <Box
-              sx={{
-                mt: "44px", p: { xs: "28px", md: "40px" }, borderRadius: "18px",
-                border: `1px solid ${T.gridBorder}`, backgroundColor: T.cardBgAlt,
-                boxShadow: T.boxShadow, textAlign: "center",
-              }}
-            >
-              <Typography sx={{ fontSize: { xs: "22px", md: "28px" }, fontWeight: 500, fontFamily: FONT_DISPLAY, color: T.headline, letterSpacing: "-0.02em", mb: "12px" }}>
-                {guide.cta.headline}
-              </Typography>
-              <Typography sx={{ fontSize: "15px", lineHeight: 1.75, color: T.secondaryText, maxWidth: "460px", mx: "auto", mb: "24px" }}>
-                {guide.cta.body}
-              </Typography>
-              <Button
-                component={Link}
-                to={guide.cta.href}
+            {guide.cta && (
+              <Box
                 sx={{
-                  px: "26px", py: "12px", borderRadius: "9px", textTransform: "none",
-                  backgroundColor: T.ctaPrimaryBg, color: T.ctaPrimaryText, fontSize: "14px", fontWeight: 500,
-                  "&:hover": { backgroundColor: T.ctaPrimaryHover, transform: "translateY(-2px)" },
-                  transition: "background-color 0.25s ease, transform 0.2s ease",
+                  mt: "44px", p: { xs: "28px", md: "40px" }, borderRadius: "18px",
+                  border: `1px solid ${T.gridBorder}`, backgroundColor: T.cardBgAlt,
+                  boxShadow: T.boxShadow, textAlign: "center",
                 }}
               >
-                {guide.cta.label}
-              </Button>
-            </Box>
+                <Typography sx={{ fontSize: { xs: "22px", md: "28px" }, fontWeight: 500, fontFamily: FONT_DISPLAY, color: T.headline, letterSpacing: "-0.02em", mb: "12px" }}>
+                  {guide.cta.headline}
+                </Typography>
+                <Typography sx={{ fontSize: "15px", lineHeight: 1.75, color: T.secondaryText, maxWidth: "460px", mx: "auto", mb: "24px" }}>
+                  {guide.cta.body}
+                </Typography>
+                <Button
+                  component={Link}
+                  to={guide.cta.href}
+                  sx={{
+                    px: "26px", py: "12px", borderRadius: "9px", textTransform: "none",
+                    backgroundColor: T.ctaPrimaryBg, color: T.ctaPrimaryText, fontSize: "14px", fontWeight: 500,
+                    "&:hover": { backgroundColor: T.ctaPrimaryHover, transform: "translateY(-2px)" },
+                    transition: "background-color 0.25s ease, transform 0.2s ease",
+                  }}
+                >
+                  {guide.cta.label}
+                </Button>
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>

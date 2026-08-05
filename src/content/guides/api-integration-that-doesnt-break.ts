@@ -112,7 +112,6 @@ import httpx
 RETRYABLE_STATUS = {408, 429, 500, 502, 503, 504}
 MAX_ATTEMPTS = 5
 
-
 def request_with_retry(client: httpx.Client, method: str, url: str, **kwargs) -> httpx.Response:
     last_error: Exception | None = None
 
@@ -157,7 +156,6 @@ def request_with_retry(client: httpx.Client, method: str, url: str, **kwargs) ->
         "The scenario this exists for: your request succeeded upstream and the response never reached you. You cannot distinguish that from a genuine failure, so retrying must be safe.",
       code: `import uuid
 
-
 def create_payment(client: httpx.Client, order_id: str, amount_pence: int) -> dict:
     """Create a payment that can be retried without charging twice."""
 
@@ -174,7 +172,6 @@ def create_payment(client: httpx.Client, order_id: str, amount_pence: int) -> di
         json={"order_id": order_id, "amount": amount_pence, "currency": "GBP"},
     )
     return response.json()
-
 
 # WRONG — a fresh key per attempt defeats the entire mechanism. Each retry
 # looks like a new operation to the server, and you charge the customer twice.
@@ -198,7 +195,6 @@ from flask import Flask, request, abort
 
 app = Flask(__name__)
 SIGNING_SECRET = os.environ["WEBHOOK_SIGNING_SECRET"]
-
 
 @app.post("/webhooks/provider")
 def handle_webhook():
@@ -385,12 +381,6 @@ def handle_webhook():
     "Internal service-to-service calls, which need exactly the same discipline and usually get less.",
   ],
 
-  lifeApplications: [
-    "Designing for the failure case rather than the happy path — a habit that transfers to plans, processes and commitments.",
-    "Recognising that retrying harder often makes a struggling system worse, whether it's a server or a person.",
-    "Building in explicit fallbacks rather than assuming things will work, and deciding in advance what happens when they don't.",
-  ],
-
   exercises: [
     {
       title: "The timeout audit",
@@ -490,15 +480,14 @@ def handle_webhook():
   relatedGuides: ["cybersecurity-basics-for-builders", "designing-agent-tools"],
 
   conclusion: [
-    "Everything hard about API integration is failure handling, and the failures are ordinary rather than exotic. Transient errors, slowness, rate limits, duplicate deliveries. At any volume these are weekly events, and an integration that only handles success will meet all of them.",
-    "The patterns are few and they transfer everywhere. Explicit timeouts. Classified retries with backoff and jitter. Stable idempotency keys. Signature verification on raw bytes. Deduped webhooks driven from fetched state. A written policy for what happens when the thing is down.",
     "If you do one thing, audit your timeouts. It takes an afternoon, most codebases have unbounded calls in them, and it prevents the specific failure where one slow dependency quietly consumes every worker you have.",
   ],
 
   cta: {
-    headline: "Integrating systems that have to stay up?",
-    body: "We build integrations with the retry, idempotency and monitoring discipline that keeps them working on the day something upstream misbehaves.",
-    label: "Talk to our team",
+    headline: "Integration failing in ways you can't reproduce?",
+    body:
+      "Intermittent failures are usually retries, rate limits or timeouts interacting badly. We've debugged a lot of these.",
+    label: "Talk through the failure",
     href: "/contact",
   },
 };

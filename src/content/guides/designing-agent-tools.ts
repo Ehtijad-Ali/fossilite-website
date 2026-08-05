@@ -153,7 +153,6 @@ strong = {
         "The single highest-return change in most agent codebases. Compare the two failure paths — the first produces retry loops, the second produces corrections.",
       code: `from datetime import datetime
 
-
 # BAD — the model learns nothing and will try again identically
 def book_bad(date: str) -> tuple[str, bool]:
     try:
@@ -161,7 +160,6 @@ def book_bad(date: str) -> tuple[str, bool]:
     except ValueError:
         return "Error", True
     return "Booked", False
-
 
 # GOOD — says what was wrong, what was expected, and what to do
 def book_good(date: str) -> tuple[str, bool]:
@@ -192,7 +190,6 @@ def book_good(date: str) -> tuple[str, bool]:
         "Scope enforcement belongs in the function, where it holds regardless of what the model was told. The prompt can ask; only this can guarantee.",
       code: `ALLOWED_TABLES = {"orders", "products"}          # never "users", never "payments"
 MAX_ROWS = 100
-
 
 def query_database(table: str, filters: dict, requesting_user_id: str) -> tuple[str, bool]:
     """Read-only query, scoped to safe tables and to the requesting user's rows."""
@@ -227,11 +224,9 @@ def query_database(table: str, filters: dict, requesting_user_id: str) -> tuple[
         "A tool that dumps raw API output fills the context with noise the model then has to attend across. Return what the task needs, and say when there's more.",
       code: `import json
 
-
 # BAD — 40KB of nested JSON, most of it irrelevant to any question asked
 def get_order_bad(order_id: str) -> str:
     return json.dumps(api.fetch_order(order_id))   # every field, every nested object
-
 
 # GOOD — the fields that answer real questions, plus a pointer to the rest
 def get_order_good(order_id: str) -> tuple[str, bool]:
@@ -407,13 +402,6 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     "Vendor evaluation — asking an agent platform how tool permissions and error handling work separates serious products from demos.",
   ],
 
-  lifeApplications: [
-    "Understanding the permission prompts in AI-enabled apps: what a tool can reach is the actual question, not what the app promises it will do.",
-    "Writing clearer instructions generally — stating when something applies, not just what it is, is the same skill that makes a good tool description.",
-    "Designing any interface for someone who can't ask you a follow-up question: the constraints have to be in the interface, not in the briefing.",
-    "Recognising that in your own delegation, 'please be careful' is not a control and a checklist is.",
-  ],
-
   exercises: [
     {
       title: "The description A/B test",
@@ -524,15 +512,14 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
   ],
 
   conclusion: [
-    "The tool surface is the agent's real interface, and most behaviour people try to fix in the prompt is determined there. Descriptions that state when to call. Schemas that reject bad input before it executes. Errors that explain rather than merely fail. Returns shaped for the task. Permissions enforced in the function.",
-    "The reason this matters more than prompt tuning is that all of it is code — testable, versionable, and enforceable in a way that no instruction can be. Moving a rule from the prompt into the tool converts a hope into a constraint, and that conversion is most of what separates an agent that demos well from one you'd leave running.",
     "Start with your error messages. Pick the failure path your agent hits most often, rewrite the message to say what was wrong and what to do, and count the loop iterations before and after. It's an hour's work and the effect is usually immediate.",
   ],
 
   cta: {
-    headline: "Designing an agent's tool surface?",
-    body: "We build agentic systems where the guardrails live in code — scoped permissions, validated schemas, and human checkpoints on anything irreversible.",
-    label: "Talk to our team",
+    headline: "Agent calling the wrong tool?",
+    body:
+      "It's almost always the descriptions and the schema rather than the model. That's a fixable problem and usually a quick one.",
+    label: "Get your tools reviewed",
     href: "/contact",
   },
 };

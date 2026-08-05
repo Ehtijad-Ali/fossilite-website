@@ -361,15 +361,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Data cleaning is judgement work disguised as janitorial work. Deciding what a blank cell means, whether an outlier is real, and what makes two rows the same entity — these are substantive decisions about the world, and they determine everything downstream more completely than any modelling choice does.",
-    "The discipline that separates reliable practitioners from the rest is not knowing more transformations. It's auditing before fixing, expressing every decision as reviewable code, and asserting assumptions so the pipeline fails loudly instead of producing a plausible wrong number. Both documented cases above involved careful people using tools as intended — the errors were invisible, not careless.",
     "Start with the diagnostic pass on a dataset you already trust. Count distinct values in every categorical column. Most people find something they didn't know was there, and that's the moment the discipline stops feeling like overhead.",
   ],
 
   cta: {
-    headline: "Spending more time fixing data than using it?",
-    body: "We build data pipelines with validation and monitoring built in — so problems surface upstream instead of in your reports.",
-    label: "Talk to our team",
+    headline: "Data not ready for the thing you want to build?",
+    body:
+      "It rarely is, and finding out during the build is the expensive way. An audit first is cheaper than a rebuild later.",
+    label: "Ask about a data audit",
     href: "/contact",
   },
 };

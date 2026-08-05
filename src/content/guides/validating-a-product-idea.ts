@@ -348,17 +348,9 @@ export const guide: Guide = {
   relatedGuides: ["pricing-your-services", "clear-writing-that-gets-read"],
 
   conclusion: [
-    "Validation is not a stage you complete and leave behind. It's a habit of insisting on evidence before commitment, and its main obstacle is not method but temperament — the discomfort of actively looking for the answer you don't want.",
-    "The mechanics are genuinely simple. Talk to people who have the problem, ask about what they've already done rather than what they'd do, look for existing workarounds, and ask for a costly commitment before you build. What's hard is writing down the number that would make you stop, and then honouring it.",
     "Do the cheap version this week. Fifteen conversations, no pitching, one page of notes each. Whatever you find, you'll be making the next decision with information instead of hope — and that difference compounds across every business you ever build.",
   ],
 
-  cta: {
-    headline: "Validated the problem and ready to build?",
-    body: "We take teams from a proven problem to a working system in weeks, starting with the smallest thing that delivers the outcome.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

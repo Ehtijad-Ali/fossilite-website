@@ -105,7 +105,6 @@ client = anthropic.Anthropic()
 KEEP_RECENT = 6          # turns kept verbatim — where the current task lives
 SUMMARISE_AFTER = 20     # threshold, not every turn: compressing constantly costs more
 
-
 def summarise_history(messages: list[dict], goal: str) -> list[dict]:
     """Compress older turns; keep the tail in full."""
     if len(messages) <= SUMMARISE_AFTER:
@@ -169,7 +168,6 @@ def summarise_history(messages: list[dict], goal: str) -> list[dict]:
         )
         return [h["text"] for h in hits]
 
-
 def build_prompt(user_input: str, user_id: str, memory: AgentMemory) -> list[dict]:
     recalled = memory.recall(user_input, user_id)
 
@@ -204,7 +202,6 @@ def build_prompt(user_input: str, user_id: str, memory: AgentMemory) -> list[dic
 
         if turn > 1 and count > 2 * first_turn_tokens:
             print(f"           ^ context has doubled by turn {turn}")
-
 
 def largest_contributors(messages: list[dict], top: int = 5) -> None:
     """Find what is actually filling the context. Usually a tool return."""
@@ -368,12 +365,6 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
     "Personalisation that improves over time without an ever-growing per-request cost.",
   ],
 
-  lifeApplications: [
-    "Recognising that useful notes are summarised and retrievable, not exhaustive — the same tradeoff, in a personal knowledge system.",
-    "Noticing that restating the goal partway through long work is a real technique, for meetings and projects as much as for agents.",
-    "Understanding that deciding what to discard is as much a design choice as deciding what to keep.",
-  ],
-
   exercises: [
     {
       title: "Profile the curve",
@@ -476,15 +467,14 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
   ],
 
   conclusion: [
-    "Agents degrade over long runs for two reasons, and both are structural rather than mysterious. Cost grows quadratically because every turn re-sends what came before. Quality falls because the instructions you gave at step zero end up in the part of the context models attend to least.",
-    "The remedies are ordered by return. Shape your tool returns — usually the single biggest win and the cheapest. Summarise on a threshold while keeping the recent tail. Restate the goal and constraints at the end of each prompt. Move durable facts into retrieval so the store can grow without the prompt following it.",
     "Before any of that, measure. Log tokens per turn and rank what's occupying the context. Most teams building compaction pipelines have a single verbose tool return they haven't looked at yet.",
   ],
 
   cta: {
-    headline: "Agent working well until it doesn't?",
-    body: "We build long-running agentic systems with context management, durable memory and the instrumentation to see where they drift.",
-    label: "Talk to our team",
+    headline: "Context window filling up mid-task?",
+    body:
+      "What to keep and what to discard is the design decision that determines whether long-running agents work at all. We can help you make it.",
+    label: "Talk through your build",
     href: "/contact",
   },
 };

@@ -96,7 +96,6 @@ from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 
-
 @tool
 def get_weather(city: str) -> str:
     """Get current weather for a city.
@@ -107,7 +106,6 @@ def get_weather(city: str) -> str:
         city: City name, e.g. 'Lisbon'
     """
     return {"Lisbon": "19C, clear"}.get(city, f"No data for {city}")
-
 
 model = ChatAnthropic(model="claude-opus-5", max_tokens=16000)
 
@@ -143,22 +141,18 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode
 
-
 class State(TypedDict):
     # add_messages is a reducer: node updates APPEND rather than overwrite.
     # Without it, each node would replace the whole history.
     messages: Annotated[list, add_messages]
     step_count: int
 
-
 tools = [get_weather]
 model_with_tools = model.bind_tools(tools)
-
 
 def call_model(state: State) -> dict:
     response = model_with_tools.invoke(state["messages"])
     return {"messages": [response], "step_count": state.get("step_count", 0) + 1}
-
 
 def should_continue(state: State) -> str:
     """Conditional edge: this function IS the control flow."""
@@ -166,7 +160,6 @@ def should_continue(state: State) -> str:
         return END                                   # hard ceiling, always
     last = state["messages"][-1]
     return "tools" if getattr(last, "tool_calls", None) else END
-
 
 builder = StateGraph(State)
 builder.add_node("model", call_model)
@@ -368,12 +361,6 @@ else:
     "Anything where a wrong action is expensive and a pause is cheap.",
   ],
 
-  lifeApplications: [
-    "Thinking in state machines transfers well: what state am I in, what moves me to the next one, what's the exit condition.",
-    "Recognising that durable state is what makes an interruption survivable — true of processes and of your own work.",
-    "Noticing when an accumulating record needs pruning rather than more capacity.",
-  ],
-
   exercises: [
     {
       title: "Persistence across a restart",
@@ -471,15 +458,14 @@ else:
   ],
 
   conclusion: [
-    "LangGraph is the agent framework for when control flow is the problem. State machines, explicit cycles, checkpointed persistence and interrupts — four features that are awkward to bolt onto anything else and natural here.",
-    "The cost is verbosity, and it's only worth paying when you need one of those four. A linear flow expressed as a graph is harder to read than the function it replaced, and a simple tool loop is what `create_react_agent` is for.",
     "If you're evaluating it, the fastest test is persistence: run the prebuilt agent with a checkpointer, make two calls on one `thread_id`, and see whether that behaviour is what your problem has been missing. Usually you'll know immediately.",
   ],
 
   cta: {
-    headline: "Need an agent that survives a restart?",
-    body: "We build stateful agentic systems with durable checkpointing, approval gates and the tracing to debug them.",
-    label: "Talk to our team",
+    headline: "Designing a graph that keeps growing?",
+    body:
+      "State machines are easy to start and hard to keep legible. We do this work and can review a design before you commit to it.",
+    label: "Have your design reviewed",
     href: "/contact",
   },
 };

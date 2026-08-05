@@ -379,15 +379,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "A language model is a next-token predictor trained at enormous scale, and that single fact explains nearly everything about how it behaves. Fluency without verification, confident fabrication, forgetting across sessions, failing at arithmetic while succeeding at nuanced summarisation — none of these are bugs or mysteries. They're direct consequences of the mechanism.",
-    "The practical skill this unlocks is knowing which half of a problem to give the model. Language work — understanding, drafting, classifying, restructuring, explaining — is what it's genuinely excellent at. Guaranteed accuracy, live data, arithmetic and irreversible decisions belong to code, tools and people. Systems that respect this division work well; systems that ignore it fail in ways their builders find baffling.",
     "Start by mapping the boundary yourself. Spend an hour deliberately trying to break a model, verify everything it tells you, and note where confidence and correctness part company. That hour will teach you more than any amount of reading, including this guide.",
   ],
 
   cta: {
-    headline: "Putting language models into production?",
-    body: "We build grounded, evaluated LLM systems — retrieval, tool use, guardrails and human review, engineered to hold up under real traffic.",
-    label: "Talk to our team",
+    headline: "Wondering what a model could actually do with your data?",
+    body:
+      "The gap between understanding how these work and knowing what to build with them is where most projects stall. We can usually tell you in one call.",
+    label: "Ask us where to start",
     href: "/contact",
   },
 };

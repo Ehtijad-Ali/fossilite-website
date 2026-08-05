@@ -374,15 +374,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Evaluation is the least fun and most load-bearing part of building anything with AI. Choose a metric that reflects what errors actually cost, compare against a baseline that makes the number mean something, protect your test set from contamination, break results down by subgroup, and keep measuring after launch.",
-    "The mindset that matters underneath all of it is a willingness to be disappointed early. A team that goes looking for reasons its result might be wrong will find them in week two, when they're cheap. A team that doesn't will find them in month eight, when they're not — and will experience it as a mystery rather than a consequence.",
     "If you adopt one practice from this guide, make it the trivial baseline. It takes an hour, it's almost never done, and it regularly reveals that an expensive system is barely outperforming a rule anyone could have written.",
   ],
 
   cta: {
-    headline: "Not sure whether your AI system actually works?",
-    body: "We build the evaluation, monitoring and human review that tells you honestly — before your customers do.",
-    label: "Talk to our team",
+    headline: "Shipping without an eval set?",
+    body:
+      "Nearly everyone does, and it's the thing they regret first. Building one is a few days of work and it changes every decision after.",
+    label: "Get help building evals",
     href: "/contact",
   },
 };

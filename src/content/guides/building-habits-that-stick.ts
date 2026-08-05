@@ -361,17 +361,9 @@ export const guide: Guide = {
   relatedGuides: ["learning-faster", "deep-work-and-focus"],
 
   conclusion: [
-    "Three findings do most of the work here. Habit formation takes considerably longer than the popular figure suggests. It varies enormously between people and behaviours. And missing an occasional day does not derail it — the belief that it does causes far more abandonment than the misses do.",
-    "Design accordingly. One habit, defined as a specific action after an existing routine, small enough for your worst day, with friction removed in advance and a recovery rule written before you need it. Then hold it for longer than feels necessary, because the period where it still takes effort is the normal middle rather than evidence of failure.",
     "Pick one behaviour this week and shrink it until skipping would be absurd. The smallness is not a compromise — it's the mechanism, because what you're building at this stage is the trigger, not the outcome.",
   ],
 
-  cta: {
-    headline: "Trying to make a new way of working stick?",
-    body: "We design systems and processes people actually adopt — because the workflow fits how the team already works.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

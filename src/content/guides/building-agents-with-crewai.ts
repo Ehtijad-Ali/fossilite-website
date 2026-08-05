@@ -155,7 +155,6 @@ print(result)`,
         "Tools attach per agent, which makes least privilege natural — the researcher can search, the writer structurally cannot. That's a real advantage of the role model.",
       code: `from crewai.tools import tool
 
-
 @tool("Search product documentation")
 def search_docs(query: str) -> str:
     """Search internal product documentation.
@@ -167,7 +166,6 @@ def search_docs(query: str) -> str:
     if not hits:
         return f"No documentation matched '{query}'."
     return "\\n\\n".join(f"[{h['title']}]\\n{h['text']}" for h in hits)
-
 
 researcher = Agent(
     role="Market Researcher",
@@ -355,12 +353,6 @@ print(crew.usage_metrics)`,
     "Prototyping a workflow quickly to learn its shape, before rebuilding it as a deterministic pipeline with model calls at specific points.",
   ],
 
-  lifeApplications: [
-    "Recognising when delegation adds coordination cost rather than capacity — the same calculus applies to human teams and is just as often got wrong.",
-    "Writing briefs that specify the deliverable, not just the task. `expected_output` is a lesson in giving instructions people can actually satisfy.",
-    "Noticing that information doesn't flow between people automatically either; it flows through what gets written down.",
-  ],
-
   exercises: [
     {
       title: "Baseline versus crew",
@@ -461,15 +453,14 @@ print(crew.usage_metrics)`,
   ],
 
   conclusion: [
-    "CrewAI makes multi-agent systems easy to express, which is both its strength and the thing to be careful about. Roles, goals, tasks and processes map onto a mental model everyone already has, and that fluency can carry you past the question of whether the problem needs a team at all.",
-    "Use it when the decomposition is real — distinct tools, genuinely independent workstreams, a reviewer with its own source of truth. Write the prose fields as instructions rather than flavour, treat `expected_output` as a specification, scope tools per role, and cap every agent.",
     "Before any of that, build the single-agent baseline. If a crew can't beat one well-equipped agent on quality, cost and time, the org chart was a metaphor rather than an architecture.",
   ],
 
   cta: {
-    headline: "Not sure whether your problem needs a crew?",
-    body: "We design agentic systems around what the task actually requires — and say plainly when a simpler architecture wins.",
-    label: "Talk to our team",
+    headline: "Multi-agent setup not converging?",
+    body:
+      "Coordination cost is usually the culprit and the fix is usually fewer agents. We can look at the crew you've defined.",
+    label: "Talk through your build",
     href: "/contact",
   },
 };

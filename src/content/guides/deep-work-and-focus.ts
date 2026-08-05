@@ -352,17 +352,9 @@ export const guide: Guide = {
   relatedGuides: ["clear-writing-that-gets-read", "prompt-engineering-fundamentals"],
 
   conclusion: [
-    "The research points somewhere more actionable than 'try harder to concentrate'. Interruption is expensive in ways that don't show up in your output — people compensate by working faster and pay in stress. Switching tasks leaves part of your attention behind, especially when what you left was unfinished. Both of those are facts about how attention works, not about your character.",
-    "Which means the solution is structural. Protect one block at your best hour, make it genuinely hard to break, batch the shallow work rather than trying to eliminate it, and stop at a clean point so today doesn't leak into tomorrow. None of this requires more discipline than you have; it requires a day designed so that less discipline is needed.",
     "Start by measuring your longest uninterrupted block for a week without changing anything. Whatever number you get is the real constraint on what kind of work you can currently do — and it's usually the moment the problem stops being abstract.",
   ],
 
-  cta: {
-    headline: "Losing hours to work that should be automatic?",
-    body: "We remove the repetitive work that fragments a team's week, so the time goes back to the work that needs a person.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

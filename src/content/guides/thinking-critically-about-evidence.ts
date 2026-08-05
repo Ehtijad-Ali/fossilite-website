@@ -366,17 +366,9 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Critical thinking in practice is not a knowledge of fallacies. It's a handful of questions applied habitually: compared to what, out of how many, who was measured, who isn't in the data, has anyone else found this, and what would change my mind. None require training, and together they dismantle most weak claims quickly.",
-    "The hardest part is applying them symmetrically. Scrutinising claims you dislike is easy and produces a belief set that feels examined while being systematically biased. The discipline is checking the things you want to be true — including the widely-repeated figure that supports the point you were about to make.",
     "Start with 'compared to what?' this week, on every number you encounter. It takes seconds, it's socially costless, and you'll be surprised how often the comparison is missing precisely where it would have mattered most.",
   ],
 
-  cta: {
-    headline: "Making a decision on numbers you're not sure about?",
-    body: "We build measurement and evaluation into every system we ship, so the numbers you're deciding from mean what you think they mean.",
-    label: "Talk to our team",
-    href: "/contact",
-  },
 };
 
 export default guide;

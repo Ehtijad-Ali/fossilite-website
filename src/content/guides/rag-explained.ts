@@ -285,7 +285,6 @@ export const guide: Guide = {
         "The single highest-impact piece of code in a RAG pipeline. Splitting on headings rather than character count keeps chunks self-contained, and prepending the section path makes each one meaningful on its own.",
       code: `import re
 
-
 def chunk_markdown(text: str, doc_title: str, max_chars: int = 1500) -> list[dict]:
     """Split on headings, carry the section path into each chunk's text."""
     chunks: list[dict] = []
@@ -345,7 +344,6 @@ def chunk_markdown(text: str, doc_title: str, max_chars: int = 1500) -> list[dic
     ranked = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
     return [chunk_id for chunk_id, _ in ranked[:top_n]]
 
-
 def retrieve(query: str, user_id: str, top_n: int = 20) -> list[dict]:
     # Permission filtering happens BEFORE the similarity search, not after.
     # Filtering afterwards leaks information through result counts.
@@ -381,7 +379,6 @@ Rules:
    NOT FOUND IN PROVIDED DOCUMENTS
 3. Do not use knowledge from outside these documents.
 4. If two documents conflict, say so and quote both."""
-
 
 def answer(question: str, user_id: str) -> str:
     chunks = retrieve(question, user_id)
@@ -424,7 +421,6 @@ EVAL_SET = [
     {"q": "What does error ERR_4412 mean?",                    "chunk_id": "ts-errors-12"},
     {"q": "Who is the CEO of a company we've never heard of?", "chunk_id": None},  # must refuse
 ]
-
 
 def evaluate_retrieval(k: int = 5) -> None:
     hits = misses = correct_refusals = false_answers = 0
@@ -526,15 +522,14 @@ def evaluate_retrieval(k: int = 5) -> None:
   ],
 
   conclusion: [
-    "RAG is a simple idea surrounded by unglamorous engineering. Fetch the relevant material, put it in the prompt, answer from it. The concept takes a minute; the chunking, hybrid retrieval, re-ranking, permissions, freshness and evaluation take the rest of the project — and they're what separates a system people trust from one they quietly stop using.",
-    "If you remember one operational rule, make it this: measure retrieval separately from generation. The overwhelming majority of 'the AI gave a wrong answer' reports in RAG systems are retrieval failures wearing a generation costume, and no amount of prompt tuning fixes a chunk that was never fetched.",
     "Start with twenty documents you know well enough to grade the answers yourself. Build the naive pipeline, break it deliberately, and fix one stage at a time with a number in front of you. That progression teaches the discipline in a week.",
   ],
 
   cta: {
-    headline: "Need retrieval that survives production?",
-    body: "We design grounded AI systems — structured chunking, hybrid retrieval, re-ranking and honest evaluation — that hold up under real traffic and real scrutiny.",
-    label: "Talk to our team",
+    headline: "Retrieval returning the wrong chunks?",
+    body:
+      "Retrieval quality, not the model, is what breaks most RAG systems — and it's measurable. We build these and can tell you where yours is losing.",
+    label: "Get your retrieval reviewed",
     href: "/contact",
   },
 };

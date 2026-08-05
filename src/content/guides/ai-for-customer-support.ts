@@ -240,12 +240,6 @@ export const guide: Guide = {
     "Summarising long ticket threads at handover so the next agent starts from a briefing rather than a transcript.",
   ],
 
-  lifeApplications: [
-    "Recognising when you're being handled by an ungrounded bot — asking for the source of a policy claim usually reveals it quickly.",
-    "Knowing that a company is bound by what its chatbot tells you, which is worth remembering when one makes you a commitment.",
-    "Applying the volume-versus-complexity distinction to your own work: automate the repetitive, keep judgement where it belongs.",
-  ],
-
   exercises: [
     {
       title: "The contact-reason audit",
@@ -348,15 +342,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Customer support is the best-documented AI use case in business, and the documentation says something specific: AI handles volume well and complexity badly. The deployments that work route by contact type, ground every answer in real policy, design the human handover properly, and never hide it.",
-    "The two cases in this guide are worth more than any vendor deck. One shows genuine, large, measured gains on routine contacts. The other shows a company legally bound by a policy its chatbot invented. Both outcomes were available to the same technology; the difference was design.",
     "Start where the risk is lowest and the return is certain: audit your contact reasons, fix the documentation for the top five, and automate triage before you automate answers. Most of the value is in that unglamorous sequence, and it's the part that makes everything after it safe.",
   ],
 
   cta: {
-    headline: "Thinking about AI in your support function?",
-    body: "We build grounded support systems with real escalation design and honest measurement — including telling you which contact types shouldn't be automated.",
-    label: "Talk to our team",
+    headline: "Considering AI in your support queue?",
+    body:
+      "We build grounded support systems with real escalation design — including telling you which contact types shouldn't be automated at all.",
+    label: "Review your support queue",
     href: "/contact",
   },
 };

@@ -238,12 +238,6 @@ export const guide: Guide = {
     "Internal knowledge search across HR documentation, with citations.",
   ],
 
-  lifeApplications: [
-    "Understanding that an automated rejection may reflect historic patterns rather than your suitability — and that asking for human review is increasingly a right.",
-    "Recognising proxy signals in any selection process, which operate in far more places than recruitment.",
-    "Noticing when a system's apparent objectivity is really consistency — doing the same thing every time isn't the same as doing the right thing.",
-  ],
-
   exercises: [
     {
       title: "The two-column sort",
@@ -346,15 +340,14 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Hiring is the clearest example in business of AI working exactly as designed and producing an unacceptable result. A model trained on who you hired learns who you preferred. That isn't a flaw to engineer around — it's what the training data says, and Amazon abandoned a competent system rather than solve it.",
-    "So draw the line at decisions. Summarise, extract stated facts, answer policy questions, draft, schedule, onboard. Don't score, rank or reject. Keep a human accountable for every judgement about a person, audit outcomes across groups, take legal advice for the places you hire, and tell candidates what you're doing.",
     "The valuable HR AI work is the boring half — and that's a genuinely useful thing to notice, because it's also the half that carries almost no legal exposure and is most likely to still be running in two years.",
   ],
 
   cta: {
-    headline: "Want AI in HR without the legal exposure?",
-    body: "We build grounded HR and policy systems that handle the volume while keeping every decision about a person with a person.",
-    label: "Talk to our team",
+    headline: "Automating any part of hiring?",
+    body:
+      "This is the highest-liability place to put AI, and it's worth getting the design and the audit trail right before you deploy anything.",
+    label: "Review your hiring process",
     href: "/contact",
   },
 };

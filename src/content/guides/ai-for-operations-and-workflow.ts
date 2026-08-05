@@ -1,5 +1,5 @@
 import type { Guide } from "../types";
-import { EHTIJAD_ALI } from "../authors";
+import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "ai-for-operations-and-workflow",
@@ -18,7 +18,7 @@ export const guide: Guide = {
   category: "automation",
   level: "Beginner",
   updated: "2026-08-05",
-  author: EHTIJAD_ALI,
+  author: PETER_NGUYEN,
   readingTime: 12,
 
   intro: [

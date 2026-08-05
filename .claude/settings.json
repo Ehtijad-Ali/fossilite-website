@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s file:///dev/null)",
+      "Bash(node -e ' *)"
+    ]
+  }
+}

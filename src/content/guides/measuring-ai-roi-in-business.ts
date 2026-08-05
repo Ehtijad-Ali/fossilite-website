@@ -1,5 +1,5 @@
 import type { Guide } from "../types";
-import { EHTIJAD_ALI } from "../authors";
+import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "measuring-ai-roi-in-business",
@@ -18,7 +18,7 @@ export const guide: Guide = {
   category: "business-strategy",
   level: "Intermediate",
   updated: "2026-08-05",
-  author: EHTIJAD_ALI,
+  author: PETER_NGUYEN,
   readingTime: 12,
 
   intro: [

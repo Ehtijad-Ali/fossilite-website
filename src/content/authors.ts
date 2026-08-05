@@ -14,10 +14,11 @@
 
 import type { Author } from "./types";
 
-export const EHTIJAD_ALI: Author = {
-  name: "Ehtijad Ali",
-  // TODO(ehtijad): add `role` and `bio` here and they appear on all 36 guides
-  // and in every Article schema. Suggested shape:
+export const PETER_NGUYEN: Author = {
+  name: "Peter Nguyen",
+  // TODO: add `role` and `bio` here and they appear on all 36 guides and in
+  // every Article schema. The author block at the end of each guide stays
+  // hidden until there's a bio. Suggested shape:
   //   role: "Founder, Fossilite AI",
   //   bio:  "One or two sentences on the work behind these guides.",
   //   url:  "https://www.linkedin.com/in/…",

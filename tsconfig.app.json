@@ -21,5 +21,8 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  // The prerender entry imports the content model, so it belongs in the
+  // typechecked build — otherwise renaming a field there would silently emit
+  // wrong metadata instead of failing.
+  "include": ["src", "scripts/prerender-entry.ts"]
 }

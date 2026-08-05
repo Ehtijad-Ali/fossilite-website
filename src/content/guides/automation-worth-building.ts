@@ -3,7 +3,7 @@ import { EHTIJAD_ALI } from "../authors";
 
 export const guide: Guide = {
   slug: "automation-worth-building",
-  seoTitle: "Automation Worth Building: What to Automate and What to Delete",
+  seoTitle: "Automation Worth Building: What to Automate, What to Cut",
   metaDescription:
     "How to decide what's actually worth automating — the payback maths, the maintenance nobody counts, and why deleting a step usually beats automating it.",
   title: "Automation Worth Building",

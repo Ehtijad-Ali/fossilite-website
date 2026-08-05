@@ -44,11 +44,13 @@ const upsertLink = (rel: string, href: string) => {
  * Manages document head for a route: title, description, canonical, Open Graph,
  * Twitter card and JSON-LD.
  *
- * Note on crawling: this is a client-rendered SPA, so the head is populated
- * after hydration. Google executes JS and picks this up; several other crawlers
- * and most social-preview scrapers do not. Pre-rendering the guide routes at
- * build time is the follow-up that makes this fully robust — see
- * docs/RESOURCE_LIBRARY.md.
+ * Note on crawling: this is a client-rendered SPA, so at runtime the head is
+ * populated after hydration, which most social-preview scrapers never see.
+ * `scripts/prerender.mjs` therefore bakes the same tags into a static HTML file
+ * per route at build time. This hook still runs on navigation — it's what keeps
+ * the head correct as the user moves between routes without a page load — and
+ * it removes the prerendered JSON-LD before writing its own, so a page never
+ * carries two copies of its Article schema.
  */
 export const useSeo = ({
   title,

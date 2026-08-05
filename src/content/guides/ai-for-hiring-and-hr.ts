@@ -3,7 +3,7 @@ import { EHTIJAD_ALI } from "../authors";
 
 export const guide: Guide = {
   slug: "ai-for-hiring-and-hr",
-  seoTitle: "AI for Hiring and HR: Where It Helps and Where It's Dangerous",
+  seoTitle: "AI for Hiring and HR: Where It Helps, Where It Doesn't",
   metaDescription:
     "Using AI in recruitment and HR without building a discrimination problem — what to automate, what never to, and the documented case that shows why.",
   title: "AI for Hiring and HR",

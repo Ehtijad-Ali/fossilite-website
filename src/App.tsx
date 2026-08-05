@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
-import { Navbar, Footer, ScrollToTop } from "./components";
+import { Navbar, Footer, ScrollToTop, PageSeo } from "./components";
 import './App.css'
 import { Home } from './views'
 
@@ -22,13 +22,17 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      <PageSeo />
       <Navbar />
       <Suspense fallback={null}>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/prodcuts' element={<Products />} />
+          {/* Historic typo. It used to render Products, which published the
+              same page at two URLs; redirect so old links still land without
+              splitting the page across two addresses. */}
+          <Route path='/prodcuts' element={<Navigate to='/products' replace />} />
           <Route path='/pricing' element={<Pricing />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/login' element={<Login />} />

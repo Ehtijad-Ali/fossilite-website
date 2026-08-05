@@ -87,23 +87,30 @@ strings.
 
 ## Known limits, in priority order
 
-**1. Pre-rendering (highest value).** This is a client-rendered SPA, so `<head>`
-and body content are populated after hydration. Google executes JS and indexes
-this, but many crawlers and most social-preview scrapers do not. Adding
-`vite-plugin-ssr` or a `puppeteer`-based prerender step over the routes in
-`sitemap.xml` would make the SEO work fully robust. Until then the structured
-data is correct but only reliably seen by Google.
+**1. Eager content glob (highest value).** `src/content/index.ts` imports all
+guides eagerly. They're pinned to a `content` chunk in `vite.config.ts`, so the
+landing page doesn't pay for them — but the library index still loads every guide
+body just to render cards, and at 36 guides that chunk is 923 kB (303 kB
+gzipped). Switch to `{ eager: false }` for bodies plus a build-generated
+manifest holding only the listing fields (title, description, category, level,
+readingTime, keywords, updated).
 
-**2. Eager content glob.** `src/content/index.ts` imports all guides eagerly.
-They're pinned to a `content` chunk in `vite.config.ts`, so the landing page
-doesn't pay for them — but the library index still loads every guide body just to
-render cards. At ~7 guides that's 205 kB (71 kB gzipped), which is fine. Past
-roughly 30 guides, switch to `{ eager: false }` for bodies plus a
-build-generated manifest holding only the listing fields (title, description,
-category, level, readingTime, keywords, updated).
+**2. The body is still not rendered server-side.** `scripts/prerender.mjs` bakes
+the `<head>` — title, description, canonical, Open Graph, Twitter card and all
+JSON-LD — into a static HTML file per route, so crawlers and social scrapers get
+correct metadata without executing JavaScript. The `<body>` is still the empty
+SPA root that React hydrates. That's fine for Google and for link previews;
+a crawler that reads neither JS nor structured data sees no article text.
+Full SSR is the remaining step, and it is a much larger change than the head.
 
 **3. Newsletter signup is front-end only.** The subscribe form sets local state
 and does not persist anywhere. Wire it to a real provider before promoting it.
+
+**4. No per-page Open Graph image.** `og:image` is omitted rather than pointed
+at a placeholder, so previews render as text-only cards. Guides with hero
+photography already have an image worth using; wiring it through the
+prerenderer needs the built asset URL, which the SSR entry doesn't currently
+resolve.
 
 ---
 

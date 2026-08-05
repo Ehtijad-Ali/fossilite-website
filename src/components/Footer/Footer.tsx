@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import logoLight from "../../assets/FossiliteLogoNavy.svg";
 import logoDark from "../../assets/FossiliteLogo.svg";
@@ -166,72 +166,6 @@ export const Footer: FC = () => {
         transition: "background-color 0.4s ease, border-color 0.4s ease",
       }}
     >
-      {/* ══ CTA BAND ══════════════════════════════════════════════════════ */}
-      <Box sx={{ pt: { xs: "44px", md: "60px" }, pb: { xs: "4px", md: "8px" } }}>
-        <Box
-          sx={{
-            borderRadius: "20px",
-            border: `1px solid ${T.gridBorder}`,
-            backgroundColor: T.cardBgAlt,
-            boxShadow: T.boxShadow,
-            p: { xs: "28px 24px", md: "38px 44px" },
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            alignItems: { xs: "flex-start", md: "center" },
-            justifyContent: "space-between",
-            gap: { xs: "24px", md: "40px" },
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          {/* accent glow */}
-          <Box sx={{
-            position: "absolute", top: "-40%", right: "-5%", width: "360px", height: "360px",
-            maxWidth: "60%", background: T.radialGlow, pointerEvents: "none",
-          }} />
-          <Box sx={{ position: "relative", zIndex: 1 }}>
-            <Typography sx={{
-              fontSize: { xs: "28px", sm: "36px", md: "42px" },
-              fontWeight: 500, color: T.headline, fontFamily: FONT_DISPLAY,
-              letterSpacing: "-0.02em", lineHeight: 1.1, mb: "10px",
-            }}>
-              Ready to ship production AI?
-            </Typography>
-            <Typography sx={{ fontSize: "15px", color: T.secondaryText, lineHeight: 1.7, maxWidth: "420px" }}>
-              Tell us about your operation and we'll prove the impact before you commit.
-            </Typography>
-          </Box>
-          <Box sx={{ position: "relative", zIndex: 1, display: "flex", gap: "12px", flexShrink: 0, flexWrap: "wrap" }}>
-            <Button
-              onClick={() => navigate("/contact")}
-              endIcon={<RightArrow />}
-              sx={{
-                px: "24px", py: "13px",
-                backgroundColor: T.ctaPrimaryBg, color: T.ctaPrimaryText,
-                fontSize: "14px", fontWeight: 500, textTransform: "none", borderRadius: "9px",
-                transition: "background-color 0.25s ease, transform 0.2s ease",
-                "&:hover": { backgroundColor: T.ctaPrimaryHover, transform: "translateY(-2px)" },
-                "& .MuiButton-endIcon svg": { filter: T.ctaPrimaryIcon },
-              }}
-            >
-              Book a Demo
-            </Button>
-            <Button
-              onClick={() => navigate("/pricing")}
-              sx={{
-                px: "24px", py: "13px",
-                backgroundColor: "transparent", color: T.primaryText,
-                fontSize: "14px", fontWeight: 500, textTransform: "none", borderRadius: "9px",
-                border: `0.5px solid ${T.ctaSecBorder}`,
-                transition: "border-color 0.2s ease, transform 0.2s ease",
-                "&:hover": { borderColor: T.accent, transform: "translateY(-2px)" },
-              }}
-            >
-              View pricing
-            </Button>
-          </Box>
-        </Box>
-      </Box>
 
       {/* ══ MAIN GRID ═════════════════════════════════════════════════════ */}
       <Box

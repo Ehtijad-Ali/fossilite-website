@@ -822,7 +822,13 @@ export const GuideDetail: FC = () => {
 
           {/* Article */}
           <Box component="article" sx={{ maxWidth: "720px" }}>
-            <Box id="introduction" sx={{ scrollMarginTop: "120px" }}>
+            {/* The intro is section 01 in the contents rail, so it needs the
+                same numbered heading as everything else — without it the
+                opening paragraphs float unlabelled and read as a layout bug. */}
+            <H2 id="introduction" index={num("introduction")} T={T}>
+              Introduction
+            </H2>
+            <Box sx={{ scrollMarginTop: "120px" }}>
               {guide.intro.map((p, i) => (
                 <Typography
                   key={i}
@@ -880,7 +886,7 @@ export const GuideDetail: FC = () => {
                   <H3 T={T}>{s.title}</H3>
                   <Typography sx={{ fontSize: "15.5px", lineHeight: 1.8, color: T.secondaryText, mb: "10px" }}>{s.body}</Typography>
                   <Box sx={{ display: "flex", flexWrap: "wrap", gap: "18px" }}>
-                    {[["Effort", s.effort], ["You'll know you're done when", s.outcome]].map(([k, v]) => (
+                    {[["Timeline", s.effort], ["Done when", s.outcome]].map(([k, v]) => (
                       <Box key={k} sx={{ maxWidth: "420px" }}>
                         <Label T={T}>{k}</Label>
                         <Typography sx={{ fontSize: "13.5px", color: T.primaryText, lineHeight: 1.6 }}>{v}</Typography>

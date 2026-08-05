@@ -752,7 +752,13 @@ export const GuideDetail: FC = () => {
         <Box
           sx={{
             maxWidth: "1180px", mx: "auto", display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "220px 1fr" },
+            // minmax(0, 1fr), not 1fr. `1fr` is shorthand for `minmax(auto,
+            // 1fr)`, and that `auto` minimum is the track's min-content width —
+            // so a single unwrappable child (the code blocks, which are
+            // `white-space: pre`) forces the whole column wider than the
+            // screen. The 0 minimum lets the track shrink and hands the
+            // overflow back to the code block's own horizontal scroll.
+            gridTemplateColumns: { xs: "minmax(0, 1fr)", lg: "220px minmax(0, 1fr)" },
             gap: { xs: "0", lg: "64px" }, alignItems: "start",
           }}
         >
@@ -829,7 +835,11 @@ export const GuideDetail: FC = () => {
           </Box>
 
           {/* Article */}
-          <Box component="article" sx={{ maxWidth: "720px" }}>
+          {/* minWidth: 0 for the same reason as the track above — a grid item
+              defaults to `min-width: auto`, and a min-width always wins over a
+              max-width, so without this the 720px cap is simply ignored on any
+              guide containing a code block. */}
+          <Box component="article" sx={{ minWidth: 0, maxWidth: "720px" }}>
             {/* The intro is section 01 in the contents rail, so it needs the
                 same numbered heading as everything else — without it the
                 opening paragraphs float unlabelled and read as a layout bug. */}

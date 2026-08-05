@@ -68,7 +68,10 @@ export const LegalLayout: FC<LegalLayoutProps> = ({
             maxWidth: "1120px",
             mx: "auto",
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "240px 1fr" },
+            // minmax(0, …) so a long unbreakable string — a URL in the policy
+            // text — can't widen the column past the viewport. `1fr` alone
+            // means `minmax(auto, 1fr)`, whose auto minimum is min-content.
+            gridTemplateColumns: { xs: "minmax(0, 1fr)", md: "240px minmax(0, 1fr)" },
             gap: { xs: "40px", md: "64px" },
             alignItems: "start",
           }}

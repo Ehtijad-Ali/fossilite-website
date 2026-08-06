@@ -116,6 +116,72 @@ const THEMES = [
       "finding-your-first-clients",
     ],
   },
+
+  // ── Themes for the business guides added in the 51-guide batch ────────────
+  {
+    query: "archive documents paper files stacked folders",
+    want: ["paper", "document", "file", "folder", "archive", "stack", "record", "book"],
+    avoid: ["person", "hand", "smiling", "portrait"],
+    guides: ["ai-for-finance-teams", "document-processing-with-ai", "writing-an-ai-usage-policy"],
+  },
+  {
+    query: "warehouse boxes shipping",
+    want: ["warehouse", "box", "parcel", "shipping", "logistics", "shelf", "cardboard", "delivery"],
+    avoid: ["person", "worker", "smiling", "portrait"],
+    guides: ["ai-for-ecommerce"],
+  },
+  {
+    query: "laptop screen code dark",
+    want: ["screen", "code", "computer", "monitor", "display", "interface", "dark", "laptop"],
+    avoid: ["person", "man", "woman", "hand", "face", "smiling"],
+    guides: ["ai-for-saas-businesses", "building-a-business-website-with-ai"],
+  },
+  {
+    query: "design sketch paper",
+    want: ["sketch", "drawing", "design", "paper", "pen", "pencil", "wireframe", "interface"],
+    // Sharing this theme with the branding guide handed it a fashion design
+    // board. Product design and brand identity are different subjects and need
+    // separate queries.
+    avoid: ["smiling", "portrait", "meeting", "group", "fashion", "dress", "clothing"],
+    guides: ["ai-in-product-design"],
+  },
+  {
+    query: "letterpress type printing",
+    want: ["letterpress", "type", "typography", "print", "printing", "letter", "ink", "press"],
+    avoid: ["smiling", "portrait", "person", "fashion"],
+    guides: ["building-your-brand-with-ai"],
+  },
+  {
+    query: "padlock security chain metal abstract dark",
+    want: ["lock", "padlock", "security", "chain", "metal", "key", "dark", "steel"],
+    avoid: ["person", "hand", "smiling"],
+    guides: ["data-privacy-and-ai"],
+  },
+  {
+    // Empty rooms rather than the "engaged team in a workshop" cliché.
+    query: "empty auditorium lecture hall seats architecture",
+    want: ["auditorium", "seat", "hall", "chair", "row", "architecture", "empty", "interior"],
+    avoid: ["crowd", "audience", "people", "smiling", "speaker"],
+    guides: ["training-your-team-on-ai", "leading-an-ai-rollout"],
+  },
+  {
+    query: "staircase geometric architecture perspective minimal concrete",
+    want: ["staircase", "stair", "architecture", "geometric", "perspective", "concrete", "minimal", "structure"],
+    avoid: ["person", "people", "crowd", "portrait"],
+    guides: ["choosing-an-ai-vendor", "ai-for-startup-growth"],
+  },
+  {
+    query: "microphone notebook recording desk interview close up",
+    want: ["microphone", "notebook", "recording", "audio", "desk", "notes", "pen", "sound"],
+    avoid: ["smiling", "portrait", "singer", "concert", "stage"],
+    guides: ["customer-research-with-ai"],
+  },
+  {
+    query: "concrete geometric blocks shadow",
+    want: ["block", "geometric", "modular", "pattern", "shape", "abstract", "cube", "structure"],
+    avoid: ["person", "child", "toy", "smiling"],
+    guides: ["no-code-ai-for-business"],
+  },
 ];
 
 const api = async (url) => {
@@ -131,6 +197,31 @@ const api = async (url) => {
   return r.json();
 };
 
+/**
+ * Tone penalty from the photo's dominant colour.
+ *
+ * Subject matching alone picked a bright orange-and-blue 3D render for the
+ * no-code guide: a perfect keyword match (blocks, geometric, modular) on a
+ * site whose pages are dark navy with gold. Every other hero sits around
+ * luminance 70, so a bright saturated image doesn't read as a hero, it reads
+ * as a mistake. Unsplash returns a dominant colour per photo, so this can be
+ * judged before downloading anything.
+ */
+const tone = (hex) => {
+  if (!/^#[0-9a-f]{6}$/i.test(hex || "")) return 0;
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  const mx = Math.max(r, g, b);
+  const sat = mx ? (mx - Math.min(r, g, b)) / mx : 0;
+  let t = 0;
+  if (lum < 110) t += 3; // matches the rest of the library
+  if (lum > 170) t -= 4; // washes out against the navy page
+  if (sat > 0.45) t -= 4; // loud colour fights the gold accent
+  return t;
+};
+
 /** Score a photo by how well its own description matches what we asked for. */
 const score = (photo, want, avoid) => {
   const text = [photo.description, photo.alt_description, ...(photo.tags || []).map((t) => t.title)]
@@ -143,7 +234,7 @@ const score = (photo, want, avoid) => {
   for (const w of want) if (text.includes(w)) s += 2;
   for (const a of avoid) if (text.includes(a)) s -= 4;
   if (photo.width / photo.height >= 1.4) s += 1; // crops better into a wide hero
-  return s;
+  return s + tone(photo.color);
 };
 
 const credits = [];

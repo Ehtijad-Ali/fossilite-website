@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Local Claude Code permission allowlist. Machine-specific, and it records
+# command strings verbatim, which means it can capture secrets passed as env
+# vars on a command line. Never commit it.
+.claude/settings.json
+.claude/settings.local.json

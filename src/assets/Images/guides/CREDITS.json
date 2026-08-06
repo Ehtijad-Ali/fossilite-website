@@ -32,6 +32,26 @@
       "file": "1600x1067 49KB"
     },
     {
+      "slug": "ai-for-ecommerce",
+      "id": "RVP3wAw9gJY",
+      "photographer": "Guilherme Mendes",
+      "profile": "https://unsplash.com/@guilhermemendes",
+      "page": "https://unsplash.com/photos/cardboard-boxes-and-packaging-supplies-in-a-warehouse-RVP3wAw9gJY",
+      "description": "Cardboard boxes and packaging supplies in a warehouse.",
+      "matchScore": 8,
+      "file": "1600x678 68KB"
+    },
+    {
+      "slug": "ai-for-finance-teams",
+      "id": "snNHKZ-mGfE",
+      "photographer": "Wesley Tingey",
+      "profile": "https://unsplash.com/@wesleyphotography",
+      "page": "https://unsplash.com/photos/stacks-of-paper-documents-and-file-folders-snNHKZ-mGfE",
+      "description": "stacks of paper documents and file folders",
+      "matchScore": 12,
+      "file": "1600x1067 115KB"
+    },
+    {
       "slug": "ai-for-hiring-and-hr",
       "id": "q8fe785r5nU",
       "photographer": "Andrea De Santis",
@@ -62,6 +82,16 @@
       "file": "1600x900 241KB"
     },
     {
+      "slug": "ai-for-saas-businesses",
+      "id": "n3ba57RKVNs",
+      "photographer": "Jakub Żerdzicki",
+      "profile": "https://unsplash.com/@jakubzerdzicki",
+      "page": "https://unsplash.com/photos/computer-screen-displaying-lines-of-code-n3ba57RKVNs",
+      "description": "Dark monitor code programming cyber workspace with colorful syntax highlighting and LED lighting.",
+      "matchScore": 14,
+      "file": "1600x900 19KB"
+    },
+    {
       "slug": "ai-for-sales-teams",
       "id": "a0X9tAAxzaA",
       "photographer": "Dimmis Vart",
@@ -70,6 +100,26 @@
       "description": "Empty floor. White walls.• Пустой этаж, белые стены.",
       "matchScore": 5,
       "file": "1600x1200 22KB"
+    },
+    {
+      "slug": "ai-for-startup-growth",
+      "id": "wI4h8-MUuFI",
+      "photographer": "Edmundo Oliver",
+      "profile": "https://unsplash.com/@edoliverphoto",
+      "page": "https://unsplash.com/photos/modern-staircase-with-minimalist-design-and-geometric-design-wI4h8-MUuFI",
+      "description": "Modern staircase with minimalist design and geometric design",
+      "matchScore": 9,
+      "file": "1600x1200 44KB"
+    },
+    {
+      "slug": "ai-in-product-design",
+      "id": "gcHFXsdcmJE",
+      "photographer": "Kelly Sikkema",
+      "profile": "https://unsplash.com/@kellysikkema",
+      "page": "https://unsplash.com/photos/yellow-click-pen-on-white-printer-paper-gcHFXsdcmJE",
+      "description": "UX Work: Woman's hands drawing a wireframe",
+      "matchScore": 10,
+      "file": "1600x1067 45KB"
     },
     {
       "slug": "api-integration-that-doesnt-break",
@@ -90,6 +140,16 @@
       "description": "The folding exterior of Tuletornen creates an interesting mix of shadows and highlights.",
       "matchScore": 4,
       "file": "1600x1067 70KB"
+    },
+    {
+      "slug": "building-a-business-website-with-ai",
+      "id": "5sLNGV2EFRM",
+      "photographer": "Harshit Katiyar",
+      "profile": "https://unsplash.com/@harshitkatiyar",
+      "page": "https://unsplash.com/photos/computer-screen-displaying-lines-of-code-5sLNGV2EFRM",
+      "description": "A computer monitor having source code on the screen with dark mode editor and a warm yellow light in the background",
+      "matchScore": 14,
+      "file": "1600x1067 67KB"
     },
     {
       "slug": "building-agents-with-autogen",
@@ -141,6 +201,16 @@
       "file": "1600x1200 119KB"
     },
     {
+      "slug": "building-your-brand-with-ai",
+      "id": "Yx9lWACrpew",
+      "photographer": "frank van der leer",
+      "profile": "https://unsplash.com/@frank_van_der_leer",
+      "page": "https://unsplash.com/photos/man-in-black-jacket-holding-black-smartphone-Yx9lWACrpew",
+      "description": "Inkting a printing form on a letterpress press",
+      "matchScore": 17,
+      "file": "1600x1068 132KB"
+    },
+    {
       "slug": "building-your-first-ai-agent",
       "id": "qY-XlCf9Zs4",
       "photographer": "jonakoh _",
@@ -160,6 +230,16 @@
       "file": "1600x1198 563KB"
     },
     {
+      "slug": "choosing-an-ai-vendor",
+      "id": "wI4h8-MUuFI",
+      "photographer": "Edmundo Oliver",
+      "profile": "https://unsplash.com/@edoliverphoto",
+      "page": "https://unsplash.com/photos/modern-staircase-with-minimalist-design-and-geometric-design-wI4h8-MUuFI",
+      "description": "Modern staircase with minimalist design and geometric design",
+      "matchScore": 12,
+      "file": "1600x1200 44KB"
+    },
+    {
       "slug": "clear-writing-that-gets-read",
       "id": "kJPf1CcAIGM",
       "photographer": "Hal Gatewood",
@@ -167,6 +247,16 @@
       "page": "https://unsplash.com/photos/a-black-and-white-photo-of-a-light-in-the-dark-kJPf1CcAIGM",
       "description": "a black and white photo of a light in the dark",
       "file": "1600x1067 94KB"
+    },
+    {
+      "slug": "customer-research-with-ai",
+      "id": "blRgj_jnojc",
+      "photographer": "Amr Taha™",
+      "profile": "https://unsplash.com/@amr_taha",
+      "page": "https://unsplash.com/photos/person-holding-black-click-pen-blRgj_jnojc",
+      "description": "man holding pen under light on monitor desk",
+      "matchScore": 6,
+      "file": "1600x983 26KB"
     },
     {
       "slug": "cybersecurity-basics-for-builders",
@@ -187,6 +277,16 @@
       "file": "1600x1067 85KB"
     },
     {
+      "slug": "data-privacy-and-ai",
+      "id": "TGCe4hfihLo",
+      "photographer": "Tao Yuan",
+      "profile": "https://unsplash.com/@peek_a_boo_who",
+      "page": "https://unsplash.com/photos/a-metallic-chain-against-a-dark-background-TGCe4hfihLo",
+      "description": "3D rendering chain",
+      "matchScore": 8,
+      "file": "1600x900 24KB"
+    },
+    {
       "slug": "deep-work-and-focus",
       "id": "wT0oU24OJYU",
       "photographer": "Avtar Singh",
@@ -204,6 +304,16 @@
       "description": "Modern building architecture against a clear blue sky",
       "matchScore": 6,
       "file": "1600x1067 106KB"
+    },
+    {
+      "slug": "document-processing-with-ai",
+      "id": "nCHP8xRf5Xw",
+      "photographer": "Eric Prouzet",
+      "profile": "https://unsplash.com/@eprouzet",
+      "page": "https://unsplash.com/photos/a-stack-of-books-with-a-bow-on-top-of-it-nCHP8xRf5Xw",
+      "description": "Stack of vintage documents tied with ribbon inside a dusty archive room filled with historical records from the 20th century - Old documents are neatly stacked and tied with a ribbon, resting in a dusty archive room filled with historical records, evoking a sense of nostalgia.",
+      "matchScore": 12,
+      "file": "1600x1067 169KB"
     },
     {
       "slug": "evaluating-ai-systems",
@@ -244,6 +354,16 @@
       "file": "1600x1067 100KB"
     },
     {
+      "slug": "leading-an-ai-rollout",
+      "id": "IQAGcyw4zns",
+      "photographer": "Liam Scotchmer",
+      "profile": "https://unsplash.com/@liam_scotchmer",
+      "page": "https://unsplash.com/photos/rows-of-empty-orange-theater-seats-IQAGcyw4zns",
+      "description": "University lecture hall in Sydney, Australia!",
+      "matchScore": 10,
+      "file": "1600x1086 290KB"
+    },
+    {
       "slug": "learning-faster",
       "id": "OkMtxyQylc8",
       "photographer": "Priscilla Du Preez 🇨🇦",
@@ -271,6 +391,16 @@
       "description": "abstract wave on dark background",
       "matchScore": 10,
       "file": "1600x900 27KB"
+    },
+    {
+      "slug": "no-code-ai-for-business",
+      "id": "Ji18VXdL9Hw",
+      "photographer": "Peaky Frames",
+      "profile": "https://unsplash.com/@rashedpaykary",
+      "page": "https://unsplash.com/photos/a-pile-of-gray-geometric-concrete-shapes-Ji18VXdL9Hw",
+      "description": "A pile of gray geometric concrete shapes.",
+      "matchScore": 8,
+      "file": "1600x1200 216KB"
     },
     {
       "slug": "pricing-your-services",
@@ -329,6 +459,16 @@
       "file": "1600x1067 142KB"
     },
     {
+      "slug": "training-your-team-on-ai",
+      "id": "FrcfdIg-1jk",
+      "photographer": "Zhuojun Yu",
+      "profile": "https://unsplash.com/@heebase",
+      "page": "https://unsplash.com/photos/abandoned-auditorium-with-rows-of-empty-seats-and-graffiti-FrcfdIg-1jk",
+      "description": "Abandoned auditorium with rows of empty seats and graffiti.",
+      "matchScore": 10,
+      "file": "1600x1067 134KB"
+    },
+    {
       "slug": "validating-a-product-idea",
       "id": "lX2ANsssXAk",
       "photographer": "Briana Tozour",
@@ -347,6 +487,16 @@
       "description": "fluid,fluid art,abstract,abstract art,abstract background,abstract dark,texture,texture background,texture wall,texture paper,background,background image,background design,background texture,pattern,pattern background,patterns and textures,wall,wall background,wall art,wall painting,background for pc,background for web,background for website,full hd wallpaper,full screen wallpaper,full hd,full screen,full color,full colour,full colours,sphere,dots,circle,spiral,cubes,spiral,Rik Oostenbroek,Oostenbroek style,fiesta,3d,galaxy,stars,andromeda,particles,blur,lights",
       "matchScore": 10,
       "file": "1600x1000 32KB"
+    },
+    {
+      "slug": "writing-an-ai-usage-policy",
+      "id": "RTAdxj1qktY",
+      "photographer": "Eric Prouzet",
+      "profile": "https://unsplash.com/@eprouzet",
+      "page": "https://unsplash.com/photos/a-stack-of-books-sitting-on-top-of-a-table-RTAdxj1qktY",
+      "description": "Old, stacked bound documents resting on a shelf in an archive, showcasing worn pages and bindings in natural light - Bound documents with aged pages are stacked on a shelf, secured by twine, highlighting their historical significance and aged appearance in soft light.",
+      "matchScore": 10,
+      "file": "1600x1067 206KB"
     }
   ]
 }

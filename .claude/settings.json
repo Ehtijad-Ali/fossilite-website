@@ -14,7 +14,9 @@
       "Bash(rm -rf \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/guides-backup\")",
       "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/nodash.mjs\")",
       "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/nodash2.mjs\")",
-      "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/splicecheck.mjs\")"
+      "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/splicecheck.mjs\")",
+      "Bash(node -e ' *)",
+      "Bash(grep -ho 'url: \"https://\\\\\\(investors.zillow\\\\|www.science.org\\\\|peri.umass\\\\|www.mccarthy\\\\|link.springer\\\\|www.klarna\\\\\\)[^\"]*\"' src/content/guides/*.ts)"
     ],
     "additionalDirectories": [
       "C:\\Users\\COSMO\\AppData\\Local\\Temp\\claude\\c--Users-COSMO-Downloads-fossilite-website-main\\519328f9-ba2e-4cf5-a94f-a0cf75b86c03"

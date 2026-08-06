@@ -29,8 +29,8 @@ export const guide: Guide = {
 
   whyItMatters: [
     "Machine learning has quietly become infrastructure. It decides which loan applications get flagged, which job applications a recruiter sees, what a radiologist gets shown first, and what a delivery route looks like. You do not need to build these systems to be affected by them — but understanding them changes you from a passenger into someone who can ask the right question at the right moment.",
-    "Professionally, the value is not in being able to call `model.fit()`. Any competent developer can learn an API in an afternoon. The value is in knowing whether a result means anything. A team that can't tell overfitting from genuine performance will confidently ship a model that looked excellent in testing and falls apart the week it goes live — and they will not understand why.",
-    "There is also a defensive reason to learn this. A great deal of what is sold as AI is ordinary statistics with a better marketing budget, and some of it is nothing at all. Once you understand what training data does and doesn't guarantee, vendor claims become much easier to evaluate. You'll find yourself asking 'what was it evaluated on?' — and you'll notice how often nobody can answer.",
+    "Professionally, the value is not in being able to call `model.fit()`. Any competent developer can learn an API in an afternoon. The value is in knowing whether a result means anything. A team that can't tell overfitting from genuine performance will confidently ship a model that looked excellent in testing and falls apart the week it goes live, and they will not understand why.",
+    "There is also a defensive reason to learn this. A great deal of what is sold as AI is ordinary statistics with a better marketing budget, and some of it is nothing at all. Once you understand what training data does and doesn't guarantee, vendor claims become much easier to evaluate. You'll find yourself asking 'what was it evaluated on?', and you'll notice how often nobody can answer.",
   ],
 
   coreConcepts: [
@@ -53,12 +53,12 @@ export const guide: Guide = {
       explain:
         "Loss is a single number scoring how badly the model did. Low loss is good. The critical point is that you choose the loss function, and that choice defines the model's entire notion of success.",
       detail:
-        "Pick the wrong loss and you get a model that is technically excellent at the wrong thing. A fraud detector trained to maximise raw accuracy on data that's 99.9% legitimate can score 99.9% by predicting 'not fraud' every single time — and catch nothing.",
+        "Pick the wrong loss and you get a model that is technically excellent at the wrong thing. A fraud detector trained to maximise raw accuracy on data that's 99.9% legitimate can score 99.9% by predicting 'not fraud' every single time, and catch nothing.",
     },
     {
       term: "Gradient descent is how the adjusting happens",
       explain:
-        "For each parameter, you can compute which direction of change would reduce the loss — that's the gradient. Then you take a small step in that direction. Repeat, and the loss walks downhill.",
+        "For each parameter, you can compute which direction of change would reduce the loss. That's the gradient. Then you take a small step in that direction. Repeat, and the loss walks downhill.",
       detail:
         "The step size is the learning rate. Too large and the model overshoots and never settles. Too small and training takes forever. Tuning it is one of the most common practical chores in ML.",
     },
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Overfitting and underfitting",
       explain:
-        "An overfit model has learned the noise and quirks of the training set rather than the underlying pattern — excellent on training data, poor on new data. An underfit model hasn't learned enough of the pattern and is poor on both.",
+        "An overfit model has learned the noise and quirks of the training set rather than the underlying pattern: excellent on training data, poor on new data. An underfit model hasn't learned enough of the pattern and is poor on both.",
       detail:
         "Diagnose them by comparing training and validation scores. Large gap between the two: overfitting. Both scores bad: underfitting. This single check tells you what to do next more reliably than any other diagnostic.",
     },
@@ -95,7 +95,7 @@ export const guide: Guide = {
       explain:
         "Models detect statistical association between inputs and outputs. They do not establish that one causes the other, and they cannot tell the difference.",
       detail:
-        "A model predicting hospital readmission may lean on which ward a patient was in — not because the ward causes readmission, but because sicker patients are sent there. Change the admissions policy and the model silently degrades.",
+        "A model predicting hospital readmission may lean on which ward a patient was in: not because the ward causes readmission, but because sicker patients are sent there. Change the admissions policy and the model silently degrades.",
     },
   ],
 
@@ -132,7 +132,7 @@ export const guide: Guide = {
     },
     {
       title: "Study feature engineering on real, dirty data",
-      body: "Find a genuinely messy dataset — inconsistent dates, free-text fields, missing values that mean different things. Spend your time on the inputs rather than the algorithm. Try to beat your best model purely by improving features while keeping the algorithm fixed.",
+      body: "Find a messy dataset: inconsistent dates, free-text fields, missing values that mean different things. Spend your time on the inputs rather than the algorithm. Try to beat your best model purely by improving features while keeping the algorithm fixed.",
       effort: "12–15 hours",
       outcome: "You've improved a model measurably without changing the algorithm once.",
     },
@@ -250,7 +250,7 @@ export const guide: Guide = {
   businessApplications: [
     "Demand forecasting: predicting order volume per SKU per week, which drives purchasing and staffing. Often the highest-ROI first ML project because the cost of error is already measurable in existing spreadsheets.",
     "Lead scoring: ranking inbound enquiries by likelihood to close, so a small sales team spends its hours on the top of the list rather than working chronologically.",
-    "Document extraction: pulling structured fields from invoices, contracts, and forms. Replaces a genuinely tedious job and has an obvious accuracy benchmark — the humans currently doing it.",
+    "Document extraction: pulling structured fields from invoices, contracts, and forms. Replaces a tedious job and has an obvious accuracy benchmark — the humans currently doing it.",
     "Churn prediction and retention: identifying at-risk accounts early enough that intervention is still possible, and quantifying which signals actually precede cancellation.",
     "Quality inspection: flagging likely defects from images or sensor data, used as a triage layer in front of human inspectors rather than a replacement for them.",
     "Dynamic pricing and promotion targeting: estimating price sensitivity per segment. Powerful, and the area where fairness and regulatory scrutiny arrive fastest — proceed with legal input.",
@@ -268,7 +268,7 @@ export const guide: Guide = {
     {
       title: "Predict something you already understand",
       brief:
-        "Find a dataset about a subject you know well — a sport, a game, local property prices. Train a simple model to predict an outcome, then examine the features it relies on most. Because you have domain knowledge, you can tell whether its reasoning is sensible or absurd.",
+        "Find a dataset about a subject you know well: a sport, a game, local property prices. Train a simple model to predict an outcome, then examine the features it relies on most. Because you have domain knowledge, you can tell whether its reasoning is sensible or absurd.",
       success:
         "You can point to at least one feature the model weighted heavily and explain whether that makes real-world sense.",
       time: "3–4 hours",
@@ -292,7 +292,7 @@ export const guide: Guide = {
     {
       title: "Beat the algorithm with features",
       brief:
-        "Fix your model and its hyperparameters. Now improve the score using only feature engineering — combining columns, extracting date components, encoding categories differently, handling missing values more carefully.",
+        "Fix your model and its hyperparameters. Now improve the score using only feature engineering: combining columns, extracting date components, encoding categories differently, handling missing values more carefully.",
       success: "A measurable improvement on held-out data with the algorithm untouched.",
       time: "4–6 hours",
     },
@@ -323,7 +323,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "Do I need advanced mathematics to learn machine learning?",
-      a: "Not to start. You can build correct, useful models with comfortable high-school algebra and a solid grasp of the concepts. Maths becomes necessary when you want to modify algorithms or read research papers — but that's a later stage, not an entry requirement.",
+      a: "Not to start. You can build correct, useful models with comfortable high-school algebra and a solid grasp of the concepts. Maths becomes necessary when you want to modify algorithms or read research papers: but that's a later stage, not an entry requirement.",
     },
     {
       q: "How much data do I need?",
@@ -347,7 +347,7 @@ export const guide: Guide = {
     },
     {
       q: "How long does it take to become employable in ML?",
-      a: "For someone who can already program, roughly six to twelve months of consistent practice to reach junior competence — most of which should be spent on data handling and evaluation rather than algorithms. Portfolio projects that show honest evaluation impress far more than high scores.",
+      a: "For someone who can already program, roughly six to twelve months of consistent practice to reach junior competence. Most of which should be spent on data handling and evaluation rather than algorithms. Portfolio projects that show honest evaluation impress far more than high scores.",
     },
   ],
 

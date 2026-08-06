@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "pricing-your-services",
   seoTitle: "How to Price Your Services Without Guessing",
   metaDescription:
-    "A practical guide to pricing freelance and consulting work — moving beyond hourly rates to value-based pricing, with scripts for the conversations that decide it.",
+    "A practical guide to pricing freelance and consulting work: moving beyond hourly rates to value-based pricing, with scripts for the conversations that decide it.",
   title: "How to Price Your Services Without Guessing",
   keywords: [
     "how to price freelance services",
@@ -46,7 +46,7 @@ export const guide: Guide = {
       explain:
         "You cannot price value you haven't measured. Before quoting, you need to know what the problem currently costs, what solving it is worth, and what happens if nothing changes.",
       detail:
-        "This isn't a negotiating tactic. It's diagnosis, and clients experience it as competence — nobody trusts a consultant who quotes before understanding the problem.",
+        "This isn't a negotiating tactic. It's diagnosis, and clients experience it as competence. Nobody trusts a consultant who quotes before understanding the problem.",
     },
     {
       term: "Anchoring",
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "A single price invites a yes/no decision, and no is easier. Three options change the question to 'which one', and give the client control over scope rather than over your rate.",
       detail:
-        "Structure them so the middle option is the one you want to sell. The cheapest should be genuinely limited, and the most expensive should be a real offer you'd be delighted to deliver.",
+        "Structure them so the middle option is the one you want to sell. The cheapest should be limited, and the most expensive should be a real offer you'd be delighted to deliver.",
     },
     {
       term: "Your floor is a real number, not a feeling",
@@ -95,7 +95,7 @@ export const guide: Guide = {
   learningPath: [
     {
       title: "Calculate your actual floor",
-      body: "Work out your target annual income, add tax, add business costs, add unpaid holiday and sick time. Divide by the hours you can genuinely bill — measured from your own timesheet, not assumed. That's your true minimum rate.",
+      body: "Work out your target annual income, add tax, add business costs, add unpaid holiday and sick time. Divide by the hours you can bill: measured from your own timesheet, not assumed. That's your true minimum rate.",
       effort: "2 hours",
       outcome: "A defensible floor you can refuse to go below.",
     },
@@ -125,7 +125,7 @@ export const guide: Guide = {
     },
     {
       title: "Test a higher price",
-      body: "Raise your price 25% for new enquiries only, leaving existing clients untouched. Record your close rate for the ten conversations before and the ten after. The point is to replace a fear with a measurement — whichever way it comes out, you'll be pricing on evidence instead of nerve.",
+      body: "Raise your price 25% for new enquiries only, leaving existing clients untouched. Record your close rate for the ten conversations before and the ten after. The point is to replace a fear with a measurement: whichever way it comes out, you'll be pricing on evidence instead of nerve.",
       effort: "Ongoing",
       outcome: "Real data on your own price elasticity rather than fear.",
     },
@@ -210,7 +210,7 @@ export const guide: Guide = {
     "Establish the cost of the problem before naming any number. Everything else in pricing depends on this one step.",
     "Put the price in a proposal, not in a live conversation, unless you're confident. Written pricing lets you frame it properly and stops you negotiating against yourself out loud.",
     "State the price once, clearly, then stay quiet. The silence after a number is uncomfortable and it is not your job to fill it.",
-    "Define scope boundaries in writing — what's included, what isn't, how many rounds, what triggers a change order. Most unprofitable projects were scoped vaguely, not priced badly.",
+    "Define scope boundaries in writing: what's included, what isn't, how many rounds, what triggers a change order. Most unprofitable projects were scoped vaguely, not priced badly.",
     "Charge a deposit before starting, ideally 30–50%. It filters out clients who were never going to commit and materially improves your cash position.",
     "Track effective hourly rate on every project after delivery. It's the only honest measure of whether your pricing works.",
     "Say no to work below your floor and mean it. Every exception becomes a precedent you'll be reminded of.",
@@ -237,7 +237,7 @@ export const guide: Guide = {
 
   lifeApplications: [
     "Salary negotiation: the same structure applies — establish the value of what you deliver before discussing the number, and negotiate scope and conditions rather than only base pay.",
-    "Valuing your own time outside work: knowing your real hourly floor makes decisions about DIY versus paying someone genuinely straightforward.",
+    "Valuing your own time outside work: knowing your real hourly floor makes decisions about DIY versus paying someone straightforward.",
     "Saying no: a clear pricing floor gives you an objective reason to decline that doesn't require a personal justification, which is much easier to say.",
     "Any negotiation at all: the habits of not filling silences, not over-explaining, and trading scope rather than conceding transfer completely.",
   ],
@@ -304,11 +304,11 @@ export const guide: Guide = {
     },
     {
       q: "Is value-based pricing possible when the value is hard to measure?",
-      a: "Often yes, indirectly — time saved, risk reduced, decisions unblocked, revenue protected. Where it genuinely can't be estimated, use fixed project pricing with tight scope rather than falling back to hourly.",
+      a: "Often yes, indirectly — time saved, risk reduced, decisions unblocked, revenue protected. Where it can't be estimated, use fixed project pricing with tight scope rather than falling back to hourly.",
     },
     {
       q: "How much should I raise prices by?",
-      a: "There's no benchmark that transfers across markets, so treat it as an experiment rather than a target. A modest rise on new enquiries only, with close rate recorded before and after, tells you what your own demand does. Larger jumps are usually best made alongside a repositioning — a new specialism, a productised offer, better proof.",
+      a: "There's no benchmark that transfers across markets, so treat it as an experiment rather than a target. A modest rise on new enquiries only, with close rate recorded before and after, tells you what your own demand does. Larger jumps are usually best made alongside a repositioning: a new specialism, a productised offer, better proof.",
     },
     {
       q: "What do I say when a client says it's too expensive?",
@@ -346,7 +346,7 @@ export const guide: Guide = {
   relatedGuides: ["validating-a-product-idea", "clear-writing-that-gets-read"],
 
   conclusion: [
-    "Start with the floor calculation this week. Most people who do it discover they've been charging below cost once unpaid time is counted honestly — and that single number makes every subsequent pricing decision much easier to hold.",
+    "Start with the floor calculation this week. Most people who do it discover they've been charging below cost once unpaid time is counted honestly, and that single number makes every subsequent pricing decision much easier to hold.",
   ],
 
 };

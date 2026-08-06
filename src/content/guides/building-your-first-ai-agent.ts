@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "building-your-first-ai-agent",
   seoTitle: "Build Your First AI Agent: A Hands-On Tutorial",
   metaDescription:
-    "Build a working AI agent from scratch in Python — tool calling, the agent loop, error handling and step limits, with complete copyable code.",
+    "Build a working AI agent from scratch in Python: tool calling, the agent loop, error handling and step limits, with complete copyable code.",
   title: "Build Your First AI Agent",
   keywords: [
     "how to build an AI agent",
@@ -22,15 +22,15 @@ export const guide: Guide = {
   readingTime: 15,
 
   intro: [
-    "Most agent tutorials start by installing a framework, which means you end up with something that works and no idea why. This one goes the other way: you'll write the loop yourself, in about forty lines, and understand every one of them. Frameworks are genuinely useful — but they're much easier to evaluate once you know what they're doing on your behalf.",
+    "Most agent tutorials start by installing a framework, which means you end up with something that works and no idea why. This one goes the other way: you'll write the loop yourself, in about forty lines, and understand every one of them. Frameworks are useful — but they're much easier to evaluate once you know what they're doing on your behalf.",
     "The whole thing rests on one mechanism. You describe some functions to the model. When the model wants to use one, it doesn't run it — it returns a structured request saying which function and with what arguments. Your code runs it, sends the result back, and the model continues. That request-execute-return cycle, wrapped in a loop, is an agent.",
     "By the end you'll have a working agent that calls real tools, handles failures, and stops when it should. Every code block below runs as written. You need Python, an Anthropic API key, and about an hour.",
   ],
 
   whyItMatters: [
-    "Building one by hand is the fastest way to develop judgement about the whole category. Once you've written the loop, framework documentation stops being mysterious — you can see which parts are genuinely helping and which are wrapping four lines in an abstraction. That judgement is worth more than any specific framework you might learn.",
+    "Building one by hand is the fastest way to develop judgement about the whole category. Once you've written the loop, framework documentation stops being mysterious — you can see which parts are helping and which are wrapping four lines in an abstraction. That judgement is worth more than any specific framework you might learn.",
     "It also makes the failure modes concrete rather than theoretical. You'll watch the model call a tool with the wrong argument type, retry an action that just failed, and confidently report success on something it didn't do. Reading about compounding error is abstract; watching your own agent loop forty times because a tool returned an unhelpful error message is not.",
-    "And it's the shortest path to knowing whether an agent is the right shape for your problem at all. Many tasks people hand to agents are better served by a fixed sequence with one model call in the middle — cheaper, faster, far easier to debug. You can only make that call confidently once you've built both.",
+    "And it's the shortest path to knowing whether an agent is the right shape for your problem at all. Many tasks people hand to agents are better served by a fixed sequence with one model call in the middle: cheaper, faster, far easier to debug. You can only make that call confidently once you've built both.",
   ],
 
   coreConcepts: [
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Step limits are not optional",
       explain:
-        "An agent with no ceiling can loop indefinitely — retrying a failing tool, or oscillating between two actions. It will do this eventually, and it will do it while you're not watching.",
+        "An agent with no ceiling can loop indefinitely: retrying a failing tool, or oscillating between two actions. It will do this eventually, and it will do it while you're not watching.",
       detail:
         "Cap iterations in code from the first prototype. A limit that's occasionally too low is a minor annoyance; no limit is an unbounded bill.",
     },
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "Adaptive thinking lets the model reason before choosing an action. On anything involving more than one obvious step, this measurably improves which tool it picks and with what arguments.",
       detail:
-        "It also makes debugging tractable — when an agent does something inexplicable, the reasoning is usually where the misunderstanding is visible.",
+        "It also makes debugging tractable: when an agent does something inexplicable, the reasoning is usually where the misunderstanding is visible.",
     },
     {
       term: "The tool runner versus the manual loop",
@@ -346,7 +346,7 @@ runner = client.beta.messages.tool_runner(
 final_message = runner.until_done()
 print(final_message.content[0].text)`,
       note:
-        "The docstring becomes the tool description and the type hints become the schema — so a vague docstring produces a vague tool description, and the model's call accuracy drops accordingly. It's the same lever as before, wearing different clothes.",
+        "The docstring becomes the tool description and the type hints become the schema: so a vague docstring produces a vague tool description, and the model's call accuracy drops accordingly. It's the same lever as before, wearing different clothes.",
     },
   ],
 
@@ -377,7 +377,7 @@ print(final_message.content[0].text)`,
     },
     {
       title: "Add real tools",
-      body: "Replace the fake weather function with something real — a file reader, an HTTP call, a database query. Real tools fail in ways fake ones don't, which is the point.",
+      body: "Replace the fake weather function with something real: a file reader, an HTTP call, a database query. Real tools fail in ways fake ones don't, which is the point.",
       effort: "2–4 hours",
       outcome: "An agent doing something you actually wanted done.",
     },
@@ -470,12 +470,12 @@ print(final_message.content[0].text)`,
     {
       mistake: "Adding tools until the model gets confused",
       why: "Every tool is context and another option to choose between. Beyond a certain point, more tools reduce accuracy on all of them.",
-      fix: "Keep the set focused. If you genuinely need many, look at tool search rather than loading every schema up front.",
+      fix: "Keep the set focused. If you need many, look at tool search rather than loading every schema up front.",
     },
   ],
 
   bestPractices: [
-    "Log every iteration — the tool, the arguments, the result. Agent debugging without a full trace is guesswork, and you will need to debug.",
+    "Log every iteration: the tool, the arguments, the result. Agent debugging without a full trace is guesswork, and you will need to debug.",
     "Write tool descriptions that state the trigger condition, not just the capability.",
     "Return errors as results with `is_error: true`, and make the message specific enough for the model to correct itself.",
     "Cap steps, tokens and spend per run, in code, from the first prototype.",
@@ -506,7 +506,7 @@ print(final_message.content[0].text)`,
 
   lifeApplications: [
     "Understanding what the 'agent' features in your existing tools actually do, and what permissions you granted them.",
-    "Automating genuinely tedious personal work — file organisation, data extraction, research summaries — where you're the only stakeholder and errors are cheap.",
+    "Automating tedious personal work — file organisation, data extraction, research summaries — where you're the only stakeholder and errors are cheap.",
     "Building intuition for delegation generally: irreversible steps warrant a checkpoint, reversible ones don't.",
     "Recognising compounding error in your own multi-step plans. Ten steps that each usually work is not a plan that usually works.",
   ],
@@ -570,7 +570,7 @@ print(final_message.content[0].text)`,
     },
     {
       q: "How many tools should an agent have?",
-      a: "As few as accomplish the task. Every tool adds context and another choice to get wrong. If you genuinely need many, look at tool search so schemas load on demand rather than all at once.",
+      a: "As few as accomplish the task. Every tool adds context and another choice to get wrong. If you need many, look at tool search so schemas load on demand rather than all at once.",
     },
     {
       q: "Why does my agent keep calling the same failing tool?",
@@ -598,7 +598,7 @@ print(final_message.content[0].text)`,
     { name: "anthropic (Python SDK)", what: "The official SDK, including the tool runner used in example 6. `pip install anthropic`.", cost: "Free", url: "https://github.com/anthropics/anthropic-sdk-python" },
     { name: "Anthropic Console", what: "Test tool definitions interactively before wiring them into code.", cost: "Paid", url: "https://console.anthropic.com" },
     { name: "LangGraph", what: "Stateful, branching agent workflows when you want explicit control over the loop rather than open autonomy.", cost: "Free", url: "https://langchain-ai.github.io/langgraph/" },
-    { name: "LangSmith", what: "Tracing for agent runs — every prompt, tool call and result. Close to essential once runs get long.", cost: "Freemium", url: "https://smith.langchain.com" },
+    { name: "LangSmith", what: "Tracing for agent runs: every prompt, tool call and result. Close to essential once runs get long.", cost: "Freemium", url: "https://smith.langchain.com" },
     { name: "Pydantic", what: "Validate tool arguments and outputs strictly, catching malformed calls before they execute.", cost: "Free", url: "https://docs.pydantic.dev" },
   ],
 
@@ -622,7 +622,7 @@ print(final_message.content[0].text)`,
   ],
 
   conclusion: [
-    "Take the loop from example 3, point it at a genuinely tedious task in your own work, and run it with the tool-call logging on. The first trace where it does something you didn't expect is where the real learning starts.",
+    "Take the loop from example 3, point it at a tedious task in your own work, and run it with the tool-call logging on. The first trace where it does something you didn't expect is where the real learning starts.",
   ],
 
   cta: {

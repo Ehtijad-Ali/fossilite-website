@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "ai-for-operations-and-workflow",
   seoTitle: "AI for Operations: Finding the Work Worth Automating",
   metaDescription:
-    "A practical method for applying AI to business operations — document processing, approvals, reporting and back-office workflow, without automating chaos.",
+    "A practical method for applying AI to business operations: document processing, approvals, reporting and back-office workflow, without automating chaos.",
   title: "AI for Operations and Workflow",
   keywords: [
     "ai business operations",
@@ -22,14 +22,14 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "Operations is where AI produces the most boring wins and the best returns. There's no customer watching, the work is genuinely repetitive, the cost is already measurable, and mistakes are usually caught internally before they reach anyone who matters.",
-    "It's also where the most common mistake happens: automating a process nobody has looked at properly. Writing down every step of a workflow reliably reveals that two exist because of a system replaced three years ago, one is a workaround for a bug that got fixed, and the approval nobody can explain is genuinely nobody's requirement.",
+    "Operations is where AI produces the most boring wins and the best returns. There's no customer watching, the work is repetitive, the cost is already measurable, and mistakes are usually caught internally before they reach anyone who matters.",
+    "It's also where the most common mistake happens: automating a process nobody has looked at properly. Writing down every step of a workflow reliably reveals that two exist because of a system replaced three years ago, one is a workaround for a bug that got fixed, and the approval nobody can explain is nobody's requirement.",
     "This guide covers how to find operations work worth automating, the document-processing applications that pay back most reliably, why unstructured input is where AI earns its keep, and how to keep an automated process from quietly breaking.",
   ],
 
   whyItMatters: [
     "Back-office work is invisible until it fails. It rarely appears in a strategy document, nobody's promotion depends on it, and it consumes an enormous number of hours across finance, admin, procurement and compliance. That combination — high volume, low visibility, no advocate — is why it stays manual long after it should.",
-    "It's also the area where AI's specific capability matters most. Rule-based automation could never handle a supplier invoice in an unexpected format or an email describing a request in prose. Handling unstructured input is the genuinely new thing, and operations is full of it.",
+    "It's also the area where AI's specific capability matters most. Rule-based automation could never handle a supplier invoice in an unexpected format or an email describing a request in prose. Handling unstructured input is the new thing, and operations is full of it.",
     "And the errors here compound quietly. A misprocessed invoice, a missed renewal, a reconciliation that silently drifts — these don't announce themselves. Getting the checks right matters more than getting the speed right.",
   ],
 
@@ -99,7 +99,7 @@ export const guide: Guide = {
       walkthrough:
         "Ziemann, Eren and El-Osta examined 3,597 genomics papers published between 2005 and 2015, covering 7,467 supplementary gene lists produced in Excel. With default settings, Excel silently converts certain gene symbols into dates — SEPT2 becomes 2-Sep. No warning appears and the converted value looks entirely normal.",
       result:
-        "19.6% of the papers examined contained conversion errors. Careful people, ordinary use of a standard tool, and it survived peer review. The operations lesson is that manual data steps produce errors nobody counts — so a business case built purely on time saved understates the value, and any automation replacing those steps needs validation built in rather than assumed.",
+        "19.6% of the papers examined contained conversion errors. Careful people, ordinary use of a standard tool, and it survived peer review. The operations lesson is that manual data steps produce errors nobody counts: so a business case built purely on time saved understates the value, and any automation replacing those steps needs validation built in rather than assumed.",
       source: {
         label: "Ziemann, Eren & El-Osta (2016) — Gene name errors are widespread in the scientific literature, Genome Biology",
         url: "https://link.springer.com/article/10.1186/s13059-016-1044-7",
@@ -154,7 +154,7 @@ export const guide: Guide = {
     },
     {
       title: "Add validation as a separate stage",
-      body: "Check extracted values against authoritative sources — totals, purchase orders, master data, plausible ranges. This is where errors get caught, and it must be its own step.",
+      body: "Check extracted values against authoritative sources: totals, purchase orders, master data, plausible ranges. This is where errors get caught, and it must be its own step.",
       effort: "2–3 weeks",
       outcome: "Errors surfaced before they propagate.",
     },
@@ -187,7 +187,7 @@ export const guide: Guide = {
     {
       mistake: "Skipping the validation stage",
       why: "Extraction without checking is a fast way to be confidently wrong. The manual process had a person implicitly validating; removing them removes that check.",
-      fix: "Make validation an explicit stage — totals, cross-references, plausible ranges, master data matching.",
+      fix: "Make validation an explicit stage: totals, cross-references, plausible ranges, master data matching.",
     },
     {
       mistake: "Routing by confidence but not by consequence",
@@ -232,7 +232,7 @@ export const guide: Guide = {
     "Alert on failure and on non-execution.",
     "Document the manual fallback and verify it periodically.",
     "Name an owner and review twice a year.",
-    "Measure exception rate — it's usually where the time actually goes.",
+    "Measure exception rate. It's usually where the time actually goes.",
   ],
 
   proTips: [
@@ -245,9 +245,9 @@ export const guide: Guide = {
   ],
 
   businessApplications: [
-    "Invoice and receipt processing — extracting fields from varied layouts, validating against purchase orders, routing exceptions.",
+    "Invoice and receipt processing: extracting fields from varied layouts, validating against purchase orders, routing exceptions.",
     "Reconciliation between systems that don't integrate, producing a discrepancy list for investigation.",
-    "Contract and document review — pulling key terms, dates and obligations into a structured register.",
+    "Contract and document review: pulling key terms, dates and obligations into a structured register.",
     "Purchase and expense approval routing, with policy checks applied consistently.",
     "Supplier onboarding: extracting details from submitted documents and checking them against requirements.",
     "Compliance monitoring — flagging records that fall outside policy for human review.",
@@ -308,7 +308,7 @@ export const guide: Guide = {
     },
     {
       q: "When should I use AI rather than ordinary automation?",
-      a: "When the input resists rules — varied document layouts, prose requests, scanned material, free-text fields. If the input is already structured, conventional software is cheaper, faster and more reliable.",
+      a: "When the input resists rules: varied document layouts, prose requests, scanned material, free-text fields. If the input is already structured, conventional software is cheaper, faster and more reliable.",
     },
     {
       q: "How accurate does extraction need to be?",
@@ -316,7 +316,7 @@ export const guide: Guide = {
     },
     {
       q: "What's the most common operations mistake?",
-      a: "Automating before mapping. Process mapping routinely finds steps that exist for expired reasons, and deleting them is faster than automating them — and improves cycle time more.",
+      a: "Automating before mapping. Process mapping routinely finds steps that exist for expired reasons, and deleting them is faster than automating them, and improves cycle time more.",
     },
     {
       q: "How do I stop it failing silently?",
@@ -328,7 +328,7 @@ export const guide: Guide = {
     },
     {
       q: "How do we handle exceptions?",
-      a: "Route them cleanly to a person with the context attached, and measure how many there are. If exceptions consume most of the time, automating the routine cases will disappoint — and that's worth knowing before you build.",
+      a: "Route them cleanly to a person with the context attached, and measure how many there are. If exceptions consume most of the time, automating the routine cases will disappoint, and that's worth knowing before you build.",
     },
   ],
 

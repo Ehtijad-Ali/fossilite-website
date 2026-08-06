@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "A score in isolation is uninterpretable. 87% is impressive or embarrassing depending entirely on what predicting the most common answer would have scored.",
       detail:
-        "Always compute the trivial baseline — the majority class, the previous value, the current manual process. Surprisingly often it's within a point or two of an expensive model.",
+        "Always compute the trivial baseline: the majority class, the previous value, the current manual process. Surprisingly often it's within a point or two of an expensive model.",
     },
     {
       term: "The test set must be sealed",
@@ -127,7 +127,7 @@ export const guide: Guide = {
     },
     {
       title: "Audit every feature for leakage",
-      body: "Go feature by feature and ask whether it would be available at prediction time. Then run the shuffle test: randomise the labels and retrain. Performance should collapse to chance — if it doesn't, something is leaking.",
+      body: "Go feature by feature and ask whether it would be available at prediction time. Then run the shuffle test: randomise the labels and retrain. Performance should collapse to chance: if it doesn't, something is leaking.",
       effort: "3–5 hours",
       outcome: "A clean shuffle test, and at least one suspicious feature investigated.",
     },
@@ -145,7 +145,7 @@ export const guide: Guide = {
     },
     {
       title: "Read a hundred errors individually",
-      body: "Aggregate metrics say how much is wrong; reading failures says why. Sort by confidence and start with the confident mistakes — that's where systematic problems live.",
+      body: "Aggregate metrics say how much is wrong; reading failures says why. Sort by confidence and start with the confident mistakes. That's where systematic problems live.",
       effort: "4–6 hours",
       outcome: "A categorised list of failure modes, ranked by frequency.",
     },
@@ -162,7 +162,7 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "A system evaluated against the right target that still drifted into large error.",
       walkthrough:
-        "Google Flu Trends estimated influenza-like illness from search volume and was explicitly built to predict the CDC's reported figures — so its evaluation target was, in principle, exactly right. It performed well initially. Then search behaviour changed, partly through media coverage of flu and partly through Google's own interface changes, while the model continued applying a relationship learned from an earlier period.",
+        "Google Flu Trends estimated influenza-like illness from search volume and was explicitly built to predict the CDC's reported figures: so its evaluation target was, in principle, exactly right. It performed well initially. Then search behaviour changed, partly through media coverage of flu and partly through Google's own interface changes, while the model continued applying a relationship learned from an earlier period.",
       result:
         "By the 2012–13 season it was persistently overestimating flu prevalence, at one point predicting more than double the proportion of doctor visits the CDC recorded. Lazer and colleagues concluded in Science that the errors were largely avoidable. The lesson for evaluation specifically: an excellent offline score is a statement about a moment in time, and without ongoing measurement against fresh ground truth you have no way to know when it stopped being true.",
       source: {
@@ -176,7 +176,7 @@ export const guide: Guide = {
       walkthrough:
         "Anthropic evaluated a retrieval pipeline by isolating a single metric — how often the correct passage failed to appear in the top twenty results — and then adding one component at a time, remeasuring after each. This is the opposite of the common approach, where several changes ship together and the team credits whichever one they favour.",
       result:
-        "Against a 5.7% baseline failure rate: contextual embeddings alone reduced failures by 35%, adding keyword search took it to 49%, and adding re-ranking took it to 67%. Because each stage was measured independently, the contributions are attributable rather than assumed — and it turned out the components compounded rather than overlapping. This is what component-level evaluation buys you: knowing which part earns its cost.",
+        "Against a 5.7% baseline failure rate: contextual embeddings alone reduced failures by 35%, adding keyword search took it to 49%, and adding re-ranking took it to 67%. Because each stage was measured independently, the contributions are attributable rather than assumed, and it turned out the components compounded rather than overlapping. This is what component-level evaluation buys you: knowing which part earns its cost.",
       source: {
         label: "Anthropic (2024) — Introducing Contextual Retrieval",
         url: "https://www.anthropic.com/news/contextual-retrieval",
@@ -188,7 +188,7 @@ export const guide: Guide = {
       walkthrough:
         "A shape worth recognising. A team builds a classifier on data where the positive class is rare, reports strong accuracy, and celebrates. Inspection of the confusion matrix shows the model predicts the majority class for almost every input. It has learned the base rate and nothing else. The accuracy figure is real, arithmetically correct, and describes a system that catches nothing.",
       result:
-        "The confusion matrix would have revealed this in seconds; the accuracy score never could. This is why the first thing to look at in any classification result is the matrix rather than the headline number — and why the metric should have been recall on the rare class from the start.",
+        "The confusion matrix would have revealed this in seconds; the accuracy score never could. This is why the first thing to look at in any classification result is the matrix rather than the headline number, and why the metric should have been recall on the rare class from the start.",
     },
   ],
 
@@ -242,7 +242,7 @@ export const guide: Guide = {
   ],
 
   proTips: [
-    "Sort errors by model confidence and read the confident ones first. Confidently wrong is where systematic problems and leakage live; uncertain and wrong is usually just genuinely hard cases.",
+    "Sort errors by model confidence and read the confident ones first. Confidently wrong is where systematic problems and leakage live; uncertain and wrong is usually just hard cases.",
     "If a result surprises you positively, assume leakage before you assume brilliance. This instinct will save you more embarrassment than any other habit in applied machine learning.",
     "Plot learning curves — training and validation score against training set size. If both have flattened and converged, more data won't help and you need a different approach. It answers 'what next?' better than intuition.",
     "Keep a running log of every experiment with its evaluation score, including the failures. Teams without one re-run the same failed idea roughly twice a year.",

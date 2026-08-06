@@ -24,13 +24,13 @@ export const guide: Guide = {
   intro: [
     "Critical thinking is usually taught as a list of logical fallacies, which is a bit like teaching driving by listing types of collision. Knowing the name of the ad hominem fallacy has almost never helped anyone evaluate a real claim, because real claims rarely arrive as clean syllogisms. They arrive as a percentage in a headline, a confident assertion from someone senior, or a study you haven't read.",
     "What actually helps is a small set of questions applied habitually. Compared to what? Out of how many? Who was measured, and does that resemble me? Has anyone else found the same thing? These are unglamorous and they dismantle a remarkable proportion of weak claims within thirty seconds.",
-    "This guide is that toolkit. It assumes no statistics background and it's aimed at ordinary decisions — a health claim, a business assertion, a piece of advice, a number in a report. The goal is not to become a sceptic about everything, which is just as lazy as believing everything. It's to calibrate: to hold claims with roughly the confidence the evidence supports.",
+    "This guide is that toolkit. It assumes no statistics background and it's aimed at ordinary decisions: a health claim, a business assertion, a piece of advice, a number in a report. The goal is not to become a sceptic about everything, which is just as lazy as believing everything. It's to calibrate: to hold claims with roughly the confidence the evidence supports.",
   ],
 
   whyItMatters: [
-    "You are making consequential decisions on evidence you cannot personally verify — about your health, your money, your work, your children. Outsourcing that judgement entirely is unavoidable to some degree, but the difference between outsourcing well and outsourcing badly is a small number of learnable habits.",
+    "You are making consequential decisions on evidence you cannot personally verify: about your health, your money, your work, your children. Outsourcing that judgement entirely is unavoidable to some degree, but the difference between outsourcing well and outsourcing badly is a small number of learnable habits.",
     "It also matters professionally in a way that's easy to underestimate. The person in a meeting who asks 'compared to what?' about an impressive number, without hostility, changes the quality of the decision being made. That's a rare and disproportionately valuable contribution, and it requires no seniority.",
-    "There's a defensive argument too. A great deal of content is now optimised to be persuasive rather than accurate — and increasingly generated at volume by systems that produce fluent, confident, well-formatted claims with no mechanism for being right. The ability to check rather than absorb has never been more load-bearing.",
+    "There's a defensive argument too. A great deal of content is now optimised to be persuasive rather than accurate: and increasingly generated at volume by systems that produce fluent, confident, well-formatted claims with no mechanism for being right. The ability to check rather than absorb has never been more load-bearing.",
   ],
 
   coreConcepts: [
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "Two things moving together may be causally linked in either direction, or both driven by something else, or coincidental. Observational data cannot distinguish these.",
       detail:
-        "The useful move isn't reciting the slogan — it's asking what the third factor might be. People who take vitamins are healthier, and they're also wealthier, more health-conscious and more likely to exercise.",
+        "The useful move isn't reciting the slogan. It's asking what the third factor might be. People who take vitamins are healthier, and they're also wealthier, more health-conscious and more likely to exercise.",
     },
     {
       term: "Selection effects",
@@ -126,7 +126,7 @@ export const guide: Guide = {
     },
     {
       title: "Hunt for the third factor",
-      body: "For five correlations you encounter, generate at least two plausible confounders and one reverse-causation story. Speed matters more than depth — this is a reflex you're building.",
+      body: "For five correlations you encounter, generate at least two plausible confounders and one reverse-causation story. Speed matters more than depth. This is a reflex you're building.",
       effort: "1 hour",
       outcome: "Alternative explanations arrive before you've accepted the stated one.",
     },
@@ -151,7 +151,7 @@ export const guide: Guide = {
       walkthrough:
         "The figure most people know — 21 days — did not come from research on habit formation. It originated in a mid-twentieth-century plastic surgeon's observation about patient adjustment, and spread because it was short, memorable and encouraging. When Lally and colleagues actually measured it, having 96 people perform a daily behaviour and rate its automaticity for 12 weeks, they found something quite different.",
       result:
-        "The median time to maximum automaticity was 66 days, with a range from 18 to a predicted 254 days — and the 66-day median applied among the roughly half of participants whose data fitted the model. The lesson generalises well beyond habits: a claim's ubiquity is not evidence for it. Widely-repeated figures frequently have a traceable origin that turns out not to be a study at all, and checking the origin takes minutes.",
+        "The median time to maximum automaticity was 66 days, with a range from 18 to a predicted 254 days, and the 66-day median applied among the roughly half of participants whose data fitted the model. The lesson generalises well beyond habits: a claim's ubiquity is not evidence for it. Widely-repeated figures frequently have a traceable origin that turns out not to be a study at all, and checking the origin takes minutes.",
       source: {
         label: "Lally, van Jaarsveld, Potts & Wardle (2010) — How are habits formed, European Journal of Social Psychology",
         url: "https://onlinelibrary.wiley.com/doi/10.1002/ejsp.674",
@@ -217,7 +217,7 @@ export const guide: Guide = {
     {
       mistake: "Mistaking scepticism for critical thinking",
       why: "Rejecting everything requires no more work than accepting everything and produces worse decisions, because it discards good evidence along with bad.",
-      fix: "Aim for calibration rather than doubt — hold each claim with roughly the confidence its evidence supports, which for many claims is 'probably true'.",
+      fix: "Aim for calibration rather than doubt: hold each claim with roughly the confidence its evidence supports, which for many claims is 'probably true'.",
     },
   ],
 
@@ -226,7 +226,7 @@ export const guide: Guide = {
     "Convert relative changes to absolute ones before reacting to them.",
     "For rare events, work the arithmetic through a concrete population rather than reasoning about percentages.",
     "Ask who was measured and whether they resemble the situation you're applying it to.",
-    "Ask who isn't in the data — the dropouts, the failures, the non-respondents.",
+    "Ask who isn't in the data: the dropouts, the failures, the non-respondents.",
     "Prefer replicated findings to striking single studies, and check whether replication has been attempted at all.",
     "Trace ubiquitous claims to their origin. Widely-repeated figures often have a source that isn't a study.",
     "Decide what would change your mind before you evaluate, and hold yourself to it.",
@@ -253,10 +253,10 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Health decisions, where base rates, relative risk framing and single-study reporting combine to produce genuinely misleading impressions.",
+    "Health decisions, where base rates, relative risk framing and single-study reporting combine to produce misleading impressions.",
     "Financial claims, where past performance, survivorship bias among funds and selective reporting are structural rather than occasional.",
     "Parenting and education advice, an area with unusually weak evidence and unusually confident delivery.",
-    "Reading the news generally — most numerical claims in headlines are relative, uncontextualised, or both.",
+    "Reading the news generally. Most numerical claims in headlines are relative, uncontextualised, or both.",
     "Evaluating advice about your own life, including advice that arrives in the form of a confident personal anecdote.",
     "Assessing anything generated by an AI system, which produces the format of a well-evidenced claim regardless of whether evidence exists.",
   ],
@@ -304,7 +304,7 @@ export const guide: Guide = {
     "Relative changes have been converted to absolute ones",
     "For rare events, I worked the arithmetic through a concrete population",
     "I know who was measured and whether they resemble my situation",
-    "I asked who isn't in the data — dropouts, failures, non-respondents",
+    "I asked who isn't in the data: dropouts, failures, non-respondents",
     "I checked whether the finding has been independently replicated",
     "I considered at least two alternative explanations for any correlation",
     "I traced widely-repeated claims back toward their origin",
@@ -327,7 +327,7 @@ export const guide: Guide = {
     },
     {
       q: "Isn't this just being cynical?",
-      a: "No, and the distinction matters. Cynicism rejects everything and requires no work. Calibration means holding each claim with roughly the confidence its evidence supports — which for many claims means accepting them, provisionally.",
+      a: "No, and the distinction matters. Cynicism rejects everything and requires no work. Calibration means holding each claim with roughly the confidence its evidence supports: which for many claims means accepting them, provisionally.",
     },
     {
       q: "How do I do this without being the difficult person in the room?",

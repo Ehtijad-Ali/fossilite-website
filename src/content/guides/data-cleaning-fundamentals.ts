@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "data-cleaning-fundamentals",
   seoTitle: "Data Cleaning Fundamentals: Getting Data You Can Trust",
   metaDescription:
-    "The unglamorous discipline behind every reliable analysis — finding what's wrong with your data, fixing it reproducibly, and proving it stayed fixed.",
+    "The unglamorous discipline behind every reliable analysis: finding what's wrong with your data, fixing it reproducibly, and proving it stayed fixed.",
   title: "Data Cleaning Fundamentals",
   keywords: [
     "data cleaning",
@@ -23,13 +23,13 @@ export const guide: Guide = {
 
   intro: [
     "Everybody says data cleaning takes most of the time on a data project, and everybody says it as though it were an unfortunate overhead — a tax on the interesting work. That framing is why so much of it is done badly. Cleaning isn't preparation for the analysis; a great deal of the time it *is* the analysis, because deciding what a blank cell means is a substantive judgement about the world, not a technical chore.",
-    "The failure mode is specific and worth naming. Bad cleaning rarely produces an error. It produces a number — a plausible, well-formatted, confidently-presented number that is wrong in a direction nobody notices. Errors get caught. Wrong answers get published.",
+    "The failure mode is specific and worth naming. Bad cleaning rarely produces an error. It produces a number: a plausible, well-formatted, confidently-presented number that is wrong in a direction nobody notices. Errors get caught. Wrong answers get published.",
     "This guide covers how to find what's actually wrong with a dataset, how to decide what to do about it, and — most importantly — how to do it in a way that someone else can review and re-run. It assumes no particular tool, though the examples lean toward code, for reasons the first documented case makes uncomfortably clear.",
   ],
 
   whyItMatters: [
     "Every downstream thing inherits your cleaning decisions. A model trained on badly cleaned data learns the artefacts. A dashboard built on it misleads confidently. A decision made from it is a decision made from fiction, and nobody in the chain can see it because the number looks like all the other numbers.",
-    "The costs are also asymmetric in a way that rewards paranoia. Finding a problem during cleaning costs an hour. Finding it after a model is trained costs a retraining cycle. Finding it after a decision has been made can cost far more than the project was worth — and the two documented cases below show it reaching published research and national policy debate.",
+    "The costs are also asymmetric in a way that rewards paranoia. Finding a problem during cleaning costs an hour. Finding it after a model is trained costs a retraining cycle. Finding it after a decision has been made can cost far more than the project was worth, and the two documented cases below show it reaching published research and national policy debate.",
     "There's a professional angle too. The person who reliably spots that a column changed format last March, or that a category was silently renamed, becomes the person whose numbers get trusted. That reputation compounds much faster than technical sophistication does, and it's built almost entirely on unglamorous diligence.",
   ],
 
@@ -108,13 +108,13 @@ export const guide: Guide = {
     },
     {
       title: "Audit a genuinely messy dataset without fixing it",
-      body: "Take real data from your own work. Produce a written list of every problem you find — wrong types, missing patterns, inconsistent categories, duplicates, impossible values, suspicious distributions. Resist repairing anything until the list is complete.",
+      body: "Take real data from your own work. Produce a written list of every problem you find: wrong types, missing patterns, inconsistent categories, duplicates, impossible values, suspicious distributions. Resist repairing anything until the list is complete.",
       effort: "3–5 hours",
       outcome: "A written data quality report, and a sense of how problems cluster.",
     },
     {
       title: "Decide what missing means, column by column",
-      body: "For each column with blanks, work out how the data was collected and what a blank therefore represents. Write the decision down. Then implement it — which might be filling, dropping, or explicitly keeping it missing and handling it downstream.",
+      body: "For each column with blanks, work out how the data was collected and what a blank therefore represents. Write the decision down. Then implement it: which might be filling, dropping, or explicitly keeping it missing and handling it downstream.",
       effort: "3–4 hours",
       outcome: "A documented per-column policy rather than a global fillna.",
     },
@@ -229,7 +229,7 @@ export const guide: Guide = {
   ],
 
   proTips: [
-    "Count distinct values in every categorical column on first contact. It's the single highest-yield diagnostic — inconsistent spellings, unexpected categories, and silent renames all surface immediately.",
+    "Count distinct values in every categorical column on first contact. It's the single highest-yield diagnostic: inconsistent spellings, unexpected categories, and silent renames all surface immediately.",
     "Compare this month's data against last month's on structure rather than content: same columns, same types, same category set, similar row count. Most breakages announce themselves as a structural change first.",
     "Sort by every column at least once and look at both ends. Impossible values, padding characters and encoding problems live at the extremes and are invisible in the middle.",
     "When a total looks wrong, check the row count before checking the logic. A surprising proportion of wrong aggregates are join problems rather than calculation problems.",
@@ -241,7 +241,7 @@ export const guide: Guide = {
     "Reporting reliability: the difference between a dashboard people act on and one they quietly stop trusting is almost always cleaning discipline rather than visualisation quality.",
     "Migration and integration projects, where the cleaning work is the project and underestimating it is the standard cause of overrun.",
     "Regulatory reporting, where the requirement is not just a correct number but a defensible, reproducible path from source to figure.",
-    "Preparing training data for machine learning — the majority of real ML project effort, and the part that determines the ceiling on model quality.",
+    "Preparing training data for machine learning: the majority of real ML project effort, and the part that determines the ceiling on model quality.",
     "Data quality monitoring: scheduled checks that flag when an upstream feed changes format or a field starts arriving empty, before it reaches a report.",
     "Vendor and partner data intake, where you have no control over quality and assertions at the boundary are the only defence.",
   ],
@@ -325,7 +325,7 @@ export const guide: Guide = {
     },
     {
       q: "What about outliers — remove or keep?",
-      a: "Investigate individually. An extreme value caused by a broken sensor should go; an extreme value representing a genuinely unusual event may be the most informative row you have. The decision is about cause, never about magnitude.",
+      a: "Investigate individually. An extreme value caused by a broken sensor should go; an extreme value representing a unusual event may be the most informative row you have. The decision is about cause, never about magnitude.",
     },
     {
       q: "Can AI clean my data for me?",
@@ -337,12 +337,12 @@ export const guide: Guide = {
     { name: "pandas", what: "The workhorse for tabular cleaning in Python. `info`, `dtypes`, `value_counts` and `isna` are most of the diagnostic pass.", cost: "Free", url: "https://pandas.pydata.org" },
     { name: "Great Expectations", what: "Declarative data quality assertions that run as part of a pipeline and produce readable reports.", cost: "Freemium", url: "https://greatexpectations.io" },
     { name: "OpenRefine", what: "Interactive cleaning with clustering for inconsistent categories, and it records every operation as a re-runnable script.", cost: "Free", url: "https://openrefine.org" },
-    { name: "pandera", what: "Schema validation for DataFrames — types, ranges, allowed values, enforced at runtime.", cost: "Free", url: "https://pandera.readthedocs.io" },
+    { name: "pandera", what: "Schema validation for DataFrames: types, ranges, allowed values, enforced at runtime.", cost: "Free", url: "https://pandera.readthedocs.io" },
     { name: "csvkit", what: "Command-line tools for inspecting and validating CSVs before they ever reach your pipeline.", cost: "Free", url: "https://csvkit.readthedocs.io" },
   ],
 
   resources: [
-    { title: "Tidy Data — Hadley Wickham", kind: "Paper", note: "The clearest statement of what well-structured data looks like and why. Short and genuinely influential.", url: "https://vita.had.co.nz/papers/tidy-data.pdf" },
+    { title: "Tidy Data — Hadley Wickham", kind: "Paper", note: "The clearest statement of what well-structured data looks like and why. Short and influential.", url: "https://vita.had.co.nz/papers/tidy-data.pdf" },
     { title: "Gene name errors are widespread in the scientific literature", kind: "Paper", note: "The Excel autocorrect study. Two pages, and it changes how you think about default tool behaviour.", url: "https://link.springer.com/article/10.1186/s13059-016-1044-7" },
     { title: "Python for Data Analysis — Wes McKinney", kind: "Book", note: "Freely readable online, with thorough coverage of the cleaning operations you'll use daily.", url: "https://wesmckinney.com/book/" },
     { title: "Bad Data Handbook — Q. Ethan McCallum", kind: "Book", note: "Practitioners describing real data disasters. Useful precisely because it's anecdotal rather than idealised." },

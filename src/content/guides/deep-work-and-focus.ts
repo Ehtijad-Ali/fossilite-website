@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "deep-work-and-focus",
   seoTitle: "Deep Work: How to Actually Concentrate Again",
   metaDescription:
-    "A practical guide to sustained focus — what interruption really costs, why task-switching lingers, and how to build a working day that protects concentration.",
+    "A practical guide to sustained focus: what interruption really costs, why task-switching lingers, and how to build a working day that protects concentration.",
   title: "Deep Work and the Recovery of Focus",
   keywords: [
     "how to focus",
@@ -24,7 +24,7 @@ export const guide: Guide = {
   intro: [
     "There is a particular kind of exhausting day that produces nothing. You were busy from nine until six, you answered everything, you attended every meeting, and the one piece of work that actually mattered has not moved. You weren't lazy. You were fragmented.",
     "Most advice about focus treats this as a willpower problem, which is why most advice about focus doesn't work. The research points somewhere more useful: the cost isn't the interruption itself but what happens either side of it — the way part of your attention stays behind on the previous task, and the way a fragmented environment quietly trains you to expect fragmentation.",
-    "This guide is about designing a working day where concentration is possible, rather than trying to summon it through discipline. It draws on published research where research exists, is honest about where it doesn't, and is aimed at people whose work genuinely requires thinking rather than only responding.",
+    "This guide is about designing a working day where concentration is possible, rather than trying to summon it through discipline. It draws on published research where research exists, is honest about where it doesn't, and is aimed at people whose work requires thinking rather than only responding.",
   ],
 
   whyItMatters: [
@@ -65,7 +65,7 @@ export const guide: Guide = {
     {
       term: "Self-interruption is the larger share",
       explain:
-        "A substantial portion of interruptions are self-initiated — checking messages, opening a tab, remembering something and acting on it immediately. Nobody interrupted you; the habit did.",
+        "A substantial portion of interruptions are self-initiated: checking messages, opening a tab, remembering something and acting on it immediately. Nobody interrupted you; the habit did.",
       detail:
         "This is good news, because self-interruption is the part you can actually control. Blaming your colleagues for a problem that's mostly internal leads to solutions that don't work.",
     },
@@ -107,7 +107,7 @@ export const guide: Guide = {
     },
     {
       title: "Protect one block, not your whole day",
-      body: "Choose 90 minutes at the time your energy is genuinely highest. Same time each day. Phone elsewhere, notifications off, one task, no email. Start there rather than attempting to restructure everything.",
+      body: "Choose 90 minutes at the time your energy is highest. Same time each day. Phone elsewhere, notifications off, one task, no email. Start there rather than attempting to restructure everything.",
       effort: "90 minutes daily",
       outcome: "One reliably productive block you can build around.",
     },
@@ -119,7 +119,7 @@ export const guide: Guide = {
     },
     {
       title: "Batch the shallow work",
-      body: "Set two or three fixed windows for messages, email and admin. Outside those windows, they wait. Tell colleagues your response pattern so their expectations adjust — most people mind far less than you fear.",
+      body: "Set two or three fixed windows for messages, email and admin. Outside those windows, they wait. Tell colleagues your response pattern so their expectations adjust. Most people mind far less than you fear.",
       effort: "Ongoing",
       outcome: "Shallow work stops leaking into every hour.",
     },
@@ -181,7 +181,7 @@ export const guide: Guide = {
     {
       mistake: "Trying to restructure the entire day at once",
       why: "Ambitious systems collide with an existing calendar and other people's expectations, fail within a fortnight, and leave you concluding that focus isn't possible in your job.",
-      fix: "Protect one block. Make it reliable. Extend only once it survives a genuinely bad week.",
+      fix: "Protect one block. Make it reliable. Extend only once it survives a bad week.",
     },
     {
       mistake: "Scheduling deep work whenever there's a gap",
@@ -200,7 +200,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Treating all work as deserving deep focus",
-      why: "Most tasks genuinely don't need it, and trying to apply protected focus to email produces guilt rather than productivity.",
+      why: "Most tasks don't need it, and trying to apply protected focus to email produces guilt rather than productivity.",
       fix: "Sort work honestly into deep and shallow, and batch the shallow. The aim is separation, not elimination.",
     },
     {
@@ -218,7 +218,7 @@ export const guide: Guide = {
     "Batch messages into two or three fixed windows and tell people what those are. Predictability satisfies most of what colleagues actually want from responsiveness.",
     "End the day by writing tomorrow's first task in one specific sentence. It removes the morning's hardest decision.",
     "Consolidate meetings into a band rather than spreading them out. Adjacent meetings destroy far less of a day than spaced ones.",
-    "Protect recovery deliberately — a real stopping time, sleep, and breaks that aren't just a different screen.",
+    "Protect recovery deliberately: a real stopping time, sleep, and breaks that aren't just a different screen.",
   ],
 
   proTips: [
@@ -279,7 +279,7 @@ export const guide: Guide = {
     {
       title: "Batch your messages",
       brief:
-        "Move all email and chat into two fixed windows for one week. Tell colleagues in advance. Record what genuinely went wrong as a result.",
+        "Move all email and chat into two fixed windows for one week. Tell colleagues in advance. Record what went wrong as a result.",
       success: "A list of actual consequences, which is almost always shorter than the anticipated one.",
       time: "One week",
     },
@@ -305,7 +305,7 @@ export const guide: Guide = {
     },
     {
       q: "What if my job makes uninterrupted time impossible?",
-      a: "Some roles genuinely are response-driven, and in those cases the honest answer is that deep work has to be negotiated rather than found. Start by protecting one block a week and measuring what actually breaks — the expected consequences usually exceed the real ones.",
+      a: "Some roles are response-driven, and in those cases the honest answer is that deep work has to be negotiated rather than found. Start by protecting one block a week and measuring what actually breaks — the expected consequences usually exceed the real ones.",
     },
     {
       q: "Does the Pomodoro technique work?",
@@ -313,7 +313,7 @@ export const guide: Guide = {
     },
     {
       q: "Is multitasking ever fine?",
-      a: "For genuinely automatic tasks, yes. For anything requiring thought, what feels like multitasking is rapid switching, and it carries attention residue each way. The cost is real and mostly invisible while you're paying it.",
+      a: "For automatic tasks, yes. For anything requiring thought, what feels like multitasking is rapid switching, and it carries attention residue each way. The cost is real and mostly invisible while you're paying it.",
     },
     {
       q: "How do I stop checking my phone?",
@@ -352,7 +352,7 @@ export const guide: Guide = {
   relatedGuides: ["clear-writing-that-gets-read", "prompt-engineering-fundamentals"],
 
   conclusion: [
-    "Start by measuring your longest uninterrupted block for a week without changing anything. Whatever number you get is the real constraint on what kind of work you can currently do — and it's usually the moment the problem stops being abstract.",
+    "Start by measuring your longest uninterrupted block for a week without changing anything. Whatever number you get is the real constraint on what kind of work you can currently do, and it's usually the moment the problem stops being abstract.",
   ],
 
 };

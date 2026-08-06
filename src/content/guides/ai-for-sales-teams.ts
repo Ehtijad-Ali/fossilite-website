@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "ai-for-sales-teams",
   seoTitle: "AI for Sales Teams: Research, Follow-Up and Pipeline",
   metaDescription:
-    "Where AI genuinely helps a sales team — account research, call notes, follow-up, lead scoring — and the outreach automation that damages your pipeline.",
+    "Where AI helps a sales team — account research, call notes, follow-up, lead scoring — and the outreach automation that damages your pipeline.",
   title: "AI for Sales Teams",
   keywords: [
     "ai for sales",
@@ -28,7 +28,7 @@ export const guide: Guide = {
   ],
 
   whyItMatters: [
-    "Sales reps spend a large share of their week not selling — researching accounts, writing notes, updating records, drafting follow-ups, assembling proposals. That admin is real work and it's exactly the shape AI handles well. Recovering it puts hours back into conversations without hiring anyone.",
+    "Sales reps spend a large share of their week not selling: researching accounts, writing notes, updating records, drafting follow-ups, assembling proposals. That admin is real work and it's exactly the shape AI handles well. Recovering it puts hours back into conversations without hiring anyone.",
     "The downside risk is unusual, though. A bad marketing email is ignored. A bad automated sales sequence gets your domain flagged, which affects every email your company sends including invoices and support replies. The blast radius extends well past the campaign.",
     "And sales data is the most contaminated data in most businesses. CRM fields are half-empty, statuses are stale, and 'closed lost' hides a dozen different reasons. Any AI built on top of it inherits all of that, which is worth knowing before you trust a score.",
   ],
@@ -53,7 +53,7 @@ export const guide: Guide = {
       explain:
         "Transcribing, summarising, extracting next steps and updating records removes the task reps most reliably skip. Better data downstream is a side effect worth as much as the time saved.",
       detail:
-        "The reason CRMs are empty isn't laziness — it's that updating them happens after the call, when the next one is starting. Removing that friction fixes the data problem at its source.",
+        "The reason CRMs are empty isn't laziness. It's that updating them happens after the call, when the next one is starting. Removing that friction fixes the data problem at its source.",
     },
     {
       term: "Volume outreach is the trap",
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Lead scoring inherits your history",
       explain:
-        "A model trained on which leads converted learns the pattern of who your reps pursued and closed — not who was genuinely a good fit.",
+        "A model trained on which leads converted learns the pattern of who your reps pursued and closed — not who was a good fit.",
       detail:
         "If your team historically neglected a segment, the model will score it low, and the self-fulfilling loop tightens. This is the same failure that scrapped Amazon's hiring tool, in a commercial setting.",
     },
@@ -97,7 +97,7 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "What happens when a model learns from past selection decisions.",
       walkthrough:
-        "Amazon trained a CV-screening model on a decade of applications, and it learned that male candidates had historically been preferred — penalising CVs mentioning \"women's\" and favouring language more common on men's applications. The engineering was sound; the model faithfully reproduced the pattern in its labels.",
+        "Amazon trained a CV-screening model on a decade of applications, and it learned that male candidates had historically been preferred — penalising CVs mentioning \"women's\"and favouring language more common on men's applications. The engineering was sound; the model faithfully reproduced the pattern in its labels.",
       result:
         "The mechanism transfers directly to lead scoring. A model trained on which leads your reps converted learns which leads your reps *pursued*. Segments your team historically under-worked will score low, reps will deprioritise them further, and the loop tightens. If you score leads, use explicit fit criteria you can state and audit — not a pattern learned from past outcomes.",
       source: {
@@ -142,7 +142,7 @@ export const guide: Guide = {
     },
     {
       title: "Start with account research briefs",
-      body: "Turn public company information plus CRM history into a structured pre-call brief — recent news, likely priorities, prior interactions, open questions. Highest return, zero customer-facing risk.",
+      body: "Turn public company information plus CRM history into a structured pre-call brief: recent news, likely priorities, prior interactions, open questions. Highest return, zero customer-facing risk.",
       effort: "2–3 weeks",
       outcome: "Reps arriving prepared for calls they'd have skimmed.",
     },
@@ -154,7 +154,7 @@ export const guide: Guide = {
     },
     {
       title: "Draft follow-ups for rep approval",
-      body: "Generate follow-up emails from call notes with the rep editing before send. Track how often drafts go unedited — that tells you where the drafting is genuinely good.",
+      body: "Generate follow-up emails from call notes with the rep editing before send. Track how often drafts go unedited — that tells you where the drafting is good.",
       effort: "2–3 weeks",
       outcome: "Faster follow-up with a human on every outbound word.",
     },
@@ -224,7 +224,7 @@ export const guide: Guide = {
   ],
 
   proTips: [
-    "Ask reps which admin task they most reliably skip. That's your first automation — it's the one with real pain behind it, and fixing it buys goodwill for everything after.",
+    "Ask reps which admin task they most reliably skip. That's your first automation. It's the one with real pain behind it, and fixing it buys goodwill for everything after.",
     "Read twenty AI-drafted follow-ups before letting any go out unedited. The failure mode is confident specificity about things that weren't discussed, and it's invisible in aggregate metrics.",
     "Check what fraction of your 'closed lost' records have a reason attached. It's usually low, and it's the single field that would most improve everything downstream.",
     "If reply rate falls while sends rise, stop. That's the signal that precedes deliverability damage, and it's the only warning you get.",
@@ -310,7 +310,7 @@ export const guide: Guide = {
     },
     {
       q: "Our CRM data is a mess. Does that matter?",
-      a: "Yes — it's a ceiling on everything you build. The audit and cleanup is unglamorous and frequently delivers more value than the AI layer you were planning to put on top.",
+      a: "Yes. It's a ceiling on everything you build. The audit and cleanup is unglamorous and frequently delivers more value than the AI layer you were planning to put on top.",
     },
   ],
 

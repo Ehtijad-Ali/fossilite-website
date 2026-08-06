@@ -24,12 +24,12 @@ export const guide: Guide = {
   intro: [
     "When an agent behaves badly, the instinct is to rewrite the system prompt. It's almost always the wrong place to look. The model's decisions about which tool to call, and with what arguments, are driven overwhelmingly by the tool definitions — the names, the descriptions, the schemas, and the error messages that come back. Those are the interface, and the prompt is commentary on it.",
     "This is good news, because tool definitions are code. They can be tested, validated and versioned, in a way that a paragraph of prompt instruction can't. Moving a behaviour from the prompt into the schema converts a hope into a constraint.",
-    "This guide covers how to design that surface: how granular a tool should be, how to write a description the model can act on, how to make schemas that reject bad calls before they execute, what an error message should say, and where permissions belong. It assumes you've built a basic agent — if not, start there.",
+    "This guide covers how to design that surface: how granular a tool should be, how to write a description the model can act on, how to make schemas that reject bad calls before they execute, what an error message should say, and where permissions belong. It assumes you've built a basic agent: if not, start there.",
   ],
 
   whyItMatters: [
     "Tool design is the highest-leverage work in an agent project and the most consistently neglected. Teams spend days tuning prompts to stop an agent misusing a tool whose description says what it does but never says when to use it. The fix is usually one sentence in the wrong file.",
-    "It's also where the security boundary genuinely sits. The model emits a request; your tool function decides what happens. Every validation, permission check, rate limit and audit log belongs there. A guardrail expressed in the prompt is a preference; the same rule in the tool function is enforcement.",
+    "It's also where the security boundary sits. The model emits a request; your tool function decides what happens. Every validation, permission check, rate limit and audit log belongs there. A guardrail expressed in the prompt is a preference; the same rule in the tool function is enforcement.",
     "And it determines operating cost more than model choice does. Vague schemas produce malformed calls that get retried. Uninformative errors produce loops. A well-designed tool surface can cut the number of steps a task takes several-fold, and steps are what you pay for.",
   ],
 
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "Every tool occupies context and adds an option to choose between. Past a certain count, accuracy drops across the whole set, not just the marginal tool.",
       detail:
-        "If you genuinely need a large library, tool search lets schemas load on demand rather than all up front — and it appends rather than swapping, which preserves the prompt cache.",
+        "If you need a large library, tool search lets schemas load on demand rather than all up front — and it appends rather than swapping, which preserves the prompt cache.",
     },
     {
       term: "Return shape matters as much as input shape",
@@ -97,7 +97,7 @@ export const guide: Guide = {
       title: "A weak tool definition and a strong one",
       language: "python",
       intro:
-        "Same capability, very different call accuracy. The differences are all in text the model reads — description, field descriptions, and constrained types.",
+        "Same capability, very different call accuracy. The differences are all in text the model reads: description, field descriptions, and constrained types.",
       code: `# WEAK — the model must guess when to call it and what the fields mean
 weak = {
     "name": "search",
@@ -117,8 +117,8 @@ strong = {
     "name": "search_customer_records",
     "description": (
         "Search customer records by name, email or account number. "
-        "Call this whenever the user refers to a specific customer and you "
-        "do not already have their details in the conversation. Do not call "
+        "Call this whenever the user refers to a specific customer and you"
+        "do not already have their details in the conversation. Do not call"
         "it for general questions about policy or pricing."
     ),
     "strict": True,
@@ -150,7 +150,7 @@ strong = {
       title: "Error messages the model can act on",
       language: "python",
       intro:
-        "The single highest-return change in most agent codebases. Compare the two failure paths — the first produces retry loops, the second produces corrections.",
+        "The single highest-return change in most agent codebases. Compare the two failure paths: the first produces retry loops, the second produces corrections.",
       code: `from datetime import datetime
 
 # BAD — the model learns nothing and will try again identically
@@ -314,7 +314,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
       kind: "illustration",
       scenario: "The overloaded tool nobody can gate.",
       walkthrough:
-        "A shape worth recognising in your own code. You build `manage_record(action, record_id, data)` where `action` is one of create, update or delete. It's compact and it works. Then you need approval on deletes only — and there's no way to express that, because the harness sees one tool name and an opaque argument. You end up parsing the arguments in the approval layer to work out what the agent is actually about to do.",
+        "A shape worth recognising in your own code. You build `manage_record(action, record_id, data)` where `action` is one of create, update or delete. It's compact and it works. Then you need approval on deletes only: and there's no way to express that, because the harness sees one tool name and an opaque argument. You end up parsing the arguments in the approval layer to work out what the agent is actually about to do.",
       result:
         "Three separate tools cost a few more lines and make the whole surface tractable: `delete_record` can require approval, `create_record` can be rate-limited, `update_record` can be logged differently. The granularity that feels redundant when you write it is what makes the harness able to do its job.",
     },
@@ -322,7 +322,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
       kind: "illustration",
       scenario: "The tool return that ate the context window.",
       walkthrough:
-        "A tool wraps an internal API and returns its response verbatim — deeply nested JSON, several hundred fields, most irrelevant. Each call consumes a large share of the window. After four calls the agent's original instructions are buried in the middle of a mass of API payloads, and its behaviour degrades in ways that look like the model getting confused rather than like a design problem.",
+        "A tool wraps an internal API and returns its response verbatim: deeply nested JSON, several hundred fields, most irrelevant. Each call consumes a large share of the window. After four calls the agent's original instructions are buried in the middle of a mass of API payloads, and its behaviour degrades in ways that look like the model getting confused rather than like a design problem.",
       result:
         "Returning a shaped summary with a pointer to a detail tool typically shortens runs substantially and improves instruction-following, because the goal is no longer competing with thousands of tokens of irrelevant structure. Return shape is a context-management decision, not a formatting preference.",
     },
@@ -367,12 +367,12 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     {
       mistake: "Adding tools until accuracy drops",
       why: "Each tool is context and another option. Beyond a threshold, performance degrades across the whole set, and the cause isn't obvious from any single failure.",
-      fix: "Keep the working set focused. For genuinely large libraries, use tool search so schemas load on demand.",
+      fix: "Keep the working set focused. For large libraries, use tool search so schemas load on demand.",
     },
   ],
 
   bestPractices: [
-    "Write every description as a trigger condition — when to call, and when not to.",
+    "Write every description as a trigger condition: when to call, and when not to.",
     "Describe every field in the schema. An undescribed parameter is a guess waiting to happen.",
     "Use enums wherever the value set is known, and enable strict tool use with `additionalProperties: false`.",
     "One tool per action the model chooses between. Split anything with a mode switch.",
@@ -488,7 +488,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
   tools: [
     { name: "Pydantic", what: "Strict schema validation for tool arguments and returns, and schema generation from type hints.", cost: "Free", url: "https://docs.pydantic.dev" },
     { name: "anthropic (Python SDK)", what: "Tool definitions, strict mode, and the `@beta_tool` decorator that derives schemas from signatures.", cost: "Free", url: "https://github.com/anthropics/anthropic-sdk-python" },
-    { name: "LangSmith", what: "Per-call tracing — which tool, what arguments, what came back. Where tool problems become visible.", cost: "Freemium", url: "https://smith.langchain.com" },
+    { name: "LangSmith", what: "Per-call tracing: which tool, what arguments, what came back. Where tool problems become visible.", cost: "Freemium", url: "https://smith.langchain.com" },
     { name: "Promptfoo", what: "Fixed-test-set evaluation, usable for measuring tool-call accuracy across description changes.", cost: "Free", url: "https://promptfoo.dev" },
   ],
 

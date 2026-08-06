@@ -23,7 +23,7 @@ export const guide: Guide = {
 
   intro: [
     "Security is presented to most people as an intimidating specialism full of exotic threats, which has the unfortunate effect of making the boring, effective measures feel inadequate. If the picture in your head is a hooded figure defeating encryption, then turning on multi-factor authentication feels like bringing an umbrella to a war.",
-    "The evidence points somewhere far more mundane. Attacks overwhelmingly begin with a stolen password, a person clicking something, or a system nobody patched. Not clever cryptography — credentials and human beings. That's genuinely good news, because it means the highest-value defences are cheap, boring, and available to you this afternoon.",
+    "The evidence points somewhere far more mundane. Attacks overwhelmingly begin with a stolen password, a person clicking something, or a system nobody patched. Not clever cryptography — credentials and human beings. That's good news, because it means the highest-value defences are cheap, boring, and available to you this afternoon.",
     "This guide is the defensive fundamentals for people who build and run things: developers, founders, freelancers, anyone responsible for a system or a company's data. It is deliberately not about becoming a security specialist. It's about closing the doors that attacks actually come through.",
   ],
 
@@ -37,14 +37,14 @@ export const guide: Guide = {
     {
       term: "Credentials are the front door",
       explain:
-        "The most common way into a system is a valid username and password that belongs to someone else — reused from another breach, phished, or guessed. No exploit required, and to the system it looks like a legitimate login.",
+        "The most common way into a system is a valid username and password that belongs to someone else: reused from another breach, phished, or guessed. No exploit required, and to the system it looks like a legitimate login.",
       detail:
         "This is why password hygiene and multi-factor authentication are not beginner advice to graduate from. They defend the path attacks most often take.",
     },
     {
       term: "Multi-factor authentication is the single highest-value control",
       explain:
-        "MFA requires something beyond the password — a code, an app prompt, a hardware key. A stolen password alone stops being sufficient.",
+        "MFA requires something beyond the password: a code, an app prompt, a hardware key. A stolen password alone stops being sufficient.",
       detail:
         "Not all factors are equal. App-based codes and hardware keys are considerably stronger than SMS, which is vulnerable to SIM-swapping. Hardware keys additionally resist phishing, because the key checks the site's identity rather than trusting the user's judgement.",
     },
@@ -95,7 +95,7 @@ export const guide: Guide = {
       explain:
         "In transit means HTTPS everywhere, so data can't be read as it crosses networks. At rest means stored data is encrypted, so a stolen disk or database file isn't immediately readable.",
       detail:
-        "Both are largely solved problems now — free certificates, encryption on by default in most managed databases. The work is verifying it's actually enabled rather than assumed.",
+        "Both are largely solved problems now: free certificates, encryption on by default in most managed databases. The work is verifying it's actually enabled rather than assumed.",
     },
     {
       term: "Assume you'll have an incident",
@@ -206,7 +206,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Backing up without testing a restore",
-      why: "Backup jobs report success while producing unusable output — incomplete data, wrong encryption keys, missing databases. You find out during the incident.",
+      why: "Backup jobs report success while producing unusable output: incomplete data, wrong encryption keys, missing databases. You find out during the incident.",
       fix: "Perform a real restore on a schedule and time it. An untested backup is an assumption, not a control.",
     },
     {
@@ -259,7 +259,7 @@ export const guide: Guide = {
   lifeApplications: [
     "Your personal accounts face the same attacks with none of the corporate protection. Email, banking and cloud storage deserve the strongest factor available.",
     "Family and friends who are less technical benefit enormously from you setting up a password manager and MFA for them once.",
-    "Recognising manipulation techniques generally — urgency, authority, secrecy and isolation are the levers in social engineering and in most fraud.",
+    "Recognising manipulation techniques generally: urgency, authority, secrecy and isolation are the levers in social engineering and in most fraud.",
     "Protecting irreplaceable personal data, particularly photographs, with a backup copy that isn't in the same place or the same account.",
     "Understanding what you agree to when you grant an app access to your accounts, which is a permission-scope question exactly like least privilege.",
   ],

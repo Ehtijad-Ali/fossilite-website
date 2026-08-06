@@ -22,15 +22,15 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "Ask ten people what artificial intelligence is and you'll get answers ranging from 'a computer that thinks' to 'a marketing word'. Both contain something true, which is exactly why the term is so slippery — and why so much money is currently being spent on projects whose failure was predictable from the first meeting.",
+    "Ask ten people what artificial intelligence is and you'll get answers ranging from 'a computer that thinks' to 'a marketing word'. Both contain something true, which is exactly why the term is so slippery, and why so much money is currently being spent on projects whose failure was predictable from the first meeting.",
     "The workable definition is unglamorous: artificial intelligence is the field of building systems that perform tasks which, when a human does them, we'd describe as requiring intelligence. Note what that definition is anchored to. It's about the task, not about the mechanism, and certainly not about the machine having an inner life.",
     "This guide gives you a mental model that survives contact with actual products. What the different things called AI actually are, why the definition keeps moving, where the real capability boundary sits today, and how to evaluate a claim without either dismissing it or believing it wholesale.",
   ],
 
   whyItMatters: [
     "You are being asked to make decisions about this technology whether or not you feel qualified to. Whether to adopt a tool, whether to trust an output, whether a supplier's claim is plausible, whether your job is affected. Those decisions are being made by people at every level of every organisation, mostly without a working model of what the technology does.",
-    "The commercial cost of not having that model is specific and large. Projects get funded on the assumption that a system can do something it structurally cannot — reason reliably about arithmetic, know about last week, guarantee an answer is correct. Those projects don't fail at launch. They fail six months in, after the budget is spent, and the post-mortem usually blames the vendor rather than the premise.",
-    "There's a civic dimension too. These systems increasingly sit between people and decisions that matter — credit, hiring, healthcare triage, benefits. Understanding that a model reproduces patterns in the data it was given, rather than exercising judgement, changes what questions you know to ask when one of those decisions goes against someone.",
+    "The commercial cost of not having that model is specific and large. Projects get funded on the assumption that a system can do something it structurally cannot: reason reliably about arithmetic, know about last week, guarantee an answer is correct. Those projects don't fail at launch. They fail six months in, after the budget is spent, and the post-mortem usually blames the vendor rather than the premise.",
+    "There's a civic dimension too. These systems increasingly sit between people and decisions that matter: credit, hiring, healthcare triage, benefits. Understanding that a model reproduces patterns in the data it was given, rather than exercising judgement, changes what questions you know to ask when one of those decisions goes against someone.",
   ],
 
   coreConcepts: [
@@ -86,7 +86,7 @@ export const guide: Guide = {
     {
       term: "The training data defines the boundary",
       explain:
-        "A system's competence is bounded by what it was trained on. Give it inputs unlike anything in that data and it doesn't refuse — it produces an output anyway, with no signal that it's now guessing.",
+        "A system's competence is bounded by what it was trained on. Give it inputs unlike anything in that data and it doesn't refuse: it produces an output anyway, with no signal that it's now guessing.",
       detail:
         "'What was it trained on, and does my situation resemble that?' is the single most useful question you can ask about any AI product, and the one vendors are least prepared for.",
     },
@@ -160,7 +160,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The demo that works and the deployment that doesn't.",
       walkthrough:
-        "A pattern worth recognising before you sign anything. A vendor demonstrates a system on inputs they selected. It performs impressively. You deploy it against your own traffic, which includes malformed records, edge cases, an unusual regional format, and a category nobody mentioned. Performance is visibly worse, and nobody can say precisely why.",
+        "A pattern worth recognising before you sign anything. A vendor demonstrates a system on inputs they selected. It performs impressively. You deploy it against your own traffic, which includes malformed records, edge cases, an unusual regional format, and a category nobody mentioned. Performance is visibly worse, and nobody can say why.",
       result:
         "Nothing dishonest necessarily happened — the demo showed genuine capability on the inputs it was given. The correct response is not scepticism about AI in general but a specific request: run it on a sample of our real data, including the awkward records, and let us see the errors. A vendor confident in their system will agree.",
     },
@@ -228,10 +228,10 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Evaluating the AI features arriving in tools you already use, and deciding which are genuinely useful versus which are a checkbox on a roadmap.",
-    "Reading news about AI with calibration — asking what was measured and on what, rather than accepting either the breathless or the dismissive framing.",
+    "Evaluating the AI features arriving in tools you already use, and deciding which are useful versus which are a checkbox on a roadmap.",
+    "Reading news about AI with calibration: asking what was measured and on what, rather than accepting either the breathless or the dismissive framing.",
     "Understanding decisions made about you. If an automated system declines something, knowing that it learned from historical patterns tells you what to ask when you appeal.",
-    "Deciding what to learn. Understanding that these systems handle pattern-matching well and judgement, accountability and novel situations poorly is genuinely useful career information.",
+    "Deciding what to learn. Understanding that these systems handle pattern-matching well and judgement, accountability and novel situations poorly is useful career information.",
     "Using the tools well yourself — which mostly means knowing which half of a problem to hand over and which half to keep.",
   ],
 
@@ -253,7 +253,7 @@ export const guide: Guide = {
     {
       title: "The vendor interrogation",
       brief:
-        "Write your five standard evaluation questions. Use them on a real product — a vendor, or the documentation of a tool you already use. Note which questions have no available answer.",
+        "Write your five standard evaluation questions. Use them on a real product: a vendor, or the documentation of a tool you already use. Note which questions have no available answer.",
       success: "You've identified at least one claim you can't verify.",
       time: "1–2 hours",
     },
@@ -290,7 +290,7 @@ export const guide: Guide = {
     },
     {
       q: "Will AI take my job?",
-      a: "It automates tasks rather than whole roles, and jobs are bundles of tasks. Roles that are mostly repetitive pattern-work are exposed; those involving accountability, physical judgement or genuinely novel situations far less so. The realistic near-term effect is changed job composition rather than wholesale replacement.",
+      a: "It automates tasks rather than whole roles, and jobs are bundles of tasks. Roles that are mostly repetitive pattern-work are exposed; those involving accountability, physical judgement or novel situations far less so. The realistic near-term effect is changed job composition rather than wholesale replacement.",
     },
     {
       q: "Is general AI close?",
@@ -307,14 +307,14 @@ export const guide: Guide = {
   ],
 
   tools: [
-    { name: "ChatGPT / Claude / Gemini", what: "General-purpose language models. The fastest way to develop calibrated intuition — use several, they fail differently.", cost: "Freemium" },
+    { name: "ChatGPT / Claude / Gemini", what: "General-purpose language models. The fastest way to develop calibrated intuition: use several, they fail differently.", cost: "Freemium" },
     { name: "Teachable Machine", what: "Train a classifier in a browser with your own examples. The quickest demonstration of how training data determines behaviour.", cost: "Free", url: "https://teachablemachine.withgoogle.com" },
     { name: "TensorFlow Playground", what: "Watch a small neural network learn in real time. Good intuition per minute spent.", cost: "Free", url: "https://playground.tensorflow.org" },
     { name: "Hugging Face", what: "Thousands of open models with documentation on what each was trained on — useful for seeing the range beyond chatbots.", cost: "Freemium", url: "https://huggingface.co" },
   ],
 
   resources: [
-    { title: "Elements of AI", kind: "Course", note: "A free, genuinely well-made introduction aimed at non-specialists. Start here if this guide left you wanting more.", url: "https://www.elementsofai.com" },
+    { title: "Elements of AI", kind: "Course", note: "A free, well-made introduction aimed at non-specialists. Start here if this guide left you wanting more.", url: "https://www.elementsofai.com" },
     { title: "Google's Rules of Machine Learning", kind: "Docs", note: "Engineering rules from running ML at scale. Short, practical, and quietly deflating of a lot of hype.", url: "https://developers.google.com/machine-learning/guides/rules-of-ml" },
     { title: "AI Snake Oil — Narayanan & Kapoor", kind: "Book", note: "Careful, evidence-led separation of what works from what's being sold. A useful counterweight in both directions." },
     { title: "Simon Willison's blog", kind: "Newsletter", note: "Hands-on, sober writing about what these tools actually do day to day.", url: "https://simonwillison.net" },

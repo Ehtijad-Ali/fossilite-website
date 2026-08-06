@@ -22,7 +22,7 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "CrewAI's premise is that you describe a team rather than a program. You define agents by role, goal and backstory; you define tasks with a description and an expected output; you assemble them into a crew and press go. It reads like org design, and that's genuinely why people like it — the mental model is immediately available to anyone who has ever briefed a colleague.",
+    "CrewAI's premise is that you describe a team rather than a program. You define agents by role, goal and backstory; you define tasks with a description and an expected output; you assemble them into a crew and press go. It reads like org design, and that's why people like it — the mental model is immediately available to anyone who has ever briefed a colleague.",
     "That accessibility is also the trap. Because it feels like delegating to people, it invites you to model your problem as a team when a single agent with good tools, or a plain sequence of function calls, would be cheaper, faster and easier to debug. Every agent in a crew is a full model context that must be established, filled and paid for.",
     "This guide covers how the pieces actually fit together, what the sequential and hierarchical processes really do, and — most usefully — how to tell whether your problem wants a crew at all.",
   ],
@@ -44,7 +44,7 @@ export const guide: Guide = {
     {
       term: "A task is a description plus an expected output",
       explain:
-        "Tasks carry a `description` of the work and an `expected_output` describing the deliverable. The second field does more than it looks like — it's the specification the agent works toward.",
+        "Tasks carry a `description` of the work and an `expected_output` describing the deliverable. The second field does more than it looks like. It's the specification the agent works toward.",
       detail:
         "Treat `expected_output` as a rubric. 'A summary' produces anything; 'a markdown table with columns X, Y, Z and one row per finding' produces something checkable.",
     },
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "With `Process.hierarchical`, a manager agent decides which agent handles what and in what order. You must supply either a `manager_llm` or a `manager_agent`.",
       detail:
-        "It's more flexible and considerably harder to predict, debug or cost. Reach for it when the task genuinely can't be sequenced in advance — which is rarer than it first appears.",
+        "It's more flexible and considerably harder to predict, debug or cost. Reach for it when the task can't be sequenced in advance — which is rarer than it first appears.",
     },
     {
       term: "Context is not shared automatically",
@@ -99,7 +99,7 @@ researcher = Agent(
     role="Market Researcher",
     goal="Find verifiable facts about a company's product line and pricing",
     backstory=(
-        "You are meticulous about sourcing. You never state a figure you "
+        "You are meticulous about sourcing. You never state a figure you"
         "cannot attribute, and you write NOT FOUND rather than estimating."
     ),
     llm="claude-opus-5",
@@ -110,7 +110,7 @@ writer = Agent(
     role="Brief Writer",
     goal="Turn research into a one-page brief a busy executive can act on",
     backstory=(
-        "You lead with the conclusion, keep sentences short, and never "
+        "You lead with the conclusion, keep sentences short, and never"
         "introduce a claim that was not in the research you were given."
     ),
     llm="claude-opus-5",
@@ -121,7 +121,7 @@ writer = Agent(
 research_task = Task(
     description="Research the product line and public pricing of {company}.",
     expected_output=(
-        "A markdown list of products. For each: name, price if public "
+        "A markdown list of products. For each: name, price if public"
         "(else NOT FOUND), and the source URL."
     ),
     agent=researcher,
@@ -130,7 +130,7 @@ research_task = Task(
 write_task = Task(
     description="Write a one-page brief from the research.",
     expected_output=(
-        "Markdown, under 400 words. Opens with a two-sentence summary, "
+        "Markdown, under 400 words. Opens with a two-sentence summary,"
         "then a table of products and prices, then three risks."
     ),
     agent=writer,
@@ -191,7 +191,7 @@ writer = Agent(
       title: "Hierarchical, and why to think twice",
       language: "python",
       intro:
-        "The manager decides who does what. It's flexible and it's the mode that surprises people on their bill — the manager is itself an agent, reasoning about delegation on every step.",
+        "The manager decides who does what. It's flexible and it's the mode that surprises people on their bill: the manager is itself an agent, reasoning about delegation on every step.",
       code: `crew = Crew(
     agents=[researcher, writer, fact_checker],
     tasks=[research_task, write_task, check_task],
@@ -206,7 +206,7 @@ result = crew.kickoff(inputs={"company": "Fossilite"})
 # is real model work and it is easy to underestimate.
 print(crew.usage_metrics)`,
       note:
-        "Before choosing hierarchical, try sequential and see whether the ordering was genuinely unknowable in advance. Most workflows people reach for a manager to handle turn out to be a pipeline someone hadn't written down yet.",
+        "Before choosing hierarchical, try sequential and see whether the ordering was unknowable in advance. Most workflows people reach for a manager to handle turn out to be a pipeline someone hadn't written down yet.",
     },
   ],
 
@@ -274,13 +274,13 @@ print(crew.usage_metrics)`,
       walkthrough:
         "A recognisable pattern. The task is 'research a company and write a brief', and the org-chart mental model makes it natural to create a researcher, an analyst, a writer, an editor and a fact-checker. Each one establishes its own context, produces output, and passes it on. The result is decent. It cost several times a single-agent run and took considerably longer, and when it's wrong, the error could have entered at any of five handoffs.",
       result:
-        "The corrective is a baseline. Solve it with one agent first and record cost, time and quality. Add roles only where you can point at what the extra context buys — a genuinely independent perspective, or a workstream that runs in parallel. Roles that merely relay work are pure overhead.",
+        "The corrective is a baseline. Solve it with one agent first and record cost, time and quality. Add roles only where you can point at what the extra context buys: a independent perspective, or a workstream that runs in parallel. Roles that merely relay work are pure overhead.",
     },
     {
       kind: "illustration",
       scenario: "The agent that didn't know what its colleague found.",
       walkthrough:
-        "A crew is set up with a researcher and a writer. The researcher discovers an important caveat mid-task but doesn't put it in the task output, because the `expected_output` asked for a product list. The writer never sees it — not because of a bug, but because task output is the only channel between them. The brief ships confidently without the caveat.",
+        "A crew is set up with a researcher and a writer. The researcher discovers an important caveat mid-task but doesn't put it in the task output, because the `expected_output` asked for a product list. The writer never sees it: not because of a bug, but because task output is the only channel between them. The brief ships confidently without the caveat.",
       result:
         "Agents share task results, not understanding. Anything that must reach the next stage has to be part of the `expected_output` specification. Writing that field carefully is how you decide what information survives the handoff.",
     },
@@ -300,7 +300,7 @@ print(crew.usage_metrics)`,
     {
       mistake: "Treating role and backstory as flavour text",
       why: "They become the system prompt. Decorative backstories produce decorative behaviour, and 'you are a world-class expert' does far less than a concrete instruction.",
-      fix: "Write them as behavioural instructions — what this agent does, refuses to do, and how it handles uncertainty.",
+      fix: "Write them as behavioural instructions: what this agent does, refuses to do, and how it handles uncertainty.",
     },
     {
       mistake: "Omitting `max_iter`",
@@ -315,7 +315,7 @@ print(crew.usage_metrics)`,
     {
       mistake: "Reaching for hierarchical to avoid sequencing",
       why: "A manager agent adds delegation reasoning on every step — real cost and much harder tracing — often to solve an ordering problem you could have written down.",
-      fix: "Use sequential unless the order genuinely cannot be known in advance. Try to sequence it first; you usually can.",
+      fix: "Use sequential unless the order cannot be known in advance. Try to sequence it first; you usually can.",
     },
     {
       mistake: "A verification agent with no independent source",
@@ -346,8 +346,8 @@ print(crew.usage_metrics)`,
   ],
 
   businessApplications: [
-    "Research-and-report pipelines where gathering, analysing and writing are genuinely distinct stages with different tool needs.",
-    "Content operations with a real editorial separation — a drafter and a reviewer holding different standards, where the reviewer has its own source of truth.",
+    "Research-and-report pipelines where gathering, analysing and writing are distinct stages with different tool needs.",
+    "Content operations with a real editorial separation: a drafter and a reviewer holding different standards, where the reviewer has its own source of truth.",
     "Parallel investigation across independent items, where separate contexts avoid one agent's findings crowding another's.",
     "Processes that already have a human handoff structure worth mirroring, and where the mapping makes the system easier to explain to stakeholders.",
     "Prototyping a workflow quickly to learn its shape, before rebuilding it as a deterministic pipeline with model calls at specific points.",
@@ -400,11 +400,11 @@ print(crew.usage_metrics)`,
   faqs: [
     {
       q: "When is CrewAI the right choice?",
-      a: "When your problem genuinely decomposes into roles with different tools and perspectives, and you've confirmed a single agent underperforms. The role model is intuitive and that intuitiveness is exactly why it gets applied to problems that don't need it.",
+      a: "When your problem decomposes into roles with different tools and perspectives, and you've confirmed a single agent underperforms. The role model is intuitive and that intuitiveness is exactly why it gets applied to problems that don't need it.",
     },
     {
       q: "Sequential or hierarchical?",
-      a: "Sequential, almost always. It's predictable, traceable and cheaper. Hierarchical adds a manager agent reasoning about delegation on every step — use it only when the task order genuinely cannot be determined in advance.",
+      a: "Sequential, almost always. It's predictable, traceable and cheaper. Hierarchical adds a manager agent reasoning about delegation on every step — use it only when the task order cannot be determined in advance.",
     },
     {
       q: "Do agents in a crew share memory?",

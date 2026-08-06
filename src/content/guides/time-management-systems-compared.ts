@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "time-management-systems-compared",
   seoTitle: "Time Management Systems Compared: Which Actually Works",
   metaDescription:
-    "GTD, time blocking, Pomodoro and the rest — what each is genuinely good at, where each fails, and how to choose one that fits your actual work.",
+    "GTD, time blocking, Pomodoro and the rest — what each is good at, where each fails, and how to choose one that fits your actual work.",
   title: "Time Management Systems, Honestly Compared",
   keywords: [
     "time management systems",
@@ -22,7 +22,7 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "Every time management system works for the person who wrote the book about it. That's not a criticism — it's the most useful thing to understand about the genre. These systems were designed by particular people, for particular kinds of work, under particular constraints, and they're presented as universal because 'this worked for me and might work for you' doesn't sell.",
+    "Every time management system works for the person who wrote the book about it. That's not a criticism. It's the most useful thing to understand about the genre. These systems were designed by particular people, for particular kinds of work, under particular constraints, and they're presented as universal because 'this worked for me and might work for you' doesn't sell.",
     "The result is a predictable cycle. You adopt a system enthusiastically, it works for three weeks, it collapses during a busy period, and you conclude you're the problem. Usually you weren't. The system was solving a constraint you don't have while ignoring the one you do.",
     "This guide compares the major systems by what they actually optimise for and where each characteristically fails. The aim is diagnosis first: work out which constraint is actually binding on your week, then choose the system that addresses it — or, more often, take the one component of it that helps and leave the rest.",
   ],
@@ -53,7 +53,7 @@ export const guide: Guide = {
       explain:
         "Time blocking assigns work to specific hours rather than to a list. It converts intentions into commitments that compete with meetings on equal terms.",
       detail:
-        "Its weakness is reactive work. If your day is genuinely interrupt-driven, a detailed block schedule breaks by mid-morning and produces a sense of failure. Blocking a smaller portion of the day survives far better than blocking all of it.",
+        "Its weakness is reactive work. If your day is interrupt-driven, a detailed block schedule breaks by mid-morning and produces a sense of failure. Blocking a smaller portion of the day survives far better than blocking all of it.",
     },
     {
       term: "Timer systems: for when starting is the problem",
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "Switching between tasks carries a cost that doesn't show up as elapsed time. People compensate for interruption by working faster and pay in stress rather than in missed deadlines.",
       detail:
-        "This is why a system that reduces switching can improve your week even when it doesn't change total output — the output was already being maintained, at a price nobody was measuring.",
+        "This is why a system that reduces switching can improve your week even when it doesn't change total output: the output was already being maintained, at a price nobody was measuring.",
     },
     {
       term: "The system is not the work",
@@ -119,7 +119,7 @@ export const guide: Guide = {
     },
     {
       title: "Use a timer only for starting",
-      body: "If resistance to beginning is your issue, commit to fifteen minutes and permit yourself to stop. Then don't let the timer interrupt work that's flowing — the purpose was to start, and it's served.",
+      body: "If resistance to beginning is your issue, commit to fifteen minutes and permit yourself to stop. Then don't let the timer interrupt work that's flowing: the purpose was to start, and it's served.",
       effort: "As needed",
       outcome: "Reliable starting without artificial interruption.",
     },
@@ -156,7 +156,7 @@ export const guide: Guide = {
       walkthrough:
         "Sophie Leroy studied what happens cognitively when people switch between work tasks, introducing the concept of attention residue. Participants moved from one task to another under conditions varying whether the first was completed or left unfinished.",
       result:
-        "Performance on the second task was measurably worse when the first had been left incomplete — part of attention remained with it, with the effect strongest for tasks that were unfinished, time-pressured or emotionally engaging. This is a specific argument for systems that batch similar work and for reaching a defined stopping point before switching, rather than for any particular app or methodology.",
+        "Performance on the second task was measurably worse when the first had been left incomplete: part of attention remained with it, with the effect strongest for tasks that were unfinished, time-pressured or emotionally engaging. This is a specific argument for systems that batch similar work and for reaching a defined stopping point before switching, rather than for any particular app or methodology.",
       source: {
         label: "Leroy (2009) — Why Is It So Hard to Do My Work? The Challenge of Attention Residue When Switching Between Work Tasks",
         url: "https://www.uwb.edu/business/faculty/sophie-leroy/attention-residue",
@@ -166,7 +166,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The elaborate system that becomes the work.",
       walkthrough:
-        "A recognisable trajectory. You adopt a comprehensive system, build out projects, contexts, tags and areas of responsibility, and spend a satisfying weekend configuring it. For a fortnight everything is captured and categorised. Then a genuinely busy period arrives, the weekly review is skipped twice, the backlog grows unreviewed, and opening the system now produces anxiety rather than clarity. Eventually you stop opening it, and you look for a better system.",
+        "A recognisable trajectory. You adopt a comprehensive system, build out projects, contexts, tags and areas of responsibility, and spend a satisfying weekend configuring it. For a fortnight everything is captured and categorised. Then a busy period arrives, the weekly review is skipped twice, the backlog grows unreviewed, and opening the system now produces anxiety rather than clarity. Eventually you stop opening it, and you look for a better system.",
       result:
         "The failure wasn't discipline; it was that the maintenance cost exceeded what a bad week could absorb. A system's real test is not how well it works when you have time to maintain it but whether it survives the week when you don't. That argues strongly for the simplest structure that holds your commitments.",
     },
@@ -241,7 +241,7 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Managing personal admin without it occupying background attention, which is what capture systems genuinely deliver.",
+    "Managing personal admin without it occupying background attention, which is what capture systems deliver.",
     "Protecting time for things with no external deadline — exercise, learning, relationships — which lose by default to anything scheduled.",
     "Reducing the mental load of running a household, where the invisible work is largely tracking rather than doing.",
     "Recognising over-commitment as a structural problem rather than a personal failing, which changes what you do about it.",
@@ -273,7 +273,7 @@ export const guide: Guide = {
     {
       title: "Batch the interruptions",
       brief:
-        "Move all messages and admin into two fixed windows for a week. Tell people in advance. Record what genuinely went wrong as a consequence.",
+        "Move all messages and admin into two fixed windows for a week. Tell people in advance. Record what went wrong as a consequence.",
       success: "A list of real consequences, which is almost always shorter than the anticipated one.",
       time: "1 week",
     },
@@ -311,7 +311,7 @@ export const guide: Guide = {
     },
     {
       q: "Is Getting Things Done worth implementing fully?",
-      a: "The capture-and-clarify core is genuinely valuable for people who drop commitments. The full implementation — contexts, horizons, comprehensive reviews — is substantial maintenance that many people can't sustain. Take the core.",
+      a: "The capture-and-clarify core is valuable for people who drop commitments. The full implementation — contexts, horizons, comprehensive reviews — is substantial maintenance that many people can't sustain. Take the core.",
     },
     {
       q: "Does the Pomodoro technique work?",

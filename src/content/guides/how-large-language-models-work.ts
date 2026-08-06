@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "how-large-language-models-work",
   seoTitle: "How Large Language Models Work — Plainly Explained",
   metaDescription:
-    "Tokens, context windows, training and hallucination — an accurate, jargon-free explanation of what large language models do and where they genuinely fail.",
+    "Tokens, context windows, training and hallucination — an accurate, jargon-free explanation of what large language models do and where they fail.",
   title: "How Large Language Models Actually Work",
   keywords: [
     "how large language models work",
@@ -22,13 +22,13 @@ export const guide: Guide = {
   readingTime: 15,
 
   intro: [
-    "There are two bad explanations of language models in circulation. The first says they're just autocomplete, which is technically close but implies far less capability than these systems demonstrably have. The second says they think and understand, which implies far more. Both make it harder to predict when one will work and when it will fail you — and prediction is the whole point of understanding.",
+    "There are two bad explanations of language models in circulation. The first says they're just autocomplete, which is technically close but implies far less capability than these systems demonstrably have. The second says they think and understand, which implies far more. Both make it harder to predict when one will work and when it will fail you, and prediction is the whole point of understanding.",
     "Here's the accurate version. A large language model is a very large mathematical function that takes a sequence of text and produces a probability distribution over what comes next. It was built by adjusting billions of numbers until it got extremely good at that one prediction task, across a substantial fraction of the text humanity has written down.",
-    "That description sounds modest. The surprising empirical finding of the last several years is that becoming truly excellent at predicting the next piece of text requires acquiring a great deal of transferable structure — grammar, factual associations, reasoning patterns, code semantics, style. Nobody designed those capabilities. They emerged because they help with the prediction. That's the genuinely remarkable part, and it's also exactly why the failures look so strange.",
+    "That description sounds modest. The surprising empirical finding of the last several years is that becoming truly excellent at predicting the next piece of text requires acquiring a great deal of transferable structure: grammar, factual associations, reasoning patterns, code semantics, style. Nobody designed those capabilities. They emerged because they help with the prediction. That's the remarkable part, and it's also exactly why the failures look so strange.",
   ],
 
   whyItMatters: [
-    "You are almost certainly going to work alongside these systems for the rest of your career, whatever your field. The difference between people who get consistently good results and people who get frustrated is rarely about the model — it's about whether they understand what the tool is doing well enough to set it up for success.",
+    "You are almost certainly going to work alongside these systems for the rest of your career, whatever your field. The difference between people who get consistently good results and people who get frustrated is rarely about the model. It's about whether they understand what the tool is doing well enough to set it up for success.",
     "Understanding the mechanism directly predicts the failure modes. Once you know the model is generating plausible continuations rather than retrieving verified facts, hallucination stops being mysterious and becomes something you design around. Once you understand the context window, the strange behaviour of very long conversations becomes obvious. Every practical skill here descends from the mechanism.",
     "There's a commercial dimension too. An enormous amount of money is currently being spent on LLM projects that were never going to work, because someone assumed the model had capabilities it structurally doesn't have — reliable arithmetic, knowledge of last week's events, guaranteed consistency. Knowing where the boundary sits saves budgets and reputations.",
   ],
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "Tokens, not words",
       explain:
-        "Models don't read letters or words. Text is chopped into tokens — common chunks that may be a whole word, a fragment, a space, or a punctuation mark. Everything the model does operates on these units.",
+        "Models don't read letters or words. Text is chopped into tokens: common chunks that may be a whole word, a fragment, a space, or a punctuation mark. Everything the model does operates on these units.",
       detail:
         "As a rough guide, one token averages about four characters of English, so 1,000 tokens is roughly 750 words. This is why models struggle with letter-level tasks like counting the r's in a word: it never saw the letters as separate things.",
     },
@@ -58,7 +58,7 @@ export const guide: Guide = {
     {
       term: "The context window is the model's entire working memory",
       explain:
-        "The context window is the maximum number of tokens the model can consider at once — your prompt, any documents you supplied, the conversation so far, and the response being generated, all counted together.",
+        "The context window is the maximum number of tokens the model can consider at once: your prompt, any documents you supplied, the conversation so far, and the response being generated, all counted together.",
       detail:
         "Nothing outside that window exists for the model. When a long conversation exceeds it, earlier turns are dropped or summarised, which is why a model can suddenly 'forget' an instruction you gave forty messages ago.",
     },
@@ -74,14 +74,14 @@ export const guide: Guide = {
       explain:
         "The model produces probabilities over possible next tokens; the sampler then picks one. Temperature scales how much the sampler favours the highest-probability option. Low temperature is more predictable, high temperature more varied.",
       detail:
-        "A widespread misconception is that temperature 0 makes a model factual. It doesn't. It makes the model consistently produce its most likely output — which can be a confidently, repeatably wrong answer.",
+        "A widespread misconception is that temperature 0 makes a model factual. It doesn't. It makes the model consistently produce its most likely output: which can be a confidently, repeatably wrong answer.",
     },
     {
       term: "Hallucination is the mechanism working normally",
       explain:
         "The model generates text that is statistically plausible given the context. When it has genuine knowledge, plausible and true coincide. When it doesn't, it still produces something plausible — a citation with the right shape, a function name that sounds right — because producing nothing was never an option it was trained toward.",
       detail:
-        "This is why hallucinations are so often confidently formatted and structurally perfect. The model is excellent at the form of a correct answer, which is precisely what makes fabrications hard to spot at a glance.",
+        "This is why hallucinations are so often confidently formatted and structurally perfect. The model is excellent at the form of a correct answer, which is what makes fabrications hard to spot at a glance.",
     },
     {
       term: "Pre-training, fine-tuning, and alignment are different stages",
@@ -100,7 +100,7 @@ export const guide: Guide = {
     {
       term: "Tool use extends the model past its limits",
       explain:
-        "Modern systems let the model call external functions — a calculator, a search engine, a database, your own API. The model decides what to call and with what arguments; the actual work happens outside it.",
+        "Modern systems let the model call external functions: a calculator, a search engine, a database, your own API. The model decides what to call and with what arguments; the actual work happens outside it.",
       detail:
         "This is the correct fix for arithmetic, live data, and anything requiring guaranteed accuracy. Don't ask a text predictor to be a calculator when you can hand it one.",
     },
@@ -139,7 +139,7 @@ export const guide: Guide = {
     },
     {
       title: "Add a tool call",
-      body: "Give a model a function it can invoke — a calculator, a weather lookup, a query against your own data. Watch it decide when to call, and handle the case where it calls with malformed arguments, because it will.",
+      body: "Give a model a function it can invoke: a calculator, a weather lookup, a query against your own data. Watch it decide when to call, and handle the case where it calls with malformed arguments, because it will.",
       effort: "5–6 hours",
       outcome: "You've seen the model correctly delegate something it can't do reliably itself.",
     },
@@ -156,7 +156,7 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "A lawyer files a brief citing six court decisions that do not exist.",
       walkthrough:
-        "In a personal injury claim against the airline Avianca, plaintiff's counsel used ChatGPT to research precedent and submitted a brief citing cases such as \"Varghese v. China Southern Airlines\". The cases were fabricated, complete with fictitious quotations and internal citations to other invented decisions. When opposing counsel could not locate them, the lawyer asked ChatGPT whether the cases were real; it said yes. That is the mechanism working exactly as designed — asked to confirm its own output, it produced the plausible continuation, which was agreement.",
+        "In a personal injury claim against the airline Avianca, plaintiff's counsel used ChatGPT to research precedent and submitted a brief citing cases such as \"Varghese v. China Southern Airlines\". The cases were fabricated, complete with fictitious quotations and internal citations to other invented decisions. When opposing counsel could not locate them, the lawyer asked ChatGPT whether the cases were real; it said yes. That is the mechanism working exactly as designed: asked to confirm its own output, it produced the plausible continuation, which was agreement.",
       result:
         "On 22 June 2023 Judge P. Kevin Castel sanctioned the two lawyers and their firm $5,000, and required corrective letters be sent to every real judge whose name had been attached to a fabricated opinion. The fabrications were convincing precisely because the model is excellent at the *form* of a citation — plausible party names, realistic reporter numbers, correct structure — which is exactly what next-token prediction optimises.",
       source: {
@@ -231,7 +231,7 @@ export const guide: Guide = {
   bestPractices: [
     "Give the model a role and a goal before the task. 'You are reviewing this for a non-technical executive who needs to make a budget decision' changes the output far more than adding adjectives.",
     "Show one worked example of the output you want. A single concrete example outperforms three paragraphs of description, because it removes ambiguity about format, depth and tone simultaneously.",
-    "Ask for reasoning before conclusions on analytical tasks. Generation is sequential, so tokens spent working through the problem genuinely improve the answer that follows — the reasoning isn't decoration.",
+    "Ask for reasoning before conclusions on analytical tasks. Generation is sequential, so tokens spent working through the problem improve the answer that follows — the reasoning isn't decoration.",
     "Ground factual work in supplied sources and require quotes. This converts an unverifiable claim into a checkable one, which is the single biggest reliability upgrade available.",
     "Give the model an explicit escape hatch: 'if the provided documents don't answer this, say so'. Without permission to decline, it will produce something rather than nothing.",
     "Use structured output formats — JSON, tables, defined headings — when the result feeds another system. Free-form prose is unparseable and will break your pipeline eventually.",
@@ -262,7 +262,7 @@ export const guide: Guide = {
     "Getting unstuck in writing: use the model for the terrible first draft you'd otherwise avoid producing. Editing something bad is psychologically much easier than facing an empty page.",
     "Thinking through decisions: describe your situation and ask for the strongest argument against your preferred option. It's a low-cost way to get an adversarial perspective when you don't want to poll your friends.",
     "Translating jargon: paste a dense contract clause, medical letter or technical document and ask for plain language — then verify anything consequential with a qualified human.",
-    "Preparing for hard conversations: rehearse a salary negotiation or difficult feedback session with the model playing the other party. The practice is genuinely useful even though the simulation is imperfect.",
+    "Preparing for hard conversations: rehearse a salary negotiation or difficult feedback session with the model playing the other party. The practice is useful even though the simulation is imperfect.",
   ],
 
   exercises: [
@@ -320,19 +320,19 @@ export const guide: Guide = {
   faqs: [
     {
       q: "Do language models understand what they're saying?",
-      a: "They build rich internal representations that support genuinely useful reasoning, but there's no grounding in experience and no persistent beliefs. The productive framing is behavioural: judge what it reliably does on your task rather than arguing about what's happening inside.",
+      a: "They build rich internal representations that support useful reasoning, but there's no grounding in experience and no persistent beliefs. The productive framing is behavioural: judge what it reliably does on your task rather than arguing about what's happening inside.",
     },
     {
       q: "Why does an LLM get simple arithmetic wrong?",
-      a: "It generates plausible tokens rather than performing calculation, and numbers tokenise awkwardly into fragments. The fix isn't a better prompt — it's giving the model a calculator or having it write code that actually runs.",
+      a: "It generates plausible tokens rather than performing calculation, and numbers tokenise awkwardly into fragments. The fix isn't a better prompt. It's giving the model a calculator or having it write code that actually runs.",
     },
     {
       q: "What is a context window, in practical terms?",
-      a: "The total amount of text the model can consider at once, including your instructions, any documents, the conversation history and its own reply. Exceed it and something gets dropped — usually the oldest material, which is often your original instructions.",
+      a: "The total amount of text the model can consider at once, including your instructions, any documents, the conversation history and its own reply. Exceed it and something gets dropped: usually the oldest material, which is often your original instructions.",
     },
     {
       q: "Should I fine-tune a model for my business?",
-      a: "Usually not first. Fine-tuning teaches format and behaviour well but is a poor mechanism for facts. For company knowledge, retrieval is cheaper, updates instantly, and lets you cite sources. Consider fine-tuning once prompting and retrieval are genuinely exhausted.",
+      a: "Usually not first. Fine-tuning teaches format and behaviour well but is a poor mechanism for facts. For company knowledge, retrieval is cheaper, updates instantly, and lets you cite sources. Consider fine-tuning once prompting and retrieval are exhausted.",
     },
     {
       q: "Are bigger models always better?",
@@ -352,7 +352,7 @@ export const guide: Guide = {
     { name: "OpenAI Playground", what: "Direct API access with visible system prompts, temperature and token counts. Far more instructive than the chat interface.", cost: "Paid", url: "https://platform.openai.com/playground" },
     { name: "Anthropic Console", what: "Claude's development environment, including a prompt generator and side-by-side prompt comparison.", cost: "Paid", url: "https://console.anthropic.com" },
     { name: "Tiktokenizer", what: "Shows exactly how text splits into tokens. Thirty seconds here explains a dozen odd model behaviours.", cost: "Free", url: "https://tiktokenizer.vercel.app" },
-    { name: "LM Studio", what: "Run open-weight models locally. The best way to understand hardware costs and what smaller models can genuinely do.", cost: "Free", url: "https://lmstudio.ai" },
+    { name: "LM Studio", what: "Run open-weight models locally. The best way to understand hardware costs and what smaller models can do.", cost: "Free", url: "https://lmstudio.ai" },
     { name: "Ollama", what: "Command-line local model runner. Simple, scriptable, good for experimenting without per-token costs.", cost: "Free", url: "https://ollama.com" },
     { name: "LangSmith", what: "Tracing and evaluation for LLM applications — see exactly what was sent and returned at every step.", cost: "Freemium", url: "https://smith.langchain.com" },
     { name: "Promptfoo", what: "Test prompts against a fixed evaluation set and catch regressions. Treats prompts as code, which they are.", cost: "Free", url: "https://promptfoo.dev" },

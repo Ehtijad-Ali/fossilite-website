@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "ai-for-customer-support",
   seoTitle: "AI for Customer Support: What Works and What Backfires",
   metaDescription:
-    "How to use AI in customer support without wrecking service quality — deflection, triage, escalation design, and the documented results of getting it wrong.",
+    "How to use AI in customer support without wrecking service quality: deflection, triage, escalation design, and the documented results of getting it wrong.",
   title: "AI for Customer Support",
   keywords: [
     "ai customer support",
@@ -24,7 +24,7 @@ export const guide: Guide = {
   intro: [
     "Customer support is where most businesses try AI first, and for good reason: high volume, repetitive questions, measurable cost, and an obvious benchmark in the team already doing it. It's also where the most public failures have happened, which makes it unusually well documented — you can learn from other companies' expensive lessons rather than repeating them.",
     "The pattern in those lessons is consistent. AI handles volume extremely well and complexity badly. Deployments that respect that distinction save real money. Deployments that assume volume and complexity are the same thing get impressive numbers for a year and then quietly rehire.",
-    "This guide covers where AI genuinely helps in support, how to design the handover to a human, what to measure, and the two documented cases every business should read before committing — one showing the upside with real numbers, one showing what happens when the output isn't grounded.",
+    "This guide covers where AI helps in support, how to design the handover to a human, what to measure, and the two documented cases every business should read before committing — one showing the upside with real numbers, one showing what happens when the output isn't grounded.",
   ],
 
   whyItMatters: [
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "Volume and complexity are different axes",
       explain:
-        "Most support volume is a small number of repeated questions — where is my order, how do I reset this, what's your returns policy. Most support *difficulty* sits in a long tail of unusual, emotional or multi-step cases.",
+        "Most support volume is a small number of repeated questions: where is my order, how do I reset this, what's your returns policy. Most support *difficulty* sits in a long tail of unusual, emotional or multi-step cases.",
       detail:
         "AI is excellent on the first and poor on the second. Designs that route by *type* rather than treating all contacts alike are the ones that hold up.",
     },
@@ -81,25 +81,25 @@ export const guide: Guide = {
       explain:
         "Classifying by intent, urgency and product area, then routing to the right queue with relevant history attached, saves time on every ticket including the ones humans handle.",
       detail:
-        "It's also far lower risk than customer-facing generation — a misrouted ticket is an annoyance, a wrong answer is a liability.",
+        "It's also far lower risk than customer-facing generation: a misrouted ticket is an annoyance, a wrong answer is a liability.",
     },
     {
       term: "Your documentation becomes the bottleneck",
       explain:
         "Grounded AI can only answer what's written down. Deployments frequently reveal that the help centre is out of date, contradictory, or missing the answers customers actually ask for.",
       detail:
-        "That's a genuinely useful finding, and often the highest-return work the project produces — improving the docs helps the humans too.",
+        "That's a useful finding, and often the highest-return work the project produces — improving the docs helps the humans too.",
     },
   ],
 
   examples: [
     {
       kind: "documented",
-      scenario: "Klarna's AI assistant — the results, and the reversal a year later.",
+      scenario: "Klarna's AI assistant: the results, and the reversal a year later.",
       walkthrough:
         "In February 2024 Klarna announced an OpenAI-powered assistant handling two-thirds of its customer service chats in its first month: 2.3 million conversations, across 23 markets and 35+ languages, with resolution time falling from 11 minutes to under 2. They reported customer satisfaction on par with human agents, a 25% drop in repeat inquiries, and an estimated $40 million profit improvement for 2024, describing the work as equivalent to 700 full-time agents. Then in May 2025, CEO Sebastian Siemiatkowski told Bloomberg the cost-cutting had gone too far, and the company began recruiting human agents again so customers would always have the option of speaking to a person. His summary: \"We focused too much on cost. The result was lower quality.\"",
       result:
-        "Both halves matter and most write-ups only quote one. The volume gains were real and large. The failure was treating volume as the whole problem — AI held up on routine contacts and not on the emotional, complex and multi-step cases, and satisfaction fell. The design that survives is the one Klarna arrived at second: AI on the high-volume tier, humans available for complexity, and never hiding the route to a person. Note too that \"700 agents\" was a modelled equivalence rather than a headcount, which is worth remembering when a vendor quotes it at you.",
+        "Both halves matter and most write-ups only quote one. The volume gains were real and large. The failure was treating volume as the whole problem — AI held up on routine contacts and not on the emotional, complex and multi-step cases, and satisfaction fell. The design that survives is the one Klarna arrived at second: AI on the high-volume tier, humans available for complexity, and never hiding the route to a person. Note too that \"700 agents\"was a modelled equivalence rather than a headcount, which is worth remembering when a vendor quotes it at you.",
       source: {
         label: "Klarna press release (Feb 2024) and Forbes coverage of the May 2025 reversal",
         url: "https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/",
@@ -123,14 +123,14 @@ export const guide: Guide = {
       walkthrough:
         "A pattern worth watching for in your own dashboard. A support bot is judged on deflection rate, and the number climbs steadily — a genuine success by the measure being reported. Contact volume, though, is flat. What's actually happening is that customers get an unhelpful answer, close the chat, and open a new one an hour later. Each new contact counts as a fresh ticket, and each deflection counts as a win.",
       result:
-        "Pairing deflection with repeat-contact rate and resolution rate makes this visible immediately. If deflection rises while total contacts stay flat, you've relocated the work rather than removed it — and the customer had a worse experience on the way.",
+        "Pairing deflection with repeat-contact rate and resolution rate makes this visible immediately. If deflection rises while total contacts stay flat, you've relocated the work rather than removed it, and the customer had a worse experience on the way.",
     },
   ],
 
   learningPath: [
     {
       title: "Find out what people actually contact you about",
-      body: "Export three months of tickets and categorise the top 20 reasons by volume. Most businesses find a handful of question types account for the majority of contacts — and that they're not the ones anyone assumed.",
+      body: "Export three months of tickets and categorise the top 20 reasons by volume. Most businesses find a handful of question types account for the majority of contacts, and that they're not the ones anyone assumed.",
       effort: "4–6 hours",
       outcome: "A ranked list of contact reasons with volumes attached.",
     },
@@ -206,7 +206,7 @@ export const guide: Guide = {
     {
       mistake: "Cutting headcount on projected savings",
       why: "The savings arrive later than the forecast and the quality cost arrives sooner. Rehiring is more expensive and slower than not firing.",
-      fix: "Let the volume genuinely shift first, then redeploy people to the complex work where they're most valuable. Treat headcount as the last lever, not the first.",
+      fix: "Let the volume shift first, then redeploy people to the complex work where they're most valuable. Treat headcount as the last lever, not the first.",
     },
   ],
 
@@ -236,7 +236,7 @@ export const guide: Guide = {
     "Ticket triage and routing, which pays back on every contact including those a human handles.",
     "Drafting first responses for agent review, giving speed without removing the human check.",
     "Out-of-hours coverage, where the honest comparison is against nobody answering at all rather than against a human.",
-    "Internal support for your own staff — same mechanics, far lower stakes, and a good place to build confidence.",
+    "Internal support for your own staff: same mechanics, far lower stakes, and a good place to build confidence.",
     "Summarising long ticket threads at handover so the next agent starts from a briefing rather than a transcript.",
   ],
 
@@ -251,7 +251,7 @@ export const guide: Guide = {
     {
       title: "Try to break your own bot",
       brief:
-        "Ask it ten questions your documentation genuinely can't answer, and three where the policy is ambiguous. Count how many produce a confident invention.",
+        "Ask it ten questions your documentation can't answer, and three where the policy is ambiguous. Count how many produce a confident invention.",
       success: "You know your fabrication rate before customers discover it.",
       time: "2 hours",
     },
@@ -288,7 +288,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "How much support volume can AI realistically handle?",
-      a: "It depends entirely on your contact mix. Klarna reported two-thirds of chats in month one, but their volume is dominated by routine payment queries. Audit your own contact reasons first — the share that's genuinely routine is the share that's automatable.",
+      a: "It depends entirely on your contact mix. Klarna reported two-thirds of chats in month one, but their volume is dominated by routine payment queries. Audit your own contact reasons first — the share that's routine is the share that's automatable.",
     },
     {
       q: "Will it reduce headcount?",
@@ -308,7 +308,7 @@ export const guide: Guide = {
     },
     {
       q: "Should customers be told they're talking to AI?",
-      a: "Yes — it's increasingly a regulatory expectation and it sets appropriate expectations. Customers are markedly more tolerant of an AI that's clearly labelled and offers an easy route to a person.",
+      a: "Yes. It's increasingly a regulatory expectation and it sets appropriate expectations. Customers are markedly more tolerant of an AI that's clearly labelled and offers an easy route to a person.",
     },
     {
       q: "What should we measure?",

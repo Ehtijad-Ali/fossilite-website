@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "automation-worth-building",
   seoTitle: "Automation Worth Building: What to Automate, What to Cut",
   metaDescription:
-    "How to decide what's actually worth automating — the payback maths, the maintenance nobody counts, and why deleting a step usually beats automating it.",
+    "How to decide what's actually worth automating: the payback maths, the maintenance nobody counts, and why deleting a step usually beats automating it.",
   title: "Automation Worth Building",
   keywords: [
     "what to automate",
@@ -22,14 +22,14 @@ export const guide: Guide = {
   readingTime: 11,
 
   intro: [
-    "There's a well-known joke about spending six hours automating a task that took twenty minutes. It lands because everyone has done it, and because the maths is genuinely harder than it looks — the tempting version compares build time against time saved, and leaves out the part that actually decides it.",
+    "There's a well-known joke about spending six hours automating a task that took twenty minutes. It lands because everyone has done it, and because the maths is harder than it looks — the tempting version compares build time against time saved, and leaves out the part that actually decides it.",
     "Automation has a maintenance cost. It breaks when an upstream format changes, when someone leaves and takes the context with them, when the process it encoded gets revised. That ongoing cost is invisible at build time and it's what turns a good automation into a liability nobody wants to own.",
     "This guide is about choosing. Which tasks pay back, which look tempting and don't, and the option most people skip entirely — deleting the step rather than automating it. Most of the value here is in what you decide not to build.",
   ],
 
   whyItMatters: [
     "Automation is where a lot of well-intentioned effort disappears. Teams automate the visible annoyance rather than the expensive one, build something fragile around a process that was about to change, and end up maintaining several scripts that each save a few minutes a month.",
-    "The compounding argument is real, though, when you pick correctly. A task done weekly by four people for two years is several hundred hours. Removing it doesn't just save time — it removes an error source, a training burden and a dependency on whoever happened to know the steps.",
+    "The compounding argument is real, though, when you pick correctly. A task done weekly by four people for two years is several hundred hours. Removing it doesn't just save time: it removes an error source, a training burden and a dependency on whoever happened to know the steps.",
     "And automation forces a clarity that's valuable even when you don't build. Writing down every step of a process reliably reveals that two of them exist because of a system that was replaced, and one is a workaround for a bug that got fixed. That audit often pays for itself before any code is written.",
   ],
 
@@ -67,7 +67,7 @@ export const guide: Guide = {
       explain:
         "Steps requiring a real decision resist automation. What works is removing everything around the decision so a person does only the deciding.",
       detail:
-        "Gathering the information, formatting it, drafting the options — that's automatable. The choice stays with a person, and that's usually where the value was anyway.",
+        "Gathering the information, formatting it, drafting the options. That's automatable. The choice stays with a person, and that's usually where the value was anyway.",
     },
     {
       term: "Silent failure is worse than no automation",
@@ -174,7 +174,7 @@ export const guide: Guide = {
       walkthrough:
         "A recognisable discovery. A weekly report takes someone forty minutes to assemble and it's an obvious automation candidate. Before building, someone asks who reads it. The distribution list has eleven people. Two open it. Both say they'd be fine with a monthly version, and one only wants a single number from it.",
       result:
-        "The automation was never built. A monthly one-line summary replaced forty minutes a week. Asking who consumes the output takes ten minutes and is the highest-return question in this guide — it's just easier to build something than to propose stopping something.",
+        "The automation was never built. A monthly one-line summary replaced forty minutes a week. Asking who consumes the output takes ten minutes and is the highest-return question in this guide. It's just easier to build something than to propose stopping something.",
     },
   ],
 
@@ -186,7 +186,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Ignoring maintenance in the payback calculation",
-      why: "Build time is visible and maintenance isn't. Formats change, credentials expire, processes get revised — and the automation needs attention each time.",
+      why: "Build time is visible and maintenance isn't. Formats change, credentials expire, processes get revised, and the automation needs attention each time.",
       fix: "Add an annual maintenance estimate before deciding. Anything that only just breaks even without it will lose.",
     },
     {
@@ -239,10 +239,10 @@ export const guide: Guide = {
   ],
 
   businessApplications: [
-    "Reporting pipelines — usually the largest concentration of automatable work, and the place where the who-reads-this question deletes the most.",
+    "Reporting pipelines: usually the largest concentration of automatable work, and the place where the who-reads-this question deletes the most.",
     "Data entry and re-keying between systems that don't integrate, which is both time-consuming and error-generating.",
-    "Reconciliation between systems — tedious by hand, well-defined, and stable enough to automate safely.",
-    "Onboarding and offboarding checklists, where the cost of a missed step is high and the process is genuinely stable.",
+    "Reconciliation between systems: tedious by hand, well-defined, and stable enough to automate safely.",
+    "Onboarding and offboarding checklists, where the cost of a missed step is high and the process is stable.",
     "Monitoring and alerting, replacing someone remembering to check something.",
     "Document generation from structured data, where a person reviews rather than assembles.",
   ],
@@ -250,7 +250,7 @@ export const guide: Guide = {
   lifeApplications: [
     "Personal admin — the same ranking applies, and the same answer usually appears: several recurring tasks can simply stop.",
     "Recognising that a frequent small task costs more than an occasional large one, in your own week as much as at work.",
-    "Automating decisions in advance — a standing rule beats deciding repeatedly, which is automation applied to attention rather than to software.",
+    "Automating decisions in advance: a standing rule beats deciding repeatedly, which is automation applied to attention rather than to software.",
     "Noticing which recurring obligations exist because of a situation that no longer applies.",
   ],
 
@@ -313,7 +313,7 @@ export const guide: Guide = {
     },
     {
       q: "Should I automate something that needs judgement?",
-      a: "Automate around it. Gather the information, format it, draft the options — and leave the decision to a person. That's usually where the value was, and it's the part that resists automation for good reasons.",
+      a: "Automate around it. Gather the information, format it, draft the options, and leave the decision to a person. That's usually where the value was, and it's the part that resists automation for good reasons.",
     },
     {
       q: "What if the process changes often?",
@@ -321,7 +321,7 @@ export const guide: Guide = {
     },
     {
       q: "Can AI automate things that couldn't be automated before?",
-      a: "It genuinely extends the range to unstructured input — documents, free text, images — that rule-based automation couldn't handle. The selection criteria don't change: frequency, stability, ownership, detectable failure.",
+      a: "It extends the range to unstructured input — documents, free text, images — that rule-based automation couldn't handle. The selection criteria don't change: frequency, stability, ownership, detectable failure.",
     },
     {
       q: "What's the most common mistake?",

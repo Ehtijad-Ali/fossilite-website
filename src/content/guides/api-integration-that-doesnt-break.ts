@@ -53,7 +53,7 @@ export const guide: Guide = {
       explain:
         "A unique key per logical operation lets the server recognise a repeat and return the original result instead of performing the action twice.",
       detail:
-        "Essential for anything that creates or charges. The dangerous case is a request that succeeded upstream and timed out on your side — you cannot tell that from a genuine failure, so you must be able to retry safely.",
+        "Essential for anything that creates or charges. The dangerous case is a request that succeeded upstream and timed out on your side: you cannot tell that from a genuine failure, so you must be able to retry safely.",
     },
     {
       term: "Always set an explicit timeout",
@@ -67,7 +67,7 @@ export const guide: Guide = {
       explain:
         "After repeated failures, stop calling for a cooling-off period and fail immediately instead. Try again periodically to see if it recovered.",
       detail:
-        "This protects both sides — you stop wasting capacity on calls that will fail, and you stop adding load to something already struggling.",
+        "This protects both sides: you stop wasting capacity on calls that will fail, and you stop adding load to something already struggling.",
     },
     {
       term: "Rate limits are documentation, headers are truth",
@@ -300,7 +300,7 @@ def handle_webhook():
       kind: "illustration",
       scenario: "The double charge from a successful request.",
       walkthrough:
-        "The failure mode idempotency exists for, and it's counterintuitive. A payment request reaches the provider and succeeds. The response is lost — a network blip, a load balancer timeout. Your client sees a timeout, which it classifies as retryable, and retries. The provider has no way to know this is the same operation, so it charges again. Your logs show one failure and one success. The customer sees two charges.",
+        "The failure mode idempotency exists for, and it's counterintuitive. A payment request reaches the provider and succeeds. The response is lost: a network blip, a load balancer timeout. Your client sees a timeout, which it classifies as retryable, and retries. The provider has no way to know this is the same operation, so it charges again. Your logs show one failure and one success. The customer sees two charges.",
       result:
         "A stable idempotency key derived from the order id makes the retry safe: the provider recognises it and returns the original result. The key must identify the operation, not the attempt — a fresh UUID per request is the common mistake and it defeats the mechanism entirely.",
     },
@@ -376,7 +376,7 @@ def handle_webhook():
     "Payment processing, where idempotency is the difference between a retry and a double charge.",
     "Order and inventory synchronisation across systems, where duplicate webhooks create duplicate records.",
     "CRM and marketing platform integrations, which are rate-limited aggressively and rarely handled for it.",
-    "Any AI system calling model providers — the same retry, timeout and rate-limit patterns apply directly.",
+    "Any AI system calling model providers: the same retry, timeout and rate-limit patterns apply directly.",
     "Partner and supplier data exchange, where you control neither the schedule nor the format stability.",
     "Internal service-to-service calls, which need exactly the same discipline and usually get less.",
   ],
@@ -442,7 +442,7 @@ def handle_webhook():
     },
     {
       q: "Why do I get duplicate webhooks?",
-      a: "Delivery is at-least-once by design. If your handler is slow or returns a non-2xx, the provider retries — and network conditions produce duplicates independently. Dedupe on event id.",
+      a: "Delivery is at-least-once by design. If your handler is slow or returns a non-2xx, the provider retries, and network conditions produce duplicates independently. Dedupe on event id.",
     },
     {
       q: "Why does my signature verification always fail?",

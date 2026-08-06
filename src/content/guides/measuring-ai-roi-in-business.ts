@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "measuring-ai-roi-in-business",
   seoTitle: "Measuring AI ROI: Building a Business Case That Holds",
   metaDescription:
-    "How to work out whether an AI project pays back — baselines, the costs nobody forecasts, and why most reported AI ROI figures don't survive scrutiny.",
+    "How to work out whether an AI project pays back: baselines, the costs nobody forecasts, and why most reported AI ROI figures don't survive scrutiny.",
   title: "Measuring AI ROI in Business",
   keywords: [
     "ai roi",
@@ -29,7 +29,7 @@ export const guide: Guide = {
 
   whyItMatters: [
     "AI projects fail commercially far more often than they fail technically. The system works, the demo impressed everyone, and eighteen months later nobody can say whether it made money. That's a measurement failure, and it's avoidable with a few hours of work before anything is built.",
-    "It also determines what you build. A properly constructed case usually reveals that the exciting project has weak economics and a boring one has excellent economics. Teams that skip the analysis systematically pick the wrong projects — not through incompetence, but because enthusiasm and payback aren't correlated.",
+    "It also determines what you build. A properly constructed case usually reveals that the exciting project has weak economics and a boring one has excellent economics. Teams that skip the analysis systematically pick the wrong projects: not through incompetence, but because enthusiasm and payback aren't correlated.",
     "And you will be sold to using ROI numbers. Knowing how those are constructed — what's counted, what's omitted, what timeframe — is the difference between evaluating a claim and being impressed by one.",
   ],
 
@@ -51,7 +51,7 @@ export const guide: Guide = {
     {
       term: "Count the costs that don't appear on the invoice",
       explain:
-        "Build cost is visible. Inference cost, maintenance, monitoring, human review, prompt and model updates, and the internal time spent on all of it are not — and together they usually exceed the build.",
+        "Build cost is visible. Inference cost, maintenance, monitoring, human review, prompt and model updates, and the internal time spent on all of it are not, and together they usually exceed the build.",
       detail:
         "Review time is the most-omitted line. If a person checks every output, you've bought speed rather than headcount, and the business case needs to say so.",
     },
@@ -99,7 +99,7 @@ export const guide: Guide = {
       walkthrough:
         "In February 2024 Klarna reported its AI assistant handling two-thirds of customer service chats in month one — 2.3 million conversations, resolution time down from 11 minutes to under 2, a 25% drop in repeat inquiries, and an estimated $40 million profit improvement for 2024, described as equivalent to the work of 700 full-time agents. It became the reference case for AI ROI. In May 2025 the CEO told Bloomberg the cost-cutting had gone too far and the company began rehiring human agents, saying: \"We focused too much on cost. The result was lower quality.\"",
       result:
-        "Three lessons for anyone building a case. The gains were real, measured against a genuine baseline — that part is exemplary. The \"700 agents\" figure was a modelled equivalence rather than a headcount, which is exactly the kind of distinction that disappears when a number is quoted back at you. And the case omitted a cost that only appeared later: the quality decline on complex contacts, and the expense of reversing. A twelve-month ROI figure would have looked excellent; the eighteen-month one was different.",
+        "Three lessons for anyone building a case. The gains were real, measured against a genuine baseline — that part is exemplary. The \"700 agents\"figure was a modelled equivalence rather than a headcount, which is exactly the kind of distinction that disappears when a number is quoted back at you. And the case omitted a cost that only appeared later: the quality decline on complex contacts, and the expense of reversing. A twelve-month ROI figure would have looked excellent; the eighteen-month one was different.",
       source: {
         label: "Klarna press release (Feb 2024) and Forbes coverage of the May 2025 reversal",
         url: "https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/",
@@ -123,7 +123,7 @@ export const guide: Guide = {
       walkthrough:
         "A recognisable outcome. A tool saves each of twelve people about forty minutes a day. The business case multiplies that out to roughly two full-time equivalents and a healthy annual figure. A year later the tool is well liked, nobody wants it removed, and no cost line in the business has changed. Headcount is the same, the payroll is the same, and the forty minutes went into other work — some valuable, some not.",
       result:
-        "The saving was real as time and never real as money, because no decision converted it. Time saved becomes financial only when something specific follows: a role isn't backfilled, queued work gets done, or capacity is sold. A business case that claims time savings should name which of those three it's relying on — and if it can't, it should present the benefit qualitatively rather than as a number.",
+        "The saving was real as time and never real as money, because no decision converted it. Time saved becomes financial only when something specific follows: a role isn't backfilled, queued work gets done, or capacity is sold. A business case that claims time savings should name which of those three it's relying on: and if it can't, it should present the benefit qualitatively rather than as a number.",
     },
   ],
 
@@ -142,7 +142,7 @@ export const guide: Guide = {
     },
     {
       title: "Build the full cost side",
-      body: "Build, inference, maintenance, monitoring, human review, and the internal time on all of it. Add an annual maintenance figure — it's the line most often omitted and rarely small.",
+      body: "Build, inference, maintenance, monitoring, human review, and the internal time on all of it. Add an annual maintenance figure. It's the line most often omitted and rarely small.",
       effort: "3–4 hours",
       outcome: "A cost total that includes the invisible lines.",
     },
@@ -202,7 +202,7 @@ export const guide: Guide = {
     {
       mistake: "Declaring success in week two",
       why: "Early results measure novelty and the easy cases. Drift, exceptions and maintenance are all later phenomena.",
-      fix: "Run at least two months before drawing conclusions, and require the pilot to survive a genuinely awkward period.",
+      fix: "Run at least two months before drawing conclusions, and require the pilot to survive a awkward period.",
     },
     {
       mistake: "Setting the success threshold after seeing results",
@@ -223,7 +223,7 @@ export const guide: Guide = {
 
   bestPractices: [
     "Measure the manual baseline before building. It is unrecoverable afterwards.",
-    "Price the current error profile — type, detector, detection time, cost to fix.",
+    "Price the current error profile: type, detector, detection time, cost to fix.",
     "Include inference, maintenance, monitoring, review and internal time on the cost side.",
     "Name the mechanism that converts time saved into money, or report it qualitatively.",
     "Write the go/no-go threshold before the pilot and give it to someone else.",
@@ -300,7 +300,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "What's a realistic ROI for an AI project?",
-      a: "There's no benchmark that transfers — it depends entirely on your current cost per unit and how much of the work is genuinely routine. Anyone quoting a universal figure is selling something. Measure your own baseline.",
+      a: "There's no benchmark that transfers — it depends entirely on your current cost per unit and how much of the work is routine. Anyone quoting a universal figure is selling something. Measure your own baseline.",
     },
     {
       q: "Why shouldn't I count hours saved as money?",

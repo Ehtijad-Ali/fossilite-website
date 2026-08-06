@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "building-habits-that-stick",
   seoTitle: "Building Habits That Stick: What the Evidence Says",
   metaDescription:
-    "How habits actually form — why 21 days is a myth, how long it really takes, and the design choices that make a new behaviour automatic.",
+    "How habits actually form: why 21 days is a myth, how long it really takes, and the design choices that make a new behaviour automatic.",
   title: "Building Habits That Stick",
   keywords: [
     "how to build habits",
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "The research does not support the idea that one lapse resets progress. Occasional misses have a limited effect on the overall trajectory toward automaticity.",
       detail:
-        "This matters because the all-or-nothing belief causes more abandonment than the lapses themselves. The dangerous pattern is not missing Tuesday — it's concluding on Wednesday that the attempt is over.",
+        "This matters because the all-or-nothing belief causes more abandonment than the lapses themselves. The dangerous pattern is not missing Tuesday. It's concluding on Wednesday that the attempt is over.",
     },
     {
       term: "Simple behaviours automate faster than complex ones",
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "Attaching a new behaviour to an existing routine borrows a stable cue you don't have to remember. After brushing your teeth, after making coffee, after sitting down at your desk.",
       detail:
-        "This solves the most common early failure, which isn't unwillingness — it's simply not remembering at the moment it was supposed to happen.",
+        "This solves the most common early failure, which isn't unwillingness. It's simply not remembering at the moment it was supposed to happen.",
     },
     {
       term: "Friction is the strongest lever you control",
@@ -138,7 +138,7 @@ export const guide: Guide = {
     },
     {
       title: "Hold for far longer than feels necessary",
-      body: "Continue at the minimum size for at least two months without judging whether it's 'working'. The period where it still requires effort is not evidence of failure — it's the normal middle.",
+      body: "Continue at the minimum size for at least two months without judging whether it's 'working'. The period where it still requires effort is not evidence of failure. It's the normal middle.",
       effort: "Ongoing",
       outcome: "You pass the point where most attempts are abandoned.",
     },
@@ -167,7 +167,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The ambitious version that lasts nine days.",
       walkthrough:
-        "A pattern almost everyone has run at least once. You decide to start running, and because you're motivated on day one you commit to 5km every morning. It goes well for a week. Then a bad night's sleep, a busy morning, and the prospect of 5km is genuinely unreasonable — so you skip. Skipping once makes the next skip easier, and by day twelve the attempt is over. You conclude you lack discipline.",
+        "A pattern almost everyone has run at least once. You decide to start running, and because you're motivated on day one you commit to 5km every morning. It goes well for a week. Then a bad night's sleep, a busy morning, and the prospect of 5km is unreasonable — so you skip. Skipping once makes the next skip easier, and by day twelve the attempt is over. You conclude you lack discipline.",
       result:
         "Nothing about discipline was tested. The behaviour was sized for your best day and then met an ordinary one. A version sized for your worst day — put on shoes, run to the end of the road — survives bad mornings, and it's the surviving that builds the automatic response. Ambition is the right instinct applied at the wrong stage.",
     },
@@ -175,7 +175,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The habit with no cue.",
       walkthrough:
-        "You decide to practise an instrument 'daily'. Some days you remember in the morning, some days at eleven at night, some days not at all. Each time you have to notice that it hasn't happened yet and then decide to do it. That's not a habit — it's a recurring decision, and it competes against everything else in the day.",
+        "You decide to practise an instrument 'daily'. Some days you remember in the morning, some days at eleven at night, some days not at all. Each time you have to notice that it hasn't happened yet and then decide to do it. That's not a habit. It's a recurring decision, and it competes against everything else in the day.",
       result:
         "Attaching it to a fixed existing routine — after dinner, before the first meeting, immediately after making coffee — supplies the trigger that automaticity needs somewhere to attach to. The behaviour hasn't changed; the reason it now happens is that you're no longer required to remember it.",
     },
@@ -209,7 +209,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Relying on motivation",
-      why: "Motivation is real and it fluctuates. Any design that requires it will fail on precisely the days consistency matters most.",
+      why: "Motivation is real and it fluctuates. Any design that requires it will fail on the days consistency matters most.",
       fix: "Design for the absence of motivation: reduce friction, shrink the behaviour, and use a cue you don't have to remember.",
     },
     {
@@ -236,7 +236,7 @@ export const guide: Guide = {
     "When you're going to miss, do the absurdly small version instead — one push-up, one sentence, one page. It maintains the cue-behaviour pairing, which is the thing you're actually building.",
     "Design the environment the night before. Decisions made in advance, when you're calm, consistently outperform decisions made in the moment, when you're not.",
     "If you keep failing at the same habit, shrink it rather than trying harder. Repeated failure at a given size is information about the size, not about you.",
-    "Pair a new habit you don't enjoy with something you do — a specific podcast only during the walk, say. The pairing supplies motivation the behaviour doesn't have yet.",
+    "Pair a new habit you don't enjoy with something you do: a specific podcast only during the walk, say. The pairing supplies motivation the behaviour doesn't have yet.",
     "When the behaviour becomes automatic, notice it and stop tracking. Continuing to track something automatic adds friction to a thing that no longer needs it.",
   ],
 
@@ -335,7 +335,7 @@ export const guide: Guide = {
     },
     {
       q: "What if the habit still feels effortful after two months?",
-      a: "That's within the observed range and not a sign of failure. Check whether the context is genuinely consistent and whether the behaviour is simple enough — inconsistent cues and multi-step routines both extend the timeline substantially.",
+      a: "That's within the observed range and not a sign of failure. Check whether the context is consistent and whether the behaviour is simple enough — inconsistent cues and multi-step routines both extend the timeline substantially.",
     },
   ],
 
@@ -361,7 +361,7 @@ export const guide: Guide = {
   relatedGuides: ["learning-faster", "deep-work-and-focus"],
 
   conclusion: [
-    "Pick one behaviour this week and shrink it until skipping would be absurd. The smallness is not a compromise — it's the mechanism, because what you're building at this stage is the trigger, not the outcome.",
+    "Pick one behaviour this week and shrink it until skipping would be absurd. The smallness is not a compromise. It's the mechanism, because what you're building at this stage is the trigger, not the outcome.",
   ],
 
 };

@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "building-agents-with-langchain",
   seoTitle: "Building Agents with LangChain: A Practical Guide",
   metaDescription:
-    "How to build a working LangChain agent with create_agent and Claude — tools, structured output, streaming and the abstractions worth understanding.",
+    "How to build a working LangChain agent with create_agent and Claude: tools, structured output, streaming and the abstractions worth understanding.",
   title: "Building Agents with LangChain",
   keywords: [
     "langchain agent tutorial",
@@ -22,14 +22,14 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "LangChain has a reputation problem that's partly deserved and partly out of date. The early versions buried a simple loop under several layers of abstraction, and a generation of developers concluded the whole thing was overhead. The modern `create_agent` interface is much closer to the metal, and the parts that genuinely earn their place — streaming, structured output, the integration surface — are now easier to reach.",
+    "LangChain has a reputation problem that's partly deserved and partly out of date. The early versions buried a simple loop under several layers of abstraction, and a generation of developers concluded the whole thing was overhead. The modern `create_agent` interface is much closer to the metal, and the parts that earn their place — streaming, structured output, the integration surface — are now easier to reach.",
     "The honest framing: LangChain is worth using when you want the ecosystem. Dozens of model providers behind one interface, hundreds of tool integrations, and tracing that works out of the box. It is not worth using to save yourself the forty lines of an agent loop, because that loop is not the hard part.",
     "This guide assumes you've written a raw agent loop and know what a tool call is. If not, build one first — LangChain makes far more sense when you can see what it's doing on your behalf rather than taking it on faith.",
   ],
 
   whyItMatters: [
     "The integration surface is the real argument. Swapping model providers is a one-line change. Connecting a vector store, a SQL database, or a search API means importing something rather than writing a client. For a team that needs to move fast across several backends, that's genuine leverage.",
-    "It also matters because LangChain is what a large share of production LLM code is written in. Whether or not you'd choose it fresh, you will read it, inherit it, and be asked to debug it — and that's much easier if you understand which parts are doing work and which are ceremony.",
+    "It also matters because LangChain is what a large share of production LLM code is written in. Whether or not you'd choose it fresh, you will read it, inherit it, and be asked to debug it, and that's much easier if you understand which parts are doing work and which are ceremony.",
     "And knowing it well tells you when to leave. The clearest signal that you've outgrown a framework is being able to name exactly which of its abstractions you're fighting. Without that, framework changes are cargo-culting in a different direction.",
   ],
 
@@ -53,7 +53,7 @@ export const guide: Guide = {
       explain:
         "Decorate a Python function with `@tool` and LangChain builds the JSON Schema from its type hints and docstring. Your docstring becomes the tool description the model reads.",
       detail:
-        "That makes the docstring load-bearing rather than documentation. A vague docstring produces a vague tool description and measurably worse call accuracy — same lever as writing schemas by hand, just less visible.",
+        "That makes the docstring load-bearing rather than documentation. A vague docstring produces a vague tool description and measurably worse call accuracy: same lever as writing schemas by hand, just less visible.",
     },
     {
       term: "Everything is a Runnable",
@@ -125,7 +125,7 @@ print(result["messages"][-1].content)`,
       title: "Seeing what the agent actually did",
       language: "python",
       intro:
-        "The default output hides the tool calls. Iterate the returned messages to get the trace — this is the first thing to reach for when an agent misbehaves.",
+        "The default output hides the tool calls. Iterate the returned messages to get the trace. This is the first thing to reach for when an agent misbehaves.",
       code: `result = agent.invoke({
     "messages": [{"role": "user", "content": "Compare Lisbon and Manchester."}]
 })
@@ -149,7 +149,7 @@ for message in result["messages"]:
       title: "Streaming and structured output",
       language: "python",
       intro:
-        "Two things the framework genuinely saves you writing. Streaming gives responsive UX on long runs; structured output makes the result safe to feed into another system.",
+        "Two things the framework saves you writing. Streaming gives responsive UX on long runs; structured output makes the result safe to feed into another system.",
       code: `from pydantic import BaseModel, Field
 
 class WeatherComparison(BaseModel):
@@ -216,7 +216,7 @@ for chunk in agent.stream(
     },
     {
       title: "Swap the model provider",
-      body: "Change `ChatAnthropic` for another provider's wrapper and re-run your evaluation set. Note what changed and what didn't — this is the portability claim being tested rather than assumed.",
+      body: "Change `ChatAnthropic` for another provider's wrapper and re-run your evaluation set. Note what changed and what didn't. This is the portability claim being tested rather than assumed.",
       effort: "1–2 hours",
       outcome: "Evidence about how portable your agent actually is.",
     },
@@ -245,7 +245,7 @@ for chunk in agent.stream(
       kind: "illustration",
       scenario: "The tutorial that doesn't run.",
       walkthrough:
-        "A recognisable frustration with this ecosystem specifically. You follow a well-written LangChain tutorial and every import fails. The tutorial isn't wrong — it was written against `initialize_agent` or `AgentExecutor`, which the library has since moved past. LangChain has changed its agent API more than once, and search results don't sort by recency.",
+        "A recognisable frustration with this ecosystem specifically. You follow a well-written LangChain tutorial and every import fails. The tutorial isn't wrong: it was written against `initialize_agent` or `AgentExecutor`, which the library has since moved past. LangChain has changed its agent API more than once, and search results don't sort by recency.",
       result:
         "Check the publication date before following any LangChain material, and prefer the official docs over blog posts. When an import fails, search the current reference for the concept rather than the class name — the idea usually survived the rename.",
     },
@@ -272,7 +272,7 @@ for chunk in agent.stream(
     },
     {
       mistake: "Adopting the framework for a trivial agent",
-      why: "For one model and one tool, the abstraction and dependency cost exceeds the loop it replaces — and you lose visibility into what's happening.",
+      why: "For one model and one tool, the abstraction and dependency cost exceeds the loop it replaces, and you lose visibility into what's happening.",
       fix: "Use the raw SDK until you actually want the integrations, tracing or provider portability. Then adopt deliberately.",
     },
     {
@@ -365,11 +365,11 @@ for chunk in agent.stream(
   faqs: [
     {
       q: "Is LangChain still worth using?",
-      a: "For the integration ecosystem, tracing and provider portability — yes. To avoid writing an agent loop — no, that loop is about forty lines and worth understanding. Adopt it for what it uniquely provides.",
+      a: "For the integration ecosystem, tracing and provider portability — yes. To avoid writing an agent loop: no, that loop is about forty lines and worth understanding. Adopt it for what it uniquely provides.",
     },
     {
       q: "What's the difference between LangChain and LangGraph?",
-      a: "LangChain gives you `create_agent` and the integration surface for straightforward agents. LangGraph gives you explicit control over the loop — branching, cycles, persistence, human-in-the-loop. Start with LangChain and move when you need the control.",
+      a: "LangChain gives you `create_agent` and the integration surface for straightforward agents. LangGraph gives you explicit control over the loop: branching, cycles, persistence, human-in-the-loop. Start with LangChain and move when you need the control.",
     },
     {
       q: "Why do so many LangChain tutorials not work?",
@@ -377,7 +377,7 @@ for chunk in agent.stream(
     },
     {
       q: "Does the agent remember previous conversations?",
-      a: "Not by itself. `create_agent` agents are stateless between calls — you accumulate the message list and pass it back, or use LangGraph's checkpointing for real persistence.",
+      a: "Not by itself. `create_agent` agents are stateless between calls: you accumulate the message list and pass it back, or use LangGraph's checkpointing for real persistence.",
     },
     {
       q: "Can I use it with any model provider?",
@@ -385,7 +385,7 @@ for chunk in agent.stream(
     },
     {
       q: "How do I stop it looping?",
-      a: "Set a recursion limit on the agent. Frameworks don't remove the compounding-error problem — they wrap it, and an unbounded framework agent loops as readily as a hand-written one.",
+      a: "Set a recursion limit on the agent. Frameworks don't remove the compounding-error problem: they wrap it, and an unbounded framework agent loops as readily as a hand-written one.",
     },
   ],
 

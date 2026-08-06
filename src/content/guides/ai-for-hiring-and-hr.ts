@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "ai-for-hiring-and-hr",
   seoTitle: "AI for Hiring and HR: Where It Helps, Where It Doesn't",
   metaDescription:
-    "Using AI in recruitment and HR without building a discrimination problem — what to automate, what never to, and the documented case that shows why.",
+    "Using AI in recruitment and HR without building a discrimination problem: what to automate, what never to, and the documented case that shows why.",
   title: "AI for Hiring and HR",
   keywords: [
     "ai in recruitment",
@@ -24,13 +24,13 @@ export const guide: Guide = {
   intro: [
     "Hiring looks like an ideal AI use case. High volume, repetitive reading, an obvious bottleneck, and a decision that already feels like pattern-matching. That combination is exactly why it's the most dangerous place in a business to deploy AI carelessly.",
     "The problem isn't that the technology fails. It's that it works precisely as designed — learning the patterns in whatever decisions you trained it on. If your historic hiring favoured one kind of candidate, a model trained on it will reproduce that preference at scale, faster, and with the appearance of objectivity. That's not a bug you can patch out.",
-    "This guide covers where AI genuinely helps across recruitment and HR, the specific applications to avoid entirely, what the law increasingly requires, and the documented case every business should read before letting a model near a candidate.",
+    "This guide covers where AI helps across recruitment and HR, the specific applications to avoid entirely, what the law increasingly requires, and the documented case every business should read before letting a model near a candidate.",
   ],
 
   whyItMatters: [
     "Hiring decisions are legally protected territory. Discrimination in recruitment carries regulatory and litigation exposure in most jurisdictions, and 'the algorithm did it' is not a defence — the employer is responsible for the outcome regardless of how the decision was produced.",
     "The risk is also unusually hard to detect. A biased human interviewer affects the candidates they meet. A biased screening model affects every applicant, consistently, invisibly, and with a veneer of neutrality that makes it harder to challenge. Scale converts a small bias into a systematic one.",
-    "But the upside in HR is real and mostly sits away from the decisions. Scheduling, drafting, answering policy questions, summarising, onboarding logistics — an enormous amount of genuinely tedious work that has nothing to do with choosing between people.",
+    "But the upside in HR is real and mostly sits away from the decisions. Scheduling, drafting, answering policy questions, summarising, onboarding logistics — an enormous amount of tedious work that has nothing to do with choosing between people.",
   ],
 
   coreConcepts: [
@@ -44,7 +44,7 @@ export const guide: Guide = {
     {
       term: "Removing protected fields doesn't remove bias",
       explain:
-        "Deleting name, gender and age from a CV feels like a fix. The model simply finds proxies — the university, the sports club, the phrasing, the gap in employment history.",
+        "Deleting name, gender and age from a CV feels like a fix. The model simply finds proxies: the university, the sports club, the phrasing, the gap in employment history.",
       detail:
         "Proxy discrimination is the harder problem precisely because it's invisible. You can't audit for a variable you didn't know the model was using.",
     },
@@ -58,14 +58,14 @@ export const guide: Guide = {
     {
       term: "Structured extraction is safe; inference is not",
       explain:
-        "Pulling stated facts — years in a role, listed qualifications, named tools — is low risk and genuinely saves time. Inferring seniority, culture fit or potential from tone is not.",
+        "Pulling stated facts — years in a role, listed qualifications, named tools — is low risk and saves time. Inferring seniority, culture fit or potential from tone is not.",
       detail:
-        "Require the model to output NOT STATED rather than inferring. An inferred attribute is an invented one, and inventing attributes about job applicants is precisely the exposure to avoid.",
+        "Require the model to output NOT STATED rather than inferring. An inferred attribute is an invented one, and inventing attributes about job applicants is the exposure to avoid.",
     },
     {
       term: "Regulation is arriving and it's specific",
       explain:
-        "Automated employment decision tools face growing legal requirements — bias auditing, candidate notification, and in some jurisdictions the right to a human review.",
+        "Automated employment decision tools face growing legal requirements: bias auditing, candidate notification, and in some jurisdictions the right to a human review.",
       detail:
         "Requirements vary by jurisdiction and change. Take employment-law advice for the places you actually hire before deploying anything decision-adjacent.",
     },
@@ -97,7 +97,7 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Amazon builds a CV-screening model and has to scrap it.",
       walkthrough:
-        "From 2014 Amazon developed a system to score job applicants one to five stars, trained on CVs submitted to the company over the previous decade. Because that applicant pool was overwhelmingly male in a male-dominated industry, the pattern the model learned was that male candidates had been preferred. By 2015 it was penalising CVs containing the word \"women's\" — as in \"women's chess club captain\" — and favouring verbs that appeared more often on men's applications.",
+        "From 2014 Amazon developed a system to score job applicants one to five stars, trained on CVs submitted to the company over the previous decade. Because that applicant pool was overwhelmingly male in a male-dominated industry, the pattern the model learned was that male candidates had been preferred. By 2015 it was penalising CVs containing the word \"women's\" — as in \"women's chess club captain\", and favouring verbs that appeared more often on men's applications.",
       result:
         "Amazon concluded it could not reliably make the model gender-neutral and abandoned the project. Note what did not go wrong: the engineering was competent and the model fit its training data faithfully. The failure was conceptual. The labels recorded who recruiters had chosen, not who performed well, and a model trained on those labels reproduces the choosing. Any business considering CV screening should assume this is the default outcome rather than an unlucky one.",
       source: {
@@ -109,7 +109,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The screening tool that found the university, not the ability.",
       walkthrough:
-        "A shape worth anticipating. A company strips names, ages and addresses from CVs before screening, satisfied that bias is handled. Scores still skew. On investigation the model has latched onto university names and a few phrasing patterns that correlate strongly with a particular background — not because those graduates performed better once hired, but because past recruiters favoured them and the model learned that preference. Nobody chose the proxy; the model found it.",
+        "A shape worth anticipating. A company strips names, ages and addresses from CVs before screening, satisfied that bias is handled. Scores still skew. On investigation the model has latched onto university names and a few phrasing patterns that correlate strongly with a particular background: not because those graduates performed better once hired, but because past recruiters favoured them and the model learned that preference. Nobody chose the proxy; the model found it.",
       result:
         "Field removal addresses direct discrimination and does nothing about proxies. The only reliable check is outcome auditing — measuring selection rates across groups at each stage and investigating disparities. If you can't run that audit, you don't have evidence the tool is fair, and 'we removed the obvious fields' is not evidence.",
     },
@@ -176,7 +176,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Assuming removing names and ages fixes bias",
-      why: "Models find proxies — institution, phrasing, employment gaps. Proxy discrimination is harder to detect precisely because you didn't choose the variable.",
+      why: "Models find proxies: institution, phrasing, employment gaps. Proxy discrimination is harder to detect precisely because you didn't choose the variable.",
       fix: "Audit outcomes across groups at each stage. Field removal is a starting point, not evidence.",
     },
     {
@@ -225,16 +225,16 @@ export const guide: Guide = {
     "Run your existing process through an outcome audit before adding AI. Teams frequently discover a disparity that predates any automation, which is worth knowing regardless.",
     "Put the highest-volume, lowest-stakes HR work first — policy questions and scheduling. It builds internal confidence on something that can't hurt anyone.",
     "Write down what the tool must never be used for and circulate it. Scope creep in HR tooling is how a summarisation aid quietly becomes a ranking system.",
-    "Test your extraction with deliberately unusual CVs — career breaks, non-linear paths, overseas qualifications. That's where inference creeps in and where the fairness risk concentrates.",
+    "Test your extraction with deliberately unusual CVs: career breaks, non-linear paths, overseas qualifications. That's where inference creeps in and where the fairness risk concentrates.",
   ],
 
   businessApplications: [
     "Policy and benefits questions answered from a grounded, current handbook — usually the highest-volume HR query type.",
     "Job description drafting from a structured brief, with a human editing before publication.",
-    "Interview scheduling and coordination, which is pure logistics and genuinely tedious.",
+    "Interview scheduling and coordination, which is pure logistics and tedious.",
     "Onboarding checklists generated per role, location and contract type.",
     "Summarising long policy or compliance documents for managers who won't otherwise read them.",
-    "Structured extraction from applications into comparable summaries — facts only, decision human.",
+    "Structured extraction from applications into comparable summaries: facts only, decision human.",
     "Internal knowledge search across HR documentation, with citations.",
   ],
 
@@ -256,7 +256,7 @@ export const guide: Guide = {
     {
       title: "Break the extraction",
       brief:
-        "Run deliberately unusual CVs through any extraction tool — career breaks, overseas qualifications, non-linear paths. Count how often it infers rather than reporting NOT STATED.",
+        "Run deliberately unusual CVs through any extraction tool: career breaks, overseas qualifications, non-linear paths. Count how often it infers rather than reporting NOT STATED.",
       success: "A measured inference rate on the cases that matter most.",
       time: "2–3 hours",
     },
@@ -286,15 +286,15 @@ export const guide: Guide = {
   faqs: [
     {
       q: "Can we use AI to screen CVs?",
-      a: "For extracting stated facts into comparable summaries a recruiter reads — cautiously, yes. For scoring, ranking or rejecting — no. That's a decision, the employer is legally responsible for it, and models trained on past hiring reproduce past preferences.",
+      a: "For extracting stated facts into comparable summaries a recruiter reads: cautiously, yes. For scoring, ranking or rejecting — no. That's a decision, the employer is legally responsible for it, and models trained on past hiring reproduce past preferences.",
     },
     {
       q: "Doesn't removing names and photos make it fair?",
-      a: "It addresses direct discrimination and not proxy discrimination. Models find substitutes — institution, phrasing, employment gaps. Only outcome auditing tells you whether the result is actually fair.",
+      a: "It addresses direct discrimination and not proxy discrimination. Models find substitutes: institution, phrasing, employment gaps. Only outcome auditing tells you whether the result is actually fair.",
     },
     {
       q: "What's the safest AI use in HR?",
-      a: "Answering policy questions from a grounded, current handbook. High volume, genuinely useful, no protected decision, and it improves your documentation as a side effect.",
+      a: "Answering policy questions from a grounded, current handbook. High volume, useful, no protected decision, and it improves your documentation as a side effect.",
     },
     {
       q: "Is AI hiring regulated?",
@@ -306,11 +306,11 @@ export const guide: Guide = {
     },
     {
       q: "Can AI help with performance reviews?",
-      a: "It can summarise documented evidence a manager has recorded. It should not assess performance or inform dismissal decisions — the same problems as hiring, with higher stakes and an existing employment relationship.",
+      a: "It can summarise documented evidence a manager has recorded. It should not assess performance or inform dismissal decisions: the same problems as hiring, with higher stakes and an existing employment relationship.",
     },
     {
       q: "How do we audit for bias?",
-      a: "Measure selection rates across protected groups at every stage, before and after deployment, and investigate disparities. It requires collecting demographic data carefully and lawfully — and if you can't, that's a decision not to automate the stage.",
+      a: "Measure selection rates across protected groups at every stage, before and after deployment, and investigate disparities. It requires collecting demographic data carefully and lawfully: and if you can't, that's a decision not to automate the stage.",
     },
   ],
 
@@ -340,7 +340,7 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "The valuable HR AI work is the boring half — and that's a genuinely useful thing to notice, because it's also the half that carries almost no legal exposure and is most likely to still be running in two years.",
+    "The valuable HR AI work is the boring half: and that's a useful thing to notice, because it's also the half that carries almost no legal exposure and is most likely to still be running in two years.",
   ],
 
   cta: {

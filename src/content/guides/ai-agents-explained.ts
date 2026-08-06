@@ -22,14 +22,14 @@ export const guide: Guide = {
   readingTime: 13,
 
   intro: [
-    "An AI agent is a language model that has been given the ability to act — to call tools, read results, and decide what to do next — rather than only to produce text. That's the whole idea, and it's genuinely significant, because a system that can take actions is categorically different from one that can only describe them.",
+    "An AI agent is a language model that has been given the ability to act — to call tools, read results, and decide what to do next — rather than only to produce text. That's the whole idea, and it's significant, because a system that can take actions is categorically different from one that can only describe them.",
     "It's also where the reliability problem changes character. A model that produces a wrong paragraph wastes your time. A model that produces a wrong action sends an email, updates a record, or spends money. The same underlying uncertainty, connected to different consequences.",
     "This guide covers what an agent actually consists of, why multi-step autonomy compounds error rather than merely repeating it, and the design choices that separate agents that work from demonstrations that impress. It assumes you understand roughly what a language model does; if not, start there and come back.",
   ],
 
   whyItMatters: [
     "Agents are where a substantial share of current AI investment is going, and where a substantial share of it is being wasted. The gap between a compelling demo and a system that runs unattended is wider here than anywhere else in applied AI, because the failure modes are multiplicative rather than additive.",
-    "Understanding the architecture also tells you which problems are actually suited to this approach. A great many tasks currently being handed to agents would be better served by a fixed workflow with a model doing one step — cheaper, faster, and dramatically easier to debug. Knowing when autonomy earns its cost is the useful judgement here.",
+    "Understanding the architecture also tells you which problems are actually suited to this approach. A great many tasks currently being handed to agents would be better served by a fixed workflow with a model doing one step: cheaper, faster, and dramatically easier to debug. Knowing when autonomy earns its cost is the useful judgement here.",
     "And there's a risk dimension that's specific to agents. A system that reads untrusted content and can also take actions has an attack surface that a chatbot doesn't. That's not a theoretical concern; it's the reason agent deployments need security review that ordinary model integrations don't.",
   ],
 
@@ -39,12 +39,12 @@ export const guide: Guide = {
       explain:
         "The model receives a goal and the current state, decides on an action, the action executes, the result comes back, and the loop repeats until the model decides it's finished or a limit is hit.",
       detail:
-        "The intelligence is in the model; the agency is in the loop. Understanding this makes the failure modes obvious — anything that can go wrong in one step can go wrong repeatedly, and the loop has no independent judgement about whether it's making progress.",
+        "The intelligence is in the model; the agency is in the loop. Understanding this makes the failure modes obvious: anything that can go wrong in one step can go wrong repeatedly, and the loop has no independent judgement about whether it's making progress.",
     },
     {
       term: "Tools are how the agent affects anything",
       explain:
-        "A tool is a function the model can call — search, a database query, an API call, a calculation. The model chooses which to call and with what arguments; the tool does the actual work.",
+        "A tool is a function the model can call: search, a database query, an API call, a calculation. The model chooses which to call and with what arguments; the tool does the actual work.",
       detail:
         "Tool design matters more than most teams expect. Clear names, tight parameter schemas and informative error messages substantially improve how well a model uses them, because the description is all the model has to go on.",
     },
@@ -65,7 +65,7 @@ export const guide: Guide = {
     {
       term: "Memory is architecture, not a model property",
       explain:
-        "The model has no memory between calls. Anything an agent 'remembers' is state the surrounding system stored and re-supplied — the conversation so far, results of previous steps, retrieved documents.",
+        "The model has no memory between calls. Anything an agent 'remembers' is state the surrounding system stored and re-supplied: the conversation so far, results of previous steps, retrieved documents.",
       detail:
         "As the loop runs, this accumulated state grows and fills the context window. Long-running agents degrade partly because their context becomes crowded with the debris of earlier steps.",
     },
@@ -74,12 +74,12 @@ export const guide: Guide = {
       explain:
         "A prompt saying 'never spend more than £100' is a request. A check in your code that rejects any transaction over £100 is a guardrail. Only one of them holds when the model misunderstands.",
       detail:
-        "The rule of thumb: any constraint that genuinely matters must be enforced outside the model. The prompt communicates intent; the code enforces it.",
+        "The rule of thumb: any constraint that matters must be enforced outside the model. The prompt communicates intent; the code enforces it.",
     },
     {
       term: "Human checkpoints at irreversibility",
       explain:
-        "The natural place for approval is wherever an action can't be undone — sending external communication, moving money, deleting data, changing production configuration.",
+        "The natural place for approval is wherever an action can't be undone: sending external communication, moving money, deleting data, changing production configuration.",
       detail:
         "This gives you most of the value of automation with a fraction of the risk. Agents that draft and queue, with a person approving, are the version that ships successfully far more often than full autonomy.",
     },
@@ -88,7 +88,7 @@ export const guide: Guide = {
       explain:
         "If an agent processes content it didn't author — a web page, an email, an uploaded document — that content can contain instructions. An agent that can also act may act on them.",
       detail:
-        "This is a genuinely hard problem without a complete solution. The mitigations are architectural: treat all fetched content as untrusted data, restrict what tools are available in contexts handling untrusted input, and require approval for consequential actions.",
+        "This is a hard problem without a complete solution. The mitigations are architectural: treat all fetched content as untrusted data, restrict what tools are available in contexts handling untrusted input, and require approval for consequential actions.",
     },
     {
       term: "Multi-agent systems multiply the difficulty",
@@ -120,7 +120,7 @@ export const guide: Guide = {
     },
     {
       title: "Break it deliberately",
-      body: "Make a tool fail. Return malformed data. Give an ambiguous goal. Give an impossible one. Note what the agent does — most untuned agents respond to failure by retrying the same action indefinitely.",
+      body: "Make a tool fail. Return malformed data. Give an ambiguous goal. Give an impossible one. Note what the agent does. Most untuned agents respond to failure by retrying the same action indefinitely.",
       effort: "4–6 hours",
       outcome: "A documented list of how your agent behaves when things go wrong.",
     },
@@ -169,7 +169,7 @@ export const guide: Guide = {
       walkthrough:
         "Liu and colleagues varied the position of relevant information within a model's context and measured retrieval accuracy. Performance was highest when it sat at the beginning or end and degraded when it sat in the middle, forming a U-shaped curve. Accuracy also fell overall as total context length grew, including for models designed for long contexts.",
       result:
-        "For agents this is a direct architectural constraint. A long-running loop accumulates state — prior steps, tool outputs, retrieved documents — and pushes the original goal and constraints into the middle of an ever-growing context. That's precisely the position the research shows attention handles worst. Summarising completed steps and re-stating the goal and constraints at the end of each prompt are mitigations that follow from the measurement.",
+        "For agents this is a direct architectural constraint. A long-running loop accumulates state — prior steps, tool outputs, retrieved documents — and pushes the original goal and constraints into the middle of an ever-growing context. That's the position the research shows attention handles worst. Summarising completed steps and re-stating the goal and constraints at the end of each prompt are mitigations that follow from the measurement.",
       source: {
         label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
@@ -199,7 +199,7 @@ export const guide: Guide = {
     {
       mistake: "Letting the agent verify its own work",
       why: "A model asked whether its output is correct produces the plausible answer, which is usually yes. It has no independent source to consult.",
-      fix: "Verify against something external — a deterministic check, a separate data source, or a person. Self-verification is theatre.",
+      fix: "Verify against something external: a deterministic check, a separate data source, or a person. Self-verification is theatre.",
     },
     {
       mistake: "No step limit or cost ceiling",
@@ -229,7 +229,7 @@ export const guide: Guide = {
   ],
 
   bestPractices: [
-    "Log everything at every iteration — prompt, reasoning, tool, arguments, result. Agent debugging is impossible without a complete trace.",
+    "Log everything at every iteration: prompt, reasoning, tool, arguments, result. Agent debugging is impossible without a complete trace.",
     "Set hard limits on steps, tokens and spend per run, enforced in code, from the first prototype.",
     "Design tools with clear names, tight schemas and informative error messages. The description is the model's only guidance.",
     "Re-state the goal and the binding constraints at the end of every prompt, since accumulated state pushes them into the least-attended position.",
@@ -260,7 +260,7 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Understanding what the 'agent' features in tools you use actually do — and specifically what permissions you've granted them.",
+    "Understanding what the 'agent' features in tools you use actually do, and specifically what permissions you've granted them.",
     "Judging autonomy claims critically. 'Fully autonomous' usually means 'autonomous within a narrow scope with a person watching', which is fine but different.",
     "Applying the same reasoning to your own delegation: irreversible decisions warrant a checkpoint, reversible ones don't, and the distinction is more useful than seniority.",
     "Recognising compounding error in any multi-step plan you make. Ten steps that each usually work is not a plan that usually works.",
@@ -334,11 +334,11 @@ export const guide: Guide = {
     },
     {
       q: "Should I use a framework or build it myself?",
-      a: "Build a simple loop yourself first — it's genuinely not much code and you'll understand what the framework is doing. Adopt a framework when you need tracing, retries and orchestration you'd otherwise reimplement.",
+      a: "Build a simple loop yourself first. It's not much code and you'll understand what the framework is doing. Adopt a framework when you need tracing, retries and orchestration you'd otherwise reimplement.",
     },
     {
       q: "What is prompt injection and how worried should I be?",
-      a: "It's untrusted content containing instructions the agent follows. If your agent processes web pages, emails or uploads and can also take actions, worry properly — this is the most serious open security problem in agent design and has no complete fix.",
+      a: "It's untrusted content containing instructions the agent follows. If your agent processes web pages, emails or uploads and can also take actions, worry properly. This is the most serious open security problem in agent design and has no complete fix.",
     },
     {
       q: "Do multi-agent systems work better?",
@@ -352,7 +352,7 @@ export const guide: Guide = {
 
   tools: [
     { name: "LangGraph", what: "Stateful, branching agent workflows with explicit control over the loop. Good when you want structure rather than open-ended autonomy.", cost: "Free", url: "https://langchain-ai.github.io/langgraph/" },
-    { name: "LangSmith", what: "Tracing for agent runs — see every prompt, tool call and result. Close to essential for debugging.", cost: "Freemium", url: "https://smith.langchain.com" },
+    { name: "LangSmith", what: "Tracing for agent runs: see every prompt, tool call and result. Close to essential for debugging.", cost: "Freemium", url: "https://smith.langchain.com" },
     { name: "Model provider SDKs", what: "Native tool-calling from OpenAI, Anthropic and others. Often all you need, and worth starting here.", cost: "Paid" },
     { name: "Pydantic", what: "Strict schema validation for tool arguments and outputs. Catches malformed calls before they execute.", cost: "Free", url: "https://docs.pydantic.dev" },
     { name: "OpenTelemetry", what: "Standard tracing, useful when agent steps span several services.", cost: "Free", url: "https://opentelemetry.io" },

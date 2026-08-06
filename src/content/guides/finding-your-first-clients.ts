@@ -51,14 +51,14 @@ export const guide: Guide = {
     {
       term: "Your existing network is the first channel",
       explain:
-        "Almost everyone underestimates this because they're thinking about who might hire them. The productive frame is who might know someone — former colleagues, classmates, people from previous industries.",
+        "Almost everyone underestimates this because they're thinking about who might hire them. The productive frame is who might know someone: former colleagues, classmates, people from previous industries.",
       detail:
         "The ask is not 'do you need this'. It's 'do you know anyone dealing with this specific problem'. That question is easy to answer and doesn't put anyone in an awkward position.",
     },
     {
       term: "Be useful before you're paid",
       explain:
-        "Doing something concretely helpful before asking for anything — a specific observation, a small fix, a genuinely useful analysis — converts a cold contact into a warm one faster than any amount of credentials.",
+        "Doing something concretely helpful before asking for anything — a specific observation, a small fix, a useful analysis — converts a cold contact into a warm one faster than any amount of credentials.",
       detail:
         "It must be specific to them. A generic template attached to a mail merge is transparently generic and performs worse than nothing, because it signals volume rather than attention.",
     },
@@ -101,7 +101,7 @@ export const guide: Guide = {
     },
     {
       title: "Build a list of fifty specific people",
-      body: "Not companies — people, with names and roles, who plausibly own the problem. Use LinkedIn, industry communities, local directories, conference speaker lists. Fifty is enough to learn from and small enough to research properly.",
+      body: "Not companies: people, with names and roles, who plausibly own the problem. Use LinkedIn, industry communities, local directories, conference speaker lists. Fifty is enough to learn from and small enough to research properly.",
       effort: "5–8 hours",
       outcome: "A named list, with a note on why each one qualifies.",
     },
@@ -113,7 +113,7 @@ export const guide: Guide = {
     },
     {
       title: "Write outreach that leads with something useful",
-      body: "For each person on your list, spend fifteen minutes finding something specific and genuinely helpful — an observation about their site, their process, their public output. Lead with that. Keep the message under 120 words.",
+      body: "For each person on your list, spend fifteen minutes finding something specific and helpful — an observation about their site, their process, their public output. Lead with that. Keep the message under 120 words.",
       effort: "15 minutes per contact",
       outcome: "Messages that don't read as templates because they aren't.",
     },
@@ -148,7 +148,7 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "What founders themselves say went wrong.",
       walkthrough:
-        "CB Insights has repeatedly compiled post-mortems written by failed startups — founders explaining, without investor-relations constraints, what happened. The original analysis covered 110+ post-mortems; a later study examined 431 failed venture-backed companies. Because most cite several causes, the percentages exceed 100.",
+        "CB Insights has repeatedly compiled post-mortems written by failed startups: founders explaining, without investor-relations constraints, what happened. The original analysis covered 110+ post-mortems; a later study examined 431 failed venture-backed companies. Because most cite several causes, the percentages exceed 100.",
       result:
         "In the original set, 42% cited no market need — the most common reason given. In the 2024 study, 43% were attributed to poor product-market fit, alongside 70% running out of capital. The relevance to finding clients is direct: 'I can't find anyone to buy this' and 'nobody needed this' are frequently the same finding arriving in different words. If fifty well-chosen prospects produce no interest, treat that as evidence about the offer rather than as a reason to send another fifty identical messages.",
       source: {
@@ -168,7 +168,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The offer nobody can repeat.",
       walkthrough:
-        "You describe yourself as helping businesses improve their processes with technology. It's accurate and it covers everything you can do. A contact who genuinely wants to help you has nothing to work with — they can't scan their memory for anyone matching that description, because it matches everyone and no one. So they say they'll keep you in mind, and they mean it, and nothing happens.",
+        "You describe yourself as helping businesses improve their processes with technology. It's accurate and it covers everything you can do. A contact who wants to help you has nothing to work with: they can't scan their memory for anyone matching that description, because it matches everyone and no one. So they say they'll keep you in mind, and they mean it, and nothing happens.",
       result:
         "A narrow description is not a limit on what you'll accept; it's what makes you retrievable from someone else's memory. 'I automate invoice processing for construction firms' triggers recall the moment a contact hears a builder complain about paperwork. Breadth feels safer and is the reason nobody refers you.",
     },
@@ -178,16 +178,16 @@ export const guide: Guide = {
     {
       mistake: "Positioning broadly to avoid missing opportunities",
       why: "A broad description is unmemorable and unreferable. Nobody can recall you at the moment a relevant problem is mentioned, which is when referrals actually happen.",
-      fix: "Narrow to a specific person and a specific outcome. You can still accept adjacent work — the position is for findability, not for restricting your invoices.",
+      fix: "Narrow to a specific person and a specific outcome. You can still accept adjacent work: the position is for findability, not for restricting your invoices.",
     },
     {
       mistake: "Building an audience before having clients",
-      why: "Content has a long lead time and no early feedback loop. It's the right activity at the wrong stage, and it consumes precisely the months you can least afford.",
+      why: "Content has a long lead time and no early feedback loop. It's the right activity at the wrong stage, and it consumes the months you can least afford.",
       fix: "Do direct outreach first. Publish once you have real client problems and outcomes to write about, which also makes the content substantially better.",
     },
     {
       mistake: "Working free to build a portfolio",
-      why: "Free clients don't behave like clients — they deprioritise the work, change scope casually, and produce weak testimonials. It also anchors the relationship at zero.",
+      why: "Free clients don't behave like clients: they deprioritise the work, change scope casually, and produce weak testimonials. It also anchors the relationship at zero.",
       fix: "Charge something, even a reduced introductory rate stated as time-limited. A small payment changes the relationship more than the amount suggests.",
     },
     {
@@ -202,7 +202,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Not asking for referrals",
-      why: "Satisfied clients rarely refer spontaneously — not from indifference, but because it doesn't occur to them at the moment it would help.",
+      why: "Satisfied clients rarely refer spontaneously: not from indifference, but because it doesn't occur to them at the moment it would help.",
       fix: "Ask a specific question at the end of every engagement: do you know anyone else dealing with [the exact problem you solved]? Specific questions get answered.",
     },
     {
@@ -268,14 +268,14 @@ export const guide: Guide = {
     {
       title: "Ten researched messages",
       brief:
-        "Spend fifteen minutes researching each of ten prospects and write a genuinely specific message leading with something useful. Track responses.",
+        "Spend fifteen minutes researching each of ten prospects and write a specific message leading with something useful. Track responses.",
       success: "A response rate you can compare against a templated batch.",
       time: "4 hours",
     },
     {
       title: "Build one proof artefact",
       brief:
-        "Produce something public that demonstrates you understand the problem — a teardown, a small tool, a written analysis.",
+        "Produce something public that demonstrates you understand the problem: a teardown, a small tool, a written analysis.",
       success: "Something you'd be comfortable linking in every conversation.",
       time: "10–20 hours",
     },
@@ -312,7 +312,7 @@ export const guide: Guide = {
     },
     {
       q: "Isn't cold outreach spam?",
-      a: "Templated mass messaging is. A researched message to someone who genuinely has the problem, leading with something useful, is a normal professional approach — and the effort involved is precisely what distinguishes it.",
+      a: "Templated mass messaging is. A researched message to someone who has the problem, leading with something useful, is a normal professional approach, and the effort involved is what distinguishes it.",
     },
     {
       q: "How narrow should my positioning be?",
@@ -334,7 +334,7 @@ export const guide: Guide = {
 
   tools: [
     { name: "LinkedIn", what: "Finding specific named people in specific roles. The research tool, not primarily a publishing platform at this stage.", cost: "Freemium" },
-    { name: "A spreadsheet", what: "Tracking prospects, messages, responses and outcomes. A CRM is premature until this genuinely overflows.", cost: "Free" },
+    { name: "A spreadsheet", what: "Tracking prospects, messages, responses and outcomes. A CRM is premature until this overflows.", cost: "Free" },
     { name: "Calendly", what: "Removes the scheduling friction that kills momentum after a positive reply.", cost: "Freemium", url: "https://calendly.com" },
     { name: "Stripe Payment Links", what: "Take a deposit without building anything. Removes the friction between agreement and commitment.", cost: "Paid", url: "https://stripe.com/payments/payment-links" },
     { name: "Carrd / Framer", what: "A credible one-page site describing one narrow offer, built in an afternoon.", cost: "Freemium" },
@@ -360,7 +360,7 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Start this week with the one-sentence offer and twenty named people. If you can't find twenty, that's the most useful thing you'll learn all month — and it's better to learn it now than after six months of posting.",
+    "Start this week with the one-sentence offer and twenty named people. If you can't find twenty, that's the most useful thing you'll learn all month, and it's better to learn it now than after six months of posting.",
   ],
 
 };

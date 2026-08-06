@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "building-agents-with-langgraph",
   seoTitle: "Building Agents with LangGraph: State, Cycles and Control",
   metaDescription:
-    "LangGraph models agents as state machines — explicit control flow, checkpointed persistence and human-in-the-loop pauses. With runnable code.",
+    "LangGraph models agents as state machines: explicit control flow, checkpointed persistence and human-in-the-loop pauses. With runnable code.",
   title: "Building Agents with LangGraph",
   keywords: [
     "langgraph tutorial",
@@ -22,14 +22,14 @@ export const guide: Guide = {
   readingTime: 13,
 
   intro: [
-    "LangGraph exists because `create_agent` runs out of road. A prebuilt agent handles the tool loop and nothing else — the moment you need a branch, a retry with different behaviour, a pause for human approval, or state that survives a process restart, you're fighting the abstraction. LangGraph gives you the loop as an explicit graph you define.",
+    "LangGraph exists because `create_agent` runs out of road. A prebuilt agent handles the tool loop and nothing else: the moment you need a branch, a retry with different behaviour, a pause for human approval, or state that survives a process restart, you're fighting the abstraction. LangGraph gives you the loop as an explicit graph you define.",
     "The mental model is a state machine, not a conversation or an org chart. You declare nodes (functions that transform state), edges (what runs next), and conditional edges (functions that decide). The agent loop that other frameworks hide becomes a cycle you drew on purpose.",
     "That explicitness is the trade. LangGraph is more verbose than `create_agent` and considerably more capable. This guide covers when the trade is worth making, the prebuilt shortcut for when it isn't, and the two features — checkpointed persistence and interrupts — that are the real reason to be here.",
   ],
 
   whyItMatters: [
     "Persistence is the feature most teams discover they need after committing to something else. A checkpointed graph can be resumed hours later, in a different process, from the exact step it stopped at. Retrofitting that onto a stateless agent means rebuilding it.",
-    "Human-in-the-loop is the second. Real systems need a person to approve an irreversible action, and 'pause mid-run, wait for a decision that may arrive tomorrow, resume' is genuinely hard without checkpointing. LangGraph makes it a first-class operation rather than an architecture you invent.",
+    "Human-in-the-loop is the second. Real systems need a person to approve an irreversible action, and 'pause mid-run, wait for a decision that may arrive tomorrow, resume' is hard without checkpointing. LangGraph makes it a first-class operation rather than an architecture you invent.",
     "And the explicitness pays off in debugging. When an agent misbehaves in a framework that hides the loop, you're inferring control flow from a trace. When the control flow is a graph you wrote, you read it.",
   ],
 
@@ -46,14 +46,14 @@ export const guide: Guide = {
       explain:
         "A node is a plain function from state to state-update. An edge says what runs next. A conditional edge is a function that reads state and returns the name of the next node.",
       detail:
-        "The agent loop is a conditional edge pointing back at a previous node. That's the whole trick — cycles are legal, which is what separates this from a pipeline.",
+        "The agent loop is a conditional edge pointing back at a previous node. That's the whole trick: cycles are legal, which is what separates this from a pipeline.",
     },
     {
       term: "`create_react_agent` is the prebuilt shortcut",
       explain:
         "`from langgraph.prebuilt import create_react_agent` gives you a working tool-calling agent graph in one call. Use it when you want LangGraph's persistence without hand-drawing the loop.",
       detail:
-        "It's the right starting point for most projects. Drop to a hand-built `StateGraph` when you need control the prebuilt doesn't expose — extra nodes, custom routing, validation stages.",
+        "It's the right starting point for most projects. Drop to a hand-built `StateGraph` when you need control the prebuilt doesn't expose: extra nodes, custom routing, validation stages.",
     },
     {
       term: "Checkpointers make state durable",
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "A graph with a cycle can loop forever. LangGraph enforces a recursion limit, and you should set it deliberately rather than relying on the default.",
       detail:
-        "Same compounding-error problem as any agent — the graph structure makes it visible, not absent.",
+        "Same compounding-error problem as any agent: the graph structure makes it visible, not absent.",
     },
   ],
 
@@ -182,7 +182,7 @@ graph.invoke(
       title: "Human approval with an interrupt",
       language: "python",
       intro:
-        "The feature that's genuinely hard without checkpointing: pause before an irreversible action, wait for a human, resume — possibly in a different process, hours later.",
+        "The feature that's hard without checkpointing: pause before an irreversible action, wait for a human, resume — possibly in a different process, hours later.",
       code: `graph = builder.compile(
     checkpointer=checkpointer,
     interrupt_before=["tools"],     # stop before ANY tool executes
@@ -231,7 +231,7 @@ else:
     },
     {
       title: "Rebuild it as an explicit graph",
-      body: "Implement the same agent with `StateGraph`. Draw the nodes and edges on paper first — the graph is the design, and writing it without a sketch is where people get lost.",
+      body: "Implement the same agent with `StateGraph`. Draw the nodes and edges on paper first: the graph is the design, and writing it without a sketch is where people get lost.",
       effort: "3–4 hours",
       outcome: "A hand-built loop you can extend.",
     },
@@ -243,7 +243,7 @@ else:
     },
     {
       title: "Add an interrupt",
-      body: "Pause before tool execution, inspect the pending call, and resume. Then try resuming from a different process to confirm the state is genuinely durable.",
+      body: "Pause before tool execution, inspect the pending call, and resume. Then try resuming from a different process to confirm the state is durable.",
       effort: "2–3 hours",
       outcome: "A working human-approval gate.",
     },
@@ -268,7 +268,7 @@ else:
       walkthrough:
         "Liu and colleagues varied where relevant information sat in a model's context and measured accuracy. Performance peaked at the start and end and degraded in the middle, holding even for long-context models.",
       result:
-        "A checkpointed graph accumulates messages indefinitely by design — that's what persistence means. Without a summarisation node, the original instructions migrate toward the least-attended region as the thread grows. LangGraph makes the fix expressible: a conditional edge to a compaction node when message count crosses a threshold.",
+        "A checkpointed graph accumulates messages indefinitely by design. That's what persistence means. Without a summarisation node, the original instructions migrate toward the least-attended region as the thread grows. LangGraph makes the fix expressible: a conditional edge to a compaction node when message count crosses a threshold.",
       source: {
         label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
@@ -278,7 +278,7 @@ else:
       kind: "illustration",
       scenario: "MemorySaver in production.",
       walkthrough:
-        "A recognisable outcome. Development goes smoothly with `MemorySaver`, the agent remembers conversations, everything works. It ships. Then the service restarts on a deploy and every in-flight conversation is gone — including any run paused at an approval interrupt, which now cannot be resumed because the checkpoint it referenced was in the memory of a dead process.",
+        "A recognisable outcome. Development goes smoothly with `MemorySaver`, the agent remembers conversations, everything works. It ships. Then the service restarts on a deploy and every in-flight conversation is gone: including any run paused at an approval interrupt, which now cannot be resumed because the checkpoint it referenced was in the memory of a dead process.",
       result:
         "`MemorySaver` is a development tool and the name doesn't say so loudly enough. Anything that will restart needs a durable backend, and the test is simple: kill the process mid-conversation and try to resume.",
     },
@@ -286,7 +286,7 @@ else:
       kind: "illustration",
       scenario: "Reaching for a graph when a chain would do.",
       walkthrough:
-        "A team adopts LangGraph for a task that is genuinely linear — retrieve, summarise, format. They write nodes, edges and a state schema for a sequence that has no branches and no cycles. The graph works and every future reader has to reconstruct a pipeline from a state machine.",
+        "A team adopts LangGraph for a task that is linear: retrieve, summarise, format. They write nodes, edges and a state schema for a sequence that has no branches and no cycles. The graph works and every future reader has to reconstruct a pipeline from a state machine.",
       result:
         "LangGraph earns its verbosity through cycles, branching, persistence and interrupts. If your flow has none of those, a plain function calling three things in order is clearer, and `create_agent` covers the simple tool loop. Adopt the graph when you can name which of its four features you need.",
     },
@@ -306,7 +306,7 @@ else:
     {
       mistake: "Forgetting reducers on list state",
       why: "Without `add_messages` or an equivalent, a node's return value replaces the field rather than appending. History silently disappears and the agent behaves as though every turn were the first.",
-      fix: "Annotate accumulating fields with a reducer. Remove one deliberately once to see the failure — it's unmistakable afterwards.",
+      fix: "Annotate accumulating fields with a reducer. Remove one deliberately once to see the failure. It's unmistakable afterwards.",
     },
     {
       mistake: "Relying on the default recursion limit",
@@ -357,7 +357,7 @@ else:
     "Long-running processes that must survive deploys, restarts and scaling events.",
     "Multi-session assistants where a user returns to a conversation days later and expects continuity.",
     "Compliance-sensitive automation where every state transition is checkpointed and auditable.",
-    "Complex routing — triage flows where the path depends on classification, with retry branches for ambiguous cases.",
+    "Complex routing: triage flows where the path depends on classification, with retry branches for ambiguous cases.",
     "Anything where a wrong action is expensive and a pause is cheap.",
   ],
 

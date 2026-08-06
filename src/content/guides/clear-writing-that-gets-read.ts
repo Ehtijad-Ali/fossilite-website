@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "clear-writing-that-gets-read",
   seoTitle: "Clear Writing: How to Be Understood the First Time",
   metaDescription:
-    "A practical guide to writing that people actually read and act on — structure, sentence craft, editing technique, and the habits that make writing clear.",
+    "A practical guide to writing that people actually read and act on: structure, sentence craft, editing technique, and the habits that make writing clear.",
   title: "Clear Writing That Gets Read",
   keywords: [
     "how to write clearly",
@@ -24,12 +24,12 @@ export const guide: Guide = {
   intro: [
     "Most bad writing at work isn't produced by bad writers. It's produced by people who started typing before they knew what they wanted, and by people who confused sounding professional with being understood. Both are fixable, and neither requires talent.",
     "Clear writing is a thinking problem wearing a language costume. When a paragraph is muddled, the usual cause is that the underlying thought was muddled and the sentences faithfully reproduced it. This is good news: the fastest route to better prose is not better vocabulary but clearer thinking about what you actually want the reader to do.",
-    "This guide is about the writing that fills a working life — emails, proposals, updates, documentation, messages that need a decision. Not literary prose. The standard is different and much more measurable: did the reader understand it on the first pass, and did they do the thing?",
+    "This guide is about the writing that fills a working life: emails, proposals, updates, documentation, messages that need a decision. Not literary prose. The standard is different and much more measurable: did the reader understand it on the first pass, and did they do the thing?",
   ],
 
   whyItMatters: [
     "Writing is now the primary interface of professional life. Decisions get made in documents, work gets assigned in messages, and your reputation with people who've never met you is built almost entirely from text. Someone who writes clearly appears more competent than someone equally capable who doesn't, and that gap is neither fair nor going away.",
-    "The compounding cost of unclear writing is enormous and mostly invisible. A confusing message generates three clarifying replies. An ambiguous spec produces the wrong feature. A rambling update means the decision doesn't get made this week. Nobody logs these costs, which is precisely why they persist.",
+    "The compounding cost of unclear writing is enormous and mostly invisible. A confusing message generates three clarifying replies. An ambiguous spec produces the wrong feature. A rambling update means the decision doesn't get made this week. Nobody logs these costs, which is why they persist.",
     "There's also a selfish argument. Writing something down is the most reliable way to discover that you don't understand it. The discipline of making a thought clear enough for a stranger regularly reveals that the thought was incoherent — which is unpleasant in the moment and extremely valuable overall.",
   ],
 
@@ -72,9 +72,9 @@ export const guide: Guide = {
     {
       term: "Passive voice hides the actor",
       explain:
-        "'Mistakes were made' famously omits who made them. Passive constructions aren't wrong, but they systematically remove agency — which is sometimes accidental and sometimes precisely why people reach for them.",
+        "'Mistakes were made' famously omits who made them. Passive constructions aren't wrong, but they systematically remove agency — which is sometimes accidental and sometimes why people reach for them.",
       detail:
-        "Use passive deliberately when the actor genuinely doesn't matter. Use active when someone is responsible for something, especially if that someone is you.",
+        "Use passive deliberately when the actor doesn't matter. Use active when someone is responsible for something, especially if that someone is you.",
     },
     {
       term: "Structure is navigation, not decoration",
@@ -151,7 +151,7 @@ export const guide: Guide = {
       walkthrough:
         "In 'Politics and the English Language' (1946), Orwell takes a concrete biblical sentence — 'I returned, and saw under the sun, that the race is not to the swift, nor the battle to the strong… but time and chance happeneth to them all' — and translates it into the officialese of his day: 'Objective considerations of contemporary phenomena compel the conclusion that success or failure in competitive activities exhibits no tendency to be commensurate with innate capacity…'. The second version says the same thing. It contains no concrete image, no person, and almost no verbs doing work.",
       result:
-        "Orwell's demonstration is still the clearest available argument that abstraction is not a neutral stylistic choice — it removes the reader's ability to picture, check or disagree with what you said. Every 'replace the abstract noun with the specific thing' instruction in this guide descends from that parody, and the essay is short, free, and worth reading in full.",
+        "Orwell's demonstration is still the clearest available argument that abstraction is not a neutral stylistic choice: it removes the reader's ability to picture, check or disagree with what you said. Every 'replace the abstract noun with the specific thing' instruction in this guide descends from that parody, and the essay is short, free, and worth reading in full.",
       source: {
         label: "Orwell (1946) — Politics and the English Language",
         url: "https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/",
@@ -169,7 +169,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "Documentation nobody reads, so people ask the author instead.",
       walkthrough:
-        "Written as continuous prose, in the order the author happened to learn things. Every reader arrives with one specific question and no way to locate its answer, so asking a human is genuinely the faster path. The content is fine. The document has no navigation.",
+        "Written as continuous prose, in the order the author happened to learn things. Every reader arrives with one specific question and no way to locate its answer, so asking a human is the faster path. The content is fine. The document has no navigation.",
       result:
         "Restructuring around the questions people actually ask — with those questions as headings — usually changes nothing about the content and everything about whether it gets used. If people keep asking you things that are documented, that is a finding about the document, not about them.",
     },
@@ -183,7 +183,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Burying the ask",
-      why: "Readers stop early. If the request appears in paragraph five, a substantial proportion of your audience will never see it — and you'll conclude they ignored you.",
+      why: "Readers stop early. If the request appears in paragraph five, a substantial proportion of your audience will never see it, and you'll conclude they ignored you.",
       fix: "State what you need in the first two sentences, with the deadline. Everything else is supporting material for the people who need it.",
     },
     {
@@ -203,7 +203,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Assuming shared context",
-      why: "You've been immersed in this for weeks. The reader opened it forty seconds ago between two meetings, and the acronym you've stopped noticing is genuinely opaque to them.",
+      why: "You've been immersed in this for weeks. The reader opened it forty seconds ago between two meetings, and the acronym you've stopped noticing is opaque to them.",
       fix: "Name the least-informed person who must act on this and reread as them. Expand the first use of anything they wouldn't know.",
     },
     {
@@ -308,7 +308,7 @@ export const guide: Guide = {
     },
     {
       q: "Should I use AI to write for me?",
-      a: "It's genuinely useful for first drafts, restructuring and cutting length — the tasks where facing a blank page is the obstacle. It's a poor substitute for knowing what you want to say, which is where most bad writing actually originates.",
+      a: "It's useful for first drafts, restructuring and cutting length — the tasks where facing a blank page is the obstacle. It's a poor substitute for knowing what you want to say, which is where most bad writing actually originates.",
     },
     {
       q: "How do I write clearly about complex technical topics?",

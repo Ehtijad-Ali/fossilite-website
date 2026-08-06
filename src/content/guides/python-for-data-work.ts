@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "python-for-data-work",
   seoTitle: "Python for Data Work: The Parts That Actually Matter",
   metaDescription:
-    "Learn the Python that data work actually needs — pandas, clean pipelines, and reproducible analysis. Skip the computer science you'll never use.",
+    "Learn the Python that data work actually needs: pandas, clean pipelines, and reproducible analysis. Skip the computer science you'll never use.",
   title: "Python for Data Work",
   keywords: [
     "python for data analysis",
@@ -23,8 +23,8 @@ export const guide: Guide = {
 
   intro: [
     "Most Python courses are written for people who want to become software engineers. You spend three weeks on object-oriented programming, inheritance and design patterns, and emerge able to model a zoo as a class hierarchy but unable to load a messy CSV and work out why 12% of the dates are wrong.",
-    "Data work needs a different and much smaller subset of the language. You need to move data around, reshape it, clean it, join it, and produce a result someone else can reproduce. That's roughly 20% of Python, plus one library, and you can be genuinely productive in weeks rather than months.",
-    "This guide is that subset, in the order the work actually demands it. It's aimed at analysts, researchers, marketers and anyone who has outgrown spreadsheets — and at people learning machine learning who discovered that the modelling is the easy part and the data handling is where the time goes.",
+    "Data work needs a different and much smaller subset of the language. You need to move data around, reshape it, clean it, join it, and produce a result someone else can reproduce. That's roughly 20% of Python, plus one library, and you can be productive in weeks rather than months.",
+    "This guide is that subset, in the order the work actually demands it. It's aimed at analysts, researchers, marketers and anyone who has outgrown spreadsheets, and at people learning machine learning who discovered that the modelling is the easy part and the data handling is where the time goes.",
   ],
 
   whyItMatters: [
@@ -51,7 +51,7 @@ export const guide: Guide = {
     {
       term: "Dtypes are where the bugs live",
       explain:
-        "Every column has a type — integer, float, string, datetime, boolean. A column of numbers read as strings will silently sort wrongly, concatenate instead of add, and produce results that look plausible.",
+        "Every column has a type: integer, float, string, datetime, boolean. A column of numbers read as strings will silently sort wrongly, concatenate instead of add, and produce results that look plausible.",
       detail:
         "Run `df.dtypes` immediately after loading anything, every time. An 'object' dtype on a column you expected to be numeric is the single most common signal of a data problem in the file.",
     },
@@ -93,7 +93,7 @@ export const guide: Guide = {
     {
       term: "Notebooks for exploring, scripts for delivering",
       explain:
-        "Notebooks are excellent for looking at data interactively and terrible as production artefacts — cells can be run out of order, producing results that can't be reproduced by running top to bottom.",
+        "Notebooks are excellent for looking at data interactively and terrible as production artefacts: cells can be run out of order, producing results that can't be reproduced by running top to bottom.",
       detail:
         "Explore in a notebook, then move the logic into a plain `.py` file with functions once it works. The transition point is when someone else will depend on the output.",
     },
@@ -108,7 +108,7 @@ export const guide: Guide = {
     },
     {
       title: "Load something real and look at it",
-      body: "Take a genuinely messy CSV — ideally from your own work. Load it with pandas and run `head`, `info`, `describe`, `dtypes`, `isna().sum()` and `value_counts()` on the categorical columns. Write down every problem you find before fixing any of them.",
+      body: "Take a messy CSV — ideally from your own work. Load it with pandas and run `head`, `info`, `describe`, `dtypes`, `isna().sum()` and `value_counts()` on the categorical columns. Write down every problem you find before fixing any of them.",
       effort: "3–4 hours",
       outcome: "A written list of the specific data quality issues in a real file.",
     },
@@ -155,9 +155,9 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "A spreadsheet formula error in an influential economics paper.",
       walkthrough:
-        "Reinhart and Rogoff's 'Growth in a Time of Debt' reported that countries with public debt above 90% of GDP experienced negative average growth. The finding was cited widely in arguments for austerity, including by US politicians shaping budget proposals. Graduate student Thomas Herndon, working with Michael Ash and Robert Pollin, could not replicate the result. They obtained the original spreadsheet and found several problems — including a formula range that omitted five countries, because it had not been dragged down far enough.",
+        "Reinhart and Rogoff's 'Growth in a Time of Debt' reported that countries with public debt above 90% of GDP experienced negative average growth. The finding was cited widely in arguments for austerity, including by US politicians shaping budget proposals. Graduate student Thomas Herndon, working with Michael Ash and Robert Pollin, could not replicate the result. They obtained the original spreadsheet and found several problems: including a formula range that omitted five countries, because it had not been dragged down far enough.",
       result:
-        "Recalculated, the average real GDP growth for countries above the 90% threshold was 2.2% rather than −0.1%. The point for anyone doing data work is not that economists are careless — it's that the error was invisible for years because the logic lived inside cell references rather than in reviewable, re-runnable code. This is the strongest available argument for scripting analysis rather than clicking it.",
+        "Recalculated, the average real GDP growth for countries above the 90% threshold was 2.2% rather than −0.1%. The point for anyone doing data work is not that economists are careless. It's that the error was invisible for years because the logic lived inside cell references rather than in reviewable, re-runnable code. This is the strongest available argument for scripting analysis rather than clicking it.",
       source: {
         label: "Herndon, Ash & Pollin (2013), PERI/UMass Amherst — critique of Reinhart and Rogoff",
         url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/",
@@ -184,7 +184,7 @@ export const guide: Guide = {
   mistakes: [
     {
       mistake: "Learning Python as a software engineer would",
-      why: "Object-oriented design, inheritance and design patterns are genuinely important for building applications, and almost entirely irrelevant to answering a data question. Spending your first month there is why so many people give up.",
+      why: "Object-oriented design, inheritance and design patterns are important for building applications, and almost entirely irrelevant to answering a data question. Spending your first month there is why so many people give up.",
       fix: "Learn the data subset first and go deeper only when a real task demands it. You can be productive without ever writing a class.",
     },
     {
@@ -234,7 +234,7 @@ export const guide: Guide = {
     "Learn `value_counts(dropna=False)` early and use it constantly. It reveals unexpected categories, inconsistent spellings and the true extent of missing data faster than any other single command.",
     "When a transformation gives an unexpected result, inspect the intermediate DataFrame rather than reasoning about the chain. Print the shape and a few rows after each step; the failure is almost never where you assume.",
     "Write the assertion before the code that should satisfy it. Stating the expected row count first makes you notice when your mental model of the data is wrong.",
-    "Keep a personal snippets file for things you re-derive — date parsing, a standard cleaning routine, your preferred chart formatting. Six months of this compounds into a genuine productivity edge.",
+    "Keep a personal snippets file for things you re-derive: date parsing, a standard cleaning routine, your preferred chart formatting. Six months of this compounds into a genuine productivity edge.",
     "Read the error message from the bottom up. The last line names the actual problem; the traceback above it is the path that led there, and beginners tend to read the least useful part first.",
     "Before optimising anything for speed, measure. The slow step is routinely not the one you expected, and most 'slow' analyses are a single loop that should have been a column operation.",
   ],
@@ -252,7 +252,7 @@ export const guide: Guide = {
     "Personal finance: parsing bank exports to categorise spending and see patterns your banking app's categories obscure.",
     "Any hobby with data behind it — training logs, sports statistics, game records, reading history — where the interesting questions aren't the ones the app offers.",
     "Automating the tedious: renaming and organising files, extracting information from documents, converting between formats.",
-    "Checking claims yourself. When a statistic in an article seems off, being able to find the underlying dataset and look is a genuinely useful form of independence.",
+    "Checking claims yourself. When a statistic in an article seems off, being able to find the underlying dataset and look is a useful form of independence.",
     "Learning to think in transformations — take input, apply a defined step, check the result — is a habit that transfers well beyond code.",
   ],
 
@@ -260,7 +260,7 @@ export const guide: Guide = {
     {
       title: "The messy file audit",
       brief:
-        "Find a genuinely dirty CSV. Without fixing anything, produce a written list of every problem: wrong dtypes, missing values, inconsistent categories, duplicates, impossible values.",
+        "Find a dirty CSV. Without fixing anything, produce a written list of every problem: wrong dtypes, missing values, inconsistent categories, duplicates, impossible values.",
       success: "At least eight distinct problems documented before you write any cleaning code.",
       time: "2 hours",
     },
@@ -344,7 +344,7 @@ inspect(df, "orders")`,
       title: "The join that silently doubles your revenue",
       language: "python",
       intro:
-        "Joins fail quietly in both directions — duplicate keys multiply rows, type mismatches drop them, and the script completes cleanly either way. Assert the row count instead of hoping.",
+        "Joins fail quietly in both directions: duplicate keys multiply rows, type mismatches drop them, and the script completes cleanly either way. Assert the row count instead of hoping.",
       code: `def safe_merge(
     left: pd.DataFrame,
     right: pd.DataFrame,
@@ -367,8 +367,8 @@ inspect(df, "orders")`,
     dupes = right[on].duplicated().sum()
     if dupes and how in ("left", "inner"):
         raise ValueError(
-            f"Right side has {dupes} duplicate '{on}' values — the merge would "
-            f"multiply rows. Deduplicate first, or use validate='one_to_many' "
+            f"Right side has {dupes} duplicate '{on}' values — the merge would"
+            f"multiply rows. Deduplicate first, or use validate='one_to_many'"
             f"if the fan-out is intentional."
         )
 
@@ -378,7 +378,7 @@ inspect(df, "orders")`,
     expected = expect_rows if expect_rows is not None else before
     if len(merged) != expected:
         raise ValueError(
-            f"Row count changed unexpectedly: {before:,} -> {len(merged):,} "
+            f"Row count changed unexpectedly: {before:,} -> {len(merged):,}"
             f"(expected {expected:,})."
         )
 
@@ -390,7 +390,7 @@ inspect(df, "orders")`,
 
 orders = safe_merge(orders, customers, on="customer_id")`,
       note:
-        "pandas' own `validate=` argument does much of this and is criminally underused. `validate=\"many_to_one\"` raises immediately if the right side isn't unique on the key — one keyword, one whole class of silent error prevented.",
+        "pandas' own `validate=` argument does much of this and is criminally underused. `validate=\"many_to_one\"` raises immediately if the right side isn't unique on the key: one keyword, one whole class of silent error prevented.",
     },
     {
       title: "Deciding what missing means, column by column",
@@ -466,7 +466,7 @@ def apply_missing_policy(df: pd.DataFrame) -> pd.DataFrame:
     },
     {
       q: "Should I use AI to write my Python?",
-      a: "It's genuinely useful for syntax you'd otherwise look up and for a first draft. It's a poor substitute for understanding your data — the errors that matter in data work are logical rather than syntactic, and a model can't check whether your join assumption holds.",
+      a: "It's useful for syntax you'd otherwise look up and for a first draft. It's a poor substitute for understanding your data: the errors that matter in data work are logical rather than syntactic, and a model can't check whether your join assumption holds.",
     },
     {
       q: "What's the difference between pandas and NumPy?",
@@ -474,7 +474,7 @@ def apply_missing_policy(df: pd.DataFrame) -> pd.DataFrame:
     },
     {
       q: "Do I need to know SQL as well?",
-      a: "If your data lives in a database, yes, and it's worth learning alongside. The concepts overlap heavily — filtering, grouping, joining are the same ideas in both, which makes the second one much faster to pick up.",
+      a: "If your data lives in a database, yes, and it's worth learning alongside. The concepts overlap heavily: filtering, grouping, joining are the same ideas in both, which makes the second one much faster to pick up.",
     },
   ],
 

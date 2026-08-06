@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "prompt-engineering-fundamentals",
   seoTitle: "Prompt Engineering Fundamentals: A Practical Guide",
   metaDescription:
-    "Learn prompt engineering properly — structure, examples, chain-of-thought, evaluation and the failure patterns that separate reliable prompts from lucky ones.",
+    "Learn prompt engineering properly: structure, examples, chain-of-thought, evaluation and the failure patterns that separate reliable prompts from lucky ones.",
   title: "Prompt Engineering Fundamentals",
   keywords: [
     "prompt engineering",
@@ -58,7 +58,7 @@ export const guide: Guide = {
     {
       term: "Chain of thought: reasoning before conclusions",
       explain:
-        "For any task involving analysis, asking the model to work through its reasoning before stating an answer measurably improves the answer. Generation is sequential, so the reasoning tokens genuinely inform what follows.",
+        "For any task involving analysis, asking the model to work through its reasoning before stating an answer measurably improves the answer. Generation is sequential, so the reasoning tokens inform what follows.",
       detail:
         "This means 'think step by step, then give your answer' works, but 'give your answer, then explain' does not — the explanation there is a post-hoc justification of a conclusion already committed to.",
     },
@@ -67,7 +67,7 @@ export const guide: Guide = {
       explain:
         "Specify the shape you want: headings, a JSON schema, a table with named columns, a fixed word count. Unstructured requests produce unstructured responses that vary between runs.",
       detail:
-        "If the output feeds another system, structure isn't a preference — it's a contract. Define it explicitly and validate it, because 'usually valid JSON' is a production incident waiting to happen.",
+        "If the output feeds another system, structure isn't a preference. It's a contract. Define it explicitly and validate it, because 'usually valid JSON' is a production incident waiting to happen.",
     },
     {
       term: "Decomposition beats one giant prompt",
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "'Don't be verbose' performs worse than 'maximum 120 words'. Telling a model what to avoid leaves the entire remaining space open; telling it what to do narrows it to a target.",
       detail:
-        "Where you genuinely need a prohibition, pair it with the alternative: 'don't speculate — if the documents don't answer the question, write NOT FOUND'.",
+        "Where you need a prohibition, pair it with the alternative: 'don't speculate — if the documents don't answer the question, write NOT FOUND'.",
     },
     {
       term: "The escape hatch",
@@ -138,7 +138,7 @@ export const guide: Guide = {
     },
     {
       title: "Adversarially test your prompt",
-      body: "Try to break your own prompt: empty input, wrong-language input, input that contains instructions, input where the answer genuinely isn't available. Note every case where it produces something confidently wrong.",
+      body: "Try to break your own prompt: empty input, wrong-language input, input that contains instructions, input where the answer isn't available. Note every case where it produces something confidently wrong.",
       effort: "2–3 hours",
       outcome: "A list of failure modes and a hardened prompt that handles them.",
     },
@@ -175,7 +175,7 @@ export const guide: Guide = {
       walkthrough:
         "A failure shape worth being able to recognise: you ask a model to sort support tickets into your eight categories, without listing them. It returns sensible-sounding labels that aren't in your taxonomy — 'Billing Confusion' where your schema says 'Billing' — and your downstream code, which expects one of eight strings, starts dropping rows. Nothing threw an error; the model did something reasonable that your system couldn't consume.",
       result:
-        "The fix is to enumerate the permitted labels in the prompt, supply one example per label drawn from genuinely ambiguous cases rather than obvious ones, require the output to be a single label and nothing else, and validate against the enum before use. Open-ended classification invents categories the moment you stop watching.",
+        "The fix is to enumerate the permitted labels in the prompt, supply one example per label drawn from ambiguous cases rather than obvious ones, require the output to be a single label and nothing else, and validate against the enum before use. Open-ended classification invents categories the moment you stop watching.",
     },
   ],
 
@@ -219,7 +219,7 @@ export const guide: Guide = {
 
   bestPractices: [
     "Open with the task and the audience in one sentence, before any context. The model reads sequentially and benefits from knowing the goal before processing the material.",
-    "State constraints numerically wherever possible — word counts, item counts, reading levels. Numbers are checkable; adjectives aren't.",
+    "State constraints numerically wherever possible: word counts, item counts, reading levels. Numbers are checkable; adjectives aren't.",
     "Include one example of ideal output for anything with a repeated format, and make it an example of a hard case.",
     "Request reasoning before conclusions on analytical work, and consider asking for the reasoning in a section you can discard.",
     "Always give the model a defined way to fail — 'NOT FOUND', 'INSUFFICIENT DATA', an empty array — so that failing is a valid output rather than something it must avoid.",
@@ -247,7 +247,7 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Learning: 'explain X assuming I know Y but not Z, then ask me three questions to check I understood' is a genuinely effective study loop, and it works for almost any subject.",
+    "Learning: 'explain X assuming I know Y but not Z, then ask me three questions to check I understood' is a effective study loop, and it works for almost any subject.",
     "Difficult writing: specify the recipient, the relationship, the outcome you want and the tone, and you'll get a usable draft of the message you've been avoiding for three days.",
     "Decision support: 'here's my situation and my preferred option — give me the three strongest arguments against it' is a cheap way to stress-test your own thinking.",
     "Simplifying the impenetrable: contracts, medical letters, tax guidance. Specify your level and ask for the practical implications, then verify anything that matters with a professional.",
@@ -308,7 +308,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "Will prompt engineering become obsolete as models improve?",
-      a: "The tricks will; the specification skill won't. Better models reduce the need for workarounds but increase the value of clearly stated requirements — a capable system given a vague brief still produces something generic, just more fluently.",
+      a: "The tricks will; the specification skill won't. Better models reduce the need for workarounds but increase the value of clearly stated requirements: a capable system given a vague brief still produces something generic, just more fluently.",
     },
     {
       q: "Does saying 'you are an expert' actually help?",
@@ -316,7 +316,7 @@ export const guide: Guide = {
     },
     {
       q: "How long should a prompt be?",
-      a: "As long as the specification genuinely requires, and no longer. A complex extraction task might need 800 words of instructions and examples; a summarisation task might need thirty. Length is a consequence of the task, not a target.",
+      a: "As long as the specification requires, and no longer. A complex extraction task might need 800 words of instructions and examples; a summarisation task might need thirty. Length is a consequence of the task, not a target.",
     },
     {
       q: "Do prompts transfer between different models?",
@@ -339,7 +339,7 @@ export const guide: Guide = {
   tools: [
     { name: "Anthropic Console", what: "Prompt generator, side-by-side comparison and evaluation tooling built for iterating properly.", cost: "Paid", url: "https://console.anthropic.com" },
     { name: "OpenAI Playground", what: "Direct parameter control with visible system prompts and token counts.", cost: "Paid", url: "https://platform.openai.com/playground" },
-    { name: "Promptfoo", what: "Open-source prompt testing — define test cases, run across models, catch regressions in CI.", cost: "Free", url: "https://promptfoo.dev" },
+    { name: "Promptfoo", what: "Open-source prompt testing: define test cases, run across models, catch regressions in CI.", cost: "Free", url: "https://promptfoo.dev" },
     { name: "LangSmith", what: "Tracing and evaluation for chained prompts. Shows exactly what each step sent and received.", cost: "Freemium", url: "https://smith.langchain.com" },
     { name: "Tiktokenizer", what: "Token counting, which matters once prompts get long and costs get real.", cost: "Free", url: "https://tiktokenizer.vercel.app" },
     { name: "Git", what: "Unglamorous and essential. Prompts belong in version control with everything else.", cost: "Free" },

@@ -53,14 +53,14 @@ export const guide: Guide = {
       explain:
         "The same total study time produces more durable learning when distributed across days than concentrated into one session. Some forgetting between sessions is a feature — reconstructing after partial forgetting is where the gain comes from.",
       detail:
-        "This makes cramming a genuinely rational strategy for a test tomorrow and a terrible one for anything you want next year. Match the method to the horizon honestly.",
+        "This makes cramming a rational strategy for a test tomorrow and a terrible one for anything you want next year. Match the method to the horizon honestly.",
     },
     {
       term: "Difficulty that helps and difficulty that doesn't",
       explain:
         "Effort spent reconstructing, connecting or applying material aids learning. Effort spent decoding bad explanations or fighting a broken environment does not.",
       detail:
-        "The distinction matters because 'learning should be hard' is easily misapplied into tolerating genuinely bad materials. Struggle with the content, not with the delivery.",
+        "The distinction matters because 'learning should be hard' is easily misapplied into tolerating bad materials. Struggle with the content, not with the delivery.",
     },
     {
       term: "Interleaving",
@@ -95,7 +95,7 @@ export const guide: Guide = {
   learningPath: [
     {
       title: "Stop highlighting and re-reading",
-      body: "For one week, ban both on anything you're genuinely trying to learn. Replace them with a single question after each section: what did that say? Answer from memory before looking back. The discomfort you feel is the method working.",
+      body: "For one week, ban both on anything you're trying to learn. Replace them with a single question after each section: what did that say? Answer from memory before looking back. The discomfort you feel is the method working.",
       effort: "No extra time — a substitution",
       outcome: "You experience the gap between feeling familiar and being able to produce.",
     },
@@ -154,7 +154,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The tutorial you followed perfectly and cannot reproduce.",
       walkthrough:
-        "A recognisable experience for anyone learning a technical skill. You work through a tutorial, everything makes sense, each step follows from the last, and at the end you have a working result. A week later, facing a similar task without the tutorial, you can't begin. Nothing went wrong during the tutorial — you were following, not retrieving, and following generates almost no retrieval practice.",
+        "A recognisable experience for anyone learning a technical skill. You work through a tutorial, everything makes sense, each step follows from the last, and at the end you have a working result. A week later, facing a similar task without the tutorial, you can't begin. Nothing went wrong during the tutorial: you were following, not retrieving, and following generates almost no retrieval practice.",
       result:
         "The correction is small and uncomfortable: after each section, close the tutorial and reproduce the step from memory. When you finish, build something similar but different without the guide. The failures you hit are the actual learning, and they were always going to happen — the only question is whether they happen while you're learning or while you're working.",
     },
@@ -177,7 +177,7 @@ export const guide: Guide = {
     {
       mistake: "Judging a study session by how it felt",
       why: "The methods that feel best during the session are frequently the least effective at delay. Your in-the-moment sense of learning is measuring familiarity.",
-      fix: "Evaluate methods on delayed testing — a few days later, unprompted. That's the only measure that correlates with what you'll actually retain.",
+      fix: "Evaluate methods on delayed testing: a few days later, unprompted. That's the only measure that correlates with what you'll actually retain.",
     },
     {
       mistake: "Cramming for something you need long-term",
@@ -302,7 +302,7 @@ export const guide: Guide = {
     },
     {
       q: "Is cramming ever rational?",
-      a: "Yes, for a deadline where you only need the material to survive until tomorrow. It's genuinely effective short-term and genuinely poor for durability, so the honest question is which you actually need.",
+      a: "Yes, for a deadline where you only need the material to survive until tomorrow. It's effective short-term and poor for durability, so the honest question is which you actually need.",
     },
     {
       q: "How long should study sessions be?",
@@ -314,7 +314,7 @@ export const guide: Guide = {
     },
     {
       q: "What about spaced repetition apps?",
-      a: "Excellent for discrete factual material — vocabulary, terminology, formulas. Less suited to skills and conceptual understanding, which need applied practice and explanation rather than flashcards.",
+      a: "Excellent for discrete factual material: vocabulary, terminology, formulas. Less suited to skills and conceptual understanding, which need applied practice and explanation rather than flashcards.",
     },
     {
       q: "How do I learn a skill rather than facts?",

@@ -22,9 +22,9 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "The obvious use of AI in marketing is producing more content, faster. It's also the one most likely to leave you worse off than before — with a site full of material that ranks for nothing, sounds like everyone else, and quietly signals to both readers and search engines that nobody was really paying attention.",
+    "The obvious use of AI in marketing is producing more content, faster. It's also the one most likely to leave you worse off than before: with a site full of material that ranks for nothing, sounds like everyone else, and quietly signals to both readers and search engines that nobody was really paying attention.",
     "The less obvious uses are where the return is. Research that would take a day. Turning one substantial piece into eight formats. Analysing what actually performed and why. Testing more variants than a team could write. These are unglamorous and they compound.",
-    "This guide covers where AI genuinely helps a marketing function, why scaled content generation is a trap that search engines now explicitly penalise, and how to use it without your brand voice dissolving into the same register as everyone else's.",
+    "This guide covers where AI helps a marketing function, why scaled content generation is a trap that search engines now explicitly penalise, and how to use it without your brand voice dissolving into the same register as everyone else's.",
   ],
 
   whyItMatters: [
@@ -39,12 +39,12 @@ export const guide: Guide = {
       explain:
         "Producing finished content is what AI is worst at commercially, because everyone can do it and the output converges on the same register. The value was never in the typing.",
       detail:
-        "If a piece could have been written by any competitor using the same tool, it isn't doing marketing work — it's occupying a URL.",
+        "If a piece could have been written by any competitor using the same tool, it isn't doing marketing work. It's occupying a URL.",
     },
     {
       term: "Repurposing is the highest-return application",
       explain:
-        "One genuinely good piece — a customer interview, an original analysis, a real case study — can become a newsletter, a series of posts, a script, a landing page section and a talk outline.",
+        "One good piece — a customer interview, an original analysis, a real case study — can become a newsletter, a series of posts, a script, a landing page section and a talk outline.",
       detail:
         "The scarce input is the original substance. AI multiplies distribution of something real rather than manufacturing substance that isn't there.",
     },
@@ -53,7 +53,7 @@ export const guide: Guide = {
       explain:
         "Search engines have explicit policies against generating many pages primarily to manipulate rankings, regardless of whether AI or humans produced them.",
       detail:
-        "The test they apply is intent and value to the reader, not the production method. AI-assisted content that genuinely helps is fine; volume produced to rank is not.",
+        "The test they apply is intent and value to the reader, not the production method. AI-assisted content that helps is fine; volume produced to rank is not.",
     },
     {
       term: "Research and synthesis beat drafting",
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Testing variants is a real volume win",
       explain:
-        "Subject lines, ad copy, headlines, landing page hooks — places where more variants genuinely helps because a test decides, not an opinion.",
+        "Subject lines, ad copy, headlines, landing page hooks — places where more variants helps because a test decides, not an opinion.",
       detail:
         "This is the one legitimate volume application: quantity feeding a measurement process, not quantity substituting for one.",
     },
@@ -123,7 +123,7 @@ export const guide: Guide = {
       walkthrough:
         "A recognisable trajectory. A team goes from four posts a month to forty using AI. Six months later the site has 240 new pages. Organic traffic is flat. The pages are grammatical, on-topic, and indistinguishable from what three competitors published on the same keywords using the same tools. Nobody links to them because there's nothing in them worth citing, and nobody finishes them because they say what the reader already assumed.",
       result:
-        "The scarce resource was never production capacity — it was something worth saying. A single piece containing original data, a real customer story, or a genuinely contrarian argument outperforms the forty, and can be repurposed into a month of distribution. Volume is only leverage when there's substance to multiply.",
+        "The scarce resource was never production capacity — it was something worth saying. A single piece containing original data, a real customer story, or a contrarian argument outperforms the forty, and can be repurposed into a month of distribution. Volume is only leverage when there's substance to multiply.",
     },
   ],
 
@@ -185,7 +185,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Describing voice in adjectives",
-      why: "'Professional but approachable' produces the statistical average of everything written in that register — which is precisely the generic tone you're trying to avoid.",
+      why: "'Professional but approachable' produces the statistical average of everything written in that register — which is the generic tone you're trying to avoid.",
       fix: "Supply real examples of your writing and explicit rules about what you never say.",
     },
     {
@@ -201,7 +201,7 @@ export const guide: Guide = {
     {
       mistake: "Treating more marketing as the answer to weak conversion",
       why: "If the offer doesn't resonate, more content scales the wrong thing. Fit problems get misdiagnosed as volume problems, and AI makes that mistake cheaper to make.",
-      fix: "Check whether volume is genuinely the constraint before automating it.",
+      fix: "Check whether volume is the constraint before automating it.",
     },
     {
       mistake: "Letting AI write the strategy",
@@ -224,7 +224,7 @@ export const guide: Guide = {
   ],
 
   proTips: [
-    "Run a support-ticket extraction before your next content plan. The questions customers actually ask, ranked by frequency, is a better brief than anything a keyword tool will give you — and it's already in a system you own.",
+    "Run a support-ticket extraction before your next content plan. The questions customers actually ask, ranked by frequency, is a better brief than anything a keyword tool will give you, and it's already in a system you own.",
     "Ask whether a competitor could publish your piece unchanged. If they could, it isn't doing marketing work. Original data, a named customer, or a genuine opinion are the only reliable differentiators left.",
     "Keep one file of your best writing and paste it in as a voice reference every time. It takes ten seconds and does more for tone than any amount of adjective-based prompting.",
     "Check the first statistic in any AI-assisted draft, always. If it's wrong or unfindable, assume the rest need checking too — the failure clusters.",
@@ -290,11 +290,11 @@ export const guide: Guide = {
   faqs: [
     {
       q: "Will AI content hurt our search rankings?",
-      a: "AI assistance isn't penalised; content produced at scale primarily to manipulate rankings is, regardless of how it was made. The test applied is whether it genuinely helps a reader. Generic volume fails that test whoever wrote it.",
+      a: "AI assistance isn't penalised; content produced at scale primarily to manipulate rankings is, regardless of how it was made. The test applied is whether it helps a reader. Generic volume fails that test whoever wrote it.",
     },
     {
       q: "What's the best use of AI in marketing?",
-      a: "Repurposing genuinely good material across formats, and research and synthesis you couldn't otherwise afford. Both multiply something real rather than manufacturing substance that isn't there.",
+      a: "Repurposing good material across formats, and research and synthesis you couldn't otherwise afford. Both multiply something real rather than manufacturing substance that isn't there.",
     },
     {
       q: "How do we stop everything sounding generic?",
@@ -302,7 +302,7 @@ export const guide: Guide = {
     },
     {
       q: "Can AI replace our copywriter?",
-      a: "It can replace the typing and not the judgement — what to say, to whom, what's true, and what you'd stand behind. Teams that removed the judgement generally publish more and convert less.",
+      a: "It can replace the typing and not the judgement: what to say, to whom, what's true, and what you'd stand behind. Teams that removed the judgement generally publish more and convert less.",
     },
     {
       q: "Is it safe to publish AI-written statistics?",
@@ -310,7 +310,7 @@ export const guide: Guide = {
     },
     {
       q: "How much content should we publish?",
-      a: "As much as you can genuinely review and stand behind, and not more. If output rose and results didn't, publishing less and investing in one thing worth reading is the correct response.",
+      a: "As much as you can review and stand behind, and not more. If output rose and results didn't, publishing less and investing in one thing worth reading is the correct response.",
     },
   ],
 
@@ -318,7 +318,7 @@ export const guide: Guide = {
     { name: "Your support and CRM data", what: "The highest-value marketing input you already own. Mine it before generating anything new.", cost: "Free" },
     { name: "A voice reference file", what: "Three to five pieces of your best writing plus never-say rules. Not a tool, and more effective than most of them.", cost: "Free" },
     { name: "Analytics with link tracking", what: "Links earned per piece is the metric that exposes generic content before rankings do.", cost: "Freemium" },
-    { name: "A/B testing tooling", what: "Whatever lets tests decide between variants — the one place volume genuinely helps.", cost: "Freemium" },
+    { name: "A/B testing tooling", what: "Whatever lets tests decide between variants — the one place volume helps.", cost: "Freemium" },
   ],
 
   resources: [

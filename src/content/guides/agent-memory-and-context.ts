@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "agent-memory-and-context",
   seoTitle: "Agent Memory and Context: Managing State That Grows",
   metaDescription:
-    "Why agents degrade over long runs and what to do about it — context windows, summarisation, retrieval-backed memory and the cost curve nobody plans for.",
+    "Why agents degrade over long runs and what to do about it: context windows, summarisation, retrieval-backed memory and the cost curve nobody plans for.",
   title: "Agent Memory and Context Management",
   keywords: [
     "agent memory",
@@ -22,7 +22,7 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "Agents don't fail suddenly. They degrade. The first few steps are sharp, then somewhere around step twelve the thing starts forgetting constraints it was given at the start, repeating work it already did, and answering a slightly different question than the one you asked. It looks like the model getting worse. It isn't — it's the context filling up.",
+    "Agents don't fail suddenly. They degrade. The first few steps are sharp, then somewhere around step twelve the thing starts forgetting constraints it was given at the start, repeating work it already did, and answering a slightly different question than the one you asked. It looks like the model getting worse. It isn't. It's the context filling up.",
     "This is the failure mode that most distinguishes a demo from a production agent, because demos are short. Every architecture accumulates: a loop appends messages, a crew accumulates task outputs, a group chat re-sends everything each turn. Growth is the default and nobody plans for it.",
     "This guide covers what actually happens as context grows, the four mechanisms for controlling it, and how to tell which one your system needs. It assumes you've built an agent and watched one of these runs go sideways.",
   ],
@@ -65,7 +65,7 @@ export const guide: Guide = {
     {
       term: "Working memory versus long-term memory",
       explain:
-        "Working memory is the current context: this task, this conversation. Long-term memory is durable storage across sessions — preferences, prior decisions, accumulated facts.",
+        "Working memory is the current context: this task, this conversation. Long-term memory is durable storage across sessions: preferences, prior decisions, accumulated facts.",
       detail:
         "They need different mechanisms. Working memory wants summarisation; long-term memory wants retrieval, so you fetch the relevant three facts rather than carrying all of them.",
     },
@@ -121,9 +121,9 @@ def summarise_history(messages: list[dict], goal: str) -> list[dict]:
         model="claude-opus-5",
         max_tokens=2000,
         system=(
-            "Summarise this agent transcript for a colleague taking over. "
-            "Preserve: decisions made and why, facts established, approaches "
-            "already tried and their outcomes, and anything still outstanding. "
+            "Summarise this agent transcript for a colleague taking over."
+            "Preserve: decisions made and why, facts established, approaches"
+            "already tried and their outcomes, and anything still outstanding."
             "Omit: exploratory reasoning, superseded drafts, and pleasantries."
         ),
         messages=[{"role": "user", "content": transcript}],
@@ -198,7 +198,7 @@ def build_prompt(user_input: str, user_id: str, memory: AgentMemory) -> list[dic
         cumulative += count
 
         # Per-turn input is what grows. Cumulative is what you pay.
-        print(f"turn {turn:2d}  input {count:>7,}  cumulative {cumulative:>8,}")
+        print(f"turn {turn:2d} input {count:>7,} cumulative {cumulative:>8,}")
 
         if turn > 1 and count > 2 * first_turn_tokens:
             print(f"           ^ context has doubled by turn {turn}")
@@ -219,7 +219,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
   learningPath: [
     {
       title: "Measure the curve before optimising",
-      body: "Log input tokens per turn across a twenty-step run and plot it. Then rank what's occupying the context. Fix the biggest contributor first — it's usually not what you assumed.",
+      body: "Log input tokens per turn across a twenty-step run and plot it. Then rank what's occupying the context. Fix the biggest contributor first. It's usually not what you assumed.",
       effort: "2–3 hours",
       outcome: "A curve and a ranked culprit list, rather than a hunch.",
     },
@@ -255,7 +255,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
     },
     {
       title: "Decide what gets forgotten",
-      body: "Write down what should never persist — failed approaches, corrected errors, abandoned branches. Implement the pruning explicitly.",
+      body: "Write down what should never persist: failed approaches, corrected errors, abandoned branches. Implement the pruning explicitly.",
       effort: "2–3 hours",
       outcome: "A memory policy rather than accumulation by default.",
     },
@@ -268,7 +268,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
       walkthrough:
         "Liu and colleagues systematically varied the position of relevant information within a model's context and measured retrieval accuracy on multi-document question answering. If attention were uniform, position wouldn't matter.",
       result:
-        "Accuracy was highest when the needed information sat at the beginning or end and degraded when it sat in the middle — a U-shaped curve that held even for models built for long contexts, with overall performance falling as context grew. This is the mechanism behind agents that stop following their system prompt around step fifteen: the prompt hasn't changed, its position has.",
+        "Accuracy was highest when the needed information sat at the beginning or end and degraded when it sat in the middle: a U-shaped curve that held even for models built for long contexts, with overall performance falling as context grew. This is the mechanism behind agents that stop following their system prompt around step fifteen: the prompt hasn't changed, its position has.",
       source: {
         label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",

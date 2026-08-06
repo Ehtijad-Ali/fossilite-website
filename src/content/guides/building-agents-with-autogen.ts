@@ -22,15 +22,15 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "AutoGen models multi-agent work as conversation. Agents talk to each other in a group chat, a policy decides who speaks next, and a termination condition decides when they stop. It's a genuinely different framing from CrewAI's org chart or LangGraph's state machine, and for problems that are actually dialogue-shaped — negotiation, critique, iterative refinement — it fits well.",
+    "AutoGen models multi-agent work as conversation. Agents talk to each other in a group chat, a policy decides who speaks next, and a termination condition decides when they stop. It's a different framing from CrewAI's org chart or LangGraph's state machine, and for problems that are actually dialogue-shaped — negotiation, critique, iterative refinement — it fits well.",
     "It's also the most demanding of the three to operate. The API is async throughout, the architecture is layered, and the framework was substantially redesigned at v0.4 — which means a large share of the tutorials you'll find describe an API that no longer exists. Budget time for that.",
     "This guide covers the current `autogen-agentchat` interface: how agents and teams are constructed, how termination actually works, and the specific gotchas — including one about sampling parameters that will bite anyone pairing AutoGen with a current Claude model.",
   ],
 
   whyItMatters: [
-    "The conversational model captures something the alternatives don't. When the work genuinely is a back-and-forth — a critic pushing on a writer's draft until it holds up, two perspectives negotiating toward a plan — expressing that as a group chat is more natural than expressing it as a pipeline or a graph.",
+    "The conversational model captures something the alternatives don't. When the work is a back-and-forth — a critic pushing on a writer's draft until it holds up, two perspectives negotiating toward a plan — expressing that as a group chat is more natural than expressing it as a pipeline or a graph.",
     "AutoGen is also research-backed and Microsoft-maintained, which matters for enterprises with procurement constraints. If you need a multi-agent framework with institutional backing, it's on the shortlist by default.",
-    "And the termination-condition design is genuinely good. Making 'when do we stop?' a first-class composable object, rather than an afterthought, is a better answer than most frameworks manage — and stopping is where multi-agent systems most reliably go wrong.",
+    "And the termination-condition design is good. Making 'when do we stop?' a first-class composable object, rather than an afterthought, is a better answer than most frameworks manage, and stopping is where multi-agent systems most reliably go wrong.",
   ],
 
   coreConcepts: [
@@ -53,7 +53,7 @@ export const guide: Guide = {
       explain:
         "An agent has a name, a model client, an optional system message, and optional tools. It's the participant in a conversation rather than a step in a pipeline.",
       detail:
-        "The `name` is meaningful — other agents address each other by name, and selection policies use it. Names like `critic` and `writer` do more work than `agent_1`.",
+        "The `name` is meaningful: other agents address each other by name, and selection policies use it. Names like `critic` and `writer` do more work than `agent_1`.",
     },
     {
       term: "Teams decide who speaks next",
@@ -90,7 +90,7 @@ export const guide: Guide = {
       title: "A minimal two-agent team",
       language: "python",
       intro:
-        "A writer and a critic, alternating until the critic approves or the message cap fires. Note the async structure — it's not optional.",
+        "A writer and a critic, alternating until the critic approves or the message cap fires. Note the async structure. It's not optional.",
       code: `import asyncio
 
 from autogen_agentchat.agents import AssistantAgent
@@ -111,7 +111,7 @@ async def main() -> None:
         name="writer",
         model_client=model_client,
         system_message=(
-            "You draft short product briefs. When the critic gives feedback, "
+            "You draft short product briefs. When the critic gives feedback,"
             "revise and present the full updated draft, not just the changes."
         ),
     )
@@ -120,7 +120,7 @@ async def main() -> None:
         name="critic",
         model_client=model_client,
         system_message=(
-            "You review drafts for unsupported claims and vague language. "
+            "You review drafts for unsupported claims and vague language."
             "Give specific, actionable feedback. When the draft has no "
             "unsupported claims left, reply with exactly: APPROVED"
         ),
@@ -137,7 +137,7 @@ async def main() -> None:
 
 asyncio.run(main())`,
       note:
-        "The sampling-parameter gotcha is real and easy to miss: `AnthropicChatCompletionClient` exposes `temperature`, `top_p` and `top_k`, but current Claude models reject them with a 400. Don't set them — and if you hit an unexplained 400, check whether a default is being sent.",
+        "The sampling-parameter gotcha is real and easy to miss: `AnthropicChatCompletionClient` exposes `temperature`, `top_p` and `top_k`, but current Claude models reject them with a 400. Don't set them: and if you hit an unexplained 400, check whether a default is being sent.",
     },
     {
       title: "Giving an agent tools",
@@ -163,7 +163,7 @@ researcher = AssistantAgent(
     model_client=model_client,
     tools=[search_docs],
     system_message=(
-        "You find verifiable facts using search_docs. Never state a figure "
+        "You find verifiable facts using search_docs. Never state a figure"
         "you have not retrieved. Write NOT FOUND rather than estimating."
     ),
     reflect_on_tool_use=True,   # summarise results rather than dumping them
@@ -175,7 +175,7 @@ researcher = AssistantAgent(
       title: "Selector teams, and why round-robin first",
       language: "python",
       intro:
-        "A selector team uses a model to choose the next speaker. It's more flexible and considerably harder to predict — reach for it only when a fixed order genuinely doesn't fit.",
+        "A selector team uses a model to choose the next speaker. It's more flexible and considerably harder to predict — reach for it only when a fixed order doesn't fit.",
       code: `from autogen_agentchat.teams import SelectorGroupChat
 
 team = SelectorGroupChat(
@@ -187,8 +187,8 @@ team = SelectorGroupChat(
     selector_prompt=(
         "Read the conversation and choose which participant should speak next.\\n"
         "{roles}\\n\\nConversation:\\n{history}\\n\\n"
-        "Choose from {participants}. Pick the researcher when a factual claim "
-        "needs checking, the writer when a draft needs producing or revising, "
+        "Choose from {participants}. Pick the researcher when a factual claim"
+        "needs checking, the writer when a draft needs producing or revising,"
         "and the critic when a draft is ready for review."
     ),
 )
@@ -197,7 +197,7 @@ team = SelectorGroupChat(
 # between two agents indefinitely, and each turn carries the full history.
 await Console(team.run_stream(task="Draft a brief for a new API product."))`,
       note:
-        "Every turn in a group chat re-sends the whole conversation, so cost grows with the square of the turn count rather than linearly. A 20-message cap is not conservative — it's the thing standing between you and a surprising bill.",
+        "Every turn in a group chat re-sends the whole conversation, so cost grows with the square of the turn count rather than linearly. A 20-message cap is not conservative. It's the thing standing between you and a surprising bill.",
     },
   ],
 
@@ -222,7 +222,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     },
     {
       title: "Watch the conversation with Console",
-      body: "Run everything through `Console(team.run_stream(...))` while developing. A group chat's behaviour is genuinely invisible from the final result.",
+      body: "Run everything through `Console(team.run_stream(...))` while developing. A group chat's behaviour is invisible from the final result.",
       effort: "1 hour",
       outcome: "You can see who said what and why the team went where it did.",
     },
@@ -305,7 +305,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     {
       mistake: "Reaching for a selector team by default",
       why: "Model-selected turn-taking adds a model call per turn and makes traces much harder to follow, often to solve an ordering problem round-robin handles fine.",
-      fix: "Start with `RoundRobinGroupChat`. Move to a selector when you can point at a case where fixed order genuinely fails.",
+      fix: "Start with `RoundRobinGroupChat`. Move to a selector when you can point at a case where fixed order fails.",
     },
     {
       mistake: "Dumping raw tool output into the chat",
@@ -321,10 +321,10 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
 
   bestPractices: [
     "Use `autogen_agentchat` and `autogen_ext` imports; treat anything with `config_list` as legacy.",
-    "Compose termination conditions — a semantic stop combined with a hard message cap, always.",
+    "Compose termination conditions: a semantic stop combined with a hard message cap, always.",
     "Start with `RoundRobinGroupChat` and justify any move to a selector team.",
     "Keep teams small. Every additional agent pays for the whole conversation on every turn.",
-    "Give agents meaningful names — they're used in addressing and in selection prompts.",
+    "Give agents meaningful names. They're used in addressing and in selection prompts.",
     "Set `reflect_on_tool_use=True` so raw tool output doesn't flood the shared context.",
     "Develop with `Console(team.run_stream(...))`; use `run()` only once behaviour is settled.",
     "Leave sampling parameters unset when using current Claude models.",
@@ -342,7 +342,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
   ],
 
   businessApplications: [
-    "Draft-and-critique workflows where an independent reviewer with its own tools genuinely catches things the author misses.",
+    "Draft-and-critique workflows where an independent reviewer with its own tools catches things the author misses.",
     "Simulated negotiation or planning, where the back-and-forth is the point rather than an implementation detail.",
     "Research synthesis with a challenger role that pushes on weak claims before they reach a human.",
     "Enterprise settings where Microsoft backing and research provenance matter to procurement.",
@@ -412,7 +412,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     },
     {
       q: "AutoGen or CrewAI?",
-      a: "AutoGen when the work is genuinely conversational — critique, negotiation, iterative refinement. CrewAI when it decomposes into roles with a defined handoff. AutoGen is more powerful and more demanding to operate.",
+      a: "AutoGen when the work is conversational: critique, negotiation, iterative refinement. CrewAI when it decomposes into roles with a defined handoff. AutoGen is more powerful and more demanding to operate.",
     },
     {
       q: "Can I use Claude models with it?",
@@ -420,7 +420,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     },
     {
       q: "How do I see what the agents are doing?",
-      a: "Wrap the run in `Console(team.run_stream(...))`. A group chat's behaviour is genuinely invisible from the final result, and this is the difference between debugging and guessing.",
+      a: "Wrap the run in `Console(team.run_stream(...))`. A group chat's behaviour is invisible from the final result, and this is the difference between debugging and guessing.",
     },
   ],
 

@@ -28,7 +28,7 @@ export const guide: Guide = {
   ],
 
   whyItMatters: [
-    "Almost every genuinely useful business application of language models needs company-specific knowledge. Support answers must reflect your actual policy. Internal search must cover your actual documents. Sales research must use your actual account history. Without grounding, you have a very articulate system that confidently makes things up about your business — which is worse than having nothing.",
+    "Almost every useful business application of language models needs company-specific knowledge. Support answers must reflect your actual policy. Internal search must cover your actual documents. Sales research must use your actual account history. Without grounding, you have a very articulate system that confidently makes things up about your business — which is worse than having nothing.",
     "RAG is also the answer to a question people usually get wrong. The instinct when a model doesn't know something is to train it on the missing data. That's expensive, slow to update, impossible to audit, and it doesn't reliably install facts. Retrieval is cheaper, updates the moment a document changes, and — critically — can cite its source, which is often a hard requirement in regulated work.",
     "Understanding it also makes you a much harder person to sell to. A large number of AI products are a retrieval pipeline with a good interface. Knowing what's inside lets you ask the questions that matter: how do you chunk, do you re-rank, what happens when retrieval finds nothing, and can I see the sources behind an answer?",
   ],
@@ -53,7 +53,7 @@ export const guide: Guide = {
       explain:
         "The user's question is embedded with the same model, then the store returns the chunks whose vectors sit closest to it. 'Closest' is usually measured by cosine similarity.",
       detail:
-        "Note what this doesn't do: it doesn't understand the question, and it doesn't verify relevance. It returns the top matches whether or not any of them are actually useful — there's always a nearest neighbour, even when nothing is relevant.",
+        "Note what this doesn't do: it doesn't understand the question, and it doesn't verify relevance. It returns the top matches whether or not any of them are actually useful. There's always a nearest neighbour, even when nothing is relevant.",
     },
     {
       term: "Hybrid search combines semantic and keyword matching",
@@ -88,7 +88,7 @@ export const guide: Guide = {
       explain:
         "A RAG system can fail at retrieval (the right passage was never fetched) or at generation (the passage was there and the answer still went wrong). These need measuring separately.",
       detail:
-        "Teams that only evaluate final answers spend weeks tuning prompts to fix what is actually a chunking problem. Measure retrieval hit rate first — if the correct chunk isn't in the context, no prompt will save you.",
+        "Teams that only evaluate final answers spend weeks tuning prompts to fix what is actually a chunking problem. Measure retrieval hit rate first: if the correct chunk isn't in the context, no prompt will save you.",
     },
   ],
 
@@ -125,7 +125,7 @@ export const guide: Guide = {
     },
     {
       title: "Harden generation",
-      body: "Require citations for every claim, forbid answers not supported by retrieved text, and add explicit refusal behaviour. Then test with questions the corpus genuinely can't answer.",
+      body: "Require citations for every claim, forbid answers not supported by retrieved text, and add explicit refusal behaviour. Then test with questions the corpus can't answer.",
       effort: "3–4 hours",
       outcome: "The system reliably says 'not in the documents' instead of inventing.",
     },
@@ -201,7 +201,7 @@ export const guide: Guide = {
     {
       mistake: "Fine-tuning instead of retrieving",
       why: "It's expensive, doesn't reliably install facts, can't cite sources, and requires retraining every time a document changes.",
-      fix: "Use retrieval for knowledge. Reserve fine-tuning for consistent format and tone, and only after prompting has genuinely been exhausted.",
+      fix: "Use retrieval for knowledge. Reserve fine-tuning for consistent format and tone, and only after prompting has been exhausted.",
     },
     {
       mistake: "Treating the index as static",
@@ -226,7 +226,7 @@ export const guide: Guide = {
     "Store a one-line summary alongside each chunk and embed the summary rather than the raw text for the first-pass search. It denoises retrieval on documents full of boilerplate.",
     "Look at your logged queries weekly and cluster them. The clusters that retrieve poorly usually point at a whole category of missing or badly structured documentation — a content problem wearing a technical disguise.",
     "When users complain about answers, check retrieval first, every time. In our experience most reported 'model errors' in RAG systems are actually chunking errors.",
-    "Test with the questions your team can't answer either. If the document genuinely doesn't cover it, the correct behaviour is refusal — and that's the behaviour least likely to have been tested.",
+    "Test with the questions your team can't answer either. If the document doesn't cover it, the correct behaviour is refusal, and that's the behaviour least likely to have been tested.",
     "Include the document date in the chunk text itself, not only in metadata. Models reason about currency far better when the date is visible in the context they're reading.",
   ],
 
@@ -328,7 +328,7 @@ def chunk_markdown(text: str, doc_title: str, max_chars: int = 1500) -> list[dic
       title: "Hybrid retrieval with reciprocal rank fusion",
       language: "python",
       intro:
-        "Semantic search misses exact identifiers; keyword search misses paraphrases. Running both and fusing the rankings covers each other's blind spots — and RRF needs no score normalisation, which is why it's the pragmatic default.",
+        "Semantic search misses exact identifiers; keyword search misses paraphrases. Running both and fusing the rankings covers each other's blind spots: and RRF needs no score normalisation, which is why it's the pragmatic default.",
       code: `def reciprocal_rank_fusion(
     rankings: list[list[str]], k: int = 60, top_n: int = 20
 ) -> list[str]:
@@ -414,7 +414,7 @@ def answer(question: str, user_id: str) -> str:
       title: "Measuring retrieval separately from generation",
       language: "python",
       intro:
-        "The diagnostic that saves weeks. If the correct chunk was never retrieved, no prompt change will fix the answer — and this tells you which half to work on.",
+        "The diagnostic that saves weeks. If the correct chunk was never retrieved, no prompt change will fix the answer, and this tells you which half to work on.",
       code: `# Each case: a question plus the chunk id that should answer it.
 EVAL_SET = [
     {"q": "How long is enterprise parental leave in Germany?", "chunk_id": "hr-de-04"},
@@ -496,7 +496,7 @@ def evaluate_retrieval(k: int = 5) -> None:
   tools: [
     { name: "pgvector", what: "Vector search inside Postgres. Often the pragmatic choice — one database instead of two.", cost: "Free", url: "https://github.com/pgvector/pgvector" },
     { name: "Qdrant", what: "Purpose-built vector database with strong metadata filtering. Good when filters matter as much as similarity.", cost: "Freemium", url: "https://qdrant.tech" },
-    { name: "LlamaIndex", what: "Framework focused specifically on the retrieval side — loaders, chunkers, retrievers and evaluation.", cost: "Free", url: "https://www.llamaindex.ai" },
+    { name: "LlamaIndex", what: "Framework focused specifically on the retrieval side: loaders, chunkers, retrievers and evaluation.", cost: "Free", url: "https://www.llamaindex.ai" },
     { name: "Cohere Rerank", what: "A managed re-ranking model. Usually the fastest meaningful quality win in a working pipeline.", cost: "Paid", url: "https://cohere.com/rerank" },
     { name: "Ragas", what: "Evaluation framework for RAG that scores retrieval and generation separately.", cost: "Free", url: "https://docs.ragas.io" },
     { name: "Unstructured", what: "Parses PDFs, slides and HTML into clean structured text. Solves the unglamorous problem that ruins most pipelines.", cost: "Freemium", url: "https://unstructured.io" },
@@ -528,7 +528,7 @@ def evaluate_retrieval(k: int = 5) -> None:
   cta: {
     headline: "Retrieval returning the wrong chunks?",
     body:
-      "Retrieval quality, not the model, is what breaks most RAG systems — and it's measurable. We build these and can tell you where yours is losing.",
+      "Retrieval quality, not the model, is what breaks most RAG systems, and it's measurable. We build these and can tell you where yours is losing.",
     label: "Get your retrieval reviewed",
     href: "/contact",
   },

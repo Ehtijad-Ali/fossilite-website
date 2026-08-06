@@ -22,9 +22,9 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "Framework comparisons usually rank things, which is the wrong shape for this decision. These libraries aren't competing on a single axis — they encode genuinely different mental models, and the right question is which model matches your problem rather than which library is best.",
+    "Framework comparisons usually rank things, which is the wrong shape for this decision. These libraries aren't competing on a single axis: they encode different mental models, and the right question is which model matches your problem rather than which library is best.",
     "There's also a candidate most comparisons omit: no framework at all. The agent loop is about forty lines. A substantial share of production agent code would be simpler, cheaper and easier to debug written directly against a model SDK, and teams reach for a framework before they've felt the pull of one.",
-    "This guide gives you the mental model each library encodes, the single question that decides between them, and honest notes on what each costs. It assumes you've built a raw loop — if not, do that first, because it's the baseline every option here has to beat.",
+    "This guide gives you the mental model each library encodes, the single question that decides between them, and honest notes on what each costs. It assumes you've built a raw loop: if not, do that first, because it's the baseline every option here has to beat.",
   ],
 
   whyItMatters: [
@@ -39,7 +39,7 @@ export const guide: Guide = {
       explain:
         "Can you write down the steps in advance? If yes, you want a workflow — a fixed sequence with model calls at specific points — not an agent. No framework changes this answer.",
       detail:
-        "Agents earn their cost when the sequence genuinely can't be known ahead of time. That's rarer than it feels, and 'we couldn't be bothered to write it down' is not the same as 'it can't be determined'.",
+        "Agents earn their cost when the sequence can't be known ahead of time. That's rarer than it feels, and 'we couldn't be bothered to write it down' is not the same as 'it can't be determined'.",
     },
     {
       term: "Raw SDK: you own the loop",
@@ -51,7 +51,7 @@ export const guide: Guide = {
     {
       term: "LangChain: the integration surface",
       explain:
-        "`create_agent` plus a large ecosystem — many providers behind one interface, hundreds of tool integrations, tracing that works without instrumentation.",
+        "`create_agent` plus a large ecosystem: many providers behind one interface, hundreds of tool integrations, tracing that works without instrumentation.",
       detail:
         "Adopt it for the ecosystem, not to avoid writing a loop. Teams that adopt for the latter reason end up with an abstraction they don't understand around a problem they hadn't felt.",
     },
@@ -65,7 +65,7 @@ export const guide: Guide = {
     {
       term: "CrewAI: the org chart",
       explain:
-        "Agents defined by role, goal and backstory; tasks with expected outputs; sequential or hierarchical execution. Fast to express when the role metaphor genuinely fits.",
+        "Agents defined by role, goal and backstory; tasks with expected outputs; sequential or hierarchical execution. Fast to express when the role metaphor fits.",
       detail:
         "The accessibility is also the risk. Because it feels like delegating to people, it invites modelling problems as teams that a single agent would handle for a fraction of the cost.",
     },
@@ -74,7 +74,7 @@ export const guide: Guide = {
       explain:
         "Agents talk in a group chat, a policy picks who speaks next, composable termination conditions decide when to stop. Async throughout.",
       detail:
-        "The best fit for genuinely dialogue-shaped work — critique, negotiation, iterative refinement. Also the most demanding to operate, and its cost grows quadratically with turns.",
+        "The best fit for dialogue-shaped work: critique, negotiation, iterative refinement. Also the most demanding to operate, and its cost grows quadratically with turns.",
     },
     {
       term: "Cost scales with architecture, not just usage",
@@ -86,7 +86,7 @@ export const guide: Guide = {
     {
       term: "The migration cost is real",
       explain:
-        "These libraries encode different models, so moving between them isn't a port — it's a redesign. Choosing is a longer commitment than it feels at the prototype stage.",
+        "These libraries encode different models, so moving between them isn't a port. It's a redesign. Choosing is a longer commitment than it feels at the prototype stage.",
       detail:
         "Which argues for starting with the least committal option that could work and moving deliberately, rather than picking the most capable one up front.",
     },
@@ -157,7 +157,7 @@ await Console(team.run_stream(task="..."))`,
     },
     {
       title: "Identify which capability you're missing",
-      body: "Name the specific thing the baseline can't do — many providers, durable state, human approval, genuinely parallel roles, dialogue-shaped refinement. That name selects the framework.",
+      body: "Name the specific thing the baseline can't do: many providers, durable state, human approval, parallel roles, dialogue-shaped refinement. That name selects the framework.",
       effort: "1 hour",
       outcome: "A named requirement rather than a preference.",
     },
@@ -200,7 +200,7 @@ await Console(team.run_stream(task="..."))`,
       walkthrough:
         "Liu and colleagues varied where relevant information sat within a model's context and measured retrieval accuracy. Performance was highest at the beginning and end and degraded in the middle, holding even for long-context models.",
       result:
-        "Every architecture here accumulates context — a crew through task outputs, a group chat through the shared history, a graph through checkpointed messages. The original instructions drift toward the least-attended position as runs lengthen. This is a property of the models, not the libraries, so 'switch framework' is never the fix for it.",
+        "Every architecture here accumulates context: a crew through task outputs, a group chat through the shared history, a graph through checkpointed messages. The original instructions drift toward the least-attended position as runs lengthen. This is a property of the models, not the libraries, so 'switch framework' is never the fix for it.",
       source: {
         label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
@@ -212,7 +212,7 @@ await Console(team.run_stream(task="..."))`,
       walkthrough:
         "A team spends two weeks prototyping the same task in four frameworks. Each prototype works. Each is roughly as good as the others, because the task was well within all of their capabilities. The comparison produces a preference based on syntax taste, and the actual question — whether the task needed an agent at all — never gets asked.",
       result:
-        "A raw-SDK baseline would have answered more in an afternoon. The frameworks differentiate on capabilities most prototypes don't exercise: persistence across restarts, human approval, genuinely parallel roles. Compare against the baseline on one named requirement rather than comparing frameworks against each other.",
+        "A raw-SDK baseline would have answered more in an afternoon. The frameworks differentiate on capabilities most prototypes don't exercise: persistence across restarts, human approval, parallel roles. Compare against the baseline on one named requirement rather than comparing frameworks against each other.",
     },
   ],
 
@@ -244,7 +244,7 @@ await Console(team.run_stream(task="..."))`,
     },
     {
       mistake: "Ignoring operational fit",
-      why: "Async requirements, state durability and traceability decide whether something survives production more often than capability does — and they're invisible in a prototype.",
+      why: "Async requirements, state durability and traceability decide whether something survives production more often than capability does, and they're invisible in a prototype.",
       fix: "Test a restart mid-run, and try to debug a deliberately failed run, before committing.",
     },
     {
@@ -261,7 +261,7 @@ await Console(team.run_stream(task="..."))`,
     "Measure cost per successful task, not per call.",
     "Prefer the least committal option that could work — migration is a redesign.",
     "Match the mental model to the problem's shape: sequence, state machine, team or conversation.",
-    "Test operational fit — restart mid-run, and debug a deliberately failed run.",
+    "Test operational fit: restart mid-run, and debug a deliberately failed run.",
     "Pin versions. All of these move fast and have broken agent code on minor upgrades.",
     "Keep guardrails, step limits and verification in code regardless of framework.",
   ],
@@ -271,7 +271,7 @@ await Console(team.run_stream(task="..."))`,
     "Count agents and ask what each separate context buys. A role that relays or reformats another agent's output is overhead with a job title, in any framework.",
     "Prototype the hardest realistic case, not the demo. These libraries all handle the easy path; they differentiate on persistence, approval and failure recovery.",
     "Check how each one traces a failed run before you commit. You'll spend more time debugging than building, and the debugging story varies enormously.",
-    "When a framework's overhead starts irritating you, that irritation is data. Write down which specific abstraction you're fighting — it's usually the signal to move or to drop back to the SDK.",
+    "When a framework's overhead starts irritating you, that irritation is data. Write down which specific abstraction you're fighting. It's usually the signal to move or to drop back to the SDK.",
     "Treat multi-agent as a cost decision as much as an architecture one. The metaphor makes it feel free and the bill disagrees.",
   ],
 
@@ -288,7 +288,7 @@ await Console(team.run_stream(task="..."))`,
       title: "The workflow test",
       brief:
         "Take a task you were about to build an agent for. Try to write the complete sequence of steps. If you succeed, implement it as a workflow and compare against an agent on twenty inputs.",
-      success: "Either a shipped workflow, or a written reason it's genuinely undeterminable.",
+      success: "Either a shipped workflow, or a written reason it's undeterminable.",
       time: "4–6 hours",
     },
     {
@@ -341,7 +341,7 @@ await Console(team.run_stream(task="..."))`,
     },
     {
       q: "CrewAI or AutoGen?",
-      a: "CrewAI when the work decomposes into roles with a defined handoff — it's faster to express and easier to trace. AutoGen when the work is genuinely a conversation, and you can afford its quadratic context growth.",
+      a: "CrewAI when the work decomposes into roles with a defined handoff. It's faster to express and easier to trace. AutoGen when the work is a conversation, and you can afford its quadratic context growth.",
     },
     {
       q: "How much more does multi-agent cost?",
@@ -367,7 +367,7 @@ await Console(team.run_stream(task="..."))`,
 
   resources: [
     { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "The best framework-agnostic treatment, and clear that most tasks want a workflow rather than an agent.", url: "https://www.anthropic.com/research/building-effective-agents" },
-    { title: "Lost in the Middle", kind: "Paper", note: "Why every option here degrades on long runs — a model property, not a library one.", url: "https://arxiv.org/abs/2307.03172" },
+    { title: "Lost in the Middle", kind: "Paper", note: "Why every option here degrades on long runs: a model property, not a library one.", url: "https://arxiv.org/abs/2307.03172" },
     { title: "OWASP Top 10 for LLM Applications", kind: "Docs", note: "The security concerns every framework inherits equally.", url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/" },
   ],
 

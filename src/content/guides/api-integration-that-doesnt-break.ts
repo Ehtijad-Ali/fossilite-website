@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "api-integration-that-doesnt-break",
   seoTitle: "API Integration That Doesn't Break: A Practical Guide",
   metaDescription:
-    "Retries, idempotency, timeouts, webhooks and rate limits — how to integrate with an API you don't control so it survives the day it misbehaves.",
+    "Retries, idempotency, timeouts, webhooks and rate limits: how to integrate with an API you don't control so it survives the day it misbehaves.",
   title: "API Integration That Doesn't Break",
   keywords: [
     "api integration best practices",
@@ -23,7 +23,7 @@ export const guide: Guide = {
 
   intro: [
     "Integrating with an API is easy on the happy path and that's the problem. The request works, the JSON parses, the feature ships. Then one Tuesday the upstream service is slow rather than down, your requests pile up behind a default timeout you never set, and the whole thing falls over in a way nobody anticipated because nobody tested it.",
-    "Everything difficult about integration is failure handling. Not exotic failure — ordinary failure. Transient errors, slowness, rate limits, duplicate deliveries, a field that changed shape. These aren't edge cases; at any volume they're weekly events.",
+    "Everything difficult about integration is failure handling. Not exotic failure: ordinary failure. Transient errors, slowness, rate limits, duplicate deliveries, a field that changed shape. These aren't edge cases; at any volume they're weekly events.",
     "This guide covers the patterns that make an integration survive contact with a service you don't control. It assumes you can already make a request and parse a response, and that you've been bitten at least once.",
   ],
 
@@ -37,14 +37,14 @@ export const guide: Guide = {
     {
       term: "Retry only what's safe to retry",
       explain:
-        "Transient failures — timeouts, 429, 5xx, connection resets — are worth retrying. Client errors like 400 and 404 are not; the same request will fail identically forever.",
+        "Transient failures (timeouts, 429, 5xx, connection resets) are worth retrying. Client errors like 400 and 404 are not; the same request will fail identically forever.",
       detail:
         "Retrying a 400 is a busy loop with extra steps. Classify by status before deciding, and treat anything you didn't explicitly classify as non-retryable.",
     },
     {
       term: "Exponential backoff with jitter",
       explain:
-        "Wait longer after each failure — 1s, 2s, 4s — and add randomness. The randomness matters as much as the backoff.",
+        "Wait longer after each failure (1s, 2s, 4s), and add randomness. The randomness matters as much as the backoff.",
       detail:
         "Without jitter, every client that failed at the same moment retries at the same moment, hammering a recovering service in synchronised waves. This is the thundering herd, and jitter is a one-line fix.",
     },
@@ -79,7 +79,7 @@ export const guide: Guide = {
     {
       term: "Webhooks arrive more than once",
       explain:
-        "Delivery is usually at-least-once. The same event will be delivered twice — after a timeout on your side, or a provider retry — and out of order is common too.",
+        "Delivery is usually at-least-once. The same event will be delivered twice (after a timeout on your side, or a provider retry), and out of order is common too.",
       detail:
         "Make handlers idempotent on the event id, and drive state from the resource you fetch rather than from delivery order.",
     },
@@ -88,7 +88,7 @@ export const guide: Guide = {
       explain:
         "A webhook endpoint is a public URL that mutates your state. Without signature verification, anyone who learns it can send you events.",
       detail:
-        "Verify against the raw request body. Frameworks that parse and re-serialise JSON change the bytes and break the signature — a common and confusing failure.",
+        "Verify against the raw request body. Frameworks that parse and re-serialise JSON change the bytes and break the signature, a common and confusing failure.",
     },
     {
       term: "Fail loudly, degrade deliberately",
@@ -104,7 +104,7 @@ export const guide: Guide = {
       title: "Retry with backoff, jitter and classification",
       language: "python",
       intro:
-        "The core pattern. Note what it refuses to retry — retrying a 400 is an infinite loop that looks like resilience.",
+        "The core pattern. Note what it refuses to retry. Retrying a 400 is an infinite loop that looks like resilience.",
       code: `import random
 import time
 import httpx
@@ -160,8 +160,8 @@ def create_payment(client: httpx.Client, order_id: str, amount_pence: int) -> di
     """Create a payment that can be retried without charging twice."""
 
     # The key must be STABLE for the logical operation, not random per attempt.
-    # Deriving it from the order id means a retry — even from a different
-    # process after a crash — reuses the same key and the server dedupes.
+    # Deriving it from the order id means a retry, even from a different
+    # process after a crash: reuses the same key and the server dedupes.
     idempotency_key = f"payment-{order_id}"
 
     response = request_with_retry(
@@ -173,7 +173,7 @@ def create_payment(client: httpx.Client, order_id: str, amount_pence: int) -> di
     )
     return response.json()
 
-# WRONG — a fresh key per attempt defeats the entire mechanism. Each retry
+# WRONG: a fresh key per attempt defeats the entire mechanism. Each retry
 # looks like a new operation to the server, and you charge the customer twice.
 def create_payment_broken(client, order_id, amount_pence):
     return client.post(
@@ -182,7 +182,7 @@ def create_payment_broken(client, order_id, amount_pence):
         json={"order_id": order_id, "amount": amount_pence},
     )`,
       note:
-        "The broken version is the common mistake and it looks correct — a UUID per request feels like the point of a unique key. The key must identify the *operation*, not the attempt.",
+        "The broken version is the common mistake and it looks correct: a UUID per request feels like the point of a unique key. The key must identify the *operation*, not the attempt.",
     },
     {
       title: "Webhook handling: verify, dedupe, then act",
@@ -226,7 +226,7 @@ def handle_webhook():
     # duplicates step 2 exists to absorb.
     return "", 200`,
       note:
-        "Step 3 is the one people skip. Driving state from the webhook payload means a delayed 'created' event can overwrite a newer 'updated' one — fetching the current resource makes ordering irrelevant.",
+        "Step 3 is the one people skip. Driving state from the webhook payload means a delayed 'created' event can overwrite a newer 'updated' one: fetching the current resource makes ordering irrelevant.",
     },
   ],
 
@@ -269,7 +269,7 @@ def handle_webhook():
     },
     {
       title: "Decide the degradation policy",
-      body: "For each integration, write down what happens when it's unavailable — queue, serve stale, or surface an error. Implement it explicitly rather than defaulting to an exception.",
+      body: "For each integration, write down what happens when it's unavailable: queue, serve stale, or surface an error. Implement it explicitly rather than defaulting to an exception.",
       effort: "2–4 hours",
       outcome: "Deliberate behaviour instead of accidental behaviour.",
     },
@@ -292,7 +292,7 @@ def handle_webhook():
       kind: "illustration",
       scenario: "The retry storm you caused.",
       walkthrough:
-        "A shape worth recognising. An upstream service has a brief wobble and returns 503 for twenty seconds. Your fleet retries immediately, three times each, with no backoff. The service — which was recovering — now receives several times its normal traffic from clients that all failed at the same instant. It stays down considerably longer than it would have, and your retries are the reason.",
+        "A shape worth recognising. An upstream service has a brief wobble and returns 503 for twenty seconds. Your fleet retries immediately, three times each, with no backoff. The service (which was recovering) now receives several times its normal traffic from clients that all failed at the same instant. It stays down considerably longer than it would have, and your retries are the reason.",
       result:
         "Exponential backoff spreads the load over time; jitter spreads it across clients. Without jitter, backoff alone still produces synchronised waves at 1s, 2s and 4s. Both together turn a self-inflicted outage back into a twenty-second blip.",
     },
@@ -302,20 +302,20 @@ def handle_webhook():
       walkthrough:
         "The failure mode idempotency exists for, and it's counterintuitive. A payment request reaches the provider and succeeds. The response is lost: a network blip, a load balancer timeout. Your client sees a timeout, which it classifies as retryable, and retries. The provider has no way to know this is the same operation, so it charges again. Your logs show one failure and one success. The customer sees two charges.",
       result:
-        "A stable idempotency key derived from the order id makes the retry safe: the provider recognises it and returns the original result. The key must identify the operation, not the attempt — a fresh UUID per request is the common mistake and it defeats the mechanism entirely.",
+        "A stable idempotency key derived from the order id makes the retry safe: the provider recognises it and returns the original result. The key must identify the operation, not the attempt. A fresh UUID per request is the common mistake and it defeats the mechanism entirely.",
     },
   ],
 
   mistakes: [
     {
       mistake: "Not setting a timeout",
-      why: "Most clients default to none or something very long. A hung connection holds a worker indefinitely, and enough of them exhaust the pool — turning one slow dependency into a full outage.",
+      why: "Most clients default to none or something very long. A hung connection holds a worker indefinitely, and enough of them exhaust the pool: turning one slow dependency into a full outage.",
       fix: "Set an explicit timeout on every outbound call. Slow is worse than down, because it consumes capacity silently.",
     },
     {
       mistake: "Retrying without backoff or jitter",
       why: "Immediate retries amplify load on a service that's already struggling, and synchronised retries across clients keep it down longer.",
-      fix: "Exponential backoff plus random jitter. Both — backoff alone still produces synchronised waves.",
+      fix: "Exponential backoff plus random jitter. Both: backoff alone still produces synchronised waves.",
     },
     {
       mistake: "Retrying non-retryable errors",
@@ -324,7 +324,7 @@ def handle_webhook():
     },
     {
       mistake: "Generating a fresh idempotency key per attempt",
-      why: "It defeats the entire mechanism — each retry looks like a new operation. This is the common mistake because a unique key per request feels like the point.",
+      why: "It defeats the entire mechanism: each retry looks like a new operation. This is the common mistake because a unique key per request feels like the point.",
       fix: "Derive a stable key from the business identifier, so any retry from any process reuses it.",
     },
     {
@@ -340,7 +340,7 @@ def handle_webhook():
     {
       mistake: "Swallowing integration errors",
       why: "An exception caught and logged at debug level is a failure nobody notices until a user reports missing data weeks later.",
-      fix: "Decide the degradation policy explicitly per integration — queue, serve stale, or surface — and alert on the failure rate.",
+      fix: "Decide the degradation policy explicitly per integration (queue, serve stale, or surface), and alert on the failure rate.",
     },
     {
       mistake: "Ignoring rate limit headers",
@@ -434,7 +434,7 @@ def handle_webhook():
     },
     {
       q: "What timeout should I set?",
-      a: "Base it on the endpoint's observed p99 latency plus headroom — often 5–30 seconds. The specific number matters far less than having one at all.",
+      a: "Base it on the endpoint's observed p99 latency plus headroom: often 5–30 seconds. The specific number matters far less than having one at all.",
     },
     {
       q: "Do I need idempotency keys everywhere?",
@@ -468,8 +468,8 @@ def handle_webhook():
 
   resources: [
     { title: "Stripe API documentation", kind: "Docs", note: "The reference implementation for idempotency keys and webhook design. Worth reading even if you never use Stripe.", url: "https://docs.stripe.com/api/idempotent_requests" },
-    { title: "AWS — Exponential Backoff and Jitter", kind: "Docs", note: "The clearest explanation of why jitter matters as much as backoff, with the data behind it.", url: "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/" },
-    { title: "Verizon Data Breach Investigations Report", kind: "Docs", note: "Base rates on how breaches begin — relevant to how you store integration credentials.", url: "https://www.verizon.com/business/resources/reports/dbir/" },
+    { title: "AWS: Exponential Backoff and Jitter", kind: "Docs", note: "The clearest explanation of why jitter matters as much as backoff, with the data behind it.", url: "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/" },
+    { title: "Verizon Data Breach Investigations Report", kind: "Docs", note: "Base rates on how breaches begin: relevant to how you store integration credentials.", url: "https://www.verizon.com/business/resources/reports/dbir/" },
   ],
 
   internalLinks: [

@@ -22,9 +22,9 @@ export const guide: Guide = {
   readingTime: 11,
 
   intro: [
-    "There's a well-known joke about spending six hours automating a task that took twenty minutes. It lands because everyone has done it, and because the maths is harder than it looks — the tempting version compares build time against time saved, and leaves out the part that actually decides it.",
+    "There's a well-known joke about spending six hours automating a task that took twenty minutes. It lands because everyone has done it, and because the maths is harder than it looks: the tempting version compares build time against time saved, and leaves out the part that actually decides it.",
     "Automation has a maintenance cost. It breaks when an upstream format changes, when someone leaves and takes the context with them, when the process it encoded gets revised. That ongoing cost is invisible at build time and it's what turns a good automation into a liability nobody wants to own.",
-    "This guide is about choosing. Which tasks pay back, which look tempting and don't, and the option most people skip entirely — deleting the step rather than automating it. Most of the value here is in what you decide not to build.",
+    "This guide is about choosing. Which tasks pay back, which look tempting and don't, and the option most people skip entirely: deleting the step rather than automating it. Most of the value here is in what you decide not to build.",
   ],
 
   whyItMatters: [
@@ -86,7 +86,7 @@ export const guide: Guide = {
     {
       term: "Start with the boring middle",
       explain:
-        "The best first automation is repetitive, stable, well-understood, and tolerant of review. Not the most impressive one — the one most likely to still be running in a year.",
+        "The best first automation is repetitive, stable, well-understood, and tolerant of review. Not the most impressive one. The one most likely to still be running in a year.",
       detail:
         "Ambitious first automations fail and poison the appetite for the next one. A dull success buys credibility for something harder.",
     },
@@ -101,7 +101,7 @@ export const guide: Guide = {
     },
     {
       title: "Rank by annual cost, not by annoyance",
-      body: "Multiply duration by annual frequency for each item. Sort. The top entries are usually short, frequent and unglamorous — not the task you'd have picked.",
+      body: "Multiply duration by annual frequency for each item. Sort. The top entries are usually short, frequent and unglamorous: not the task you'd have picked.",
       effort: "1 hour",
       outcome: "A ranked list with hours attached.",
     },
@@ -119,7 +119,7 @@ export const guide: Guide = {
     },
     {
       title: "Do the payback maths honestly",
-      body: "Estimate build time, then add annual maintenance. Compare against time saved over two years. If it's close, don't build — estimates are optimistic and the close ones lose.",
+      body: "Estimate build time, then add annual maintenance. Compare against time saved over two years. If it's close, don't build. Estimates are optimistic and the close ones lose.",
       effort: "1 hour",
       outcome: "A go/no-go with numbers behind it.",
     },
@@ -131,7 +131,7 @@ export const guide: Guide = {
     },
     {
       title: "Make failure loud",
-      body: "Add a notification when it fails, and — importantly — when it doesn't run at all. Silent absence is the failure mode that costs most.",
+      body: "Add a notification when it fails, and (importantly) when it doesn't run at all. Silent absence is the failure mode that costs most.",
       effort: "2–3 hours",
       outcome: "You'll know within a day rather than a month.",
     },
@@ -150,9 +150,9 @@ export const guide: Guide = {
       walkthrough:
         "Mark, Gudith and Klocke ran a controlled study comparing interrupted and uninterrupted work. The intuitive expectation is that interrupted work takes longer.",
       result:
-        "Participants completed interrupted tasks in *less* time, with no quality difference — they compensated by working faster. The cost appeared as significantly higher stress, frustration, time pressure and effort. For automation this reframes the business case: a task that fragments someone's day is costing more than its duration suggests, and that cost won't show up in a time-saved calculation.",
+        "Participants completed interrupted tasks in *less* time, with no quality difference. They compensated by working faster. The cost appeared as significantly higher stress, frustration, time pressure and effort. For automation this reframes the business case: a task that fragments someone's day is costing more than its duration suggests, and that cost won't show up in a time-saved calculation.",
       source: {
-        label: "Mark, Gudith & Klocke (2008) — The Cost of Interrupted Work: More Speed and Stress, CHI '08",
+        label: "Mark, Gudith & Klocke (2008). The Cost of Interrupted Work: More Speed and Stress, CHI '08",
         url: "https://ics.uci.edu/~gmark/chi08-mark.pdf",
       },
     },
@@ -160,11 +160,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Why manual data steps are more dangerous than they look.",
       walkthrough:
-        "Ziemann, Eren and El-Osta examined 3,597 genomics papers published between 2005 and 2015, covering 7,467 supplementary gene lists produced in Excel. With default settings, Excel silently converts certain gene symbols into dates — SEPT2 becomes 2-Sep.",
+        "Ziemann, Eren and El-Osta examined 3,597 genomics papers published between 2005 and 2015, covering 7,467 supplementary gene lists produced in Excel. With default settings, Excel silently converts certain gene symbols into dates: SEPT2 becomes 2-Sep.",
       result:
         "19.6% of the papers contained conversion errors. Careful researchers, ordinary use, no warning shown, and it survived peer review. The automation lesson isn't about Excel: any recurring manual step involving a tool that transforms data silently is producing errors nobody is counting. That's a cost that never appears in a time-based business case.",
       source: {
-        label: "Ziemann, Eren & El-Osta (2016) — Gene name errors are widespread in the scientific literature, Genome Biology",
+        label: "Ziemann, Eren & El-Osta (2016). Gene name errors are widespread in the scientific literature, Genome Biology",
         url: "https://link.springer.com/article/10.1186/s13059-016-1044-7",
       },
     },
@@ -220,7 +220,7 @@ export const guide: Guide = {
     "Rank candidates by duration × annual frequency, not by how irritating they are.",
     "Include an annual maintenance estimate in every payback calculation.",
     "Ask who consumes the output before automating anything that produces one.",
-    "Write the process out precisely before building — the audit often changes the answer.",
+    "Write the process out precisely before building, the audit often changes the answer.",
     "Check process stability: if it changed recently or is under review, wait.",
     "Automate around judgement steps rather than trying to replace them.",
     "Alert on failure and on non-execution, both.",
@@ -231,7 +231,7 @@ export const guide: Guide = {
 
   proTips: [
     "The highest-return question is 'who reads this?' It takes ten minutes, it's rarely asked, and it kills more unnecessary automation than any analysis.",
-    "Try stopping a recurring task for a month before automating it. If nobody notices, you've saved the build entirely — and if they do, you now know exactly who cares and why.",
+    "Try stopping a recurring task for a month before automating it. If nobody notices, you've saved the build entirely. And if they do, you now know exactly who cares and why.",
     "Count the errors the manual process produces, not just the time it takes. Steps involving tools that silently transform data are producing mistakes nobody is measuring.",
     "Look for tasks that fragment someone's day, not just long ones. A five-minute interruption at an unpredictable time costs more than its duration, and that cost is invisible in a time-saved figure.",
     "Write the failure alert before the automation. It clarifies what 'working' means, and it's the part that gets skipped when you're nearly finished.",
@@ -248,7 +248,7 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Personal admin — the same ranking applies, and the same answer usually appears: several recurring tasks can simply stop.",
+    "Personal admin. The same ranking applies, and the same answer usually appears: several recurring tasks can simply stop.",
     "Recognising that a frequent small task costs more than an occasional large one, in your own week as much as at work.",
     "Automating decisions in advance: a standing rule beats deciding repeatedly, which is automation applied to attention rather than to software.",
     "Noticing which recurring obligations exist because of a situation that no longer applies.",
@@ -301,11 +301,11 @@ export const guide: Guide = {
   faqs: [
     {
       q: "What should I automate first?",
-      a: "The most frequent, most stable, best-understood task on your list — not the most annoying or most impressive. A boring success buys credibility for something harder; an ambitious failure poisons the appetite.",
+      a: "The most frequent, most stable, best-understood task on your list: not the most annoying or most impressive. A boring success buys credibility for something harder; an ambitious failure poisons the appetite.",
     },
     {
       q: "How do I know if it's worth it?",
-      a: "Time saved over two years must exceed build time plus annual maintenance. If it's close, don't build — estimates are optimistic and marginal cases reliably lose.",
+      a: "Time saved over two years must exceed build time plus annual maintenance. If it's close, don't build. Estimates are optimistic and marginal cases reliably lose.",
     },
     {
       q: "How much maintenance should I assume?",
@@ -321,7 +321,7 @@ export const guide: Guide = {
     },
     {
       q: "Can AI automate things that couldn't be automated before?",
-      a: "It extends the range to unstructured input — documents, free text, images — that rule-based automation couldn't handle. The selection criteria don't change: frequency, stability, ownership, detectable failure.",
+      a: "It extends the range to unstructured input (documents, free text, images) that rule-based automation couldn't handle. The selection criteria don't change: frequency, stability, ownership, detectable failure.",
     },
     {
       q: "What's the most common mistake?",
@@ -340,7 +340,7 @@ export const guide: Guide = {
   resources: [
     { title: "The Cost of Interrupted Work", kind: "Paper", note: "Mark, Gudith & Klocke (2008). Why fragmenting tasks cost more than their duration suggests.", url: "https://ics.uci.edu/~gmark/chi08-mark.pdf" },
     { title: "Gene name errors are widespread in the scientific literature", kind: "Paper", note: "What manual data handling costs in errors rather than time.", url: "https://link.springer.com/article/10.1186/s13059-016-1044-7" },
-    { title: "Google's Rules of Machine Learning", kind: "Docs", note: "Rule one is essentially 'try it without ML first' — the same discipline applied to automation generally.", url: "https://developers.google.com/machine-learning/guides/rules-of-ml" },
+    { title: "Google's Rules of Machine Learning", kind: "Docs", note: "Rule one is essentially 'try it without ML first': the same discipline applied to automation generally.", url: "https://developers.google.com/machine-learning/guides/rules-of-ml" },
   ],
 
   internalLinks: [

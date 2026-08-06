@@ -23,12 +23,12 @@ export const guide: Guide = {
 
   intro: [
     "There is a particular kind of exhausting day that produces nothing. You were busy from nine until six, you answered everything, you attended every meeting, and the one piece of work that actually mattered has not moved. You weren't lazy. You were fragmented.",
-    "Most advice about focus treats this as a willpower problem, which is why most advice about focus doesn't work. The research points somewhere more useful: the cost isn't the interruption itself but what happens either side of it — the way part of your attention stays behind on the previous task, and the way a fragmented environment quietly trains you to expect fragmentation.",
+    "Most advice about focus treats this as a willpower problem, which is why most advice about focus doesn't work. The research points somewhere more useful: the cost isn't the interruption itself but what happens either side of it. The way part of your attention stays behind on the previous task, and the way a fragmented environment quietly trains you to expect fragmentation.",
     "This guide is about designing a working day where concentration is possible, rather than trying to summon it through discipline. It draws on published research where research exists, is honest about where it doesn't, and is aimed at people whose work requires thinking rather than only responding.",
   ],
 
   whyItMatters: [
-    "Almost all valuable knowledge work has a minimum viable block of attention below which it simply cannot be done. Writing something coherent, designing a system, understanding a complex problem, learning a difficult skill — these need a runway. Work that arrives in fifteen-minute slices between meetings never gets airborne, and the frustrating result is that a full day of effort produces nothing you'd point at.",
+    "Almost all valuable knowledge work has a minimum viable block of attention below which it simply cannot be done. Writing something coherent, designing a system, understanding a complex problem, learning a difficult skill: these need a runway. Work that arrives in fifteen-minute slices between meetings never gets airborne, and the frustrating result is that a full day of effort produces nothing you'd point at.",
     "The professional consequence compounds quietly. If your day only permits shallow work, you only ever produce shallow work, and over years that shapes what you're capable of rather than just what you did this week. The skills that require sustained concentration to build are exactly the ones that stay scarce.",
     "There's also a straightforward wellbeing argument, and it's supported by the research below: working in a fragmented way doesn't just reduce output. People compensate for interruptions by working faster, and pay for it in stress and time pressure. The fragmentation is costing you something even on days where the work still gets finished.",
   ],
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "Attention residue",
       explain:
-        "When you switch from one task to another, part of your attention stays with the first — particularly if it was left unfinished. You are physically working on the new task while a portion of your cognitive capacity is still occupied by the old one.",
+        "When you switch from one task to another, part of your attention stays with the first: particularly if it was left unfinished. You are physically working on the new task while a portion of your cognitive capacity is still occupied by the old one.",
       detail:
         "This is why 'I'll just quickly check that' is more expensive than the time it takes. The cost isn't the two minutes; it's the degraded quality of the twenty minutes after.",
     },
@@ -53,7 +53,7 @@ export const guide: Guide = {
       explain:
         "People adapt to interruption not by taking longer but by working faster to make up the time. The work gets done. The cost shows up as stress, frustration, time pressure and effort rather than as a missed deadline.",
       detail:
-        "This is why fragmentation is so easy to ignore organisationally — the output metrics look fine while the people producing them are steadily depleted.",
+        "This is why fragmentation is so easy to ignore organisationally. The output metrics look fine while the people producing them are steadily depleted.",
     },
     {
       term: "Depth requires an uninterrupted runway",
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "Knowing when the working day ends changes how you work within it. Open-ended availability encourages pacing yourself indefinitely and never fully disengaging.",
       detail:
-        "It also protects recovery, which is not a luxury — the capacity for concentration is finite daily and replenishes with rest rather than with effort.",
+        "It also protects recovery, which is not a luxury. The capacity for concentration is finite daily and replenishes with rest rather than with effort.",
     },
     {
       term: "Shallow work is necessary, not shameful",
@@ -95,7 +95,7 @@ export const guide: Guide = {
   learningPath: [
     {
       title: "Measure your actual fragmentation for a week",
-      body: "Don't change anything yet. Just record, each day, your longest uninterrupted work block and roughly how many times you switched context. Most people are startled — the honest number is usually far lower than the felt one.",
+      body: "Don't change anything yet. Just record, each day, your longest uninterrupted work block and roughly how many times you switched context. Most people are startled. The honest number is usually far lower than the felt one.",
       effort: "5 minutes a day",
       outcome: "A real baseline instead of an impression.",
     },
@@ -144,9 +144,9 @@ export const guide: Guide = {
       walkthrough:
         "Mark, Gudith and Klocke ran a controlled study in which participants performed work tasks under interrupted and uninterrupted conditions, presented at CHI 2008. The intuitive prediction is that interrupted work takes longer and comes out worse. The measured result was more interesting than that.",
       result:
-        "Participants completed interrupted tasks in less time, with no difference in quality — they compensated by working faster. The cost appeared elsewhere: they reported significantly higher stress, frustration, time pressure and effort. This reframes the whole problem. Fragmentation is not primarily a throughput issue that shows up in your output metrics; it's a load issue that shows up in the person. (Worth noting: the widely-quoted '23 minutes to refocus' figure is not from this paper, despite frequently being attributed to it.)",
+        "Participants completed interrupted tasks in less time, with no difference in quality. They compensated by working faster. The cost appeared elsewhere: they reported significantly higher stress, frustration, time pressure and effort. This reframes the whole problem. Fragmentation is not primarily a throughput issue that shows up in your output metrics; it's a load issue that shows up in the person. (Worth noting: the widely-quoted '23 minutes to refocus' figure is not from this paper, despite frequently being attributed to it.)",
       source: {
-        label: "Mark, Gudith & Klocke (2008) — The Cost of Interrupted Work: More Speed and Stress, CHI '08",
+        label: "Mark, Gudith & Klocke (2008). The Cost of Interrupted Work: More Speed and Stress, CHI '08",
         url: "https://ics.uci.edu/~gmark/chi08-mark.pdf",
       },
     },
@@ -156,9 +156,9 @@ export const guide: Guide = {
       walkthrough:
         "Sophie Leroy investigated what happens cognitively when people move between work tasks, introducing the concept of attention residue in Organizational Behavior and Human Decision Processes. Participants switched from one task to another under conditions that varied whether the first task was completed or left unfinished.",
       result:
-        "Performance on the second task was measurably worse when the first had been left incomplete — part of attention remained with it. The effect is strongest when the previous task was unfinished, time-pressured, or emotionally engaging. This is the mechanism behind the felt experience of sitting down to write and finding your mind still in the meeting you just left, and it's why reaching a clean stopping point is worth more than the few minutes it costs.",
+        "Performance on the second task was measurably worse when the first had been left incomplete: part of attention remained with it. The effect is strongest when the previous task was unfinished, time-pressured, or emotionally engaging. This is the mechanism behind the felt experience of sitting down to write and finding your mind still in the meeting you just left, and it's why reaching a clean stopping point is worth more than the few minutes it costs.",
       source: {
-        label: "Leroy (2009) — Why Is It So Hard to Do My Work? The Challenge of Attention Residue When Switching Between Work Tasks",
+        label: "Leroy (2009). Why Is It So Hard to Do My Work? The Challenge of Attention Residue When Switching Between Work Tasks",
         url: "https://www.uwb.edu/business/faculty/sophie-leroy/attention-residue",
       },
     },
@@ -166,7 +166,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The calendar with no runway.",
       walkthrough:
-        "A pattern worth checking for in your own week. Meetings at 10:00, 11:30 and 14:00, each an hour. The gaps look substantial in aggregate — several hours of 'free' time. But no single gap exceeds ninety minutes, and each one is bracketed by preparing for the next meeting and recovering from the last. Work requiring a long runway never gets one, and the day still ends with the important thing untouched.",
+        "A pattern worth checking for in your own week. Meetings at 10:00, 11:30 and 14:00, each an hour. The gaps look substantial in aggregate: several hours of 'free' time. But no single gap exceeds ninety minutes, and each one is bracketed by preparing for the next meeting and recovering from the last. Work requiring a long runway never gets one, and the day still ends with the important thing untouched.",
       result:
         "The fix is structural rather than motivational: consolidate meetings into a contiguous band and defend the remaining block, rather than distributing meetings evenly through the day. Two meetings back to back cost less than the same two meetings spaced apart, which is the opposite of how most people schedule.",
     },
@@ -213,7 +213,7 @@ export const guide: Guide = {
   bestPractices: [
     "Put the same block in the same slot every day. Consistency removes the daily negotiation about whether and when, which is itself a drain.",
     "Decide what you'll work on before the block starts. Deciding at the start of a focus session burns the freshest part of it.",
-    "Physically separate yourself from your phone. In another room beats face-down beats silent — proximity matters more than people expect.",
+    "Physically separate yourself from your phone. In another room beats face-down beats silent: proximity matters more than people expect.",
     "Close everything not needed for the task, including the tabs you 'might need'. Visible options are open loops.",
     "Batch messages into two or three fixed windows and tell people what those are. Predictability satisfies most of what colleagues actually want from responsiveness.",
     "End the day by writing tomorrow's first task in one specific sentence. It removes the morning's hardest decision.",
@@ -225,7 +225,7 @@ export const guide: Guide = {
     "Note where you stopped in enough detail that restarting requires no thinking. 'Halfway through the pricing section, next: rewrite the objection paragraph' costs thirty seconds and saves ten minutes of reorientation.",
     "When you notice the impulse to check something, write it on a piece of paper instead and continue. Most items turn out not to matter, and capturing them satisfies the urge without paying the switching cost.",
     "Do the hard thing first, before anything else opens. The quality of attention available before your inbox is qualitatively different from what's left after it, and no amount of later effort recovers it.",
-    "If you're stuck for more than twenty minutes, change modality rather than pushing — walk, write it out longhand, explain the problem aloud. Stuck-and-staring is not deep work; it's the appearance of it.",
+    "If you're stuck for more than twenty minutes, change modality rather than pushing: walk, write it out longhand, explain the problem aloud. Stuck-and-staring is not deep work; it's the appearance of it.",
     "Track your longest daily uninterrupted block as your metric, not hours worked. It's the number that actually predicts whether hard things got done.",
     "When declining a meeting, offer a specific alternative time inside your shallow band. Almost nobody objects to being moved; people object to being refused.",
   ],
@@ -240,11 +240,11 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Learning anything difficult outside work — an instrument, a language, a technical subject — where the same runway requirement applies and the same fragmentation prevents progress.",
+    "Learning anything difficult outside work (an instrument, a language, a technical subject) where the same runway requirement applies and the same fragmentation prevents progress.",
     "Being present with people. Attention residue doesn't respect the boundary between work and home, and arriving mentally still at work is the same mechanism.",
     "Reading properly again. Sustained reading is a trainable capacity that erodes with fragmented attention and returns with deliberate practice.",
     "Creative work of any kind, which is unusually sensitive to interruption because it depends on holding a lot of loose material in mind at once.",
-    "Recognising when you're busy rather than productive — a distinction that's easy to lose and expensive to keep losing.",
+    "Recognising when you're busy rather than productive: a distinction that's easy to lose and expensive to keep losing.",
   ],
 
   exercises: [
@@ -305,11 +305,11 @@ export const guide: Guide = {
     },
     {
       q: "What if my job makes uninterrupted time impossible?",
-      a: "Some roles are response-driven, and in those cases the honest answer is that deep work has to be negotiated rather than found. Start by protecting one block a week and measuring what actually breaks — the expected consequences usually exceed the real ones.",
+      a: "Some roles are response-driven, and in those cases the honest answer is that deep work has to be negotiated rather than found. Start by protecting one block a week and measuring what actually breaks: the expected consequences usually exceed the real ones.",
     },
     {
       q: "Does the Pomodoro technique work?",
-      a: "It helps people who struggle to start, because 25 minutes is a low bar to clear. For work with a long warm-up it can be counterproductive — the timer interrupts you at the point you'd have become productive. Use it to begin, not to structure everything.",
+      a: "It helps people who struggle to start, because 25 minutes is a low bar to clear. For work with a long warm-up it can be counterproductive. The timer interrupts you at the point you'd have become productive. Use it to begin, not to structure everything.",
     },
     {
       q: "Is multitasking ever fine?",
@@ -325,7 +325,7 @@ export const guide: Guide = {
     },
     {
       q: "How long until focus improves?",
-      a: "Expect a couple of uncomfortable weeks — the restlessness when you remove the usual escapes is real and temporary. Most people notice a meaningful difference in their ability to stay with something within a month of consistent blocks.",
+      a: "Expect a couple of uncomfortable weeks. The restlessness when you remove the usual escapes is real and temporary. Most people notice a meaningful difference in their ability to stay with something within a month of consistent blocks.",
     },
   ],
 
@@ -333,15 +333,15 @@ export const guide: Guide = {
     { name: "Freedom / Cold Turkey", what: "Blocks sites and apps across devices. Useful precisely because it's difficult to disable mid-session.", cost: "Freemium" },
     { name: "Focus modes (iOS / Android / macOS / Windows)", what: "Built in and free. Configure one properly rather than installing something new.", cost: "Free" },
     { name: "Calendar blocking", what: "Whatever calendar you already use. Deep work blocks belong in it as real events others can see.", cost: "Free" },
-    { name: "A paper notebook", what: "For capturing intrusive thoughts without opening a device. Deliberately analogue — opening an app to log a distraction is itself a distraction.", cost: "Free" },
+    { name: "A paper notebook", what: "For capturing intrusive thoughts without opening a device. Deliberately analogue. Opening an app to log a distraction is itself a distraction.", cost: "Free" },
     { name: "Toggl", what: "Time tracking, if you want data on where the day actually goes rather than an impression.", cost: "Freemium", url: "https://toggl.com" },
   ],
 
   resources: [
     { title: "The Cost of Interrupted Work: More Speed and Stress", kind: "Paper", note: "Mark, Gudith & Klocke (2008). Short and readable, and the source of the counter-intuitive finding above.", url: "https://ics.uci.edu/~gmark/chi08-mark.pdf" },
     { title: "Sophie Leroy on attention residue", kind: "Paper", note: "The original research on why switching tasks leaves part of your attention behind.", url: "https://www.uwb.edu/business/faculty/sophie-leroy/attention-residue" },
-    { title: "Deep Work — Cal Newport", kind: "Book", note: "The book that popularised the term. Strong on the argument and the practices; treat its broader cultural claims as opinion rather than evidence." },
-    { title: "Attention Span — Gloria Mark", kind: "Book", note: "From the researcher behind the interruption studies. More empirically grounded than most books in this genre." },
+    { title: "Deep Work: Cal Newport", kind: "Book", note: "The book that popularised the term. Strong on the argument and the practices; treat its broader cultural claims as opinion rather than evidence." },
+    { title: "Attention Span: Gloria Mark", kind: "Book", note: "From the researcher behind the interruption studies. More empirically grounded than most books in this genre." },
   ],
 
   internalLinks: [

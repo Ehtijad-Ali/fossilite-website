@@ -22,14 +22,14 @@ export const guide: Guide = {
   readingTime: 13,
 
   intro: [
-    "A language model knows an enormous amount about the world in general and nothing whatsoever about your company. It has never seen your pricing, your policies, your support history, or the decision your team made last March. Retrieval-augmented generation — RAG — is the standard way of closing that gap, and it's simpler than the acronym suggests.",
+    "A language model knows an enormous amount about the world in general and nothing whatsoever about your company. It has never seen your pricing, your policies, your support history, or the decision your team made last March. Retrieval-augmented generation (RAG) is the standard way of closing that gap, and it's simpler than the acronym suggests.",
     "The idea in one line: before answering, go and fetch the relevant passages from your own documents, and put them in the prompt. The model then answers from material it can actually see rather than from memory it doesn't have. That's the whole mechanism.",
     "What makes RAG interesting isn't the concept, which takes a minute to grasp. It's that the naive version works impressively in a demo and disappoints in production, for reasons that are entirely predictable once you understand where each stage can fail. This guide covers the mechanism properly and then spends most of its time on those failure points, because that's where the actual engineering lives.",
   ],
 
   whyItMatters: [
-    "Almost every useful business application of language models needs company-specific knowledge. Support answers must reflect your actual policy. Internal search must cover your actual documents. Sales research must use your actual account history. Without grounding, you have a very articulate system that confidently makes things up about your business — which is worse than having nothing.",
-    "RAG is also the answer to a question people usually get wrong. The instinct when a model doesn't know something is to train it on the missing data. That's expensive, slow to update, impossible to audit, and it doesn't reliably install facts. Retrieval is cheaper, updates the moment a document changes, and — critically — can cite its source, which is often a hard requirement in regulated work.",
+    "Almost every useful business application of language models needs company-specific knowledge. Support answers must reflect your actual policy. Internal search must cover your actual documents. Sales research must use your actual account history. Without grounding, you have a very articulate system that confidently makes things up about your business, which is worse than having nothing.",
+    "RAG is also the answer to a question people usually get wrong. The instinct when a model doesn't know something is to train it on the missing data. That's expensive, slow to update, impossible to audit, and it doesn't reliably install facts. Retrieval is cheaper, updates the moment a document changes, and (critically) can cite its source, which is often a hard requirement in regulated work.",
     "Understanding it also makes you a much harder person to sell to. A large number of AI products are a retrieval pipeline with a good interface. Knowing what's inside lets you ask the questions that matter: how do you chunk, do you re-rank, what happens when retrieval finds nothing, and can I see the sources behind an answer?",
   ],
 
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "Embeddings turn meaning into coordinates",
       explain:
-        "An embedding model converts a piece of text into a list of numbers — a vector — positioned so that texts with similar meaning land near each other. 'Reset my password' and 'I can't log in' end up close together despite sharing almost no words.",
+        "An embedding model converts a piece of text into a list of numbers (a vector) positioned so that texts with similar meaning land near each other. 'Reset my password' and 'I can't log in' end up close together despite sharing almost no words.",
       detail:
         "This is what lets retrieval find relevant material when the user's wording doesn't match the document's. It's also why embeddings alone miss exact-match needs like product codes and error numbers, which have meaning but little semantic context.",
     },
@@ -107,7 +107,7 @@ export const guide: Guide = {
     },
     {
       title: "Fix chunking",
-      body: "Re-chunk along semantic boundaries — headings, sections, paragraphs — instead of fixed character counts. Add overlap between chunks. Prepend each chunk with its document title and section heading so it carries context.",
+      body: "Re-chunk along semantic boundaries (headings, sections, paragraphs) instead of fixed character counts. Add overlap between chunks. Prepend each chunk with its document title and section heading so it carries context.",
       effort: "4–5 hours",
       outcome: "Measurably higher retrieval hit rate on your test questions.",
     },
@@ -142,23 +142,23 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Anthropic measures what each stage of a retrieval pipeline is actually worth.",
       walkthrough:
-        "Anthropic benchmarked retrieval across several knowledge domains, measuring the top-20-chunk failure rate — how often the correct passage was absent from the twenty chunks retrieved. A standard embedding pipeline gave a 5.7% failure rate as the baseline. They then added, in turn: context prepended to each chunk before embedding, keyword (BM25) search alongside semantic search, and a re-ranking pass over the merged results.",
+        "Anthropic benchmarked retrieval across several knowledge domains, measuring the top-20-chunk failure rate. How often the correct passage was absent from the twenty chunks retrieved. A standard embedding pipeline gave a 5.7% failure rate as the baseline. They then added, in turn: context prepended to each chunk before embedding, keyword (BM25) search alongside semantic search, and a re-ranking pass over the merged results.",
       result:
-        "Contextual embeddings alone cut the failure rate by 35% (5.7% → 3.7%). Adding contextual BM25 took the reduction to 49% (→ 2.9%). Adding re-ranking took it to 67% (→ 1.9%). This is the published evidence behind three recommendations in this guide — attach context to chunks, use hybrid retrieval, and don't skip the re-ranker — and it shows their effects compound rather than overlap.",
+        "Contextual embeddings alone cut the failure rate by 35% (5.7% → 3.7%). Adding contextual BM25 took the reduction to 49% (→ 2.9%). Adding re-ranking took it to 67% (→ 1.9%). This is the published evidence behind three recommendations in this guide (attach context to chunks, use hybrid retrieval, and don't skip the re-ranker), and it shows their effects compound rather than overlap.",
       source: {
-        label: "Anthropic (2024) — Introducing Contextual Retrieval",
+        label: "Anthropic (2024). Introducing Contextual Retrieval",
         url: "https://www.anthropic.com/news/contextual-retrieval",
       },
     },
     {
       kind: "documented",
-      scenario: "Researchers show that retrieving the right chunk isn't sufficient — its position matters too.",
+      scenario: "Researchers show that retrieving the right chunk isn't sufficient: its position matters too.",
       walkthrough:
         "Liu and colleagues varied where the relevant document sat within a model's context on multi-document question answering. Accuracy was highest when the needed passage appeared at the start or end of the context and fell measurably when it sat in the middle, producing a U-shaped curve. Performance also declined as total context length grew, including on models built for long contexts.",
       result:
-        "For RAG this has a direct consequence: retrieving ten chunks and dumping them in arbitrary order wastes good retrieval. Rank order is part of the pipeline, not cosmetic — which is a second, independent argument for re-ranking beyond simply picking better chunks.",
+        "For RAG this has a direct consequence: retrieving ten chunks and dumping them in arbitrary order wastes good retrieval. Rank order is part of the pipeline, not cosmetic, which is a second, independent argument for re-ranking beyond simply picking better chunks.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -176,12 +176,12 @@ export const guide: Guide = {
     {
       mistake: "Chunking by fixed character count",
       why: "It cuts sentences, tables and lists in half. A chunk ending mid-clause is a chunk that can't answer anything, and it will still be retrieved because similarity doesn't measure completeness.",
-      fix: "Split on structure — headings, sections, paragraphs — with overlap between adjacent chunks, and attach the document title and section path to each chunk's text.",
+      fix: "Split on structure (headings, sections, paragraphs) with overlap between adjacent chunks, and attach the document title and section path to each chunk's text.",
     },
     {
       mistake: "Skipping the re-ranker",
       why: "Vector similarity is a fast approximation. The most similar chunk is frequently not the most useful one, and the model has no way to tell the difference.",
-      fix: "Retrieve generously — say twenty chunks — then re-rank and pass only the best few to the model. Better ordering usually beats a better prompt.",
+      fix: "Retrieve generously (say twenty chunks) then re-rank and pass only the best few to the model. Better ordering usually beats a better prompt.",
     },
     {
       mistake: "Only measuring final answer quality",
@@ -190,7 +190,7 @@ export const guide: Guide = {
     },
     {
       mistake: "No behaviour defined for 'nothing relevant found'",
-      why: "Vector search always returns something. Given irrelevant chunks and no instruction, the model produces a plausible answer from unrelated material — the most dangerous output the system can make.",
+      why: "Vector search always returns something. Given irrelevant chunks and no instruction, the model produces a plausible answer from unrelated material. The most dangerous output the system can make.",
       fix: "Set a relevance threshold, and instruct the model explicitly to answer 'not found in the available documents'. Test it with questions you know are out of scope.",
     },
     {
@@ -206,32 +206,32 @@ export const guide: Guide = {
     {
       mistake: "Treating the index as static",
       why: "Documents change. A pipeline with no re-indexing path is answering from a snapshot that gets staler every week, invisibly.",
-      fix: "Build the update path on day one — ideally triggered by document changes — and surface the source document's last-modified date in every answer.",
+      fix: "Build the update path on day one (ideally triggered by document changes), and surface the source document's last-modified date in every answer.",
     },
   ],
 
   bestPractices: [
-    "Attach metadata to every chunk: source document, section, author, date, access level. Almost every later improvement — filtering, citation, freshness, permissions — depends on metadata you didn't collect if you skipped this.",
+    "Attach metadata to every chunk: source document, section, author, date, access level. Almost every later improvement (filtering, citation, freshness, permissions) depends on metadata you didn't collect if you skipped this.",
     "Prepend context to chunk text before embedding. A chunk that reads 'Refund Policy › Enterprise › After 30 days: …' embeds far more usefully than the bare paragraph.",
     "Use hybrid retrieval by default. Real corpora contain identifiers, names and codes that pure semantic search handles badly.",
     "Show sources in the interface, linked and clickable. It builds trust, and more importantly it lets users catch errors you'd never find yourself.",
     "Set an explicit relevance floor. Answering from weak matches is worse than declining, because a confident wrong answer costs more than a visible gap.",
     "Log every query with its retrieved chunks and final answer. Failure analysis without this is guesswork, and questions users actually ask are your best evaluation set.",
     "Keep chunks reasonably small and retrieve several rather than retrieving one enormous one. Attention degrades over long contexts and precision beats volume.",
-    "Re-run evaluation whenever you change the embedding model. Changing embeddings invalidates the entire index and requires a full re-embed — plan for it.",
+    "Re-run evaluation whenever you change the embedding model. Changing embeddings invalidates the entire index and requires a full re-embed: plan for it.",
   ],
 
   proTips: [
     "Generate a short hypothetical answer to the user's question first, then embed that and search with it. Answers embed closer to answer-shaped passages than questions do, and this often improves retrieval measurably for free.",
     "Store a one-line summary alongside each chunk and embed the summary rather than the raw text for the first-pass search. It denoises retrieval on documents full of boilerplate.",
-    "Look at your logged queries weekly and cluster them. The clusters that retrieve poorly usually point at a whole category of missing or badly structured documentation — a content problem wearing a technical disguise.",
+    "Look at your logged queries weekly and cluster them. The clusters that retrieve poorly usually point at a whole category of missing or badly structured documentation: a content problem wearing a technical disguise.",
     "When users complain about answers, check retrieval first, every time. In our experience most reported 'model errors' in RAG systems are actually chunking errors.",
     "Test with the questions your team can't answer either. If the document doesn't cover it, the correct behaviour is refusal, and that's the behaviour least likely to have been tested.",
     "Include the document date in the chunk text itself, not only in metadata. Models reason about currency far better when the date is visible in the context they're reading.",
   ],
 
   businessApplications: [
-    "Internal knowledge assistants over policies, runbooks and past decisions — solving the real problem, which is that the documentation exists but nobody can find the relevant paragraph.",
+    "Internal knowledge assistants over policies, runbooks and past decisions. Solving the real problem, which is that the documentation exists but nobody can find the relevant paragraph.",
     "Customer support deflection: answering from your actual help centre with citations, escalating to a human when retrieval confidence is low.",
     "Sales enablement: retrieving relevant case studies, pricing precedents and objection handling for the specific account a rep is about to call.",
     "Contract and compliance review: surfacing the clauses relevant to a question across a large document set, with source links for the lawyer who has to sign off.",
@@ -242,7 +242,7 @@ export const guide: Guide = {
   lifeApplications: [
     "Personal knowledge base: index your own notes, saved articles and journals so you can ask questions of your past self rather than trying to remember where you wrote something.",
     "Studying from source material: build retrieval over a textbook or paper set and ask questions that force you to engage with what the text actually says, with citations to verify.",
-    "Managing complex personal admin — insurance policies, tenancy agreements, medical letters — where the answer exists in a document you'd rather not read end to end.",
+    "Managing complex personal admin (insurance policies, tenancy agreements, medical letters) where the answer exists in a document you'd rather not read end to end.",
     "Research projects: keeping dozens of sources searchable by meaning rather than by whether you remembered the exact phrase you highlighted.",
   ],
 
@@ -363,7 +363,7 @@ def retrieve(query: str, user_id: str, top_n: int = 20) -> list[dict]:
       title: "Grounded generation with a refusal path",
       language: "python",
       intro:
-        "Vector search always returns something, so the model will always have chunks — relevant or not. A relevance floor plus explicit permission to decline is what stops it answering from unrelated material.",
+        "Vector search always returns something, so the model will always have chunks: relevant or not. A relevance floor plus explicit permission to decline is what stops it answering from unrelated material.",
       code: `import anthropic
 
 client = anthropic.Anthropic()
@@ -390,7 +390,7 @@ def answer(question: str, user_id: str) -> str:
         return "NOT FOUND IN PROVIDED DOCUMENTS"
 
     context = "\\n\\n---\\n\\n".join(
-        f"[{c['source']} — {c['section']}, updated {c['updated']}]\\n{c['text']}"
+        f"[{c['source']}: {c['section']}, updated {c['updated']}]\\n{c['text']}"
         for c in chunks
     )
 
@@ -408,7 +408,7 @@ def answer(question: str, user_id: str) -> str:
     )
     return response.content[0].text`,
       note:
-        "The date is included in the chunk text, not only in metadata — models reason about currency far better when they can see it in the context they're reading.",
+        "The date is included in the chunk text, not only in metadata. Models reason about currency far better when they can see it in the context they're reading.",
     },
     {
       title: "Measuring retrieval separately from generation",
@@ -452,7 +452,7 @@ def evaluate_retrieval(k: int = 5) -> None:
   checklist: [
     "Chunks follow document structure, with overlap and inherited headings",
     "Every chunk carries metadata: source, section, date, access level",
-    "Retrieval is hybrid — semantic plus keyword",
+    "Retrieval is hybrid: semantic plus keyword",
     "A re-ranker orders results before they reach the model",
     "Retrieval hit rate is measured separately from answer quality",
     "A relevance threshold exists and low-confidence retrieval triggers refusal",
@@ -481,7 +481,7 @@ def evaluate_retrieval(k: int = 5) -> None:
     },
     {
       q: "How big should chunks be?",
-      a: "Big enough to be self-contained, small enough to be precise — often a few hundred tokens. Structure matters more than size: a chunk that ends mid-table is wrong at any length.",
+      a: "Big enough to be self-contained, small enough to be precise: often a few hundred tokens. Structure matters more than size: a chunk that ends mid-table is wrong at any length.",
     },
     {
       q: "How do I stop it retrieving documents a user shouldn't see?",
@@ -494,7 +494,7 @@ def evaluate_retrieval(k: int = 5) -> None:
   ],
 
   tools: [
-    { name: "pgvector", what: "Vector search inside Postgres. Often the pragmatic choice — one database instead of two.", cost: "Free", url: "https://github.com/pgvector/pgvector" },
+    { name: "pgvector", what: "Vector search inside Postgres. Often the pragmatic choice, one database instead of two.", cost: "Free", url: "https://github.com/pgvector/pgvector" },
     { name: "Qdrant", what: "Purpose-built vector database with strong metadata filtering. Good when filters matter as much as similarity.", cost: "Freemium", url: "https://qdrant.tech" },
     { name: "LlamaIndex", what: "Framework focused specifically on the retrieval side: loaders, chunkers, retrievers and evaluation.", cost: "Free", url: "https://www.llamaindex.ai" },
     { name: "Cohere Rerank", what: "A managed re-ranking model. Usually the fastest meaningful quality win in a working pipeline.", cost: "Paid", url: "https://cohere.com/rerank" },
@@ -505,7 +505,7 @@ def evaluate_retrieval(k: int = 5) -> None:
   resources: [
     { title: "LlamaIndex documentation", kind: "Docs", note: "The most thorough practical reference on chunking, retrieval strategies and evaluation.", url: "https://docs.llamaindex.ai" },
     { title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", kind: "Paper", note: "The 2020 paper that named the approach. Useful for seeing how much the practice has moved since.", url: "https://arxiv.org/abs/2005.11401" },
-    { title: "Anthropic — Contextual Retrieval", kind: "Docs", note: "A well-documented technique for attaching context to chunks before embedding, with measured results.", url: "https://www.anthropic.com/news/contextual-retrieval" },
+    { title: "Anthropic: Contextual Retrieval", kind: "Docs", note: "A well-documented technique for attaching context to chunks before embedding, with measured results.", url: "https://www.anthropic.com/news/contextual-retrieval" },
     { title: "Ragas documentation", kind: "Docs", note: "Concrete metrics for RAG evaluation, and a good model for how to think about measuring the stages separately.", url: "https://docs.ragas.io" },
   ],
 

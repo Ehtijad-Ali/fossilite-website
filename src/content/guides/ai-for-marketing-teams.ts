@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "ai-for-marketing-teams",
   seoTitle: "AI for Marketing Teams: Volume Isn't the Opportunity",
   metaDescription:
-    "How marketing teams get real value from AI — research, repurposing, testing and analysis — and why mass-generated content is a liability, not a strategy.",
+    "How marketing teams get real value from AI (research, repurposing, testing and analysis), and why mass-generated content is a liability, not a strategy.",
   title: "AI for Marketing Teams",
   keywords: [
     "ai for marketing",
@@ -29,7 +29,7 @@ export const guide: Guide = {
 
   whyItMatters: [
     "Marketing is the function where AI adoption is fastest and least examined. The tools are cheap, the output is instant, and the quality bar is subjective enough that bad work can ship for months before anyone notices the numbers haven't moved.",
-    "The competitive dynamic has also inverted. When generating competent-sounding content costs almost nothing, competent-sounding content stops being a differentiator. What becomes scarce is anything demonstrably grounded in real experience, real data or a real point of view — which is exactly what AI can't supply on its own.",
+    "The competitive dynamic has also inverted. When generating competent-sounding content costs almost nothing, competent-sounding content stops being a differentiator. What becomes scarce is anything demonstrably grounded in real experience, real data or a real point of view, which is exactly what AI can't supply on its own.",
     "And there's a durable risk. Search engines have moved explicitly against content produced at scale primarily to game rankings. A library of generated articles isn't a neutral asset; it can be a liability attached to the same domain as everything else you publish.",
   ],
 
@@ -44,7 +44,7 @@ export const guide: Guide = {
     {
       term: "Repurposing is the highest-return application",
       explain:
-        "One good piece — a customer interview, an original analysis, a real case study — can become a newsletter, a series of posts, a script, a landing page section and a talk outline.",
+        "One good piece (a customer interview, an original analysis, a real case study) can become a newsletter, a series of posts, a script, a landing page section and a talk outline.",
       detail:
         "The scarce input is the original substance. AI multiplies distribution of something real rather than manufacturing substance that isn't there.",
     },
@@ -58,7 +58,7 @@ export const guide: Guide = {
     {
       term: "Research and synthesis beat drafting",
       explain:
-        "Summarising customer interviews, analysing competitor positioning, extracting themes from reviews and support tickets — turning unstructured input into something a marketer can act on.",
+        "Summarising customer interviews, analysing competitor positioning, extracting themes from reviews and support tickets. Turning unstructured input into something a marketer can act on.",
       detail:
         "This is where a small team gets genuine leverage, because it's the work that usually doesn't happen at all for lack of time.",
     },
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Testing variants is a real volume win",
       explain:
-        "Subject lines, ad copy, headlines, landing page hooks — places where more variants helps because a test decides, not an opinion.",
+        "Subject lines, ad copy, headlines, landing page hooks. Places where more variants helps because a test decides, not an opinion.",
       detail:
         "This is the one legitimate volume application: quantity feeding a measurement process, not quantity substituting for one.",
     },
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "Asking for content that's 'professional but friendly' produces the statistical average of those words. Supplying three pieces of your actual writing produces something closer to you.",
       detail:
-        "Maintain a voice reference — real examples plus explicit rules about what you never say — and use it on everything.",
+        "Maintain a voice reference (real examples plus explicit rules about what you never say), and use it on everything.",
     },
     {
       term: "Someone must own the final read",
@@ -99,7 +99,7 @@ export const guide: Guide = {
       walkthrough:
         "A lawyer used ChatGPT to research precedent and filed a brief citing six court decisions that did not exist, complete with fabricated quotations. Asked to confirm the cases were real, the model said yes.",
       result:
-        "The court sanctioned the lawyers $5,000 in June 2023. The marketing lesson is the mechanism rather than the setting: models produce the *form* of a well-sourced claim — plausible statistics, confident attributions, realistic-sounding studies — whether or not any source exists. Any content function publishing statistics or citing research without checking is running exactly this risk, in public, under the brand.",
+        "The court sanctioned the lawyers $5,000 in June 2023. The marketing lesson is the mechanism rather than the setting: models produce the *form* of a well-sourced claim (plausible statistics, confident attributions, realistic-sounding studies) whether or not any source exists. Any content function publishing statistics or citing research without checking is running exactly this risk, in public, under the brand.",
       source: {
         label: "Mata v. Avianca, Inc., No. 1:22-cv-01461 (S.D.N.Y. 22 June 2023)",
         url: "https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1:2022cv01461/575368/54/",
@@ -109,11 +109,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Why marketing more is often the wrong response.",
       walkthrough:
-        "CB Insights has repeatedly compiled post-mortems written by failed startups. In the original set of 110+, 42% cited no market need — the most frequently given reason. A later analysis of 431 venture-backed failures attributed 43% to poor product-market fit.",
+        "CB Insights has repeatedly compiled post-mortems written by failed startups. In the original set of 110+, 42% cited no market need, the most frequently given reason. A later analysis of 431 venture-backed failures attributed 43% to poor product-market fit.",
       result:
-        "AI makes it cheap to increase marketing output, which makes it cheap to scale past a positioning problem without noticing. If content isn't converting, producing more of it addresses the symptom. The uncomfortable question — whether the offer resonates at all — is the one that determines the outcome, and no amount of generated content answers it.",
+        "AI makes it cheap to increase marketing output, which makes it cheap to scale past a positioning problem without noticing. If content isn't converting, producing more of it addresses the symptom. The uncomfortable question (whether the offer resonates at all) is the one that determines the outcome, and no amount of generated content answers it.",
       source: {
-        label: "CB Insights — The Top Reasons Startups Fail",
+        label: "CB Insights, The Top Reasons Startups Fail",
         url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/",
       },
     },
@@ -123,7 +123,7 @@ export const guide: Guide = {
       walkthrough:
         "A recognisable trajectory. A team goes from four posts a month to forty using AI. Six months later the site has 240 new pages. Organic traffic is flat. The pages are grammatical, on-topic, and indistinguishable from what three competitors published on the same keywords using the same tools. Nobody links to them because there's nothing in them worth citing, and nobody finishes them because they say what the reader already assumed.",
       result:
-        "The scarce resource was never production capacity — it was something worth saying. A single piece containing original data, a real customer story, or a contrarian argument outperforms the forty, and can be repurposed into a month of distribution. Volume is only leverage when there's substance to multiply.",
+        "The scarce resource was never production capacity. It was something worth saying. A single piece containing original data, a real customer story, or a contrarian argument outperforms the forty, and can be repurposed into a month of distribution. Volume is only leverage when there's substance to multiply.",
     },
   ],
 
@@ -154,7 +154,7 @@ export const guide: Guide = {
     },
     {
       title: "Test variants at volume",
-      body: "Generate many subject lines, headlines and ad variants, and let tests decide. This is the legitimate volume play — quantity feeding measurement.",
+      body: "Generate many subject lines, headlines and ad variants, and let tests decide. This is the legitimate volume play: quantity feeding measurement.",
       effort: "2–3 weeks",
       outcome: "Better-performing copy chosen by data rather than opinion.",
     },
@@ -185,7 +185,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Describing voice in adjectives",
-      why: "'Professional but approachable' produces the statistical average of everything written in that register — which is the generic tone you're trying to avoid.",
+      why: "'Professional but approachable' produces the statistical average of everything written in that register, which is the generic tone you're trying to avoid.",
       fix: "Supply real examples of your writing and explicit rules about what you never say.",
     },
     {
@@ -214,12 +214,12 @@ export const guide: Guide = {
     "Mine your own support, sales and review data before producing anything new.",
     "Maintain a voice reference of real examples plus explicit never-say rules.",
     "Multiply substance through repurposing rather than manufacturing volume.",
-    "Use AI for research and synthesis — the work that otherwise doesn't happen.",
+    "Use AI for research and synthesis, the work that otherwise doesn't happen.",
     "Reserve volume for variant testing, where measurement decides.",
     "Verify every statistic and citation against a primary source.",
     "Give every published piece a named owner who has read it.",
     "Cap publishing rate at genuine review capacity.",
-    "Judge content on conversion, links and engagement — not pieces published.",
+    "Judge content on conversion, links and engagement, not pieces published.",
     "Keep positioning and strategy decisions human.",
   ],
 
@@ -227,7 +227,7 @@ export const guide: Guide = {
     "Run a support-ticket extraction before your next content plan. The questions customers actually ask, ranked by frequency, is a better brief than anything a keyword tool will give you, and it's already in a system you own.",
     "Ask whether a competitor could publish your piece unchanged. If they could, it isn't doing marketing work. Original data, a named customer, or a genuine opinion are the only reliable differentiators left.",
     "Keep one file of your best writing and paste it in as a voice reference every time. It takes ten seconds and does more for tone than any amount of adjective-based prompting.",
-    "Check the first statistic in any AI-assisted draft, always. If it's wrong or unfindable, assume the rest need checking too — the failure clusters.",
+    "Check the first statistic in any AI-assisted draft, always. If it's wrong or unfindable, assume the rest need checking too, the failure clusters.",
     "Track links earned per piece, not just traffic. Generated content rarely earns citations, and that gap shows up in rankings long before it shows up anywhere else.",
     "When output volume rises and results don't, the honest next step is publishing less and investing the time in one thing worth reading.",
   ],
@@ -306,7 +306,7 @@ export const guide: Guide = {
     },
     {
       q: "Is it safe to publish AI-written statistics?",
-      a: "Not without verification. Models produce convincing citations for studies that don't exist — a lawyer was sanctioned for filing six fabricated cases. Check every number against a primary source.",
+      a: "Not without verification. Models produce convincing citations for studies that don't exist. A lawyer was sanctioned for filing six fabricated cases. Check every number against a primary source.",
     },
     {
       q: "How much content should we publish?",
@@ -318,12 +318,12 @@ export const guide: Guide = {
     { name: "Your support and CRM data", what: "The highest-value marketing input you already own. Mine it before generating anything new.", cost: "Free" },
     { name: "A voice reference file", what: "Three to five pieces of your best writing plus never-say rules. Not a tool, and more effective than most of them.", cost: "Free" },
     { name: "Analytics with link tracking", what: "Links earned per piece is the metric that exposes generic content before rankings do.", cost: "Freemium" },
-    { name: "A/B testing tooling", what: "Whatever lets tests decide between variants — the one place volume helps.", cost: "Freemium" },
+    { name: "A/B testing tooling", what: "Whatever lets tests decide between variants: the one place volume helps.", cost: "Freemium" },
   ],
 
   resources: [
-    { title: "Google Search Central — spam policies", kind: "Docs", note: "The authoritative statement on scaled content abuse. Read the actual policy rather than commentary about it.", url: "https://developers.google.com/search/docs/essentials/spam-policies" },
-    { title: "CB Insights — The Top Reasons Startups Fail", kind: "Docs", note: "Why fit problems get misdiagnosed as marketing volume problems.", url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/" },
+    { title: "Google Search Central: spam policies", kind: "Docs", note: "The authoritative statement on scaled content abuse. Read the actual policy rather than commentary about it.", url: "https://developers.google.com/search/docs/essentials/spam-policies" },
+    { title: "CB Insights, The Top Reasons Startups Fail", kind: "Docs", note: "Why fit problems get misdiagnosed as marketing volume problems.", url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/" },
     { title: "Mata v. Avianca", kind: "Docs", note: "What unverified AI output costs when it reaches the public record.", url: "https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1:2022cv01461/575368/54/" },
   ],
 

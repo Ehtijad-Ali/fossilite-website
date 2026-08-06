@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "building-agents-with-crewai",
   seoTitle: "Building Multi-Agent Systems with CrewAI",
   metaDescription:
-    "How CrewAI's role-based agents, tasks and crews actually work — with runnable code, the sequential vs hierarchical tradeoff, and where crews go wrong.",
+    "How CrewAI's role-based agents, tasks and crews actually work: with runnable code, the sequential vs hierarchical tradeoff, and where crews go wrong.",
   title: "Building Multi-Agent Systems with CrewAI",
   keywords: [
     "crewai tutorial",
@@ -22,14 +22,14 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "CrewAI's premise is that you describe a team rather than a program. You define agents by role, goal and backstory; you define tasks with a description and an expected output; you assemble them into a crew and press go. It reads like org design, and that's why people like it — the mental model is immediately available to anyone who has ever briefed a colleague.",
+    "CrewAI's premise is that you describe a team rather than a program. You define agents by role, goal and backstory; you define tasks with a description and an expected output; you assemble them into a crew and press go. It reads like org design, and that's why people like it. The mental model is immediately available to anyone who has ever briefed a colleague.",
     "That accessibility is also the trap. Because it feels like delegating to people, it invites you to model your problem as a team when a single agent with good tools, or a plain sequence of function calls, would be cheaper, faster and easier to debug. Every agent in a crew is a full model context that must be established, filled and paid for.",
-    "This guide covers how the pieces actually fit together, what the sequential and hierarchical processes really do, and — most usefully — how to tell whether your problem wants a crew at all.",
+    "This guide covers how the pieces actually fit together, what the sequential and hierarchical processes really do, and (most usefully) how to tell whether your problem wants a crew at all.",
   ],
 
   whyItMatters: [
     "Multi-agent frameworks are where AI budgets go to disappear. A crew of five agents on a task a single agent could handle costs roughly five times as much and takes considerably longer, because each agent re-establishes context, works, and reports back through the coordinator. Knowing when that overhead buys something is the difference between an effective system and an expensive one.",
-    "When it does fit, though, the role decomposition is real. Genuinely independent workstreams — research one thing while drafting another, review from a perspective the writer can't hold — benefit from separate contexts. A single agent asked to write and then critique its own work is doing the thing that reliably doesn't work.",
+    "When it does fit, though, the role decomposition is real. Genuinely independent workstreams (research one thing while drafting another, review from a perspective the writer can't hold) benefit from separate contexts. A single agent asked to write and then critique its own work is doing the thing that reliably doesn't work.",
     "And CrewAI is popular enough that you'll encounter it. Being able to read a crew definition and predict its cost and failure modes is useful even if you'd have built the thing differently.",
   ],
 
@@ -39,7 +39,7 @@ export const guide: Guide = {
       explain:
         "CrewAI agents are defined in prose. `role` is what they are, `goal` is what they're optimising for, `backstory` supplies context and voice. Together they become the system prompt.",
       detail:
-        "This is prompt engineering wearing an org chart. Vague roles produce vague behaviour for exactly the reasons vague prompts do — the fields feel like configuration and behave like instructions.",
+        "This is prompt engineering wearing an org chart. Vague roles produce vague behaviour for exactly the reasons vague prompts do: the fields feel like configuration and behave like instructions.",
     },
     {
       term: "A task is a description plus an expected output",
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "With `Process.hierarchical`, a manager agent decides which agent handles what and in what order. You must supply either a `manager_llm` or a `manager_agent`.",
       detail:
-        "It's more flexible and considerably harder to predict, debug or cost. Reach for it when the task can't be sequenced in advance — which is rarer than it first appears.",
+        "It's more flexible and considerably harder to predict, debug or cost. Reach for it when the task can't be sequenced in advance, which is rarer than it first appears.",
     },
     {
       term: "Context is not shared automatically",
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Every agent is a separate context to fill",
       explain:
-        "Cost scales with agents, not just with work. Each one re-establishes its own context, produces output, and the coordinator reads that output — a fan-out and fan-in on every step.",
+        "Cost scales with agents, not just with work. Each one re-establishes its own context, produces output, and the coordinator reads that output: a fan-out and fan-in on every step.",
       detail:
         "A five-agent crew on a task one agent could do isn't five times the quality. It's usually five times the cost for a similar answer arrived at more slowly.",
     },
@@ -90,7 +90,7 @@ export const guide: Guide = {
       title: "A minimal two-agent crew",
       language: "python",
       intro:
-        "Install with `pip install crewai`. Two agents, two tasks, sequential process — the researcher's output becomes the writer's context automatically.",
+        "Install with `pip install crewai`. Two agents, two tasks, sequential process. The researcher's output becomes the writer's context automatically.",
       code: `from crewai import Agent, Task, Crew, Process
 
 # The three prose fields become the agent's system prompt. Write them
@@ -152,7 +152,7 @@ print(result)`,
       title: "Giving agents scoped tools",
       language: "python",
       intro:
-        "Tools attach per agent, which makes least privilege natural — the researcher can search, the writer structurally cannot. That's a real advantage of the role model.",
+        "Tools attach per agent, which makes least privilege natural. The researcher can search, the writer structurally cannot. That's a real advantage of the role model.",
       code: `from crewai.tools import tool
 
 @tool("Search product documentation")
@@ -219,7 +219,7 @@ print(crew.usage_metrics)`,
     },
     {
       title: "Run the two-agent sequential crew",
-      body: "Implement the first example. Read the verbose output closely — it shows each agent's reasoning and where task output is handed on.",
+      body: "Implement the first example. Read the verbose output closely. It shows each agent's reasoning and where task output is handed on.",
       effort: "1–2 hours",
       outcome: "A working crew, and a sense of what the handoff actually contains.",
     },
@@ -314,7 +314,7 @@ print(crew.usage_metrics)`,
     },
     {
       mistake: "Reaching for hierarchical to avoid sequencing",
-      why: "A manager agent adds delegation reasoning on every step — real cost and much harder tracing — often to solve an ordering problem you could have written down.",
+      why: "A manager agent adds delegation reasoning on every step (real cost and much harder tracing) often to solve an ordering problem you could have written down.",
       fix: "Use sequential unless the order cannot be known in advance. Try to sequence it first; you usually can.",
     },
     {
@@ -326,12 +326,12 @@ print(crew.usage_metrics)`,
 
   bestPractices: [
     "Establish a single-agent baseline before building any crew, and hold the crew to beating it.",
-    "Write `role`, `goal` and `backstory` as behavioural instructions — they are the system prompt.",
+    "Write `role`, `goal` and `backstory` as behavioural instructions. They are the system prompt.",
     "Treat `expected_output` as a specification: structure, length, required fields, and the missing-information behaviour.",
     "Scope tools per agent so capability follows role. This is least privilege and it's free here.",
     "Set `max_iter` on every agent and a ceiling on total crew execution.",
     "Prefer `Process.sequential` and justify any move to hierarchical with a reason the order can't be fixed.",
-    "Read `usage_metrics` after every run during development — crew cost is easy to underestimate.",
+    "Read `usage_metrics` after every run during development: crew cost is easy to underestimate.",
     "Give verification roles a real tool, or don't create them.",
     "Run with `verbose=True` while developing; the reasoning trace is where handoff problems become visible.",
   ],
@@ -404,7 +404,7 @@ print(crew.usage_metrics)`,
     },
     {
       q: "Sequential or hierarchical?",
-      a: "Sequential, almost always. It's predictable, traceable and cheaper. Hierarchical adds a manager agent reasoning about delegation on every step — use it only when the task order cannot be determined in advance.",
+      a: "Sequential, almost always. It's predictable, traceable and cheaper. Hierarchical adds a manager agent reasoning about delegation on every step. Use it only when the task order cannot be determined in advance.",
     },
     {
       q: "Do agents in a crew share memory?",
@@ -412,11 +412,11 @@ print(crew.usage_metrics)`,
     },
     {
       q: "How much does a crew cost compared to one agent?",
-      a: "Roughly in proportion to the agents involved, plus coordination overhead — each one establishes its own context and its output is then read by the next. Read `usage_metrics` rather than estimating; the distribution is usually surprising.",
+      a: "Roughly in proportion to the agents involved, plus coordination overhead. Each one establishes its own context and its output is then read by the next. Read `usage_metrics` rather than estimating; the distribution is usually surprising.",
     },
     {
       q: "Can I use it with any model?",
-      a: "Yes — CrewAI supports the major providers, and you set the model per agent. That also lets you run cheaper models for mechanical roles and reserve stronger ones for the reasoning-heavy stages.",
+      a: "Yes: CrewAI supports the major providers, and you set the model per agent. That also lets you run cheaper models for mechanical roles and reserve stronger ones for the reasoning-heavy stages.",
     },
     {
       q: "Why does my crew give inconsistent output?",
@@ -437,7 +437,7 @@ print(crew.usage_metrics)`,
   resources: [
     { title: "CrewAI Processes documentation", kind: "Docs", note: "The authoritative explanation of sequential versus hierarchical, including the manager requirement.", url: "https://docs.crewai.com/en/concepts/processes" },
     { title: "CrewAI on GitHub", kind: "Docs", note: "Source and examples. Worth reading the agent implementation to see what the prose fields become.", url: "https://github.com/crewaiinc/crewai" },
-    { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "Framework-agnostic, and specifically sceptical of multi-agent designs that haven't been justified.", url: "https://www.anthropic.com/research/building-effective-agents" },
+    { title: "Building Effective Agents: Anthropic", kind: "Docs", note: "Framework-agnostic, and specifically sceptical of multi-agent designs that haven't been justified.", url: "https://www.anthropic.com/research/building-effective-agents" },
   ],
 
   internalLinks: [

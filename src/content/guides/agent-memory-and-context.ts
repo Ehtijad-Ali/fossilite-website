@@ -29,7 +29,7 @@ export const guide: Guide = {
 
   whyItMatters: [
     "Cost is the visible half. A conversation that grows linearly costs quadratically to run, because every turn re-sends everything before it. Teams model agent cost as steps × price-per-call and are then surprised by a bill several times their estimate.",
-    "Quality is the half that matters more. As the context grows, the instructions you gave at step zero migrate toward the middle — measurably the worst-attended region. An agent that ignores its own system prompt at step twenty isn't disobedient; the prompt is now buried.",
+    "Quality is the half that matters more. As the context grows, the instructions you gave at step zero migrate toward the middle: measurably the worst-attended region. An agent that ignores its own system prompt at step twenty isn't disobedient; the prompt is now buried.",
     "And memory is what separates a tool from an assistant. A system that forgets everything between sessions can't build on prior work, learn a user's preferences, or resume something interrupted. Getting persistence right is what makes an agent worth returning to.",
   ],
 
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "The standard pattern. Older turns get compressed into a summary; the last few stay in full detail because that's where the current task lives.",
       detail:
-        "Summarise on a threshold — message count or token count — rather than every turn. Compressing constantly costs more than it saves and loses detail you still needed.",
+        "Summarise on a threshold (message count or token count), rather than every turn. Compressing constantly costs more than it saves and loses detail you still needed.",
     },
     {
       term: "Working memory versus long-term memory",
@@ -74,7 +74,7 @@ export const guide: Guide = {
       explain:
         "Carrying every fact an agent has ever learned in its context is expensive and dilutes attention. Storing them and retrieving the relevant few per turn scales indefinitely.",
       detail:
-        "This is RAG applied to the agent's own history. The mechanism is identical — embed, store, retrieve on relevance — and it's the only approach that doesn't degrade with volume.",
+        "This is RAG applied to the agent's own history. The mechanism is identical (embed, store, retrieve on relevance), and it's the only approach that doesn't degrade with volume.",
     },
     {
       term: "Tool results are the biggest offender",
@@ -86,7 +86,7 @@ export const guide: Guide = {
     {
       term: "Not everything should persist",
       explain:
-        "A failed approach, a corrected mistake, an abandoned branch — carrying these forward wastes tokens and can actively mislead the model into revisiting them.",
+        "A failed approach, a corrected mistake, an abandoned branch. Carrying these forward wastes tokens and can actively mislead the model into revisiting them.",
       detail:
         "Design what gets forgotten as deliberately as what gets kept. Pruning is a feature.",
     },
@@ -102,7 +102,7 @@ export const guide: Guide = {
 
 client = anthropic.Anthropic()
 
-KEEP_RECENT = 6          # turns kept verbatim — where the current task lives
+KEEP_RECENT = 6          # turns kept verbatim, where the current task lives
 SUMMARISE_AFTER = 20     # threshold, not every turn: compressing constantly costs more
 
 def summarise_history(messages: list[dict], goal: str) -> list[dict]:
@@ -137,7 +137,7 @@ def summarise_history(messages: list[dict], goal: str) -> list[dict]:
         *recent,
     ]`,
       note:
-        "Note what the summarisation prompt asks to *omit*. Carrying forward abandoned approaches doesn't just cost tokens — it invites the agent to revisit them.",
+        "Note what the summarisation prompt asks to *omit*. Carrying forward abandoned approaches doesn't just cost tokens. It invites the agent to revisit them.",
     },
     {
       title: "Retrieval-backed long-term memory",
@@ -155,7 +155,7 @@ def summarise_history(messages: list[dict], goal: str) -> list[dict]:
         self.store.upsert({
             "text": fact,
             "embedding": self.embedder.embed(fact),
-            "user_id": user_id,      # scoping is not optional — see the note
+            "user_id": user_id,      # scoping is not optional, see the note
             "kind": kind,
             "created_at": now(),
         })
@@ -270,7 +270,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
       result:
         "Accuracy was highest when the needed information sat at the beginning or end and degraded when it sat in the middle: a U-shaped curve that held even for models built for long contexts, with overall performance falling as context grew. This is the mechanism behind agents that stop following their system prompt around step fifteen: the prompt hasn't changed, its position has.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -278,11 +278,11 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
       kind: "documented",
       scenario: "Retrieval as an alternative to carrying everything.",
       walkthrough:
-        "Anthropic benchmarked retrieval quality by measuring how often the correct passage failed to appear in the top twenty results, then added components one at a time — context attached to each chunk, keyword search alongside semantic, then re-ranking.",
+        "Anthropic benchmarked retrieval quality by measuring how often the correct passage failed to appear in the top twenty results, then added components one at a time: context attached to each chunk, keyword search alongside semantic, then re-ranking.",
       result:
         "Failure rate fell from 5.7% to 3.7% with contextual embeddings, to 2.9% adding keyword search, and to 1.9% with re-ranking. Applied to agent memory, this is the argument for retrieval over accumulation: a well-built store surfaces the right three facts reliably, and unlike a growing context it doesn't get worse as it fills.",
       source: {
-        label: "Anthropic (2024) — Introducing Contextual Retrieval",
+        label: "Anthropic (2024). Introducing Contextual Retrieval",
         url: "https://www.anthropic.com/news/contextual-retrieval",
       },
     },
@@ -290,7 +290,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
       kind: "illustration",
       scenario: "The one tool return that ate the run.",
       walkthrough:
-        "A recognisable profile. An agent's context grows alarmingly and the team starts designing a summarisation pipeline. Ranking the contents first shows a single tool — an API wrapper returning its upstream response verbatim — accounting for most of the context after four calls. Nested JSON, several hundred fields, almost none of it relevant to any question asked.",
+        "A recognisable profile. An agent's context grows alarmingly and the team starts designing a summarisation pipeline. Ranking the contents first shows a single tool (an API wrapper returning its upstream response verbatim) accounting for most of the context after four calls. Nested JSON, several hundred fields, almost none of it relevant to any question asked.",
       result:
         "Shaping that one return to the fields the task needs flattened the curve without any compaction code. Measure what's actually filling the context before building machinery to compress it; the answer is usually one tool rather than the conversation.",
     },
@@ -305,7 +305,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
     {
       mistake: "Summarising every turn",
       why: "Compression is a model call. Doing it constantly costs more than the tokens it saves and progressively loses detail the current task still needs.",
-      fix: "Trigger on a threshold — message count or token count — and keep the recent tail verbatim.",
+      fix: "Trigger on a threshold (message count or token count), and keep the recent tail verbatim.",
     },
     {
       mistake: "Letting the goal be summarised away",
@@ -343,7 +343,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
     "Use retrieval rather than accumulation for facts that persist across sessions.",
     "Scope memory retrieval by tenant before the similarity search.",
     "Decide explicitly what should be forgotten, and implement it.",
-    "Cap steps — it bounds the quadratic cost curve more effectively than any compression.",
+    "Cap steps. It bounds the quadratic cost curve more effectively than any compression.",
     "Test that compaction preserved what later turns actually depend on.",
   ],
 
@@ -360,7 +360,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
     "Long-running assistants where users return across days and expect continuity of prior decisions.",
     "Cost control at volume: context management typically moves spend more than model choice does.",
     "Support systems that need account history without carrying every past ticket in every prompt.",
-    "Compliance settings where what an automated system retained — and about whom — must be auditable and deletable.",
+    "Compliance settings where what an automated system retained (and about whom) must be auditable and deletable.",
     "Multi-agent architectures, where context discipline compounds because every participant pays for shared history.",
     "Personalisation that improves over time without an ever-growing per-request cost.",
   ],
@@ -421,7 +421,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
     },
     {
       q: "When should I summarise?",
-      a: "On a threshold — message or token count — rather than every turn. Compression is a model call, so doing it constantly costs more than it saves and erodes detail you still need.",
+      a: "On a threshold (message or token count), rather than every turn. Compression is a model call, so doing it constantly costs more than it saves and erodes detail you still need.",
     },
     {
       q: "Summarisation or retrieval?",
@@ -429,7 +429,7 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
     },
     {
       q: "How do I stop compaction losing something important?",
-      a: "Specify in the summarisation prompt what must be preserved — decisions and why, facts established, approaches already tried — and what to drop. Then test with questions that depend on early turns.",
+      a: "Specify in the summarisation prompt what must be preserved (decisions and why, facts established, approaches already tried), and what to drop. Then test with questions that depend on early turns.",
     },
     {
       q: "What's the biggest single win?",
@@ -445,13 +445,13 @@ def largest_contributors(messages: list[dict], top: int = 5) -> None:
     { name: "count_tokens", what: "Measure context size accurately per turn. Never estimate with a non-Claude tokeniser.", cost: "Free", url: "https://docs.anthropic.com" },
     { name: "LangGraph checkpointers", what: "Durable state across sessions and restarts, with a natural place to insert a compaction node.", cost: "Free", url: "https://langchain-ai.github.io/langgraph/" },
     { name: "pgvector / Qdrant", what: "Vector stores for retrieval-backed long-term memory with metadata filtering.", cost: "Freemium" },
-    { name: "LangSmith", what: "Tracing that shows per-turn token usage — where the curve becomes visible.", cost: "Freemium", url: "https://smith.langchain.com" },
+    { name: "LangSmith", what: "Tracing that shows per-turn token usage, where the curve becomes visible.", cost: "Freemium", url: "https://smith.langchain.com" },
   ],
 
   resources: [
     { title: "Lost in the Middle", kind: "Paper", note: "The positional-attention finding underlying most of this guide. Short and worth reading directly.", url: "https://arxiv.org/abs/2307.03172" },
-    { title: "Anthropic — Contextual Retrieval", kind: "Docs", note: "Measured results for the retrieval techniques that make long-term memory work.", url: "https://www.anthropic.com/news/contextual-retrieval" },
-    { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "Context management in the wider agent design picture.", url: "https://www.anthropic.com/research/building-effective-agents" },
+    { title: "Anthropic: Contextual Retrieval", kind: "Docs", note: "Measured results for the retrieval techniques that make long-term memory work.", url: "https://www.anthropic.com/news/contextual-retrieval" },
+    { title: "Building Effective Agents: Anthropic", kind: "Docs", note: "Context management in the wider agent design picture.", url: "https://www.anthropic.com/research/building-effective-agents" },
   ],
 
   internalLinks: [

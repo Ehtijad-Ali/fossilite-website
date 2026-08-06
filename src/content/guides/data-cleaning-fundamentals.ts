@@ -22,9 +22,9 @@ export const guide: Guide = {
   readingTime: 13,
 
   intro: [
-    "Everybody says data cleaning takes most of the time on a data project, and everybody says it as though it were an unfortunate overhead — a tax on the interesting work. That framing is why so much of it is done badly. Cleaning isn't preparation for the analysis; a great deal of the time it *is* the analysis, because deciding what a blank cell means is a substantive judgement about the world, not a technical chore.",
+    "Everybody says data cleaning takes most of the time on a data project, and everybody says it as though it were an unfortunate overhead, a tax on the interesting work. That framing is why so much of it is done badly. Cleaning isn't preparation for the analysis; a great deal of the time it *is* the analysis, because deciding what a blank cell means is a substantive judgement about the world, not a technical chore.",
     "The failure mode is specific and worth naming. Bad cleaning rarely produces an error. It produces a number: a plausible, well-formatted, confidently-presented number that is wrong in a direction nobody notices. Errors get caught. Wrong answers get published.",
-    "This guide covers how to find what's actually wrong with a dataset, how to decide what to do about it, and — most importantly — how to do it in a way that someone else can review and re-run. It assumes no particular tool, though the examples lean toward code, for reasons the first documented case makes uncomfortably clear.",
+    "This guide covers how to find what's actually wrong with a dataset, how to decide what to do about it, and (most importantly) how to do it in a way that someone else can review and re-run. It assumes no particular tool, though the examples lean toward code, for reasons the first documented case makes uncomfortably clear.",
   ],
 
   whyItMatters: [
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "Look before you touch",
       explain:
-        "The first pass is diagnosis, not repair. Load the data and characterise it — shape, types, missing counts, distinct values per categorical column, ranges on numeric columns — before writing a single line of cleaning.",
+        "The first pass is diagnosis, not repair. Load the data and characterise it (shape, types, missing counts, distinct values per categorical column, ranges on numeric columns) before writing a single line of cleaning.",
       detail:
         "Fixing as you discover means you never see the full pattern. Problems cluster: one broken export usually caused four of the symptoms you're about to patch individually.",
     },
@@ -46,7 +46,7 @@ export const guide: Guide = {
       explain:
         "Every column has a type your tool inferred. A numeric column containing a single stray 'N/A' or a currency symbol becomes text, and then sorts alphabetically, concatenates instead of adding, and compares unpredictably.",
       detail:
-        "Check inferred types immediately after every load. A column that should be numeric and isn't is telling you something specific about the file's contents — go and find out what.",
+        "Check inferred types immediately after every load. A column that should be numeric and isn't is telling you something specific about the file's contents: go and find out what.",
     },
     {
       term: "Missing means several different things",
@@ -74,7 +74,7 @@ export const guide: Guide = {
       explain:
         "Negative ages, orders dated in the future, percentages above 100, timestamps before the company existed. These are cheap to detect and always indicate something worth understanding upstream.",
       detail:
-        "Impossible values are gifts. They're the visible symptom of a problem that is also producing invisible ones — a broken parser doesn't only corrupt the values you can spot.",
+        "Impossible values are gifts. They're the visible symptom of a problem that is also producing invisible ones. A broken parser doesn't only corrupt the values you can spot.",
     },
     {
       term: "Joins are where silent corruption happens",
@@ -120,7 +120,7 @@ export const guide: Guide = {
     },
     {
       title: "Standardise categories and text",
-      body: "Trim whitespace, normalise casing, and map variant spellings to canonical values using an explicit lookup you can inspect — not a clever fuzzy match you can't audit. Recount distinct values afterwards.",
+      body: "Trim whitespace, normalise casing, and map variant spellings to canonical values using an explicit lookup you can inspect. Not a clever fuzzy match you can't audit. Recount distinct values afterwards.",
       effort: "4–6 hours",
       outcome: "Categorical columns whose distinct counts match reality.",
     },
@@ -149,11 +149,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "A spreadsheet's autocorrect silently corrupting gene names across the scientific literature.",
       walkthrough:
-        "Ziemann, Eren and El-Osta examined 3,597 papers published in 18 genome-focused journals between 2005 and 2015, covering 7,467 supplementary gene lists produced in Excel. With default settings, Excel converts certain gene symbols into dates or floating-point numbers — SEPT2 becomes 2-Sep, MARCH1 becomes 1-Mar. No warning is shown, and the converted value looks entirely normal in the cell.",
+        "Ziemann, Eren and El-Osta examined 3,597 papers published in 18 genome-focused journals between 2005 and 2015, covering 7,467 supplementary gene lists produced in Excel. With default settings, Excel converts certain gene symbols into dates or floating-point numbers: SEPT2 becomes 2-Sep, MARCH1 becomes 1-Mar. No warning is shown, and the converted value looks entirely normal in the cell.",
       result:
-        "19.6% of the papers examined — 704 articles — contained gene name conversion errors in their supplementary data. The corruption happened at the tool's default settings, during ordinary use, to careful researchers, and survived peer review. The general lesson is not about Excel specifically: any tool that silently transforms your data on load will produce errors that look like data rather than like errors.",
+        "19.6% of the papers examined (704 articles) contained gene name conversion errors in their supplementary data. The corruption happened at the tool's default settings, during ordinary use, to careful researchers, and survived peer review. The general lesson is not about Excel specifically: any tool that silently transforms your data on load will produce errors that look like data rather than like errors.",
       source: {
-        label: "Ziemann, Eren & El-Osta (2016) — Gene name errors are widespread in the scientific literature, Genome Biology",
+        label: "Ziemann, Eren & El-Osta (2016). Gene name errors are widespread in the scientific literature, Genome Biology",
         url: "https://link.springer.com/article/10.1186/s13059-016-1044-7",
       },
     },
@@ -161,11 +161,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "A formula range that wasn't dragged far enough, in a paper cited in national policy debate.",
       walkthrough:
-        "Reinhart and Rogoff's 'Growth in a Time of Debt' reported that countries with public debt above 90% of GDP saw negative average growth — a finding used extensively in arguments for austerity. Thomas Herndon, working with Michael Ash and Robert Pollin, could not replicate it. Obtaining the original spreadsheet, they found several problems, including an averaging formula whose range omitted five countries because it had not been extended over all the rows.",
+        "Reinhart and Rogoff's 'Growth in a Time of Debt' reported that countries with public debt above 90% of GDP saw negative average growth: a finding used extensively in arguments for austerity. Thomas Herndon, working with Michael Ash and Robert Pollin, could not replicate it. Obtaining the original spreadsheet, they found several problems, including an averaging formula whose range omitted five countries because it had not been extended over all the rows.",
       result:
         "Recalculated, average real GDP growth above the 90% threshold was 2.2% rather than −0.1%. What makes this a data-cleaning story rather than an economics one is the mechanism of concealment: the logic lived inside cell references, where it could not be reviewed, diffed, or re-run by anyone who hadn't been handed the file.",
       source: {
-        label: "Herndon, Ash & Pollin (2013), PERI/UMass Amherst — critique of Reinhart and Rogoff",
+        label: "Herndon, Ash & Pollin (2013), PERI/UMass Amherst: critique of Reinhart and Rogoff",
         url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/",
       },
     },
@@ -173,7 +173,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The category that quietly split in two.",
       walkthrough:
-        "A pattern worth watching for in any recurring report. An upstream system is updated and starts writing a category label with different casing or an extra space — 'Enterprise' becomes 'enterprise ', say. Your grouping logic now produces two categories where there was one. Both appear in the output. Each has roughly half the volume it should. Every total is still correct, so nothing looks broken; only the breakdown is wrong.",
+        "A pattern worth watching for in any recurring report. An upstream system is updated and starts writing a category label with different casing or an extra space: 'Enterprise' becomes 'enterprise ', say. Your grouping logic now produces two categories where there was one. Both appear in the output. Each has roughly half the volume it should. Every total is still correct, so nothing looks broken; only the breakdown is wrong.",
       result:
         "The defence is an assertion rather than vigilance: check that the distinct values in a categorical column remain within a known allowed set, and fail the run when a new one appears. Trimming and normalising casing on load prevents the common version; the assertion catches the version you didn't anticipate.",
     },
@@ -218,7 +218,7 @@ export const guide: Guide = {
   ],
 
   bestPractices: [
-    "Run the same diagnostic pass on every dataset, every time, before writing any cleaning code. Familiarity is not a substitute — files change.",
+    "Run the same diagnostic pass on every dataset, every time, before writing any cleaning code. Familiarity is not a substitute: files change.",
     "Keep raw, intermediate and output data in separate locations, and never write into raw. This structure alone prevents most reproducibility failures.",
     "Make every cleaning decision a line of code with a comment explaining why, not what.",
     "Assert your assumptions rather than remembering them. Row counts after joins, no nulls in keys, categories within an allowed set, values within plausible ranges.",
@@ -247,7 +247,7 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Personal record-keeping — finances, health, training logs — where consistency in how you record things determines whether you can ever answer a question with them.",
+    "Personal record-keeping (finances, health, training logs) where consistency in how you record things determines whether you can ever answer a question with them.",
     "Reading statistics critically: knowing how many judgement calls sit between raw collection and a published figure changes how much weight a single number deserves.",
     "Any research you do for a decision, where the discipline of checking the source rather than the summary is the same habit.",
     "Recognising the general pattern: a tool that silently transforms your input will produce errors that look like results. That's true well beyond spreadsheets.",
@@ -309,7 +309,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "How much time should data cleaning take?",
-      a: "On a typical project, more than you planned for — often the majority. Rather than trying to compress it, plan for it explicitly and treat the cleaning code as a deliverable in its own right, because the next project on the same source will reuse it.",
+      a: "On a typical project, more than you planned for: often the majority. Rather than trying to compress it, plan for it explicitly and treat the cleaning code as a deliverable in its own right, because the next project on the same source will reuse it.",
     },
     {
       q: "Should I remove rows with missing values?",
@@ -317,19 +317,19 @@ export const guide: Guide = {
     },
     {
       q: "Is it wrong to use spreadsheets for data work?",
-      a: "They're excellent for inspection and small one-off tasks. The problems arise when work repeats, needs auditing, or gets large — logic hidden in cell references can't be reviewed or re-run, and some tools silently transform values on load.",
+      a: "They're excellent for inspection and small one-off tasks. The problems arise when work repeats, needs auditing, or gets large. Logic hidden in cell references can't be reviewed or re-run, and some tools silently transform values on load.",
     },
     {
       q: "How do I know when the data is clean enough?",
       a: "When your assertions pass, the known problem list is either fixed or documented as accepted, and you can explain every transformation to someone who'll use the result. 'Clean' is relative to the question being asked, not absolute.",
     },
     {
-      q: "What about outliers — remove or keep?",
+      q: "What about outliers: remove or keep?",
       a: "Investigate individually. An extreme value caused by a broken sensor should go; an extreme value representing a unusual event may be the most informative row you have. The decision is about cause, never about magnitude.",
     },
     {
       q: "Can AI clean my data for me?",
-      a: "It's useful for suggesting canonical mappings and spotting patterns you'd miss. It's a poor final authority, because the decisive questions — what does a blank mean here, is this outlier real — depend on how the data was collected, which the model has no access to.",
+      a: "It's useful for suggesting canonical mappings and spotting patterns you'd miss. It's a poor final authority, because the decisive questions (what does a blank mean here, is this outlier real) depend on how the data was collected, which the model has no access to.",
     },
   ],
 
@@ -342,10 +342,10 @@ export const guide: Guide = {
   ],
 
   resources: [
-    { title: "Tidy Data — Hadley Wickham", kind: "Paper", note: "The clearest statement of what well-structured data looks like and why. Short and influential.", url: "https://vita.had.co.nz/papers/tidy-data.pdf" },
+    { title: "Tidy Data: Hadley Wickham", kind: "Paper", note: "The clearest statement of what well-structured data looks like and why. Short and influential.", url: "https://vita.had.co.nz/papers/tidy-data.pdf" },
     { title: "Gene name errors are widespread in the scientific literature", kind: "Paper", note: "The Excel autocorrect study. Two pages, and it changes how you think about default tool behaviour.", url: "https://link.springer.com/article/10.1186/s13059-016-1044-7" },
-    { title: "Python for Data Analysis — Wes McKinney", kind: "Book", note: "Freely readable online, with thorough coverage of the cleaning operations you'll use daily.", url: "https://wesmckinney.com/book/" },
-    { title: "Bad Data Handbook — Q. Ethan McCallum", kind: "Book", note: "Practitioners describing real data disasters. Useful precisely because it's anecdotal rather than idealised." },
+    { title: "Python for Data Analysis: Wes McKinney", kind: "Book", note: "Freely readable online, with thorough coverage of the cleaning operations you'll use daily.", url: "https://wesmckinney.com/book/" },
+    { title: "Bad Data Handbook: Q. Ethan McCallum", kind: "Book", note: "Practitioners describing real data disasters. Useful precisely because it's anecdotal rather than idealised." },
   ],
 
   internalLinks: [

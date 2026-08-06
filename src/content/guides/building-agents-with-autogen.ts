@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "building-agents-with-autogen",
   seoTitle: "Building Agents with AutoGen: Conversational Multi-Agent AI",
   metaDescription:
-    "How Microsoft AutoGen's async agent teams work — AssistantAgent, group chats, termination conditions — with runnable code and the gotchas that bite.",
+    "How Microsoft AutoGen's async agent teams work (AssistantAgent, group chats, termination conditions) with runnable code and the gotchas that bite.",
   title: "Building Agents with AutoGen",
   keywords: [
     "autogen tutorial",
@@ -22,13 +22,13 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "AutoGen models multi-agent work as conversation. Agents talk to each other in a group chat, a policy decides who speaks next, and a termination condition decides when they stop. It's a different framing from CrewAI's org chart or LangGraph's state machine, and for problems that are actually dialogue-shaped — negotiation, critique, iterative refinement — it fits well.",
-    "It's also the most demanding of the three to operate. The API is async throughout, the architecture is layered, and the framework was substantially redesigned at v0.4 — which means a large share of the tutorials you'll find describe an API that no longer exists. Budget time for that.",
-    "This guide covers the current `autogen-agentchat` interface: how agents and teams are constructed, how termination actually works, and the specific gotchas — including one about sampling parameters that will bite anyone pairing AutoGen with a current Claude model.",
+    "AutoGen models multi-agent work as conversation. Agents talk to each other in a group chat, a policy decides who speaks next, and a termination condition decides when they stop. It's a different framing from CrewAI's org chart or LangGraph's state machine, and for problems that are actually dialogue-shaped (negotiation, critique, iterative refinement) it fits well.",
+    "It's also the most demanding of the three to operate. The API is async throughout, the architecture is layered, and the framework was substantially redesigned at v0.4, which means a large share of the tutorials you'll find describe an API that no longer exists. Budget time for that.",
+    "This guide covers the current `autogen-agentchat` interface: how agents and teams are constructed, how termination actually works, and the specific gotchas. Including one about sampling parameters that will bite anyone pairing AutoGen with a current Claude model.",
   ],
 
   whyItMatters: [
-    "The conversational model captures something the alternatives don't. When the work is a back-and-forth — a critic pushing on a writer's draft until it holds up, two perspectives negotiating toward a plan — expressing that as a group chat is more natural than expressing it as a pipeline or a graph.",
+    "The conversational model captures something the alternatives don't. When the work is a back-and-forth (a critic pushing on a writer's draft until it holds up, two perspectives negotiating toward a plan) expressing that as a group chat is more natural than expressing it as a pipeline or a graph.",
     "AutoGen is also research-backed and Microsoft-maintained, which matters for enterprises with procurement constraints. If you need a multi-agent framework with institutional backing, it's on the shortlist by default.",
     "And the termination-condition design is good. Making 'when do we stop?' a first-class composable object, rather than an afterthought, is a better answer than most frameworks manage, and stopping is where multi-agent systems most reliably go wrong.",
   ],
@@ -67,7 +67,7 @@ export const guide: Guide = {
       explain:
         "`MaxMessageTermination` stops after N messages. `TextMentionTermination` stops when an agent says a keyword. You combine them with `|` so the run ends when any condition fires.",
       detail:
-        "This is the framework's best design decision. Always combine a semantic condition with a hard message cap — a keyword-only condition will occasionally never fire.",
+        "This is the framework's best design decision. Always combine a semantic condition with a hard message cap: a keyword-only condition will occasionally never fire.",
     },
     {
       term: "`run_stream` gives you the trace",
@@ -101,7 +101,7 @@ from autogen_ext.models.anthropic import AnthropicChatCompletionClient
 
 async def main() -> None:
     # NOTE: this client accepts temperature/top_p/top_k, but current Claude
-    # models reject them. Leave them unset — see the note below this block.
+    # models reject them. Leave them unset, see the note below this block.
     model_client = AnthropicChatCompletionClient(
         model="claude-opus-5",
         max_tokens=16000,
@@ -169,13 +169,13 @@ researcher = AssistantAgent(
     reflect_on_tool_use=True,   # summarise results rather than dumping them
 )`,
       note:
-        "`reflect_on_tool_use=True` makes the agent process the tool output into a response rather than returning it raw. In a group chat that matters twice over — raw output lands in every other agent's context too.",
+        "`reflect_on_tool_use=True` makes the agent process the tool output into a response rather than returning it raw. In a group chat that matters twice over: raw output lands in every other agent's context too.",
     },
     {
       title: "Selector teams, and why round-robin first",
       language: "python",
       intro:
-        "A selector team uses a model to choose the next speaker. It's more flexible and considerably harder to predict — reach for it only when a fixed order doesn't fit.",
+        "A selector team uses a model to choose the next speaker. It's more flexible and considerably harder to predict: reach for it only when a fixed order doesn't fit.",
       code: `from autogen_agentchat.teams import SelectorGroupChat
 
 team = SelectorGroupChat(
@@ -210,7 +210,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     },
     {
       title: "Get the async structure right",
-      body: "Run the two-agent example. If you're not fluent with asyncio, spend the time here rather than fighting it later — every AutoGen call is a coroutine and the failure modes are unfamiliar if you're new to it.",
+      body: "Run the two-agent example. If you're not fluent with asyncio, spend the time here rather than fighting it later. Every AutoGen call is a coroutine and the failure modes are unfamiliar if you're new to it.",
       effort: "2–3 hours",
       outcome: "A working team, and comfort with the async surface.",
     },
@@ -265,9 +265,9 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
       walkthrough:
         "Liu and colleagues varied the position of relevant information within a model's context and measured retrieval accuracy. Performance was highest at the beginning and end and degraded in the middle, holding even for long-context models.",
       result:
-        "A group chat re-sends the whole conversation on every turn, so the original task steadily migrates toward the middle — the worst-attended position. That's the mechanism behind teams that start well and drift by message fifteen, and the reason a message cap protects quality as well as cost.",
+        "A group chat re-sends the whole conversation on every turn, so the original task steadily migrates toward the middle, the worst-attended position. That's the mechanism behind teams that start well and drift by message fifteen, and the reason a message cap protects quality as well as cost.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -275,7 +275,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
       kind: "illustration",
       scenario: "The tutorial that imports a module that no longer exists.",
       walkthrough:
-        "A shape you will hit within your first hour. You follow a well-regarded AutoGen tutorial and `from autogen import AssistantAgent` fails. The tutorial isn't wrong — it predates the v0.4 redesign, when the package split into `autogen-agentchat` and `autogen-ext` and the whole API became async.",
+        "A shape you will hit within your first hour. You follow a well-regarded AutoGen tutorial and `from autogen import AssistantAgent` fails. The tutorial isn't wrong. It predates the v0.4 redesign, when the package split into `autogen-agentchat` and `autogen-ext` and the whole API became async.",
       result:
         "Check whether material uses `autogen_agentchat` imports and `await` before following it. If it shows a `config_list` and synchronous calls, it's pre-0.4. The official documentation is the reliable starting point for this framework more than for most.",
     },
@@ -284,7 +284,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
   mistakes: [
     {
       mistake: "Following pre-0.4 tutorials",
-      why: "The v0.4 redesign changed the package layout and made everything async. Older patterns — `autogen.AssistantAgent`, `config_list`, synchronous calls — simply won't run.",
+      why: "The v0.4 redesign changed the package layout and made everything async. Older patterns (`autogen.AssistantAgent`, `config_list`, synchronous calls) simply won't run.",
       fix: "Use `autogen_agentchat` imports and check that any material you follow uses `await`. If it doesn't, it's out of date.",
     },
     {
@@ -294,7 +294,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     },
     {
       mistake: "Relying on a keyword-only termination condition",
-      why: "If the agent never says the magic word — because it phrased approval differently, or the conversation drifted — the run doesn't stop.",
+      why: "If the agent never says the magic word (because it phrased approval differently, or the conversation drifted) the run doesn't stop.",
       fix: "Always compose a semantic condition with `MaxMessageTermination`. The cap is the safety net, not the primary mechanism.",
     },
     {
@@ -309,7 +309,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     },
     {
       mistake: "Dumping raw tool output into the chat",
-      why: "In a group chat, one agent's raw tool result lands in every other agent's context — multiplying the cost of a verbose return across the whole team.",
+      why: "In a group chat, one agent's raw tool result lands in every other agent's context: multiplying the cost of a verbose return across the whole team.",
       fix: "Use `reflect_on_tool_use=True` and shape tool returns to what the task needs.",
     },
     {
@@ -329,12 +329,12 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     "Develop with `Console(team.run_stream(...))`; use `run()` only once behaviour is settled.",
     "Leave sampling parameters unset when using current Claude models.",
     "Close model clients explicitly when the run finishes.",
-    "Measure tokens per turn, not per run — the growth curve is the thing that surprises people.",
+    "Measure tokens per turn, not per run. The growth curve is the thing that surprises people.",
   ],
 
   proTips: [
     "Induce a non-terminating run on purpose, early, with a keyword-only condition. It's the failure that costs real money, and it's much better to meet it while you're watching.",
-    "Put the task restatement in the termination-adjacent agent's system message. As the conversation grows, the original task drifts toward the least-attended part of the context — a periodic restatement counteracts it.",
+    "Put the task restatement in the termination-adjacent agent's system message. As the conversation grows, the original task drifts toward the least-attended part of the context, a periodic restatement counteracts it.",
     "Name agents for their function and reference those names in the selector prompt. `critic` and `researcher` steer selection meaningfully better than `agent_a` and `agent_b`.",
     "Log the message count and cumulative tokens at each turn during development. The curve tells you where to set your cap far better than intuition.",
     "If a two-agent team works and a four-agent team doesn't, resist adding a coordinator. The usual cause is context growth, and another participant makes it worse.",
@@ -384,7 +384,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     "Using `autogen_agentchat` / `autogen_ext`, not pre-0.4 imports",
     "Every team has a hard `MaxMessageTermination` alongside any semantic condition",
     "Sampling parameters are unset when using current Claude models",
-    "Team size is justified — each agent pays for the whole conversation",
+    "Team size is justified: each agent pays for the whole conversation",
     "Agents have meaningful names used in selection prompts",
     "`reflect_on_tool_use` is set so raw output doesn't flood the chat",
     "Development runs go through `Console(team.run_stream(...))`",
@@ -396,11 +396,11 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
   faqs: [
     {
       q: "Which AutoGen API should I use?",
-      a: "`autogen-agentchat` — the v0.4-and-later interface. Anything using `autogen.AssistantAgent` with a `config_list` and synchronous calls predates the redesign and won't run against the current library.",
+      a: "`autogen-agentchat`, the v0.4-and-later interface. Anything using `autogen.AssistantAgent` with a `config_list` and synchronous calls predates the redesign and won't run against the current library.",
     },
     {
       q: "Does everything have to be async?",
-      a: "Yes. Agent and team methods are coroutines. If your codebase is synchronous, you'll need to bridge or restructure — worth knowing before you commit, as it's a real integration constraint.",
+      a: "Yes. Agent and team methods are coroutines. If your codebase is synchronous, you'll need to bridge or restructure: worth knowing before you commit, as it's a real integration constraint.",
     },
     {
       q: "Why does my team never stop?",
@@ -416,7 +416,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
     },
     {
       q: "Can I use Claude models with it?",
-      a: "Yes, via `AnthropicChatCompletionClient` in `autogen_ext.models.anthropic` — install with `autogen-ext[anthropic]`. Leave temperature and top_p unset, since current Claude models reject them.",
+      a: "Yes, via `AnthropicChatCompletionClient` in `autogen_ext.models.anthropic`: install with `autogen-ext[anthropic]`. Leave temperature and top_p unset, since current Claude models reject them.",
     },
     {
       q: "How do I see what the agents are doing?",
@@ -450,7 +450,7 @@ await Console(team.run_stream(task="Draft a brief for a new API product."))`,
   ],
 
   conclusion: [
-    "As with every framework in this category: build the single-agent baseline first. AutoGen's overhead is the highest of the three, so the bar it has to clear is correspondingly higher — and when it clears it, you'll know exactly why.",
+    "As with every framework in this category: build the single-agent baseline first. AutoGen's overhead is the highest of the three, so the bar it has to clear is correspondingly higher: and when it clears it, you'll know exactly why.",
   ],
 
   cta: {

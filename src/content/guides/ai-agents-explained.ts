@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "ai-agents-explained",
   seoTitle: "AI Agents Explained: What They Are and Where They Break",
   metaDescription:
-    "How AI agents work — planning, tools, memory and guardrails — plus the reliability problems that decide whether one survives contact with production.",
+    "How AI agents work (planning, tools, memory and guardrails) plus the reliability problems that decide whether one survives contact with production.",
   title: "AI Agents Explained",
   keywords: [
     "what are AI agents",
@@ -22,7 +22,7 @@ export const guide: Guide = {
   readingTime: 13,
 
   intro: [
-    "An AI agent is a language model that has been given the ability to act — to call tools, read results, and decide what to do next — rather than only to produce text. That's the whole idea, and it's significant, because a system that can take actions is categorically different from one that can only describe them.",
+    "An AI agent is a language model that has been given the ability to act (to call tools, read results, and decide what to do next), rather than only to produce text. That's the whole idea, and it's significant, because a system that can take actions is categorically different from one that can only describe them.",
     "It's also where the reliability problem changes character. A model that produces a wrong paragraph wastes your time. A model that produces a wrong action sends an email, updates a record, or spends money. The same underlying uncertainty, connected to different consequences.",
     "This guide covers what an agent actually consists of, why multi-step autonomy compounds error rather than merely repeating it, and the design choices that separate agents that work from demonstrations that impress. It assumes you understand roughly what a language model does; if not, start there and come back.",
   ],
@@ -51,7 +51,7 @@ export const guide: Guide = {
     {
       term: "Reasoning before acting improves action selection",
       explain:
-        "Having the model articulate what it's trying to do and why, before choosing a tool, measurably improves the choice — for the same reason it improves analytical answers.",
+        "Having the model articulate what it's trying to do and why, before choosing a tool, measurably improves the choice: for the same reason it improves analytical answers.",
       detail:
         "It also makes debugging tractable. When an agent does something inexplicable, the reasoning trace is usually where you find the misunderstanding, and without it you're guessing.",
     },
@@ -86,7 +86,7 @@ export const guide: Guide = {
     {
       term: "Prompt injection is the defining security problem",
       explain:
-        "If an agent processes content it didn't author — a web page, an email, an uploaded document — that content can contain instructions. An agent that can also act may act on them.",
+        "If an agent processes content it didn't author (a web page, an email, an uploaded document) that content can contain instructions. An agent that can also act may act on them.",
       detail:
         "This is a hard problem without a complete solution. The mitigations are architectural: treat all fetched content as untrusted data, restrict what tools are available in contexts handling untrusted input, and require approval for consequential actions.",
     },
@@ -102,13 +102,13 @@ export const guide: Guide = {
   learningPath: [
     {
       title: "Build a single tool call first",
-      body: "Give a model one function — a calculator, a lookup — and let it decide when to call it. Watch it call with malformed arguments, because it will. Handle that case before adding anything else.",
+      body: "Give a model one function (a calculator, a lookup), and let it decide when to call it. Watch it call with malformed arguments, because it will. Handle that case before adding anything else.",
       effort: "3–5 hours",
       outcome: "You've seen the model delegate correctly, and seen it get the arguments wrong.",
     },
     {
       title: "Add the loop",
-      body: "Let the model call a tool, receive the result, and decide again. Add a hard step limit immediately — an agent without one will occasionally loop until you stop paying for it.",
+      body: "Let the model call a tool, receive the result, and decide again. Add a hard step limit immediately. An agent without one will occasionally loop until you stop paying for it.",
       effort: "5–8 hours",
       outcome: "A working loop with a bounded number of steps.",
     },
@@ -157,7 +157,7 @@ export const guide: Guide = {
       walkthrough:
         "A lawyer researching precedent used ChatGPT and filed a brief citing six decisions that did not exist. When their authenticity was questioned, he asked the model whether the cases were real. It confirmed they were, and supplied further supporting detail.",
       result:
-        "The court sanctioned the lawyers $5,000 in June 2023. For agent design specifically, the second step is the instructive one: a model asked to check its own work produced the plausible continuation, which was agreement. This is why self-verification is not a guardrail. Any check that matters must query an independent source or a deterministic system — asking the model again produces the appearance of verification and none of the substance.",
+        "The court sanctioned the lawyers $5,000 in June 2023. For agent design specifically, the second step is the instructive one: a model asked to check its own work produced the plausible continuation, which was agreement. This is why self-verification is not a guardrail. Any check that matters must query an independent source or a deterministic system. Asking the model again produces the appearance of verification and none of the substance.",
       source: {
         label: "Mata v. Avianca, Inc., No. 1:22-cv-01461 (S.D.N.Y. 22 June 2023)",
         url: "https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1:2022cv01461/575368/54/",
@@ -169,9 +169,9 @@ export const guide: Guide = {
       walkthrough:
         "Liu and colleagues varied the position of relevant information within a model's context and measured retrieval accuracy. Performance was highest when it sat at the beginning or end and degraded when it sat in the middle, forming a U-shaped curve. Accuracy also fell overall as total context length grew, including for models designed for long contexts.",
       result:
-        "For agents this is a direct architectural constraint. A long-running loop accumulates state — prior steps, tool outputs, retrieved documents — and pushes the original goal and constraints into the middle of an ever-growing context. That's the position the research shows attention handles worst. Summarising completed steps and re-stating the goal and constraints at the end of each prompt are mitigations that follow from the measurement.",
+        "For agents this is a direct architectural constraint. A long-running loop accumulates state (prior steps, tool outputs, retrieved documents), and pushes the original goal and constraints into the middle of an ever-growing context. That's the position the research shows attention handles worst. Summarising completed steps and re-stating the goal and constraints at the end of each prompt are mitigations that follow from the measurement.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -179,16 +179,16 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The agent that retried the same failing action forty times.",
       walkthrough:
-        "A shape worth anticipating. An agent calls a tool, the tool returns an error, and the agent — having no concept of having tried this before beyond what's in its context — decides the reasonable next action is to call the tool. The same tool. With the same arguments. The loop continues until a step limit or a billing alert intervenes.",
+        "A shape worth anticipating. An agent calls a tool, the tool returns an error, and the agent (having no concept of having tried this before beyond what's in its context) decides the reasonable next action is to call the tool. The same tool. With the same arguments. The loop continues until a step limit or a billing alert intervenes.",
       result:
-        "The defences are structural rather than prompt-based: a hard step limit, detection of repeated identical actions, and a required change of approach after a failure. It's also why informative error messages matter — a tool returning 'error' gives the model nothing to reason with, while 'error: date must be ISO 8601 format' gives it a correction.",
+        "The defences are structural rather than prompt-based: a hard step limit, detection of repeated identical actions, and a required change of approach after a failure. It's also why informative error messages matter. A tool returning 'error' gives the model nothing to reason with, while 'error: date must be ISO 8601 format' gives it a correction.",
     },
   ],
 
   mistakes: [
     {
       mistake: "Putting critical constraints in the prompt",
-      why: "A prompt is a request that a probabilistic system will usually honour. 'Usually' is not a security property, and the failures cluster on unusual inputs — exactly when constraints matter.",
+      why: "A prompt is a request that a probabilistic system will usually honour. 'Usually' is not a security property, and the failures cluster on unusual inputs: exactly when constraints matter.",
       fix: "Enforce anything that matters in code, outside the model. The prompt explains intent; the code makes it true.",
     },
     {
@@ -247,7 +247,7 @@ export const guide: Guide = {
     "Have the agent state its plan before executing, and log the plan separately from the actions. Comparing intended plan to actual actions is the fastest way to find where reasoning diverged from behaviour.",
     "Cap the number of steps far lower than you think you need during development. A tight limit surfaces the cases where the agent is flailing, which a generous limit hides behind eventual success.",
     "Track cost per successful task, not cost per call. An agent that's cheap per call and often fails can be far more expensive than an apparently pricier one that completes reliably.",
-    "Run your agent against deliberately adversarial content — a document containing instructions — before it ever touches real untrusted input. Almost every first implementation follows them.",
+    "Run your agent against deliberately adversarial content (a document containing instructions) before it ever touches real untrusted input. Almost every first implementation follows them.",
   ],
 
   businessApplications: [
@@ -322,11 +322,11 @@ export const guide: Guide = {
   faqs: [
     {
       q: "What's the difference between an agent and a chatbot?",
-      a: "A chatbot produces text. An agent can call tools, observe the results, and decide what to do next — so it can affect systems outside the conversation. The difference is consequential rather than cosmetic.",
+      a: "A chatbot produces text. An agent can call tools, observe the results, and decide what to do next. So it can affect systems outside the conversation. The difference is consequential rather than cosmetic.",
     },
     {
       q: "Are agents reliable enough for production?",
-      a: "For bounded tasks with short chains, external guardrails and human approval at irreversible points, yes — many are running usefully today. For long unattended autonomy over consequential actions, generally not, because per-step error compounds.",
+      a: "For bounded tasks with short chains, external guardrails and human approval at irreversible points, yes. Many are running usefully today. For long unattended autonomy over consequential actions, generally not, because per-step error compounds.",
     },
     {
       q: "How many steps can an agent handle?",
@@ -342,7 +342,7 @@ export const guide: Guide = {
     },
     {
       q: "Do multi-agent systems work better?",
-      a: "Rarely, at the stage most teams are at. They add coordination failure and make tracing much harder. Exhaust single-agent and fixed-workflow designs first — they solve more problems than their reputation suggests.",
+      a: "Rarely, at the stage most teams are at. They add coordination failure and make tracing much harder. Exhaust single-agent and fixed-workflow designs first. They solve more problems than their reputation suggests.",
     },
     {
       q: "How do I stop an agent going in circles?",
@@ -359,7 +359,7 @@ export const guide: Guide = {
   ],
 
   resources: [
-    { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "Unusually sober vendor guidance, including the argument that most tasks don't need an agent.", url: "https://www.anthropic.com/research/building-effective-agents" },
+    { title: "Building Effective Agents: Anthropic", kind: "Docs", note: "Unusually sober vendor guidance, including the argument that most tasks don't need an agent.", url: "https://www.anthropic.com/research/building-effective-agents" },
     { title: "Lost in the Middle", kind: "Paper", note: "Why accumulated agent context degrades attention to your goal and constraints.", url: "https://arxiv.org/abs/2307.03172" },
     { title: "OWASP Top 10 for LLM Applications", kind: "Docs", note: "Prompt injection and agent-specific risks, written for people shipping to real users.", url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/" },
     { title: "ReAct: Synergizing Reasoning and Acting in Language Models", kind: "Paper", note: "The paper behind the reason-then-act loop most agents use.", url: "https://arxiv.org/abs/2210.03629" },
@@ -380,7 +380,7 @@ export const guide: Guide = {
   ],
 
   conclusion: [
-    "Before building one, spend a day implementing your task as a fixed workflow with model calls at specific points. If it performs comparably — and it often does — you've saved yourself a category of problem. If it doesn't, you now know exactly what the autonomy is buying.",
+    "Before building one, spend a day implementing your task as a fixed workflow with model calls at specific points. If it performs comparably (and it often does) you've saved yourself a category of problem. If it doesn't, you now know exactly what the autonomy is buying.",
   ],
 
   cta: {

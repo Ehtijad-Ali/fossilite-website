@@ -28,9 +28,9 @@ export const guide: Guide = {
   ],
 
   whyItMatters: [
-    "Back-office work is invisible until it fails. It rarely appears in a strategy document, nobody's promotion depends on it, and it consumes an enormous number of hours across finance, admin, procurement and compliance. That combination — high volume, low visibility, no advocate — is why it stays manual long after it should.",
+    "Back-office work is invisible until it fails. It rarely appears in a strategy document, nobody's promotion depends on it, and it consumes an enormous number of hours across finance, admin, procurement and compliance. That combination (high volume, low visibility, no advocate) is why it stays manual long after it should.",
     "It's also the area where AI's specific capability matters most. Rule-based automation could never handle a supplier invoice in an unexpected format or an email describing a request in prose. Handling unstructured input is the new thing, and operations is full of it.",
-    "And the errors here compound quietly. A misprocessed invoice, a missed renewal, a reconciliation that silently drifts — these don't announce themselves. Getting the checks right matters more than getting the speed right.",
+    "And the errors here compound quietly. A misprocessed invoice, a missed renewal, a reconciliation that silently drifts: these don't announce themselves. Getting the checks right matters more than getting the speed right.",
   ],
 
   coreConcepts: [
@@ -49,7 +49,7 @@ export const guide: Guide = {
         "If a process is already structured and rule-based, ordinary software is cheaper, faster and more reliable. Reach for AI where the input resists rules.",
     },
     {
-      term: "Extract, validate, then act — as separate stages",
+      term: "Extract, validate, then act: as separate stages",
       explain:
         "Pull the fields, check them against something authoritative, then take action. Collapsing these into one step removes the place where errors get caught.",
       detail:
@@ -65,7 +65,7 @@ export const guide: Guide = {
     {
       term: "Exceptions are the actual work",
       explain:
-        "The straightforward cases are easy to automate and rarely where the time goes. Exceptions — the unusual supplier, the disputed amount, the missing reference — consume the hours.",
+        "The straightforward cases are easy to automate and rarely where the time goes. Exceptions (the unusual supplier, the disputed amount, the missing reference) consume the hours.",
       detail:
         "Automate the routine, route exceptions cleanly, and measure how many there really are. Teams are often surprised the exception rate is the number that matters.",
     },
@@ -79,7 +79,7 @@ export const guide: Guide = {
     {
       term: "Keep the manual path documented",
       explain:
-        "When the automation is down — and it will be — someone needs to do the work. If the knowledge left with the automation, you have an outage rather than a slowdown.",
+        "When the automation is down (and it will be) someone needs to do the work. If the knowledge left with the automation, you have an outage rather than a slowdown.",
       detail:
         "Document the manual process and check periodically that someone could still follow it.",
     },
@@ -97,11 +97,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "What manual data handling costs in errors rather than hours.",
       walkthrough:
-        "Ziemann, Eren and El-Osta examined 3,597 genomics papers published between 2005 and 2015, covering 7,467 supplementary gene lists produced in Excel. With default settings, Excel silently converts certain gene symbols into dates — SEPT2 becomes 2-Sep. No warning appears and the converted value looks entirely normal.",
+        "Ziemann, Eren and El-Osta examined 3,597 genomics papers published between 2005 and 2015, covering 7,467 supplementary gene lists produced in Excel. With default settings, Excel silently converts certain gene symbols into dates: SEPT2 becomes 2-Sep. No warning appears and the converted value looks entirely normal.",
       result:
         "19.6% of the papers examined contained conversion errors. Careful people, ordinary use of a standard tool, and it survived peer review. The operations lesson is that manual data steps produce errors nobody counts: so a business case built purely on time saved understates the value, and any automation replacing those steps needs validation built in rather than assumed.",
       source: {
-        label: "Ziemann, Eren & El-Osta (2016) — Gene name errors are widespread in the scientific literature, Genome Biology",
+        label: "Ziemann, Eren & El-Osta (2016). Gene name errors are widespread in the scientific literature, Genome Biology",
         url: "https://link.springer.com/article/10.1186/s13059-016-1044-7",
       },
     },
@@ -121,7 +121,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The approval step nobody could explain.",
       walkthrough:
-        "A pattern that appears in most process-mapping exercises. A purchase workflow has four approval stages. Asked why the third exists, nobody knows — the person who required it left, the threshold it enforced was set when the company was a fifth of its size, and the approver rubber-stamps everything because they have no context to evaluate it. The team's plan had been to automate the routing between stages.",
+        "A pattern that appears in most process-mapping exercises. A purchase workflow has four approval stages. Asked why the third exists, nobody knows. The person who required it left, the threshold it enforced was set when the company was a fifth of its size, and the approver rubber-stamps everything because they have no context to evaluate it. The team's plan had been to automate the routing between stages.",
       result:
         "Removing the stage was faster than automating it, and improved cycle time more. Process mapping frequently produces this result, which is why it belongs before any automation work rather than after. The steps worth automating are the ones that survive the question 'what happens if we stop doing this?'",
     },
@@ -130,7 +130,7 @@ export const guide: Guide = {
   learningPath: [
     {
       title: "Inventory the recurring work",
-      body: "For two weeks, log every operational task done more than weekly, with duration and frequency. Rank by annual hours rather than by irritation — the expensive tasks are usually short and frequent.",
+      body: "For two weeks, log every operational task done more than weekly, with duration and frequency. Rank by annual hours rather than by irritation. The expensive tasks are usually short and frequent.",
       effort: "5 minutes a day",
       outcome: "A ranked list with real hours attached.",
     },
@@ -239,7 +239,7 @@ export const guide: Guide = {
     "Ask of every process step: what happens if we stop doing this? The answers reliably delete more work than any automation you were planning, and it costs an afternoon.",
     "Count errors in the current manual process, not just hours. Manual data handling produces mistakes nobody is measuring, and that's often the larger half of the business case.",
     "Write the failure alert before writing the automation. It forces you to define what 'working' means, and it's the piece that gets skipped when you're nearly finished.",
-    "Start with reconciliation. It's tedious, well-defined, produces a list rather than an action, and the output tells you how bad your data quality is — which shapes everything you attempt next.",
+    "Start with reconciliation. It's tedious, well-defined, produces a list rather than an action, and the output tells you how bad your data quality is, which shapes everything you attempt next.",
     "Track the exception rate weekly. A rising rate is the earliest signal that something upstream changed, well before anyone reports a problem.",
     "Keep the manual runbook current enough that a new starter could follow it. That's the real test of whether the knowledge survived automation.",
   ],
@@ -250,7 +250,7 @@ export const guide: Guide = {
     "Contract and document review: pulling key terms, dates and obligations into a structured register.",
     "Purchase and expense approval routing, with policy checks applied consistently.",
     "Supplier onboarding: extracting details from submitted documents and checking them against requirements.",
-    "Compliance monitoring — flagging records that fall outside policy for human review.",
+    "Compliance monitoring: flagging records that fall outside policy for human review.",
     "Recurring report assembly from multiple sources, with a person reviewing before distribution.",
     "Inbox triage for shared operational mailboxes, classifying and routing with context attached.",
   ],
@@ -324,7 +324,7 @@ export const guide: Guide = {
     },
     {
       q: "Should we keep doing it manually as a backup?",
-      a: "Keep the knowledge, not the duplicate work. Document the manual process and verify periodically that someone could still follow it — otherwise a temporary fault becomes an outage.",
+      a: "Keep the knowledge, not the duplicate work. Document the manual process and verify periodically that someone could still follow it. Otherwise a temporary fault becomes an outage.",
     },
     {
       q: "How do we handle exceptions?",
@@ -342,7 +342,7 @@ export const guide: Guide = {
   resources: [
     { title: "Gene name errors are widespread in the scientific literature", kind: "Paper", note: "What manual data steps cost in errors rather than hours. Two pages.", url: "https://link.springer.com/article/10.1186/s13059-016-1044-7" },
     { title: "Zillow Group Q3 2021 results", kind: "Docs", note: "Why irreversible actions need routing by consequence, not just confidence.", url: "https://investors.zillowgroup.com/investors/news-and-events/news/news-details/2021/Zillow-Group-Reports-Third-Quarter-2021-Financial-Results--Shares-Plan-to-Wind-Down-Zillow-Offers-Operations/default.aspx" },
-    { title: "Google's Rules of Machine Learning", kind: "Docs", note: "Rule one is essentially 'try it without ML first' — sound operations advice generally.", url: "https://developers.google.com/machine-learning/guides/rules-of-ml" },
+    { title: "Google's Rules of Machine Learning", kind: "Docs", note: "Rule one is essentially 'try it without ML first': sound operations advice generally.", url: "https://developers.google.com/machine-learning/guides/rules-of-ml" },
   ],
 
   internalLinks: [
@@ -364,7 +364,7 @@ export const guide: Guide = {
   cta: {
     headline: "Back-office process eating hours?",
     body:
-      "Map it before automating it — sometimes that alone is the answer. We'll walk a process with you and say honestly whether AI belongs in it.",
+      "Map it before automating it: sometimes that alone is the answer. We'll walk a process with you and say honestly whether AI belongs in it.",
     label: "Walk a process with us",
     href: "/contact",
   },

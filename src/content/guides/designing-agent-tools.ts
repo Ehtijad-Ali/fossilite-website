@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "designing-agent-tools",
   seoTitle: "Designing Agent Tools: Schemas, Errors and Permissions",
   metaDescription:
-    "Most agent failures are tool design failures. How to write schemas, descriptions and error messages that make an agent reliable — with working code.",
+    "Most agent failures are tool design failures. How to write schemas, descriptions and error messages that make an agent reliable: with working code.",
   title: "Designing Agent Tools That Work",
   keywords: [
     "agent tool design",
@@ -22,7 +22,7 @@ export const guide: Guide = {
   readingTime: 13,
 
   intro: [
-    "When an agent behaves badly, the instinct is to rewrite the system prompt. It's almost always the wrong place to look. The model's decisions about which tool to call, and with what arguments, are driven overwhelmingly by the tool definitions — the names, the descriptions, the schemas, and the error messages that come back. Those are the interface, and the prompt is commentary on it.",
+    "When an agent behaves badly, the instinct is to rewrite the system prompt. It's almost always the wrong place to look. The model's decisions about which tool to call, and with what arguments, are driven overwhelmingly by the tool definitions: the names, the descriptions, the schemas, and the error messages that come back. Those are the interface, and the prompt is commentary on it.",
     "This is good news, because tool definitions are code. They can be tested, validated and versioned, in a way that a paragraph of prompt instruction can't. Moving a behaviour from the prompt into the schema converts a hope into a constraint.",
     "This guide covers how to design that surface: how granular a tool should be, how to write a description the model can act on, how to make schemas that reject bad calls before they execute, what an error message should say, and where permissions belong. It assumes you've built a basic agent: if not, start there.",
   ],
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "The description is a trigger condition, not a summary",
       explain:
-        "'Gets the current weather' tells the model what the tool does. 'Call this whenever the user asks about current conditions, temperature, or whether they need an umbrella' tells it when to reach for it — which is the decision it actually has to make.",
+        "'Gets the current weather' tells the model what the tool does. 'Call this whenever the user asks about current conditions, temperature, or whether they need an umbrella' tells it when to reach for it, which is the decision it actually has to make.",
       detail:
         "Recent models reach for tools more conservatively than their predecessors, so prescriptive descriptions matter more than they used to. This is measurable: adding trigger conditions reliably lifts should-call rate.",
     },
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "Every tool occupies context and adds an option to choose between. Past a certain count, accuracy drops across the whole set, not just the marginal tool.",
       detail:
-        "If you need a large library, tool search lets schemas load on demand rather than all up front — and it appends rather than swapping, which preserves the prompt cache.",
+        "If you need a large library, tool search lets schemas load on demand rather than all up front: and it appends rather than swapping, which preserves the prompt cache.",
     },
     {
       term: "Return shape matters as much as input shape",
@@ -98,7 +98,7 @@ export const guide: Guide = {
       language: "python",
       intro:
         "Same capability, very different call accuracy. The differences are all in text the model reads: description, field descriptions, and constrained types.",
-      code: `# WEAK — the model must guess when to call it and what the fields mean
+      code: `# WEAK: the model must guess when to call it and what the fields mean
 weak = {
     "name": "search",
     "description": "Searches records",
@@ -112,7 +112,7 @@ weak = {
     },
 }
 
-# STRONG — trigger condition, described fields, constrained values, strict mode
+# STRONG: trigger condition, described fields, constrained values, strict mode
 strong = {
     "name": "search_customer_records",
     "description": (
@@ -144,7 +144,7 @@ strong = {
     },
 }`,
       note:
-        "`strict: True` requires both `additionalProperties: False` and a complete `required` list. In exchange, the API guarantees the input validates before your function sees it — which removes a whole category of defensive code.",
+        "`strict: True` requires both `additionalProperties: False` and a complete `required` list. In exchange, the API guarantees the input validates before your function sees it, which removes a whole category of defensive code.",
     },
     {
       title: "Error messages the model can act on",
@@ -153,7 +153,7 @@ strong = {
         "The single highest-return change in most agent codebases. Compare the two failure paths: the first produces retry loops, the second produces corrections.",
       code: `from datetime import datetime
 
-# BAD — the model learns nothing and will try again identically
+# BAD: the model learns nothing and will try again identically
 def book_bad(date: str) -> tuple[str, bool]:
     try:
         datetime.strptime(date, "%Y-%m-%d")
@@ -161,7 +161,7 @@ def book_bad(date: str) -> tuple[str, bool]:
         return "Error", True
     return "Booked", False
 
-# GOOD — says what was wrong, what was expected, and what to do
+# GOOD: says what was wrong, what was expected, and what to do
 def book_good(date: str) -> tuple[str, bool]:
     try:
         parsed = datetime.strptime(date, "%Y-%m-%d")
@@ -181,7 +181,7 @@ def book_good(date: str) -> tuple[str, bool]:
 
     return f"Booked for {date}.", False`,
       note:
-        "Notice the second error doesn't just reject — it tells the model to ask the user. An error message is the right place to redirect the agent, because it arrives exactly when the decision is being made.",
+        "Notice the second error doesn't just reject. It tells the model to ask the user. An error message is the right place to redirect the agent, because it arrives exactly when the decision is being made.",
     },
     {
       title: "Permissions at the tool boundary",
@@ -215,7 +215,7 @@ def query_database(table: str, filters: dict, requesting_user_id: str) -> tuple[
     truncated = " (truncated)" if len(rows) == MAX_ROWS else ""
     return f"{len(rows)} rows{truncated}:\\n" + format_rows(rows), False`,
       note:
-        "The tenant filter is the important line. Because `requesting_user_id` comes from your session rather than from the model's arguments, no prompt injection can widen the query — the capability simply isn't exposed.",
+        "The tenant filter is the important line. Because `requesting_user_id` comes from your session rather than from the model's arguments, no prompt injection can widen the query, the capability simply isn't exposed.",
     },
     {
       title: "Returning a shape the model can use",
@@ -224,11 +224,11 @@ def query_database(table: str, filters: dict, requesting_user_id: str) -> tuple[
         "A tool that dumps raw API output fills the context with noise the model then has to attend across. Return what the task needs, and say when there's more.",
       code: `import json
 
-# BAD — 40KB of nested JSON, most of it irrelevant to any question asked
+# BAD: 40KB of nested JSON, most of it irrelevant to any question asked
 def get_order_bad(order_id: str) -> str:
     return json.dumps(api.fetch_order(order_id))   # every field, every nested object
 
-# GOOD — the fields that answer real questions, plus a pointer to the rest
+# GOOD: the fields that answer real questions, plus a pointer to the rest
 def get_order_good(order_id: str) -> tuple[str, bool]:
     order = api.fetch_order(order_id)
     if order is None:
@@ -302,11 +302,11 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
       kind: "documented",
       scenario: "Measuring what each stage of a pipeline is actually worth.",
       walkthrough:
-        "Anthropic benchmarked a retrieval pipeline by isolating one metric — how often the correct passage was missing from the top twenty results — then adding one component at a time and remeasuring after each.",
+        "Anthropic benchmarked a retrieval pipeline by isolating one metric (how often the correct passage was missing from the top twenty results) then adding one component at a time and remeasuring after each.",
       result:
         "Against a 5.7% baseline failure rate: added context per chunk cut failures 35%, keyword search took it to 49%, re-ranking to 67%. The method transfers directly to tool design: change one thing, measure against a fixed input set, and you learn which changes earn their cost. Changing three tool descriptions at once and observing 'it seems better' teaches you nothing.",
       source: {
-        label: "Anthropic (2024) — Introducing Contextual Retrieval",
+        label: "Anthropic (2024). Introducing Contextual Retrieval",
         url: "https://www.anthropic.com/news/contextual-retrieval",
       },
     },
@@ -336,7 +336,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     },
     {
       mistake: "Free-text strings where an enum belongs",
-      why: "An unconstrained string invites values your code doesn't handle — a status of 'in progress' when your system expects 'in_progress'. The call succeeds and the downstream logic breaks.",
+      why: "An unconstrained string invites values your code doesn't handle: a status of 'in progress' when your system expects 'in_progress'. The call succeeds and the downstream logic breaks.",
       fix: "Use `enum` for every field with a known value set, and turn on strict mode so violations are rejected before execution.",
     },
     {
@@ -346,7 +346,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     },
     {
       mistake: "Uninformative error strings",
-      why: "The error goes into the prompt. 'Failed' gives the model nothing to change, so its most reasonable next action is to try again identically — repeatedly.",
+      why: "The error goes into the prompt. 'Failed' gives the model nothing to change, so its most reasonable next action is to try again identically: repeatedly.",
       fix: "State the problem, the expectation, and the corrective action. Write it for the model, not for your logs.",
     },
     {
@@ -378,7 +378,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     "One tool per action the model chooses between. Split anything with a mode switch.",
     "Make error messages actionable: what was wrong, what was expected, what to do next.",
     "Enforce allowlists, tenant scoping and result limits inside the function, never only in the prompt.",
-    "Inject identity and permissions from session context — never accept them as tool arguments.",
+    "Inject identity and permissions from session context: never accept them as tool arguments.",
     "Shape return values for the task and flag truncation explicitly.",
     "Log every call with tool, arguments, result size and duration. Tool-level telemetry is where agent performance problems become visible.",
     "Test each tool in isolation against malformed and adversarial inputs before wiring it to an agent.",
@@ -389,7 +389,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     "Read your tool descriptions as if you were a competent new colleague with no context. Anywhere you'd have to ask a clarifying question is where the model will guess.",
     "Log the character length of every tool return. The distribution usually contains one tool that's quietly consuming most of your context budget.",
     "When the model calls a tool with a wrong argument, fix the field description before touching the system prompt. The model is usually doing its best with a vague schema.",
-    "Give related tools cross-references in their return values — 'for full detail, call X'. A pointer delivered at the moment of relevance beats a relationship described up front.",
+    "Give related tools cross-references in their return values: 'for full detail, call X'. A pointer delivered at the moment of relevance beats a relationship described up front.",
     "Name tools with a verb and an object: `search_customer_records`, not `customers`. The name is read as an instruction, and a bare noun doesn't say what will happen.",
   ],
 
@@ -399,7 +399,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     "Finance and procurement workflows, where per-action rate limits and spend ceilings belong in the tool function.",
     "Reducing operating cost: trimming return shapes and fixing error messages typically cuts steps per task noticeably, and steps are the bill.",
     "Compliance and audit: per-tool logging gives you a defensible record of what an automated system did and on whose behalf.",
-    "Vendor evaluation — asking an agent platform how tool permissions and error handling work separates serious products from demos.",
+    "Vendor evaluation: asking an agent platform how tool permissions and error handling work separates serious products from demos.",
   ],
 
   exercises: [
@@ -461,11 +461,11 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     },
     {
       q: "Should I use one flexible tool or several specific ones?",
-      a: "Several specific ones, in almost every case. The test is whether you'd want to approve, log or rate-limit the variants differently — if so, they must be separate tools, because the harness only sees the tool name.",
+      a: "Several specific ones, in almost every case. The test is whether you'd want to approve, log or rate-limit the variants differently. If so, they must be separate tools, because the harness only sees the tool name.",
     },
     {
       q: "What is strict tool use and should I turn it on?",
-      a: "It guarantees the model's arguments validate against your schema before execution. Yes, turn it on — it requires `additionalProperties: false` and a complete `required` list, and removes a whole class of defensive parsing.",
+      a: "It guarantees the model's arguments validate against your schema before execution. Yes, turn it on. It requires `additionalProperties: false` and a complete `required` list, and removes a whole class of defensive parsing.",
     },
     {
       q: "How many tools is too many?",
@@ -477,7 +477,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
     },
     {
       q: "Should a tool ever return an exception?",
-      a: "Never let one propagate — a crash tells the model nothing and loses the run. Catch it and return a `tool_result` with `is_error: true` and a message specific enough to act on.",
+      a: "Never let one propagate. A crash tells the model nothing and loses the run. Catch it and return a `tool_result` with `is_error: true` and a message specific enough to act on.",
     },
     {
       q: "How do I stop a tool returning too much data?",
@@ -494,7 +494,7 @@ def get_order_good(order_id: str) -> tuple[str, bool]:
 
   resources: [
     { title: "Anthropic tool use documentation", kind: "Docs", note: "Authoritative reference for schemas, strict mode, tool_choice and parallel calls.", url: "https://docs.anthropic.com" },
-    { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "Includes the bash-versus-dedicated-tool tradeoff and when to promote an action to its own tool.", url: "https://www.anthropic.com/research/building-effective-agents" },
+    { title: "Building Effective Agents: Anthropic", kind: "Docs", note: "Includes the bash-versus-dedicated-tool tradeoff and when to promote an action to its own tool.", url: "https://www.anthropic.com/research/building-effective-agents" },
     { title: "OWASP Top 10 for LLM Applications", kind: "Docs", note: "Why tool permissions and identity injection are security controls rather than design preferences.", url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/" },
     { title: "JSON Schema documentation", kind: "Docs", note: "The reference for enums, formats and constraints. Worth reading properly once.", url: "https://json-schema.org/learn" },
   ],

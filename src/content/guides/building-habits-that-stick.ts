@@ -23,35 +23,35 @@ export const guide: Guide = {
 
   intro: [
     "You have probably heard that it takes 21 days to form a habit. It doesn't, and the origin of that number is worth knowing: it comes from a 1960s plastic surgeon's observation about how long patients took to adjust to an altered appearance, not from a study of habit formation at all. It spread because it's short, memorable and encouraging.",
-    "The actual research gives a less convenient answer, and a much more useful one. Habit formation takes considerably longer than three weeks, varies enormously between people and behaviours, and — critically — is not derailed by missing an occasional day. Each of those three findings contradicts something most people believe, and each one changes how you'd sensibly design an attempt.",
+    "The actual research gives a less convenient answer, and a much more useful one. Habit formation takes considerably longer than three weeks, varies enormously between people and behaviours, and (critically) is not derailed by missing an occasional day. Each of those three findings contradicts something most people believe, and each one changes how you'd sensibly design an attempt.",
     "This guide covers what habit formation actually involves, why most attempts fail in the first fortnight for structural rather than motivational reasons, and how to design a behaviour that has a realistic chance of becoming automatic.",
   ],
 
   whyItMatters: [
-    "Most of what determines your outcomes over years is not decisions but defaults. What you do without deciding — when you wake, whether you move, what you reach for when bored, whether you write anything — accumulates far more than any individual choice. Habits are the mechanism by which those defaults get set.",
-    "The practical argument is about willpower economics. Anything requiring a decision competes for a limited daily resource, and it loses that competition on bad days — which are exactly the days consistency matters. A behaviour that has become automatic costs almost nothing and survives bad days intact.",
-    "And the failure pattern is worth understanding because it's so consistent. People don't usually abandon a new habit because it was too hard. They abandon it because they missed two days, concluded they'd failed, and stopped — a belief that the evidence specifically contradicts.",
+    "Most of what determines your outcomes over years is not decisions but defaults. What you do without deciding (when you wake, whether you move, what you reach for when bored, whether you write anything) accumulates far more than any individual choice. Habits are the mechanism by which those defaults get set.",
+    "The practical argument is about willpower economics. Anything requiring a decision competes for a limited daily resource, and it loses that competition on bad days, which are exactly the days consistency matters. A behaviour that has become automatic costs almost nothing and survives bad days intact.",
+    "And the failure pattern is worth understanding because it's so consistent. People don't usually abandon a new habit because it was too hard. They abandon it because they missed two days, concluded they'd failed, and stopped: a belief that the evidence specifically contradicts.",
   ],
 
   coreConcepts: [
     {
       term: "A habit is a context-triggered automatic response",
       explain:
-        "A habit is a behaviour that fires in response to a situational cue without a deliberate decision. The defining property is automaticity — you do it before you've weighed whether to.",
+        "A habit is a behaviour that fires in response to a situational cue without a deliberate decision. The defining property is automaticity. You do it before you've weighed whether to.",
       detail:
         "This is why context matters so much. The habit isn't 'exercise'; it's 'put on running shoes when the alarm goes at 7'. The cue is part of the structure, not a detail.",
     },
     {
       term: "Repetition in a consistent context is the mechanism",
       explain:
-        "Automaticity develops through repeating a behaviour in the same context. Same trigger, same behaviour, repeatedly — that pairing is what builds the association.",
+        "Automaticity develops through repeating a behaviour in the same context. Same trigger, same behaviour, repeatedly. That pairing is what builds the association.",
       detail:
         "Varying the context resets much of the progress. A gym habit tied to 'after work' survives; one tied to 'when I have time' never becomes automatic because there's no stable cue to attach to.",
     },
     {
       term: "It takes longer than you've been told, and it varies enormously",
       explain:
-        "The popular figures — 21 days, 30 days — have no empirical basis. The measured reality is much longer on average and with an enormous spread between individuals and behaviours.",
+        "The popular figures (21 days, 30 days) have no empirical basis. The measured reality is much longer on average and with an enormous spread between individuals and behaviours.",
       detail:
         "The practical implication is that judging your attempt at three weeks is judging it far too early. Most people quit during the period when the behaviour is supposed to still feel effortful.",
     },
@@ -74,7 +74,7 @@ export const guide: Guide = {
       explain:
         "The initial version should be so small that doing it is easier than negotiating with yourself about it. The aim early on is consistency of the cue-behaviour pairing, not the size of the behaviour.",
       detail:
-        "Two minutes of the thing, done daily, beats thirty minutes done erratically — not because the two minutes achieve much, but because they're building the automatic response that later carries the thirty.",
+        "Two minutes of the thing, done daily, beats thirty minutes done erratically: not because the two minutes achieve much, but because they're building the automatic response that later carries the thirty.",
     },
     {
       term: "Anchor to something already automatic",
@@ -93,7 +93,7 @@ export const guide: Guide = {
     {
       term: "Identity carries you through the flat period",
       explain:
-        "Framing the behaviour as something you are rather than something you're attempting changes how a missed day is interpreted — as an exception rather than as evidence.",
+        "Framing the behaviour as something you are rather than something you're attempting changes how a missed day is interpreted: as an exception rather than as evidence.",
       detail:
         "'I'm someone who runs' absorbs a missed run. 'I'm trying to run more' is disproved by one, which is a fragile position to hold for months.",
     },
@@ -114,7 +114,7 @@ export const guide: Guide = {
     },
     {
       title: "Shrink it until skipping feels absurd",
-      body: "Reduce the behaviour until it takes two minutes or less. One page, one set, one paragraph. You are training the trigger, not achieving the outcome — the outcome comes later, from the trigger existing.",
+      body: "Reduce the behaviour until it takes two minutes or less. One page, one set, one paragraph. You are training the trigger, not achieving the outcome. The outcome comes later, from the trigger existing.",
       effort: "15 minutes",
       outcome: "A version so small that a bad day is not a reason to skip it.",
     },
@@ -126,7 +126,7 @@ export const guide: Guide = {
     },
     {
       title: "Track completion only, in one place",
-      body: "Mark whether it happened, nothing else. Not duration, not quality — those turn tracking into a performance review that gets abandoned. A calendar with crosses works as well as anything.",
+      body: "Mark whether it happened, nothing else. Not duration, not quality. Those turn tracking into a performance review that gets abandoned. A calendar with crosses works as well as anything.",
       effort: "10 seconds a day",
       outcome: "A visible record and, after two weeks, a real sense of your actual rate.",
     },
@@ -155,11 +155,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Measuring how long habit formation actually takes.",
       walkthrough:
-        "Lally and colleagues had 96 volunteers each choose an eating, drinking or activity behaviour to perform daily in the same context, and rate its automaticity every day for 12 weeks. Fitting curves to each individual's automaticity scores allowed them to estimate when the behaviour plateaued — the point at which it had become as automatic as it was going to get.",
+        "Lally and colleagues had 96 volunteers each choose an eating, drinking or activity behaviour to perform daily in the same context, and rate its automaticity every day for 12 weeks. Fitting curves to each individual's automaticity scores allowed them to estimate when the behaviour plateaued. The point at which it had become as automatic as it was going to get.",
       result:
-        "The median time to reach maximum automaticity was 66 days, with an enormous individual range from 18 days to a predicted 254. Two further details matter more than the headline number. The 66-day figure is a median among the roughly half of participants whose data fitted the model, and it was shortest for simple behaviours. And missing an occasional day did not meaningfully derail the trajectory — which directly contradicts the all-or-nothing belief that ends most attempts.",
+        "The median time to reach maximum automaticity was 66 days, with an enormous individual range from 18 days to a predicted 254. Two further details matter more than the headline number. The 66-day figure is a median among the roughly half of participants whose data fitted the model, and it was shortest for simple behaviours. And missing an occasional day did not meaningfully derail the trajectory, which directly contradicts the all-or-nothing belief that ends most attempts.",
       source: {
-        label: "Lally, van Jaarsveld, Potts & Wardle (2010) — How are habits formed: Modelling habit formation in the real world, European Journal of Social Psychology",
+        label: "Lally, van Jaarsveld, Potts & Wardle (2010). How are habits formed: Modelling habit formation in the real world, European Journal of Social Psychology",
         url: "https://onlinelibrary.wiley.com/doi/10.1002/ejsp.674",
       },
     },
@@ -167,9 +167,9 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The ambitious version that lasts nine days.",
       walkthrough:
-        "A pattern almost everyone has run at least once. You decide to start running, and because you're motivated on day one you commit to 5km every morning. It goes well for a week. Then a bad night's sleep, a busy morning, and the prospect of 5km is unreasonable — so you skip. Skipping once makes the next skip easier, and by day twelve the attempt is over. You conclude you lack discipline.",
+        "A pattern almost everyone has run at least once. You decide to start running, and because you're motivated on day one you commit to 5km every morning. It goes well for a week. Then a bad night's sleep, a busy morning, and the prospect of 5km is unreasonable: so you skip. Skipping once makes the next skip easier, and by day twelve the attempt is over. You conclude you lack discipline.",
       result:
-        "Nothing about discipline was tested. The behaviour was sized for your best day and then met an ordinary one. A version sized for your worst day — put on shoes, run to the end of the road — survives bad mornings, and it's the surviving that builds the automatic response. Ambition is the right instinct applied at the wrong stage.",
+        "Nothing about discipline was tested. The behaviour was sized for your best day and then met an ordinary one. A version sized for your worst day (put on shoes, run to the end of the road) survives bad mornings, and it's the surviving that builds the automatic response. Ambition is the right instinct applied at the wrong stage.",
     },
     {
       kind: "illustration",
@@ -177,7 +177,7 @@ export const guide: Guide = {
       walkthrough:
         "You decide to practise an instrument 'daily'. Some days you remember in the morning, some days at eleven at night, some days not at all. Each time you have to notice that it hasn't happened yet and then decide to do it. That's not a habit. It's a recurring decision, and it competes against everything else in the day.",
       result:
-        "Attaching it to a fixed existing routine — after dinner, before the first meeting, immediately after making coffee — supplies the trigger that automaticity needs somewhere to attach to. The behaviour hasn't changed; the reason it now happens is that you're no longer required to remember it.",
+        "Attaching it to a fixed existing routine (after dinner, before the first meeting, immediately after making coffee) supplies the trigger that automaticity needs somewhere to attach to. The behaviour hasn't changed; the reason it now happens is that you're no longer required to remember it.",
     },
   ],
 
@@ -215,7 +215,7 @@ export const guide: Guide = {
     {
       mistake: "Tracking too much",
       why: "Elaborate tracking becomes a second habit that also needs establishing, and it turns the record into a performance evaluation you'll eventually avoid looking at.",
-      fix: "Track completion only — did it happen. One mark, no metrics.",
+      fix: "Track completion only: did it happen. One mark, no metrics.",
     },
   ],
 
@@ -224,7 +224,7 @@ export const guide: Guide = {
     "Size the initial version for your worst day, not your best one.",
     "Attach it to something already automatic rather than to a time you have to remember.",
     "Remove every step you can between the cue and the action, in advance.",
-    "Keep the context identical. Same time, same place, same trigger — variation slows automaticity considerably.",
+    "Keep the context identical. Same time, same place, same trigger: variation slows automaticity considerably.",
     "Track completion only, visibly, in one place.",
     "Write your recovery rule before your first miss, not after it.",
     "Expect months, and specifically expect the middle period where it still requires effort.",
@@ -233,7 +233,7 @@ export const guide: Guide = {
 
   proTips: [
     "Never miss twice. One miss is noise; two in a row is the beginning of a new pattern. This single rule protects more attempts than any amount of motivation.",
-    "When you're going to miss, do the absurdly small version instead — one push-up, one sentence, one page. It maintains the cue-behaviour pairing, which is the thing you're actually building.",
+    "When you're going to miss, do the absurdly small version instead, one push-up, one sentence, one page. It maintains the cue-behaviour pairing, which is the thing you're actually building.",
     "Design the environment the night before. Decisions made in advance, when you're calm, consistently outperform decisions made in the moment, when you're not.",
     "If you keep failing at the same habit, shrink it rather than trying harder. Repeated failure at a given size is information about the size, not about you.",
     "Pair a new habit you don't enjoy with something you do: a specific podcast only during the walk, say. The pairing supplies motivation the behaviour doesn't have yet.",
@@ -241,7 +241,7 @@ export const guide: Guide = {
   ],
 
   businessApplications: [
-    "Process adoption: new team practices fail for the same reasons personal habits do — no fixed trigger, too large a first version, and abandonment after the first bad week.",
+    "Process adoption: new team practices fail for the same reasons personal habits do: no fixed trigger, too large a first version, and abandonment after the first bad week.",
     "Rituals that stick: attaching a practice to an existing fixed point, like a standing meeting or a deploy, rather than to intention.",
     "Documentation and reporting habits, which survive only when they're small, triggered, and low-friction.",
     "Sales and outreach consistency, where a small daily minimum outperforms sporadic intensive pushes on almost any measure.",
@@ -250,10 +250,10 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Health behaviours — movement, sleep timing, water, medication — where consistency matters far more than intensity.",
+    "Health behaviours (movement, sleep timing, water, medication) where consistency matters far more than intensity.",
     "Creative practice, where a small daily minimum reliably outproduces waiting for the right conditions.",
     "Learning anything, since spaced practice only works if the practice actually recurs, which is a habit problem.",
-    "Reducing unwanted behaviours by adding friction rather than exercising restraint — the same mechanism in reverse.",
+    "Reducing unwanted behaviours by adding friction rather than exercising restraint, the same mechanism in reverse.",
     "Relationships and household routines, which benefit from fixed triggers as much as anything else does.",
   ],
 
@@ -261,7 +261,7 @@ export const guide: Guide = {
     {
       title: "The one-sentence design",
       brief:
-        "Write your habit as 'after [existing routine], I will [specific action] in [specific place]'. If you can't, it's a goal — break it down until you can.",
+        "Write your habit as 'after [existing routine], I will [specific action] in [specific place]'. If you can't, it's a goal: break it down until you can.",
       success: "A sentence with no ambiguity about when, what or where.",
       time: "30 minutes",
     },
@@ -289,7 +289,7 @@ export const guide: Guide = {
     {
       title: "Sixty days of one mark",
       brief:
-        "Track a single habit's completion — one mark, nothing else — for sixty days. Note when, if at all, it stopped requiring a decision.",
+        "Track a single habit's completion (one mark, nothing else) for sixty days. Note when, if at all, it stopped requiring a decision.",
       success: "Sixty days of data and an honest read on your own timeline.",
       time: "10 seconds a day",
     },
@@ -301,7 +301,7 @@ export const guide: Guide = {
     "The initial version is small enough for my worst day",
     "The cue is fixed and I don't have to remember it",
     "Friction between cue and action has been removed in advance",
-    "The context — time, place, trigger — stays identical",
+    "The context (time, place, trigger) stays identical",
     "I track completion only, visibly, in one place",
     "I wrote my recovery rule before the first miss",
     "I'm not judging the attempt at three weeks",
@@ -315,7 +315,7 @@ export const guide: Guide = {
     },
     {
       q: "Where did the 21-day figure come from?",
-      a: "From a plastic surgeon's mid-twentieth-century observation about how long patients took to adjust to an altered appearance — not from research on habit formation. It spread because it's short and encouraging, not because it's supported.",
+      a: "From a plastic surgeon's mid-twentieth-century observation about how long patients took to adjust to an altered appearance, not from research on habit formation. It spread because it's short and encouraging, not because it's supported.",
     },
     {
       q: "Does missing a day ruin my progress?",
@@ -323,7 +323,7 @@ export const guide: Guide = {
     },
     {
       q: "Should I use a streak app?",
-      a: "They help with visibility and can backfire badly, because a broken long streak often triggers abandonment — the sunk cost turns into a reason to quit. If you use one, decide in advance that breaking it means continuing tomorrow, not starting over.",
+      a: "They help with visibility and can backfire badly, because a broken long streak often triggers abandonment: the sunk cost turns into a reason to quit. If you use one, decide in advance that breaking it means continuing tomorrow, not starting over.",
     },
     {
       q: "How many habits can I build at once?",
@@ -335,22 +335,22 @@ export const guide: Guide = {
     },
     {
       q: "What if the habit still feels effortful after two months?",
-      a: "That's within the observed range and not a sign of failure. Check whether the context is consistent and whether the behaviour is simple enough — inconsistent cues and multi-step routines both extend the timeline substantially.",
+      a: "That's within the observed range and not a sign of failure. Check whether the context is consistent and whether the behaviour is simple enough: inconsistent cues and multi-step routines both extend the timeline substantially.",
     },
   ],
 
   tools: [
     { name: "A paper calendar", what: "One mark per day. Visible, zero friction, and immune to becoming a project in itself.", cost: "Free" },
     { name: "Streaks / Habitica / Loop", what: "Habit trackers, if a digital record helps. Choose one that tracks completion rather than encouraging elaborate metrics.", cost: "Freemium" },
-    { name: "Environment design", what: "Not an app. Laying clothes out, deleting an app, moving an object — the highest-leverage tool on this list.", cost: "Free" },
+    { name: "Environment design", what: "Not an app. Laying clothes out, deleting an app, moving an object, the highest-leverage tool on this list.", cost: "Free" },
     { name: "A calendar reminder", what: "For habits without a natural anchor routine, until a real cue establishes itself.", cost: "Free" },
   ],
 
   resources: [
     { title: "How are habits formed (Lally et al., 2010)", kind: "Paper", note: "The primary source for the 66-day figure and the finding that missed days don't derail progress.", url: "https://onlinelibrary.wiley.com/doi/10.1002/ejsp.674" },
-    { title: "Atomic Habits — James Clear", kind: "Book", note: "The most practical popular treatment. Strong on friction and environment design; treat individual anecdotes as illustration rather than evidence." },
-    { title: "Tiny Habits — BJ Fogg", kind: "Book", note: "Built around anchoring new behaviours to existing routines and starting absurdly small. Directly useful method." },
-    { title: "Good Habits, Bad Habits — Wendy Wood", kind: "Book", note: "From a researcher in the field. The most evidence-grounded of the popular books on the subject." },
+    { title: "Atomic Habits: James Clear", kind: "Book", note: "The most practical popular treatment. Strong on friction and environment design; treat individual anecdotes as illustration rather than evidence." },
+    { title: "Tiny Habits: BJ Fogg", kind: "Book", note: "Built around anchoring new behaviours to existing routines and starting absurdly small. Directly useful method." },
+    { title: "Good Habits, Bad Habits: Wendy Wood", kind: "Book", note: "From a researcher in the field. The most evidence-grounded of the popular books on the subject." },
   ],
 
   internalLinks: [

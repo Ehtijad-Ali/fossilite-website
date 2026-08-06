@@ -30,14 +30,14 @@ export const guide: Guide = {
   whyItMatters: [
     "Writing is now the primary interface of professional life. Decisions get made in documents, work gets assigned in messages, and your reputation with people who've never met you is built almost entirely from text. Someone who writes clearly appears more competent than someone equally capable who doesn't, and that gap is neither fair nor going away.",
     "The compounding cost of unclear writing is enormous and mostly invisible. A confusing message generates three clarifying replies. An ambiguous spec produces the wrong feature. A rambling update means the decision doesn't get made this week. Nobody logs these costs, which is why they persist.",
-    "There's also a selfish argument. Writing something down is the most reliable way to discover that you don't understand it. The discipline of making a thought clear enough for a stranger regularly reveals that the thought was incoherent — which is unpleasant in the moment and extremely valuable overall.",
+    "There's also a selfish argument. Writing something down is the most reliable way to discover that you don't understand it. The discipline of making a thought clear enough for a stranger regularly reveals that the thought was incoherent, which is unpleasant in the moment and extremely valuable overall.",
   ],
 
   coreConcepts: [
     {
       term: "Decide what you want before you write",
       explain:
-        "Every piece of practical writing has a purpose: a decision, an action, an understanding. If you can't state it in one sentence before you begin, the writing will wander until you find it — usually in the final paragraph.",
+        "Every piece of practical writing has a purpose: a decision, an action, an understanding. If you can't state it in one sentence before you begin, the writing will wander until you find it: usually in the final paragraph.",
       detail:
         "Write the purpose at the top of your draft as a note to yourself, then delete it at the end. It keeps the whole piece pointed in one direction.",
     },
@@ -46,21 +46,21 @@ export const guide: Guide = {
       explain:
         "Readers of workplace writing are scanning, interrupted, and deciding within seconds whether to keep going. Leading with the point respects that. Building to it as a reveal does not.",
       detail:
-        "This inverts how most people were taught to write essays. The structure is: what I need, why, then the supporting detail — not background, then reasoning, then finally the ask.",
+        "This inverts how most people were taught to write essays. The structure is: what I need, why, then the supporting detail: not background, then reasoning, then finally the ask.",
     },
     {
       term: "One idea per sentence",
       explain:
         "Sentences carrying three clauses and two qualifications force the reader to hold everything in working memory while they parse. Splitting them costs nothing and removes the effort.",
       detail:
-        "Long sentences aren't inherently bad — long tangled ones are. A long sentence with a single clear shape reads fine; a short one with three embedded conditions doesn't.",
+        "Long sentences aren't inherently bad: long tangled ones are. A long sentence with a single clear shape reads fine; a short one with three embedded conditions doesn't.",
     },
     {
       term: "Concrete beats abstract",
       explain:
         "'We should improve our processes' means nothing. 'Approvals take nine days and should take two' means something. Abstraction hides both the problem and your reasoning.",
       detail:
-        "Whenever you write an abstract noun — efficiency, alignment, engagement, synergy — ask what specific thing you'd point at. Then write that instead.",
+        "Whenever you write an abstract noun (efficiency, alignment, engagement, synergy) ask what specific thing you'd point at. Then write that instead.",
     },
     {
       term: "Verbs carry the weight",
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Passive voice hides the actor",
       explain:
-        "'Mistakes were made' famously omits who made them. Passive constructions aren't wrong, but they systematically remove agency — which is sometimes accidental and sometimes why people reach for them.",
+        "'Mistakes were made' famously omits who made them. Passive constructions aren't wrong, but they systematically remove agency, which is sometimes accidental and sometimes why people reach for them.",
       detail:
         "Use passive deliberately when the actor doesn't matter. Use active when someone is responsible for something, especially if that someone is you.",
     },
@@ -132,7 +132,7 @@ export const guide: Guide = {
     },
     {
       title: "Get one honest reader",
-      body: "Find someone who will tell you where they got confused rather than telling you it's good. Ask a specific question: 'where did you have to read twice?' — not 'what do you think?'",
+      body: "Find someone who will tell you where they got confused rather than telling you it's good. Ask a specific question: 'where did you have to read twice?': not 'what do you think?'",
       effort: "Ongoing",
       outcome: "External feedback on comprehension rather than on style.",
     },
@@ -149,11 +149,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "George Orwell rewrites a passage of Ecclesiastes in modern administrative English.",
       walkthrough:
-        "In 'Politics and the English Language' (1946), Orwell takes a concrete biblical sentence — 'I returned, and saw under the sun, that the race is not to the swift, nor the battle to the strong… but time and chance happeneth to them all' — and translates it into the officialese of his day: 'Objective considerations of contemporary phenomena compel the conclusion that success or failure in competitive activities exhibits no tendency to be commensurate with innate capacity…'. The second version says the same thing. It contains no concrete image, no person, and almost no verbs doing work.",
+        "In 'Politics and the English Language' (1946), Orwell takes a concrete biblical sentence ('I returned, and saw under the sun, that the race is not to the swift, nor the battle to the strong… but time and chance happeneth to them all'), and translates it into the officialese of his day: 'Objective considerations of contemporary phenomena compel the conclusion that success or failure in competitive activities exhibits no tendency to be commensurate with innate capacity…'. The second version says the same thing. It contains no concrete image, no person, and almost no verbs doing work.",
       result:
         "Orwell's demonstration is still the clearest available argument that abstraction is not a neutral stylistic choice: it removes the reader's ability to picture, check or disagree with what you said. Every 'replace the abstract noun with the specific thing' instruction in this guide descends from that parody, and the essay is short, free, and worth reading in full.",
       source: {
-        label: "Orwell (1946) — Politics and the English Language",
+        label: "Orwell (1946). Politics and the English Language",
         url: "https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/",
       },
     },
@@ -161,7 +161,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The status update that generates six follow-up questions.",
       walkthrough:
-        "A shape you will recognise. Three paragraphs of context, a schedule slip mentioned partway through the fourth, and the actual request for a decision in the final line. Readers who stopped at paragraph two — which is most of them — never saw either the slip or the ask. The information was all present; none of it was found.",
+        "A shape you will recognise. Three paragraphs of context, a schedule slip mentioned partway through the fourth, and the actual request for a decision in the final line. Readers who stopped at paragraph two (which is most of them) never saw either the slip or the ask. The information was all present; none of it was found.",
       result:
         "Reordering alone fixes it: open with 'The launch moves to 14 March. I need a decision on scope by Friday to hold that date', then put the context underneath in labelled sections. Nothing is deleted. The document simply stops requiring the reader to earn the point.",
     },
@@ -171,7 +171,7 @@ export const guide: Guide = {
       walkthrough:
         "Written as continuous prose, in the order the author happened to learn things. Every reader arrives with one specific question and no way to locate its answer, so asking a human is the faster path. The content is fine. The document has no navigation.",
       result:
-        "Restructuring around the questions people actually ask — with those questions as headings — usually changes nothing about the content and everything about whether it gets used. If people keep asking you things that are documented, that is a finding about the document, not about them.",
+        "Restructuring around the questions people actually ask (with those questions as headings) usually changes nothing about the content and everything about whether it gets used. If people keep asking you things that are documented, that is a finding about the document, not about them.",
     },
   ],
 
@@ -194,7 +194,7 @@ export const guide: Guide = {
     {
       mistake: "Editing while drafting",
       why: "It produces slow, cautious, incoherent writing, because you're optimising sentences before you know whether they belong in the document at all.",
-      fix: "Draft fast without stopping, then edit as a separate session — ideally after a break. The two activities interfere with each other.",
+      fix: "Draft fast without stopping, then edit as a separate session: ideally after a break. The two activities interfere with each other.",
     },
     {
       mistake: "Sending a wall of unbroken text",
@@ -220,14 +220,14 @@ export const guide: Guide = {
     "Use numbers wherever you have them. 'Slow' is an opinion, 'nine days' is a fact, and facts end arguments that opinions extend.",
     "Prefer short common words. 'Use' rather than 'utilise', 'help' rather than 'facilitate'. Nobody has ever been impressed by 'utilise'.",
     "Read every draft aloud before sending. It's the cheapest and most reliable editing tool that exists.",
-    "Leave a gap between writing and editing — even ten minutes. You cannot see your own text properly while the intent is still fresh.",
+    "Leave a gap between writing and editing, even ten minutes. You cannot see your own text properly while the intent is still fresh.",
     "Write the summary last, once you know what the document actually says. Summaries written first describe what you intended to write.",
   ],
 
   proTips: [
     "Write the subject line or title after finishing. If you can't summarise the document in eight words, it probably contains two documents that should be separated.",
     "For anything important, draft it, sleep on it, and cut a third in the morning. The overnight version is reliably better, and the effect is strongest on writing you felt good about.",
-    "Use the 'so what?' test on every paragraph. If you can't answer why the reader needs it, delete it — this catches most of the material people are reluctant to cut.",
+    "Use the 'so what?' test on every paragraph. If you can't answer why the reader needs it, delete it. This catches most of the material people are reluctant to cut.",
     "When you're stuck, record yourself explaining it out loud and transcribe that. Spoken explanation is usually clearer than written attempts, because speech doesn't tempt you toward formality.",
     "Notice where you write 'as previously discussed' or 'per my last email'. It usually signals that the earlier message wasn't clear, and that's the thing worth fixing.",
     "Keep a file of writing you found unusually clear, from anyone. Reread it occasionally. Imitation of specific structure teaches faster than general advice about style.",
@@ -245,7 +245,7 @@ export const guide: Guide = {
   lifeApplications: [
     "Difficult personal messages: stating the point kindly and early is almost always better received than a long build-up, which reads as evasive however it was meant.",
     "Thinking through decisions: writing your reasoning down reliably exposes the parts you haven't actually thought through, which is uncomfortable and useful.",
-    "Formal correspondence — complaints, disputes, applications: a clear, specific, unemotional letter with dates and facts is markedly more effective than an angry one.",
+    "Formal correspondence. Complaints, disputes, applications: a clear, specific, unemotional letter with dates and facts is markedly more effective than an angry one.",
     "Teaching or explaining anything to anyone: the discipline of writing for the least-informed reader is the same discipline that makes a good explanation out loud.",
     "Keeping a record for yourself: notes written clearly enough for a stranger are the ones still comprehensible to you in two years.",
   ],
@@ -308,7 +308,7 @@ export const guide: Guide = {
     },
     {
       q: "Should I use AI to write for me?",
-      a: "It's useful for first drafts, restructuring and cutting length — the tasks where facing a blank page is the obstacle. It's a poor substitute for knowing what you want to say, which is where most bad writing actually originates.",
+      a: "It's useful for first drafts, restructuring and cutting length. The tasks where facing a blank page is the obstacle. It's a poor substitute for knowing what you want to say, which is where most bad writing actually originates.",
     },
     {
       q: "How do I write clearly about complex technical topics?",
@@ -320,10 +320,10 @@ export const guide: Guide = {
     },
     {
       q: "How do I get better if nobody gives me feedback?",
-      a: "Read your writing aloud, cut a third, and reread your own work a month later — distance makes flaws visible. Writing publicly for strangers accelerates this considerably, because strangers don't fill in your gaps.",
+      a: "Read your writing aloud, cut a third, and reread your own work a month later: distance makes flaws visible. Writing publicly for strangers accelerates this considerably, because strangers don't fill in your gaps.",
     },
     {
-      q: "What about tone — how formal should I be?",
+      q: "What about tone: how formal should I be?",
       a: "Match the reader and the stakes, but err toward how you'd actually speak to a respected colleague. Excessive formality is read as distance or evasion far more often than casualness is read as disrespect.",
     },
   ],
@@ -332,14 +332,14 @@ export const guide: Guide = {
     { name: "Hemingway Editor", what: "Flags long sentences, passive voice and complex phrasing. Blunt and useful as a diagnostic, not as an authority.", cost: "Freemium", url: "https://hemingwayapp.com" },
     { name: "Grammarly", what: "Catches mechanical errors and some wordiness. Ignore its style suggestions when they flatten your voice.", cost: "Freemium", url: "https://grammarly.com" },
     { name: "Text-to-speech (built into your OS)", what: "Having a document read to you catches awkward construction better than reading it yourself.", cost: "Free" },
-    { name: "iA Writer / Obsidian", what: "Distraction-free drafting. The value is behavioural — separating drafting from formatting.", cost: "Freemium" },
+    { name: "iA Writer / Obsidian", what: "Distraction-free drafting. The value is behavioural: separating drafting from formatting.", cost: "Freemium" },
   ],
 
   resources: [
-    { title: "On Writing Well — William Zinsser", kind: "Book", note: "The standard text on non-fiction clarity. The chapters on clutter and simplicity are worth the whole book." },
-    { title: "Politics and the English Language — George Orwell", kind: "Book", note: "A short essay, freely available, on how vague writing enables vague thinking. Still uncomfortably accurate." },
-    { title: "The Elements of Style — Strunk & White", kind: "Book", note: "Dated in places and dogmatic in others, but 'omit needless words' remains the most useful three-word instruction in writing." },
-    { title: "Style: Lessons in Clarity and Grace — Joseph Williams", kind: "Book", note: "The most rigorous of these. Explains why certain sentences feel clear, rather than just asserting rules." },
+    { title: "On Writing Well: William Zinsser", kind: "Book", note: "The standard text on non-fiction clarity. The chapters on clutter and simplicity are worth the whole book." },
+    { title: "Politics and the English Language: George Orwell", kind: "Book", note: "A short essay, freely available, on how vague writing enables vague thinking. Still uncomfortably accurate." },
+    { title: "The Elements of Style: Strunk & White", kind: "Book", note: "Dated in places and dogmatic in others, but 'omit needless words' remains the most useful three-word instruction in writing." },
+    { title: "Style: Lessons in Clarity and Grace: Joseph Williams", kind: "Book", note: "The most rigorous of these. Explains why certain sentences feel clear, rather than just asserting rules." },
   ],
 
   internalLinks: [

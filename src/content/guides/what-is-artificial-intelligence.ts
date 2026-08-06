@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "what-is-artificial-intelligence",
   seoTitle: "What Is Artificial Intelligence? A Straight Answer",
   metaDescription:
-    "What AI actually is, what it isn't, and how to tell a real capability from a marketing claim — without hype in either direction.",
+    "What AI actually is, what it isn't, and how to tell a real capability from a marketing claim: without hype in either direction.",
   title: "What Is Artificial Intelligence, Really?",
   keywords: [
     "what is artificial intelligence",
@@ -37,16 +37,16 @@ export const guide: Guide = {
     {
       term: "AI is a goal; machine learning is the current method",
       explain:
-        "Artificial intelligence names the ambition — machines doing things that seem to need intelligence. Machine learning is one approach to that ambition: rather than writing rules by hand, you let a system find patterns in examples.",
+        "Artificial intelligence names the ambition: machines doing things that seem to need intelligence. Machine learning is one approach to that ambition: rather than writing rules by hand, you let a system find patterns in examples.",
       detail:
-        "Earlier AI was largely hand-written rules — expert systems encoding what a specialist knew. That approach hit a wall on tasks nobody can articulate rules for, like recognising a face. Learning from examples solved that, which is why ML now dominates so thoroughly that the terms get used interchangeably.",
+        "Earlier AI was largely hand-written rules: expert systems encoding what a specialist knew. That approach hit a wall on tasks nobody can articulate rules for, like recognising a face. Learning from examples solved that, which is why ML now dominates so thoroughly that the terms get used interchangeably.",
     },
     {
       term: "Narrow AI is what exists; general AI does not",
       explain:
         "Every system deployed today is narrow: it does one class of task, defined at training time. A model that plays chess superbly cannot make a cup of tea, and cannot learn to without being rebuilt.",
       detail:
-        "General AI — a system that transfers competence across arbitrary domains the way a person does — remains a research goal, not a product. Treat any claim that a shipping product has it as a claim about marketing, not engineering.",
+        "General AI (a system that transfers competence across arbitrary domains the way a person does) remains a research goal, not a product. Treat any claim that a shipping product has it as a claim about marketing, not engineering.",
     },
     {
       term: "The definition keeps moving",
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Generative AI is one branch, not the whole field",
       explain:
-        "Systems that produce text, images, audio or code are generative. They dominate current attention, but a great deal of deployed AI is discriminative — classifying, ranking, detecting, forecasting — and often more commercially valuable.",
+        "Systems that produce text, images, audio or code are generative. They dominate current attention, but a great deal of deployed AI is discriminative (classifying, ranking, detecting, forecasting), and often more commercially valuable.",
       detail:
         "Fraud detection, demand forecasting and quality inspection generate no headlines and considerable profit. Don't let the generative wave push you toward a chatbot when your actual problem is a classifier.",
     },
@@ -101,19 +101,19 @@ export const guide: Guide = {
     },
     {
       title: "Use several systems deliberately",
-      body: "Spend an hour each with a language model, an image generator and a classifier-style tool. Not to get work done — to map where each becomes unreliable. Push each one until it fails and note what the failure looked like.",
+      body: "Spend an hour each with a language model, an image generator and a classifier-style tool. Not to get work done: to map where each becomes unreliable. Push each one until it fails and note what the failure looked like.",
       effort: "3–4 hours",
       outcome: "First-hand evidence of how differently these systems fail.",
     },
     {
       title: "Understand learning from examples",
-      body: "Work through a visual demonstration of a model learning — TensorFlow Playground, or a teachable-machine style tool where you supply your own examples. Deliberately give it biased or insufficient examples and observe the result.",
+      body: "Work through a visual demonstration of a model learning: TensorFlow Playground, or a teachable-machine style tool where you supply your own examples. Deliberately give it biased or insufficient examples and observe the result.",
       effort: "2–3 hours",
       outcome: "You've seen training data quality determine model behaviour directly.",
     },
     {
       title: "Study two real failures properly",
-      body: "Read the documented cases below in full rather than in summary. Both are instructive precisely because nothing malfunctioned — the systems did exactly what they were built to do.",
+      body: "Read the documented cases below in full rather than in summary. Both are instructive precisely because nothing malfunctioned. The systems did exactly what they were built to do.",
       effort: "2 hours",
       outcome: "You can explain a real AI failure without using the word 'glitch'.",
     },
@@ -125,7 +125,7 @@ export const guide: Guide = {
     },
     {
       title: "Find one real use in your own work",
-      body: "Identify a task you do that is repetitive, language-heavy or pattern-based, and tolerates review. Try it. The point is calibration — you'll learn more from one honest attempt than from any amount of reading about capability.",
+      body: "Identify a task you do that is repetitive, language-heavy or pattern-based, and tolerates review. Try it. The point is calibration. You'll learn more from one honest attempt than from any amount of reading about capability.",
       effort: "5–10 hours",
       outcome: "A grounded personal view of where the technology helps you specifically.",
     },
@@ -140,7 +140,7 @@ export const guide: Guide = {
       result:
         "The project was scrapped after the company concluded it couldn't reliably make the model gender-neutral. This is the clearest possible illustration of what these systems do and don't do: it found a genuine statistical pattern in real data, faithfully. It had no capacity to notice that the pattern was a record of human preference rather than of merit, because noticing that is not the kind of thing it does.",
       source: {
-        label: "Dastin, Reuters (10 October 2018) — Amazon scraps secret AI recruiting tool that showed bias against women",
+        label: "Dastin, Reuters (10 October 2018). Amazon scraps secret AI recruiting tool that showed bias against women",
         url: "https://www.euronews.com/business/2018/10/10/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women",
       },
     },
@@ -162,7 +162,7 @@ export const guide: Guide = {
       walkthrough:
         "A pattern worth recognising before you sign anything. A vendor demonstrates a system on inputs they selected. It performs impressively. You deploy it against your own traffic, which includes malformed records, edge cases, an unusual regional format, and a category nobody mentioned. Performance is visibly worse, and nobody can say why.",
       result:
-        "Nothing dishonest necessarily happened — the demo showed genuine capability on the inputs it was given. The correct response is not scepticism about AI in general but a specific request: run it on a sample of our real data, including the awkward records, and let us see the errors. A vendor confident in their system will agree.",
+        "Nothing dishonest necessarily happened. The demo showed genuine capability on the inputs it was given. The correct response is not scepticism about AI in general but a specific request: run it on a sample of our real data, including the awkward records, and let us see the errors. A vendor confident in their system will agree.",
     },
   ],
 
@@ -175,7 +175,7 @@ export const guide: Guide = {
     {
       mistake: "Assuming a confident output is a correct one",
       why: "These systems produce output with the same fluency regardless of whether they have relevant knowledge. Confidence is a property of the format, not evidence about accuracy.",
-      fix: "Verify anything consequential, and design systems so that verification is possible — cited sources, quoted evidence, human review at the decision point.",
+      fix: "Verify anything consequential, and design systems so that verification is possible: cited sources, quoted evidence, human review at the decision point.",
     },
     {
       mistake: "Believing the system understands your business",
@@ -184,7 +184,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Judging a system by its best output",
-      why: "Everyone shows the good one. The distribution of outputs — and specifically the worst 5% — determines whether a system is usable in production.",
+      why: "Everyone shows the good one. The distribution of outputs (and specifically the worst 5%) determines whether a system is usable in production.",
       fix: "Evaluate on a fixed set of realistic inputs including deliberately awkward ones, and look at the failures rather than the successes.",
     },
     {
@@ -211,7 +211,7 @@ export const guide: Guide = {
   ],
 
   proTips: [
-    "Ask a vendor what their system does when it's uncertain. The quality of that answer tells you more about engineering maturity than any capability claim — teams who've run something in production have thought hard about it.",
+    "Ask a vendor what their system does when it's uncertain. The quality of that answer tells you more about engineering maturity than any capability claim. Teams who've run something in production have thought hard about it.",
     "When evaluating any AI claim, mentally substitute the specific mechanism for the word AI. 'Our AI understands your customers' becomes 'our statistical model finds correlations in your customer data', which is both accurate and easier to assess.",
     "Look at who bears the cost of an error. Systems where the vendor bears it are engineered very differently from systems where you or your customer does.",
     "Test any tool on a subject you know deeply. You cannot evaluate accuracy in a domain where you can't tell right from plausible, and everyone overestimates a system in areas they can't check.",
@@ -219,7 +219,7 @@ export const guide: Guide = {
   ],
 
   businessApplications: [
-    "Classification at volume: routing tickets, categorising documents, flagging transactions — mature, measurable, and usually the highest-return first project.",
+    "Classification at volume: routing tickets, categorising documents, flagging transactions: mature, measurable, and usually the highest-return first project.",
     "Extraction: pulling structured data out of unstructured documents, where the benchmark is the person currently doing it manually.",
     "Forecasting: demand, staffing, inventory. Often the clearest ROI because the cost of current error is already visible in spreadsheets.",
     "Drafting and summarising: first-pass content, meeting notes, report generation, always under human review before anything leaves the building.",
@@ -232,7 +232,7 @@ export const guide: Guide = {
     "Reading news about AI with calibration: asking what was measured and on what, rather than accepting either the breathless or the dismissive framing.",
     "Understanding decisions made about you. If an automated system declines something, knowing that it learned from historical patterns tells you what to ask when you appeal.",
     "Deciding what to learn. Understanding that these systems handle pattern-matching well and judgement, accountability and novel situations poorly is useful career information.",
-    "Using the tools well yourself — which mostly means knowing which half of a problem to hand over and which half to keep.",
+    "Using the tools well yourself, which mostly means knowing which half of a problem to hand over and which half to keep.",
   ],
 
   exercises: [
@@ -286,7 +286,7 @@ export const guide: Guide = {
     },
     {
       q: "What's the difference between AI, machine learning and deep learning?",
-      a: "AI is the broad goal. Machine learning is the dominant approach — learning patterns from examples rather than following hand-written rules. Deep learning is a subset of machine learning using multi-layer neural networks.",
+      a: "AI is the broad goal. Machine learning is the dominant approach: learning patterns from examples rather than following hand-written rules. Deep learning is a subset of machine learning using multi-layer neural networks.",
     },
     {
       q: "Will AI take my job?",
@@ -302,7 +302,7 @@ export const guide: Guide = {
     },
     {
       q: "How do I know if a company's AI claim is real?",
-      a: "Ask what it was trained on, how it was evaluated, what it does when uncertain, and whether you can run it on your own data. Vague answers to specific questions are the signal — not the technology itself.",
+      a: "Ask what it was trained on, how it was evaluated, what it does when uncertain, and whether you can run it on your own data. Vague answers to specific questions are the signal, not the technology itself.",
     },
   ],
 
@@ -310,13 +310,13 @@ export const guide: Guide = {
     { name: "ChatGPT / Claude / Gemini", what: "General-purpose language models. The fastest way to develop calibrated intuition: use several, they fail differently.", cost: "Freemium" },
     { name: "Teachable Machine", what: "Train a classifier in a browser with your own examples. The quickest demonstration of how training data determines behaviour.", cost: "Free", url: "https://teachablemachine.withgoogle.com" },
     { name: "TensorFlow Playground", what: "Watch a small neural network learn in real time. Good intuition per minute spent.", cost: "Free", url: "https://playground.tensorflow.org" },
-    { name: "Hugging Face", what: "Thousands of open models with documentation on what each was trained on — useful for seeing the range beyond chatbots.", cost: "Freemium", url: "https://huggingface.co" },
+    { name: "Hugging Face", what: "Thousands of open models with documentation on what each was trained on: useful for seeing the range beyond chatbots.", cost: "Freemium", url: "https://huggingface.co" },
   ],
 
   resources: [
     { title: "Elements of AI", kind: "Course", note: "A free, well-made introduction aimed at non-specialists. Start here if this guide left you wanting more.", url: "https://www.elementsofai.com" },
     { title: "Google's Rules of Machine Learning", kind: "Docs", note: "Engineering rules from running ML at scale. Short, practical, and quietly deflating of a lot of hype.", url: "https://developers.google.com/machine-learning/guides/rules-of-ml" },
-    { title: "AI Snake Oil — Narayanan & Kapoor", kind: "Book", note: "Careful, evidence-led separation of what works from what's being sold. A useful counterweight in both directions." },
+    { title: "AI Snake Oil: Narayanan & Kapoor", kind: "Book", note: "Careful, evidence-led separation of what works from what's being sold. A useful counterweight in both directions." },
     { title: "Simon Willison's blog", kind: "Newsletter", note: "Hands-on, sober writing about what these tools actually do day to day.", url: "https://simonwillison.net" },
   ],
 

@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "finding-your-first-clients",
   seoTitle: "Finding Your First Clients: A Practical Playbook",
   metaDescription:
-    "How to get paying clients when you have no portfolio, no network and no reputation — the channels that work early and the ones that waste months.",
+    "How to get paying clients when you have no portfolio, no network and no reputation: the channels that work early and the ones that waste months.",
   title: "Finding Your First Clients",
   keywords: [
     "how to find clients",
@@ -23,7 +23,7 @@ export const guide: Guide = {
 
   intro: [
     "The advice usually given to people looking for their first clients is to build an audience, post consistently, and wait for inbound. That advice comes from people who already have an audience, and it describes what works at their stage rather than yours. Following it early means spending six months producing content for nobody while your savings run down.",
-    "What works when you're starting is unglamorous and direct: identify a specific problem, identify specific people who have it, and contact them individually with something useful. It doesn't scale, which is exactly why it works — nobody else is doing it, because everyone is waiting for the audience.",
+    "What works when you're starting is unglamorous and direct: identify a specific problem, identify specific people who have it, and contact them individually with something useful. It doesn't scale, which is exactly why it works. Nobody else is doing it, because everyone is waiting for the audience.",
     "This guide covers how to choose a narrow enough offer that people can recognise themselves in it, where the first clients actually come from, what to say when you have nothing to show, and how to convert early work into a position that stops requiring cold outreach.",
   ],
 
@@ -46,7 +46,7 @@ export const guide: Guide = {
       explain:
         "Buyers don't want a service; they want a result. 'Cut your invoice processing from three days to three hours' is a purchase decision. 'Automation consulting' is a category.",
       detail:
-        "This also determines who you can reach. Outcomes have owners — someone whose job is affected by that specific problem — and that person is far easier to identify and contact than 'a business'.",
+        "This also determines who you can reach. Outcomes have owners (someone whose job is affected by that specific problem), and that person is far easier to identify and contact than 'a business'.",
     },
     {
       term: "Your existing network is the first channel",
@@ -58,7 +58,7 @@ export const guide: Guide = {
     {
       term: "Be useful before you're paid",
       explain:
-        "Doing something concretely helpful before asking for anything — a specific observation, a small fix, a useful analysis — converts a cold contact into a warm one faster than any amount of credentials.",
+        "Doing something concretely helpful before asking for anything (a specific observation, a small fix, a useful analysis) converts a cold contact into a warm one faster than any amount of credentials.",
       detail:
         "It must be specific to them. A generic template attached to a mail merge is transparently generic and performs worse than nothing, because it signals volume rather than attention.",
     },
@@ -107,13 +107,13 @@ export const guide: Guide = {
     },
     {
       title: "Mine your existing network first",
-      body: "Contact everyone you already know who works anywhere adjacent. Don't pitch — describe the specific problem you solve and ask whether they know anyone dealing with it. Aim for thirty conversations.",
+      body: "Contact everyone you already know who works anywhere adjacent. Don't pitch: describe the specific problem you solve and ask whether they know anyone dealing with it. Aim for thirty conversations.",
       effort: "8–12 hours",
       outcome: "Several introductions, and a much sharper sense of how people describe the problem.",
     },
     {
       title: "Write outreach that leads with something useful",
-      body: "For each person on your list, spend fifteen minutes finding something specific and helpful — an observation about their site, their process, their public output. Lead with that. Keep the message under 120 words.",
+      body: "For each person on your list, spend fifteen minutes finding something specific and helpful: an observation about their site, their process, their public output. Lead with that. Keep the message under 120 words.",
       effort: "15 minutes per contact",
       outcome: "Messages that don't read as templates because they aren't.",
     },
@@ -137,7 +137,7 @@ export const guide: Guide = {
     },
     {
       title: "Only now, start publishing",
-      body: "With real client problems and real outcomes, you have something to write about that isn't generic. Content works at this stage because it's grounded — which is why it didn't work in month one.",
+      body: "With real client problems and real outcomes, you have something to write about that isn't generic. Content works at this stage because it's grounded, which is why it didn't work in month one.",
       effort: "2–4 hours weekly",
       outcome: "Inbound begins to supplement outreach rather than replace it prematurely.",
     },
@@ -150,9 +150,9 @@ export const guide: Guide = {
       walkthrough:
         "CB Insights has repeatedly compiled post-mortems written by failed startups: founders explaining, without investor-relations constraints, what happened. The original analysis covered 110+ post-mortems; a later study examined 431 failed venture-backed companies. Because most cite several causes, the percentages exceed 100.",
       result:
-        "In the original set, 42% cited no market need — the most common reason given. In the 2024 study, 43% were attributed to poor product-market fit, alongside 70% running out of capital. The relevance to finding clients is direct: 'I can't find anyone to buy this' and 'nobody needed this' are frequently the same finding arriving in different words. If fifty well-chosen prospects produce no interest, treat that as evidence about the offer rather than as a reason to send another fifty identical messages.",
+        "In the original set, 42% cited no market need, the most common reason given. In the 2024 study, 43% were attributed to poor product-market fit, alongside 70% running out of capital. The relevance to finding clients is direct: 'I can't find anyone to buy this' and 'nobody needed this' are frequently the same finding arriving in different words. If fifty well-chosen prospects produce no interest, treat that as evidence about the offer rather than as a reason to send another fifty identical messages.",
       source: {
-        label: "CB Insights — The Top Reasons Startups Fail (startup post-mortem analyses)",
+        label: "CB Insights: The Top Reasons Startups Fail (startup post-mortem analyses)",
         url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/",
       },
     },
@@ -160,9 +160,9 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "Six months of content and no clients.",
       walkthrough:
-        "A common and expensive trajectory. You're told to build an audience, so you post consistently for six months. Engagement grows slowly. Nobody enquires. The advice wasn't wrong in general — it describes what works for someone with an established position and a body of delivered work. Applied at month one, it's a strategy with a long lead time and no feedback loop, deployed exactly when you need short lead times and rapid feedback.",
+        "A common and expensive trajectory. You're told to build an audience, so you post consistently for six months. Engagement grows slowly. Nobody enquires. The advice wasn't wrong in general. It describes what works for someone with an established position and a body of delivered work. Applied at month one, it's a strategy with a long lead time and no feedback loop, deployed exactly when you need short lead times and rapid feedback.",
       result:
-        "The sequencing is what matters. Direct outreach produces conversations within days, and those conversations tell you how people actually describe their problem — which is the raw material that makes content work later. Publishing after you have delivered outcomes is a different activity from publishing instead of seeking them.",
+        "The sequencing is what matters. Direct outreach produces conversations within days, and those conversations tell you how people actually describe their problem, which is the raw material that makes content work later. Publishing after you have delivered outcomes is a different activity from publishing instead of seeking them.",
     },
     {
       kind: "illustration",
@@ -192,7 +192,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Sending templated outreach at volume",
-      why: "Recipients recognise templates immediately, and a generic message signals that you haven't looked at their situation — which is the only thing you have to offer when you lack reputation.",
+      why: "Recipients recognise templates immediately, and a generic message signals that you haven't looked at their situation, which is the only thing you have to offer when you lack reputation.",
       fix: "Fifteen minutes of research per message, leading with something specific to them. Ten researched messages outperform two hundred templated ones.",
     },
     {
@@ -207,7 +207,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Treating rejection as a verdict on you",
-      why: "Most non-responses are about timing, budget and priority — factors you have no visibility into. Reading them as judgement makes outreach unsustainable, and sustainability is the whole game.",
+      why: "Most non-responses are about timing, budget and priority: factors you have no visibility into. Reading them as judgement makes outreach unsustainable, and sustainability is the whole game.",
       fix: "Track response rates as data. A 5% response rate means twenty messages per conversation, which is a workload rather than a rejection.",
     },
   ],
@@ -220,7 +220,7 @@ export const guide: Guide = {
     "Build one piece of public proof that demonstrates understanding, since you can't show client work.",
     "Charge something from the first client, and state any introductory discount as time-limited.",
     "Ask for a testimonial and a specific referral at the end of every engagement, while goodwill is highest.",
-    "Track outreach numbers — sent, replied, converted — so you can distinguish a bad offer from a normal response rate.",
+    "Track outreach numbers (sent, replied, converted) so you can distinguish a bad offer from a normal response rate.",
     "Treat a lack of interest across fifty well-chosen prospects as information about the offer, not a prompt to send fifty more.",
   ],
 
@@ -228,7 +228,7 @@ export const guide: Guide = {
     "Ask every prospect, including the ones who decline, what they're currently doing about the problem. The answers are the most valuable market research you'll ever get, and declining prospects answer more candidly than buying ones.",
     "Send the useful thing with no ask attached at all, then follow up a week later. Separating the giving from the asking dramatically improves how the second message is received.",
     "Record the exact words prospects use for their problem and put those words in your own description. Your professional vocabulary is almost never the buyer's.",
-    "Ask satisfied clients for the introduction rather than the referral — 'would you be willing to introduce me to X?' is a smaller ask than 'do you know anyone?' and converts far better.",
+    "Ask satisfied clients for the introduction rather than the referral: 'would you be willing to introduce me to X?' is a smaller ask than 'do you know anyone?' and converts far better.",
     "Keep a simple record of every conversation, including the ones that went nowhere. A surprising number of 'not now' responses become 'now' within a year, and nobody follows up.",
     "If you can't find fifty specific people who have the problem, that's a finding about the market rather than a research failure. Difficulty locating your customers now predicts difficulty selling to them later.",
   ],
@@ -243,7 +243,7 @@ export const guide: Guide = {
   ],
 
   lifeApplications: [
-    "Job searching, which is the same problem — narrow positioning, direct contact with people rather than portals, and being useful before asking.",
+    "Job searching, which is the same problem: narrow positioning, direct contact with people rather than portals, and being useful before asking.",
     "Building any professional network, where asking who someone knows is consistently more effective than asking for something directly.",
     "Getting comfortable with rejection as data rather than verdict, which transfers well beyond commercial contexts.",
     "Asking for help generally: specific, small, answerable requests get responses where vague open-ended ones don't.",
@@ -324,7 +324,7 @@ export const guide: Guide = {
     },
     {
       q: "What response rate should I expect?",
-      a: "It varies enormously by market and message quality, which is why the useful thing is tracking your own numbers rather than benchmarking. Establish your baseline, then improve it — a doubled response rate halves the work per client.",
+      a: "It varies enormously by market and message quality, which is why the useful thing is tracking your own numbers rather than benchmarking. Establish your baseline, then improve it: a doubled response rate halves the work per client.",
     },
     {
       q: "When should I raise my prices?",
@@ -341,9 +341,9 @@ export const guide: Guide = {
   ],
 
   resources: [
-    { title: "The Mom Test — Rob Fitzpatrick", kind: "Book", note: "Short and cheap. The best material on talking to prospects without extracting polite encouragement.", url: "https://www.momtestbook.com" },
-    { title: "Specializing — Philip Morgan", kind: "Book", note: "The most thorough argument for narrowing positioning, aimed specifically at independent practitioners." },
-    { title: "The Win Without Pitching Manifesto — Blair Enns", kind: "Book", note: "On refusing to compete on price and specifying instead of pitching. Bracing and short." },
+    { title: "The Mom Test: Rob Fitzpatrick", kind: "Book", note: "Short and cheap. The best material on talking to prospects without extracting polite encouragement.", url: "https://www.momtestbook.com" },
+    { title: "Specializing: Philip Morgan", kind: "Book", note: "The most thorough argument for narrowing positioning, aimed specifically at independent practitioners." },
+    { title: "The Win Without Pitching Manifesto: Blair Enns", kind: "Book", note: "On refusing to compete on price and specifying instead of pitching. Bracing and short." },
     { title: "CB Insights startup post-mortems", kind: "Docs", note: "Founders explaining what actually killed their companies. Useful calibration on whether the problem is the offer or the outreach.", url: "https://www.cbinsights.com/research/startup-failure-post-mortem/" },
   ],
 

@@ -24,13 +24,13 @@ export const guide: Guide = {
   intro: [
     "Almost everyone starts by pricing at what feels safe. You pick a number just low enough that nobody will laugh, quote it slightly apologetically, and then discover you've built a business that requires you to work permanently at capacity to earn an ordinary living.",
     "The core mistake isn't the number. It's the unit. Selling hours means selling a resource you cannot make more of, and it means every efficiency gain you achieve reduces your own income. Get faster, earn less. That's a structural problem that no amount of raising your rate fully solves.",
-    "This guide covers how to price against the value of the outcome rather than the cost of your time, how to gather the information that makes that possible, and what to actually say when a client asks for your rate. It's written for freelancers, consultants and small agencies — anyone selling expertise rather than a product.",
+    "This guide covers how to price against the value of the outcome rather than the cost of your time, how to gather the information that makes that possible, and what to actually say when a client asks for your rate. It's written for freelancers, consultants and small agencies: anyone selling expertise rather than a product.",
   ],
 
   whyItMatters: [
     "Pricing is the highest-leverage number in your business and the one most people spend the least time on. A 20% price increase, absorbed by clients who were going to hire you anyway, goes almost entirely to profit. There is no other single change with that return-to-effort ratio.",
     "Under-pricing also degrades the work itself, in ways that feel like personal failure rather than a pricing problem. Too-cheap clients demand more attention, take longer to decide, and treat the work as disposable. Meanwhile you take on too many projects to make the numbers work, and every one gets less of you than it needed.",
-    "There's a positioning effect too, which is uncomfortable but real. Price is one of the few quality signals available to a buyer who can't evaluate your work in advance. Being the cheapest option filters out the clients who assume — often correctly — that serious work costs serious money.",
+    "There's a positioning effect too, which is uncomfortable but real. Price is one of the few quality signals available to a buyer who can't evaluate your work in advance. Being the cheapest option filters out the clients who assume (often correctly) that serious work costs serious money.",
   ],
 
   coreConcepts: [
@@ -67,7 +67,7 @@ export const guide: Guide = {
       explain:
         "Calculate the rate you need: target income, plus tax, plus costs, plus non-billable time, divided by realistically billable hours. Most people are shocked by how high it is.",
       detail:
-        "The number people get wrong is the billable ratio. Sales, admin, proposals and the gap between projects are real working hours that no client pays for directly. Don't take a figure from an article — including this one. Track your own hours for a month, split them into billable and not, and use your actual ratio. Whatever it is, it will be well below 100%, and pricing as though it were 100% guarantees a shortfall.",
+        "The number people get wrong is the billable ratio. Sales, admin, proposals and the gap between projects are real working hours that no client pays for directly. Don't take a figure from an article: including this one. Track your own hours for a month, split them into billable and not, and use your actual ratio. Whatever it is, it will be well below 100%, and pricing as though it were 100% guarantees a shortfall.",
     },
     {
       term: "Scope is what you're actually negotiating",
@@ -142,11 +142,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Dan Ariely tests whether adding a worse option changes what people buy.",
       walkthrough:
-        "Ariely noticed a subscription offer from The Economist listing three options: web-only at $59, print-only at $125, and print-and-web at $125. The middle option looks pointless — it costs the same as the bundle and gives you less. He put the three options to 100 MIT students, then removed the apparently useless middle option and put the remaining two to another group.",
+        "Ariely noticed a subscription offer from The Economist listing three options: web-only at $59, print-only at $125, and print-and-web at $125. The middle option looks pointless. It costs the same as the bundle and gives you less. He put the three options to 100 MIT students, then removed the apparently useless middle option and put the remaining two to another group.",
       result:
-        "With all three options present, 84 of 100 chose the $125 bundle and 16 chose web-only; nobody chose print-only. With the middle option removed, the majority switched to the cheap web-only option and only 32 chose the bundle. The 'useless' option was doing work — it gave the bundle something to look good against. This is the evidence behind presenting scoped options rather than a single price. Treat it as a reason to test options on your own pricing rather than a law: it is one classroom experiment, with students, choosing hypothetically.",
+        "With all three options present, 84 of 100 chose the $125 bundle and 16 chose web-only; nobody chose print-only. With the middle option removed, the majority switched to the cheap web-only option and only 32 chose the bundle. The 'useless' option was doing work. It gave the bundle something to look good against. This is the evidence behind presenting scoped options rather than a single price. Treat it as a reason to test options on your own pricing rather than a law: it is one classroom experiment, with students, choosing hypothetically.",
       source: {
-        label: "Ariely, Predictably Irrational (2008) — The Economist subscription experiment",
+        label: "Ariely, Predictably Irrational (2008). The Economist subscription experiment",
         url: "https://www.forbes.com/sites/stephaniesarkis/2019/04/29/stop-being-swindled-by-the-decoy-effect/",
       },
     },
@@ -154,7 +154,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The proposal that makes price the only thing to compare.",
       walkthrough:
-        "A recognisable shape: a proposal opens with a list of deliverables — pages, revisions, file formats, hours. Every competing proposal lists roughly the same deliverables. The buyer now has three documents that differ on exactly one dimension, so they decide on that dimension. The work being compared may be very different in quality; the document gave no way to see it.",
+        "A recognisable shape: a proposal opens with a list of deliverables: pages, revisions, file formats, hours. Every competing proposal lists roughly the same deliverables. The buyer now has three documents that differ on exactly one dimension, so they decide on that dimension. The work being compared may be very different in quality; the document gave no way to see it.",
       result:
         "The corrective is structural rather than persuasive: lead with the client's problem in their own words and what it currently costs them, then present options, and put deliverables at the end as implementation detail. If the buyer can only compare deliverables, they will compare on price.",
     },
@@ -162,16 +162,16 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "Discovering your floor rate for the first time.",
       walkthrough:
-        "Take your target annual income, add the tax you'll owe on it, add business costs, add the weeks you won't be able to bill for — holiday, illness, sales, admin, the gap between projects. Divide by the hours you can realistically bill, which for most solo operators is somewhere near half of hours worked, not all of them.",
+        "Take your target annual income, add the tax you'll owe on it, add business costs, add the weeks you won't be able to bill for: holiday, illness, sales, admin, the gap between projects. Divide by the hours you can realistically bill, which for most solo operators is somewhere near half of hours worked, not all of them.",
       result:
-        "Most people doing this calculation honestly for the first time find their existing rate is at or below the number it produces — meaning the business has been subsidised by unpaid overtime. The value isn't the number itself; it's that a floor derived from arithmetic is much easier to hold in a negotiation than one derived from nerve.",
+        "Most people doing this calculation honestly for the first time find their existing rate is at or below the number it produces. Meaning the business has been subsidised by unpaid overtime. The value isn't the number itself; it's that a floor derived from arithmetic is much easier to hold in a negotiation than one derived from nerve.",
     },
   ],
 
   mistakes: [
     {
       mistake: "Quoting before understanding the problem",
-      why: "Without knowing what the outcome is worth, the only anchor available is your own time — so you price against your cost rather than their benefit, permanently.",
+      why: "Without knowing what the outcome is worth, the only anchor available is your own time: so you price against your cost rather than their benefit, permanently.",
       fix: "Never give a number in the first conversation unless you already know the value. 'I need to understand the problem properly before I can price it' is a professional answer, not an evasive one.",
     },
     {
@@ -221,22 +221,22 @@ export const guide: Guide = {
     "Ask 'what's this costing you now?' and then be silent. The client usually starts calculating out loud, and their number is far more persuasive to them than anything you'd have proposed.",
     "Include one option that's clearly larger than what they asked for. A meaningful minority take it, and it makes your intended option look moderate rather than expensive.",
     "When someone says 'that's more than we expected', don't move. Ask what they expected and what informed it. Frequently they're comparing against a different scope entirely.",
-    "Put a validity date on every quote — 'this pricing holds for 30 days'. It creates a natural deadline without pressure tactics.",
+    "Put a validity date on every quote: 'this pricing holds for 30 days'. It creates a natural deadline without pressure tactics.",
     "Track why you lose work, and separate 'lost on price' from every other reason. The only inference here that's safe is the extreme one: if you never lose on price, you are below what the market will bear. Where exactly your win rate should sit depends on your pipeline volume and margin, so derive it from your own numbers rather than a benchmark.",
     "Productise your most repeated service with a fixed name, scope and price. Named things with fixed prices are dramatically easier to sell than bespoke arrangements, for both sides.",
   ],
 
   businessApplications: [
-    "Agency and studio pricing: the same principles apply, with the added lever of team utilisation — under-pricing at agency scale compounds into structural unprofitability.",
+    "Agency and studio pricing: the same principles apply, with the added lever of team utilisation: under-pricing at agency scale compounds into structural unprofitability.",
     "Productised services: converting a repeated engagement into a fixed-scope, fixed-price offer that can be sold without a bespoke proposal each time.",
     "Retainers: pricing ongoing access and capacity rather than a fixed hour count, which aligns better with how advisory work is actually consumed.",
-    "SaaS and product pricing: value-based logic transfers directly — price against the outcome delivered per customer segment rather than against your cost to serve.",
+    "SaaS and product pricing: value-based logic transfers directly: price against the outcome delivered per customer segment rather than against your cost to serve.",
     "Internal budgeting and business cases: the value conversation is the same conversation you'd have to justify a project internally.",
     "Negotiating partnerships and contracts: scope-for-price trading rather than straight discounting works identically in any commercial negotiation.",
   ],
 
   lifeApplications: [
-    "Salary negotiation: the same structure applies — establish the value of what you deliver before discussing the number, and negotiate scope and conditions rather than only base pay.",
+    "Salary negotiation: the same structure applies: establish the value of what you deliver before discussing the number, and negotiate scope and conditions rather than only base pay.",
     "Valuing your own time outside work: knowing your real hourly floor makes decisions about DIY versus paying someone straightforward.",
     "Saying no: a clear pricing floor gives you an objective reason to decline that doesn't require a personal justification, which is much easier to say.",
     "Any negotiation at all: the habits of not filling silences, not over-explaining, and trading scope rather than conceding transfer completely.",
@@ -304,7 +304,7 @@ export const guide: Guide = {
     },
     {
       q: "Is value-based pricing possible when the value is hard to measure?",
-      a: "Often yes, indirectly — time saved, risk reduced, decisions unblocked, revenue protected. Where it can't be estimated, use fixed project pricing with tight scope rather than falling back to hourly.",
+      a: "Often yes, indirectly: time saved, risk reduced, decisions unblocked, revenue protected. Where it can't be estimated, use fixed project pricing with tight scope rather than falling back to hourly.",
     },
     {
       q: "How much should I raise prices by?",
@@ -316,7 +316,7 @@ export const guide: Guide = {
     },
     {
       q: "Should I put prices on my website?",
-      a: "Publish a starting price or a range if your work is reasonably standardised — it filters out mismatched enquiries before they consume your time. Keep bespoke work off the page, but avoid 'contact us' with no signal at all.",
+      a: "Publish a starting price or a range if your work is reasonably standardised. It filters out mismatched enquiries before they consume your time. Keep bespoke work off the page, but avoid 'contact us' with no signal at all.",
     },
     {
       q: "How do I raise prices with long-standing clients?",
@@ -332,9 +332,9 @@ export const guide: Guide = {
   ],
 
   resources: [
-    { title: "The Win Without Pitching Manifesto — Blair Enns", kind: "Book", note: "Short and bracing, on refusing to compete on price and specifying rather than pitching." },
-    { title: "Pricing Creativity — Blair Enns", kind: "Book", note: "The most thorough treatment of options-based pricing for expertise businesses." },
-    { title: "Value-Based Fees — Alan Weiss", kind: "Book", note: "Direct and occasionally abrasive, with useful specifics on the value conversation." },
+    { title: "The Win Without Pitching Manifesto: Blair Enns", kind: "Book", note: "Short and bracing, on refusing to compete on price and specifying rather than pitching." },
+    { title: "Pricing Creativity: Blair Enns", kind: "Book", note: "The most thorough treatment of options-based pricing for expertise businesses." },
+    { title: "Value-Based Fees: Alan Weiss", kind: "Book", note: "Direct and occasionally abrasive, with useful specifics on the value conversation." },
     { title: "Double Your Freelancing", kind: "Newsletter", note: "Practical, ongoing writing on positioning and pricing for solo operators." },
   ],
 

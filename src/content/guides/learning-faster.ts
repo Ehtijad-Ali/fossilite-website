@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "learning-faster",
   seoTitle: "How to Learn Faster: What the Research Actually Shows",
   metaDescription:
-    "Retrieval practice, spacing and why re-reading feels productive but isn't — evidence-based learning techniques and how to apply them to real skills.",
+    "Retrieval practice, spacing and why re-reading feels productive but isn't: evidence-based learning techniques and how to apply them to real skills.",
   title: "How to Learn Faster",
   keywords: [
     "how to learn faster",
@@ -24,13 +24,13 @@ export const guide: Guide = {
   intro: [
     "There is an uncomfortable finding at the centre of learning research, and once you know it you can't unsee it: the techniques that feel most productive are largely the least effective, and the techniques that work feel like failing.",
     "Re-reading a chapter is smooth. The words are familiar, comprehension feels effortless, and you finish confident you know the material. Closing the book and trying to reconstruct it from memory is uncomfortable, halting, and full of gaps. The first produces the feeling of learning. The second produces the learning.",
-    "This guide covers what the evidence supports, why the effective methods feel bad, and how to apply them to the things adults actually learn — a technical skill, a language, a domain you've just been made responsible for. It's short on motivation and long on method, because motivation isn't usually the binding constraint.",
+    "This guide covers what the evidence supports, why the effective methods feel bad, and how to apply them to the things adults actually learn. A technical skill, a language, a domain you've just been made responsible for. It's short on motivation and long on method, because motivation isn't usually the binding constraint.",
   ],
 
   whyItMatters: [
-    "Learning speed compounds in a way few other capabilities do. Every skill you acquire faster is time released for the next one, and over a career the difference between someone who learns efficiently and someone who studies hard using ineffective methods is enormous — not because of talent, but because one of them keeps most of what they cover.",
+    "Learning speed compounds in a way few other capabilities do. Every skill you acquire faster is time released for the next one, and over a career the difference between someone who learns efficiently and someone who studies hard using ineffective methods is enormous. Not because of talent, but because one of them keeps most of what they cover.",
     "It matters more now because the half-life of specific knowledge keeps shortening. Tools, frameworks and entire job functions change within a few years. The durable asset isn't what you currently know; it's how quickly you can become competent at the next thing.",
-    "There's also a straightforward waste argument. Most people were never taught how to learn and default to highlighting and re-reading — methods that consume hours and produce confidence rather than retention. Switching methods costs nothing and recovers a substantial share of that time.",
+    "There's also a straightforward waste argument. Most people were never taught how to learn and default to highlighting and re-reading: methods that consume hours and produce confidence rather than retention. Switching methods costs nothing and recovers a substantial share of that time.",
   ],
 
   coreConcepts: [
@@ -51,7 +51,7 @@ export const guide: Guide = {
     {
       term: "Spacing beats massing",
       explain:
-        "The same total study time produces more durable learning when distributed across days than concentrated into one session. Some forgetting between sessions is a feature — reconstructing after partial forgetting is where the gain comes from.",
+        "The same total study time produces more durable learning when distributed across days than concentrated into one session. Some forgetting between sessions is a feature. Reconstructing after partial forgetting is where the gain comes from.",
       detail:
         "This makes cramming a rational strategy for a test tomorrow and a terrible one for anything you want next year. Match the method to the horizon honestly.",
     },
@@ -67,7 +67,7 @@ export const guide: Guide = {
       explain:
         "Mixing different problem types within a session produces better transfer than practising one type to completion, even though blocked practice feels more successful during the session.",
       detail:
-        "Blocked practice lets you apply the same method repeatedly without deciding which method applies. Interleaving forces the selection step — which is the skill you actually need when problems arrive unlabelled.",
+        "Blocked practice lets you apply the same method repeatedly without deciding which method applies. Interleaving forces the selection step, which is the skill you actually need when problems arrive unlabelled.",
     },
     {
       term: "Explaining is a retrieval test with a high bar",
@@ -96,12 +96,12 @@ export const guide: Guide = {
     {
       title: "Stop highlighting and re-reading",
       body: "For one week, ban both on anything you're trying to learn. Replace them with a single question after each section: what did that say? Answer from memory before looking back. The discomfort you feel is the method working.",
-      effort: "No extra time — a substitution",
+      effort: "No extra time, a substitution",
       outcome: "You experience the gap between feeling familiar and being able to produce.",
     },
     {
       title: "Adopt the blank page",
-      body: "After any learning session, close everything and write what you remember on a blank page. Then compare against the source and mark what you missed. The gaps are your study list — everything else needs less attention than you'd have given it.",
+      body: "After any learning session, close everything and write what you remember on a blank page. Then compare against the source and mark what you missed. The gaps are your study list. Everything else needs less attention than you'd have given it.",
       effort: "10 minutes per session",
       outcome: "A specific, evidence-based list of what you don't know.",
     },
@@ -125,7 +125,7 @@ export const guide: Guide = {
     },
     {
       title: "Explain it to someone",
-      body: "Teach the topic to a person, or write it for an audience who doesn't share your background. Note every point where you become vague — vagueness is precisely where understanding is missing.",
+      body: "Teach the topic to a person, or write it for an audience who doesn't share your background. Note every point where you become vague: vagueness is precisely where understanding is missing.",
       effort: "30–60 minutes per topic",
       outcome: "A list of the specific things you only thought you understood.",
     },
@@ -144,9 +144,9 @@ export const guide: Guide = {
       walkthrough:
         "Roediger and Karpicke had students read prose passages, then either take repeated recall tests without any feedback, or restudy the material the same number of times. Both groups spent comparable time with the material. Final retention was then measured at 5 minutes, 2 days, or 1 week.",
       result:
-        "At 5 minutes, repeated studying won — the restudy group recalled more. At the delayed tests, prior testing produced substantially greater retention than restudying. Crucially, repeated studying also increased students' confidence in their ability to remember, while producing worse long-term retention. That combination is the whole problem in one result: the method that feels most effective is the one that misleads you about how much you've learned.",
+        "At 5 minutes, repeated studying won, the restudy group recalled more. At the delayed tests, prior testing produced substantially greater retention than restudying. Crucially, repeated studying also increased students' confidence in their ability to remember, while producing worse long-term retention. That combination is the whole problem in one result: the method that feels most effective is the one that misleads you about how much you've learned.",
       source: {
-        label: "Roediger & Karpicke (2006) — Test-Enhanced Learning: Taking Memory Tests Improves Long-Term Retention, Psychological Science",
+        label: "Roediger & Karpicke (2006). Test-Enhanced Learning: Taking Memory Tests Improves Long-Term Retention, Psychological Science",
         url: "https://journals.sagepub.com/doi/10.1111/j.1467-9280.2006.01693.x",
       },
     },
@@ -156,13 +156,13 @@ export const guide: Guide = {
       walkthrough:
         "A recognisable experience for anyone learning a technical skill. You work through a tutorial, everything makes sense, each step follows from the last, and at the end you have a working result. A week later, facing a similar task without the tutorial, you can't begin. Nothing went wrong during the tutorial: you were following, not retrieving, and following generates almost no retrieval practice.",
       result:
-        "The correction is small and uncomfortable: after each section, close the tutorial and reproduce the step from memory. When you finish, build something similar but different without the guide. The failures you hit are the actual learning, and they were always going to happen — the only question is whether they happen while you're learning or while you're working.",
+        "The correction is small and uncomfortable: after each section, close the tutorial and reproduce the step from memory. When you finish, build something similar but different without the guide. The failures you hit are the actual learning, and they were always going to happen. The only question is whether they happen while you're learning or while you're working.",
     },
     {
       kind: "illustration",
       scenario: "Blocked practice that flatters you during the session.",
       walkthrough:
-        "You practise one problem type twenty times. Accuracy climbs steadily through the set and the session feels excellent. But after the second problem you stopped deciding which approach applies — you were executing a method you'd already selected. When mixed problems arrive later, the selection step is the part you haven't practised, and it's the part that matters.",
+        "You practise one problem type twenty times. Accuracy climbs steadily through the set and the session feels excellent. But after the second problem you stopped deciding which approach applies. You were executing a method you'd already selected. When mixed problems arrive later, the selection step is the part you haven't practised, and it's the part that matters.",
       result:
         "Interleaving reverses the experience: in-session accuracy drops and delayed performance improves. This is why judging a study method by how the session felt is unreliable, and why you should evaluate any change to your method on a delayed test rather than on the day.",
     },
@@ -219,8 +219,8 @@ export const guide: Guide = {
   ],
 
   proTips: [
-    "Test yourself before you study a topic, even though you'll fail. Attempting retrieval first improves how much you take from the subsequent material — the failure primes you for what matters.",
-    "When you get something wrong, don't just read the correct answer — try again from memory a few minutes later. Correction without re-retrieval mostly produces the illusion of having fixed it.",
+    "Test yourself before you study a topic, even though you'll fail. Attempting retrieval first improves how much you take from the subsequent material: the failure primes you for what matters.",
+    "When you get something wrong, don't just read the correct answer: try again from memory a few minutes later. Correction without re-retrieval mostly produces the illusion of having fixed it.",
     "Keep a running list of questions you couldn't answer. It's a far better study plan than any syllabus, because it's specific to your actual gaps.",
     "Learn in the smallest chunk that's still meaningful, then immediately test. Long uninterrupted input feels efficient and generates almost no retrieval opportunities.",
     "If you can't explain why something is true, you've learned the fact and not the structure. Facts without structure are the first thing to go.",
@@ -228,7 +228,7 @@ export const guide: Guide = {
   ],
 
   businessApplications: [
-    "Onboarding design: replace document-heavy induction with retrieval — questions, small tasks, teaching back — and new starters reach competence measurably sooner.",
+    "Onboarding design: replace document-heavy induction with retrieval (questions, small tasks, teaching back), and new starters reach competence measurably sooner.",
     "Training that survives the week: spacing material across sessions rather than delivering a one-day workshop that's largely gone by the following month.",
     "Technical upskilling: mixed, applied practice on real problems rather than sequential course completion.",
     "Knowledge retention across teams: having people document by explaining to a non-expert audience surfaces the gaps that expert-written docs conceal.",
@@ -298,7 +298,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "Why does re-reading feel so much more effective than testing?",
-      a: "Because it produces fluency — the material feels easy while it's in front of you. That feeling tracks familiarity rather than your ability to produce the information later, and the two come apart sharply at any delay.",
+      a: "Because it produces fluency: the material feels easy while it's in front of you. That feeling tracks familiarity rather than your ability to produce the information later, and the two come apart sharply at any delay.",
     },
     {
       q: "Is cramming ever rational?",
@@ -306,11 +306,11 @@ export const guide: Guide = {
     },
     {
       q: "How long should study sessions be?",
-      a: "Short enough to stay attentive and frequent enough to space — for most people 25 to 50 minutes with real breaks. Total time matters less than distribution and whether retrieval is happening.",
+      a: "Short enough to stay attentive and frequent enough to space. For most people 25 to 50 minutes with real breaks. Total time matters less than distribution and whether retrieval is happening.",
     },
     {
       q: "Do learning styles matter?",
-      a: "The idea that matching teaching to a preferred style improves outcomes has repeatedly failed to replicate. What does matter is matching the format to the material — visual for spatial content, practice for skills — regardless of preference.",
+      a: "The idea that matching teaching to a preferred style improves outcomes has repeatedly failed to replicate. What does matter is matching the format to the material (visual for spatial content, practice for skills) regardless of preference.",
     },
     {
       q: "What about spaced repetition apps?",
@@ -334,10 +334,10 @@ export const guide: Guide = {
   ],
 
   resources: [
-    { title: "Make It Stick — Brown, Roediger & McDaniel", kind: "Book", note: "The accessible summary of this research, co-written by one of the researchers behind the testing-effect work.", url: "https://www.retrievalpractice.org" },
+    { title: "Make It Stick: Brown, Roediger & McDaniel", kind: "Book", note: "The accessible summary of this research, co-written by one of the researchers behind the testing-effect work.", url: "https://www.retrievalpractice.org" },
     { title: "Test-Enhanced Learning (Roediger & Karpicke, 2006)", kind: "Paper", note: "The primary source for the central finding. Short and readable.", url: "https://journals.sagepub.com/doi/10.1111/j.1467-9280.2006.01693.x" },
     { title: "The Learning Scientists", kind: "Newsletter", note: "Cognitive psychologists translating the evidence into practice, with free materials for teachers and self-learners.", url: "https://www.learningscientists.org" },
-    { title: "Ultralearning — Scott Young", kind: "Book", note: "Aggressive self-directed learning projects. Strong on structure and directness; treat the case studies as illustrative rather than as evidence." },
+    { title: "Ultralearning: Scott Young", kind: "Book", note: "Aggressive self-directed learning projects. Strong on structure and directness; treat the case studies as illustrative rather than as evidence." },
   ],
 
   internalLinks: [

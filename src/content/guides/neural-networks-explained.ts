@@ -28,8 +28,8 @@ export const guide: Guide = {
   ],
 
   whyItMatters: [
-    "Every system currently described as AI — language models, image generators, speech recognition, protein structure prediction — is a neural network underneath. Understanding the architecture is what lets you reason about the whole category rather than treating each new product as a separate mystery.",
-    "It also explains the economics, which is where most business decisions actually get made. Why training costs what it does, why inference is cheap by comparison, why GPUs matter, why fine-tuning a large model is affordable while training one from scratch is not — all of these fall directly out of how the computation works. People who don't understand the architecture consistently misjudge what an AI project will cost.",
+    "Every system currently described as AI (language models, image generators, speech recognition, protein structure prediction) is a neural network underneath. Understanding the architecture is what lets you reason about the whole category rather than treating each new product as a separate mystery.",
+    "It also explains the economics, which is where most business decisions actually get made. Why training costs what it does, why inference is cheap by comparison, why GPUs matter, why fine-tuning a large model is affordable while training one from scratch is not. All of these fall directly out of how the computation works. People who don't understand the architecture consistently misjudge what an AI project will cost.",
     "And it explains the failure modes that look like nonsense from outside. Why a network can classify a thousand object categories superbly and then be fooled by a few pixels of noise. Why it produces confident outputs on inputs unlike anything it trained on. These aren't bugs: they follow from what the network is actually computing, and once you see that, they stop being surprising.",
   ],
 
@@ -46,14 +46,14 @@ export const guide: Guide = {
       explain:
         "A layer is a group of neurons all reading the same inputs, each with its own weights, producing its own output. Those outputs become the inputs to the next layer.",
       detail:
-        "In practice this is one matrix multiplication, which is why GPUs are so effective here — they were designed to multiply large matrices fast for graphics, and the operation turned out to be identical.",
+        "In practice this is one matrix multiplication, which is why GPUs are so effective here. They were designed to multiply large matrices fast for graphics, and the operation turned out to be identical.",
     },
     {
       term: "Non-linearity is the whole reason depth works",
       explain:
         "Without the non-linear function between layers, stacking layers is pointless. A chain of linear operations collapses mathematically into a single linear operation, so a hundred layers would have exactly the capacity of one.",
       detail:
-        "The activation function — usually ReLU, which simply outputs zero for negatives and the input itself for positives — is what stops the collapse. It is almost embarrassingly simple, and removing it destroys the model entirely.",
+        "The activation function (usually ReLU, which simply outputs zero for negatives and the input itself for positives) is what stops the collapse. It is almost embarrassingly simple, and removing it destroys the model entirely.",
     },
     {
       term: "Depth builds features on top of features",
@@ -127,7 +127,7 @@ export const guide: Guide = {
     },
     {
       title: "Rebuild the same thing in PyTorch",
-      body: "Now use the framework. Map each part of your hand-written version onto its PyTorch equivalent — `nn.Linear`, the optimiser, `loss.backward()`, `optimizer.step()`. The framework stops being magic at this point.",
+      body: "Now use the framework. Map each part of your hand-written version onto its PyTorch equivalent: `nn.Linear`, the optimiser, `loss.backward()`, `optimizer.step()`. The framework stops being magic at this point.",
       effort: "4–6 hours",
       outcome: "You know exactly what each framework call is doing on your behalf.",
     },
@@ -145,7 +145,7 @@ export const guide: Guide = {
     },
     {
       title: "Break a working model adversarially",
-      body: "Take a trained classifier and find inputs that fool it — small perturbations that flip the prediction while looking unchanged to you. It's a sobering and permanently useful demonstration of what the network is not doing.",
+      body: "Take a trained classifier and find inputs that fool it: small perturbations that flip the prediction while looking unchanged to you. It's a sobering and permanently useful demonstration of what the network is not doing.",
       effort: "4–6 hours",
       outcome: "You understand that high accuracy and human-like perception are different things.",
     },
@@ -158,9 +158,9 @@ export const guide: Guide = {
       walkthrough:
         "Krizhevsky, Sutskever and Hinton entered a deep convolutional network in the 2012 ImageNet Large Scale Visual Recognition Challenge, trained on GPUs with ReLU activations and dropout. The competing approaches relied on hand-engineered visual features designed by researchers over many years: edge detectors, texture descriptors, and so on. The network was given raw pixels and learned its own features.",
       result:
-        "It achieved a top-5 error rate of 15.3% against 26.2% for the second-placed entry — a margin large enough that it could not be attributed to tuning. The significance was not the architecture, most of which had been known for years, but the demonstration that learned features beat hand-designed ones given enough data and compute. Essentially every vision system built since descends from this result.",
+        "It achieved a top-5 error rate of 15.3% against 26.2% for the second-placed entry. A margin large enough that it could not be attributed to tuning. The significance was not the architecture, most of which had been known for years, but the demonstration that learned features beat hand-designed ones given enough data and compute. Essentially every vision system built since descends from this result.",
       source: {
-        label: "Krizhevsky, Sutskever & Hinton (2012) — ImageNet Classification with Deep Convolutional Neural Networks, NeurIPS",
+        label: "Krizhevsky, Sutskever & Hinton (2012). ImageNet Classification with Deep Convolutional Neural Networks, NeurIPS",
         url: "https://proceedings.neurips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf",
       },
     },
@@ -170,7 +170,7 @@ export const guide: Guide = {
       walkthrough:
         "A demonstration worth running rather than reading about. Take a network with several hidden layers that successfully separates a non-linearly-separable dataset: two interleaved spirals, say. Replace every activation function with the identity function, so each layer is purely linear, and retrain with everything else unchanged.",
       result:
-        "The network collapses to the capacity of a single linear layer and can only draw a straight boundary, no matter how many layers you give it. This isn't a training failure — the chain of linear operations is mathematically equivalent to one linear operation. It's the clearest possible demonstration that non-linearity, not depth, is what makes depth worth having.",
+        "The network collapses to the capacity of a single linear layer and can only draw a straight boundary, no matter how many layers you give it. This isn't a training failure. The chain of linear operations is mathematically equivalent to one linear operation. It's the clearest possible demonstration that non-linearity, not depth, is what makes depth worth having.",
     },
     {
       kind: "illustration",
@@ -178,14 +178,14 @@ export const guide: Guide = {
       walkthrough:
         "Train a network to distinguish ten categories, then feed it something from an eleventh category it has never encountered. The final layer produces scores across the ten categories it knows, those scores get normalised into something that looks like a probability distribution, and one category wins.",
       result:
-        "The output is a confident classification of an object the model has no concept of, because 'none of these' was never an available answer. If your system needs to handle unfamiliar inputs, that capability has to be designed in — an explicit rejection class, an out-of-distribution detector, or a confidence threshold you have actually calibrated.",
+        "The output is a confident classification of an object the model has no concept of, because 'none of these' was never an available answer. If your system needs to handle unfamiliar inputs, that capability has to be designed in. An explicit rejection class, an out-of-distribution detector, or a confidence threshold you have actually calibrated.",
     },
   ],
 
   mistakes: [
     {
       mistake: "Reaching for deep learning on tabular data",
-      why: "On structured rows-and-columns data, gradient-boosted trees usually match or beat neural networks while training in seconds and remaining inspectable. Deep learning's advantage is in raw signals — pixels, audio, text — where the input has structure worth learning from scratch.",
+      why: "On structured rows-and-columns data, gradient-boosted trees usually match or beat neural networks while training in seconds and remaining inspectable. Deep learning's advantage is in raw signals (pixels, audio, text) where the input has structure worth learning from scratch.",
       fix: "Use the simplest model class that suits your data type. Reserve neural networks for problems where hand-designing features would be infeasible.",
     },
     {
@@ -211,7 +211,7 @@ export const guide: Guide = {
     {
       mistake: "Treating the softmax output as a calibrated probability",
       why: "Neural networks are typically overconfident. A 0.97 output does not mean the model is right 97% of the time, and routing decisions on that assumption produces silent errors.",
-      fix: "Calibrate explicitly — temperature scaling is cheap and effective — then verify on held-out data that the stated confidence matches observed accuracy.",
+      fix: "Calibrate explicitly (temperature scaling is cheap and effective) then verify on held-out data that the stated confidence matches observed accuracy.",
     },
     {
       mistake: "Assuming the network perceives the way you do",
@@ -274,7 +274,7 @@ export const guide: Guide = {
     {
       title: "The single-batch sanity check",
       brief:
-        "Take ten training examples and train until the loss is nearly zero. Then introduce a deliberate bug — wrong loss, detached gradient, frozen layer — and observe how each failure looks.",
+        "Take ten training examples and train until the loss is nearly zero. Then introduce a deliberate bug (wrong loss, detached gradient, frozen layer), and observe how each failure looks.",
       success: "You can identify three distinct bugs from the loss curve alone.",
       time: "2 hours",
     },
@@ -311,7 +311,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "Do I need to understand calculus to use neural networks?",
-      a: "To use them, no — frameworks compute gradients automatically. To debug them properly, a conceptual grasp of what a derivative represents is useful. You need the intuition much more than the ability to differentiate by hand.",
+      a: "To use them, no: frameworks compute gradients automatically. To debug them properly, a conceptual grasp of what a derivative represents is useful. You need the intuition much more than the ability to differentiate by hand.",
     },
     {
       q: "How many layers should my network have?",
@@ -323,7 +323,7 @@ export const guide: Guide = {
     },
     {
       q: "What's the difference between deep learning and machine learning?",
-      a: "Deep learning is a subset of machine learning that uses multi-layer neural networks. All the machine learning fundamentals — train/test splits, overfitting, evaluation metrics — apply unchanged.",
+      a: "Deep learning is a subset of machine learning that uses multi-layer neural networks. All the machine learning fundamentals (train/test splits, overfitting, evaluation metrics) apply unchanged.",
     },
     {
       q: "Are neural networks a black box?",
@@ -349,10 +349,10 @@ export const guide: Guide = {
   ],
 
   resources: [
-    { title: "Neural Networks: Zero to Hero — Andrej Karpathy", kind: "Video", note: "Builds backpropagation and then a language model from scratch, line by line. The best free deep learning material that exists.", url: "https://karpathy.ai/zero-to-hero.html" },
-    { title: "Neural Networks and Deep Learning — Michael Nielsen", kind: "Book", note: "Free online, and the clearest written explanation of backpropagation available.", url: "http://neuralnetworksanddeeplearning.com" },
+    { title: "Neural Networks: Zero to Hero: Andrej Karpathy", kind: "Video", note: "Builds backpropagation and then a language model from scratch, line by line. The best free deep learning material that exists.", url: "https://karpathy.ai/zero-to-hero.html" },
+    { title: "Neural Networks and Deep Learning: Michael Nielsen", kind: "Book", note: "Free online, and the clearest written explanation of backpropagation available.", url: "http://neuralnetworksanddeeplearning.com" },
     { title: "Dive into Deep Learning", kind: "Book", note: "Free, interactive, with runnable code in multiple frameworks alongside the maths.", url: "https://d2l.ai" },
-    { title: "fast.ai — Practical Deep Learning for Coders", kind: "Course", note: "Top-down and fine-tuning-first, which matches how applied work is actually done.", url: "https://course.fast.ai" },
+    { title: "fast.ai: Practical Deep Learning for Coders", kind: "Course", note: "Top-down and fine-tuning-first, which matches how applied work is actually done.", url: "https://course.fast.ai" },
     { title: "ImageNet Classification with Deep CNNs (AlexNet)", kind: "Paper", note: "The 2012 paper that restarted the field. Short and readable once you know the vocabulary.", url: "https://proceedings.neurips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf" },
   ],
 

@@ -23,14 +23,14 @@ export const guide: Guide = {
 
   intro: [
     "Almost every AI project failure is an evaluation failure wearing a different costume. The model wasn't bad; the number that said it was good was measuring the wrong thing, on the wrong data, against no baseline. By the time reality disagrees, the budget is gone and everyone is confused.",
-    "Evaluation gets skipped because it's the least enjoyable part of the work. Building is satisfying, tuning feels productive, and measuring properly mostly produces bad news early — which is precisely its value. A team that measures well finds out in week two what a team that doesn't finds out in month eight.",
+    "Evaluation gets skipped because it's the least enjoyable part of the work. Building is satisfying, tuning feels productive, and measuring properly mostly produces bad news early, which is precisely its value. A team that measures well finds out in week two what a team that doesn't finds out in month eight.",
     "This guide covers how to design an evaluation that would actually catch a problem: choosing a metric that reflects real costs, building a test set that resembles production, protecting it from contamination, and continuing to measure once the system is live. It applies to classifiers, forecasters and language systems alike, because the discipline is the same even when the metrics differ.",
   ],
 
   whyItMatters: [
-    "The asymmetry is stark. A proper evaluation costs days; a system deployed on a misleading number costs months and often reputation. And unlike most engineering mistakes, this one is invisible from the inside — the dashboard says everything is fine, which is exactly the problem.",
+    "The asymmetry is stark. A proper evaluation costs days; a system deployed on a misleading number costs months and often reputation. And unlike most engineering mistakes, this one is invisible from the inside. The dashboard says everything is fine, which is exactly the problem.",
     "Evaluation is also what makes improvement possible at all. Without a fixed measurement you cannot tell whether a change helped, so you optimise on memory and impression. Teams in this state consistently believe their system is getting better while it drifts, because improvements are memorable and regressions aren't.",
-    "There's a governance dimension that's arriving fast. Increasingly you need to be able to demonstrate that a system performs acceptably across different groups of people, not just on average. That evidence has to be designed in — it cannot be reconstructed after the fact from a system that only ever recorded aggregate accuracy.",
+    "There's a governance dimension that's arriving fast. Increasingly you need to be able to demonstrate that a system performs acceptably across different groups of people, not just on average. That evidence has to be designed in. It cannot be reconstructed after the fact from a system that only ever recorded aggregate accuracy.",
   ],
 
   coreConcepts: [
@@ -39,14 +39,14 @@ export const guide: Guide = {
       explain:
         "Every metric makes an implicit statement about which mistakes matter. Accuracy says all errors are equal. Recall says missing a positive is the expensive one. Precision says a false alarm is.",
       detail:
-        "Choose the metric by asking who is harmed by each type of error and how much. A missed fraud and a wrongly frozen account are both errors, and treating them as equivalent is a decision — usually an unexamined one.",
+        "Choose the metric by asking who is harmed by each type of error and how much. A missed fraud and a wrongly frozen account are both errors, and treating them as equivalent is a decision: usually an unexamined one.",
     },
     {
       term: "Accuracy is misleading whenever classes are imbalanced",
       explain:
         "If 99% of your examples are one class, always predicting that class scores 99%. The number is excellent and the system is useless.",
       detail:
-        "Since most valuable problems are imbalanced — fraud, defects, churn, disease — accuracy is the wrong default for most of the work worth doing.",
+        "Since most valuable problems are imbalanced (fraud, defects, churn, disease) accuracy is the wrong default for most of the work worth doing.",
     },
     {
       term: "Precision, recall and the trade-off between them",
@@ -79,7 +79,7 @@ export const guide: Guide = {
     {
       term: "Split the way the world works",
       explain:
-        "Random splitting is wrong for time-series data, because it lets the model learn from the future to predict the past. It's also wrong when rows are grouped — multiple records per customer sharing a split boundary.",
+        "Random splitting is wrong for time-series data, because it lets the model learn from the future to predict the past. It's also wrong when rows are grouped: multiple records per customer sharing a split boundary.",
       detail:
         "Split by time for anything temporal, and by group for anything with repeated entities. A random split on grouped data produces an inflated score with no obvious symptom.",
     },
@@ -88,7 +88,7 @@ export const guide: Guide = {
       explain:
         "A system at 92% overall can be at 61% for one group of users. The headline number cannot reveal this, and averages are specifically designed to conceal it.",
       detail:
-        "Break performance down by every dimension that matters — customer segment, region, device, language, demographic group where legally relevant — and report the worst, not just the mean.",
+        "Break performance down by every dimension that matters (customer segment, region, device, language, demographic group where legally relevant), and report the worst, not just the mean.",
     },
     {
       term: "Calibration is separate from accuracy",
@@ -115,7 +115,7 @@ export const guide: Guide = {
     },
     {
       title: "Build the trivial baseline",
-      body: "Before any model, compute what the dumbest possible approach scores — most common class, last value, current manual process. Record it. This number will contextualise everything that follows.",
+      body: "Before any model, compute what the dumbest possible approach scores. Most common class, last value, current manual process. Record it. This number will contextualise everything that follows.",
       effort: "2–3 hours",
       outcome: "A baseline number written down before you had a model to defend.",
     },
@@ -166,7 +166,7 @@ export const guide: Guide = {
       result:
         "By the 2012–13 season it was persistently overestimating flu prevalence, at one point predicting more than double the proportion of doctor visits the CDC recorded. Lazer and colleagues concluded in Science that the errors were largely avoidable. The lesson for evaluation specifically: an excellent offline score is a statement about a moment in time, and without ongoing measurement against fresh ground truth you have no way to know when it stopped being true.",
       source: {
-        label: "Lazer, Kennedy, King & Vespignani, Science 343:1203–1205 (2014) — The Parable of Google Flu",
+        label: "Lazer, Kennedy, King & Vespignani, Science 343:1203–1205 (2014). The Parable of Google Flu",
         url: "https://www.science.org/doi/10.1126/science.1248506",
       },
     },
@@ -174,11 +174,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Measuring components separately to find out what's actually contributing.",
       walkthrough:
-        "Anthropic evaluated a retrieval pipeline by isolating a single metric — how often the correct passage failed to appear in the top twenty results — and then adding one component at a time, remeasuring after each. This is the opposite of the common approach, where several changes ship together and the team credits whichever one they favour.",
+        "Anthropic evaluated a retrieval pipeline by isolating a single metric (how often the correct passage failed to appear in the top twenty results), and then adding one component at a time, remeasuring after each. This is the opposite of the common approach, where several changes ship together and the team credits whichever one they favour.",
       result:
         "Against a 5.7% baseline failure rate: contextual embeddings alone reduced failures by 35%, adding keyword search took it to 49%, and adding re-ranking took it to 67%. Because each stage was measured independently, the contributions are attributable rather than assumed, and it turned out the components compounded rather than overlapping. This is what component-level evaluation buys you: knowing which part earns its cost.",
       source: {
-        label: "Anthropic (2024) — Introducing Contextual Retrieval",
+        label: "Anthropic (2024). Introducing Contextual Retrieval",
         url: "https://www.anthropic.com/news/contextual-retrieval",
       },
     },
@@ -232,7 +232,7 @@ export const guide: Guide = {
 
   bestPractices: [
     "State the metric, the threshold, and the cost of each error type in writing before any modelling begins.",
-    "Compute a trivial baseline every time, and report it alongside your result permanently — not just in the first week.",
+    "Compute a trivial baseline every time, and report it alongside your result permanently, not just in the first week.",
     "Split the data before exploration, cleaning or scaling. Anything computed across the whole dataset and applied to both halves is leakage.",
     "Run the label-shuffle test on every new pipeline. It costs one training run and catches a category of bug that is otherwise nearly invisible.",
     "Maintain a hand-verified golden set that never enters training and never gets tuned against. It's the only honest number left after fifty iterations.",
@@ -244,7 +244,7 @@ export const guide: Guide = {
   proTips: [
     "Sort errors by model confidence and read the confident ones first. Confidently wrong is where systematic problems and leakage live; uncertain and wrong is usually just hard cases.",
     "If a result surprises you positively, assume leakage before you assume brilliance. This instinct will save you more embarrassment than any other habit in applied machine learning.",
-    "Plot learning curves — training and validation score against training set size. If both have flattened and converged, more data won't help and you need a different approach. It answers 'what next?' better than intuition.",
+    "Plot learning curves: training and validation score against training set size. If both have flattened and converged, more data won't help and you need a different approach. It answers 'what next?' better than intuition.",
     "Keep a running log of every experiment with its evaluation score, including the failures. Teams without one re-run the same failed idea roughly twice a year.",
     "Ask 'what would this look like if the model were broken in a way we haven't imagined?' and then check for that specifically. Evaluation designed only around anticipated failures catches only anticipated failures.",
     "When someone reports a system got worse, check whether the evaluation data changed before you check whether the model did. Surprisingly often it's the measurement that moved.",
@@ -261,9 +261,9 @@ export const guide: Guide = {
 
   lifeApplications: [
     "Reading claims critically. 'Accuracy 97%' invites the questions: on what data, against what baseline, and how were errors distributed? Those three questions deflate most impressive-sounding statistics.",
-    "Understanding medical screening results, which is the imbalanced-data problem exactly — a highly accurate test for a rare condition still produces mostly false positives.",
+    "Understanding medical screening results, which is the imbalanced-data problem exactly. A highly accurate test for a rare condition still produces mostly false positives.",
     "Evaluating your own decisions honestly, which requires deciding what success looks like before you see the outcome rather than after.",
-    "Noticing when you've been tuning against your test set in life — reinterpreting your criteria until whatever happened counts as success.",
+    "Noticing when you've been tuning against your test set in life. Reinterpreting your criteria until whatever happened counts as success.",
   ],
 
   exercises: [
@@ -334,7 +334,7 @@ export const guide: Guide = {
     },
     {
       q: "Can I trust published benchmark scores?",
-      a: "Treat them as an upper bound measured on a specific distribution, not a prediction about your data. Benchmark contamination — test data appearing in training sets — is also a real and growing problem. Run your own pilot.",
+      a: "Treat them as an upper bound measured on a specific distribution, not a prediction about your data. Benchmark contamination (test data appearing in training sets) is also a real and growing problem. Run your own pilot.",
     },
     {
       q: "My model does well offline and badly in production. Why?",
@@ -342,7 +342,7 @@ export const guide: Guide = {
     },
     {
       q: "How often should I re-evaluate a live system?",
-      a: "Continuously for input and output distributions, which are cheap to monitor, and on a fixed schedule for accuracy against fresh labels. How often depends on how fast your domain moves — but 'never' is the wrong answer everywhere.",
+      a: "Continuously for input and output distributions, which are cheap to monitor, and on a fixed schedule for accuracy against fresh labels. How often depends on how fast your domain moves: but 'never' is the wrong answer everywhere.",
     },
   ],
 
@@ -356,7 +356,7 @@ export const guide: Guide = {
 
   resources: [
     { title: "Google's Rules of Machine Learning", kind: "Docs", note: "Forty-three engineering rules from production ML. Several are specifically about not fooling yourself with metrics.", url: "https://developers.google.com/machine-learning/guides/rules-of-ml" },
-    { title: "Designing Machine Learning Systems — Chip Huyen", kind: "Book", note: "Strong chapters on evaluation and monitoring specifically. Read before your first deployment." },
+    { title: "Designing Machine Learning Systems: Chip Huyen", kind: "Book", note: "Strong chapters on evaluation and monitoring specifically. Read before your first deployment." },
     { title: "The Parable of Google Flu", kind: "Paper", note: "Five pages on how a well-evaluated system drifted into large error. The best short case study in the field.", url: "https://www.science.org/doi/10.1126/science.1248506" },
     { title: "Hidden Technical Debt in Machine Learning Systems", kind: "Paper", note: "On why ML systems decay in ways ordinary software doesn't. Sobering and short.", url: "https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems" },
   ],

@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "ai-for-sales-teams",
   seoTitle: "AI for Sales Teams: Research, Follow-Up and Pipeline",
   metaDescription:
-    "Where AI helps a sales team — account research, call notes, follow-up, lead scoring — and the outreach automation that damages your pipeline.",
+    "Where AI helps a sales team (account research, call notes, follow-up, lead scoring), and the outreach automation that damages your pipeline.",
   title: "AI for Sales Teams",
   keywords: [
     "ai for sales",
@@ -22,7 +22,7 @@ export const guide: Guide = {
   readingTime: 12,
 
   intro: [
-    "Most AI-for-sales pitches lead with volume: send more emails, contact more prospects, book more meetings. That's the application with the worst returns and the highest chance of damaging something you can't easily repair — your domain reputation and your reputation generally.",
+    "Most AI-for-sales pitches lead with volume: send more emails, contact more prospects, book more meetings. That's the application with the worst returns and the highest chance of damaging something you can't easily repair: your domain reputation and your reputation generally.",
     "The genuine wins are quieter and sit either side of the conversation. Before it: research that would take a rep twenty minutes, done in two. After it: notes written, CRM updated, follow-up drafted, next steps captured. In the middle, where a human is persuading another human, AI mostly gets in the way.",
     "This guide covers where AI reliably earns its cost in a sales function, why outreach volume is the trap, how to think about lead scoring without repeating a well-documented mistake, and what to measure.",
   ],
@@ -46,7 +46,7 @@ export const guide: Guide = {
       explain:
         "Turning a company's public information, your CRM history and prior conversations into a structured brief takes a rep fifteen to twenty minutes and takes AI under two.",
       detail:
-        "It also improves quality, not just speed — reps arrive prepared for calls they'd otherwise have skimmed, and preparation is the variable that most affects outcomes.",
+        "It also improves quality, not just speed. Reps arrive prepared for calls they'd otherwise have skimmed, and preparation is the variable that most affects outcomes.",
     },
     {
       term: "Call notes and CRM hygiene pay back immediately",
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "AI makes it trivial to send far more personalised-looking emails. Recipients recognise them, reply rates fall, and spam complaints put your sending domain at risk.",
       detail:
-        "The damage isn't confined to the campaign. A flagged domain affects transactional email too — invoices, password resets, support replies — and recovering reputation takes months.",
+        "The damage isn't confined to the campaign. A flagged domain affects transactional email too (invoices, password resets, support replies), and recovering reputation takes months.",
     },
     {
       term: "Personalisation means researched, not templated",
@@ -72,14 +72,14 @@ export const guide: Guide = {
     {
       term: "Lead scoring inherits your history",
       explain:
-        "A model trained on which leads converted learns the pattern of who your reps pursued and closed — not who was a good fit.",
+        "A model trained on which leads converted learns the pattern of who your reps pursued and closed: not who was a good fit.",
       detail:
         "If your team historically neglected a segment, the model will score it low, and the self-fulfilling loop tightens. This is the same failure that scrapped Amazon's hiring tool, in a commercial setting.",
     },
     {
       term: "Proposal and follow-up drafting under review",
       explain:
-        "First drafts from structured inputs — call notes, requirements, pricing rules — with the rep editing. Fast, consistent, and a human owns every word that goes out.",
+        "First drafts from structured inputs (call notes, requirements, pricing rules) with the rep editing. Fast, consistent, and a human owns every word that goes out.",
       detail:
         "Consistency is underrated here. It also enforces your required disclaimers and approved claims, which matters in regulated sales.",
     },
@@ -97,11 +97,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "What happens when a model learns from past selection decisions.",
       walkthrough:
-        "Amazon trained a CV-screening model on a decade of applications, and it learned that male candidates had historically been preferred — penalising CVs mentioning \"women's\"and favouring language more common on men's applications. The engineering was sound; the model faithfully reproduced the pattern in its labels.",
+        "Amazon trained a CV-screening model on a decade of applications, and it learned that male candidates had historically been preferred: penalising CVs mentioning \"women's\"and favouring language more common on men's applications. The engineering was sound; the model faithfully reproduced the pattern in its labels.",
       result:
-        "The mechanism transfers directly to lead scoring. A model trained on which leads your reps converted learns which leads your reps *pursued*. Segments your team historically under-worked will score low, reps will deprioritise them further, and the loop tightens. If you score leads, use explicit fit criteria you can state and audit — not a pattern learned from past outcomes.",
+        "The mechanism transfers directly to lead scoring. A model trained on which leads your reps converted learns which leads your reps *pursued*. Segments your team historically under-worked will score low, reps will deprioritise them further, and the loop tightens. If you score leads, use explicit fit criteria you can state and audit: not a pattern learned from past outcomes.",
       source: {
-        label: "Dastin, Reuters (10 October 2018) — Amazon scraps secret AI recruiting tool that showed bias against women",
+        label: "Dastin, Reuters (10 October 2018). Amazon scraps secret AI recruiting tool that showed bias against women",
         url: "https://www.euronews.com/business/2018/10/10/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women",
       },
     },
@@ -109,11 +109,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Why the volume play is a false economy.",
       walkthrough:
-        "CB Insights has repeatedly compiled post-mortems written by failed startups. In the original set of 110+, 42% cited no market need — the most common reason given. A later study of 431 venture-backed failures attributed 43% to poor product-market fit, alongside 70% running out of capital.",
+        "CB Insights has repeatedly compiled post-mortems written by failed startups. In the original set of 110+, 42% cited no market need, the most common reason given. A later study of 431 venture-backed failures attributed 43% to poor product-market fit, alongside 70% running out of capital.",
       result:
         "The relevance to sales automation is direct. If prospects aren't converting, sending more messages is treating a fit problem as a volume problem. Companies fail from building things people didn't need far more often than from insufficient outreach, and AI makes it cheap to scale the wrong activity. Before automating volume, check whether volume is actually the constraint.",
       source: {
-        label: "CB Insights — The Top Reasons Startups Fail",
+        label: "CB Insights, The Top Reasons Startups Fail",
         url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/",
       },
     },
@@ -121,9 +121,9 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The sequence that burned the domain.",
       walkthrough:
-        "A pattern worth avoiding by design rather than by luck. A team uses AI to scale outreach from 200 to 3,000 emails a week, each lightly personalised from a template. Reply rate per email falls but total replies rise, so it looks like it's working. Then spam complaints accumulate, the sending domain's reputation drops, and deliverability collapses — not just for the campaign, but for invoices, password resets and support replies from the same domain.",
+        "A pattern worth avoiding by design rather than by luck. A team uses AI to scale outreach from 200 to 3,000 emails a week, each lightly personalised from a template. Reply rate per email falls but total replies rise, so it looks like it's working. Then spam complaints accumulate, the sending domain's reputation drops, and deliverability collapses: not just for the campaign, but for invoices, password resets and support replies from the same domain.",
       result:
-        "Recovering domain reputation takes months and there's no fast lever. The safer architecture separates sending domains for outreach and transactional mail, caps volume well below what's technically possible, and holds reply rate — not send volume — as the metric that matters. If reply rate is falling, more sending is the wrong response.",
+        "Recovering domain reputation takes months and there's no fast lever. The safer architecture separates sending domains for outreach and transactional mail, caps volume well below what's technically possible, and holds reply rate (not send volume) as the metric that matters. If reply rate is falling, more sending is the wrong response.",
     },
   ],
 
@@ -154,13 +154,13 @@ export const guide: Guide = {
     },
     {
       title: "Draft follow-ups for rep approval",
-      body: "Generate follow-up emails from call notes with the rep editing before send. Track how often drafts go unedited — that tells you where the drafting is good.",
+      body: "Generate follow-up emails from call notes with the rep editing before send. Track how often drafts go unedited. That tells you where the drafting is good.",
       effort: "2–3 weeks",
       outcome: "Faster follow-up with a human on every outbound word.",
     },
     {
       title: "If you score leads, score on stated fit",
-      body: "Use explicit criteria you can articulate — company size, sector, technology, trigger events — rather than a pattern learned from past conversions. Audit which segments score low and ask why.",
+      body: "Use explicit criteria you can articulate (company size, sector, technology, trigger events), rather than a pattern learned from past conversions. Audit which segments score low and ask why.",
       effort: "3–4 weeks",
       outcome: "A score you can explain and defend to a rep who disagrees.",
     },
@@ -211,7 +211,7 @@ export const guide: Guide = {
   ],
 
   bestPractices: [
-    "Automate around the conversation — research before, admin after — and leave the middle to the rep.",
+    "Automate around the conversation (research before, admin after), and leave the middle to the rep.",
     "Audit CRM data quality before building anything that reads it.",
     "Start with pre-call research briefs: highest return, no customer-facing risk.",
     "Automate call notes and CRM write-back to fix your data at source.",
@@ -238,7 +238,7 @@ export const guide: Guide = {
     "CRM field completion and hygiene, fixing the data problem where it starts.",
     "Follow-up email drafting from call notes, for rep approval.",
     "Proposal and quote first drafts from structured requirements and pricing rules.",
-    "Pipeline review preparation — summarising deal status and flagging stalled opportunities.",
+    "Pipeline review preparation: summarising deal status and flagging stalled opportunities.",
     "Competitive and objection-handling briefs assembled from your own won/lost history.",
     "Onboarding new reps by summarising account history they'd otherwise take weeks to absorb.",
   ],
@@ -290,7 +290,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "What's the best first AI project for a sales team?",
-      a: "Pre-call research briefs. Highest time saving, no customer-facing risk, and reps feel the benefit immediately — which matters for adoption of everything after.",
+      a: "Pre-call research briefs. Highest time saving, no customer-facing risk, and reps feel the benefit immediately, which matters for adoption of everything after.",
     },
     {
       q: "Should we automate cold outreach?",
@@ -298,7 +298,7 @@ export const guide: Guide = {
     },
     {
       q: "Can AI do lead scoring?",
-      a: "It can, but avoid training on past conversions — that learns who your reps pursued rather than who fits. Use explicit criteria you can state and audit, and check which segments get deprioritised.",
+      a: "It can, but avoid training on past conversions. That learns who your reps pursued rather than who fits. Use explicit criteria you can state and audit, and check which segments get deprioritised.",
     },
     {
       q: "Will it let us hire fewer reps?",
@@ -322,9 +322,9 @@ export const guide: Guide = {
   ],
 
   resources: [
-    { title: "The Mom Test — Rob Fitzpatrick", kind: "Book", note: "On finding out what customers actually need. Relevant because volume automation is often a substitute for that work.", url: "https://www.momtestbook.com" },
-    { title: "CB Insights — The Top Reasons Startups Fail", kind: "Docs", note: "Why fit problems get misdiagnosed as volume problems.", url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/" },
-    { title: "Reuters — Amazon scraps AI recruiting tool", kind: "Docs", note: "The mechanism behind lead scoring learning your habits instead of your market.", url: "https://www.euronews.com/business/2018/10/10/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women" },
+    { title: "The Mom Test: Rob Fitzpatrick", kind: "Book", note: "On finding out what customers actually need. Relevant because volume automation is often a substitute for that work.", url: "https://www.momtestbook.com" },
+    { title: "CB Insights, The Top Reasons Startups Fail", kind: "Docs", note: "Why fit problems get misdiagnosed as volume problems.", url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/" },
+    { title: "Reuters: Amazon scraps AI recruiting tool", kind: "Docs", note: "The mechanism behind lead scoring learning your habits instead of your market.", url: "https://www.euronews.com/business/2018/10/10/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women" },
   ],
 
   internalLinks: [

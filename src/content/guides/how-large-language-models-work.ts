@@ -3,9 +3,9 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "how-large-language-models-work",
-  seoTitle: "How Large Language Models Work — Plainly Explained",
+  seoTitle: "How Large Language Models Work: Plainly Explained",
   metaDescription:
-    "Tokens, context windows, training and hallucination — an accurate, jargon-free explanation of what large language models do and where they fail.",
+    "Tokens, context windows, training and hallucination. An accurate, jargon-free explanation of what large language models do and where they fail.",
   title: "How Large Language Models Actually Work",
   keywords: [
     "how large language models work",
@@ -30,7 +30,7 @@ export const guide: Guide = {
   whyItMatters: [
     "You are almost certainly going to work alongside these systems for the rest of your career, whatever your field. The difference between people who get consistently good results and people who get frustrated is rarely about the model. It's about whether they understand what the tool is doing well enough to set it up for success.",
     "Understanding the mechanism directly predicts the failure modes. Once you know the model is generating plausible continuations rather than retrieving verified facts, hallucination stops being mysterious and becomes something you design around. Once you understand the context window, the strange behaviour of very long conversations becomes obvious. Every practical skill here descends from the mechanism.",
-    "There's a commercial dimension too. An enormous amount of money is currently being spent on LLM projects that were never going to work, because someone assumed the model had capabilities it structurally doesn't have — reliable arithmetic, knowledge of last week's events, guaranteed consistency. Knowing where the boundary sits saves budgets and reputations.",
+    "There's a commercial dimension too. An enormous amount of money is currently being spent on LLM projects that were never going to work, because someone assumed the model had capabilities it structurally doesn't have: reliable arithmetic, knowledge of last week's events, guaranteed consistency. Knowing where the boundary sits saves budgets and reputations.",
   ],
 
   coreConcepts: [
@@ -79,7 +79,7 @@ export const guide: Guide = {
     {
       term: "Hallucination is the mechanism working normally",
       explain:
-        "The model generates text that is statistically plausible given the context. When it has genuine knowledge, plausible and true coincide. When it doesn't, it still produces something plausible — a citation with the right shape, a function name that sounds right — because producing nothing was never an option it was trained toward.",
+        "The model generates text that is statistically plausible given the context. When it has genuine knowledge, plausible and true coincide. When it doesn't, it still produces something plausible (a citation with the right shape, a function name that sounds right) because producing nothing was never an option it was trained toward.",
       detail:
         "This is why hallucinations are so often confidently formatted and structurally perfect. The model is excellent at the form of a correct answer, which is what makes fabrications hard to spot at a glance.",
     },
@@ -88,7 +88,7 @@ export const guide: Guide = {
       explain:
         "Pre-training builds raw capability from bulk text. Instruction tuning teaches the model to follow requests rather than merely continue text. Alignment techniques such as RLHF shape it toward helpful, honest, harmless behaviour.",
       detail:
-        "The base model straight out of pre-training is a strange thing to interact with — it continues your text rather than answering you. Nearly everything people describe as an LLM's 'personality' comes from these later stages.",
+        "The base model straight out of pre-training is a strange thing to interact with. It continues your text rather than answering you. Nearly everything people describe as an LLM's 'personality' comes from these later stages.",
     },
     {
       term: "The knowledge cutoff",
@@ -109,13 +109,13 @@ export const guide: Guide = {
   learningPath: [
     {
       title: "Watch tokenisation happen",
-      body: "Open a tokeniser visualiser and paste in text — English, a rare technical term, code, another language, a long number. Watch how each is split. This single exercise explains an entire class of otherwise baffling model behaviour.",
+      body: "Open a tokeniser visualiser and paste in text: English, a rare technical term, code, another language, a long number. Watch how each is split. This single exercise explains an entire class of otherwise baffling model behaviour.",
       effort: "30 minutes",
       outcome: "You can predict which inputs will tokenise badly and why that will cause trouble.",
     },
     {
       title: "Interrogate one model deliberately for an hour",
-      body: "Not to get work done — to map the boundary. Ask about events after its cutoff. Ask for a citation and then verify it. Ask it to multiply two six-digit numbers and check. Ask the same question three times in separate chats and compare. Take notes.",
+      body: "Not to get work done: to map the boundary. Ask about events after its cutoff. Ask for a citation and then verify it. Ask it to multiply two six-digit numbers and check. Ask the same question three times in separate chats and compare. Take notes.",
       effort: "1–2 hours",
       outcome: "You have first-hand evidence of at least four distinct failure modes.",
     },
@@ -158,9 +158,9 @@ export const guide: Guide = {
       walkthrough:
         "In a personal injury claim against the airline Avianca, plaintiff's counsel used ChatGPT to research precedent and submitted a brief citing cases such as \"Varghese v. China Southern Airlines\". The cases were fabricated, complete with fictitious quotations and internal citations to other invented decisions. When opposing counsel could not locate them, the lawyer asked ChatGPT whether the cases were real; it said yes. That is the mechanism working exactly as designed: asked to confirm its own output, it produced the plausible continuation, which was agreement.",
       result:
-        "On 22 June 2023 Judge P. Kevin Castel sanctioned the two lawyers and their firm $5,000, and required corrective letters be sent to every real judge whose name had been attached to a fabricated opinion. The fabrications were convincing precisely because the model is excellent at the *form* of a citation — plausible party names, realistic reporter numbers, correct structure — which is exactly what next-token prediction optimises.",
+        "On 22 June 2023 Judge P. Kevin Castel sanctioned the two lawyers and their firm $5,000, and required corrective letters be sent to every real judge whose name had been attached to a fabricated opinion. The fabrications were convincing precisely because the model is excellent at the *form* of a citation (plausible party names, realistic reporter numbers, correct structure) which is exactly what next-token prediction optimises.",
       source: {
-        label: "Mata v. Avianca, Inc., No. 1:22-cv-01461 (S.D.N.Y. 22 June 2023) — opinion and order on sanctions",
+        label: "Mata v. Avianca, Inc., No. 1:22-cv-01461 (S.D.N.Y. 22 June 2023): opinion and order on sanctions",
         url: "https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1:2022cv01461/575368/54/",
       },
     },
@@ -172,7 +172,7 @@ export const guide: Guide = {
       result:
         "In February 2024 the British Columbia Civil Resolution Tribunal rejected that argument, holding Air Canada responsible for all information on its website including the chatbot's, and awarding Moffatt damages for negligent misrepresentation covering the difference between the regular and bereavement fares. The practical lesson for anyone deploying these systems: an ungrounded model's output is your statement, legally as well as reputationally.",
       source: {
-        label: "Moffatt v. Air Canada, 2024 BCCRT 149 — analysis by McCarthy Tétrault",
+        label: "Moffatt v. Air Canada, 2024 BCCRT 149: analysis by McCarthy Tétrault",
         url: "https://www.mccarthy.ca/en/insights/blogs/techlex/moffatt-v-air-canada-misrepresentation-ai-chatbot",
       },
     },
@@ -180,11 +180,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Researchers measure where in a long context a model actually pays attention.",
       walkthrough:
-        "Liu and colleagues tested multi-document question answering and key-value retrieval, systematically varying the position of the relevant document within the context. If attention were uniform, position would not matter. It did: performance was highest when the needed information sat at the beginning or the end of the context, and degraded noticeably when it sat in the middle — a U-shaped curve.",
+        "Liu and colleagues tested multi-document question answering and key-value retrieval, systematically varying the position of the relevant document within the context. If attention were uniform, position would not matter. It did: performance was highest when the needed information sat at the beginning or the end of the context, and degraded noticeably when it sat in the middle, a U-shaped curve.",
       result:
         "The effect held even for models explicitly marketed as long-context, and performance fell overall as contexts grew longer. This is the empirical basis for two practical rules in this guide: put critical instructions at the start or end rather than buried in the middle, and retrieve the relevant passages instead of pasting everything and trusting the model to find them.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -194,11 +194,11 @@ export const guide: Guide = {
     {
       mistake: "Trusting citations, statistics, and quotes without checking",
       why: "Fabricated references are the model's most convincing failure. They have correct author-name patterns, plausible journal titles, and realistic page numbers, because format is exactly what next-token prediction masters.",
-      fix: "Treat every specific factual claim as unverified until checked. For production systems, ground the model in retrieved documents and require verbatim quotes — anything unquoted gets flagged.",
+      fix: "Treat every specific factual claim as unverified until checked. For production systems, ground the model in retrieved documents and require verbatim quotes: anything unquoted gets flagged.",
     },
     {
       mistake: "Believing temperature 0 means factual",
-      why: "It only means deterministic. A wrong answer at temperature 0 is a wrong answer you'll get every single time, which can be worse — the consistency reads as confidence.",
+      why: "It only means deterministic. A wrong answer at temperature 0 is a wrong answer you'll get every single time, which can be worse: the consistency reads as confidence.",
       fix: "Use low temperature for tasks where you want reproducibility, then handle accuracy separately through grounding, tool use, and verification. They're independent problems.",
     },
     {
@@ -209,7 +209,7 @@ export const guide: Guide = {
     {
       mistake: "Fine-tuning to add knowledge",
       why: "Fine-tuning is effective at teaching format, tone and task behaviour. It is an expensive and unreliable way to install facts, and it makes updating them a retraining job.",
-      fix: "Use retrieval for knowledge and fine-tuning for behaviour. If the requirement is 'the model should know our current pricing', that's a retrieval problem — pricing changes and parameters don't.",
+      fix: "Use retrieval for knowledge and fine-tuning for behaviour. If the requirement is 'the model should know our current pricing', that's a retrieval problem: pricing changes and parameters don't.",
     },
     {
       mistake: "Writing vague prompts and blaming the model",
@@ -224,23 +224,23 @@ export const guide: Guide = {
     {
       mistake: "Using an LLM where a deterministic system belongs",
       why: "Tax calculations, access control, and payment routing need guaranteed correctness. A probabilistic text generator cannot provide that, at any temperature.",
-      fix: "Reserve the model for language work — understanding, drafting, classifying, summarising — and let ordinary code handle anything where a wrong answer is unacceptable.",
+      fix: "Reserve the model for language work (understanding, drafting, classifying, summarising), and let ordinary code handle anything where a wrong answer is unacceptable.",
     },
   ],
 
   bestPractices: [
     "Give the model a role and a goal before the task. 'You are reviewing this for a non-technical executive who needs to make a budget decision' changes the output far more than adding adjectives.",
     "Show one worked example of the output you want. A single concrete example outperforms three paragraphs of description, because it removes ambiguity about format, depth and tone simultaneously.",
-    "Ask for reasoning before conclusions on analytical tasks. Generation is sequential, so tokens spent working through the problem improve the answer that follows — the reasoning isn't decoration.",
+    "Ask for reasoning before conclusions on analytical tasks. Generation is sequential, so tokens spent working through the problem improve the answer that follows, the reasoning isn't decoration.",
     "Ground factual work in supplied sources and require quotes. This converts an unverifiable claim into a checkable one, which is the single biggest reliability upgrade available.",
     "Give the model an explicit escape hatch: 'if the provided documents don't answer this, say so'. Without permission to decline, it will produce something rather than nothing.",
-    "Use structured output formats — JSON, tables, defined headings — when the result feeds another system. Free-form prose is unparseable and will break your pipeline eventually.",
+    "Use structured output formats (JSON, tables, defined headings) when the result feeds another system. Free-form prose is unparseable and will break your pipeline eventually.",
     "Split complex work into a chain of narrow steps. Extract, then verify, then summarise beats one prompt asking for all three, and each step becomes independently testable.",
     "Keep prompts in version control with a test set. Prompts are code: they have regressions, and you won't notice them without tests.",
   ],
 
   proTips: [
-    "When output quality drops in a long chat, start a fresh conversation with a clean summary of what matters. You're not being tidy — you're rebuilding a context window that has filled with noise the model must now attend across.",
+    "When output quality drops in a long chat, start a fresh conversation with a clean summary of what matters. You're not being tidy. You're rebuilding a context window that has filled with noise the model must now attend across.",
     "Ask the model to critique its own output in a separate turn: 'list three specific weaknesses in the draft above'. It's noticeably better at finding flaws than at avoiding them, because critique is a different task from generation.",
     "If a model repeatedly ignores an instruction, move it to the end of the prompt rather than the beginning. Recency helps, and it's a free fix before you rewrite anything.",
     "Test your prompts on your worst realistic input, not a clean one. Anything works on a tidy example; production traffic is malformed, truncated and off-topic, and that's what determines real reliability.",
@@ -261,7 +261,7 @@ export const guide: Guide = {
     "Learning something unfamiliar: ask for an explanation at your level, then ask it to test you. Being questioned surfaces gaps far more reliably than reading, and you can iterate until the explanation lands.",
     "Getting unstuck in writing: use the model for the terrible first draft you'd otherwise avoid producing. Editing something bad is psychologically much easier than facing an empty page.",
     "Thinking through decisions: describe your situation and ask for the strongest argument against your preferred option. It's a low-cost way to get an adversarial perspective when you don't want to poll your friends.",
-    "Translating jargon: paste a dense contract clause, medical letter or technical document and ask for plain language — then verify anything consequential with a qualified human.",
+    "Translating jargon: paste a dense contract clause, medical letter or technical document and ask for plain language: then verify anything consequential with a qualified human.",
     "Preparing for hard conversations: rehearse a salary negotiation or difficult feedback session with the model playing the other party. The practice is useful even though the simulation is imperfect.",
   ],
 
@@ -340,7 +340,7 @@ export const guide: Guide = {
     },
     {
       q: "Can a model learn from my conversation?",
-      a: "Not its parameters, which are frozen. Some products store your conversations and re-inject relevant parts, which feels like memory. Check the provider's data policy if you're handling anything sensitive — storage and training are separate questions.",
+      a: "Not its parameters, which are frozen. Some products store your conversations and re-inject relevant parts, which feels like memory. Check the provider's data policy if you're handling anything sensitive: storage and training are separate questions.",
     },
     {
       q: "How do I stop a model hallucinating?",
@@ -354,13 +354,13 @@ export const guide: Guide = {
     { name: "Tiktokenizer", what: "Shows exactly how text splits into tokens. Thirty seconds here explains a dozen odd model behaviours.", cost: "Free", url: "https://tiktokenizer.vercel.app" },
     { name: "LM Studio", what: "Run open-weight models locally. The best way to understand hardware costs and what smaller models can do.", cost: "Free", url: "https://lmstudio.ai" },
     { name: "Ollama", what: "Command-line local model runner. Simple, scriptable, good for experimenting without per-token costs.", cost: "Free", url: "https://ollama.com" },
-    { name: "LangSmith", what: "Tracing and evaluation for LLM applications — see exactly what was sent and returned at every step.", cost: "Freemium", url: "https://smith.langchain.com" },
+    { name: "LangSmith", what: "Tracing and evaluation for LLM applications, see exactly what was sent and returned at every step.", cost: "Freemium", url: "https://smith.langchain.com" },
     { name: "Promptfoo", what: "Test prompts against a fixed evaluation set and catch regressions. Treats prompts as code, which they are.", cost: "Free", url: "https://promptfoo.dev" },
   ],
 
   resources: [
-    { title: "The Illustrated Transformer — Jay Alammar", kind: "Docs", note: "The clearest visual explanation of attention available anywhere. Read it twice.", url: "https://jalammar.github.io/illustrated-transformer/" },
-    { title: "Let's build GPT from scratch — Andrej Karpathy", kind: "Video", note: "Two hours building a working language model line by line. Demystifies the architecture completely.", url: "https://www.youtube.com/watch?v=kCc8FmEb1nY" },
+    { title: "The Illustrated Transformer: Jay Alammar", kind: "Docs", note: "The clearest visual explanation of attention available anywhere. Read it twice.", url: "https://jalammar.github.io/illustrated-transformer/" },
+    { title: "Let's build GPT from scratch: Andrej Karpathy", kind: "Video", note: "Two hours building a working language model line by line. Demystifies the architecture completely.", url: "https://www.youtube.com/watch?v=kCc8FmEb1nY" },
     { title: "Anthropic's Prompt Engineering Guide", kind: "Docs", note: "Practical, specific, and written by people who see how these models fail at scale.", url: "https://docs.anthropic.com" },
     { title: "Attention Is All You Need", kind: "Paper", note: "The 2017 paper introducing the transformer. Short and surprisingly readable once you've seen the illustrated version.", url: "https://arxiv.org/abs/1706.03762" },
     { title: "Simon Willison's blog", kind: "Newsletter", note: "Consistently sober, hands-on writing about what these tools actually do. A good antidote to hype in both directions.", url: "https://simonwillison.net" },

@@ -9,7 +9,12 @@
       "Bash(echo \"tsc=$?\")",
       "Bash(git diff *)",
       "Bash(grep -oE \"[a-z]+, \\(the|it|they|that|this|you|we\\) [a-z]+ \\(is|are|was|were|has|have|will|can\\) [^\\\\\"]{0,40}\")",
-      "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/verify.mjs\")"
+      "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/verify.mjs\")",
+      "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/survey.mjs\")",
+      "Bash(rm -rf \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/guides-backup\")",
+      "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/nodash.mjs\")",
+      "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/nodash2.mjs\")",
+      "Bash(node \"C:/Users/COSMO/AppData/Local/Temp/claude/c--Users-COSMO-Downloads-fossilite-website-main/519328f9-ba2e-4cf5-a94f-a0cf75b86c03/splicecheck.mjs\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\COSMO\\AppData\\Local\\Temp\\claude\\c--Users-COSMO-Downloads-fossilite-website-main\\519328f9-ba2e-4cf5-a94f-a0cf75b86c03"

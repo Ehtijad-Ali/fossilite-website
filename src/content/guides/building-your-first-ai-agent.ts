@@ -22,13 +22,13 @@ export const guide: Guide = {
   readingTime: 15,
 
   intro: [
-    "Most agent tutorials start by installing a framework, which means you end up with something that works and no idea why. This one goes the other way: you'll write the loop yourself, in about forty lines, and understand every one of them. Frameworks are useful — but they're much easier to evaluate once you know what they're doing on your behalf.",
-    "The whole thing rests on one mechanism. You describe some functions to the model. When the model wants to use one, it doesn't run it — it returns a structured request saying which function and with what arguments. Your code runs it, sends the result back, and the model continues. That request-execute-return cycle, wrapped in a loop, is an agent.",
+    "Most agent tutorials start by installing a framework, which means you end up with something that works and no idea why. This one goes the other way: you'll write the loop yourself, in about forty lines, and understand every one of them. Frameworks are useful: but they're much easier to evaluate once you know what they're doing on your behalf.",
+    "The whole thing rests on one mechanism. You describe some functions to the model. When the model wants to use one, it doesn't run it. It returns a structured request saying which function and with what arguments. Your code runs it, sends the result back, and the model continues. That request-execute-return cycle, wrapped in a loop, is an agent.",
     "By the end you'll have a working agent that calls real tools, handles failures, and stops when it should. Every code block below runs as written. You need Python, an Anthropic API key, and about an hour.",
   ],
 
   whyItMatters: [
-    "Building one by hand is the fastest way to develop judgement about the whole category. Once you've written the loop, framework documentation stops being mysterious — you can see which parts are helping and which are wrapping four lines in an abstraction. That judgement is worth more than any specific framework you might learn.",
+    "Building one by hand is the fastest way to develop judgement about the whole category. Once you've written the loop, framework documentation stops being mysterious. You can see which parts are helping and which are wrapping four lines in an abstraction. That judgement is worth more than any specific framework you might learn.",
     "It also makes the failure modes concrete rather than theoretical. You'll watch the model call a tool with the wrong argument type, retry an action that just failed, and confidently report success on something it didn't do. Reading about compounding error is abstract; watching your own agent loop forty times because a tool returned an unhelpful error message is not.",
     "And it's the shortest path to knowing whether an agent is the right shape for your problem at all. Many tasks people hand to agents are better served by a fixed sequence with one model call in the middle: cheaper, faster, far easier to debug. You can only make that call confidently once you've built both.",
   ],
@@ -86,7 +86,7 @@ export const guide: Guide = {
     {
       term: "The tool runner versus the manual loop",
       explain:
-        "The SDK ships a tool runner that drives the loop for you. Write the manual loop once to understand it, then use the runner for real work — it handles the plumbing and still lets you intervene per turn.",
+        "The SDK ships a tool runner that drives the loop for you. Write the manual loop once to understand it, then use the runner for real work. It handles the plumbing and still lets you intervene per turn.",
       detail:
         "Approval gates, logging and result modification don't require a manual loop. The runner exposes per-turn hooks for exactly those cases.",
     },
@@ -97,7 +97,7 @@ export const guide: Guide = {
       title: "1. Setup and a single tool call",
       language: "python",
       intro:
-        "Start with the smallest complete thing: one tool, one call, no loop. Run this first and read the response object — seeing the actual `tool_use` block makes everything that follows obvious.",
+        "Start with the smallest complete thing: one tool, one call, no loop. Run this first and read the response object. Seeing the actual `tool_use` block makes everything that follows obvious.",
       code: `import os
 import anthropic
 
@@ -141,7 +141,7 @@ for block in response.content:
         print("input:", block.input)        # -> {"city": "Lisbon"}
         print("id:", block.id)              # you'll need this to reply`,
       note:
-        "Note what did NOT happen: no weather was fetched. The model returned a request. Nothing runs until your code decides to run it — that gap is where every guardrail in a production agent lives.",
+        "Note what did NOT happen: no weather was fetched. The model returned a request. Nothing runs until your code decides to run it. That gap is where every guardrail in a production agent lives.",
     },
     {
       title: "2. Implement the tool and return the result",
@@ -163,7 +163,7 @@ response = client.messages.create(
 # must be present or the tool_result below has nothing to pair with.
 messages.append({"role": "assistant", "content": response.content})
 
-# Collect every tool_use block — a single response may contain several.
+# Collect every tool_use block: a single response may contain several.
 tool_results = []
 for block in response.content:
     if block.type == "tool_use":
@@ -182,19 +182,19 @@ final = client.messages.create(
 )
 print(final.content[0].text)`,
       note:
-        "The `tool_use_id` pairing is strict. Returning results in a different message, or omitting one, produces an API error rather than a silent degradation — which is the good outcome.",
+        "The `tool_use_id` pairing is strict. Returning results in a different message, or omitting one, produces an API error rather than a silent degradation, which is the good outcome.",
     },
     {
       title: "3. The agent loop",
       language: "python",
       intro:
-        "Wrap that turn in a loop and you have an agent. The loop continues while `stop_reason` is `tool_use` and stops on `end_turn` — or when it hits the step limit, which is doing more work than it looks like.",
+        "Wrap that turn in a loop and you have an agent. The loop continues while `stop_reason` is `tool_use` and stops on `end_turn`. Or when it hits the step limit, which is doing more work than it looks like.",
       code: `import json
 
 MAX_STEPS = 10  # not optional: an uncapped agent can loop until your bill notices
 
 def run_tool(name: str, args: dict) -> tuple[str, bool]:
-    """Return (output, is_error). Never raise — the model can't see exceptions."""
+    """Return (output, is_error). Never raise: the model can't see exceptions."""
     try:
         if name == "get_weather":
             return get_weather(**args), False
@@ -273,7 +273,7 @@ print(run_agent("Compare the weather in Lisbon and Manchester."))`,
                 output, is_error = (
                     f"You have already called {block.name} with these exact "
                     f"arguments {seen_calls[signature] - 1} times and it did not "
-                    f"work. Do not call it again with the same input — try "
+                    f"work. Do not call it again with the same input: try"
                     f"different arguments or a different approach.",
                     True,
                 )
@@ -296,7 +296,7 @@ print(run_agent("Compare the weather in Lisbon and Manchester."))`,
       title: "5. A human approval gate",
       language: "python",
       intro:
-        "Anything irreversible needs a person in front of it. The gate belongs in the tool function, not in the prompt — a prompt is a request, and a request is not a control.",
+        "Anything irreversible needs a person in front of it. The gate belongs in the tool function, not in the prompt. A prompt is a request, and a request is not a control.",
       code: `DESTRUCTIVE = {"send_email", "delete_record", "make_payment"}
 
 def run_tool_with_approval(name: str, args: dict) -> tuple[str, bool]:
@@ -309,7 +309,7 @@ def run_tool_with_approval(name: str, args: dict) -> tuple[str, bool]:
             return "The user declined this action. Do not attempt it again.", False
     return run_tool(name, args)`,
       note:
-        "In a real product this becomes a queued approval rather than an input() prompt — but the shape is identical, and the important property is the same: the model cannot reach the action without passing through code you control.",
+        "In a real product this becomes a queued approval rather than an input() prompt. But the shape is identical, and the important property is the same: the model cannot reach the action without passing through code you control.",
     },
     {
       title: "6. The same agent with the SDK tool runner",
@@ -359,7 +359,7 @@ print(final_message.content[0].text)`,
     },
     {
       title: "Close the cycle by hand",
-      body: "Work through example 2 without copying it — type it. Deliberately break the tool_use_id pairing and read the error. Deliberately append only the text instead of the full content and watch what happens.",
+      body: "Work through example 2 without copying it: type it. Deliberately break the tool_use_id pairing and read the error. Deliberately append only the text instead of the full content and watch what happens.",
       effort: "1 hour",
       outcome: "You understand why the full content block must be appended.",
     },
@@ -389,7 +389,7 @@ print(final_message.content[0].text)`,
     },
     {
       title: "Rebuild it with the tool runner",
-      body: "Port your agent to example 6. Compare the two implementations line by line — you'll now see exactly what the runner is handling and what it leaves to you.",
+      body: "Port your agent to example 6. Compare the two implementations line by line. You'll now see exactly what the runner is handling and what it leaves to you.",
       effort: "1–2 hours",
       outcome: "You can choose between manual and framework on evidence.",
     },
@@ -408,7 +408,7 @@ print(final_message.content[0].text)`,
       walkthrough:
         "A lawyer used ChatGPT to research precedent and filed a brief citing six non-existent cases. Asked directly whether the cases were real, the model confirmed they were and supplied further detail.",
       result:
-        "The court sanctioned the lawyers $5,000 in June 2023. For agent builders the lesson is architectural: never implement a verification step as 'ask the model whether it's right'. A check must query an independent source or a deterministic system — asking again produces the appearance of verification and none of the substance.",
+        "The court sanctioned the lawyers $5,000 in June 2023. For agent builders the lesson is architectural: never implement a verification step as 'ask the model whether it's right'. A check must query an independent source or a deterministic system. Asking again produces the appearance of verification and none of the substance.",
       source: {
         label: "Mata v. Avianca, Inc., No. 1:22-cv-01461 (S.D.N.Y. 22 June 2023)",
         url: "https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1:2022cv01461/575368/54/",
@@ -420,9 +420,9 @@ print(final_message.content[0].text)`,
       walkthrough:
         "Liu and colleagues varied the position of relevant information inside the context and measured retrieval accuracy. Performance peaked at the beginning and end and degraded in the middle, holding even for long-context models.",
       result:
-        "An agent loop accumulates state with every turn, steadily pushing the original goal and constraints toward the middle — the worst-attended position. That's the empirical reason for summarising completed steps and re-stating the goal at the end of each prompt, rather than trusting a system prompt issued once at step zero.",
+        "An agent loop accumulates state with every turn, steadily pushing the original goal and constraints toward the middle, the worst-attended position. That's the empirical reason for summarising completed steps and re-stating the goal at the end of each prompt, rather than trusting a system prompt issued once at step zero.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -432,7 +432,7 @@ print(final_message.content[0].text)`,
       walkthrough:
         "A shape you will produce yourself on the first attempt. A tool validates its input and returns the string 'Error' on failure. The model receives it, has no information about what was wrong, and reasonably concludes the sensible next action is to try the tool again. Same tool, same arguments. The loop continues until the step limit intervenes.",
       result:
-        "Rewriting the error to 'Invalid date format: expected YYYY-MM-DD, got 03/04/2026' typically fixes the behaviour in one turn. Tool error messages are part of the prompt, not part of your logs — write them for the model that has to act on them.",
+        "Rewriting the error to 'Invalid date format: expected YYYY-MM-DD, got 03/04/2026' typically fixes the behaviour in one turn. Tool error messages are part of the prompt, not part of your logs. Write them for the model that has to act on them.",
     },
   ],
 
@@ -444,7 +444,7 @@ print(final_message.content[0].text)`,
     },
     {
       mistake: "Returning tool results in separate messages",
-      why: "When one response contains several `tool_use` blocks, splitting the results across messages silently trains the model to stop making parallel calls — every later run becomes slower for no visible reason.",
+      why: "When one response contains several `tool_use` blocks, splitting the results across messages silently trains the model to stop making parallel calls. Every later run becomes slower for no visible reason.",
       fix: "Collect all results and send them in one user message, in a single list.",
     },
     {
@@ -454,12 +454,12 @@ print(final_message.content[0].text)`,
     },
     {
       mistake: "Shipping without a step limit",
-      why: "Agents loop. A tool that keeps failing, or two actions that undo each other, will run until something external stops them — usually a bill or a rate limit.",
+      why: "Agents loop. A tool that keeps failing, or two actions that undo each other, will run until something external stops them: usually a bill or a rate limit.",
       fix: "Cap iterations in code from the first prototype, and log when the cap is hit so you notice the pattern.",
     },
     {
       mistake: "Putting constraints in the system prompt",
-      why: "'Never spend more than £100' is a request to a probabilistic system. It will usually be honoured, and the failures cluster on unusual inputs — exactly when the constraint matters.",
+      why: "'Never spend more than £100' is a request to a probabilistic system. It will usually be honoured, and the failures cluster on unusual inputs: exactly when the constraint matters.",
       fix: "Enforce anything that matters in the tool function or the surrounding code. The prompt explains intent; code makes it true.",
     },
     {
@@ -481,7 +481,7 @@ print(final_message.content[0].text)`,
     "Cap steps, tokens and spend per run, in code, from the first prototype.",
     "Detect repeated identical calls and interrupt them with a corrective tool result.",
     "Put human approval in front of every irreversible action, and prepare the action fully so approving is one decision.",
-    "Give tools the narrowest permissions that accomplish the task — a read-only query rather than database write access.",
+    "Give tools the narrowest permissions that accomplish the task: a read-only query rather than database write access.",
     "Enable adaptive thinking for multi-step work; it improves tool selection and makes the trace readable.",
     "Test with your worst realistic input, not a clean one. Production traffic is malformed and off-topic.",
   ],
@@ -506,7 +506,7 @@ print(final_message.content[0].text)`,
 
   lifeApplications: [
     "Understanding what the 'agent' features in your existing tools actually do, and what permissions you granted them.",
-    "Automating tedious personal work — file organisation, data extraction, research summaries — where you're the only stakeholder and errors are cheap.",
+    "Automating tedious personal work (file organisation, data extraction, research summaries) where you're the only stakeholder and errors are cheap.",
     "Building intuition for delegation generally: irreversible steps warrant a checkpoint, reversible ones don't.",
     "Recognising compounding error in your own multi-step plans. Ten steps that each usually work is not a plan that usually works.",
   ],
@@ -536,7 +536,7 @@ print(final_message.content[0].text)`,
     {
       title: "Add a real tool with real failures",
       brief:
-        "Replace the fake weather function with an actual HTTP call. Handle timeouts, non-200 responses, and malformed JSON — each as a distinct informative error.",
+        "Replace the fake weather function with an actual HTTP call. Handle timeouts, non-200 responses, and malformed JSON: each as a distinct informative error.",
       success: "The agent recovers from a network failure without you intervening.",
       time: "2–3 hours",
     },
@@ -566,7 +566,7 @@ print(final_message.content[0].text)`,
   faqs: [
     {
       q: "Do I need a framework to build an agent?",
-      a: "No — the core loop is about forty lines. Build it manually first to understand the mechanism, then adopt the SDK's tool runner or a framework for production, where retries, tracing and orchestration save real work.",
+      a: "No: the core loop is about forty lines. Build it manually first to understand the mechanism, then adopt the SDK's tool runner or a framework for production, where retries, tracing and orchestration save real work.",
     },
     {
       q: "How many tools should an agent have?",
@@ -582,7 +582,7 @@ print(final_message.content[0].text)`,
     },
     {
       q: "How do I stop an agent doing something dangerous?",
-      a: "Two mechanisms: give it the narrowest tool permissions that work, and put approval in front of irreversible actions. Prompt instructions are a request, not a control — they belong alongside code enforcement, not instead of it.",
+      a: "Two mechanisms: give it the narrowest tool permissions that work, and put approval in front of irreversible actions. Prompt instructions are a request, not a control. They belong alongside code enforcement, not instead of it.",
     },
     {
       q: "What does the step limit cost me if it's too low?",
@@ -590,7 +590,7 @@ print(final_message.content[0].text)`,
     },
     {
       q: "Can the agent read files or run commands?",
-      a: "Yes — you implement those as tools like any other. That's exactly where least privilege and approval gates matter most, because the blast radius of a misunderstanding is the whole filesystem.",
+      a: "Yes. You implement those as tools like any other. That's exactly where least privilege and approval gates matter most, because the blast radius of a misunderstanding is the whole filesystem.",
     },
   ],
 
@@ -603,7 +603,7 @@ print(final_message.content[0].text)`,
   ],
 
   resources: [
-    { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "Unusually sober vendor guidance, including the argument that most tasks don't need an agent at all.", url: "https://www.anthropic.com/research/building-effective-agents" },
+    { title: "Building Effective Agents: Anthropic", kind: "Docs", note: "Unusually sober vendor guidance, including the argument that most tasks don't need an agent at all.", url: "https://www.anthropic.com/research/building-effective-agents" },
     { title: "Anthropic tool use documentation", kind: "Docs", note: "The authoritative reference for tool schemas, tool_choice and the tool runner.", url: "https://docs.anthropic.com" },
     { title: "ReAct: Synergizing Reasoning and Acting in Language Models", kind: "Paper", note: "The paper behind the reason-then-act loop that most agents use.", url: "https://arxiv.org/abs/2210.03629" },
     { title: "OWASP Top 10 for LLM Applications", kind: "Docs", note: "Prompt injection and agent-specific risks, written for people shipping to real users.", url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/" },

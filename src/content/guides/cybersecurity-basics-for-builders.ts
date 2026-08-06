@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "cybersecurity-basics-for-builders",
   seoTitle: "Cybersecurity Basics Every Builder Should Know",
   metaDescription:
-    "The defensive fundamentals that actually prevent breaches — credentials, access, patching and backups — based on how attacks really begin.",
+    "The defensive fundamentals that actually prevent breaches (credentials, access, patching and backups) based on how attacks really begin.",
   title: "Cybersecurity Basics for Builders",
   keywords: [
     "cybersecurity basics",
@@ -23,13 +23,13 @@ export const guide: Guide = {
 
   intro: [
     "Security is presented to most people as an intimidating specialism full of exotic threats, which has the unfortunate effect of making the boring, effective measures feel inadequate. If the picture in your head is a hooded figure defeating encryption, then turning on multi-factor authentication feels like bringing an umbrella to a war.",
-    "The evidence points somewhere far more mundane. Attacks overwhelmingly begin with a stolen password, a person clicking something, or a system nobody patched. Not clever cryptography — credentials and human beings. That's good news, because it means the highest-value defences are cheap, boring, and available to you this afternoon.",
+    "The evidence points somewhere far more mundane. Attacks overwhelmingly begin with a stolen password, a person clicking something, or a system nobody patched. Not clever cryptography: credentials and human beings. That's good news, because it means the highest-value defences are cheap, boring, and available to you this afternoon.",
     "This guide is the defensive fundamentals for people who build and run things: developers, founders, freelancers, anyone responsible for a system or a company's data. It is deliberately not about becoming a security specialist. It's about closing the doors that attacks actually come through.",
   ],
 
   whyItMatters: [
-    "The base rate is the argument. If most breaches start with credentials and people rather than sophisticated technical exploits, then most of your protection comes from a small number of unglamorous controls. You do not need to defend against everything to substantially reduce your risk — you need to close the common paths.",
-    "For a small organisation the stakes are also disproportionate. A large company absorbs an incident; a small one can be ended by one. Customer data loss, a drained account, ransomware on the only copy of your work — these are survivable with preparation and frequently terminal without it.",
+    "The base rate is the argument. If most breaches start with credentials and people rather than sophisticated technical exploits, then most of your protection comes from a small number of unglamorous controls. You do not need to defend against everything to substantially reduce your risk. You need to close the common paths.",
+    "For a small organisation the stakes are also disproportionate. A large company absorbs an incident; a small one can be ended by one. Customer data loss, a drained account, ransomware on the only copy of your work. These are survivable with preparation and frequently terminal without it.",
     "There's a trust dimension that arrives sooner than most founders expect. The first serious customer, the first enterprise deal, the first regulated partner will ask what you do about access control, backups and incident response. Having sensible answers is a commercial asset; assembling them under deadline during a security questionnaire is not.",
   ],
 
@@ -88,7 +88,7 @@ export const guide: Guide = {
       explain:
         "API keys, passwords and tokens committed to a repository stay in its history even after removal, and public repositories are scanned continuously by automated tools.",
       detail:
-        "Use environment variables or a secret manager, add secret scanning to your pipeline, and treat any exposed key as compromised — rotate it rather than assessing whether anyone noticed.",
+        "Use environment variables or a secret manager, add secret scanning to your pipeline, and treat any exposed key as compromised: rotate it rather than assessing whether anyone noticed.",
     },
     {
       term: "Encryption in transit and at rest",
@@ -102,7 +102,7 @@ export const guide: Guide = {
       explain:
         "Security is about reducing likelihood and limiting damage, not achieving certainty. Planning for the incident is part of the discipline, not an admission of failure.",
       detail:
-        "A one-page plan — who to call, how to isolate a system, where the backups are, what you must tell customers and when — is worth far more than it costs, and is impossible to write calmly during an incident.",
+        "A one-page plan (who to call, how to isolate a system, where the backups are, what you must tell customers and when) is worth far more than it costs, and is impossible to write calmly during an incident.",
     },
   ],
 
@@ -117,7 +117,7 @@ export const guide: Guide = {
       title: "Inventory what you actually have",
       body: "List every system holding data or granting access: cloud accounts, repositories, SaaS tools, servers, databases, third-party integrations. Note who has access to each. Most people find something they'd forgotten.",
       effort: "2–4 hours",
-      outcome: "A written inventory — the thing every later control depends on.",
+      outcome: "A written inventory: the thing every later control depends on.",
     },
     {
       title: "Audit and cut access",
@@ -133,13 +133,13 @@ export const guide: Guide = {
     },
     {
       title: "Get secrets out of your code",
-      body: "Scan your repositories for committed credentials — including history. Rotate anything found rather than just deleting it. Move to environment variables or a secret manager and enable scanning going forward.",
+      body: "Scan your repositories for committed credentials: including history. Rotate anything found rather than just deleting it. Move to environment variables or a secret manager and enable scanning going forward.",
       effort: "4–8 hours",
       outcome: "No live secrets in version control, and a check that stops new ones.",
     },
     {
       title: "Test a restore",
-      body: "Not verify a backup ran — actually restore it somewhere and confirm the data is usable and complete. Time it. Then confirm at least one copy is beyond reach of the systems it protects.",
+      body: "Not verify a backup ran. Actually restore it somewhere and confirm the data is usable and complete. Time it. Then confirm at least one copy is beyond reach of the systems it protects.",
       effort: "3–6 hours",
       outcome: "A restore you have personally performed, with a known duration.",
     },
@@ -164,7 +164,7 @@ export const guide: Guide = {
       walkthrough:
         "Verizon's annual Data Breach Investigations Report analyses thousands of real incidents and breaches to identify how attackers gained initial access. It's the closest thing the field has to a base-rate reference, and it consistently contradicts the popular picture of how attacks work.",
       result:
-        "In the 2025 report, the human element — errors, social engineering and misuse — featured in 60% of breaches. 22% began with credential abuse, and 16% with phishing. Among Basic Web Application attacks, 88% involved stolen credentials. Read those numbers as a priority list: unique passwords, MFA everywhere, and people who feel comfortable verifying an odd request will address a large share of realistic risk before you buy a single security product.",
+        "In the 2025 report, the human element (errors, social engineering and misuse) featured in 60% of breaches. 22% began with credential abuse, and 16% with phishing. Among Basic Web Application attacks, 88% involved stolen credentials. Read those numbers as a priority list: unique passwords, MFA everywhere, and people who feel comfortable verifying an odd request will address a large share of realistic risk before you buy a single security product.",
       source: {
         label: "Verizon 2025 Data Breach Investigations Report",
         url: "https://www.verizon.com/business/resources/reports/2025-dbir-data-breach-investigations-report.pdf",
@@ -176,7 +176,7 @@ export const guide: Guide = {
       walkthrough:
         "A pattern worth checking against your own setup. Backups run nightly to a network drive that the main server mounts permanently, so restores are convenient. Ransomware reaches the server. Because the backup location is a mounted, writable path from that machine, it is encrypted too. Every backup ran successfully, every night, and none of them can be restored.",
       result:
-        "The requirement is not more frequent backups but unreachable ones: at least one copy the production system cannot write to — immutable object storage, an offline copy, or a separate account with its own credentials. And the only way to know a restore works is to have performed one.",
+        "The requirement is not more frequent backups but unreachable ones: at least one copy the production system cannot write to: immutable object storage, an offline copy, or a separate account with its own credentials. And the only way to know a restore works is to have performed one.",
     },
     {
       kind: "illustration",
@@ -184,7 +184,7 @@ export const guide: Guide = {
       walkthrough:
         "A shape that keeps working because it exploits process rather than software. A message arrives from a senior person's name, referencing a real project, explaining that a supplier's bank details have changed and the payment is urgent and confidential. Nothing technical has been compromised. The message is simply well-informed and well-timed, and the urgency and confidentiality are there specifically to prevent verification.",
       result:
-        "The control is procedural: any change to payment details is verified by contacting the counterparty on a number you already held, never one supplied in the message. Make it a rule that applies regardless of seniority, so that verifying is compliance rather than suspicion — the social cost of checking is the actual vulnerability.",
+        "The control is procedural: any change to payment details is verified by contacting the counterparty on a number you already held, never one supplied in the message. Make it a rule that applies regardless of seniority, so that verifying is compliance rather than suspicion. The social cost of checking is the actual vulnerability.",
     },
   ],
 
@@ -197,7 +197,7 @@ export const guide: Guide = {
     {
       mistake: "Using SMS as your second factor and considering it done",
       why: "SMS is interceptable and vulnerable to SIM-swap attacks. It's meaningfully better than nothing and meaningfully worse than the alternatives.",
-      fix: "Use an authenticator app as the default, and hardware keys for accounts that could destroy the business — email, cloud provider, domain registrar, banking.",
+      fix: "Use an authenticator app as the default, and hardware keys for accounts that could destroy the business: email, cloud provider, domain registrar, banking.",
     },
     {
       mistake: "Granting admin rights because it's easier",
@@ -296,7 +296,7 @@ export const guide: Guide = {
     {
       title: "The out-of-band drill",
       brief:
-        "Agree a verification rule for payment and credential changes. Then test it — have someone send a plausible request and see what happens.",
+        "Agree a verification rule for payment and credential changes. Then test it. Have someone send a plausible request and see what happens.",
       success: "The request gets verified through a separate channel without awkwardness.",
       time: "2 hours",
     },
@@ -328,7 +328,7 @@ export const guide: Guide = {
     },
     {
       q: "How often should passwords be changed?",
-      a: "Forced periodic rotation is no longer recommended — it drives predictable variations and reuse. Change a password when there's a reason: a suspected compromise, a breach notification, or someone with access leaving.",
+      a: "Forced periodic rotation is no longer recommended. It drives predictable variations and reuse. Change a password when there's a reason: a suspected compromise, a breach notification, or someone with access leaving.",
     },
     {
       q: "Do I need a security specialist?",
@@ -336,11 +336,11 @@ export const guide: Guide = {
     },
     {
       q: "What should I do if I think we've been breached?",
-      a: "Follow your written plan. Broadly: preserve evidence rather than wiping, isolate affected systems, rotate credentials, and check your legal notification obligations — several regimes impose deadlines measured in hours.",
+      a: "Follow your written plan. Broadly: preserve evidence rather than wiping, isolate affected systems, rotate credentials, and check your legal notification obligations: several regimes impose deadlines measured in hours.",
     },
     {
       q: "Is the cloud less secure than my own server?",
-      a: "Usually more secure for the underlying infrastructure, which major providers maintain better than most organisations can. The risk shifts to configuration — public storage buckets, over-permissive keys, unmanaged access — which is entirely yours.",
+      a: "Usually more secure for the underlying infrastructure, which major providers maintain better than most organisations can. The risk shifts to configuration (public storage buckets, over-permissive keys, unmanaged access) which is entirely yours.",
     },
   ],
 
@@ -368,7 +368,7 @@ export const guide: Guide = {
   relatedGuides: ["prompt-engineering-fundamentals", "evaluating-ai-systems"],
 
   conclusion: [
-    "None of that requires a specialist or a budget. Pick the two you haven't done — for most people that's MFA on everything and testing a restore — and do them this week. It's the highest return available on a few hours of unglamorous work.",
+    "None of that requires a specialist or a budget. Pick the two you haven't done (for most people that's MFA on everything and testing a restore), and do them this week. It's the highest return available on a few hours of unglamorous work.",
   ],
 
 };

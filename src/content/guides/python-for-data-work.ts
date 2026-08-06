@@ -29,7 +29,7 @@ export const guide: Guide = {
 
   whyItMatters: [
     "The practical reason is scale and repeatability. A spreadsheet analysis is a one-off performance; a script is a machine you can point at next month's data. The first time you re-run a report in four seconds that used to take you a morning, the investment pays for itself permanently.",
-    "The more serious reason is that code is auditable in a way spreadsheets are not. In a script, every transformation is a visible line that someone can review and version-control. In a spreadsheet, the logic hides inside cells, and an error can sit undetected in a formula range for years — with consequences that have reached national policy, as one of the documented cases below shows.",
+    "The more serious reason is that code is auditable in a way spreadsheets are not. In a script, every transformation is a visible line that someone can review and version-control. In a spreadsheet, the logic hides inside cells, and an error can sit undetected in a formula range for years. With consequences that have reached national policy, as one of the documented cases below shows.",
     "There's also a career effect that's difficult to overstate. Being the person on a team who can answer a data question in an hour instead of asking someone else and waiting three days changes what work comes to you. It's one of the highest-leverage skills available to someone who isn't a full-time engineer.",
   ],
 
@@ -44,7 +44,7 @@ export const guide: Guide = {
     {
       term: "The DataFrame is the unit of work",
       explain:
-        "pandas gives you a DataFrame — a table with named columns and typed values. Nearly all data work is a sequence of operations on DataFrames: filter rows, select columns, group and aggregate, join to another table, write out.",
+        "pandas gives you a DataFrame: a table with named columns and typed values. Nearly all data work is a sequence of operations on DataFrames: filter rows, select columns, group and aggregate, join to another table, write out.",
       detail:
         "If you know spreadsheets, a DataFrame is a sheet you manipulate with instructions instead of with the mouse. The mental model transfers almost directly; the difference is that every step is recorded.",
     },
@@ -67,7 +67,7 @@ export const guide: Guide = {
       explain:
         "Group rows by some key, compute something within each group, put the results back together. `groupby` is the workhorse of analysis and the operation that most often replaces an entire spreadsheet of pivot tables.",
       detail:
-        "Once this clicks, a large class of questions — per-customer, per-month, per-region — becomes one line rather than a manual process.",
+        "Once this clicks, a large class of questions (per-customer, per-month, per-region) becomes one line rather than a manual process.",
     },
     {
       term: "Joins, and the row count check",
@@ -86,7 +86,7 @@ export const guide: Guide = {
     {
       term: "Reproducibility is a design choice",
       explain:
-        "An analysis is reproducible if someone else — including you in six months — can run it and get the same numbers. That requires the code, the data version, and the environment to be recorded.",
+        "An analysis is reproducible if someone else (including you in six months) can run it and get the same numbers. That requires the code, the data version, and the environment to be recorded.",
       detail:
         "Concretely: no manual edits to intermediate files, no hardcoded absolute paths, pinned library versions, and raw data treated as read-only.",
     },
@@ -102,13 +102,13 @@ export const guide: Guide = {
   learningPath: [
     {
       title: "Learn the minimum syntax, fast",
-      body: "Variables, the five data structures, if/else, for loops, functions, imports, and reading an error message. Deliberately skip classes, decorators, async and metaprogramming — you can add them later if you ever need them.",
+      body: "Variables, the five data structures, if/else, for loops, functions, imports, and reading an error message. Deliberately skip classes, decorators, async and metaprogramming. You can add them later if you ever need them.",
       effort: "10–15 hours",
       outcome: "You can write and debug a 30-line script without copying it from somewhere.",
     },
     {
       title: "Load something real and look at it",
-      body: "Take a messy CSV — ideally from your own work. Load it with pandas and run `head`, `info`, `describe`, `dtypes`, `isna().sum()` and `value_counts()` on the categorical columns. Write down every problem you find before fixing any of them.",
+      body: "Take a messy CSV: ideally from your own work. Load it with pandas and run `head`, `info`, `describe`, `dtypes`, `isna().sum()` and `value_counts()` on the categorical columns. Write down every problem you find before fixing any of them.",
       effort: "3–4 hours",
       outcome: "A written list of the specific data quality issues in a real file.",
     },
@@ -138,13 +138,13 @@ export const guide: Guide = {
     },
     {
       title: "Learn enough plotting to communicate",
-      body: "Line, bar, scatter and histogram, with axis labels and a readable title. Resist the urge to learn the whole library — four chart types cover most communication needs.",
+      body: "Line, bar, scatter and histogram, with axis labels and a readable title. Resist the urge to learn the whole library: four chart types cover most communication needs.",
       effort: "4–6 hours",
       outcome: "You can produce a chart someone else understands without narration.",
     },
     {
       title: "Automate something you do repeatedly",
-      body: "Take a recurring manual task — a weekly report, a reconciliation, a data pull — and script it end to end. This is where the learning consolidates, because now the code has to work when you're not watching.",
+      body: "Take a recurring manual task (a weekly report, a reconciliation, a data pull), and script it end to end. This is where the learning consolidates, because now the code has to work when you're not watching.",
       effort: "10–20 hours",
       outcome: "A task that used to take a morning now takes a command.",
     },
@@ -159,7 +159,7 @@ export const guide: Guide = {
       result:
         "Recalculated, the average real GDP growth for countries above the 90% threshold was 2.2% rather than −0.1%. The point for anyone doing data work is not that economists are careless. It's that the error was invisible for years because the logic lived inside cell references rather than in reviewable, re-runnable code. This is the strongest available argument for scripting analysis rather than clicking it.",
       source: {
-        label: "Herndon, Ash & Pollin (2013), PERI/UMass Amherst — critique of Reinhart and Rogoff",
+        label: "Herndon, Ash & Pollin (2013), PERI/UMass Amherst: critique of Reinhart and Rogoff",
         url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/",
       },
     },
@@ -167,7 +167,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The join that silently doubles your revenue.",
       walkthrough:
-        "A shape worth recognising because it produces confident wrong numbers rather than errors. You merge an orders table with a customers table on customer ID. The customers table turns out to contain two rows for a handful of customers — a duplicate from a historic import. Every order for those customers now appears twice. The script runs cleanly. The totals are wrong, and they're wrong in a direction that looks like a good month.",
+        "A shape worth recognising because it produces confident wrong numbers rather than errors. You merge an orders table with a customers table on customer ID. The customers table turns out to contain two rows for a handful of customers, a duplicate from a historic import. Every order for those customers now appears twice. The script runs cleanly. The totals are wrong, and they're wrong in a direction that looks like a good month.",
       result:
         "The habit that catches this: record the row count before and after every join and compare it against what you expected. If a merge changes the row count and you didn't intend it to, stop. Add it as an assertion rather than a mental note, because the mental note will not survive the third month.",
     },
@@ -194,7 +194,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Editing raw data by hand",
-      why: "It destroys reproducibility instantly. Nobody — including you — can now regenerate the result from source, and the fix you applied is undocumented.",
+      why: "It destroys reproducibility instantly. Nobody (including you) can now regenerate the result from source, and the fix you applied is undocumented.",
       fix: "Treat raw data as read-only. Every correction happens in code, so it's visible, reviewable, and reapplied automatically next time.",
     },
     {
@@ -250,10 +250,10 @@ export const guide: Guide = {
 
   lifeApplications: [
     "Personal finance: parsing bank exports to categorise spending and see patterns your banking app's categories obscure.",
-    "Any hobby with data behind it — training logs, sports statistics, game records, reading history — where the interesting questions aren't the ones the app offers.",
+    "Any hobby with data behind it (training logs, sports statistics, game records, reading history) where the interesting questions aren't the ones the app offers.",
     "Automating the tedious: renaming and organising files, extracting information from documents, converting between formats.",
     "Checking claims yourself. When a statistic in an article seems off, being able to find the underlying dataset and look is a useful form of independence.",
-    "Learning to think in transformations — take input, apply a defined step, check the result — is a habit that transfers well beyond code.",
+    "Learning to think in transformations (take input, apply a defined step, check the result) is a habit that transfers well beyond code.",
   ],
 
   exercises: [
@@ -296,7 +296,7 @@ export const guide: Guide = {
 
   codeExamples: [
     {
-      title: "The diagnostic pass — run this on every new file",
+      title: "The diagnostic pass: run this on every new file",
       language: "python",
       intro:
         "Before writing a single line of cleaning code, characterise what you actually have. Make this a snippet you reuse; the two minutes it takes routinely saves an afternoon.",
@@ -359,7 +359,7 @@ inspect(df, "orders")`,
     if left[on].dtype != right[on].dtype:
         raise TypeError(
             f"Key '{on}' has dtype {left[on].dtype} on the left and "
-            f"{right[on].dtype} on the right — these will never match."
+            f"{right[on].dtype} on the right: these will never match."
         )
 
     # 2. Duplicate keys on the right multiply rows. This is the one that
@@ -367,7 +367,7 @@ inspect(df, "orders")`,
     dupes = right[on].duplicated().sum()
     if dupes and how in ("left", "inner"):
         raise ValueError(
-            f"Right side has {dupes} duplicate '{on}' values — the merge would"
+            f"Right side has {dupes} duplicate '{on}' values: the merge would"
             f"multiply rows. Deduplicate first, or use validate='one_to_many'"
             f"if the fan-out is intentional."
         )
@@ -400,7 +400,7 @@ orders = safe_merge(orders, customers, on="customer_id")`,
       code: `# Each entry is a judgement about how the data was collected, not a default.
 MISSING_POLICY = {
     "discount_pct":   ("fill", 0,        "no discount recorded means none applied"),
-    "delivery_date":  ("keep", None,     "not yet delivered — genuinely unknown"),
+    "delivery_date":  ("keep", None,     "not yet delivered: genuinely unknown"),
     "customer_email": ("drop", None,     "required field; a blank is a broken record"),
     "region":         ("fill", "UNKNOWN", "keep the row, flag the gap explicitly"),
     "satisfaction":   ("keep", None,     "not surveyed != neutral score; do NOT fill"),
@@ -450,7 +450,7 @@ def apply_missing_policy(df: pd.DataFrame) -> pd.DataFrame:
   faqs: [
     {
       q: "Do I need to learn programming properly before pandas?",
-      a: "You need variables, lists, dictionaries, loops, functions and imports — roughly a week of focused effort. Learn those, then go straight to pandas. Depth in general-purpose Python can wait until a task actually requires it.",
+      a: "You need variables, lists, dictionaries, loops, functions and imports: roughly a week of focused effort. Learn those, then go straight to pandas. Depth in general-purpose Python can wait until a task actually requires it.",
     },
     {
       q: "Python or R for data work?",
@@ -458,7 +458,7 @@ def apply_missing_policy(df: pd.DataFrame) -> pd.DataFrame:
     },
     {
       q: "Is Excel still worth using?",
-      a: "Absolutely, for what it's good at — quick inspection, small manual tasks, sharing with people who don't code. The switch to code should happen when work repeats, when it needs auditing, or when the data outgrows comfortable manual handling.",
+      a: "Absolutely, for what it's good at: quick inspection, small manual tasks, sharing with people who don't code. The switch to code should happen when work repeats, when it needs auditing, or when the data outgrows comfortable manual handling.",
     },
     {
       q: "How long until I'm useful?",
@@ -488,10 +488,10 @@ def apply_missing_policy(df: pd.DataFrame) -> pd.DataFrame:
   ],
 
   resources: [
-    { title: "Python for Data Analysis — Wes McKinney", kind: "Book", note: "By the creator of pandas, and freely readable online. The reference worth owning.", url: "https://wesmckinney.com/book/" },
-    { title: "Automate the Boring Stuff with Python — Al Sweigart", kind: "Book", note: "Free online. The best starting point if your motivation is practical rather than academic.", url: "https://automatetheboringstuff.com" },
-    { title: "pandas — Getting Started tutorials", kind: "Docs", note: "The official tutorials are unusually good and organised by task rather than by feature.", url: "https://pandas.pydata.org/docs/getting_started/index.html" },
-    { title: "Kaggle Learn — Pandas & Data Cleaning", kind: "Course", note: "Short, hands-on micro-courses with exercises. Good for filling specific gaps quickly.", url: "https://www.kaggle.com/learn" },
+    { title: "Python for Data Analysis: Wes McKinney", kind: "Book", note: "By the creator of pandas, and freely readable online. The reference worth owning.", url: "https://wesmckinney.com/book/" },
+    { title: "Automate the Boring Stuff with Python: Al Sweigart", kind: "Book", note: "Free online. The best starting point if your motivation is practical rather than academic.", url: "https://automatetheboringstuff.com" },
+    { title: "pandas: Getting Started tutorials", kind: "Docs", note: "The official tutorials are unusually good and organised by task rather than by feature.", url: "https://pandas.pydata.org/docs/getting_started/index.html" },
+    { title: "Kaggle Learn: Pandas & Data Cleaning", kind: "Course", note: "Short, hands-on micro-courses with exercises. Good for filling specific gaps quickly.", url: "https://www.kaggle.com/learn" },
   ],
 
   internalLinks: [

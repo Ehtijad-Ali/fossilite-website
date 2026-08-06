@@ -22,14 +22,14 @@ export const guide: Guide = {
   readingTime: 13,
 
   intro: [
-    "Customer support is where most businesses try AI first, and for good reason: high volume, repetitive questions, measurable cost, and an obvious benchmark in the team already doing it. It's also where the most public failures have happened, which makes it unusually well documented — you can learn from other companies' expensive lessons rather than repeating them.",
+    "Customer support is where most businesses try AI first, and for good reason: high volume, repetitive questions, measurable cost, and an obvious benchmark in the team already doing it. It's also where the most public failures have happened, which makes it unusually well documented. You can learn from other companies' expensive lessons rather than repeating them.",
     "The pattern in those lessons is consistent. AI handles volume extremely well and complexity badly. Deployments that respect that distinction save real money. Deployments that assume volume and complexity are the same thing get impressive numbers for a year and then quietly rehire.",
-    "This guide covers where AI helps in support, how to design the handover to a human, what to measure, and the two documented cases every business should read before committing — one showing the upside with real numbers, one showing what happens when the output isn't grounded.",
+    "This guide covers where AI helps in support, how to design the handover to a human, what to measure, and the two documented cases every business should read before committing. One showing the upside with real numbers, one showing what happens when the output isn't grounded.",
   ],
 
   whyItMatters: [
     "Support is usually the largest repetitive-work cost in a service business, and the one with the clearest measurement. You already know your ticket volume, your average handling time and your cost per contact. That makes it the rare AI project where the business case can be calculated rather than argued about.",
-    "It's also the function where a bad AI deployment is most visible to customers. A wrong answer in an internal report gets corrected quietly. A wrong answer to a customer becomes a complaint, a refund, or — as one of the documented cases below shows — a legal ruling.",
+    "It's also the function where a bad AI deployment is most visible to customers. A wrong answer in an internal report gets corrected quietly. A wrong answer to a customer becomes a complaint, a refund, or (as one of the documented cases below shows) a legal ruling.",
     "And the economics are asymmetric in an underappreciated way. Deflecting a routine question saves a few pounds. Mishandling an angry customer with a complex problem can cost the relationship entirely. Any design that treats all contacts as equally automatable is optimising the small number and risking the large one.",
   ],
 
@@ -88,7 +88,7 @@ export const guide: Guide = {
       explain:
         "Grounded AI can only answer what's written down. Deployments frequently reveal that the help centre is out of date, contradictory, or missing the answers customers actually ask for.",
       detail:
-        "That's a useful finding, and often the highest-return work the project produces — improving the docs helps the humans too.",
+        "That's a useful finding, and often the highest-return work the project produces: improving the docs helps the humans too.",
     },
   ],
 
@@ -99,7 +99,7 @@ export const guide: Guide = {
       walkthrough:
         "In February 2024 Klarna announced an OpenAI-powered assistant handling two-thirds of its customer service chats in its first month: 2.3 million conversations, across 23 markets and 35+ languages, with resolution time falling from 11 minutes to under 2. They reported customer satisfaction on par with human agents, a 25% drop in repeat inquiries, and an estimated $40 million profit improvement for 2024, describing the work as equivalent to 700 full-time agents. Then in May 2025, CEO Sebastian Siemiatkowski told Bloomberg the cost-cutting had gone too far, and the company began recruiting human agents again so customers would always have the option of speaking to a person. His summary: \"We focused too much on cost. The result was lower quality.\"",
       result:
-        "Both halves matter and most write-ups only quote one. The volume gains were real and large. The failure was treating volume as the whole problem — AI held up on routine contacts and not on the emotional, complex and multi-step cases, and satisfaction fell. The design that survives is the one Klarna arrived at second: AI on the high-volume tier, humans available for complexity, and never hiding the route to a person. Note too that \"700 agents\"was a modelled equivalence rather than a headcount, which is worth remembering when a vendor quotes it at you.",
+        "Both halves matter and most write-ups only quote one. The volume gains were real and large. The failure was treating volume as the whole problem: AI held up on routine contacts and not on the emotional, complex and multi-step cases, and satisfaction fell. The design that survives is the one Klarna arrived at second: AI on the high-volume tier, humans available for complexity, and never hiding the route to a person. Note too that \"700 agents\"was a modelled equivalence rather than a headcount, which is worth remembering when a vendor quotes it at you.",
       source: {
         label: "Klarna press release (Feb 2024) and Forbes coverage of the May 2025 reversal",
         url: "https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/",
@@ -113,7 +113,7 @@ export const guide: Guide = {
       result:
         "In February 2024 the British Columbia Civil Resolution Tribunal rejected that argument, holding Air Canada responsible for all information on its website including the chatbot's, and awarding damages covering the fare difference. The operational lesson is precise: an ungrounded support bot doesn't just give bad answers, it makes commitments your business is bound by. Answers must come from your actual policy documents, with the source quoted, and the bot must be able to say it doesn't know.",
       source: {
-        label: "Moffatt v. Air Canada, 2024 BCCRT 149 — analysis by McCarthy Tétrault",
+        label: "Moffatt v. Air Canada, 2024 BCCRT 149: analysis by McCarthy Tétrault",
         url: "https://www.mccarthy.ca/en/insights/blogs/techlex/moffatt-v-air-canada-misrepresentation-ai-chatbot",
       },
     },
@@ -121,7 +121,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The deflection metric that hid a worse experience.",
       walkthrough:
-        "A pattern worth watching for in your own dashboard. A support bot is judged on deflection rate, and the number climbs steadily — a genuine success by the measure being reported. Contact volume, though, is flat. What's actually happening is that customers get an unhelpful answer, close the chat, and open a new one an hour later. Each new contact counts as a fresh ticket, and each deflection counts as a win.",
+        "A pattern worth watching for in your own dashboard. A support bot is judged on deflection rate, and the number climbs steadily: a genuine success by the measure being reported. Contact volume, though, is flat. What's actually happening is that customers get an unhelpful answer, close the chat, and open a new one an hour later. Each new contact counts as a fresh ticket, and each deflection counts as a win.",
       result:
         "Pairing deflection with repeat-contact rate and resolution rate makes this visible immediately. If deflection rises while total contacts stay flat, you've relocated the work rather than removed it, and the customer had a worse experience on the way.",
     },
@@ -136,7 +136,7 @@ export const guide: Guide = {
     },
     {
       title: "Fix the documentation for your top five",
-      body: "For the five highest-volume reasons, check whether a clear, current, correct answer exists in writing. Frequently it doesn't. Write it before automating anything — grounded AI can only answer what's documented.",
+      body: "For the five highest-volume reasons, check whether a clear, current, correct answer exists in writing. Frequently it doesn't. Write it before automating anything: grounded AI can only answer what's documented.",
       effort: "1–2 days",
       outcome: "Five accurate documented answers, useful to humans immediately.",
     },
@@ -148,7 +148,7 @@ export const guide: Guide = {
     },
     {
       title: "Move to drafted responses under review",
-      body: "Have AI draft replies grounded in your documentation, with an agent approving or editing before send. Track how often drafts are sent unedited — that number tells you where autonomy is safe.",
+      body: "Have AI draft replies grounded in your documentation, with an agent approving or editing before send. Track how often drafts are sent unedited. That number tells you where autonomy is safe.",
       effort: "2–4 weeks",
       outcome: "Faster handling with a human on every customer-facing word.",
     },
@@ -160,7 +160,7 @@ export const guide: Guide = {
     },
     {
       title: "Build the escalation properly",
-      body: "Define triggers — low confidence, frustration, repeat contact, cancellation or legal mentions, explicit request for a person — and make sure the customer never repeats themselves on handover.",
+      body: "Define triggers (low confidence, frustration, repeat contact, cancellation or legal mentions, explicit request for a person), and make sure the customer never repeats themselves on handover.",
       effort: "1–2 weeks",
       outcome: "A handover customers don't resent.",
     },
@@ -213,25 +213,25 @@ export const guide: Guide = {
   bestPractices: [
     "Ground every customer-facing answer in your own documentation, with the source quoted and checkable.",
     "Give the AI an explicit way to say it doesn't know, and test it with questions your docs can't answer.",
-    "Report deflection, repeat-contact rate, resolution rate and satisfaction together — never deflection alone.",
+    "Report deflection, repeat-contact rate, resolution rate and satisfaction together: never deflection alone.",
     "Keep the human option visible at every step of the conversation.",
     "Escalate on low confidence, frustration, repeat contact, cancellation intent, legal mentions, and any explicit request.",
     "Carry full context across the handover so customers never repeat themselves.",
     "Start with triage, move to drafted replies, and automate only the categories that consistently need no edits.",
-    "Split satisfaction scores by whether AI or a human handled the contact — an averaged number hides the problem.",
+    "Split satisfaction scores by whether AI or a human handled the contact: an averaged number hides the problem.",
     "Review scope monthly and be willing to narrow it. Shrinking automation is a valid outcome, not a failure.",
   ],
 
   proTips: [
     "Read fifty conversations the AI handled end to end, by hand, every month. Aggregate metrics will not show you a competent-sounding answer that missed the point, and that's the failure that loses customers.",
     "Track how often agents edit AI drafts before sending, and what they change. It's the cheapest map you'll get of where the AI is weak and which categories are safe to automate next.",
-    "Log every question the AI couldn't answer. That list is a documentation backlog ranked by real customer demand — usually more useful than anything your content plan already contains.",
+    "Log every question the AI couldn't answer. That list is a documentation backlog ranked by real customer demand: usually more useful than anything your content plan already contains.",
     "Test the escalation path as a customer, not as an admin. The gap between 'escalation exists' and 'a customer can find it while annoyed' is where most of the damage happens.",
     "When a vendor quotes headline deflection numbers, ask what happened to repeat-contact rate and satisfaction over the same period. The good ones have the answer ready.",
   ],
 
   businessApplications: [
-    "Order status, delivery and returns — high volume, factual, well-documented, and the safest place to start.",
+    "Order status, delivery and returns: high volume, factual, well-documented, and the safest place to start.",
     "Account and access questions, where the answer is procedural and the same every time.",
     "Ticket triage and routing, which pays back on every contact including those a human handles.",
     "Drafting first responses for agent review, giving speed without removing the human check.",
@@ -288,7 +288,7 @@ export const guide: Guide = {
   faqs: [
     {
       q: "How much support volume can AI realistically handle?",
-      a: "It depends entirely on your contact mix. Klarna reported two-thirds of chats in month one, but their volume is dominated by routine payment queries. Audit your own contact reasons first — the share that's routine is the share that's automatable.",
+      a: "It depends entirely on your contact mix. Klarna reported two-thirds of chats in month one, but their volume is dominated by routine payment queries. Audit your own contact reasons first. The share that's routine is the share that's automatable.",
     },
     {
       q: "Will it reduce headcount?",
@@ -296,7 +296,7 @@ export const guide: Guide = {
     },
     {
       q: "What's the safest first project?",
-      a: "Ticket triage — classifying and routing with context attached. It saves time on every contact, including human-handled ones, and a misroute is an annoyance rather than a liability.",
+      a: "Ticket triage: classifying and routing with context attached. It saves time on every contact, including human-handled ones, and a misroute is an annoyance rather than a liability.",
     },
     {
       q: "Can we be held responsible for what the AI tells customers?",
@@ -325,8 +325,8 @@ export const guide: Guide = {
 
   resources: [
     { title: "Klarna AI assistant press release", kind: "Docs", note: "The primary source for the 2024 numbers. Read alongside the 2025 reversal coverage rather than on its own.", url: "https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/" },
-    { title: "Moffatt v. Air Canada — McCarthy Tétrault analysis", kind: "Docs", note: "What happens when a support bot invents policy. Short, and worth reading before you deploy.", url: "https://www.mccarthy.ca/en/insights/blogs/techlex/moffatt-v-air-canada-misrepresentation-ai-chatbot" },
-    { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "Technical guidance on grounding and escalation design, framework-agnostic.", url: "https://www.anthropic.com/research/building-effective-agents" },
+    { title: "Moffatt v. Air Canada: McCarthy Tétrault analysis", kind: "Docs", note: "What happens when a support bot invents policy. Short, and worth reading before you deploy.", url: "https://www.mccarthy.ca/en/insights/blogs/techlex/moffatt-v-air-canada-misrepresentation-ai-chatbot" },
+    { title: "Building Effective Agents: Anthropic", kind: "Docs", note: "Technical guidance on grounding and escalation design, framework-agnostic.", url: "https://www.anthropic.com/research/building-effective-agents" },
   ],
 
   internalLinks: [
@@ -348,7 +348,7 @@ export const guide: Guide = {
   cta: {
     headline: "Considering AI in your support queue?",
     body:
-      "We build grounded support systems with real escalation design — including telling you which contact types shouldn't be automated at all.",
+      "We build grounded support systems with real escalation design. Including telling you which contact types shouldn't be automated at all.",
     label: "Review your support queue",
     href: "/contact",
   },

@@ -22,7 +22,7 @@ export const guide: Guide = {
   readingTime: 13,
 
   intro: [
-    "Most failed products were not badly built. They were built well, on time, by capable people — for a problem nobody was sufficiently bothered by. The founders weren't lazy or stupid. They were confident, and they mistook confidence for evidence.",
+    "Most failed products were not badly built. They were built well, on time, by capable people. For a problem nobody was sufficiently bothered by. The founders weren't lazy or stupid. They were confident, and they mistook confidence for evidence.",
     "Validation is the discipline of finding out whether you're wrong while being wrong is still cheap. Not proving you're right. That's a different and much easier activity, and it's what most people accidentally do instead. If you go looking for encouragement, you will find it, because people are kind and hypotheticals are free.",
     "This guide covers what actually constitutes evidence, how to run interviews that produce truth rather than politeness, how to test demand before writing code, and how to read the results honestly. It assumes you have an idea you're attached to. That attachment is the main thing standing between you and a useful answer.",
   ],
@@ -39,7 +39,7 @@ export const guide: Guide = {
       explain:
         "Your solution is a guess about how to address a problem. If the problem isn't real, painful and frequent, no solution will succeed. Validate the problem first, in isolation from your idea.",
       detail:
-        "The practical test: can you describe the problem in the customer's own words, including what they currently do about it and what that costs them? If not, you haven't validated a problem — you've validated that people are polite about your idea.",
+        "The practical test: can you describe the problem in the customer's own words, including what they currently do about it and what that costs them? If not, you haven't validated a problem. You've validated that people are polite about your idea.",
     },
     {
       term: "Compliments are not evidence",
@@ -67,7 +67,7 @@ export const guide: Guide = {
       explain:
         "A demand test asks for something costly: money, a calendar slot, a deposit, real data, a signature. Costly actions are honest in a way conversation isn't.",
       detail:
-        "A landing page with an email box is a weak test — email addresses are nearly free. A landing page with a pre-order button, or a paid pilot agreement, is a strong one.",
+        "A landing page with an email box is a weak test: email addresses are nearly free. A landing page with a pre-order button, or a paid pilot agreement, is a strong one.",
     },
     {
       term: "Falsifiability",
@@ -79,7 +79,7 @@ export const guide: Guide = {
     {
       term: "The smallest thing that produces the outcome",
       explain:
-        "Your first version should deliver the result the customer wants, by whatever means — including you doing the work by hand. Software is one implementation option, not a requirement.",
+        "Your first version should deliver the result the customer wants, by whatever means: including you doing the work by hand. Software is one implementation option, not a requirement.",
       detail:
         "Doing it manually for your first ten customers is not a compromise. It's the fastest way to learn what the software actually needs to do, and several large companies ran this way for a year.",
     },
@@ -88,7 +88,7 @@ export const guide: Guide = {
       explain:
         "'Small businesses' is not a market. Different segments have different problems, budgets and buying processes, and averaging across them produces a product that fits none of them.",
       detail:
-        "Narrow until you can name specific people and find fifty more like them. A tight segment makes everything — interviews, messaging, pricing, distribution — dramatically easier.",
+        "Narrow until you can name specific people and find fifty more like them. A tight segment makes everything (interviews, messaging, pricing, distribution) dramatically easier.",
     },
   ],
 
@@ -144,9 +144,9 @@ export const guide: Guide = {
       walkthrough:
         "CB Insights has repeatedly compiled the post-mortems that failed startups publish themselves: founders explaining, without investor-relations constraints, what went wrong. The original analysis covered 110+ post-mortems; a later study examined 431 failed venture-backed companies. Because most failures cite several causes, the percentages sum to well over 100.",
       result:
-        "In the original set, 42% cited no market need — the single most common reason given. In the 2024 study of 431 companies, 43% were attributed to poor product-market fit, alongside 70% running out of capital, 29% bad timing and 19% unsustainable unit economics. Running out of money is usually the mechanism of death rather than the cause: a company building something nobody urgently needed burns cash trying to make it work. This is the empirical case for validating the problem before committing to a build.",
+        "In the original set, 42% cited no market need, the single most common reason given. In the 2024 study of 431 companies, 43% were attributed to poor product-market fit, alongside 70% running out of capital, 29% bad timing and 19% unsustainable unit economics. Running out of money is usually the mechanism of death rather than the cause: a company building something nobody urgently needed burns cash trying to make it work. This is the empirical case for validating the problem before committing to a build.",
       source: {
-        label: "CB Insights — The Top Reasons Startups Fail (startup post-mortem analyses)",
+        label: "CB Insights: The Top Reasons Startups Fail (startup post-mortem analyses)",
         url: "https://www.cbinsights.com/research/report/startup-failure-reasons-top/",
       },
     },
@@ -219,7 +219,7 @@ export const guide: Guide = {
 
   proTips: [
     "Ask 'who else should I speak to?' at the end of every conversation. Referred interviews have a much higher hit rate, and the network of people with a shared problem is usually denser than it looks from outside.",
-    "When someone says the problem is significant, ask what they've spent on it — in money or hours. The number, or the awkward silence, tells you everything.",
+    "When someone says the problem is significant, ask what they've spent on it: in money or hours. The number, or the awkward silence, tells you everything.",
     "Try to disprove your own finding once you have one. Go looking specifically for people in your segment who don't have the problem. If you can't find any, the signal is strong; if they're everywhere, your segment is wrong.",
     "Sell before you build using a concrete, dated offer: 'available in six weeks, £X per month, first three clients get onboarding included.' Vagueness is what makes pre-selling feel dishonest; specificity is what makes it a real test.",
     "Watch for the second meeting. Anyone interested will make time again, forward you to a colleague, or ask when it's ready. Enthusiasm that evaporates between meetings was politeness.",
@@ -232,14 +232,14 @@ export const guide: Guide = {
     "Pricing research: past-behaviour questions about what they currently spend on the problem produce far better price anchors than asking what they'd pay.",
     "Market entry: validating whether a problem that exists in one geography or vertical exists in the same form in another, rather than assuming it transfers.",
     "Agency and consultancy positioning: interviewing past and prospective clients about the problem in their words usually reveals a sharper, more sellable service than the one you advertise.",
-    "Investment diligence: applying the same behavioural tests to a company's claimed traction — how much is paid, recurring, and from strangers.",
+    "Investment diligence: applying the same behavioural tests to a company's claimed traction. How much is paid, recurring, and from strangers.",
   ],
 
   lifeApplications: [
     "Career decisions: before retraining for a new field, interview fifteen people doing the job. Ask what their last week actually contained rather than whether they enjoy it.",
     "Major purchases and commitments: ask people who made the same decision what they'd do differently, focusing on what actually happened rather than how they feel about it now.",
     "Testing your own beliefs about yourself: 'I'd be happier if I moved cities' is a hypothesis. Spending a month there is a cheap test that beats years of speculation.",
-    "Any decision where you notice yourself only seeking supportive opinions — the recognisable feeling of wanting encouragement rather than information is itself a useful alarm.",
+    "Any decision where you notice yourself only seeking supportive opinions. The recognisable feeling of wanting encouragement rather than information is itself a useful alarm.",
   ],
 
   exercises: [
@@ -261,7 +261,7 @@ export const guide: Guide = {
       title: "The workaround hunt",
       brief:
         "For each person interviewed, document what they currently do about the problem. Categorise: nothing, manual workaround, paid solution.",
-      success: "A count in each category — the single most useful table you'll produce.",
+      success: "A count in each category: the single most useful table you'll produce.",
       time: "2 hours",
     },
     {
@@ -304,7 +304,7 @@ export const guide: Guide = {
     },
     {
       q: "Isn't this just what customers say they want? Didn't Ford say they'd have asked for faster horses?",
-      a: "That quote is almost certainly apocryphal, and it's misapplied. You're not asking customers to design the solution. You're establishing whether a problem exists and what it costs them — which Ford's customers could have described perfectly well.",
+      a: "That quote is almost certainly apocryphal, and it's misapplied. You're not asking customers to design the solution. You're establishing whether a problem exists and what it costs them, which Ford's customers could have described perfectly well.",
     },
     {
       q: "Can I validate without talking to anyone?",
@@ -320,7 +320,7 @@ export const guide: Guide = {
     },
     {
       q: "Should I worry about someone stealing my idea during interviews?",
-      a: "Almost never. Ideas are abundant and execution is scarce, and the people you interview have jobs. The cost of secrecy — fewer, more guarded conversations — is far higher than the risk.",
+      a: "Almost never. Ideas are abundant and execution is scarce, and the people you interview have jobs. The cost of secrecy (fewer, more guarded conversations) is far higher than the risk.",
     },
   ],
 
@@ -334,9 +334,9 @@ export const guide: Guide = {
   ],
 
   resources: [
-    { title: "The Mom Test — Rob Fitzpatrick", kind: "Book", note: "Short, cheap, and the single best thing written on customer interviews. Read it before your first conversation.", url: "https://www.momtestbook.com" },
-    { title: "Deploy Empathy — Michele Hansen", kind: "Book", note: "Practical interview technique, including exact wording and how to handle the awkward moments." },
-    { title: "The Lean Startup — Eric Ries", kind: "Book", note: "The origin of much of this vocabulary. Read it for the framing, and treat the MVP advice as more literal than intended by many who cite it." },
+    { title: "The Mom Test: Rob Fitzpatrick", kind: "Book", note: "Short, cheap, and the single best thing written on customer interviews. Read it before your first conversation.", url: "https://www.momtestbook.com" },
+    { title: "Deploy Empathy: Michele Hansen", kind: "Book", note: "Practical interview technique, including exact wording and how to handle the awkward moments." },
+    { title: "The Lean Startup: Eric Ries", kind: "Book", note: "The origin of much of this vocabulary. Read it for the framing, and treat the MVP advice as more literal than intended by many who cite it." },
     { title: "Y Combinator Startup Library", kind: "Course", note: "Free, direct, and consistently sceptical of founder self-deception.", url: "https://www.ycombinator.com/library" },
   ],
 

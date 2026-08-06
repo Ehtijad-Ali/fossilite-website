@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "thinking-critically-about-evidence",
   seoTitle: "Thinking Critically About Evidence: A Practical Guide",
   metaDescription:
-    "How to evaluate claims, statistics and studies without a research background — base rates, replication, and the questions that expose weak evidence fast.",
+    "How to evaluate claims, statistics and studies without a research background: base rates, replication, and the questions that expose weak evidence fast.",
   title: "Thinking Critically About Evidence",
   keywords: [
     "critical thinking",
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "Compared to what?",
       explain:
-        "A number in isolation carries no information. '87% accuracy', 'twice the risk', 'saves three hours' — each needs a comparison before it means anything.",
+        "A number in isolation carries no information. '87% accuracy', 'twice the risk', 'saves three hours'. Each needs a comparison before it means anything.",
       detail:
         "This single question deflates more weak claims than any other. Twice a very small risk is still a very small risk, and 87% accuracy is embarrassing if guessing gets you 85%.",
     },
@@ -72,28 +72,28 @@ export const guide: Guide = {
     {
       term: "Sample size and who was sampled",
       explain:
-        "Small samples produce unstable results that swing on a few individuals. But representativeness matters more than size — a large sample of the wrong people tells you about the wrong people.",
+        "Small samples produce unstable results that swing on a few individuals. But representativeness matters more than size. A large sample of the wrong people tells you about the wrong people.",
       detail:
         "Always ask who was measured. A finding from undergraduates in a lab may or may not transfer to your context, and the paper usually can't tell you which.",
     },
     {
       term: "Replication is the real test",
       explain:
-        "A single study is a piece of evidence, not a fact. Many published findings — including famous ones — have failed to reproduce when independently retested.",
+        "A single study is a piece of evidence, not a fact. Many published findings (including famous ones) have failed to reproduce when independently retested.",
       detail:
         "Weight findings by whether they've been replicated by independent groups, not by how surprising or how widely cited they are. Surprisingness and replicability are, if anything, negatively related.",
     },
     {
       term: "Confidence is not evidence",
       explain:
-        "How certain someone sounds — including an expert, including you — is a poor guide to accuracy. Fluency and conviction are properties of delivery.",
+        "How certain someone sounds (including an expert, including you) is a poor guide to accuracy. Fluency and conviction are properties of delivery.",
       detail:
         "This applies with particular force to generated text, which produces the format of a well-sourced claim regardless of whether any source exists.",
     },
     {
       term: "Check what would change your mind",
       explain:
-        "Before evaluating a claim, ask what evidence would make you abandon your current view. If nothing would, you're not evaluating — you're defending.",
+        "Before evaluating a claim, ask what evidence would make you abandon your current view. If nothing would, you're not evaluating. You're defending.",
       detail:
         "This is the most useful habit in the guide and the least comfortable, because it applies to your own beliefs at least as much as to other people's.",
     },
@@ -102,7 +102,7 @@ export const guide: Guide = {
   learningPath: [
     {
       title: "Practise 'compared to what?' for a week",
-      body: "Every time you encounter a number — an advert, an article, a work report — ask what the comparison is. Note how often it isn't supplied and how often the claim collapses when you supply it yourself.",
+      body: "Every time you encounter a number (an advert, an article, a work report) ask what the comparison is. Note how often it isn't supplied and how often the claim collapses when you supply it yourself.",
       effort: "5 minutes a day",
       outcome: "The question becomes automatic rather than effortful.",
     },
@@ -149,11 +149,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "A widely-repeated claim about how long it takes to form a habit.",
       walkthrough:
-        "The figure most people know — 21 days — did not come from research on habit formation. It originated in a mid-twentieth-century plastic surgeon's observation about patient adjustment, and spread because it was short, memorable and encouraging. When Lally and colleagues actually measured it, having 96 people perform a daily behaviour and rate its automaticity for 12 weeks, they found something quite different.",
+        "The figure most people know (21 days) did not come from research on habit formation. It originated in a mid-twentieth-century plastic surgeon's observation about patient adjustment, and spread because it was short, memorable and encouraging. When Lally and colleagues actually measured it, having 96 people perform a daily behaviour and rate its automaticity for 12 weeks, they found something quite different.",
       result:
         "The median time to maximum automaticity was 66 days, with a range from 18 to a predicted 254 days, and the 66-day median applied among the roughly half of participants whose data fitted the model. The lesson generalises well beyond habits: a claim's ubiquity is not evidence for it. Widely-repeated figures frequently have a traceable origin that turns out not to be a study at all, and checking the origin takes minutes.",
       source: {
-        label: "Lally, van Jaarsveld, Potts & Wardle (2010) — How are habits formed, European Journal of Social Psychology",
+        label: "Lally, van Jaarsveld, Potts & Wardle (2010). How are habits formed, European Journal of Social Psychology",
         url: "https://onlinelibrary.wiley.com/doi/10.1002/ejsp.674",
       },
     },
@@ -161,11 +161,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "An influential economic finding that nobody had checked.",
       walkthrough:
-        "Reinhart and Rogoff's finding — that public debt above 90% of GDP is associated with negative growth — was cited extensively in arguments for austerity, including in political budget proposals. Thomas Herndon, a graduate student, attempted to replicate it as coursework and could not. Obtaining the original spreadsheet, he and his co-authors found several problems, including an averaging formula whose range omitted five countries.",
+        "Reinhart and Rogoff's finding (that public debt above 90% of GDP is associated with negative growth) was cited extensively in arguments for austerity, including in political budget proposals. Thomas Herndon, a graduate student, attempted to replicate it as coursework and could not. Obtaining the original spreadsheet, he and his co-authors found several problems, including an averaging formula whose range omitted five countries.",
       result:
-        "Corrected, average real GDP growth above the threshold was 2.2% rather than −0.1%. Two things are worth taking from this. The error survived enormous scrutiny because scrutiny mostly meant citing the paper rather than checking it. And it was found by a student doing the unglamorous thing — attempting to reproduce the result from the underlying data.",
+        "Corrected, average real GDP growth above the threshold was 2.2% rather than −0.1%. Two things are worth taking from this. The error survived enormous scrutiny because scrutiny mostly meant citing the paper rather than checking it. And it was found by a student doing the unglamorous thing: attempting to reproduce the result from the underlying data.",
       source: {
-        label: "Herndon, Ash & Pollin (2013), PERI/UMass Amherst — critique of Reinhart and Rogoff",
+        label: "Herndon, Ash & Pollin (2013), PERI/UMass Amherst: critique of Reinhart and Rogoff",
         url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/",
       },
     },
@@ -173,11 +173,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "A system that was accurate until the world moved.",
       walkthrough:
-        "Google Flu Trends estimated flu prevalence from search volume and performed well when launched. Over time, search behaviour changed — partly through media coverage of flu, partly through the search interface itself — while the model continued applying a relationship learned earlier.",
+        "Google Flu Trends estimated flu prevalence from search volume and performed well when launched. Over time, search behaviour changed (partly through media coverage of flu, partly through the search interface itself), while the model continued applying a relationship learned earlier.",
       result:
         "By the 2012–13 season it was persistently overestimating, at one point predicting more than double the proportion of doctor visits the CDC recorded. Lazer and colleagues concluded in Science that the errors were largely avoidable. The transferable point: evidence has a shelf life. A finding established under one set of conditions does not automatically remain true when the conditions change, and 'it worked when we checked' is a statement about the past.",
       source: {
-        label: "Lazer, Kennedy, King & Vespignani, Science 343:1203–1205 (2014) — The Parable of Google Flu",
+        label: "Lazer, Kennedy, King & Vespignani, Science 343:1203–1205 (2014). The Parable of Google Flu",
         url: "https://www.science.org/doi/10.1126/science.1248506",
       },
     },
@@ -239,14 +239,14 @@ export const guide: Guide = {
     "Look for the pre-registration or the protocol on any important study. Analyses decided after seeing the data can find something interesting in almost any dataset.",
     "Notice your emotional response before your analytical one. Claims that make you feel vindicated get less scrutiny automatically, and noticing the feeling is the only reliable way to correct for it.",
     "When a claim is framed as a percentage of a percentage, slow right down. Compound relative figures are the most reliably misleading construction in ordinary reporting.",
-    "Ask who benefits from you believing this, without treating the answer as decisive. Interested parties are sometimes right — but it tells you where to check hardest.",
+    "Ask who benefits from you believing this, without treating the answer as decisive. Interested parties are sometimes right. But it tells you where to check hardest.",
     "Keep a short list of things you've changed your mind about. If it's empty over several years, that's information about your process rather than about your accuracy.",
   ],
 
   businessApplications: [
     "Vendor claims: 'compared to what, measured how, on whose data' turns a sales conversation into an evaluable one and takes no confrontation.",
     "Internal metrics: the same relative-versus-absolute problem appears in company dashboards, where percentage improvements on small baselines routinely drive misallocated effort.",
-    "Post-mortems: survivorship bias means analysing only failed projects — or only successful ones — produces confident wrong conclusions about cause.",
+    "Post-mortems: survivorship bias means analysing only failed projects (or only successful ones) produces confident wrong conclusions about cause.",
     "A/B testing and experimentation, where sample size, stopping rules and multiple comparisons determine whether a result means anything.",
     "Market research and customer surveys, where who responded is usually more informative than what they said.",
     "Strategy: distinguishing 'this worked for that company' from 'this would work for us' requires asking what else was different, which is rarely done.",
@@ -287,7 +287,7 @@ export const guide: Guide = {
       title: "Trace a famous number",
       brief:
         "Pick a widely-repeated statistic. Follow the citations back until you reach the original source, or until the trail goes cold. Note which happens.",
-      success: "Either a primary source or a documented dead end — both are instructive.",
+      success: "Either a primary source or a documented dead end: both are instructive.",
       time: "1–2 hours",
     },
     {
@@ -335,22 +335,22 @@ export const guide: Guide = {
     },
     {
       q: "How should I treat claims from AI systems?",
-      a: "As unverified until checked. These systems produce fluent, well-formatted, confident output whether or not they have relevant knowledge — including citations that don't exist. Fluency carries no information about accuracy here.",
+      a: "As unverified until checked. These systems produce fluent, well-formatted, confident output whether or not they have relevant knowledge: including citations that don't exist. Fluency carries no information about accuracy here.",
     },
   ],
 
   tools: [
     { name: "Google Scholar", what: "Find primary sources and see citation counts. The 'cited by' link is useful for finding critiques and replications.", cost: "Free", url: "https://scholar.google.com" },
     { name: "Retraction Watch", what: "Tracks retracted papers, including ones still being widely cited.", cost: "Free", url: "https://retractionwatch.com" },
-    { name: "Cochrane Library", what: "Systematic reviews of medical evidence — the closest thing available to a considered summary of what's known.", cost: "Freemium", url: "https://www.cochranelibrary.com" },
+    { name: "Cochrane Library", what: "Systematic reviews of medical evidence: the closest thing available to a considered summary of what's known.", cost: "Freemium", url: "https://www.cochranelibrary.com" },
     { name: "Our World in Data", what: "Well-sourced data with methodology visible, which is the useful part.", cost: "Free", url: "https://ourworldindata.org" },
   ],
 
   resources: [
-    { title: "How to Lie with Statistics — Darrell Huff", kind: "Book", note: "Short, old, and still the fastest introduction to how numbers mislead." },
-    { title: "Thinking, Fast and Slow — Daniel Kahneman", kind: "Book", note: "Foundational on cognitive bias. Worth noting that some individual studies described have since failed to replicate — a point the field has been candid about." },
+    { title: "How to Lie with Statistics: Darrell Huff", kind: "Book", note: "Short, old, and still the fastest introduction to how numbers mislead." },
+    { title: "Thinking, Fast and Slow: Daniel Kahneman", kind: "Book", note: "Foundational on cognitive bias. Worth noting that some individual studies described have since failed to replicate. A point the field has been candid about." },
     { title: "The Parable of Google Flu", kind: "Paper", note: "Five pages on how good evidence degrades as conditions change.", url: "https://www.science.org/doi/10.1126/science.1248506" },
-    { title: "Calling Bullshit — Bergstrom & West", kind: "Course", note: "A university course on spotting misleading data, freely available online.", url: "https://www.callingbullshit.org" },
+    { title: "Calling Bullshit: Bergstrom & West", kind: "Course", note: "A university course on spotting misleading data, freely available online.", url: "https://www.callingbullshit.org" },
   ],
 
   internalLinks: [

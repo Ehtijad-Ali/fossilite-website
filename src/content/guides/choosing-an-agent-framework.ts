@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "choosing-an-agent-framework",
   seoTitle: "Choosing an Agent Framework: LangChain vs CrewAI vs AutoGen",
   metaDescription:
-    "A decision guide for AI agent frameworks — LangChain, LangGraph, CrewAI, AutoGen and the raw SDK — based on what each is actually good at.",
+    "A decision guide for AI agent frameworks (LangChain, LangGraph, CrewAI, AutoGen and the raw SDK) based on what each is actually good at.",
   title: "Choosing an Agent Framework",
   keywords: [
     "agent framework comparison",
@@ -29,7 +29,7 @@ export const guide: Guide = {
 
   whyItMatters: [
     "Framework choice is stickier than it looks. It shapes how you express control flow, where your state lives, how you debug, and what your team learns. Migrating a working agent between frameworks is close to a rewrite, so the cost of choosing badly is paid over the whole life of the project.",
-    "It also has a large and under-appreciated cost dimension. Multi-agent frameworks make it easy to express architectures that cost several times what a single well-equipped agent would, for output that's often no better. The framework doesn't warn you about this — the metaphor makes it feel natural.",
+    "It also has a large and under-appreciated cost dimension. Multi-agent frameworks make it easy to express architectures that cost several times what a single well-equipped agent would, for output that's often no better. The framework doesn't warn you about this: the metaphor makes it feel natural.",
     "And most of the decision is decided before you pick a library at all, by whether your problem needs an agent. A fixed workflow with model calls at defined points is more reliable and cheaper than any agent, in any framework, and it covers more cases than the current enthusiasm suggests.",
   ],
 
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "Ask the workflow question first",
       explain:
-        "Can you write down the steps in advance? If yes, you want a workflow — a fixed sequence with model calls at specific points — not an agent. No framework changes this answer.",
+        "Can you write down the steps in advance? If yes, you want a workflow (a fixed sequence with model calls at specific points) not an agent. No framework changes this answer.",
       detail:
         "Agents earn their cost when the sequence can't be known ahead of time. That's rarer than it feels, and 'we couldn't be bothered to write it down' is not the same as 'it can't be determined'.",
     },
@@ -97,7 +97,7 @@ export const guide: Guide = {
       title: "The same agent, four ways",
       language: "python",
       intro:
-        "Not runnable as one file — a side-by-side of what each option asks you to write for a single tool-calling agent. The shape of each is the point.",
+        "Not runnable as one file: a side-by-side of what each option asks you to write for a single tool-calling agent. The shape of each is the point.",
       code: `# ─── Raw SDK ─────────────────────────────────────────────────────────
 # You own the loop. ~40 lines, complete visibility, no dependency.
 while step < MAX_STEPS:
@@ -116,7 +116,7 @@ agent = create_agent(model=model, tools=[get_weather])
 agent.invoke({"messages": [{"role": "user", "content": "..."}]})
 
 # ─── LangGraph ───────────────────────────────────────────────────────
-# The loop returns as something you control — plus durable state.
+# The loop returns as something you control, plus durable state.
 from langgraph.prebuilt import create_react_agent
 agent = create_react_agent(model, [get_weather], checkpointer=checkpointer)
 agent.invoke({"messages": [...]}, {"configurable": {"thread_id": "user-123"}})
@@ -186,7 +186,7 @@ await Console(team.run_stream(task="..."))`,
       kind: "documented",
       scenario: "The failure mode every framework shares.",
       walkthrough:
-        "A lawyer used a model to research precedent, filed a brief citing six fabricated cases, and — when challenged — asked the model whether the cases were real. It confirmed them, with detail.",
+        "A lawyer used a model to research precedent, filed a brief citing six fabricated cases, and (when challenged) asked the model whether the cases were real. It confirmed them, with detail.",
       result:
         "The court sanctioned the lawyers $5,000. No framework prevents this. A CrewAI fact-checker, an AutoGen critic and a LangGraph validation node all run the same pattern if they only reason over the output rather than checking an independent source. Framework choice doesn't change what verification requires.",
       source: {
@@ -202,7 +202,7 @@ await Console(team.run_stream(task="..."))`,
       result:
         "Every architecture here accumulates context: a crew through task outputs, a group chat through the shared history, a graph through checkpointed messages. The original instructions drift toward the least-attended position as runs lengthen. This is a property of the models, not the libraries, so 'switch framework' is never the fix for it.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -210,7 +210,7 @@ await Console(team.run_stream(task="..."))`,
       kind: "illustration",
       scenario: "The framework bake-off that answers nothing.",
       walkthrough:
-        "A team spends two weeks prototyping the same task in four frameworks. Each prototype works. Each is roughly as good as the others, because the task was well within all of their capabilities. The comparison produces a preference based on syntax taste, and the actual question — whether the task needed an agent at all — never gets asked.",
+        "A team spends two weeks prototyping the same task in four frameworks. Each prototype works. Each is roughly as good as the others, because the task was well within all of their capabilities. The comparison produces a preference based on syntax taste, and the actual question (whether the task needed an agent at all) never gets asked.",
       result:
         "A raw-SDK baseline would have answered more in an afternoon. The frameworks differentiate on capabilities most prototypes don't exercise: persistence across restarts, human approval, parallel roles. Compare against the baseline on one named requirement rather than comparing frameworks against each other.",
     },
@@ -220,12 +220,12 @@ await Console(team.run_stream(task="..."))`,
     {
       mistake: "Choosing a framework before asking whether you need an agent",
       why: "If the steps can be written down, a fixed workflow is more reliable and cheaper than any agent. The framework question is downstream of a question most teams skip.",
-      fix: "Try to write the sequence. If you can, build that instead — the decision is made and you've saved the entire evaluation.",
+      fix: "Try to write the sequence. If you can, build that instead. The decision is made and you've saved the entire evaluation.",
     },
     {
       mistake: "Adopting to avoid writing the loop",
       why: "The loop is forty lines and the most valuable forty lines to understand. Adopting to skip it means depending on behaviour you can't reason about.",
-      fix: "Adopt for the ecosystem, for persistence, for interrupts — for something you can name. Not to save the loop.",
+      fix: "Adopt for the ecosystem, for persistence, for interrupts: for something you can name. Not to save the loop.",
     },
     {
       mistake: "Running a four-way bake-off",
@@ -250,7 +250,7 @@ await Console(team.run_stream(task="..."))`,
     {
       mistake: "Expecting a framework to solve reliability",
       why: "Compounding error, context drift and confident fabrication are properties of the models. Every option here inherits all three.",
-      fix: "Guardrails, verification against independent sources, step limits and human checkpoints — in whichever framework you pick.",
+      fix: "Guardrails, verification against independent sources, step limits and human checkpoints: in whichever framework you pick.",
     },
   ],
 
@@ -259,7 +259,7 @@ await Console(team.run_stream(task="..."))`,
     "Build the raw-SDK baseline first and hold every alternative to beating it.",
     "Name the specific missing capability, and let that select the framework.",
     "Measure cost per successful task, not per call.",
-    "Prefer the least committal option that could work — migration is a redesign.",
+    "Prefer the least committal option that could work: migration is a redesign.",
     "Match the mental model to the problem's shape: sequence, state machine, team or conversation.",
     "Test operational fit: restart mid-run, and debug a deliberately failed run.",
     "Pin versions. All of these move fast and have broken agent code on minor upgrades.",
@@ -278,7 +278,7 @@ await Console(team.run_stream(task="..."))`,
   businessApplications: [
     "Technology selection with a defensible rationale rather than a preference, which matters when the choice outlives the person who made it.",
     "Cost forecasting: architecture determines spend more than volume does, and multi-agent designs need modelling before commitment.",
-    "Vendor and platform evaluation — the same questions apply to hosted agent products as to libraries.",
+    "Vendor and platform evaluation: the same questions apply to hosted agent products as to libraries.",
     "Team capability planning: LangGraph and AutoGen both demand more than LangChain, and that's a hiring and training consideration.",
     "Migration planning when an existing agent has outgrown its framework, where knowing the destination's model prevents a second migration.",
   ],
@@ -329,7 +329,7 @@ await Console(team.run_stream(task="..."))`,
   faqs: [
     {
       q: "Which agent framework is best?",
-      a: "Wrong question — they encode different mental models. LangChain for the ecosystem, LangGraph for state and control flow, CrewAI for role decomposition, AutoGen for dialogue-shaped work, raw SDK for a single agent with a few tools.",
+      a: "Wrong question. They encode different mental models. LangChain for the ecosystem, LangGraph for state and control flow, CrewAI for role decomposition, AutoGen for dialogue-shaped work, raw SDK for a single agent with a few tools.",
     },
     {
       q: "Do I need a framework at all?",
@@ -345,7 +345,7 @@ await Console(team.run_stream(task="..."))`,
     },
     {
       q: "How much more does multi-agent cost?",
-      a: "Roughly proportional to agent count for a crew, and growing with the square of turn count for a group chat, since each turn re-sends the history. Measure per successful task — the gap is usually larger than expected.",
+      a: "Roughly proportional to agent count for a crew, and growing with the square of turn count for a group chat, since each turn re-sends the history. Measure per successful task: the gap is usually larger than expected.",
     },
     {
       q: "Can I switch frameworks later?",
@@ -359,14 +359,14 @@ await Console(team.run_stream(task="..."))`,
 
   tools: [
     { name: "Anthropic Python SDK", what: "The no-framework baseline, including the tool runner for the loop.", cost: "Free", url: "https://github.com/anthropics/anthropic-sdk-python" },
-    { name: "LangChain", what: "Ecosystem breadth — providers, integrations, tracing.", cost: "Free", url: "https://docs.langchain.com" },
+    { name: "LangChain", what: "Ecosystem breadth: providers, integrations, tracing.", cost: "Free", url: "https://docs.langchain.com" },
     { name: "LangGraph", what: "State machines, durable checkpointing, interrupts.", cost: "Free", url: "https://langchain-ai.github.io/langgraph/" },
     { name: "CrewAI", what: "Role-based decomposition with sequential or hierarchical execution.", cost: "Free", url: "https://docs.crewai.com" },
     { name: "AutoGen", what: "Conversational multi-agent teams, async throughout.", cost: "Free", url: "https://microsoft.github.io/autogen/stable/" },
   ],
 
   resources: [
-    { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "The best framework-agnostic treatment, and clear that most tasks want a workflow rather than an agent.", url: "https://www.anthropic.com/research/building-effective-agents" },
+    { title: "Building Effective Agents: Anthropic", kind: "Docs", note: "The best framework-agnostic treatment, and clear that most tasks want a workflow rather than an agent.", url: "https://www.anthropic.com/research/building-effective-agents" },
     { title: "Lost in the Middle", kind: "Paper", note: "Why every option here degrades on long runs: a model property, not a library one.", url: "https://arxiv.org/abs/2307.03172" },
     { title: "OWASP Top 10 for LLM Applications", kind: "Docs", note: "The security concerns every framework inherits equally.", url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/" },
   ],

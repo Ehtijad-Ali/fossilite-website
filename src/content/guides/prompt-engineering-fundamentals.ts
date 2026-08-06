@@ -22,15 +22,15 @@ export const guide: Guide = {
   readingTime: 14,
 
   intro: [
-    "Prompt engineering has an image problem. Half the internet treats it as a collection of magic phrases — say 'you are a world-class expert' and receive brilliance — and the other half declares it a fake skill that better models will eliminate. Both miss what's actually going on.",
+    "Prompt engineering has an image problem. Half the internet treats it as a collection of magic phrases (say 'you are a world-class expert' and receive brilliance), and the other half declares it a fake skill that better models will eliminate. Both miss what's actually going on.",
     "Prompting is specification. You're describing a task to a system that will do exactly what your words statistically imply, with no ability to ask a clarifying question and no shared context about your situation. The skill is the same one that separates a good brief from a bad one when you hire a contractor: knowing what you actually want, and saying it precisely enough that a competent stranger could deliver it.",
-    "That framing predicts the whole discipline. Vague requests produce generic output because the most statistically typical interpretation of a vague request is a generic one. Examples work because they collapse ambiguity faster than description. Step-by-step reasoning works because generation is sequential. Everything in this guide follows from that, and none of it becomes obsolete as models improve — better models make good specifications more valuable, not less.",
+    "That framing predicts the whole discipline. Vague requests produce generic output because the most statistically typical interpretation of a vague request is a generic one. Examples work because they collapse ambiguity faster than description. Step-by-step reasoning works because generation is sequential. Everything in this guide follows from that, and none of it becomes obsolete as models improve: better models make good specifications more valuable, not less.",
   ],
 
   whyItMatters: [
     "The gap between a careless prompt and a considered one is not marginal. On the same task with the same model, it's routinely the difference between output you throw away and output you ship with light editing. Multiply that across every AI interaction in your week and it compounds into real hours.",
     "It's also becoming a baseline professional expectation rather than a specialism. Marketers, analysts, lawyers, engineers and support teams are all being handed these tools with no instruction. The people who get consistent results are visibly more productive, and it reads as competence rather than as a trick.",
-    "For anyone building products, this is load-bearing engineering. The prompt is where your application's behaviour is defined. An undocumented, untested prompt that someone tweaked one afternoon is a production dependency with no tests — and it will break silently, in ways that reach customers before they reach your dashboards.",
+    "For anyone building products, this is load-bearing engineering. The prompt is where your application's behaviour is defined. An undocumented, untested prompt that someone tweaked one afternoon is a production dependency with no tests. And it will break silently, in ways that reach customers before they reach your dashboards.",
   ],
 
   coreConcepts: [
@@ -39,7 +39,7 @@ export const guide: Guide = {
       explain:
         "Models don't respond to flattery or urgency in any meaningful way. They respond to information. Replacing 'please write an amazing email' with 'write a 90-word email to a customer whose order is three days late, acknowledging the delay, giving the new date, and offering a 10% credit' transforms the output.",
       detail:
-        "Every adjective you'd use to praise good output — clear, concise, professional — should instead become a concrete constraint the model can actually satisfy.",
+        "Every adjective you'd use to praise good output (clear, concise, professional) should instead become a concrete constraint the model can actually satisfy.",
     },
     {
       term: "Role and audience set the register",
@@ -51,7 +51,7 @@ export const guide: Guide = {
     {
       term: "Few-shot examples collapse ambiguity",
       explain:
-        "Showing one to three examples of input paired with ideal output communicates format, depth, tone and edge-case handling simultaneously — things that would take paragraphs to describe and would still be ambiguous.",
+        "Showing one to three examples of input paired with ideal output communicates format, depth, tone and edge-case handling simultaneously. Things that would take paragraphs to describe and would still be ambiguous.",
       detail:
         "Choose examples that demonstrate the hard cases, not the easy ones. An example showing how to handle missing information teaches more than three showing the straightforward path.",
     },
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "For any task involving analysis, asking the model to work through its reasoning before stating an answer measurably improves the answer. Generation is sequential, so the reasoning tokens inform what follows.",
       detail:
-        "This means 'think step by step, then give your answer' works, but 'give your answer, then explain' does not — the explanation there is a post-hoc justification of a conclusion already committed to.",
+        "This means 'think step by step, then give your answer' works, but 'give your answer, then explain' does not. The explanation there is a post-hoc justification of a conclusion already committed to.",
     },
     {
       term: "Structure the output, always",
@@ -81,7 +81,7 @@ export const guide: Guide = {
       explain:
         "'Don't be verbose' performs worse than 'maximum 120 words'. Telling a model what to avoid leaves the entire remaining space open; telling it what to do narrows it to a target.",
       detail:
-        "Where you need a prohibition, pair it with the alternative: 'don't speculate — if the documents don't answer the question, write NOT FOUND'.",
+        "Where you need a prohibition, pair it with the alternative: 'don't speculate: if the documents don't answer the question, write NOT FOUND'.",
     },
     {
       term: "The escape hatch",
@@ -126,7 +126,7 @@ export const guide: Guide = {
     },
     {
       title: "Set up a real evaluation set",
-      body: "Assemble twenty representative inputs — including three difficult ones and two that should be refused. Write down what good output looks like for each. Run your prompt across all twenty and score it.",
+      body: "Assemble twenty representative inputs. Including three difficult ones and two that should be refused. Write down what good output looks like for each. Run your prompt across all twenty and score it.",
       effort: "4–5 hours",
       outcome: "A repeatable score you can compare across prompt versions.",
     },
@@ -149,11 +149,11 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "Adding 'let's think step by step' style reasoning to the prompt, and nothing else.",
       walkthrough:
-        "Wei and colleagues tested whether prompting a model with a handful of examples that show intermediate reasoning steps — rather than just question-and-answer pairs — changes what the model can solve. The model, the training and the questions were identical; only the exemplars in the prompt differed. They evaluated across arithmetic, commonsense and symbolic reasoning benchmarks.",
+        "Wei and colleagues tested whether prompting a model with a handful of examples that show intermediate reasoning steps (rather than just question-and-answer pairs) changes what the model can solve. The model, the training and the questions were identical; only the exemplars in the prompt differed. They evaluated across arithmetic, commonsense and symbolic reasoning benchmarks.",
       result:
-        "Prompting a 540B-parameter model with just eight chain-of-thought exemplars achieved state-of-the-art accuracy on the GSM8K maths word-problem benchmark, surpassing even a fine-tuned GPT-3 with a verifier. The paper also found the effect emerges with scale — it does not reliably help small models. This is the published basis for asking for reasoning before conclusions, and for the caveat that it isn't free or universal.",
+        "Prompting a 540B-parameter model with just eight chain-of-thought exemplars achieved state-of-the-art accuracy on the GSM8K maths word-problem benchmark, surpassing even a fine-tuned GPT-3 with a verifier. The paper also found the effect emerges with scale. It does not reliably help small models. This is the published basis for asking for reasoning before conclusions, and for the caveat that it isn't free or universal.",
       source: {
-        label: "Wei et al. (2022) — Chain-of-Thought Prompting Elicits Reasoning in Large Language Models, arXiv:2201.11903",
+        label: "Wei et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models, arXiv:2201.11903",
         url: "https://arxiv.org/abs/2201.11903",
       },
     },
@@ -163,9 +163,9 @@ export const guide: Guide = {
       walkthrough:
         "Liu and colleagues systematically moved the relevant information around inside a model's context and measured retrieval accuracy at each position. The content was identical each time; only its location changed.",
       result:
-        "Performance was highest at the beginning and end of the context and degraded in the middle — a U-shaped curve that held even for long-context models. This is why 'put critical instructions at the start, restate the most important one at the end' is a mechanical recommendation in this guide rather than a stylistic preference.",
+        "Performance was highest at the beginning and end of the context and degraded in the middle: a U-shaped curve that held even for long-context models. This is why 'put critical instructions at the start, restate the most important one at the end' is a mechanical recommendation in this guide rather than a stylistic preference.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -173,7 +173,7 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "Constraining a classifier to a fixed label set.",
       walkthrough:
-        "A failure shape worth being able to recognise: you ask a model to sort support tickets into your eight categories, without listing them. It returns sensible-sounding labels that aren't in your taxonomy — 'Billing Confusion' where your schema says 'Billing' — and your downstream code, which expects one of eight strings, starts dropping rows. Nothing threw an error; the model did something reasonable that your system couldn't consume.",
+        "A failure shape worth being able to recognise: you ask a model to sort support tickets into your eight categories, without listing them. It returns sensible-sounding labels that aren't in your taxonomy ('Billing Confusion' where your schema says 'Billing'), and your downstream code, which expects one of eight strings, starts dropping rows. Nothing threw an error; the model did something reasonable that your system couldn't consume.",
       result:
         "The fix is to enumerate the permitted labels in the prompt, supply one example per label drawn from ambiguous cases rather than obvious ones, require the output to be a single label and nothing else, and validate against the enum before use. Open-ended classification invents categories the moment you stop watching.",
     },
@@ -182,7 +182,7 @@ export const guide: Guide = {
   mistakes: [
     {
       mistake: "Asking for 'better', 'professional' or 'engaging' output",
-      why: "These are evaluations, not instructions. The model has no access to your standard, so it produces the statistical average of what those words accompany — which is exactly the generic register everyone complains about.",
+      why: "These are evaluations, not instructions. The model has no access to your standard, so it produces the statistical average of what those words accompany, which is exactly the generic register everyone complains about.",
       fix: "Convert each adjective into a testable constraint. 'Professional' might mean no exclamation marks, no contractions, under 150 words, and a specific closing. Now the model can comply and you can check.",
     },
     {
@@ -222,7 +222,7 @@ export const guide: Guide = {
     "State constraints numerically wherever possible: word counts, item counts, reading levels. Numbers are checkable; adjectives aren't.",
     "Include one example of ideal output for anything with a repeated format, and make it an example of a hard case.",
     "Request reasoning before conclusions on analytical work, and consider asking for the reasoning in a section you can discard.",
-    "Always give the model a defined way to fail — 'NOT FOUND', 'INSUFFICIENT DATA', an empty array — so that failing is a valid output rather than something it must avoid.",
+    "Always give the model a defined way to fail ('NOT FOUND', 'INSUFFICIENT DATA', an empty array) so that failing is a valid output rather than something it must avoid.",
     "Delimit supplied content with clear markers and label it as data, both for clarity and as a first defence against injection.",
     "Keep one canonical version of each production prompt, with an owner and a changelog. Ad-hoc copies drift within weeks.",
     "Re-test prompts when you change model or version. Behaviour shifts between releases, sometimes substantially, and silently.",
@@ -233,7 +233,7 @@ export const guide: Guide = {
     "Use a two-pass structure for quality work: one call generates, a second call critiques against explicit criteria, a third revises. Models are markedly better at evaluating output than at producing perfect output first time.",
     "When output is nearly right but tonally off, supply a sample of the voice you want rather than describing it. Three sentences of real text beat a paragraph of adjectives.",
     "Put your evaluation criteria in the prompt itself. 'A good answer does X, Y and Z' measurably improves output, and it forces you to define what you actually want.",
-    "For extraction tasks, ask for the source quote alongside every extracted field. It roughly doubles output length and makes every value independently checkable — usually a very good trade.",
+    "For extraction tasks, ask for the source quote alongside every extracted field. It roughly doubles output length and makes every value independently checkable: usually a very good trade.",
     "Log the exact prompt and response for anything in production. When someone reports bad output next month, reconstructing what was actually sent is otherwise impossible.",
   ],
 
@@ -249,9 +249,9 @@ export const guide: Guide = {
   lifeApplications: [
     "Learning: 'explain X assuming I know Y but not Z, then ask me three questions to check I understood' is a effective study loop, and it works for almost any subject.",
     "Difficult writing: specify the recipient, the relationship, the outcome you want and the tone, and you'll get a usable draft of the message you've been avoiding for three days.",
-    "Decision support: 'here's my situation and my preferred option — give me the three strongest arguments against it' is a cheap way to stress-test your own thinking.",
+    "Decision support: 'here's my situation and my preferred option. Give me the three strongest arguments against it' is a cheap way to stress-test your own thinking.",
     "Simplifying the impenetrable: contracts, medical letters, tax guidance. Specify your level and ask for the practical implications, then verify anything that matters with a professional.",
-    "Planning: describe your constraints precisely — time, budget, energy, non-negotiables — and you'll get a plan that fits your life rather than a generic one.",
+    "Planning: describe your constraints precisely (time, budget, energy, non-negotiables), and you'll get a plan that fits your life rather than a generic one.",
   ],
 
   exercises: [
@@ -324,7 +324,7 @@ export const guide: Guide = {
     },
     {
       q: "What is prompt injection and should I worry about it?",
-      a: "It's when text your system processes contains instructions the model follows. If your application handles untrusted input — emails, web pages, uploaded documents — then yes. Delimit content, treat it as data, and never let model output trigger a privileged action unchecked.",
+      a: "It's when text your system processes contains instructions the model follows. If your application handles untrusted input (emails, web pages, uploaded documents) then yes. Delimit content, treat it as data, and never let model output trigger a privileged action unchecked.",
     },
     {
       q: "Should I use chain-of-thought for everything?",
@@ -332,7 +332,7 @@ export const guide: Guide = {
     },
     {
       q: "How do I know if a prompt change actually helped?",
-      a: "Only by running a fixed evaluation set before and after. Judging from a couple of outputs is unreliable because model output varies between runs — you'll see the improvements you hoped for and miss the regressions.",
+      a: "Only by running a fixed evaluation set before and after. Judging from a couple of outputs is unreliable because model output varies between runs. You'll see the improvements you hoped for and miss the regressions.",
     },
   ],
 

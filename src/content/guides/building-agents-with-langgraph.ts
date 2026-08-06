@@ -24,7 +24,7 @@ export const guide: Guide = {
   intro: [
     "LangGraph exists because `create_agent` runs out of road. A prebuilt agent handles the tool loop and nothing else: the moment you need a branch, a retry with different behaviour, a pause for human approval, or state that survives a process restart, you're fighting the abstraction. LangGraph gives you the loop as an explicit graph you define.",
     "The mental model is a state machine, not a conversation or an org chart. You declare nodes (functions that transform state), edges (what runs next), and conditional edges (functions that decide). The agent loop that other frameworks hide becomes a cycle you drew on purpose.",
-    "That explicitness is the trade. LangGraph is more verbose than `create_agent` and considerably more capable. This guide covers when the trade is worth making, the prebuilt shortcut for when it isn't, and the two features — checkpointed persistence and interrupts — that are the real reason to be here.",
+    "That explicitness is the trade. LangGraph is more verbose than `create_agent` and considerably more capable. This guide covers when the trade is worth making, the prebuilt shortcut for when it isn't, and the two features (checkpointed persistence and interrupts) that are the real reason to be here.",
   ],
 
   whyItMatters: [
@@ -37,7 +37,7 @@ export const guide: Guide = {
     {
       term: "State is a typed dict the graph threads through",
       explain:
-        "You define a state schema — usually a `TypedDict`. Every node receives the current state and returns a partial update, which is merged in. That merged object is the only thing flowing through the graph.",
+        "You define a state schema: usually a `TypedDict`. Every node receives the current state and returns a partial update, which is merged in. That merged object is the only thing flowing through the graph.",
       detail:
         "How updates merge is configurable per field. Messages typically append via a reducer; scalars overwrite. Getting the reducers right is most of what makes a graph behave sanely.",
     },
@@ -60,7 +60,7 @@ export const guide: Guide = {
       explain:
         "Compile the graph with a checkpointer and every step is saved. `MemorySaver` keeps it in RAM; production backends persist to Postgres, Redis or similar.",
       detail:
-        "`MemorySaver` is for development only — state dies with the process. Shipping it is a common and quiet mistake, because everything works until the first restart.",
+        "`MemorySaver` is for development only: state dies with the process. Shipping it is a common and quiet mistake, because everything works until the first restart.",
     },
     {
       term: "`thread_id` scopes a conversation",
@@ -72,7 +72,7 @@ export const guide: Guide = {
     {
       term: "Interrupts pause the graph",
       explain:
-        "You can configure a graph to stop before or after specific nodes. It returns control to your code, you inspect or modify state, and resume later — possibly in a different process.",
+        "You can configure a graph to stop before or after specific nodes. It returns control to your code, you inspect or modify state, and resume later: possibly in a different process.",
       detail:
         "This is the human-approval mechanism. Because state is checkpointed, the pause can last as long as the approval takes.",
     },
@@ -90,7 +90,7 @@ export const guide: Guide = {
       title: "The prebuilt agent with persistence",
       language: "python",
       intro:
-        "Start here. This is a working tool-calling agent whose conversation survives across calls — the thing `create_agent` alone doesn't give you.",
+        "Start here. This is a working tool-calling agent whose conversation survives across calls: the thing `create_agent` alone doesn't give you.",
       code: `from langchain_anthropic import ChatAnthropic
 from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
@@ -109,19 +109,19 @@ def get_weather(city: str) -> str:
 
 model = ChatAnthropic(model="claude-opus-5", max_tokens=16000)
 
-# MemorySaver is IN-PROCESS ONLY. State dies with the process — fine for
+# MemorySaver is IN-PROCESS ONLY. State dies with the process, fine for
 # development, wrong for production. Swap for a Postgres/Redis checkpointer.
 checkpointer = MemorySaver()
 
 agent = create_react_agent(model, [get_weather], checkpointer=checkpointer)
 
 # thread_id scopes the conversation. Derive it from YOUR session, never from
-# user-supplied input — it is the boundary between two users' histories.
+# user-supplied input: it is the boundary between two users' histories.
 config = {"configurable": {"thread_id": "user-123"}}
 
 agent.invoke({"messages": [{"role": "user", "content": "Weather in Lisbon?"}]}, config)
 
-# Second call: no history passed, but the agent remembers — the checkpointer
+# Second call: no history passed, but the agent remembers: the checkpointer
 # loaded it. This is the whole point of LangGraph over a stateless agent.
 result = agent.invoke(
     {"messages": [{"role": "user", "content": "And is that warm for April?"}]},
@@ -129,13 +129,13 @@ result = agent.invoke(
 )
 print(result["messages"][-1].content)`,
       note:
-        "The second call passes only the new message. Everything before it comes from the checkpointer, keyed by `thread_id` — which is why that value must come from your session and never from the request body.",
+        "The second call passes only the new message. Everything before it comes from the checkpointer, keyed by `thread_id`, which is why that value must come from your session and never from the request body.",
     },
     {
       title: "A hand-built graph with an explicit loop",
       language: "python",
       intro:
-        "When the prebuilt shape doesn't fit. Nodes, edges, and a conditional edge that closes the cycle — the agent loop drawn on purpose.",
+        "When the prebuilt shape doesn't fit. Nodes, edges, and a conditional edge that closes the cycle, the agent loop drawn on purpose.",
       code: `from typing import Annotated, TypedDict
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
@@ -176,13 +176,13 @@ graph.invoke(
     config={"configurable": {"thread_id": "user-123"}, "recursion_limit": 25},
 )`,
       note:
-        "`should_continue` checks the step count before checking for tool calls. Putting the ceiling first means a runaway loop stops even when the model keeps requesting tools — the order matters.",
+        "`should_continue` checks the step count before checking for tool calls. Putting the ceiling first means a runaway loop stops even when the model keeps requesting tools: the order matters.",
     },
     {
       title: "Human approval with an interrupt",
       language: "python",
       intro:
-        "The feature that's hard without checkpointing: pause before an irreversible action, wait for a human, resume — possibly in a different process, hours later.",
+        "The feature that's hard without checkpointing: pause before an irreversible action, wait for a human, resume: possibly in a different process, hours later.",
       code: `graph = builder.compile(
     checkpointer=checkpointer,
     interrupt_before=["tools"],     # stop before ANY tool executes
@@ -212,7 +212,7 @@ else:
         {"messages": [{"role": "user", "content": "The user declined that action."}]},
     )`,
       note:
-        "`graph.invoke(None, config)` is the resume idiom and it's easy to misread — `None` means continue from the checkpoint, not start a new run. Passing a fresh input instead would append to state rather than resuming.",
+        "`graph.invoke(None, config)` is the resume idiom and it's easy to misread: `None` means continue from the checkpoint, not start a new run. Passing a fresh input instead would append to state rather than resuming.",
     },
   ],
 
@@ -270,7 +270,7 @@ else:
       result:
         "A checkpointed graph accumulates messages indefinitely by design. That's what persistence means. Without a summarisation node, the original instructions migrate toward the least-attended region as the thread grows. LangGraph makes the fix expressible: a conditional edge to a compaction node when message count crosses a threshold.",
       source: {
-        label: "Liu et al. (2023) — Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
+        label: "Liu et al. (2023). Lost in the Middle: How Language Models Use Long Contexts, arXiv:2307.03172",
         url: "https://arxiv.org/abs/2307.03172",
       },
     },
@@ -420,7 +420,7 @@ else:
     },
     {
       q: "What is a reducer and do I need one?",
-      a: "It defines how a node's update merges into existing state. For message lists you need one — `add_messages` — or each node replaces the whole history instead of appending. Scalars usually want the default overwrite.",
+      a: "It defines how a node's update merges into existing state. For message lists you need one (`add_messages`) or each node replaces the whole history instead of appending. Scalars usually want the default overwrite.",
     },
     {
       q: "How do I stop an infinite loop?",
@@ -435,14 +435,14 @@ else:
   tools: [
     { name: "langgraph", what: "The framework. `pip install langgraph langchain-anthropic`.", cost: "Free", url: "https://langchain-ai.github.io/langgraph/" },
     { name: "langgraph-checkpoint-postgres", what: "Durable checkpointing. The production replacement for MemorySaver.", cost: "Free" },
-    { name: "LangSmith", what: "Tracing that shows node-by-node execution — the natural fit for a graph.", cost: "Freemium", url: "https://smith.langchain.com" },
+    { name: "LangSmith", what: "Tracing that shows node-by-node execution, the natural fit for a graph.", cost: "Freemium", url: "https://smith.langchain.com" },
     { name: "LangGraph Studio", what: "Visual graph inspection and debugging. Useful precisely because graphs are hard to read as code.", cost: "Freemium" },
   ],
 
   resources: [
     { title: "LangGraph documentation", kind: "Docs", note: "The authoritative source for state, reducers, checkpointers and interrupts.", url: "https://langchain-ai.github.io/langgraph/" },
     { title: "Lost in the Middle", kind: "Paper", note: "Why persistent threads need a summarisation strategy rather than just more context.", url: "https://arxiv.org/abs/2307.03172" },
-    { title: "Building Effective Agents — Anthropic", kind: "Docs", note: "Framework-agnostic guidance on when a workflow beats an agent.", url: "https://www.anthropic.com/research/building-effective-agents" },
+    { title: "Building Effective Agents: Anthropic", kind: "Docs", note: "Framework-agnostic guidance on when a workflow beats an agent.", url: "https://www.anthropic.com/research/building-effective-agents" },
   ],
 
   internalLinks: [

@@ -5,7 +5,7 @@ export const guide: Guide = {
   slug: "time-management-systems-compared",
   seoTitle: "Time Management Systems Compared: Which Actually Works",
   metaDescription:
-    "GTD, time blocking, Pomodoro and the rest — what each is good at, where each fails, and how to choose one that fits your actual work.",
+    "GTD, time blocking, Pomodoro and the rest. What each is good at, where each fails, and how to choose one that fits your actual work.",
   title: "Time Management Systems, Honestly Compared",
   keywords: [
     "time management systems",
@@ -24,11 +24,11 @@ export const guide: Guide = {
   intro: [
     "Every time management system works for the person who wrote the book about it. That's not a criticism. It's the most useful thing to understand about the genre. These systems were designed by particular people, for particular kinds of work, under particular constraints, and they're presented as universal because 'this worked for me and might work for you' doesn't sell.",
     "The result is a predictable cycle. You adopt a system enthusiastically, it works for three weeks, it collapses during a busy period, and you conclude you're the problem. Usually you weren't. The system was solving a constraint you don't have while ignoring the one you do.",
-    "This guide compares the major systems by what they actually optimise for and where each characteristically fails. The aim is diagnosis first: work out which constraint is actually binding on your week, then choose the system that addresses it — or, more often, take the one component of it that helps and leave the rest.",
+    "This guide compares the major systems by what they actually optimise for and where each characteristically fails. The aim is diagnosis first: work out which constraint is actually binding on your week, then choose the system that addresses it. Or, more often, take the one component of it that helps and leave the rest.",
   ],
 
   whyItMatters: [
-    "Most people spend years cycling through systems without noticing that they keep failing in the same place. Identifying your actual constraint — too many inputs, too little uninterrupted time, unclear priorities, or unrealistic commitments — is a one-off diagnosis that makes every subsequent choice straightforward.",
+    "Most people spend years cycling through systems without noticing that they keep failing in the same place. Identifying your actual constraint (too many inputs, too little uninterrupted time, unclear priorities, or unrealistic commitments) is a one-off diagnosis that makes every subsequent choice straightforward.",
     "There's also a real cost to system churn. Each adoption takes weeks of setup and adjustment, and each abandonment carries a small amount of self-blame. People end up believing they lack discipline when they've actually been repeatedly applying the wrong tool with reasonable diligence.",
     "And the stakes compound. How you spend your hours is how you spend your life, and the difference between a week organised around what matters and one organised around what arrives is not marginal over a decade.",
   ],
@@ -46,7 +46,7 @@ export const guide: Guide = {
       explain:
         "Getting Things Done and its relatives solve one problem well: reliably capturing everything so nothing is lost and nothing occupies mental background processing.",
       detail:
-        "The characteristic failure is maintenance. A capture system with an unreviewed backlog becomes a source of guilt rather than relief, and the weekly review — the part that makes it work — is the part people quietly stop doing.",
+        "The characteristic failure is maintenance. A capture system with an unreviewed backlog becomes a source of guilt rather than relief, and the weekly review (the part that makes it work) is the part people quietly stop doing.",
     },
     {
       term: "Calendar systems: for when you have no runway",
@@ -101,7 +101,7 @@ export const guide: Guide = {
     },
     {
       title: "Fix capture first if things are getting dropped",
-      body: "One inbox for everything, emptied daily into a single list. Not a full GTD implementation — just reliable capture. If forgetting was your constraint, this alone resolves most of it.",
+      body: "One inbox for everything, emptied daily into a single list. Not a full GTD implementation: just reliable capture. If forgetting was your constraint, this alone resolves most of it.",
       effort: "3–4 hours setup",
       outcome: "Nothing lives only in your head.",
     },
@@ -113,7 +113,7 @@ export const guide: Guide = {
     },
     {
       title: "Cap concurrent commitments if you over-commit",
-      body: "Set a hard limit on active projects — three is a common working number. Anything beyond it waits explicitly rather than being started and stalled. Make the queue visible to whoever assigns you work.",
+      body: "Set a hard limit on active projects: three is a common working number. Anything beyond it waits explicitly rather than being started and stalled. Make the queue visible to whoever assigns you work.",
       effort: "2–3 hours",
       outcome: "A visible limit that makes trade-offs explicit rather than implicit.",
     },
@@ -144,9 +144,9 @@ export const guide: Guide = {
       walkthrough:
         "Mark, Gudith and Klocke had participants perform work tasks under interrupted and uninterrupted conditions and measured both completion time and self-reported experience. The intuitive prediction is that interrupted work takes longer.",
       result:
-        "Participants completed interrupted tasks in less time, with no difference in quality — they compensated by working faster. The cost showed up as significantly higher stress, frustration, time pressure and effort. For choosing a time management system this reframes the goal: if you evaluate a system purely on whether the work got done, fragmentation looks free. It isn't; it's being paid for somewhere your output metrics don't record.",
+        "Participants completed interrupted tasks in less time, with no difference in quality. They compensated by working faster. The cost showed up as significantly higher stress, frustration, time pressure and effort. For choosing a time management system this reframes the goal: if you evaluate a system purely on whether the work got done, fragmentation looks free. It isn't; it's being paid for somewhere your output metrics don't record.",
       source: {
-        label: "Mark, Gudith & Klocke (2008) — The Cost of Interrupted Work: More Speed and Stress, CHI '08",
+        label: "Mark, Gudith & Klocke (2008). The Cost of Interrupted Work: More Speed and Stress, CHI '08",
         url: "https://ics.uci.edu/~gmark/chi08-mark.pdf",
       },
     },
@@ -158,7 +158,7 @@ export const guide: Guide = {
       result:
         "Performance on the second task was measurably worse when the first had been left incomplete: part of attention remained with it, with the effect strongest for tasks that were unfinished, time-pressured or emotionally engaging. This is a specific argument for systems that batch similar work and for reaching a defined stopping point before switching, rather than for any particular app or methodology.",
       source: {
-        label: "Leroy (2009) — Why Is It So Hard to Do My Work? The Challenge of Attention Residue When Switching Between Work Tasks",
+        label: "Leroy (2009). Why Is It So Hard to Do My Work? The Challenge of Attention Residue When Switching Between Work Tasks",
         url: "https://www.uwb.edu/business/faculty/sophie-leroy/attention-residue",
       },
     },
@@ -195,7 +195,7 @@ export const guide: Guide = {
     },
     {
       mistake: "Maintaining a capture list you never review",
-      why: "An unreviewed list stops being trustworthy, so you start keeping things in your head again — while still feeling guilty about the list. Worst of both.",
+      why: "An unreviewed list stops being trustworthy, so you start keeping things in your head again: while still feeling guilty about the list. Worst of both.",
       fix: "Either commit to a regular review, or shrink the system until reviewing it takes minutes. An honest small system beats an aspirational large one.",
     },
     {
@@ -214,7 +214,7 @@ export const guide: Guide = {
     "Diagnose your actual constraint before adopting anything, and re-diagnose when a system stops working.",
     "Keep one capture inbox, not several. Multiple capture points recreate the problem capture was meant to solve.",
     "Protect one block rather than scheduling the whole day. Partial structure survives real weeks.",
-    "Batch similar work — messages, admin, calls — into defined windows to reduce switching.",
+    "Batch similar work (messages, admin, calls) into defined windows to reduce switching.",
     "Reach a defined stopping point before switching tasks, so less attention follows you.",
     "Cap concurrent commitments explicitly, and make the cap visible to whoever assigns you work.",
     "Review weekly, and if you consistently skip it, simplify until the review is short enough to actually happen.",
@@ -224,11 +224,11 @@ export const guide: Guide = {
 
   proTips: [
     "Track your longest uninterrupted block each day rather than hours worked. It's the number that actually predicts whether demanding work got done, and it changes what you optimise for.",
-    "When a system fails, identify which specific component failed before abandoning the whole thing. Usually one part broke and the other three were fine — wholesale replacement discards what was working.",
+    "When a system fails, identify which specific component failed before abandoning the whole thing. Usually one part broke and the other three were fine: wholesale replacement discards what was working.",
     "Take the single most useful element from each system rather than adopting any of them wholesale: capture from GTD, one protected block from time blocking, WIP limits from Kanban. Nobody is grading your orthodoxy.",
     "Put your commitments where the people who assign you work can see them. Half of over-commitment is invisible to the person creating it, and visibility does more than any personal discipline.",
     "Schedule the review before you schedule the work. Reviews get skipped because they're the only thing with no external deadline.",
-    "If you're between systems more often than in one, the problem is workload rather than method. Count your active commitments honestly — that number is usually the answer.",
+    "If you're between systems more often than in one, the problem is workload rather than method. Count your active commitments honestly. That number is usually the answer.",
   ],
 
   businessApplications: [
@@ -242,7 +242,7 @@ export const guide: Guide = {
 
   lifeApplications: [
     "Managing personal admin without it occupying background attention, which is what capture systems deliver.",
-    "Protecting time for things with no external deadline — exercise, learning, relationships — which lose by default to anything scheduled.",
+    "Protecting time for things with no external deadline (exercise, learning, relationships) which lose by default to anything scheduled.",
     "Reducing the mental load of running a household, where the invisible work is largely tracking rather than doing.",
     "Recognising over-commitment as a structural problem rather than a personal failing, which changes what you do about it.",
     "Deciding what to stop, which is the only lever that reliably creates time and the one every system underplays.",
@@ -311,11 +311,11 @@ export const guide: Guide = {
     },
     {
       q: "Is Getting Things Done worth implementing fully?",
-      a: "The capture-and-clarify core is valuable for people who drop commitments. The full implementation — contexts, horizons, comprehensive reviews — is substantial maintenance that many people can't sustain. Take the core.",
+      a: "The capture-and-clarify core is valuable for people who drop commitments. The full implementation (contexts, horizons, comprehensive reviews) is substantial maintenance that many people can't sustain. Take the core.",
     },
     {
       q: "Does the Pomodoro technique work?",
-      a: "For overcoming resistance to starting, yes — twenty-five minutes is a low bar to clear. As a structure for work requiring a long warm-up it can be counterproductive, because the timer interrupts at the point you'd become productive.",
+      a: "For overcoming resistance to starting, yes. Twenty-five minutes is a low bar to clear. As a structure for work requiring a long warm-up it can be counterproductive, because the timer interrupts at the point you'd become productive.",
     },
     {
       q: "How do I stop over-committing?",
@@ -327,22 +327,22 @@ export const guide: Guide = {
     },
     {
       q: "How much time should the system itself take?",
-      a: "Minutes a day and under half an hour a week. If it's more, simplify — you're maintaining a system rather than using one, and the extra structure is unlikely to be earning its cost.",
+      a: "Minutes a day and under half an hour a week. If it's more, simplify. You're maintaining a system rather than using one, and the extra structure is unlikely to be earning its cost.",
     },
   ],
 
   tools: [
     { name: "Todoist / Things / Apple Reminders", what: "Capture and list management. Any of them works; the choice matters far less than consistent use.", cost: "Freemium" },
     { name: "Your existing calendar", what: "For time blocking. Blocks belong as real events others can see, not in a separate app.", cost: "Free" },
-    { name: "Trello / a physical board", what: "Kanban with explicit work-in-progress limits — the most direct tool for over-commitment.", cost: "Freemium" },
+    { name: "Trello / a physical board", what: "Kanban with explicit work-in-progress limits, the most direct tool for over-commitment.", cost: "Freemium" },
     { name: "Paper and a pen", what: "Genuinely competitive for capture and daily planning, with no notifications attached.", cost: "Free" },
   ],
 
   resources: [
-    { title: "Getting Things Done — David Allen", kind: "Book", note: "The origin of modern capture systems. Take the core loop; the full implementation is more than most people can maintain." },
+    { title: "Getting Things Done: David Allen", kind: "Book", note: "The origin of modern capture systems. Take the core loop; the full implementation is more than most people can maintain." },
     { title: "The Cost of Interrupted Work", kind: "Paper", note: "Mark, Gudith & Klocke (2008). Short, and it reframes what a time management system should be optimising for.", url: "https://ics.uci.edu/~gmark/chi08-mark.pdf" },
-    { title: "Four Thousand Weeks — Oliver Burkeman", kind: "Book", note: "An argument that the premise of most productivity advice is wrong. A useful corrective to system-chasing." },
-    { title: "Personal Kanban — Benson & Barry", kind: "Book", note: "The clearest treatment of work-in-progress limits applied to individuals." },
+    { title: "Four Thousand Weeks: Oliver Burkeman", kind: "Book", note: "An argument that the premise of most productivity advice is wrong. A useful corrective to system-chasing." },
+    { title: "Personal Kanban: Benson & Barry", kind: "Book", note: "The clearest treatment of work-in-progress limits applied to individuals." },
   ],
 
   internalLinks: [

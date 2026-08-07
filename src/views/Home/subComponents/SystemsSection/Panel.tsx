@@ -1,6 +1,8 @@
 import { FC, ReactNode } from "react";
 import { Box, Typography } from "@mui/material";
 
+import { FONT_DISPLAY } from "../../../../theme/fonts";
+
 /**
  * The light glass card every mockup sits in.
  *
@@ -19,27 +21,35 @@ export interface Skin {
   track: string;
 }
 
+/**
+ * Panel colours, drawn from the site palette rather than invented.
+ *
+ * Light is the warm cream side (#FFF4E3 / #fdf6ec / #001932 ink), dark is the
+ * navy side (#0e1a2b / #13233a / #172b44 with cream text). Those are the same
+ * values in theme/sharedTokens, hardcoded here only because a panel can be
+ * flipped against the page theme.
+ */
 export const skinFor = (light: boolean): Skin =>
   light
     ? {
         light,
-        surface: "rgba(255,255,255,0.72)",
-        raised: "rgba(255,255,255,0.9)",
-        border: "rgba(15,32,56,0.10)",
-        title: "#0B1B33",
-        body: "#243B5C",
-        muted: "#7286A3",
-        track: "rgba(15,32,56,0.08)",
+        surface: "rgba(253,246,236,0.86)",
+        raised: "#ffffff",
+        border: "#d9c9b0",
+        title: "#001932",
+        body: "#4a4a6a",
+        muted: "#9a9384",
+        track: "rgba(0,25,50,0.08)",
       }
     : {
         light,
-        surface: "rgba(14,28,48,0.72)",
-        raised: "rgba(20,38,62,0.92)",
-        border: "rgba(255,255,255,0.10)",
-        title: "#F2F6FC",
-        body: "#C6D3E6",
-        muted: "#8296B4",
-        track: "rgba(255,255,255,0.10)",
+        surface: "rgba(19,35,58,0.82)",
+        raised: "#172b44",
+        border: "#263b57",
+        title: "#FFF4E3",
+        body: "#BBC0C6",
+        muted: "#8a8a8a",
+        track: "rgba(255,244,227,0.10)",
       };
 
 /** The pill switch in the top-right of every panel. */
@@ -113,12 +123,16 @@ export const Panel: FC<{
 }> = ({ title, subtitle, accent, skin, onToggle, children }) => (
   <Box
     sx={{
-      borderRadius: "22px",
-      border: `1.5px solid ${accent}`,
-      boxShadow: `0 0 0 1px ${accent}22, 0 22px 60px rgba(0,0,0,0.45)`,
+      borderRadius: "18px",
+      // Hairline in the accent rather than a heavy stroke: the site draws
+      // everything at 0.5px and uses borders, not shadows, for depth on navy.
+      border: `0.5px solid ${accent}`,
+      boxShadow: skin.light
+        ? `0 0 0 1px ${accent}18, 0 8px 40px rgba(0,25,50,0.06)`
+        : `0 0 0 1px ${accent}18`,
       background: skin.light
-        ? "linear-gradient(135deg, #F4F8FF 0%, #FFFFFF 45%, #EEF4FF 100%)"
-        : "linear-gradient(135deg, #0E1E36 0%, #132741 45%, #0E1E36 100%)",
+        ? "linear-gradient(160deg, #ffffff 0%, #fdf6ec 55%, #f5ede0 100%)"
+        : "linear-gradient(160deg, #13233a 0%, #0e1a2b 55%, #13233a 100%)",
       p: { xs: "16px", sm: "22px" },
       overflow: "hidden",
     }}
@@ -135,9 +149,10 @@ export const Panel: FC<{
       <Box sx={{ minWidth: 0 }}>
         <Typography
           sx={{
-            fontFamily: "Prompt",
-            fontWeight: 700,
-            fontSize: { xs: "17px", sm: "20px" },
+            fontFamily: FONT_DISPLAY,
+            fontWeight: 500,
+            letterSpacing: "-0.015em",
+            fontSize: { xs: "18px", sm: "21px" },
             color: skin.title,
             lineHeight: 1.2,
           }}

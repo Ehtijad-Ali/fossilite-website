@@ -25,9 +25,8 @@ import {
   Task,
   TaskColumn,
 } from "./data";
+import { FONT_MONO as MONO } from "../../../../theme/fonts";
 import { Panel, Pill, Skin } from "./Panel";
-
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace';
 
 /** Column header used by both board mockups. */
 const ColumnHead: FC<{ label: string; dot: string; count: number; skin: Skin }> = ({
@@ -694,10 +693,18 @@ export const KpiMockup: FC<{ accent: string; skin: Skin; onToggle: () => void }>
             Revenue trend
           </Typography>
           <Box component="svg" viewBox="0 0 100 100" preserveAspectRatio="none" sx={{ width: "100%", height: "140px" }}>
-            <path d={`${path} L94 92 L6 92 Z`} fill="#6C8CF5" opacity="0.10" />
-            <path d={path} fill="none" stroke="#6C8CF5" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+            <path d={`${path} L94 92 L6 92 Z`} fill={accent} opacity="0.12" />
+            <path
+              d={path}
+              fill="none"
+              stroke={accent}
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+            />
             {line.map((p, i) => (
-              <circle key={i} cx={p.x} cy={p.y} r="1.6" fill="#6C8CF5" vectorEffect="non-scaling-stroke" />
+              <circle key={i} cx={p.x} cy={p.y} r="1.6" fill={accent} vectorEffect="non-scaling-stroke" />
             ))}
           </Box>
         </Box>
@@ -720,7 +727,7 @@ export const KpiMockup: FC<{ accent: string; skin: Skin; onToggle: () => void }>
                   sx={{
                     height: `${d.v * 96}px`,
                     borderRadius: "5px 5px 0 0",
-                    backgroundColor: "#A5B8F8",
+                    backgroundColor: accent, opacity: 0.75,
                     transition: "height 0.5s cubic-bezier(0.4,0,0.2,1)",
                   }}
                 />

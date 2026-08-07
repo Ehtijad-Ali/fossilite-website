@@ -1,6 +1,10 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
 
+import { useSharedTokens } from "../../../../theme/sharedTokens";
+import { FONT_DISPLAY, FONT_MONO } from "../../../../theme/fonts";
+import { sectionFrameSx } from "../../_kit/frame";
+
 import { ACCENTS, SYSTEMS } from "./data";
 import { skinFor } from "./Panel";
 import {
@@ -12,34 +16,55 @@ import {
   SopMockup,
 } from "./mockups";
 
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace';
+const GOLD = "#C3A87C";
+
+/** The four corner brackets used on plates across the site. */
+const Corners: FC<{ color?: string; inset?: string }> = ({ color = GOLD, inset = "12px" }) => (
+  <>
+    {[
+      { top: inset, left: inset, borderTop: `1px solid ${color}`, borderLeft: `1px solid ${color}` },
+      { top: inset, right: inset, borderTop: `1px solid ${color}`, borderRight: `1px solid ${color}` },
+      { bottom: inset, left: inset, borderBottom: `1px solid ${color}`, borderLeft: `1px solid ${color}` },
+      { bottom: inset, right: inset, borderBottom: `1px solid ${color}`, borderRight: `1px solid ${color}` },
+    ].map((pos, i) => (
+      <Box key={i} sx={{ position: "absolute", width: "14px", height: "14px", pointerEvents: "none", zIndex: 2, ...pos }} />
+    ))}
+  </>
+);
 
 /**
  * The six-system showcase.
  *
- * One system is on screen at a time, selected by the segmented bar at the top.
- * Each panel is a working miniature rather than a screenshot: leads and tasks
- * advance when clicked, onboarding steps complete and recompute the
- * percentage, settling an invoice moves money between the three totals, and
- * the SOP search filters. Every count on screen is derived from state.
+ * One system on screen at a time, chosen from the segmented rail. Each panel
+ * is a working miniature rather than a screenshot: leads and tasks advance
+ * when clicked, onboarding steps recompute the percentage, settling an
+ * invoice moves money between the three totals, and the SOP search filters.
+ *
+ * Chrome is built from the shared tokens so the section follows the site in
+ * both themes. The per-system accents stay, because they are doing a job:
+ * they tell you which of the six you are looking at. Everything around them
+ * is the monograph language, gold rules and corner brackets included.
  */
 export const SystemsSection: FC = () => {
+  const T = useSharedTokens();
   const [i, setI] = useState(0);
-  // Panel theme is per-system, so switching away and back keeps what you chose.
-  const [lightMap, setLightMap] = useState<boolean[]>(() => SYSTEMS.map(() => true));
+  const [overrides, setOverrides] = useState<(boolean | null)[]>(() => SYSTEMS.map(() => null));
   const railRef = useRef<HTMLDivElement>(null);
 
   const sys = SYSTEMS[i];
   const accent = ACCENTS[sys.accent];
-  const skin = skinFor(lightMap[i]);
+
+  // Panels follow the site theme until someone flips one, then that choice
+  // sticks for that system.
+  const light = overrides[i] ?? !T.isDark;
+  const skin = skinFor(light);
   const toggle = useCallback(
-    () => setLightMap((prev) => prev.map((v, n) => (n === i ? !v : v))),
-    [i],
+    () => setOverrides((prev) => prev.map((v, n) => (n === i ? !(v ?? !T.isDark) : v))),
+    [i, T.isDark],
   );
 
   const go = useCallback((n: number) => setI((n + SYSTEMS.length) % SYSTEMS.length), []);
 
-  // Arrow keys move between systems while the rail has focus within it.
   useEffect(() => {
     const el = railRef.current;
     if (!el) return;
@@ -51,14 +76,7 @@ export const SystemsSection: FC = () => {
     return () => el.removeEventListener("keydown", onKey);
   }, [i, go]);
 
-  const Mockup = [
-    LeadCrmMockup,
-    OnboardingMockup,
-    ProjectsMockup,
-    InvoicingMockup,
-    SopMockup,
-    KpiMockup,
-  ][i];
+  const Mockup = [LeadCrmMockup, OnboardingMockup, ProjectsMockup, InvoicingMockup, SopMockup, KpiMockup][i];
 
   return (
     <Box
@@ -67,26 +85,24 @@ export const SystemsSection: FC = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#0A1628",
+        backgroundColor: T.bg,
         px: { xs: "20px", sm: "40px", lg: "72px" },
         py: { xs: "56px", md: "88px" },
+        borderTop: `0.5px solid ${T.border}`,
       }}
     >
-      {/* Blueprint grid, fading out toward the bottom. */}
       <Box
         aria-hidden
         sx={{
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
-          backgroundImage:
-            "linear-gradient(rgba(120,160,220,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(120,160,220,0.07) 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
+          backgroundImage: `linear-gradient(${T.gridLine} 1px, transparent 1px), linear-gradient(90deg, ${T.gridLine} 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
           maskImage: "linear-gradient(180deg, #000 0%, #000 62%, transparent 100%)",
           WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 62%, transparent 100%)",
         }}
       />
-      {/* Accent wash behind the heading, recoloured per system. */}
       <Box
         aria-hidden
         sx={{
@@ -103,8 +119,19 @@ export const SystemsSection: FC = () => {
         }}
       />
 
-      <Box sx={{ position: "relative", zIndex: 1, maxWidth: "1120px", mx: "auto" }}>
-        {/* ── Segmented stepper ── */}
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "1180px",
+          mx: "auto",
+          ...sectionFrameSx,
+          borderColor: T.border,
+          backgroundColor: T.isDark ? "transparent" : T.cardBg,
+          boxShadow: T.boxShadow,
+        }}
+      >
+        {/* ── Segmented rail ── */}
         <Box
           ref={railRef}
           role="tablist"
@@ -112,9 +139,8 @@ export const SystemsSection: FC = () => {
           sx={{ display: "flex", justifyContent: "center", gap: { xs: "6px", sm: "10px" }, mb: "26px" }}
         >
           {SYSTEMS.map((s, n) => {
-            // Every filled segment takes the CURRENT system's accent, so the
-            // whole rail recolours as you move through: five purple bars on the
-            // SOP system, six green on the KPI one.
+            // Filled segments take the CURRENT accent, so the rail recolours as
+            // you move: three blue on system three, five purple on system five.
             const on = n <= i;
             return (
               <Box
@@ -128,16 +154,16 @@ export const SystemsSection: FC = () => {
                 aria-label={`System ${String(s.n).padStart(2, "0")}: ${s.title} ${s.titleLine2 ?? ""}`.trim()}
                 onClick={() => go(n)}
                 sx={{
-                  width: { xs: "38px", sm: "72px" },
+                  width: { xs: "34px", sm: "68px" },
                   height: "4px",
                   border: "none",
                   borderRadius: "99px",
                   p: 0,
                   cursor: "pointer",
-                  backgroundColor: on ? accent.main : "rgba(140,165,200,0.24)",
-                  boxShadow: n === i ? `0 0 12px ${accent.main}99` : "none",
+                  backgroundColor: on ? accent.main : T.border,
+                  boxShadow: n === i ? `0 0 12px ${accent.main}88` : "none",
                   transition: "background-color 0.35s ease, box-shadow 0.35s ease",
-                  "&:hover": { backgroundColor: on ? accent.main : "rgba(140,165,200,0.5)" },
+                  "&:hover": { backgroundColor: on ? accent.main : T.mutedText },
                   "&:focus-visible": { outline: `2px solid ${accent.main}`, outlineOffset: "4px" },
                 }}
               />
@@ -145,33 +171,33 @@ export const SystemsSection: FC = () => {
           })}
         </Box>
 
-        {/* ── Heading block ── */}
+        {/* ── Heading ── */}
         <Typography
           sx={{
             textAlign: "center",
-            fontFamily: MONO,
-            fontSize: { xs: "12px", sm: "14px" },
-            letterSpacing: "0.08em",
-            fontWeight: 700,
+            fontFamily: FONT_MONO,
+            fontSize: { xs: "10.5px", sm: "11.5px" },
+            letterSpacing: "0.14em",
+            fontWeight: 600,
             color: accent.main,
             mb: "18px",
             transition: "color 0.4s ease",
           }}
         >
           SYSTEM {String(sys.n).padStart(2, "0")}
-          <Box component="span" sx={{ color: "rgba(150,172,205,0.65)" }}> / 06</Box>
+          <Box component="span" sx={{ color: T.mutedText }}> / 06</Box>
         </Typography>
 
         <Typography
           component="h2"
           sx={{
             textAlign: "center",
-            fontFamily: "Prompt",
-            fontWeight: 700,
-            fontSize: { xs: "38px", sm: "56px", md: "68px" },
-            lineHeight: 1.02,
-            letterSpacing: "-0.03em",
-            color: "#FFFFFF",
+            fontFamily: FONT_DISPLAY,
+            fontWeight: 500,
+            fontSize: { xs: "38px", sm: "54px", md: "64px" },
+            lineHeight: 1.04,
+            letterSpacing: "-0.025em",
+            color: T.headline,
           }}
         >
           {sys.title}
@@ -186,21 +212,23 @@ export const SystemsSection: FC = () => {
         <Typography
           sx={{
             textAlign: "center",
-            fontFamily: MONO,
-            fontSize: "11px",
+            fontFamily: FONT_MONO,
+            fontSize: "9.5px",
             letterSpacing: "0.14em",
-            color: "rgba(150,172,205,0.7)",
-            mt: "14px",
+            textTransform: "uppercase",
+            color: T.mutedText,
+            mt: "16px",
           }}
         >
-          THE FIX
+          The fix
         </Typography>
         <Typography
           sx={{
             textAlign: "center",
-            fontSize: { xs: "20px", sm: "26px" },
+            fontFamily: FONT_DISPLAY,
+            fontSize: { xs: "21px", sm: "27px" },
             fontWeight: 500,
-            fontFamily: "Prompt",
+            letterSpacing: "-0.01em",
             color: accent.main,
             mt: "6px",
             mb: { xs: "28px", md: "38px" },
@@ -210,14 +238,15 @@ export const SystemsSection: FC = () => {
           {sys.fix}
         </Typography>
 
-        {/* ── The working panel ── */}
+        {/* ── Working panel ── */}
         <Box
           key={i}
           id="system-panel"
           role="tabpanel"
           aria-labelledby={`system-tab-${sys.n}`}
-          sx={{ animation: "sysIn 0.45s cubic-bezier(0.22,1,0.36,1) both" }}
+          sx={{ position: "relative", animation: "sysIn 0.45s cubic-bezier(0.22,1,0.36,1) both" }}
         >
+          <Corners color={accent.main} inset="-6px" />
           <Mockup accent={accent.main} skin={skin} onToggle={toggle} />
         </Box>
 
@@ -225,31 +254,30 @@ export const SystemsSection: FC = () => {
         <Box
           aria-hidden
           sx={{
-            width: "58px",
-            height: "3px",
-            borderRadius: "99px",
-            backgroundColor: accent.main,
+            width: "100%",
+            height: "1px",
             mx: "auto",
-            mt: { xs: "32px", md: "44px" },
-            mb: "20px",
-            transition: "background-color 0.4s ease",
+            mt: { xs: "34px", md: "46px" },
+            mb: "22px",
+            background: `linear-gradient(90deg, transparent, ${accent.main}, transparent)`,
+            transition: "background 0.4s ease",
           }}
         />
         <Typography
           sx={{
             textAlign: "center",
-            maxWidth: "760px",
+            maxWidth: "720px",
             mx: "auto",
-            fontSize: { xs: "17px", sm: "21px" },
-            lineHeight: 1.55,
-            color: "rgba(214,226,243,0.92)",
+            fontSize: { xs: "16.5px", sm: "19px" },
+            lineHeight: 1.65,
+            color: T.secondaryText,
           }}
         >
           {sys.caption}
         </Typography>
 
         {/* ── Prev / next ── */}
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "14px", mt: "32px" }}>
+        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "14px", mt: "30px" }}>
           {([["Previous system", -1], ["Next system", 1]] as const).map(([label, dir]) => (
             <Box
               key={label}
@@ -264,11 +292,11 @@ export const SystemsSection: FC = () => {
                 height: "42px",
                 borderRadius: "50%",
                 cursor: "pointer",
-                color: "#D6E2F3",
-                backgroundColor: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(150,172,205,0.28)",
-                transition: "border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease",
-                "&:hover": { borderColor: accent.main, backgroundColor: "rgba(255,255,255,0.08)", transform: "translateY(-1px)" },
+                color: T.secondaryText,
+                backgroundColor: "transparent",
+                border: `0.5px solid ${T.border}`,
+                transition: "border-color 0.2s ease, color 0.2s ease, transform 0.2s ease",
+                "&:hover": { borderColor: accent.main, color: T.primaryText, transform: "translateY(-1px)" },
                 "&:focus-visible": { outline: `2px solid ${accent.main}`, outlineOffset: "3px" },
               }}
             >
@@ -283,7 +311,17 @@ export const SystemsSection: FC = () => {
           ))}
         </Box>
 
-        <Typography sx={{ textAlign: "center", fontSize: "12px", color: "rgba(150,172,205,0.6)", mt: "16px" }}>
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontFamily: FONT_MONO,
+            fontSize: "9.5px",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: T.mutedText,
+            mt: "18px",
+          }}
+        >
           Every panel is live. Move a lead, complete a step, settle an invoice.
         </Typography>
       </Box>

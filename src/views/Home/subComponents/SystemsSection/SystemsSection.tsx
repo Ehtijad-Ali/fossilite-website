@@ -323,6 +323,10 @@ export const SystemsSection: FC = () => {
           }}
         >
           Every panel is live. Move a lead, complete a step, settle an invoice.
+          {/* The boards scroll sideways on a phone and nothing else says so. */}
+          <Box component="span" sx={{ display: { xs: "block", md: "none" }, mt: "5px" }}>
+            Swipe the board to see every column.
+          </Box>
         </Typography>
       </Box>
 

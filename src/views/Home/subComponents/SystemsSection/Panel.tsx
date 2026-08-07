@@ -183,6 +183,9 @@ export const Pill: FC<{ text: string; color: string; solid?: boolean }> = ({ tex
       letterSpacing: "0.06em",
       lineHeight: 1.6,
       whiteSpace: "nowrap",
+      // Never squash: the pill is the fixed element and the label beside it is
+      // the one that should truncate.
+      flexShrink: 0,
       color: solid ? "#fff" : color,
       backgroundColor: solid ? color : `${color}22`,
     }}

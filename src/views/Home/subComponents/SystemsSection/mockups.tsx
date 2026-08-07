@@ -55,7 +55,7 @@ const ColumnHead: FC<{ label: string; dot: string; count: number; skin: Skin }> 
   </Box>
 );
 
-const Column: FC<{ skin: Skin; children: React.ReactNode }> = ({ skin, children }) => (
+const Column: FC<{ skin: Skin; children: React.ReactNode; sx?: object }> = ({ skin, children, sx }) => (
   <Box
     sx={{
       backgroundColor: skin.surface,
@@ -65,11 +65,41 @@ const Column: FC<{ skin: Skin; children: React.ReactNode }> = ({ skin, children 
       minWidth: 0,
       display: "flex",
       flexDirection: "column",
+      ...sx,
     }}
   >
     {children}
   </Box>
 );
+
+/**
+ * Board wrapper. On a phone this is a swipeable row of fixed-width columns,
+ * which is how a real kanban behaves at that size and, more practically, the
+ * only way each card gets enough width to be readable. Two columns on a 360px
+ * screen left about ten pixels for the segment label, and the page-level
+ * `overflow-wrap: break-word` then broke it one character per line.
+ *
+ * From md up it becomes the ordinary grid.
+ */
+const boardSx = (cols: number) => ({
+  display: { xs: "flex", md: "grid" },
+  gridTemplateColumns: { md: `repeat(${cols}, minmax(0,1fr))` },
+  gap: "10px",
+  overflowX: { xs: "auto", md: "visible" },
+  scrollSnapType: { xs: "x mandatory", md: "none" },
+  WebkitOverflowScrolling: "touch",
+  pb: { xs: "8px", md: 0 },
+  // Bleed to the panel edge so the last column doesn't look clipped mid-swipe.
+  mx: { xs: "-16px", md: 0 },
+  px: { xs: "16px", md: 0 },
+  scrollbarWidth: "none" as const,
+  "&::-webkit-scrollbar": { display: "none" },
+});
+
+const columnSx = {
+  flex: { xs: "0 0 208px", md: "initial" },
+  scrollSnapAlign: { xs: "start", md: "none" },
+};
 
 // ── 01 Lead CRM ──────────────────────────────────────────────────────────────
 
@@ -109,15 +139,9 @@ export const LeadCrmMockup: FC<{ accent: string; skin: Skin; onToggle: () => voi
       skin={skin}
       onToggle={onToggle}
     >
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "repeat(2, minmax(0,1fr))", md: "repeat(4, minmax(0,1fr))" },
-          gap: "10px",
-        }}
-      >
+      <Box sx={boardSx(4)}>
         {LEAD_STAGES.map((stage) => (
-          <Column key={stage} skin={skin}>
+          <Column key={stage} skin={skin} sx={columnSx}>
             <ColumnHead
               label={stage}
               dot={STAGE_DOT[stage]}
@@ -149,7 +173,15 @@ export const LeadCrmMockup: FC<{ accent: string; skin: Skin; onToggle: () => voi
                   }}
                 >
                   <Typography
-                    sx={{ fontSize: "12px", fontWeight: 700, color: skin.title, lineHeight: 1.3 }}
+                    sx={{
+                      fontSize: "12px",
+                      fontWeight: 700,
+                      color: skin.title,
+                      lineHeight: 1.3,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
                   >
                     {l.name}
                   </Typography>
@@ -162,7 +194,19 @@ export const LeadCrmMockup: FC<{ accent: string; skin: Skin; onToggle: () => voi
                       mt: "3px",
                     }}
                   >
-                    <Typography sx={{ fontSize: "9.5px", color: skin.muted, minWidth: 0 }}>
+                    {/* nowrap + ellipsis rather than letting it wrap: in a tight
+                        column the page-level break-word will otherwise split
+                        this one character per line. */}
+                    <Typography
+                      sx={{
+                        fontSize: "9.5px",
+                        color: skin.muted,
+                        minWidth: 0,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
                       {l.segment}
                     </Typography>
                     <Pill text={l.value} color="#22C55E" />
@@ -310,17 +354,11 @@ export const ProjectsMockup: FC<{ accent: string; skin: Skin; onToggle: () => vo
       skin={skin}
       onToggle={onToggle}
     >
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", sm: "repeat(3, minmax(0,1fr))" },
-          gap: "12px",
-        }}
-      >
+      <Box sx={boardSx(3)}>
         {TASK_COLUMNS.map((col) => {
           const items = tasks.filter((t) => t.column === col);
           return (
-            <Column key={col} skin={skin}>
+            <Column key={col} skin={skin} sx={columnSx}>
               <ColumnHead label={col} dot={TASK_DOT[col]} count={items.length} skin={skin} />
               <Box sx={{ display: "flex", flexDirection: "column", gap: "9px", minHeight: "120px" }}>
                 {items.map((t) => (
@@ -484,11 +522,33 @@ export const InvoicingMockup: FC<{ accent: string; skin: Skin; onToggle: () => v
               >
                 {inv.id}
               </Typography>
-              <Typography sx={{ fontSize: "12px", color: skin.body, minWidth: 0 }}>{inv.client}</Typography>
-              <Typography sx={{ fontSize: "12.5px", fontWeight: 700, color: skin.title, textAlign: "right" }}>
+              <Typography
+                sx={{
+                  fontSize: "12px",
+                  color: skin.body,
+                  minWidth: 0,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {inv.client}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "12.5px",
+                  fontWeight: 700,
+                  color: skin.title,
+                  textAlign: "right",
+                  whiteSpace: "nowrap",
+                }}
+              >
                 {money(inv.amount)}
               </Typography>
-              <Box sx={{ justifySelf: { xs: "end", sm: "end" }, gridColumn: { xs: "2", sm: "auto" } }}>
+              {/* On a phone the row is two columns, so the status drops onto its
+                  own line at the right rather than fighting the amount for the
+                  second column, which is what it did before. */}
+              <Box sx={{ justifySelf: "end", gridColumn: { xs: "1 / -1", sm: "auto" } }}>
                 <Pill text={inv.state} color={INVOICE_COLOR[inv.state]} solid />
               </Box>
             </Box>

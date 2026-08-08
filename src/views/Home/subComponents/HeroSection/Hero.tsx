@@ -126,7 +126,7 @@ export const Hero: FC = () => {
           {/* body */}
           <motion.div {...fade(14, 0.5)}>
             <Typography sx={{ fontFamily: "Prompt", fontSize: { xs: "15px", md: "16px" }, lineHeight: 1.75, color: BODY, maxWidth: "540px", mb: { xs: "30px", md: "38px" } }}>
-              Every action leaves a data footprint. We read them — and turn them
+              Every action leaves a data footprint. We read them, and turn them
               into your next move.
             </Typography>
           </motion.div>

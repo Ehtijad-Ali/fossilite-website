@@ -6,16 +6,16 @@ import type { Category, Track } from "./types";
 export const CATEGORIES: Category[] = [
   // ── AI & Engineering ──────────────────────────────────────────────────────
   { slug: "artificial-intelligence", name: "Artificial Intelligence", track: "AI & Engineering", blurb: "What AI actually is, what it isn't, and how to reason about it without the hype." },
-  { slug: "machine-learning", name: "Machine Learning", track: "AI & Engineering", blurb: "How machines learn patterns from data — the concepts that survive every framework change." },
+  { slug: "machine-learning", name: "Machine Learning", track: "AI & Engineering", blurb: "How machines learn patterns from data: the concepts that survive every framework change." },
   { slug: "deep-learning", name: "Deep Learning", track: "AI & Engineering", blurb: "Neural networks from first principles: layers, gradients, and why depth helps." },
   { slug: "large-language-models", name: "Large Language Models", track: "AI & Engineering", blurb: "Tokens, context windows, and what a language model can and cannot know." },
-  { slug: "prompt-engineering", name: "Prompt Engineering", track: "AI & Engineering", blurb: "Getting reliable output from models you don't control — a real engineering discipline." },
+  { slug: "prompt-engineering", name: "Prompt Engineering", track: "AI & Engineering", blurb: "Getting reliable output from models you don't control: a real engineering discipline." },
   { slug: "python", name: "Python", track: "AI & Engineering", blurb: "The language of modern data work, taught for people who need it to build things." },
   { slug: "data-science", name: "Data Science", track: "AI & Engineering", blurb: "Turning messy data into decisions people actually trust." },
   { slug: "automation", name: "Automation", track: "AI & Engineering", blurb: "Removing repeated work from your week without creating a fragile mess." },
   { slug: "no-code-tools", name: "No-Code Tools", track: "AI & Engineering", blurb: "Shipping working software before you can write a line of code." },
   { slug: "web-development", name: "Web Development", track: "AI & Engineering", blurb: "The stack behind every product you use, explained in build order." },
-  { slug: "api-integration", name: "API Integration", track: "AI & Engineering", blurb: "Making two systems talk reliably — including when one of them fails." },
+  { slug: "api-integration", name: "API Integration", track: "AI & Engineering", blurb: "Making two systems talk reliably: including when one of them fails." },
   { slug: "ui-ux", name: "UI / UX", track: "AI & Engineering", blurb: "Designing interfaces people understand without being told how." },
   { slug: "cybersecurity-basics", name: "Cybersecurity Basics", track: "AI & Engineering", blurb: "The defensive fundamentals every builder and business owner needs." },
 
@@ -23,7 +23,7 @@ export const CATEGORIES: Category[] = [
   { slug: "business-strategy", name: "Business Strategy", track: "Business & Growth", blurb: "Choosing what to do, and what to deliberately not do." },
   { slug: "entrepreneurship", name: "Entrepreneurship", track: "Business & Growth", blurb: "Starting something real, with the smallest possible bet up front." },
   { slug: "marketing", name: "Marketing", track: "Business & Growth", blurb: "Getting the right people to find you and understand you fast." },
-  { slug: "sales", name: "Sales", track: "Business & Growth", blurb: "Conversations that end in a decision — without pressure tactics." },
+  { slug: "sales", name: "Sales", track: "Business & Growth", blurb: "Conversations that end in a decision: without pressure tactics." },
   { slug: "freelancing", name: "Freelancing", track: "Business & Growth", blurb: "Trading skill for income on your own terms, sustainably." },
   { slug: "personal-branding", name: "Personal Branding", track: "Business & Growth", blurb: "Becoming known for something specific, by the people who matter." },
   { slug: "startup-growth", name: "Startup Growth", track: "Business & Growth", blurb: "Finding a repeatable channel before you spend money scaling it." },

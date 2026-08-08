@@ -28,11 +28,11 @@ const staticPages: PrerenderRoute[] = Object.values(PAGES).map((p) => ({
 // rather than imported because importing the views would pull MUI, framer-motion
 // and three.js into a build that only needs strings — if you change a title in
 // the view, change it here.
-const libraryTitle = "Resource Library — Free Guides on AI, Business & Skills";
+const libraryTitle = "Resource Library: Free Guides on AI, Business & Skills";
 const libraryDescription =
   "In-depth, free guides on artificial intelligence, machine learning, business and personal skills — written to teach, not to fill a page.";
 
-const promptsTitle = "AI Prompt Library — ChatGPT, Claude & Gemini Prompts";
+const promptsTitle = "AI Prompt Library: ChatGPT, Claude & Gemini Prompts";
 const promptsDescription =
   "A free library of tested prompts for ChatGPT, Claude and Gemini — each with what it does, when to use it, expected output and how to get better results.";
 
@@ -65,7 +65,7 @@ const categories: PrerenderRoute[] = activeCategories()
   .filter((c) => c.count > 0)
   .map((c) => {
     const path = `/resources/category/${c.slug}`;
-    const title = `${c.name} Guides — Fossilite Resource Library`;
+    const title = `${c.name} Guides: Fossilite Resource Library`;
     const description = `${c.blurb} Free, in-depth guides with worked examples, exercises and checklists.`;
     return {
       path,

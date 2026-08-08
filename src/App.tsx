@@ -11,7 +11,6 @@ const About = lazy(() => import('./views/About/About'))
 const Products = lazy(() => import('./views/Products/Products'))
 const Pricing = lazy(() => import('./views/Pricing/Pricing'))
 const Contact = lazy(() => import('./views/Contact/Contact'))
-const Login = lazy(() => import('./views/Login/Login'))
 const Resources = lazy(() => import('./views/Resources/Resources'))
 const GuideDetail = lazy(() => import('./views/Resources/GuideDetail'))
 const Prompts = lazy(() => import('./views/Prompts/Prompts'))
@@ -52,7 +51,9 @@ function App() {
           <Route path='/prodcuts' element={<Navigate to='/products' replace />} />
           <Route path='/pricing' element={<Pricing />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/login' element={<Login />} />
+          {/* Superseded by the Business OS sign-in. Kept so existing links
+              land somewhere real rather than on a form that does nothing. */}
+          <Route path='/login' element={<Navigate to='/console/login' replace />} />
           <Route path='/resources' element={<Resources />} />
           {/* Category browse reuses the library index, scoped by :category. */}
           <Route path='/resources/category/:category' element={<Resources />} />

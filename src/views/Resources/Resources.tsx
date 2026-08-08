@@ -246,8 +246,8 @@ export const Resources: FC = () => {
   const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(subEmail.trim());
 
   const title = scoped
-    ? `${scoped.name} Guides — Fossilite Resource Library`
-    : "Resource Library — Free Guides on AI, Business & Skills";
+    ? `${scoped.name} Guides: Fossilite Resource Library`
+    : "Resource Library: Free Guides on AI, Business & Skills";
   const description = scoped
     ? `${scoped.blurb} Free, in-depth guides with worked examples, exercises and checklists.`
     : "In-depth, free guides on artificial intelligence, machine learning, business and personal skills — written to teach, not to fill a page.";

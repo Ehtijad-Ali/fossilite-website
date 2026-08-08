@@ -135,7 +135,7 @@ export const Prompts: FC = () => {
   }, [model, kind, query]);
 
   useSeo({
-    title: "AI Prompt Library — ChatGPT, Claude & Gemini Prompts",
+    title: "AI Prompt Library: ChatGPT, Claude & Gemini Prompts",
     description:
       "A free library of tested prompts for ChatGPT, Claude and Gemini — each with what it does, when to use it, expected output and how to get better results.",
     path: "/prompts",

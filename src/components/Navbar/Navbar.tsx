@@ -173,7 +173,7 @@ export const Navbar: React.FC<any> = (props) => {
 
       <Box sx={{ mt: 3, display: "flex", flexDirection: "column", gap: 1.5 }}>
         <Button
-          onClick={() => go("/login")}
+          onClick={() => go("/console")}
           sx={{
             width: "100%",
             py: "12px",
@@ -311,12 +311,12 @@ export const Navbar: React.FC<any> = (props) => {
           {/* Desktop right: Log in + CTA */}
           <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: "10px" }}>
             <Button
-              onClick={() => go("/login")}
+              onClick={() => go("/console")}
               disableRipple
               sx={{
                 px: "14px",
                 py: "8px",
-                color: location.pathname === "/login" ? T.textPrimary : T.textSecondary,
+                color: location.pathname.startsWith("/console") ? T.textPrimary : T.textSecondary,
                 fontSize: "12px",
                 fontWeight: 500,
                 textTransform: "none",

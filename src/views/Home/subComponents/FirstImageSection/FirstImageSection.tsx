@@ -310,11 +310,11 @@ export const FirstImageSection: FC = () => {
       <Box sx={{ my: { xs: "72px", sm: "96px", md: "120px" }, display: "flex", alignItems: "center", gap: "20px" }}>
         <Box sx={{ flex: 1, height: "0.5px", backgroundColor: T.border, transition: "background-color 0.4s ease" }} />
         <Box sx={{ width: "6px", height: "6px", borderRadius: "50%", border: `0.5px solid ${T.secondaryText}`, backgroundColor: T.cardBg, transition: "border-color 0.4s ease, background-color 0.4s ease" }} />
-        <Box sx={{ flex: 1, height: "0.5px", backgroundColor: T.border, transition: "background-color 0.4s ease" }} />
-      </Box>
+        <Box sx={{ flex: 1, height: "0.5px", backgroundColor: T.border, transition: "background-color 0.4s ease"}} />
+ </Box>
 
-      {/* ══ BLOCK 2 — Split card ══ */}
-      <Box id="products" sx={{
+ {/* ══ BLOCK 2: Split card ══ */}
+ <Box id="products" sx={{
         display: "grid",
         gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
         gap: "1px",

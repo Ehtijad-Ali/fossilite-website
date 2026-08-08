@@ -22,49 +22,49 @@ export interface PageMeta {
 export const PAGES: Record<string, PageMeta> = {
   home: {
     path: "/",
-    title: "Fossilite — AI Systems Built to Survive Production",
+    title: "Fossilite: AI Systems Built to Survive Production",
     description:
-      "We design and build AI systems for real operational load — agents, RAG and automation, architected by engineers and handed over with the code and the data.",
+      "We design and build AI systems for real operational load: agents, RAG and automation, architected by engineers and handed over with the code and the data.",
   },
   about: {
     path: "/about",
-    title: "About Fossilite — Engineers First, AI Second",
+    title: "About Fossilite: Engineers First, AI Second",
     description:
       "How we work: map your operations, target the highest-friction work, architect before building, and prove the impact with numbers rather than adjectives.",
   },
   products: {
     path: "/products",
-    title: "What We Build — AI Agents, RAG and Automation",
+    title: "What We Build: AI Agents, RAG and Automation",
     description:
-      "Production AI systems that connect to the stack you already run — OpenAI, Anthropic, Slack, GitHub, Notion and Google — built to survive real load.",
+      "Production AI systems that connect to the stack you already run: OpenAI, Anthropic, Slack, GitHub, Notion and Google: built to survive real load.",
   },
   pricing: {
     path: "/pricing",
-    title: "Pricing — AI Engagements from Pilot to Platform",
+    title: "Pricing: AI Engagements from Pilot to Platform",
     description:
       "Three engagement tiers, from validating a first AI workflow to running several in production with a dedicated systems architect. No lock-in on code or data.",
   },
   contact: {
     path: "/contact",
-    title: "Contact Fossilite — Talk to the Engineers",
+    title: "Contact Fossilite: Talk to the Engineers",
     description:
       "Tell us what takes your team the most time and we'll say honestly whether AI helps. You own everything we deliver: code, data and models, fully documented.",
   },
   privacy: {
     path: "/privacy",
-    title: "Privacy Policy — Fossilite",
+    title: "Privacy Policy: Fossilite",
     description:
       "How Fossilite collects, uses and protects personal data, and the rights you have over information we hold about you.",
   },
   terms: {
     path: "/terms",
-    title: "Terms of Service — Fossilite",
+    title: "Terms of Service: Fossilite",
     description:
       "The terms governing use of the Fossilite website and the services we provide, including scope, liability and intellectual property.",
   },
   cookies: {
     path: "/cookies",
-    title: "Cookie Policy — Fossilite",
+    title: "Cookie Policy: Fossilite",
     description:
       "Which cookies the Fossilite website sets, what each one is for, and how to control them in your browser.",
   },

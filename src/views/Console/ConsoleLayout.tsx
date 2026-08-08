@@ -1,9 +1,11 @@
 import { FC } from "react";
-import { Link, NavLink, Navigate, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink, Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 
+import logoLight from "../../assets/FossiliteLogoNavy.svg";
+import logoDark from "../../assets/FossiliteLogo.svg";
 import { useSharedTokens } from "../../theme/sharedTokens";
-import { FONT_DISPLAY, FONT_MONO } from "../../theme/fonts";
+import { FONT_MONO } from "../../theme/fonts";
 import { useAuth } from "../../console/auth";
 import { WorkspaceProvider, useWorkspace } from "../../console/store";
 import { SYSTEM_TABS } from "./nav";
@@ -28,6 +30,15 @@ const ConsoleChrome: FC = () => {
   const { user, signOut } = useAuth();
   const { loading, busy, reset } = useWorkspace();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  // Signing out returns to the marketing site. Without the explicit navigate
+  // the route guard would catch the cleared session and drop the user back on
+  // the console sign-in, which reads as the sign-out having failed.
+  const leave = () => {
+    signOut();
+    navigate("/", { replace: true });
+  };
 
   const linkSx = (active: boolean) => ({
     display: "flex",
@@ -65,12 +76,15 @@ const ConsoleChrome: FC = () => {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: "14px", minWidth: 0 }}>
-          <Box component={Link} to="/" sx={{ textDecoration: "none", flexShrink: 0 }}>
-            <Typography
-              sx={{ fontFamily: FONT_DISPLAY, fontSize: "17px", fontWeight: 500, color: T.headline, letterSpacing: "-0.02em" }}
-            >
-              Fossilite
-            </Typography>
+          {/* Same asset and the same light/dark swap as the marketing navbar,
+              so the console reads as the same product rather than a lookalike. */}
+          <Box component={Link} to="/" aria-label="Fossilite home" sx={{ display: "flex", flexShrink: 0 }}>
+            <Box
+              component="img"
+              src={T.isDark ? logoDark : logoLight}
+              alt="Fossilite"
+              sx={{ width: { xs: "82px", sm: "96px" }, height: "auto", display: "block" }}
+            />
           </Box>
           <Box sx={{ width: "1px", height: "18px", backgroundColor: T.border, display: { xs: "none", sm: "block" } }} />
           <Typography
@@ -99,7 +113,7 @@ const ConsoleChrome: FC = () => {
           <Btn onClick={() => reset()} disabled={busy}>
             Reset data
           </Btn>
-          <Btn onClick={signOut}>Sign out</Btn>
+          <Btn onClick={leave}>Sign out</Btn>
         </Box>
       </Box>
 

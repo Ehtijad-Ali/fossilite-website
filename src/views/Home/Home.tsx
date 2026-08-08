@@ -16,7 +16,6 @@ import {
   GradientDescentSection,
   ConfidenceFieldSection,
   FieldworkSection,
-  SystemsSection,
 } from "./subComponents";
 import { Layout } from "../../layout";
 
@@ -30,8 +29,6 @@ export const Home: FC = () => {
         <FirstImageSection />
         <ArchaeologyGraphsSection />
         <FirstGeneralSection />
-        {/* The six systems, each a working miniature rather than a screenshot. */}
-        <SystemsSection />
         <FieldworkSection />
         <GradientDescentSection />
         <SecondImageSection />

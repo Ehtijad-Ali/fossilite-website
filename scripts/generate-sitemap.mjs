@@ -78,7 +78,9 @@ writeFileSync(
 
 writeFileSync(
   join(root, "public", "robots.txt"),
-  `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`,
+  // The Business OS POC is a gated demo workspace, not public content, so it
+  // is excluded here rather than left to be crawled and indexed.
+  `User-agent: *\nAllow: /\nDisallow: /console\n\nSitemap: ${ORIGIN}/sitemap.xml\n`,
 );
 
 console.log(

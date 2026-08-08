@@ -1,8 +1,9 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { Navbar, Footer, ScrollToTop, PageSeo } from "./components";
 import './App.css'
 import { Home } from './views'
+import { AuthProvider } from './console/auth'
 
 // Defer everything that isn't the landing page — keeps first paint lean.
 const AIChat = lazy(() => import('./components/AIChat').then((m) => ({ default: m.AIChat })))
@@ -14,16 +15,32 @@ const Login = lazy(() => import('./views/Login/Login'))
 const Resources = lazy(() => import('./views/Resources/Resources'))
 const GuideDetail = lazy(() => import('./views/Resources/GuideDetail'))
 const Prompts = lazy(() => import('./views/Prompts/Prompts'))
+// Business Operating System (POC). Lazy so the marketing site never pays for it.
+const ConsoleLayout = lazy(() => import('./views/Console/ConsoleLayout'))
+const ConsoleLogin = lazy(() => import('./views/Console/ConsoleLogin'))
+const ConsoleOverview = lazy(() => import('./views/Console/Overview'))
+const ConsoleArchitecture = lazy(() => import('./views/Console/Architecture'))
+const LeadCrm = lazy(() => import('./views/Console/systems/LeadCrm'))
+const ConsoleOnboarding = lazy(() => import('./views/Console/systems/Onboarding'))
+const ConsoleProjects = lazy(() => import('./views/Console/systems/Projects'))
+const ConsoleInvoicing = lazy(() => import('./views/Console/systems/Invoicing'))
+const ConsoleSops = lazy(() => import('./views/Console/systems/SopLibrary'))
+const ConsoleKpi = lazy(() => import('./views/Console/systems/KpiDashboard'))
+
 const Privacy = lazy(() => import('./views/Legal/Privacy'))
 const Terms = lazy(() => import('./views/Legal/Terms'))
 const Cookies = lazy(() => import('./views/Legal/Cookies'))
 
 function App() {
+  // The console ships its own top bar, sidebar and tab rail, so the marketing
+  // chrome is suppressed there rather than stacked on top of it.
+  const inConsole = useLocation().pathname.startsWith("/console")
+
   return (
-    <>
+    <AuthProvider>
       <ScrollToTop />
       <PageSeo />
-      <Navbar />
+      {!inConsole && <Navbar />}
       <Suspense fallback={null}>
         <Routes>
           <Route path='/' element={<Home />} />
@@ -41,6 +58,20 @@ function App() {
           <Route path='/resources/category/:category' element={<Resources />} />
           <Route path='/resources/:slug' element={<GuideDetail />} />
           <Route path='/prompts' element={<Prompts />} />
+          {/* Business Operating System. Its own chrome, so it sits outside the
+              marketing Navbar/Footer shell rather than inside it. */}
+          <Route path='/console/login' element={<ConsoleLogin />} />
+          <Route path='/console' element={<ConsoleLayout />}>
+            <Route index element={<ConsoleOverview />} />
+            <Route path='leads' element={<LeadCrm />} />
+            <Route path='onboarding' element={<ConsoleOnboarding />} />
+            <Route path='projects' element={<ConsoleProjects />} />
+            <Route path='invoicing' element={<ConsoleInvoicing />} />
+            <Route path='sops' element={<ConsoleSops />} />
+            <Route path='kpi' element={<ConsoleKpi />} />
+            <Route path='architecture' element={<ConsoleArchitecture />} />
+          </Route>
+
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/terms' element={<Terms />} />
           <Route path='/cookies' element={<Cookies />} />
@@ -48,11 +79,13 @@ function App() {
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
       </Suspense>
-      <Footer />
-      <Suspense fallback={null}>
-        <AIChat />
-      </Suspense>
-    </>
+      {!inConsole && <Footer />}
+      {!inConsole && (
+        <Suspense fallback={null}>
+          <AIChat />
+        </Suspense>
+      )}
+    </AuthProvider>
   )
 }
 

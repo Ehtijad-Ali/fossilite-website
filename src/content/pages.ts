@@ -36,7 +36,7 @@ export const PAGES: Record<string, PageMeta> = {
     path: "/products",
     title: "What We Build: AI Agents, RAG and Automation",
     description:
-      "Production AI systems that connect to the stack you already run: OpenAI, Anthropic, Slack, GitHub, Notion and Google: built to survive real load.",
+      "Production AI systems that connect to the stack you already run, from OpenAI and Anthropic to Slack, GitHub, Notion and Google. Built to survive real load.",
   },
   pricing: {
     path: "/pricing",

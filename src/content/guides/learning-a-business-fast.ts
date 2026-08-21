@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "learning-a-business-fast",
-  seoTitle: "Learning a Business Fast: A BA's First Thirty Days",
+  seoTitle: "Understanding a Business You Have Just Walked Into",
   metaDescription:
-    "How to understand an operation you have just joined. Follow the money, follow one order end to end, find the workarounds, and the questions that make people talk.",
-  title: "Learning a Business Fast",
+    "You have about thirty days before basic questions get expensive. Follow the money, follow one real order, find the spreadsheets, and learn the words people use.",
+  title: "Understanding a Business Fast",
   keywords: [
     "business analyst first 30 days",
     "understanding a business",
@@ -17,91 +17,105 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Beginner",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
   readingTime: 12,
 
   intro: [
-    "You have thirty days before people stop forgiving basic questions. That is not a rule anybody states, but it is real, and after it the cost of asking what a term means goes up sharply. So the first month is not about contributing. It is about buying context while questions are still cheap.",
+    "You have about thirty days before people stop forgiving basic questions. Nobody states that rule and it is completely real, and after it the cost of asking what a word means goes up sharply. So the first month is not about contributing. It is about buying context while questions are still cheap.",
     "Most people spend it reading documentation. Documentation describes the business somebody intended to build. You need the one that exists, which is a different organisation with the same name.",
-    "What follows is the sequence I would use walking into any operation cold, whether that is a new employer, a new client, or a department you have never worked with inside a company you already know.",
+    "What follows is the order I would use walking into any business cold, whether that is a new employer, a new client, or a department you have never worked with inside a company you already know.",
   ],
 
   coreConcepts: [
     {
       term: "Follow the money first",
       explain:
-        "Find out how the business makes money, at the level of a single transaction. Who pays, for what, how much, how often, and what has to be true for that payment to arrive.",
+        "Find out how this business makes money, at the level of one single transaction. Who pays, for what, how much, how often, and what has to happen for that payment to arrive.",
       detail:
-        "Everything else in the operation exists to make that transaction happen or to stop it going wrong. Without this frame you cannot judge whether anything matters.",
+        "Everything else in the operation exists to make that transaction happen or to stop it going wrong. Without that picture in your head you cannot judge whether anything else matters.",
     },
     {
-      term: "Then follow one real case end to end",
+      term: "Then follow one real case all the way through",
       explain:
         "One order, one claim, one application. Track it from the moment it arrives to the moment the money settles, through every system and every pair of hands.",
       detail:
-        "This single exercise teaches more than a fortnight of reading. It also gives you a shared reference: for the rest of your time there you can say 'like that Renfrew order' and people know what you mean.",
+        "This one exercise teaches more than a fortnight of reading. It also gives you something to point at: for the rest of your time there you can say like that Renfrew order and people know exactly what you mean.",
     },
     {
       term: "Ask for the last five, not a typical one",
       explain:
-        "A typical case is a story people construct to explain their work. Real cases contain the exceptions, and the exceptions are where the business actually lives.",
+        "A typical case is a story people put together on the spot to explain their work. Real cases contain the exceptions, and the exceptions are where the business actually lives.",
       detail:
-        "Expect at least one of the five to have gone somewhere nobody mentioned. That is the point of asking for five.",
+        "Expect at least one of the five to have gone somewhere nobody mentioned. That is the whole reason for asking for five.",
     },
     {
       term: "Find the spreadsheets",
       explain:
-        "Every serious gap between what the systems do and what the business needs is bridged by a spreadsheet somebody maintains privately. Find them and you have found the requirements backlog.",
+        "Every real gap between what the systems do and what the business needs gets bridged by a spreadsheet somebody keeps going privately. Find those and you have found the list of things that need building.",
       detail:
-        "Ask directly and without judgement: what do you keep outside the system, and why? People answer this honestly if you make clear you are not there to take it away.",
+        "Ask directly and without any judgement: what do you keep outside the system, and why? People answer honestly if you make it clear you are not there to take it away.",
     },
     {
-      term: "Learn the vocabulary before you use it",
+      term: "Learn the words before you use them",
       explain:
-        "Every business has words that mean something specific and local. 'Active', 'complete', 'customer' and 'order' are all landmines. Two departments will use one of them to mean two different things.",
+        "Every business has words that mean something specific and local. Active, complete, customer and order are all landmines. Two departments will use one of them to mean two different things.",
       detail:
-        "Keep a glossary from day one, with who told you and when. When you later find two definitions of the same word, you have found a real problem, not a vocabulary issue.",
+        "Keep a list from day one, with who told you and when. Later, when you find two definitions of the same word, you have found a real problem rather than a vocabulary issue.",
     },
     {
-      term: "Map the org chart that actually operates",
+      term: "Work out who actually decides things",
       explain:
-        "The published one tells you reporting lines. You need the other one: who has to agree, who can stop things, and who everyone quietly asks when they are unsure.",
+        "The published chart tells you who reports to whom. You need the other one: who has to agree, who can stop things, and who everybody quietly asks when they are not sure.",
       detail:
-        "The third category is the most useful and never appears on any chart. Find that person early and be useful to them.",
+        "That third group is the most useful and never appears on any chart. Find them early and be useful to them.",
     },
     {
-      term: "Get read access to the data",
+      term: "Ask for access to the data on day one",
       explain:
-        "Ask on day one, because it takes three weeks. Being able to check a claim yourself changes the pace of everything you do afterwards.",
+        "Ask immediately, because it takes three weeks. Being able to check something yourself changes the pace of everything you do afterwards.",
       detail:
-        "It also changes how people treat you. A BA who can produce a count in an afternoon is a different colleague from one who raises a request.",
+        "It also changes how people treat you. Somebody who can produce a count in an afternoon is a different colleague from somebody who has to raise a request and wait.",
     },
     {
-      term: "Say what you are doing and why",
+      term: "Watch, do not just ask",
       explain:
-        "People are wary of an analyst arriving in their department. The fear is efficiency in the redundancy sense, and if you do not address it they will describe the process as designed rather than as run.",
+        "People describe the process they believe they follow. The steps that have become automatic are exactly the ones they leave out, and those are usually where the trouble is.",
       detail:
-        "Be direct about what you are there for. If you do not know whether roles will change, say that rather than offering comfort you cannot guarantee.",
+        "Sit next to somebody for two hours and say almost nothing. Note what they open, what they type twice, what they check, and where they pause. None of that comes up in an interview.",
+    },
+    {
+      term: "Find out what happens on the worst day",
+      explain:
+        "Ask what happens at month end, at year end, on the busiest day, and when the main system is down. Businesses accumulate special handling for these and it is invisible the rest of the time.",
+      detail:
+        "It is also where the workarounds are strongest, because that is when people abandon the official process and run the version that actually works.",
+    },
+    {
+      term: "Start later than feels comfortable",
+      explain:
+        "The temptation in week two is to prove your worth by proposing something. An early suggestion that misses a known exception costs more credibility than a month of quiet watching.",
+      detail:
+        "Show the picture of how it works now first and let people see you understood. After that, your suggestions get a completely different reception.",
     },
   ],
 
   examples: [
     {
       kind: "illustration",
-      scenario: "The order that went through fourteen hands.",
+      scenario: "Six steps on paper, fourteen in reality.",
       walkthrough:
-        "A new BA asks to follow one real order. The published process has six steps. Following an actual order reveals fourteen touches, including two email approvals that exist because of an audit finding from years earlier, a manual credit check for one customer category, and a step where someone retypes a delivery address because two systems format it differently.",
+        "The problem: a new BA needed to understand an order process nobody could explain consistently. What was happening: she asked to follow one real order. The published process had six steps. Following an actual order turned up fourteen touches, including two email approvals that exist because of an audit finding years earlier, a manual credit check for one customer type, and a step where somebody retypes a delivery address because two systems format it differently.",
       result:
-        "None of that was in any documentation and all of it was normal to the people doing it. The retyping step alone turned out to be the source of most delivery failures. One order, one afternoon, and the project had its first genuine finding.",
+        "What changed: none of that appeared in any documentation and all of it was completely normal to the people doing it. The retyping step alone turned out to be behind most of the delivery failures. One order, one afternoon, and the project had its first real finding.",
     },
     {
       kind: "documented",
       scenario: "Why the spreadsheets matter more than they look.",
       walkthrough:
-        "Herndon, Ash and Pollin obtained the working spreadsheet behind a widely cited economics finding and identified a coding error in the averaging range, selective data exclusion and an unconventional weighting choice. Recalculated, the headline result changed materially.",
+        "Herndon, Ash and Pollin got hold of the working spreadsheet behind a widely quoted economics finding. They found a formula that had not been dragged far enough and so left five countries out, some available data excluded, and an unusual weighting choice. Recalculated, the headline result changed substantially.",
       result:
-        "Careful people, ordinary use of a standard tool, and a result that shaped debate for years. When you find the private spreadsheets in an operation, you have found both the unmet requirements and a category of risk nobody is monitoring. Treat them as evidence, not as bad practice.",
+        "Careful people, ordinary use of a completely standard tool, and a result that shaped public debate for years. When you find the private spreadsheets in a business, you have found both the things that need building and a category of risk nobody is watching. Treat them as evidence, not as bad practice.",
       source: {
         label: "Herndon, Ash and Pollin (2013), PERI/UMass Amherst: critique of Reinhart and Rogoff",
         url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/",
@@ -109,149 +123,164 @@ export const guide: Guide = {
     },
     {
       kind: "illustration",
-      scenario: "One word, two meanings, six months of argument.",
+      scenario: "One word, two meanings, found in week two.",
       walkthrough:
-        "In a services business, 'complete' means work finished to operations and payment received to finance. Two teams report completion rates monthly. The numbers never match, and for two years each side has assumed the other is careless with data.",
+        "The problem: a BA kept a list of words from day one, noting who told him each definition. What was happening: in week two, somebody in finance described an active customer as one who has paid an invoice in the last twelve months. In week three, somebody in sales described an active customer as one with an open opportunity. Both said it as if it were simply the company definition.",
       result:
-        "A glossary entry written in week one would have caught it. The BA who found it did so by writing down both definitions with the name of who supplied each, then noticing the collision. Vocabulary work looks like busywork right up until it explains a recurring disagreement.",
+        "What changed: he took the two definitions to the person who owned the reporting, and it turned out the two departments had been reporting different customer counts for years without either noticing. Keeping the list cost about five minutes a week. It would have been impossible to spot otherwise, because both people were completely certain and both were right within their own world.",
     },
   ],
 
   learningPath: [
     {
-      title: "Day one: request data access and book the observation",
-      body: "Access takes weeks, so ask immediately. At the same time, arrange to sit with whoever performs the core operational task, for two hours, watching rather than interviewing.",
-      effort: "1 hour of admin",
-      outcome: "The two things with the longest lead time are in motion.",
+      title: "Ask for data access on day one",
+      body: "Before you know what you will ask of it. It has a lead time measured in weeks and everything else gets faster once you have it.",
+      effort: "1 hour of asking, weeks of waiting",
+      outcome: "The ability to check things yourself rather than queueing.",
     },
     {
-      title: "Week one: understand the transaction",
-      body: "How does money arrive? Who pays, for what, how often, and what must be true for it to happen. Draw it on one page.",
-      effort: "2 days",
-      outcome: "The frame that lets you judge whether anything else matters.",
+      title: "Work out how the business makes money",
+      body: "At the level of a single transaction. Who pays, for what, how much, how often, and what has to happen for that money to arrive.",
+      effort: "Half a day",
+      outcome: "The picture that lets you judge whether anything else matters.",
     },
     {
-      title: "Week one to two: follow one case end to end",
-      body: "Pick a real one. Track every system, every handover, every person. Note where it waits, because waiting is where cost hides.",
-      effort: "2 to 3 days",
-      outcome: "A concrete reference you will use for months, and usually your first real finding.",
+      title: "Follow one real case all the way through",
+      body: "One order, one claim, one application, with a reference number. Track it through every system and every person. Write down every touch.",
+      effort: "Half a day to a day",
+      outcome: "More understanding than a fortnight of reading, plus something concrete everybody can refer to.",
     },
     {
-      title: "Week two: ask for the last five",
-      body: "Five actual recent cases, not a representative one. Compare them against the path you followed. Every divergence is an exception worth understanding.",
+      title: "Sit with people and watch",
+      body: "Two hours next to somebody doing the work, saying almost nothing. Note what they open, what they type twice, and where they hesitate.",
+      effort: "Half a day per role",
+      outcome: "The steps that never come up in an interview because they are too routine to mention.",
+    },
+    {
+      title: "Ask everybody what they keep outside the system",
+      body: "Spreadsheets, notebooks, shared inboxes, personal trackers. Ask without judgement and make clear you are not there to take anything away.",
+      effort: "A few conversations",
+      outcome: "A list of the things the business needs and does not have.",
+    },
+    {
+      title: "Keep a list of words from day one",
+      body: "Every term that means something specific here, with who told you and the date. Five minutes a week.",
+      effort: "Minutes a week",
+      outcome: "The ability to spot two departments meaning different things by one word, which is otherwise nearly impossible.",
+    },
+    {
+      title: "Draw the process and take it back",
+      body: "One page, drawn after watching rather than after reading. Walk the people who do the work through it and let them correct it.",
       effort: "1 day",
-      outcome: "The exception map, which is what the documentation is missing.",
-    },
-    {
-      title: "Week three: find the spreadsheets and the vocabulary",
-      body: "Ask what people keep outside the system and why. Build the glossary as you go, recording who gave you each definition.",
-      effort: "2 days",
-      outcome: "An unmet-requirements list and an early warning system for definition clashes.",
-    },
-    {
-      title: "Week four: write it down and show it to them",
-      body: "One process model, one glossary, one list of open questions. Present it back and let people correct you. Being wrong in public here is cheap and buys enormous credibility.",
-      effort: "2 days",
-      outcome: "Shared understanding, and a reputation as someone who listened.",
+      outcome: "The thing that ends your first month and earns you the right to suggest changes.",
     },
   ],
 
   mistakes: [
     {
-      mistake: "Reading documentation first",
-      why: "It describes the intended business. You will absorb its assumptions and then fail to notice where reality diverges, which is exactly where your value is.",
-      fix: "Observe first, read second. Documentation is far more useful once you know what it is missing.",
+      mistake: "Starting with the documentation",
+      why: "It describes the business somebody intended to build, not the one that exists. You end up learning a version of the process that nobody has followed for years.",
+      fix: "Follow one real case first. Use the documentation afterwards to spot the gaps between intention and reality.",
     },
     {
-      mistake: "Interviewing instead of watching",
-      why: "People describe their work as a clean sequence because that is how memory compresses it. The messy parts are precisely the parts that get left out.",
-      fix: "Two hours of sitting beside someone beats six interviews. Say almost nothing and write down what surprises you.",
+      mistake: "Only talking to managers",
+      why: "They describe the process as designed. Every workaround, exception and unwritten rule lives with the people actually doing it.",
+      fix: "Spend your first weeks with the people doing the work, and use managers for priorities and constraints.",
     },
     {
-      mistake: "Saving up questions to avoid looking ignorant",
-      why: "The window where basic questions are free closes after about a month, and questions asked later cost you more credibility than the same question asked in week one.",
-      fix: "Ask everything early. Being new is an asset with an expiry date.",
+      mistake: "Using the local words before you understand them",
+      why: "You will use one to mean something slightly different, and because everybody assumes their own definition, nobody will correct you. The misunderstanding survives for months.",
+      fix: "Keep a list, note who told you, and ask a second person to define the important ones.",
     },
     {
-      mistake: "Not addressing why you are there",
-      why: "Unspoken job-security fear makes people describe the process as designed rather than as run, and you will not know it is happening.",
-      fix: "Say plainly what the work is for. If headcount implications are undecided, say that instead of reassuring.",
+      mistake: "Treating the spreadsheets as something to be tidied up",
+      why: "If your interest reads as disapproval, the rest of them stay hidden, and those are the ones holding something important together.",
+      fix: "Say out loud that you are looking for what the systems do not do, and that you are not there to take anything away.",
     },
     {
-      mistake: "Building a beautiful model nobody validates",
-      why: "A model you did not walk through with the operators is a record of your misunderstandings, presented with confidence.",
-      fix: "Present it back in week four and invite correction. Expect several, and treat each one as a finding.",
+      mistake: "Proposing something in week two",
+      why: "An early suggestion that misses a known exception costs more credibility than a month of quiet watching, and you only get one first impression.",
+      fix: "Show the picture of how it works now first. Suggestions land completely differently once people can see you understood.",
+    },
+    {
+      mistake: "Waiting to ask for data access",
+      why: "It takes weeks. Asking in week four means you are still queueing in week seven, and everything you do until then rests on what somebody told you.",
+      fix: "Ask on day one, before you know exactly what you will need it for.",
     },
   ],
 
   bestPractices: [
-    "Request data access on day one. It has the longest lead time.",
-    "Understand the money transaction before anything else.",
-    "Follow one real case end to end, through every system and pair of hands.",
-    "Ask for the last five cases, never a typical one.",
-    "Ask what people keep outside the system and why.",
-    "Keep a glossary from day one, recording who gave you each definition.",
-    "Find out who everyone asks when they are unsure.",
-    "Present your model back within a month and invite correction.",
+    "Ask for data access on day one.",
+    "Work out how the business makes money before anything else.",
+    "Follow one real case from arrival to payment.",
+    "Ask for the last five real cases rather than a typical one.",
+    "Sit and watch people work, saying almost nothing.",
+    "Ask everybody what they keep outside the system.",
+    "Keep a list of local words with who told you and when.",
+    "Find out who everybody quietly asks when they are unsure.",
+    "Ask what happens at month end, year end and on the worst day.",
+    "Draw the process and take it back to be corrected before proposing anything.",
   ],
 
   proTips: [
-    "Ask people what part of their job they would automate if they could, and then ask what they would never let a system do. The second answer is more informative than the first. It tells you where judgement genuinely lives and where you will meet resistance later.",
-    "Note every place a case waits. Waiting is invisible in interviews because nobody experiences it as work, and it is usually most of the elapsed time. Cycle time reductions almost always come from removing waits, not from speeding up tasks.",
-    "When someone says 'the system does not let us', find out whether that is true. Roughly half the time it is a permission nobody has requested, a setting nobody has changed, or a rule someone invented years ago and everybody has forgotten was optional.",
+    "Ask everybody the same question in your first fortnight: what would you change first if you could change one thing with no approval needed. Write the answers down word for word. The clusters tell you where the real problems are, and they tell you far faster than any documentation.",
+    "Find the person who has been there longest in an unglamorous job and be useful to them early. They know why the odd rule exists, which system nobody trusts, and what was tried in 2018 and failed. That knowledge exists nowhere else and it is given freely to people who are interesting to talk to.",
+    "Write down every question you were too embarrassed to ask, and ask all of them in week three. Nobody minds in week three. In week ten they will assume you already knew, and by then the cost of not knowing has compounded.",
+    "When somebody explains something and you nod, stop and say it back to them in your own words. About a third of the time you will have got it slightly wrong, and they will correct you cheerfully. That correction is worth more than the original explanation.",
   ],
 
   businessApplications: [
-    "Joining a new employer or client, where credibility is established in the first month or not at all.",
-    "Taking over a department nobody in your team has worked with before.",
-    "Pre-sales and scoping, where you must understand an unfamiliar operation fast enough to estimate.",
-    "Due diligence, where the question is what the operation actually depends on.",
-    "Post-merger work, where two businesses use the same words for different things.",
+    "Starting a new BA job, where the first month decides how the next year goes.",
+    "Consulting, where you have to be useful in an operation you did not know existed last week.",
+    "Moving into a department you have never worked with inside your own company.",
+    "Taking over a project from somebody who has left.",
+    "Buying a business, where what it really costs to run lives in the workarounds rather than the org chart.",
+    "Covering a role temporarily, where the same approach gets you productive in days rather than weeks.",
   ],
 
   faqs: [
     {
-      q: "What if nobody has time to be shadowed?",
-      a: "Ask for thirty minutes at the busiest moment rather than an hour at a quiet one. It is easier to grant, and you learn more, because pressure is when the workarounds come out.",
+      q: "How long does it take to understand a business?",
+      a: "Enough to be useful, about a month. Enough to be confident, about six. The thirty-day window matters because that is roughly how long basic questions stay free, not because you will know everything by then.",
     },
     {
-      q: "How do I learn a technical domain quickly?",
-      a: "Learn the vocabulary and the transaction first, not the technology. You need enough to ask good questions and know when an answer is evasive. Depth arrives through the work.",
+      q: "What if nobody has time for me?",
+      a: "Ask for twenty minutes at the busiest point of their week rather than an hour at a quiet one. Easier to grant, and pressure is exactly when the workarounds come out.",
     },
     {
-      q: "What if the documentation contradicts what I observe?",
-      a: "That is a finding, not a nuisance. Record both and ask which is authoritative. The answer frequently surprises the person who owns the document.",
+      q: "Should I read the documentation at all?",
+      a: "Yes, after you have followed a real case. Then it becomes useful in a different way: the gap between what it says and what you watched is itself a finding worth writing down.",
     },
     {
-      q: "How do I handle a hostile stakeholder?",
-      a: "Assume the hostility is rational until proven otherwise. Usually it is a previous project that promised something and delivered disruption. Ask what happened last time and listen properly.",
+      q: "When should I start suggesting things?",
+      a: "Later than feels comfortable. An early suggestion that misses a known exception costs more than a month of quiet watching. Show the picture of how it works now first and let people see you understood.",
     },
     {
-      q: "When should I start proposing anything?",
-      a: "Later than feels comfortable. An early proposal that misses a known exception costs more credibility than a month of quiet observation. Show the process model first and let people see you understood.",
+      q: "How do I learn an industry I know nothing about?",
+      a: "Follow the money and follow one case. Those two work in any industry, because every business has a transaction and every transaction has a journey. The specialist vocabulary comes with the list you are keeping.",
     },
   ],
 
   tools: [
-    { name: "A notebook and a glossary file", what: "The two highest-value artefacts of a first month. Record who told you each definition.", cost: "Free" },
-    { name: "Read-only data access", what: "Request on day one. Changes your speed and how colleagues treat you.", cost: "Varies" },
-    { name: "A single-page process model", what: "Drawn after observation, walked through with operators. The deliverable that ends month one.", cost: "Free" },
+    { name: "A notebook and a list of words", what: "The two highest-value things you will produce in a first month. Record who told you each definition.", cost: "Free" },
+    { name: "Read access to the data", what: "Ask on day one. It changes your speed and how colleagues treat you.", cost: "Varies" },
+    { name: "A one-page process picture", what: "Drawn after watching, walked through with the people who do the work. The thing that ends month one.", cost: "Free" },
   ],
 
   resources: [
-    { title: "Critique of Reinhart and Rogoff", kind: "Paper", note: "What is hiding in the spreadsheets people maintain privately. Read before dismissing them.", url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/" },
+    { title: "Critique of Reinhart and Rogoff", kind: "Paper", note: "What is hiding in the spreadsheets people maintain privately. Read it before dismissing any of them.", url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/" },
   ],
 
   internalLinks: [
-    { slug: "what-a-business-analyst-actually-does", anchor: "the job this sits inside", context: "Context" },
-    { slug: "symptom-versus-problem", anchor: "separating symptoms from causes", context: "What comes next" },
-    { slug: "asking-questions-that-get-answers", anchor: "the questions that actually work", context: "Technique" },
+    { slug: "what-a-business-analyst-actually-does", anchor: "the job this is preparing you for", context: "Context" },
+    { slug: "asking-questions-that-get-answers", anchor: "getting real answers from people", context: "Technique" },
+    { slug: "where-inefficiency-hides", anchor: "what to look for once you understand it", context: "Next step" },
   ],
 
-  relatedGuides: ["what-a-business-analyst-actually-does", "symptom-versus-problem", "asking-questions-that-get-answers"],
+  relatedGuides: ["what-a-business-analyst-actually-does", "asking-questions-that-get-answers", "where-inefficiency-hides"],
 
   conclusion: [
-    "Book two hours this week to sit beside whoever performs the core task in your business and watch without interviewing. Note every surprise. That afternoon will teach you more than the documentation and it costs you one meeting slot.",
+    "Ask to follow one real case from beginning to end this week, with a reference number and a date. One afternoon doing that will teach you more than a fortnight of reading, and it will almost certainly turn up something nobody has written down anywhere.",
   ],
 };
 

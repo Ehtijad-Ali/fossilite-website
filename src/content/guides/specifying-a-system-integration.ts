@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "specifying-a-system-integration",
-  seoTitle: "Specifying a System Integration as a Business Analyst",
+  seoTitle: "Connecting Two Systems: The Questions Nobody Asks",
   metaDescription:
-    "The business questions behind an interface: what triggers it, what the data means, what happens when it fails, who owns the truth, and what the business sees meanwhile.",
-  title: "Specifying a System Integration",
+    "Getting two systems to talk is the easy part. The hard part is agreeing what the words mean, who is right when they disagree, and what people do while it is broken.",
+  title: "Connecting Two Systems Together",
   keywords: [
     "integration requirements",
     "interface specification",
@@ -17,343 +17,343 @@ export const guide: Guide = {
   ],
   category: "api-integration",
   level: "Advanced",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
-  readingTime: 18,
+  readingTime: 15,
 
   intro: [
-    "Integration work looks like a technical problem and mostly is not. The technical part, moving a message from one system to another, is a solved problem with well understood patterns. What is not solved, and what nobody but an analyst is going to establish, is what the data means on each side, which system is allowed to be right when they disagree, and what the business does during the hours when the connection is down.",
-    "Those questions are all business questions, and if they are not answered explicitly they get answered implicitly by whoever writes the code. Their answers will be reasonable and locally sensible, and some of them will be wrong in ways that surface months later as an unexplained difference in two reports.",
-    "This guide is the specification a Business Systems Analyst should produce for an interface: the triggering event, the meaning of every field on both sides, ownership of each fact, the failure behaviour, and the operational questions that decide whether the business can actually work while the integration is not working.",
+    "Connecting two systems looks like a technical job and mostly is not. Getting information from one place to another is a solved problem. Developers do it every day and they are good at it.",
+    "What is not solved, and what nobody except an analyst is going to sort out, is the awkward stuff underneath. Does customer mean the same thing in both systems? When the two disagree about an address, which one is right? And what are people supposed to do on the morning the connection is down?",
+    "Those are all business questions. If nobody answers them out loud, they get answered quietly by whoever writes the code. Their answers will be sensible and some of them will be wrong, and you will find out months later when two reports do not match and nobody can say why.",
   ],
 
   whyItMatters: [
-    "Integrations fail differently from applications. An application that breaks stops and somebody notices. An integration that breaks frequently carries on, delivering nothing, or delivering something subtly wrong, and the first sign is a customer or an accountant asking why two numbers disagree.",
-    "The cost also compounds over time. A field mapped on a misunderstanding produces incorrect data every day it runs, and by the time anybody investigates there are years of it, with no easy way to tell which records are affected.",
-    "And integrations are where organisational boundaries become technical ones. Two teams, sometimes two companies, each with their own definitions, release schedules and priorities. Somebody has to make those boundaries explicit, and that somebody is the analyst.",
+    "Connections break differently from normal software. When an application breaks, it stops and somebody notices. When a connection breaks, it often keeps running and just sends nothing, or sends something slightly wrong. The first sign is usually a customer or an accountant asking why two numbers do not agree.",
+    "The damage also builds up quietly. A field matched to the wrong thing produces bad data every day it runs. By the time anyone investigates there might be two years of it, and no easy way to tell which records are affected.",
+    "And this is where two departments, or two companies, meet. Each has its own words, its own release dates and its own priorities. Somebody has to make that boundary explicit, and it is not going to be either of the development teams.",
   ],
 
   coreConcepts: [
     {
-      term: "Start from the business event, not the payload",
+      term: "Start with what happened, not what gets sent",
       explain:
-        "What has happened in the world that means data should move? A customer placed an order. A payment cleared. An engineer completed a job. The event is the requirement and the message is an implementation of it.",
+        "Something happened in the real world and that is why data needs to move. A customer placed an order. A payment cleared. An engineer finished a job. That event is the requirement. The message is just how it gets there.",
       detail:
-        "Specifying from the payload outward produces an interface that copies fields. Specifying from the event outward produces one that communicates something, and the difference shows the first time the business changes how it works.",
+        "Start from the list of fields instead and you get a connection that copies data. Start from the event and you get one that actually tells the other side something. The difference shows up the first time the business changes how it works.",
     },
     {
-      term: "Name the source of truth for every fact, not every field",
+      term: "Decide which system is right when they disagree",
       explain:
-        "For each business fact the interface carries, exactly one system should be authoritative and the others hold copies. Write down which, and who is accountable.",
+        "For every important fact, pick one system that is in charge of it. The others hold a copy. Write down which is which and who is accountable for it being correct.",
       detail:
-        "Where two systems both allow a fact to be edited, you have specified a reconciliation problem that will run forever. That may be an acceptable trade-off, but it must be a decision rather than an accident.",
+        "If both systems let people edit the same thing, you have created reconciliation work that will run forever. That might be an acceptable trade. It has to be a decision somebody made, not something that just happens.",
     },
     {
-      term: "Both sides define every shared term independently",
+      term: "Get both sides to define the same word separately",
       explain:
-        "Ask each system's owner to write down what customer, order, active or complete means in their system, separately, without conferring, before any mapping is built.",
+        "Ask each system's owner to write down what customer, or order, or complete means in their system. Separately, without seeing each other's answer. Do this before anybody matches up a single field.",
       detail:
-        "This is the single highest-value hour in an integration project. Two systems using one word for different concepts is the normal case, and a field-level mapping conceals it perfectly.",
+        "This is the best hour you will spend on the whole project. Two systems using one word for two different things is completely normal, and matching field to field hides it perfectly until the record counts come out different.",
     },
     {
-      term: "Direction, trigger and timing are three separate decisions",
+      term: "Which way, what starts it, and how fast are three separate questions",
       explain:
-        "Which way does data flow, what causes a transfer, and how quickly must it arrive? A nightly batch, an hourly poll and an immediate event have very different business consequences.",
+        "Data flowing one way or both ways. What kicks it off. And how quickly it has to get there. Overnight, hourly, or the moment it happens are three very different things for the business.",
       detail:
-        "Derive timing from a business consequence rather than a preference. If a delay of four hours would cause a customer-visible problem and a delay of twenty minutes would not, you have your requirement and its justification.",
+        "Work out the speed from a consequence, not a preference. If being four hours behind causes a customer problem and twenty minutes does not, you have your answer and you can defend it. If somebody just prefers real time, that is not a reason.",
     },
     {
-      term: "Specify what the receiving system does with each message",
+      term: "Say what the receiving system does with each message",
       explain:
-        "Create a new record, update an existing one, or both. If update, matched on what key? If the match fails, create or reject?",
+        "Create a new record, or update one that already exists? If updating, matched on what? And if it cannot find a match, does it create one or reject it?",
       detail:
-        "Matching rules are business rules and they are frequently ambiguous. Two customers with the same name, an order reference that was reused after a system migration, a record that exists on one side and not the other. Each needs a stated answer.",
+        "Matching is a business rule and it is usually vague. Two customers with the same name. An order number reused after an old system was replaced. A record that exists on one side and not the other. Each needs a written answer.",
     },
     {
-      term: "Duplicate delivery will happen, so decide what it means",
+      term: "The same message will arrive twice, so decide what that means",
       explain:
-        "Networks retry. Systems get restarted mid-batch. Somebody reruns yesterday's file. The question is whether processing the same message twice does damage.",
+        "Networks retry. Systems get restarted halfway through. Someone reruns yesterday's file by mistake. It will happen. The question is whether it does any harm.",
       detail:
-        "Ask the business question: if this arrived twice, would the customer be charged twice, would the stock be decremented twice, would they receive two emails? Then specify the key on which duplicates are recognised.",
+        "Ask it as a business question: if this came through twice, would the customer be charged twice, would stock come down twice, would they get two emails? Then say what makes two messages the same one, so the system can spot it.",
     },
     {
-      term: "Order of arrival is not guaranteed and sometimes matters",
+      term: "Messages can arrive out of order",
       explain:
-        "An update can overtake the create it depends on, or two updates can arrive out of sequence, leaving the older value in place.",
+        "An update can overtake the thing it is updating. Or two updates arrive the wrong way round and the older value ends up sticking.",
       detail:
-        "Where sequence matters, say so and specify how it is determined: a sequence number, a timestamp from the source, a version. Where it does not, say that too, so nobody builds machinery for a problem you do not have.",
+        "Where the order matters, say so and say how you tell which came first. Where it does not matter, say that too, so nobody builds machinery for a problem you do not have.",
     },
     {
-      term: "Failure behaviour is a business decision in four parts",
+      term: "Say what happens when it fails, in four parts",
       explain:
-        "What the user sees, what gets recorded, whether it retries and how many times, and whether anything is left half-done.",
+        "What does the user see. What gets written down. Does it try again, and how many times. And is anything left half-done.",
       detail:
-        "The last is the one that causes lasting damage. A transfer that updates one system and fails before updating the other leaves the business in a state neither system knows is wrong, and somebody has to decide in advance how that is detected and corrected.",
+        "That last one causes the most lasting damage. A transfer that updates one system and then fails before updating the other leaves the business in a state neither side knows is wrong. Somebody has to decide in advance how that gets spotted and fixed.",
     },
     {
-      term: "Specify what the business does while it is down",
+      term: "Say what people do while it is broken",
       explain:
-        "Not what the system does. What the person does. Do they wait, work manually, or refuse the transaction? And what happens to that manual work when the connection returns?",
+        "Not what the system does. What the person does. Do they wait, do it on paper, or turn the customer away? And what happens to that paper work when the connection comes back?",
       detail:
-        "This is the requirement most often missing entirely, and it is the one the operation will need on the first bad day. Manual work performed during an outage that then has to be reconciled by hand is a design decision, not an accident.",
+        "This is the thing most often missing completely, and it is the one the operation needs on the first bad day. Work done manually during an outage that then has to be typed in and checked by hand is a decision, not an accident.",
     },
     {
-      term: "Reconciliation is a requirement, agreed in advance",
+      term: "Agree how you will check both sides match, before it goes live",
       explain:
-        "What counts are compared, how often, by whom, with what tolerance, and what happens when they differ.",
+        "What gets counted, how often, by whom, and how big a difference is acceptable. Number of records, total value, count by status.",
       detail:
-        "Without it, an interface that has been silently dropping a small proportion of messages for months looks exactly like one that is working. Daily control totals are cheap and they are the only way anybody finds out.",
+        "Without this, a connection that has been quietly dropping a few records a day looks exactly like one that is working perfectly. A daily count on both sides is cheap and it is the only way anybody ever finds out.",
     },
     {
-      term: "Volume, growth and peak belong in the specification",
+      term: "Ask what happens on the big days",
       explain:
-        "Messages per day, the peak within it, expected size, and growth. An interface designed for a steady trickle behaves very differently when a bulk update sends fifty thousand records at once.",
+        "How many messages a day, what the busiest day looks like, and what happens during something unusual like a price change across the whole catalogue or a bulk customer update.",
       detail:
-        "Ask specifically what happens during a data migration, a bulk price change or a mass customer update. Those are the events that break interfaces, and they are usually foreseeable.",
+        "A connection built for a steady trickle behaves very differently when fifty thousand records arrive at once. Those days are usually foreseeable, and they are what breaks connections.",
     },
     {
-      term: "The other party has a release schedule and it is not yours",
+      term: "The other side has its own release schedule",
       explain:
-        "Where the counterparty is an external company or another department, their change windows, versioning approach and notification practice are constraints on your design.",
+        "If the other end is another company or another department, their change dates, their version numbers and how they tell you about changes are all constraints you have to live with.",
       detail:
-        "Establish early how you will be told about a change on their side, and what happens if you are not. The answer nobody is happy with is that you find out when it breaks, and it is worth knowing that in advance.",
+        "Agree early how you will be told when something changes at their end, and what happens if you are not. The answer nobody likes is that you find out when it breaks, and it is much better to know that in advance.",
     },
   ],
 
   examples: [
     {
       kind: "illustration",
-      scenario: "One word, two entities, one unexplained count difference.",
+      scenario: "One word, two meanings, and a count that never matched.",
       walkthrough:
-        "An integration maps customer records from a billing system into a new platform. Record counts differ by a noticeable margin and nobody can explain it. The BA asks both system owners to define customer independently. Billing creates one record per paying entity, so a group of companies paying centrally is a single customer. The CRM holds one record per trading business.",
+        "The problem: two systems were exchanging customer records and the totals never agreed. Nobody could explain the gap. What was happening: the BA asked both system owners to define customer, separately. Billing created one record per paying entity, so a group of companies paying centrally showed up as a single customer. The CRM had one record per trading business. Both were right for their own purpose and neither team had ever had a reason to compare.",
       result:
-        "The mapping needed a rule about group structures that nobody had specified, because both teams had used the same word for years with no reason to compare. Independent written definitions from both owners is a one-hour exercise, and it should come before any field mapping is attempted.",
+        "What changed: they wrote a rule for how group structures map across, which nobody had thought to specify. The general lesson is one hour of work: before matching up any records, get both owners to write their definition down separately and put the two sentences side by side.",
     },
     {
       kind: "illustration",
-      scenario: "The half-completed transfer.",
+      scenario: "The order that was confirmed and never picked.",
       walkthrough:
-        "An order confirmation process updates the order system and then notifies the warehouse system. The warehouse call fails intermittently under load. The order shows as confirmed, the warehouse never receives it, and nothing errors visibly because the order system's own transaction completed successfully. Customers wait for goods that were never picked.",
+        "The problem: customers were waiting for goods that had never been sent. What was happening: confirming an order updated the order system and then told the warehouse system. Under load, that second call failed now and then. The order showed as confirmed, the warehouse never heard about it, and nothing looked broken because the order system's own part had worked perfectly.",
       result:
-        "The specification had covered what happens when the message is sent and not what happens when the second half fails. The fix required a business decision about whether an order should be confirmable before the warehouse has acknowledged it, which is not a question a developer should be answering alone at the end of a sprint.",
+        "What changed: they decided that an order could not be confirmed until the warehouse had acknowledged it. The specification had covered what happens when the message is sent, and said nothing about what happens when the second half fails. That is a business decision about whether a customer should be told yes before the warehouse knows, and it is not a question a developer should be answering alone at the end of a sprint.",
     },
     {
       kind: "illustration",
-      scenario: "Silently dropping a small share of messages.",
+      scenario: "Quietly losing records for months.",
       walkthrough:
-        "An interface has been running for months and is considered stable. A BA introduces a daily control total: count of records sent, count received, count rejected, and the value total on each side. On the first day the counts differ slightly. Investigation shows that records containing a particular character in an address field have been failing validation on the receiving side and being discarded without alert.",
+        "The problem: a connection had been running for months and everyone considered it stable. What was happening: the BA introduced a simple daily check. Records sent, records received, records rejected, and the total value on each side. On the very first day the counts did not match. Records with a particular character in the address field were failing a check at the receiving end and being thrown away without any alert.",
       result:
-        "The interface had been losing a small proportion of records for an unknown length of time, and there was no way to identify which ones without a full comparison. Reconciliation is not an operational nicety. Without it a partially broken interface is indistinguishable from a working one, and the failure is silent by design.",
+        "What changed: they fixed the validation and added the daily check permanently. Nobody knew how long it had been happening or which records had gone. This is why checking both sides match is not optional housekeeping. Without it, a partly broken connection looks identical to a working one, and it is designed to fail silently.",
     },
   ],
 
   learningPath: [
     {
-      title: "Write the business events the interface serves",
-      body: "What happens in the world that means data should move, and what the receiving business does as a result. One sentence per event.",
+      title: "Write down what happened in the real world",
+      body: "The events that mean data needs to move, and what the receiving business does as a result. One sentence each.",
       effort: "2 hours",
-      outcome: "A requirement expressed as communication rather than as field copying.",
+      outcome: "A requirement about communicating something, rather than about copying fields.",
     },
     {
-      title: "Get independent definitions from both sides",
-      body: "Each system owner writes what every shared term means in their system, separately. Then compare and follow every difference to a rule.",
+      title: "Get both sides to define the shared words",
+      body: "Each owner writes what every shared term means in their system, separately. Then compare and chase down every difference.",
       effort: "Half a day",
-      outcome: "The mismatches that would otherwise appear as unexplained differences after go-live.",
+      outcome: "The mismatches that would otherwise show up later as counts that do not agree.",
     },
     {
-      title: "Name the source of truth for every fact",
-      body: "One authoritative system per business fact, with an accountable owner. Flag anywhere both sides can edit the same thing.",
+      title: "Decide which system is in charge of each fact",
+      body: "One system in charge, with a named person accountable. Flag anywhere both sides can edit the same thing.",
       effort: "Half a day",
-      outcome: "The decision that determines direction, conflict handling and reconciliation.",
+      outcome: "The decision that drives direction, conflict handling and the daily checks.",
     },
     {
-      title: "Build the field mapping with no blank cells",
-      body: "Target field, source field, transformation, behaviour when the source is null, behaviour when the value is not permitted at the target, default, and who confirmed the business meaning.",
+      title: "Match up the fields with no blanks",
+      body: "For each field at the receiving end: which field it comes from, anything that changes on the way, what to do when the source is empty, what to do when the value is not one the receiver accepts, what the default is, and who confirmed what it means.",
       effort: "2-5 days",
-      outcome: "A specification an engineer can implement without guessing.",
+      outcome: "Something a developer can build without guessing.",
     },
     {
-      title: "Specify matching, duplicates and ordering",
-      body: "What key matches an incoming record, what happens when the match fails, what a duplicate means for the business, and whether sequence matters.",
+      title: "Sort out matching, duplicates and ordering",
+      body: "What identifies an incoming record, what happens when nothing matches, what a duplicate would mean for the customer, and whether order matters.",
       effort: "1 day",
-      outcome: "The three questions that produce the most expensive integration defects.",
+      outcome: "The three questions that cause the most expensive problems later.",
     },
     {
-      title: "Specify failure behaviour and the manual fallback",
-      body: "What the user sees, what is recorded, retry behaviour, partial completion handling, and what the business does while the interface is down.",
+      title: "Write down what happens when it breaks",
+      body: "What the user sees, what gets recorded, whether it retries, what is left half-done, and what people do while it is down.",
       effort: "1 day",
-      outcome: "An operation that can keep working on a bad day, and a plan for the reconciliation afterwards.",
+      outcome: "A business that can keep working on a bad day, and a plan for tidying up afterwards.",
     },
     {
-      title: "Agree reconciliation and volumes before build",
-      body: "Control totals, frequency, tolerance, owner and escalation. Plus daily volume, peak, message size and growth, including bulk events.",
+      title: "Agree the daily check and the volumes before build",
+      body: "What gets counted on each side, how often, who looks, and what size of difference matters. Plus daily volume, busiest day, message size and the bulk events.",
       effort: "Half a day",
-      outcome: "The ability to tell whether the interface is working, which is otherwise unavailable.",
+      outcome: "The ability to tell whether it is working, which you otherwise do not have at all.",
     },
   ],
 
   exercises: [
     {
-      title: "Independent definitions",
+      title: "Ask both sides what a word means",
       brief:
-        "Pick two systems in your organisation that exchange data about the same entity. Ask one person from each to define that entity in a single sentence, without seeing the other's answer. Compare them.",
+        "Pick two systems in your business that exchange information about the same thing. Ask one person from each to define it in a sentence, without seeing the other's answer. Compare.",
       success:
-        "You can name at least one case that the two definitions would count differently, and you can say what the interface currently does with it.",
+        "You can name at least one real case the two definitions would count differently, and say what the connection currently does with it.",
       time: "1 hour",
     },
     {
-      title: "The duplicate question",
+      title: "What if it ran twice?",
       brief:
-        "For any existing interface, work out what would happen if yesterday's file were processed a second time by mistake. Ask the business what the customer-visible consequence would be.",
+        "Take any existing connection and work out what would happen if yesterday's batch got processed a second time by mistake. Ask the business what the customer would see.",
       success:
-        "You can say whether the interface is safe to reprocess, and if not, what the recovery procedure currently is.",
+        "You can say whether it is safe to rerun, and if not, what somebody would have to do to sort it out.",
       time: "1 hour",
     },
     {
-      title: "Build a control total",
+      title: "Count both sides for a week",
       brief:
-        "For one live interface, define a daily reconciliation: records sent, received, rejected, and a value total on each side. Run it for a week and compare.",
+        "For one live connection, set up a daily count: records sent, received, rejected, and a total value on each side. Run it for a week and compare.",
       success:
-        "You have a working daily check, and you know whether the interface is currently losing anything.",
+        "You have a working daily check, and you know whether that connection is currently losing anything.",
       time: "Half a day plus a week of running",
     },
   ],
 
   mistakes: [
     {
-      mistake: "Specifying from the payload rather than the business event",
-      why: "You produce an interface that copies fields rather than one that communicates something, and it breaks conceptually the first time the business changes how it works.",
-      fix: "Write the events first: what happened, and what the receiving business does about it. Derive the message from that.",
+      mistake: "Starting from the list of fields",
+      why: "You get a connection that copies data rather than one that communicates something, and it stops making sense the first time the business changes how it works.",
+      fix: "Write the events first: what happened, and what the receiving side does about it. Work out the message from there.",
     },
     {
-      mistake: "Mapping fields without confirming meaning",
-      why: "Two systems using one word for different concepts is the normal case, and a field mapping hides it completely until the counts disagree.",
-      fix: "Independent written definitions from both system owners before any mapping is built.",
+      mistake: "Matching fields without checking what the words mean",
+      why: "Two systems using one word for two different things is normal, and a field-by-field match hides it completely until the counts come out different.",
+      fix: "Get both owners to write their definitions down separately, before any matching happens.",
     },
     {
-      mistake: "Leaving null handling and defaults to the engineer",
-      why: "They will choose something reasonable for the code. Whether a missing delivery date means today, blank or reject is a business decision with operational consequences.",
-      fix: "Make transformation, null handling, unmapped value handling and default mandatory columns with no blank cells permitted.",
+      mistake: "Leaving empty fields and defaults to the developer",
+      why: "They will pick something reasonable for the code. Whether a missing delivery date means today, or blank, or reject the whole thing is a business decision with real consequences.",
+      fix: "Make the source, the change on the way, the empty-field behaviour and the default compulsory columns. No blanks allowed.",
     },
     {
-      mistake: "Not specifying what a duplicate means",
-      why: "Retries and reruns are normal. Without a stated key for recognising duplicates, the business finds out through double charges or double dispatches.",
-      fix: "Ask what would happen to the customer if this arrived twice, and specify the key on which duplicates are identified.",
+      mistake: "Not saying what a duplicate means",
+      why: "Retries and reruns are normal. Without a rule for spotting the same message twice, the business finds out through double charges or double deliveries.",
+      fix: "Ask what the customer would experience if it came through twice, then say what makes two messages the same one.",
     },
     {
-      mistake: "Ignoring partial completion",
-      why: "A transfer that updates one system and fails before the other leaves an inconsistency neither side knows about, and it is discovered by a customer rather than by a system.",
-      fix: "Specify explicitly what state the business is in after each possible failure point, and how it is detected and corrected.",
+      mistake: "Ignoring the half-finished case",
+      why: "A transfer that updates one side and fails before the other leaves a mismatch neither system knows about, and a customer usually finds it before you do.",
+      fix: "Write down exactly what state the business is in after each possible failure point, and how it gets spotted and fixed.",
     },
     {
-      mistake: "No manual fallback specified",
-      why: "On the first outage the operation invents a procedure under pressure, and the work done during the outage has to be reconciled by hand afterwards with no plan.",
-      fix: "Specify what the person does while it is down and what happens to that work when the connection returns.",
+      mistake: "No plan for what people do while it is down",
+      why: "On the first outage the team invents something under pressure, and the work done that day has to be sorted out by hand afterwards with no plan for it.",
+      fix: "Say what the person does while it is broken, and what happens to that work when it comes back.",
     },
     {
-      mistake: "No reconciliation",
-      why: "An interface silently dropping a small proportion of records looks identical to one that is working, and by the time anybody notices there is no way to identify what was lost.",
-      fix: "Agree daily control totals, tolerance, owner and escalation before the interface goes live.",
+      mistake: "No daily check",
+      why: "A connection quietly losing a few records looks exactly like one that works, and by the time anyone notices you cannot tell what went missing.",
+      fix: "Agree the counts, the acceptable difference, who looks and who they tell, before it goes live.",
     },
     {
-      mistake: "Designing for steady volume only",
-      why: "Bulk events break interfaces: a price update across the catalogue, a migration, a mass customer change. These are foreseeable and are usually not considered.",
-      fix: "Specify daily volume, peak, message size, growth, and explicitly what happens during a bulk event.",
+      mistake: "Only designing for a normal day",
+      why: "Bulk events break connections. A price change across the catalogue, a data migration, a mass customer update. These are all foreseeable and usually not considered.",
+      fix: "Write down normal volume, the busiest day, message size, growth, and specifically what happens during a bulk event.",
     },
   ],
 
   bestPractices: [
-    "Specify from the business event, not the payload.",
-    "Name one source of truth per business fact, with an accountable owner.",
-    "Get independent written definitions of every shared term from both sides.",
-    "Decide direction, trigger and timing as three separate questions.",
-    "Derive timing from a business consequence rather than a preference.",
-    "Specify the matching key and what happens when the match fails.",
-    "State what a duplicate means for the business and how it is recognised.",
-    "Say whether ordering matters, and how sequence is determined if it does.",
-    "Specify failure behaviour in four parts, including partial completion.",
-    "Specify what the business does while the interface is unavailable.",
-    "Agree daily reconciliation totals, tolerance and owner before go-live.",
-    "Include volume, peak, message size, growth and bulk events.",
-    "Establish how you will be told about changes on the other side.",
+    "Start from what happened in the real world, not from the list of fields.",
+    "Name one system in charge of each fact, with an accountable person.",
+    "Get both sides to define shared words separately, in writing.",
+    "Treat direction, trigger and speed as three separate questions.",
+    "Work out the speed requirement from a consequence, not a preference.",
+    "Say what identifies an incoming record and what happens when nothing matches.",
+    "Say what a duplicate would mean for the customer and how one gets spotted.",
+    "Say whether order matters, and how you tell which came first.",
+    "Cover failure in four parts, including anything left half-done.",
+    "Say what people do while the connection is unavailable.",
+    "Agree the daily counts and acceptable difference before go-live.",
+    "Include normal volume, busiest day, message size and bulk events.",
+    "Agree how the other side will tell you when something changes.",
   ],
 
   proTips: [
-    "Ask what the two systems disagreed about last time and how it was resolved. Every long-running integration has a history of reconciliation arguments, and the pattern in them tells you exactly where the definitions differ. It is faster than any amount of documentation review and it comes from the people who had to sort it out.",
-    "Insist on seeing real messages from the source system rather than a schema. Schemas describe what is permitted. Real messages show you what is actually sent, including the field that is always empty, the one that contains a code not in the documentation, and the one somebody has been using as a free text note.",
-    "Specify the reconciliation report before you specify the interface. It forces you to decide what would count as working, and that decision usually exposes an ambiguity in the requirement itself. It is also the artefact the support team will thank you for, which matters when you need something from them later.",
-    "Where the counterparty is external, ask what happens if they change their format without telling you, and write the answer down even when the answer is that you will find out when it breaks. Making that explicit occasionally causes somebody to fix it, and when it does not, at least the risk has been accepted deliberately.",
+    "Ask what the two systems disagreed about last time and how it got sorted out. Any connection that has been running a while has a history of arguments about numbers, and the pattern in them tells you exactly where the definitions differ. It is faster than reading any documentation and it comes from the people who had to fix it.",
+    "Insist on seeing real messages, not a description of what a message should contain. The description tells you what is allowed. Real ones show you what actually gets sent, including the field that is always empty, the code that is not in anybody's list, and the one somebody has been using to write notes in.",
+    "Write the daily check before you write the connection. It forces you to decide what working would even look like, and that usually turns up something vague in the requirement itself. It is also the thing the support team will thank you for, which matters the next time you need something from them.",
+    "Where the other end is a different company, ask what happens if they change their format without telling you, and write down the answer even when the answer is that you find out when it breaks. Sometimes writing it down makes somebody fix it. When it does not, at least the risk has been accepted on purpose.",
   ],
 
   businessApplications: [
-    "Connecting a new application to an existing landscape, where the definitions have drifted for years.",
-    "Vendor and partner interfaces, where the counterparty's release schedule is a constraint you do not control.",
-    "Master data management, where source of truth is the entire question.",
-    "Migration projects, where interfaces have to work across both old and new systems during a transition period.",
-    "Regulatory reporting, where completeness and reconciliation are auditable obligations.",
-    "Mergers, where two organisations exchange data about the same customers under incompatible definitions.",
+    "Adding a new application to an existing set of systems, where the words have drifted apart over years.",
+    "Connections to suppliers and partners, where their release dates are a constraint you do not control.",
+    "Deciding which system owns customer data, where that question is the whole project.",
+    "Replacing a system, where connections have to work with both old and new during the changeover.",
+    "Reporting to a regulator, where completeness and matching totals are things you have to prove.",
+    "Mergers, where two businesses hold information about the same customers under different rules.",
   ],
 
   checklist: [
-    "Business events documented, with what the receiving business does about each.",
-    "Source of truth named per fact, with an accountable owner.",
-    "Independent definitions obtained from both system owners.",
-    "Direction, trigger and timing decided separately and justified.",
-    "Field mapping complete with no blank transformation, null, unmapped or default cells.",
-    "Matching key specified, with behaviour when the match fails.",
-    "Duplicate handling specified with a recognition key.",
-    "Ordering requirement stated, with the sequencing mechanism if it matters.",
-    "Failure behaviour specified: user sees, recorded, retries, partial completion.",
-    "Manual fallback specified, including reconciliation of work done during an outage.",
-    "Reconciliation totals, frequency, tolerance, owner and escalation agreed.",
-    "Volume, peak, message size, growth and bulk event behaviour documented.",
-    "Change notification process with the counterparty established.",
+    "Real-world events written down, with what the receiving business does about each.",
+    "One system named as in charge of each fact, with an owner.",
+    "Both system owners have defined shared words separately.",
+    "Direction, trigger and speed decided separately and justified.",
+    "Field matching complete with no blank cells anywhere.",
+    "Matching rule written, including what happens when nothing matches.",
+    "Duplicate handling written, including how a duplicate is recognised.",
+    "Ordering requirement stated, with how you tell which came first.",
+    "Failure covered: what the user sees, what is recorded, retries, half-finished work.",
+    "Manual fallback written, including tidying up afterwards.",
+    "Daily counts, frequency, acceptable difference, owner and escalation agreed.",
+    "Volume, busiest day, message size, growth and bulk events documented.",
+    "Change notification with the other side agreed.",
   ],
 
   faqs: [
     {
-      q: "How technical does a BA need to be to specify an integration?",
-      a: "Enough to read a data model, understand the difference between a batch and an event-driven interface, and follow a conversation about retries and idempotency. You do not need to design the technical solution. You need to specify what the business requires of it.",
+      q: "How technical does a BA need to be for this?",
+      a: "Enough to follow a conversation about data and about things being retried. You do not need to design the technical solution. You need to be able to say what the business requires of it, which nobody else in the room can do.",
     },
     {
-      q: "Batch or real time?",
-      a: "Derive it from consequence. If a delay of some hours causes a customer-visible problem, you need something closer to real time. If not, a batch is cheaper, simpler to reconcile and easier to rerun. Preference is not a justification.",
+      q: "Overnight batch or straight away?",
+      a: "Decide from consequence. If being a few hours behind causes a real customer problem, you need something closer to immediate. If not, an overnight run is cheaper, easier to check and easier to rerun when something goes wrong.",
     },
     {
-      q: "What is idempotency and why should I care?",
-      a: "It means processing the same message more than once has the same effect as processing it once. You care because retries and reruns are normal, and the business consequence of a duplicate, such as a double charge, is yours to specify rather than the developer's to discover.",
+      q: "Why does it matter if the same message arrives twice?",
+      a: "Because retries and reruns happen constantly, and the consequence is a business question. Would the customer get charged twice, or receive two emails, or have stock taken off twice? That is yours to specify, not the developer's to discover.",
     },
     {
-      q: "Who decides what happens when the two systems disagree?",
-      a: "The owner of the business fact, which is why naming a source of truth comes before anything else. If both systems can edit the same fact, you have specified permanent reconciliation work and that should be a conscious decision.",
+      q: "Who decides when the two systems disagree?",
+      a: "Whoever owns that piece of information, which is why naming the system in charge comes before everything else. If both systems can edit the same thing, you have signed up for permanent checking work and that should be a conscious choice.",
     },
     {
-      q: "How do I specify an interface with an external party who will not engage?",
-      a: "Write what you will send and expect, state your assumptions explicitly, and send it to them and to your sponsor. Assumptions in writing get corrected more often than open-ended requests get answered, and if they are not corrected you have a documented position.",
+      q: "The other company will not engage. What do I do?",
+      a: "Write down what you will send and what you expect back, state your assumptions plainly, and send it to them and to your sponsor. People correct something specific and wrong far more readily than they answer an open question, and if they do not correct it you have a documented position.",
     },
     {
-      q: "Do I need to specify the technical protocol?",
-      a: "No. Specify the business requirements: event, meaning, timing, failure behaviour, volume and reconciliation. The protocol is a technical choice, and constraining it without reason removes options that might be cheaper in your environment.",
+      q: "Do I need to say how it should be built technically?",
+      a: "No. Say what the business needs: what happened, what the words mean, how fast, what happens when it breaks, how much, and how you will check. Picking the technology is a technical decision, and constraining it for no reason removes options that might be cheaper.",
     },
   ],
 
   tools: [
-    { name: "A field mapping template", what: "Target, source, transformation, null handling, unmapped handling, default, confirmed by. No blank cells permitted.", cost: "Free" },
-    { name: "Real sample messages", what: "Not a schema. What is actually sent, including the fields nobody documented and the ones being misused.", cost: "Free" },
-    { name: "A reconciliation definition", what: "Control totals, frequency, tolerance, owner, escalation. Write it before specifying the interface.", cost: "Free" },
-    { name: "A shared glossary with both definitions", what: "Each term as each side defines it, side by side, with the rule that resolves the difference.", cost: "Free" },
+    { name: "A field matching sheet", what: "Receiving field, source field, anything that changes, what to do when empty, what to do with unknown values, default, who confirmed the meaning. No blanks.", cost: "Free" },
+    { name: "Real sample messages", what: "Not a description of what should be sent. What actually gets sent, including the fields nobody documented.", cost: "Free" },
+    { name: "A daily count on both sides", what: "Records sent, received, rejected, total value. Write it before you write the connection.", cost: "Free" },
+    { name: "A two-column glossary", what: "Each word as each side defines it, side by side, with the rule that resolves the difference.", cost: "Free" },
   ],
 
   internalLinks: [
-    { slug: "data-requirements-for-analysts", anchor: "profiling the data on both sides", context: "Before mapping" },
+    { slug: "data-requirements-for-analysts", anchor: "checking what the data on both sides actually looks like", context: "Before matching" },
     { slug: "api-integration-that-doesnt-break", anchor: "the engineering side of the same problem", context: "Technical context" },
-    { slug: "impact-assessment-before-a-change", anchor: "who else consumes this data", context: "Impact" },
+    { slug: "impact-assessment-before-a-change", anchor: "who else is using this data", context: "Impact" },
   ],
 
   relatedGuides: ["data-requirements-for-analysts", "api-integration-that-doesnt-break", "impact-assessment-before-a-change"],
 
   conclusion: [
-    "Take one interface your organisation already runs and define its daily reconciliation: records sent, received, rejected, and a value total on each side. Run it for a week. If the numbers differ, you have found something that has been happening silently for a long time, and if they match you have built the only thing that would ever tell you when they stop.",
+    "Take one connection your business already runs and set up a daily count on both sides: sent, received, rejected, and total value. Run it for a week. If the numbers differ you have found something that has been happening quietly for a long time, and if they match you have built the only thing that will ever tell you when they stop.",
   ],
 };
 

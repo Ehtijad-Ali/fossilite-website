@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "reporting-and-analytics-requirements",
-  seoTitle: "Reporting Requirements: Metrics People Can Actually Trust",
+  seoTitle: "Why Two Teams Report Different Numbers for the Same Thing",
   metaDescription:
-    "Specifying reports and dashboards: starting from the decision, defining a metric so two teams get the same number, and killing the reports nobody reads.",
-  title: "Reporting and Analytics Requirements",
+    "Most requested reports go unopened. How to find the decision behind the request, define a number so two teams get the same answer, and switch off what nobody reads.",
+  title: "Reports People Actually Trust",
   keywords: [
     "reporting requirements",
     "metric definition",
@@ -17,106 +17,106 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Intermediate",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
-  readingTime: 17,
+  readingTime: 15,
 
   intro: [
-    "Ask a stakeholder what reports they need and you will get a list. The list will be assembled from what already exists plus a few aspirations, it will be delivered with confidence, and most of what gets built from it will go unopened after the first month. This is such a consistent outcome that it should be treated as a property of the question rather than as a failure of the people answering it.",
-    "The underlying problem is that a report is not a requirement. It is somebody's proposed solution to a decision they have to make with insufficient information. Specify the report and you have automated their guess. Specify the decision and you frequently find that what they need is an alert, a change to a screen they already use, or a single number in an email, none of which was on the list.",
-    "This guide covers the analysis behind reporting: how to find the decision underneath the request, how to define a metric precisely enough that two departments produce the same number, what a report specification actually needs to contain, and how to deal with the accumulated estate of reports nobody reads but everybody is afraid to switch off.",
+    "Ask somebody what reports they need and you get a list. The list is put together from what already exists plus a few wishes, it is given confidently, and most of what gets built from it goes unopened after the first month. This happens so reliably that it is a property of the question rather than a failing of the person answering.",
+    "The reason is that a report is not a requirement. It is somebody's guess at how to make a decision they have to take without enough information. Build the report and you have automated their guess. Ask about the decision and you often find that what they actually need is an alert, a change to a screen they already look at, or one number in an email. None of which were on the list.",
+    "This guide covers the work behind reporting: finding the decision underneath the request, writing down what a number means precisely enough that two departments produce the same answer, and dealing with the pile of reports nobody reads that everybody is afraid to switch off.",
   ],
 
   whyItMatters: [
-    "Reporting is where organisational disagreement becomes visible and then gets buried. Two teams quote different figures for the same thing, a meeting is spent on which is right, and the resolution is usually that both are technically correct under different definitions that nobody had written down.",
-    "Reports also accumulate. Every project adds some, almost none are ever removed, and the estate becomes a maintenance burden that quietly consumes analyst and engineering time forever. Each one is also a consumer of data that constrains every future change to the underlying fields.",
-    "And a wrong number that looks plausible is worse than no number. People act on it. A report that has been subtly incorrect for a year has produced a year of decisions, and unlike a broken screen it does not announce itself.",
+    "Reporting is where disagreements in a business become visible and then get buried. Two teams quote different figures for the same thing, a meeting gets spent on who is right, and the answer usually turns out to be that both are correct under different definitions nobody ever wrote down.",
+    "Reports also pile up. Every project adds a few, almost none get removed, and the whole lot becomes a maintenance job that quietly eats analyst and engineering time forever. Each one is also using data, which means each one limits what you can change about that data later.",
+    "And a wrong number that looks believable is worse than no number, because people act on it. A report that has been subtly wrong for a year has produced a year of decisions, and unlike a broken screen it does not announce itself.",
   ],
 
   coreConcepts: [
     {
-      term: "Start from the decision, not the report",
+      term: "Start with the decision, not the report",
       explain:
-        "What decision does this support, who takes it, how often, and what would they do differently depending on the answer? If none of those can be answered, you have a request for reassurance rather than for information.",
+        "What decision does this help with, who takes it, how often, and what would they do differently depending on the answer? If none of those can be answered, this is a request for reassurance rather than for information.",
       detail:
-        "The best question I know here: think of the last time you made this decision, what did you need and how did you get it? That produces a story with facts in it, where asking what reports you need produces a list.",
+        "The question that works: think of the last time you made this decision. What did you need, and how did you get it? That gets you a story with facts in it. Asking what reports do you need gets you a list.",
     },
     {
-      term: "Ask what action each threshold triggers",
+      term: "Ask what number would make them do something",
       explain:
-        "For any metric, ask what value would cause the reader to do something, and what that something is. A number nobody would act on at any value is decoration.",
+        "For any figure, ask what value would cause the reader to pick up the phone, and what they would do. A number nobody would act on at any value is decoration.",
       detail:
-        "This question also tells you whether you are building a report or an alert. If the reader only cares when it crosses a line, they do not want a weekly report, they want to be told when it happens.",
+        "This also tells you whether you are building a report or an alert. If they only care when it goes past a line, they do not want a weekly report. They want somebody to tell them when it happens.",
     },
     {
-      term: "A metric definition has six parts",
+      term: "Six things that decide what a number means",
       explain:
-        "The population (which records are included), the filter (which are excluded), the calculation, the time basis, the grain, and the source of truth.",
+        "Which records count. Which ones are left out. How it is worked out. Which date it counts against. What one row represents. And which system it comes from.",
       detail:
-        "Miss any one and two teams will produce different numbers in good faith. The time basis is the most commonly omitted: is an order counted when it was placed, confirmed, dispatched or invoiced? Those give four different monthly figures.",
+        "Miss any one and two teams will produce different numbers, both honestly. The date one gets forgotten most: is an order counted when it was placed, confirmed, sent or invoiced? That is four different monthly figures.",
     },
     {
-      term: "Define the exclusions explicitly, because that is where teams differ",
+      term: "Write down what gets left out, because that is where teams differ",
       explain:
-        "Cancelled orders, internal test accounts, staff purchases, refunded transactions, records created by a migration, one enormous outlier from a single customer.",
+        "Cancelled orders. Test accounts. Staff purchases. Refunds. Records created by a system migration. That one enormous order from a single customer.",
       detail:
-        "Every organisation has a set of these and each team has quietly made its own choices. Writing the exclusion list is often the single most valuable artefact produced by a reporting project.",
+        "Every business has a list like this and every team has quietly made its own choices about it. Writing the exclusions down is often the single most useful thing a reporting project produces.",
     },
     {
-      term: "State the grain before anything else",
+      term: "Say what one row represents before anything else",
       explain:
-        "One row per what? Per order, per order line, per customer per month, per case per status change. Everything about the report follows from this.",
+        "One row per what? Per order, per order line, per customer per month, per case per status change. Everything else follows from this.",
       detail:
-        "Grain confusion is the source of most double counting. An order with three lines counted at line grain and reported as orders will overstate by a factor that varies with basket size, and the error looks like growth.",
+        "Getting this wrong causes most double counting. Counting order lines and calling them orders overstates by an amount that varies with how big the orders are, and the mistake looks exactly like growth.",
     },
     {
-      term: "Averages hide, distributions inform",
+      term: "Averages hide, spreads inform",
       explain:
-        "An average handling time of a few minutes is compatible with almost every case being quick and a small number taking hours, which is an entirely different operational picture.",
+        "An average handling time of a few minutes is perfectly consistent with most cases taking two minutes and a handful taking hours. That is a completely different picture of how the operation is doing.",
       detail:
-        "Where a metric describes a duration or a value, specify a percentile or a distribution rather than a mean. This is a requirement decision, not a presentation preference, because it changes what the report can be used for.",
+        "Where the number describes how long something took or how much it was worth, ask for the spread rather than the middle. This is a decision about what the report can be used for, not a presentation preference.",
     },
     {
-      term: "Specify freshness and its consequence",
+      term: "Ask how up to date it needs to be, and why",
       explain:
-        "How current does this need to be, and what goes wrong if it is a day old? Real-time reporting is dramatically more expensive than overnight and is frequently requested out of habit.",
+        "How current does this have to be, and what actually goes wrong if it is a day old? Live reporting costs dramatically more than overnight and is often asked for out of habit.",
       detail:
-        "Ask what decision would change if the data were twenty-four hours old. In the large majority of management reporting, the honest answer is none, and that answer saves a great deal of money.",
+        "Ask what decision would change if the data were twenty-four hours old. In most management reporting the honest answer is none, and that answer saves a lot of money.",
     },
     {
-      term: "Say what the report must not be used for",
+      term: "Say what the report is not for",
       explain:
-        "A figure built for trend monitoring gets quoted in a board pack as an absolute. A management estimate ends up in a regulatory return.",
+        "A figure built to watch a trend ends up quoted in a board pack as a hard number. An estimate for internal use ends up in something sent to a regulator.",
       detail:
-        "An explicit statement of intended use, and of known limitations, travels with the report and prevents the most damaging category of reporting error, which is a number used correctly for the wrong purpose.",
+        "Writing down what it is for and what its limits are, on the report itself, prevents the most damaging kind of reporting error, which is a correct number used for the wrong purpose.",
     },
     {
-      term: "Every report needs an owner and a review date",
+      term: "Every report needs an owner and a date to look at it again",
       explain:
-        "Somebody accountable for the definition remaining correct, and a date at which its continued existence is reconsidered.",
+        "Somebody responsible for the definition staying right, and a date when its continued existence gets questioned.",
       detail:
-        "Without these, the estate only grows. With them, an annual review removes the reports nobody opens, which is usually a substantial proportion and always more than anybody expects.",
+        "Without those, the pile only grows. With them, a yearly review clears out the ones nobody opens, which is always a bigger share than anybody expects.",
     },
     {
-      term: "Measure whether it is opened",
+      term: "Check whether anyone opens them",
       explain:
-        "Most reporting platforms record access. Pull the figures before designing anything new, because the existing usage data tells you what people actually use.",
+        "Most reporting tools record who opened what. Pull those figures before designing anything new, because the usage data tells you what people actually use.",
       detail:
-        "The pattern is consistent: a small number of reports carry most of the usage and a long tail is opened rarely or never. That tail is a maintenance cost and a constraint on every future data change.",
+        "The pattern is always the same. A handful of reports carry nearly all the use and a long tail is barely opened. That tail is a maintenance cost and a constraint on every future change to the underlying data.",
     },
     {
-      term: "Reconciliation against a trusted source is part of the requirement",
+      term: "Agree what it gets compared against",
       explain:
-        "A new report that produces a different number from an existing trusted one will not be believed, regardless of which is correct.",
+        "A new report producing a different number from an existing trusted one will not be believed, whichever is actually right.",
       detail:
-        "Specify what it will be reconciled against, at what level, and who signs off the comparison. Where the numbers legitimately differ, the explanation belongs on the report itself.",
+        "Say what it will be checked against, at what level, and who signs off the comparison. Where the numbers genuinely should differ, that explanation belongs on the report itself.",
     },
     {
-      term: "Self-service does not remove the need for definitions",
+      term: "Letting people build their own reports does not remove the need for definitions",
       explain:
-        "Giving people a tool to build their own reports without agreed definitions produces more disagreement, faster, with more authority behind each version.",
+        "Give people a tool without agreed definitions and you get more disagreement, faster, with more authority behind each version.",
       detail:
-        "The valuable deliverable in a self-service environment is a governed set of defined measures. The tool is the easy part and the definitions are the work.",
+        "In that setup the valuable thing to deliver is an agreed set of defined measures. The tool is the easy bit. The definitions are the work.",
     },
   ],
 
@@ -125,9 +125,9 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "A number that shaped policy and could not be reproduced.",
       walkthrough:
-        "Reinhart and Rogoff reported that countries with public debt above 90% of GDP experienced negative average growth, a finding cited extensively in arguments for austerity. Thomas Herndon, a graduate student, attempted to replicate the result as coursework and could not. Obtaining the original spreadsheet, he and his co-authors found several problems, including an averaging formula whose range omitted five countries, selective exclusion of available data, and an unconventional weighting choice.",
+        "Reinhart and Rogoff reported that countries with public debt above 90% of GDP had negative average growth, a finding used widely in arguments for austerity. Thomas Herndon, a graduate student, tried to reproduce it as coursework and could not. When he and his co-authors got hold of the original spreadsheet they found several problems, including a formula that had not been dragged far enough and so left five countries out, some available data being excluded, and an unusual weighting choice.",
       result:
-        "Recalculated, average real GDP growth above the 90% threshold was 2.2% rather than the reported figure. Every one of the problems found was a definitional choice hidden inside a calculation: which records are included, which are excluded, and how they are weighted. That is exactly what a metric definition is for, and it is why population, filter, calculation, time basis, grain and source belong in the specification rather than inside a formula nobody can inspect.",
+        "Recalculated, average real growth above the 90% threshold was 2.2% rather than the figure that had been published. Every one of those problems was a decision about what counts, hidden inside a calculation: which records are in, which are out, and how they are weighted. That is exactly what a definition is for, and it is why which records, what gets left out, how it is worked out, which date, what one row means and where it comes from belong in writing rather than buried in a formula nobody can inspect.",
       source: {
         label: "Herndon, Ash and Pollin (2013), PERI/UMass Amherst: critique of Reinhart and Rogoff",
         url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/",
@@ -135,231 +135,231 @@ export const guide: Guide = {
     },
     {
       kind: "illustration",
-      scenario: "The eleven reports that became one alert.",
+      scenario: "Eleven reports that turned into one alert.",
       walkthrough:
-        "A director asks for eleven reports. The BA asks a different question about each: think of the last time you needed this, what decision were you making and what did you do? For nine of the eleven the answer is a version of wanting to know whether anything has gone wrong. For one it is a genuine monthly analysis. For the last, the director cannot recall ever having needed it and it was on the list because a predecessor used to receive it.",
+        "The problem: a director handed over a list of eleven reports he wanted built. What was happening: rather than specifying them, the BA asked about each one. Think of the last time you needed this. What were you deciding, and what did you actually do? For nine of the eleven the answer was some version of wanting to know if anything had gone wrong. For one it was a genuine monthly piece of analysis. For the last, he could not remember ever needing it, and it was on the list because his predecessor used to get it.",
       result:
-        "The delivered solution was one exception alert covering the nine, one monthly analysis, and nothing for the eleventh. Building the original list would have consumed weeks and produced reports opened once. The distinction that mattered was between wanting to be informed when something is wrong and wanting to analyse something, and those need entirely different solutions.",
+        "What changed: they built one alert covering the nine, one monthly analysis, and nothing at all for the eleventh. Building the original list would have taken weeks and produced reports opened once. The distinction that mattered was between wanting to be told when something is wrong and wanting to dig into something, and those need completely different answers.",
     },
     {
       kind: "illustration",
-      scenario: "Two teams, one metric, both correct.",
+      scenario: "Two teams, one figure, both right.",
       walkthrough:
-        "Sales and Finance report different monthly order figures and have argued about it periodically for years. The BA writes both definitions out against the six parts. Sales counts orders at the point of order placement and includes orders later cancelled. Finance counts at invoice date and excludes cancellations and internal accounts. Both are correct for their own purpose and neither had ever been written down.",
+        "The problem: sales and finance reported different monthly order numbers and had been arguing about it on and off for years. What was happening: the BA wrote both definitions out against the six things. Sales counted orders when they were placed and included ones later cancelled. Finance counted them at invoice date and left out cancellations and internal accounts. Both were correct for their own purpose and neither had ever been written down.",
       result:
-        "The resolution was not to pick a winner. It was to name them differently, publish both definitions on the reports themselves, and agree which one is used in the board pack. Most reporting disputes are definitional rather than factual, and they persist because nobody ever writes the six parts down side by side.",
+        "What changed: they did not pick a winner. They gave the two figures different names, published both definitions on the reports themselves, and agreed which one goes in the board pack. Most reporting arguments are about definitions rather than facts, and they carry on for years because nobody ever writes the six things down side by side.",
     },
   ],
 
   learningPath: [
     {
-      title: "Pull the usage data before designing anything",
-      body: "Which existing reports are opened, by whom, how often. Most platforms record this and almost nobody looks at it before commissioning new work.",
+      title: "Check what people actually open, first",
+      body: "Which existing reports get opened, by whom, how often. Most tools record it and almost nobody looks before commissioning new work.",
       effort: "Half a day",
-      outcome: "An evidence base showing what people use, and a list of candidates for retirement.",
+      outcome: "Evidence of what people use, and a list of candidates to switch off.",
     },
     {
       title: "Find the decision behind each request",
-      body: "For each requested report ask what decision it supports, who takes it, how often, and what they would do differently at different values. Use the last real occasion rather than the general case.",
+      body: "For each report asked for, find out what decision it supports, who takes it, how often, and what they would do differently at different values. Use the last real time it happened, not the general case.",
       effort: "1-2 days",
-      outcome: "A much shorter list, and a clear split between things that should be alerts and things that should be analysis.",
+      outcome: "A much shorter list, and a clear split between alerts and genuine analysis.",
     },
     {
-      title: "Write the six-part definition for every metric",
-      body: "Population, filter, calculation, time basis, grain, source of truth. Write it even for metrics everybody considers obvious, especially those.",
+      title: "Write the six things down for every number",
+      body: "Which records, what is left out, how it is worked out, which date, what one row means, where it comes from. Do it even for numbers everybody thinks are obvious, especially those.",
       effort: "1-2 days",
-      outcome: "Definitions two teams can produce the same number from.",
+      outcome: "Definitions two teams can both produce the same answer from.",
     },
     {
-      title: "Agree the exclusion list explicitly",
-      body: "Cancellations, test accounts, internal transactions, migration artefacts, refunds, outliers. Get it agreed by every team that will use the number.",
+      title: "Agree the exclusion list out loud",
+      body: "Cancellations, test accounts, internal transactions, migration leftovers, refunds, outliers. Get it agreed by everybody who uses the number.",
       effort: "Half a day",
-      outcome: "The artefact that resolves most future reporting disputes before they happen.",
+      outcome: "The thing that settles most future reporting arguments before they start.",
     },
     {
-      title: "Specify freshness against a consequence",
-      body: "Ask what decision changes if the data is a day old. Only specify real-time where the answer is a real one.",
+      title: "Ask how current it needs to be, and why",
+      body: "Ask what decision changes if the data is a day old. Only build live reporting where there is a real answer.",
       effort: "1 hour",
-      outcome: "A cost avoided, more often than not.",
+      outcome: "Money saved, more often than not.",
     },
     {
-      title: "Define reconciliation and intended use",
-      body: "What it will be reconciled against, who signs off, and an explicit statement of what the report is and is not for.",
+      title: "Say what it gets checked against and what it is for",
+      body: "What it is compared with, who signs that off, and a plain statement of what the report is and is not for.",
       effort: "Half a day",
-      outcome: "A number that gets believed, and one that is less likely to be misused.",
+      outcome: "A number that gets believed, and one less likely to be misused.",
     },
     {
-      title: "Assign an owner and a review date to everything",
-      body: "Including the existing estate. Then run the first review and switch off what nobody opens.",
+      title: "Give everything an owner and a review date",
+      body: "Including the reports that already exist. Then run the first review and actually switch things off.",
       effort: "1 day",
-      outcome: "An estate that shrinks rather than only growing.",
+      outcome: "A set of reports that can shrink rather than only grow.",
     },
   ],
 
   exercises: [
     {
-      title: "The definition comparison",
+      title: "Two definitions, side by side",
       brief:
-        "Pick a metric two teams in your organisation both report. Write out each team's version against the six parts: population, filter, calculation, time basis, grain, source. Compare them line by line.",
+        "Pick a number two teams both report. Write out each version against the six things: which records, what is left out, how it is worked out, which date, what one row means, where it comes from. Compare line by line.",
       success:
-        "You can state exactly which of the six parts they differ on, and name a specific case that each would count differently.",
+        "You can say exactly which of the six they differ on, and name a real case each would count differently.",
       time: "2 hours",
     },
     {
-      title: "The usage audit",
+      title: "Who opens what",
       brief:
-        "Get access statistics for your organisation's reporting estate over the last six months. Rank reports by opens. Identify how many have not been opened at all and who owns them.",
+        "Get the usage figures for your organisation's reports over the last six months. Rank them by how often they are opened. Work out how many have not been opened at all and who owns those.",
       success:
-        "You have a percentage of the estate that is unused and a list you could propose retiring, with owners named.",
+        "You have a percentage of unused reports and a list you could propose switching off, with names against them.",
       time: "Half a day",
     },
     {
-      title: "The last-time question",
+      title: "Ask about the last time",
       brief:
-        "Take any current request for a report or dashboard. Ask the requester to describe the last real occasion they needed this information, what they were deciding, and what they actually did.",
+        "Take any current request for a report or dashboard. Ask the person to describe the last real time they needed that information, what they were deciding, and what they actually did.",
       success:
-        "You can say whether they need a report, an alert, a change to an existing screen, or nothing at all.",
+        "You can say whether they need a report, an alert, a change to a screen they already use, or nothing at all.",
       time: "30 minutes",
     },
   ],
 
   mistakes: [
     {
-      mistake: "Specifying the requested report",
-      why: "A report is somebody's proposed solution to a decision they have to make. Building it automates their guess and produces something opened once.",
-      fix: "Ask what decision it supports and what they did the last time they made it. Design from the decision.",
+      mistake: "Building the report that was asked for",
+      why: "A report is somebody's guess at how to handle a decision. Building it automates their guess and produces something opened once.",
+      fix: "Ask what decision it supports and what they did the last time. Design from the decision.",
     },
     {
-      mistake: "Leaving the time basis undefined",
-      why: "Order date, confirmation date, dispatch date and invoice date produce four different monthly figures, all correct, and the disagreement is unresolvable until somebody writes it down.",
-      fix: "Make time basis one of six mandatory parts of every metric definition.",
+      mistake: "Not saying which date it counts against",
+      why: "Order date, confirmed date, dispatch date and invoice date give four different monthly figures, all correct, and the argument cannot be settled until somebody writes it down.",
+      fix: "Make the date one of six things every definition has to state.",
     },
     {
-      mistake: "Not agreeing the exclusion list",
-      why: "Each team quietly makes its own choices about cancellations, test accounts and internal transactions, so the numbers differ permanently and in good faith.",
-      fix: "Write the exclusions explicitly and get them agreed by everybody who will use the metric.",
+      mistake: "Not agreeing what gets left out",
+      why: "Each team quietly makes its own decisions about cancellations, test accounts and internal orders, so the numbers differ permanently and everyone is acting in good faith.",
+      fix: "Write the exclusions down explicitly and get them agreed by everyone who uses the number.",
     },
     {
-      mistake: "Getting the grain wrong",
-      why: "Counting at line level and reporting as orders overstates by a factor that varies with basket size, and the error looks like a trend rather than a defect.",
-      fix: "State one row per what before designing anything else, and check every aggregation against it.",
+      mistake: "Getting one row per what wrong",
+      why: "Counting at line level and reporting it as orders overstates by an amount that changes with basket size, so the error looks like a trend rather than a mistake.",
+      fix: "State what one row represents before designing anything else, and check every total against it.",
     },
     {
-      mistake: "Reporting averages for durations and values",
-      why: "An average is compatible with wildly different operational realities, and it hides exactly the tail that people need to manage.",
-      fix: "Specify percentiles or a distribution where the metric describes a duration or an amount.",
+      mistake: "Reporting averages for times and amounts",
+      why: "An average fits several completely different realities and hides exactly the tail people need to manage.",
+      fix: "Ask for the spread where the number describes how long something took or how much it was worth.",
     },
     {
-      mistake: "Specifying real-time out of habit",
-      why: "It is dramatically more expensive than overnight, and in most management reporting no decision would change if the data were a day old.",
-      fix: "Ask what decision changes at each freshness level, and specify the cheapest one that supports a real answer.",
+      mistake: "Asking for live data out of habit",
+      why: "It costs dramatically more than overnight, and in most management reporting no decision would change if the data were a day old.",
+      fix: "Ask what decision changes at each level of freshness and build the cheapest one that supports a real answer.",
     },
     {
-      mistake: "No statement of intended use",
-      why: "A figure built for trend monitoring ends up quoted as an absolute in a board pack or a regulatory return, which is the most damaging reporting failure of all.",
-      fix: "Publish the intended use and known limitations on the report itself, so they travel with the number.",
+      mistake: "Not saying what it is for",
+      why: "A figure built to watch a trend gets quoted as a hard number in a board pack or a regulatory return, which is the most damaging reporting failure there is.",
+      fix: "Put what it is for and its limits on the report itself, so they travel with the number.",
     },
     {
-      mistake: "Never retiring anything",
-      why: "The estate grows forever, consumes maintenance, and constrains every future change to the underlying data because each report is a consumer.",
-      fix: "Owner and review date on everything, and an annual review that actually switches things off.",
+      mistake: "Never switching anything off",
+      why: "The pile grows forever, eats maintenance time, and limits every future change to the underlying data because every report is using it.",
+      fix: "Owner and review date on everything, and a yearly review that actually switches things off.",
     },
   ],
 
   bestPractices: [
     "Start from the decision and the action, never from the report.",
-    "Ask what value would cause the reader to do something.",
-    "Define every metric in six parts: population, filter, calculation, time basis, grain, source.",
-    "Agree the exclusion list explicitly with everyone who uses the number.",
-    "State the grain before designing anything else.",
-    "Use percentiles or distributions for durations and values.",
-    "Specify freshness against a real decision consequence.",
-    "Publish intended use and known limitations on the report itself.",
-    "Specify what the report reconciles against and who signs it off.",
+    "Ask what value would make the reader do something.",
+    "Define every number six ways: records, exclusions, calculation, date, one row per what, source.",
+    "Agree the exclusion list with everyone who uses the number.",
+    "State what one row represents before designing anything.",
+    "Use spreads rather than averages for times and amounts.",
+    "Justify how current it needs to be with a real decision.",
+    "Put what it is for and its limits on the report itself.",
+    "Say what it gets checked against and who signs that off.",
     "Give every report an owner and a review date.",
-    "Pull usage statistics before commissioning anything new.",
-    "In self-service environments, deliver governed definitions rather than only tools.",
+    "Look at usage figures before commissioning anything new.",
+    "Where people build their own reports, deliver agreed definitions rather than just access.",
   ],
 
   proTips: [
-    "Ask to see the spreadsheet the person builds after they receive the report. Almost every recipient of a regular report does something to it before using it: filters it, adds a column, compares it to something else. That post-processing is the actual requirement, and the report they asked for is just the closest thing currently available to it.",
-    "Put the definition on the report. Not in a data dictionary somebody would have to go and find, but visible on the page: what is included, what is excluded, and as at when. It ends most disputes before they start, and in my experience it is the single change that most improves whether a number gets trusted.",
-    "When two teams disagree about a figure, resist the urge to determine who is right. Write both definitions against the six parts and show them side by side. In the large majority of cases both are correct for their own purpose, and the resolution is to name them differently rather than to eliminate one.",
-    "Before building a dashboard, ask what the person would do if it showed everything was fine. If the answer is nothing, then what they need is to be told when it is not fine, which is an alert and costs a fraction as much to build and maintain. Dashboards are for exploration, and most requests for one are actually requests for reassurance.",
+    "Ask to see the spreadsheet the person builds after they get the report. Almost everybody who receives a regular report does something to it before using it: filters it, adds a column, compares it to something else. That bit afterwards is the actual requirement, and the report they asked for is just the nearest thing currently available.",
+    "Put the definition on the report itself. Not in a glossary somebody would have to go and find, but visible on the page: what is in, what is out, and as at when. It stops most arguments before they start, and it is the single change that most improves whether a number gets believed.",
+    "When two teams disagree about a figure, resist working out who is right. Write both definitions out against the six things and show them side by side. Nearly always both are correct for their own purpose, and the answer is to name them differently rather than kill one.",
+    "Before building a dashboard, ask what the person would do if it showed everything was fine. If the answer is nothing, what they want is to be told when it is not fine, which is an alert and costs a fraction as much to build and keep running. Dashboards are for digging into things, and most requests for one are really requests for reassurance.",
   ],
 
   businessApplications: [
-    "Management information projects, where definition work is the real deliverable and the tool is secondary.",
-    "Regulatory reporting, where definitions are externally specified and reconciliation is auditable.",
-    "Performance management, where metric definitions determine what behaviour gets encouraged.",
-    "System replacement, where the existing reporting estate is the hidden scope nobody counted.",
-    "Data warehouse and self-service programmes, where governed measures matter more than access.",
-    "Cost reduction, where retiring unused reports releases engineering capacity nobody was tracking.",
+    "Management information projects, where the definitions are the real deliverable and the tool is secondary.",
+    "Regulatory reporting, where the definitions come from outside and the totals have to be provable.",
+    "Performance targets, where how a number is defined decides what behaviour it encourages.",
+    "Replacing a system, where the existing pile of reports is hidden scope nobody counted.",
+    "Data warehouse and self-service projects, where agreed measures matter more than access.",
+    "Cost cutting, where switching off unused reports frees up engineering time nobody was tracking.",
   ],
 
   checklist: [
-    "Usage statistics for the existing estate obtained.",
+    "Usage figures for existing reports obtained.",
     "Decision, decision maker, frequency and action identified for each request.",
-    "Requests classified as report, alert, screen change or nothing.",
-    "Six-part definition written for every metric.",
+    "Requests sorted into report, alert, screen change, or nothing.",
+    "Six-part definition written for every number.",
     "Exclusion list explicit and agreed across teams.",
-    "Grain stated and every aggregation checked against it.",
-    "Percentiles or distributions used for durations and values.",
-    "Freshness justified by a decision consequence.",
-    "Reconciliation target and sign-off named.",
-    "Intended use and limitations published on the report.",
+    "One row per what stated and every total checked against it.",
+    "Spreads used rather than averages for times and amounts.",
+    "Freshness justified by a real decision.",
+    "What it gets checked against, and who signs off, named.",
+    "What it is for and its limits published on the report.",
     "Owner and review date assigned.",
-    "Retirement candidates identified from the usage data.",
+    "Candidates for switching off identified from the usage figures.",
   ],
 
   faqs: [
     {
-      q: "How do I stop stakeholders asking for reports they will not use?",
-      a: "Change the question. Ask about the last real occasion they needed the information and what they did. A list of reports is easy to produce and hard to justify. A specific recent decision is the opposite, and it filters the list quickly.",
+      q: "How do I stop people asking for reports they will not use?",
+      a: "Change the question. Ask about the last real time they needed the information and what they did. A list of reports is easy to produce and hard to justify. A specific recent decision is the opposite, and it shortens the list quickly.",
     },
     {
-      q: "Two teams disagree about a number. How do I resolve it?",
-      a: "Write both definitions against population, filter, calculation, time basis, grain and source. Almost always they differ on one part and both are correct for their own purpose. Name them differently rather than picking a winner.",
+      q: "Two teams disagree about a number. How do I settle it?",
+      a: "Write both definitions out against the six things. Almost always they differ on one of them and both are correct for their own purpose. Give them different names rather than picking a winner.",
     },
     {
       q: "How much detail does a report specification need?",
-      a: "Enough that somebody who was not in the conversation could build it and get the same numbers as you would. In practice that means the six-part definition, the exclusion list, the grain, the layout intent and the reconciliation target.",
+      a: "Enough that somebody who was not in the conversation could build it and get the same numbers you would. In practice that means the six-part definition, the exclusion list, what one row represents, roughly what it should look like, and what it gets checked against.",
     },
     {
-      q: "Should we build a dashboard or send a report?",
-      a: "Ask what the reader would do if everything looked fine. If nothing, they want an alert. If they would explore, they want a dashboard. If they would extract it into a spreadsheet, find out what they do there and build that instead.",
+      q: "Dashboard or emailed report?",
+      a: "Ask what the reader would do if it all looked fine. If nothing, they want an alert. If they would start digging, they want a dashboard. If they would export it into a spreadsheet, find out what they do in there and build that instead.",
     },
     {
-      q: "How do I retire reports people are attached to?",
-      a: "Lead with usage data rather than argument. Propose switching off rather than deleting, tell the owners, and give a window to object. Objections are far rarer than expected and the ones that arrive are informative.",
+      q: "How do I switch off reports people are attached to?",
+      a: "Lead with the usage figures rather than the argument. Propose switching off rather than deleting, tell the owners, and give a window to object. Objections are much rarer than you expect and the ones you get are informative.",
     },
     {
-      q: "Does self-service analytics remove the need for this work?",
-      a: "It increases it. Without agreed definitions, self-service produces more versions of every number, faster, each carrying the authority of having been produced by the person quoting it. The definitions are the deliverable.",
+      q: "Does self-service reporting remove the need for this?",
+      a: "It increases it. Without agreed definitions, self-service produces more versions of every number, faster, each carrying the authority of whoever is quoting it. The definitions are the deliverable.",
     },
   ],
 
   tools: [
-    { name: "A six-part metric definition template", what: "Population, filter, calculation, time basis, grain, source of truth. The artefact that ends definitional disputes.", cost: "Free" },
-    { name: "Report usage statistics", what: "Already collected by most platforms and rarely examined. The evidence base for both new work and retirement.", cost: "Varies" },
-    { name: "A published exclusion list", what: "Cancellations, test accounts, internal transactions, migration artefacts. Agreed across teams and visible on the report.", cost: "Free" },
-    { name: "A report register with owners and review dates", what: "The only mechanism that makes an estate shrink rather than only grow.", cost: "Free" },
+    { name: "A six-part definition template", what: "Records, exclusions, calculation, date, one row per what, source. The thing that settles definitional arguments.", cost: "Free" },
+    { name: "Report usage figures", what: "Already collected by most tools and almost never looked at. The evidence for both new work and switching things off.", cost: "Varies" },
+    { name: "A published exclusion list", what: "Cancellations, test accounts, internal orders, migration leftovers. Agreed across teams and visible on the report.", cost: "Free" },
+    { name: "A report register with owners and review dates", what: "The only thing that makes a set of reports shrink rather than only grow.", cost: "Free" },
   ],
 
   resources: [
-    { title: "Critique of Reinhart and Rogoff", kind: "Paper", note: "What happens when definitional choices live inside a formula rather than in a written definition. The clearest argument for specifying metrics in six parts.", url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/" },
+    { title: "Critique of Reinhart and Rogoff", kind: "Paper", note: "What happens when the decisions about what counts live inside a formula instead of in a written definition.", url: "https://peri.umass.edu/publication/does-high-public-debt-consistently-stifle-economic-growth-a-critique-of-reinhart-and-rogoff/" },
   ],
 
   internalLinks: [
-    { slug: "data-requirements-for-analysts", anchor: "the data these metrics are built from", context: "Data" },
-    { slug: "measuring-whether-it-worked", anchor: "using metrics to judge a change", context: "Application" },
+    { slug: "data-requirements-for-analysts", anchor: "the data these numbers come from", context: "Data" },
+    { slug: "measuring-whether-it-worked", anchor: "using numbers to judge a change", context: "Application" },
     { slug: "thinking-critically-about-evidence", anchor: "reading a number sceptically", context: "Interpretation" },
   ],
 
   relatedGuides: ["data-requirements-for-analysts", "measuring-whether-it-worked", "thinking-critically-about-evidence"],
 
   conclusion: [
-    "Take one metric two teams in your organisation both report and write out each version against the six parts. You will find they differ on exactly one of them, usually the time basis or the exclusions, and that page settles an argument that has probably been running for years.",
+    "Take one number two teams in your business both report and write out each version against the six things. You will find they differ on exactly one of them, usually the date or the exclusions, and that single page settles an argument that has probably been running for years.",
   ],
 };
 

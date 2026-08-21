@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "replacing-a-legacy-system",
-  seoTitle: "Replacing a Legacy System Without Losing What It Did",
+  seoTitle: "Replacing an Old System Without Losing What It Did",
   metaDescription:
-    "How to discover undocumented behaviour, decide what not to rebuild, choose a replacement strategy, and retire the old system without stranding anybody.",
-  title: "Replacing a Legacy System",
+    "Nobody knows everything the old system does. How to find out from evidence, decide what not to rebuild, and switch it off without stranding somebody.",
+  title: "Replacing an Old System",
   keywords: [
     "legacy system replacement",
     "system modernisation",
@@ -17,106 +17,106 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Advanced",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
-  readingTime: 18,
+  readingTime: 16,
 
   intro: [
-    "The hardest question in a legacy replacement is not what the new system should do. It is what the old one actually does, which nobody knows in full, because the people who built it have gone, the documentation describes an intention from fifteen years ago, and a substantial amount of the behaviour that matters is emergent: rules added under pressure, workarounds that became process, and one report that three departments depend on which was written by somebody's predecessor.",
-    "This produces the characteristic failure of these programmes. The new system is specified from the documented process and from interviews with people who describe what they intend to do, then goes live and immediately fails to handle a category of case that the old system had quietly been handling for a decade.",
-    "This guide is about that discovery problem, and about the decisions that follow from it: what to rebuild and what to deliberately drop, whether to replace in one move or in pieces, how to run two systems while the transition happens, and how to retire the old one without stranding somebody who was depending on it in a way nobody recorded.",
+    "The hardest question in replacing an old system is not what the new one should do. It is what the old one actually does, and nobody knows all of it. The people who built it have gone, the documentation describes an intention from fifteen years ago, and a lot of the behaviour that matters was never designed at all. It is rules added in a hurry, workarounds that became the process, and one report that three departments depend on which somebody's predecessor wrote.",
+    "That produces the classic failure. The new system gets specified from the documented process and from talking to people who describe what they intend to do. It goes live and immediately cannot handle a category of case the old one had been quietly handling for a decade.",
+    "This guide is about that discovery problem, and the decisions that follow from it. What to rebuild and what to deliberately drop, whether to swap it all at once or in pieces, how to cope while both are running, and how to switch the old one off without stranding somebody who was depending on it in a way nobody wrote down.",
   ],
 
   whyItMatters: [
-    "Legacy replacements are among the most expensive things an organisation does and among the most likely to disappoint. The cost is visible and the value is diffuse, which makes them politically fragile: they need to keep demonstrating progress over a period long enough for the sponsor to change twice.",
-    "The analysis burden is also unusually high relative to the build. Specifying a new capability means understanding what people need. Replacing an old system means understanding what it does, why it does it, which of that is still needed, and which of it was a mistake everyone has adapted around.",
-    "And the risk profile is unforgiving. Nobody gets credit for a replacement that works, because the business already had the capability. They only find out about the parts you missed, which is why the discovery work is where the effort should go.",
+    "These are among the most expensive things a business does and among the most likely to disappoint. The cost is obvious and the benefit is spread thin, which makes them politically fragile. They need to keep showing progress over a period long enough for the sponsor to change twice.",
+    "The amount of analysis is also unusually high compared to the building. Specifying something new means understanding what people need. Replacing something old means understanding what it does, why it does it, which of that is still needed, and which of it was a mistake everyone has since adapted around.",
+    "And nobody gets any credit for one that works, because the business already had the capability. They only ever hear about the bits you missed, which is exactly why the effort belongs in the finding-out.",
   ],
 
   coreConcepts: [
     {
       term: "Do not rebuild it, work out what is still needed",
       explain:
-        "The instinct is to specify the old system's behaviour as the requirement. That preserves fifteen years of accumulated compromise and rebuilds features nobody has used since 2016.",
+        "The instinct is to write down what the old system does and call that the requirement. That preserves fifteen years of compromises and rebuilds things nobody has used since 2016.",
       detail:
-        "Establish usage for every function before deciding to rebuild it. In most legacy systems a small proportion of the functionality carries the overwhelming majority of the use, and the rest is a museum.",
+        "Find out what actually gets used before deciding to rebuild anything. In most old systems a small share of the functions carry nearly all of the use, and the rest is a museum.",
     },
     {
-      term: "The system is not the only place the behaviour lives",
+      term: "The system is not the only place the work happens",
       explain:
-        "The real operation is the system plus the spreadsheets, the local databases, the email approvals, the printed checklists and the things one long-serving person knows.",
+        "The real operation is the system plus the spreadsheets, the local databases, the approvals done over email, the printed checklists and the things one long-serving person knows.",
       detail:
-        "A replacement scoped only to what the system does will migrate a business into a state where all of that scaffolding no longer fits, which is frequently how a technically successful replacement produces an operational disaster.",
+        "Replace only what the system does and you leave the business in a state where all that scaffolding no longer fits. That is often how a technically successful replacement produces an operational disaster.",
     },
     {
-      term: "Discover from evidence, not from documentation",
+      term: "Find out what it does from evidence, not documentation",
       explain:
-        "Usage logs, transaction data, the actual configuration, scheduled jobs, report definitions, and the exception codes in the tables. All of it is more reliable than any document.",
+        "Usage logs, transaction data, the actual settings, scheduled jobs, report definitions, and the codes sitting in the tables. All of it is more reliable than any document.",
       detail:
-        "Where source code is available and readable, the business rules are in it. A BA who can get an engineer to walk them through the rules in one module for an afternoon will learn more than a week of interviews would produce.",
+        "Where somebody can walk you through the code, the rules are in there. A BA who gets an engineer to explain the rules in one part of the system for an afternoon will learn more than a week of interviews would produce.",
     },
     {
-      term: "Ask what the system stops people doing",
+      term: "Ask what the old system stops people doing",
       explain:
-        "Legacy constraints shape the process around them. Some of the steps you observe exist only because the old system cannot do something, and they should not be carried forward.",
+        "An old system shapes the process around its limits. Some of the steps you see exist only because it cannot do something, and they should not be carried forward.",
       detail:
-        "The question that finds these: if this system could do anything, what would you stop doing tomorrow? It separates genuine process from compensating behaviour, and the two look identical from the outside.",
+        "The question that finds these: if this system could do anything, what would you stop doing tomorrow? It separates real process from working around a limitation, and the two look identical from the outside.",
     },
     {
-      term: "Four replacement strategies with very different risk",
+      term: "Four ways to do it, with very different risk",
       explain:
-        "Big bang replacement, phased by function, phased by user group or region, and incremental strangulation where new capability is built alongside and traffic is moved piece by piece.",
+        "Swap everything at once. Move over one function at a time. Move over one team or region at a time. Or build the new one alongside and shift work across piece by piece until the old one is empty.",
       detail:
-        "Strangulation is usually the lowest risk and the longest elapsed time, and it requires the two systems to coexist and share data, which is real cost. Big bang is fastest and concentrates all the risk into one weekend. Both are legitimate and the choice should be explicit.",
+        "The last one is usually the lowest risk and takes the longest, and it needs both systems running together and sharing data, which is real cost. All at once is fastest and puts all the risk into one weekend. Both are legitimate and the choice should be made on purpose.",
     },
     {
-      term: "Coexistence is a design problem, not a temporary inconvenience",
+      term: "Running both at once is a design problem",
       explain:
-        "During any phased approach, two systems hold overlapping data. Which is authoritative for what, how they synchronise, and what happens when they disagree are all requirements.",
+        "While you are part way through, two systems hold overlapping information. Which one is right about what, how they stay in step, and what happens when they disagree are all requirements.",
       detail:
-        "This interim state frequently lasts years and is routinely left undesigned because it is temporary. Undesigned temporary states running for years are exactly where the errors accumulate.",
+        "This in-between state often lasts years and is routinely left undesigned because it is temporary. Undesigned temporary states running for years is exactly where errors pile up.",
     },
     {
-      term: "Establish what unsupported actually costs",
+      term: "Put a number on what the old system is costing you",
       explain:
-        "Legacy risk is usually argued qualitatively. It is far more persuasive quantified: what is out of support, what cannot be patched, what happens if the one person who understands it leaves, what a day of unavailability costs.",
+        "Old-system risk usually gets argued in vague terms. It is far more persuasive with numbers: what is out of support and from when, what cannot be patched, what happens if the one person who understands it leaves, what a day without it costs.",
       detail:
-        "This is also the honest case for the programme. Modernisation justified by vague notions of agility gets deprioritised. Modernisation justified by a named, dated support expiry and an unpatchable vulnerability does not.",
+        "This is also the honest case for doing it at all. Modernisation justified by vague talk about being more agile loses every prioritisation. Modernisation justified by a support end date and something that cannot be patched does not.",
     },
     {
-      term: "Find the undocumented consumers before you change anything",
+      term: "Find everybody using it that nobody has written down",
       explain:
-        "Interfaces, extracts, scheduled files, a partner receiving a weekly report, a spreadsheet pulling a download. All of them break silently.",
+        "Connections, exports, scheduled files, a partner receiving a weekly report, a spreadsheet fed by a download. All of them break silently.",
       detail:
-        "The question to ask every team, not only the obvious ones: what do you download from this, and what do you do with it afterwards? This finds things no technical dependency analysis will.",
+        "Ask every team, not just the obvious ones: what do you download from this, and what do you do with it? This finds things no technical analysis will.",
     },
     {
-      term: "Deliberately drop things, and record it",
+      term: "Drop things on purpose, and write it down",
       explain:
-        "Some functionality should not be rebuilt. Say so explicitly, name who is affected, and get the decision accepted rather than letting it be discovered at acceptance testing.",
+        "Some functions should not be rebuilt. Say so out loud, name who is affected, and get the decision accepted rather than letting it be discovered during testing.",
       detail:
-        "An explicit list of what is not being carried forward is one of the most valuable artefacts in a replacement programme, and one of the rarest. Silent omission is what turns a scope decision into a defect.",
+        "A written list of what is not being carried forward is one of the most valuable documents in this kind of project and one of the rarest. Dropping something silently is what turns a scope decision into a defect.",
     },
     {
-      term: "Keep the old system readable after it stops being used",
+      term: "Keep the old system readable after you stop using it",
       explain:
-        "Read-only access or a queryable archive, well past go-live. Questions arrive for months and some can only be answered from the original.",
+        "Read-only access or a searchable copy, for well past go-live. Questions keep coming for months and some can only be answered from the original.",
       detail:
-        "Decommissioning is irreversible. The cost of another six months of a read-only copy is almost always smaller than the cost of needing it once and not having it.",
+        "Switching it off cannot be undone. Another six months of a read-only copy is almost always cheaper than needing it once and not having it.",
     },
     {
-      term: "Decommissioning is a project, not an afterthought",
+      term: "Switching off is a project, not an afterthought",
       explain:
-        "Interfaces disconnected, data archived to an agreed retention period, licences cancelled, access removed, documentation of what was retained and where.",
+        "Connections disconnected, data archived for an agreed period, licences cancelled, access removed, and a record of what was kept and where.",
       detail:
-        "Programmes routinely finish without decommissioning, which means the organisation now runs two systems and has achieved a cost increase. Make retirement a funded, dated deliverable with an owner.",
+        "Projects routinely finish without doing this, which means the business now runs two systems and has achieved a cost increase. Make switching off a funded, dated deliverable with a name against it.",
     },
     {
-      term: "Sustain the case over a long programme",
+      term: "Deliver something visible early",
       explain:
-        "These run long enough for sponsors to change and priorities to shift. A programme that cannot demonstrate value until year three is politically fragile regardless of its technical merit.",
+        "These run long enough for sponsors to change and priorities to shift. Something that cannot show anything until year three is politically fragile no matter how good the plan is.",
       detail:
-        "Sequence so that something visible lands early, even if it is not the largest piece. It is not just optics: early delivery also tests the assumptions the rest of the programme rests on.",
+        "Sequence so something visible lands early, even if it is not the biggest piece. It is not just about appearances: delivering early also tests the assumptions everything else depends on.",
     },
   ],
 
@@ -125,9 +125,9 @@ export const guide: Guide = {
       kind: "documented",
       scenario: "What unsupported systems cost when something arrives.",
       walkthrough:
-        "The UK National Audit Office investigated the WannaCry cyber attack and its effect on the NHS, reporting in October 2017. At least 81 of 236 trusts across England were infected, along with a further 603 primary care and other NHS organisations including 595 GP practices. At least 34% of trusts experienced disruption, 6,912 appointments were confirmed cancelled with estimates suggesting over 19,000 in total, and five accident and emergency departments diverted patients elsewhere.",
+        "The UK National Audit Office investigated the WannaCry cyber attack and its effect on the NHS, reporting in October 2017. At least 81 of 236 trusts across England were infected, along with a further 603 primary care and other NHS organisations including 595 GP practices. At least 34% of trusts had their services disrupted, 6,912 appointments were confirmed cancelled with estimates suggesting over 19,000 in total, and five accident and emergency departments had to send patients elsewhere.",
       result:
-        "The NAO found that infected organisations shared preventable weaknesses, specifically unpatched or unsupported Windows operating systems, and that the attack could have been prevented by following basic IT security practice. For a legacy replacement business case this is the concrete version of an argument usually made in the abstract: the cost of running unsupported technology is not a vague risk, it is a specific and quantifiable exposure, and stating it that way is what gets modernisation funded.",
+        "The NAO found that the organisations that got hit shared preventable weaknesses, specifically Windows systems that were unpatched or no longer supported, and said the attack could have been prevented by following basic security practice. For anyone building a case to replace an old system, this is the concrete version of an argument usually made in the abstract. The cost of running unsupported technology is not a vague worry. It is specific and countable, and putting it that way is what gets the work funded.",
       source: {
         label: "National Audit Office (27 October 2017). Investigation: WannaCry cyber attack and the NHS",
         url: "https://www.nao.org.uk/reports/investigation-wannacry-cyber-attack-and-the-nhs/",
@@ -135,234 +135,234 @@ export const guide: Guide = {
     },
     {
       kind: "illustration",
-      scenario: "The function that was never rebuilt because nobody used it.",
+      scenario: "The function nobody had used in a year.",
       walkthrough:
-        "Before specifying a replacement, a BA obtains usage logs for every screen and function in the legacy system over eighteen months. A small proportion of functions account for the overwhelming majority of use. A long tail has not been opened at all in that period, including several that had been described in interviews as essential.",
+        "The problem: a replacement was about to be specified from the old system's full feature list, which was long. What was happening: before writing anything, the BA got usage figures for every screen and function over eighteen months. A small share of functions accounted for nearly all the use. A long tail had not been opened at all in that period, including several that people had described in interviews as essential.",
       result:
-        "Taking the unused list back to the business produced a short discussion and a much shorter scope. Two functions turned out to be genuinely needed annually and were retained. The rest were dropped explicitly, with the decision recorded. Usage data does not replace the conversation, and it changes what the conversation is about, from opinion to evidence.",
+        "What changed: taking the unused list back to the business produced a short conversation and a much shorter scope. Two turned out to be genuinely needed once a year and were kept. The rest were dropped, with the decision written down. Usage figures do not replace the conversation. They change what the conversation is about, from opinion to evidence.",
     },
     {
       kind: "illustration",
-      scenario: "The steps that existed because the system could not.",
+      scenario: "Steps that existed because the system could not.",
       walkthrough:
-        "Mapping the current process reveals a sequence where staff export data, manipulate it in a spreadsheet, and re-enter the result. The instinct is to specify this workflow in the new system. Instead the BA asks what the spreadsheet is doing, and finds it performs a calculation the old system cannot handle and applies a rule that was introduced after the system was built.",
+        "The problem: mapping the current process turned up a sequence where staff export data, work on it in a spreadsheet, and type the result back in. The instinct was to build that workflow into the new system. What was happening: instead, the BA asked what the spreadsheet was actually doing. It performed a calculation the old system could not handle, and applied a rule introduced years after the system was built.",
       result:
-        "The new requirement was the calculation and the rule, not the export and re-entry. Specifying the observed process would have rebuilt a workaround as a permanent feature. Asking what the system stops people doing separates genuine process from compensating behaviour, and the two look identical when you only watch.",
+        "What changed: the requirement became the calculation and the rule, not the exporting and retyping. Specifying what people were observed doing would have rebuilt a workaround as a permanent feature. Asking what the system stops people doing separates real process from working around a limitation, and the two look identical if you only watch.",
     },
   ],
 
   learningPath: [
     {
-      title: "Quantify what the legacy position costs",
-      body: "Support status and dates, patchability, key person dependency, incident history, and the cost of a day of unavailability. Turn qualitative legacy risk into numbers.",
+      title: "Put numbers on what the old system costs you",
+      body: "Support status and end dates, what can and cannot be patched, how many people understand it, incident history, and what a day without it costs. Turn vague old-system risk into figures.",
       effort: "3-5 days",
-      outcome: "A business case argument that survives prioritisation against revenue projects.",
+      outcome: "A case that survives being prioritised against revenue projects.",
     },
     {
-      title: "Get usage data for every function",
-      body: "Screen and function usage over twelve to eighteen months, plus transaction volumes by type. This determines what is worth rebuilding.",
+      title: "Get usage figures for every function",
+      body: "Which screens and functions get used, over twelve to eighteen months, plus how many transactions of each type. This decides what is worth rebuilding.",
       effort: "1 week including access",
-      outcome: "An evidence-based scope, usually far smaller than the documented feature list.",
+      outcome: "A scope based on evidence, usually far smaller than the documented feature list.",
     },
     {
-      title: "Find the behaviour outside the system",
-      body: "Spreadsheets, local databases, email approvals, printed checklists, and the knowledge one person holds. Ask every team what they keep outside the system and what they download.",
+      title: "Find what happens outside the system",
+      body: "Spreadsheets, local databases, email approvals, printed checklists, and what one person knows. Ask every team what they keep outside the system and what they download.",
       effort: "1-2 weeks",
       outcome: "The scaffolding that a system-only replacement would strand.",
     },
     {
-      title: "Reverse engineer the rules from evidence",
-      body: "Configuration, scheduled jobs, report definitions, exception codes, and where readable, the code itself with an engineer walking you through it.",
+      title: "Work out the rules from evidence",
+      body: "Settings, scheduled jobs, report definitions, the codes in the tables, and where possible somebody walking you through the code.",
       effort: "2-4 weeks",
-      outcome: "The rules that exist in the system and in no document.",
+      outcome: "The rules that exist in the system and in no document anywhere.",
     },
     {
-      title: "Separate genuine process from compensating behaviour",
+      title: "Separate real process from working around a limitation",
       body: "For every step, ask whether it exists because the business needs it or because the old system cannot do something. Ask what people would stop doing if the system could do anything.",
       effort: "1 week",
-      outcome: "A future state that is smaller than the current one rather than a faithful reproduction of it.",
+      outcome: "A target that is smaller than what exists today, rather than a faithful copy of it.",
     },
     {
-      title: "Choose a replacement strategy explicitly",
-      body: "Big bang, phased by function, phased by group, or strangulation. State the risk, cost and elapsed time of each and recommend one with the trade-off visible.",
+      title: "Choose how you are going to do it, on purpose",
+      body: "All at once, function by function, team by team, or alongside and shifting over. State the risk, cost and elapsed time of each and recommend one with the trade-off visible.",
       effort: "3-5 days",
-      outcome: "A deliberate decision rather than a default inherited from the last programme.",
+      outcome: "A deliberate choice rather than a default inherited from the last project.",
     },
     {
-      title: "Design the coexistence period",
-      body: "Which system is authoritative for what, how they synchronise, what happens when they disagree, and how long this state will last.",
+      title: "Design the period where both are running",
+      body: "Which system is right about what, how they stay in step, what happens when they disagree, and how long this will last.",
       effort: "1-2 weeks",
-      outcome: "The interim state treated as a design rather than as a temporary inconvenience.",
+      outcome: "The in-between state treated as a design problem rather than a temporary inconvenience.",
     },
     {
-      title: "Write the not-carrying-forward list and get it accepted",
-      body: "Everything deliberately dropped, who is affected, and what they will do instead. Circulated and accepted rather than discovered.",
+      title: "Write the not-carrying-forward list and get it agreed",
+      body: "Everything being deliberately dropped, who is affected, and what they will do instead. Circulated and accepted rather than discovered.",
       effort: "2-3 days",
-      outcome: "Scope decisions that stay decisions rather than becoming defects at acceptance testing.",
+      outcome: "Scope decisions that stay decisions instead of becoming defects during testing.",
     },
     {
-      title: "Plan and fund decommissioning as a deliverable",
-      body: "Interfaces disconnected, data archived against a retention period, licences cancelled, access removed, archive access documented and dated.",
+      title: "Plan and fund switching the old one off",
+      body: "Connections disconnected, data archived for an agreed period, licences cancelled, access removed, archive access written down and dated.",
       effort: "2-4 weeks at the end",
-      outcome: "An actual reduction in estate rather than a second system to maintain.",
+      outcome: "An actual reduction in systems rather than a second one to look after.",
     },
   ],
 
   exercises: [
     {
-      title: "The usage long tail",
+      title: "Look at the long tail of usage",
       brief:
-        "For any system in your organisation, get twelve months of screen or function usage. Rank by use and calculate what proportion of functions account for most of the activity. Identify anything not used at all.",
+        "For any system in your business, get twelve months of usage by screen or function. Rank by how much they are used and work out what share of functions accounts for most of the activity. Identify anything not used at all.",
       success:
-        "You have a ranked list and can name at least one function described as important that has not been used in a year.",
+        "You have a ranked list and can name at least one function described as important that nobody has opened in a year.",
       time: "Half a day",
     },
     {
-      title: "The compensating behaviour hunt",
+      title: "Find the steps that only exist because of the system",
       brief:
-        "Take a process that uses a legacy system. For each manual step, ask whether it exists because the business needs it or because the system cannot do something. Mark each.",
+        "Take a process that uses an old system. For each manual step, ask whether it exists because the business needs it or because the system cannot do something. Mark each one.",
       success:
-        "You can name at least two steps that are compensating for a system limitation and would not exist in a replacement.",
+        "You can name at least two steps that are working around a limitation and would simply not exist in a replacement.",
       time: "2-3 hours",
     },
     {
-      title: "Quantify the legacy position",
+      title: "Put numbers on the old system",
       brief:
-        "For one legacy system, establish its support status and end date, whether it can be patched, how many people understand it, and what a day of unavailability would cost the business.",
+        "For one old system, find out its support status and end date, whether it can be patched, how many people understand it, and what a day without it would cost the business.",
       success:
-        "You have four numbers or dates that turn a qualitative legacy risk into something a finance director would respond to.",
+        "You have four numbers or dates that turn vague concern into something a finance director would respond to.",
       time: "Half a day",
     },
   ],
 
   mistakes: [
     {
-      mistake: "Specifying the old system as the requirement",
-      why: "You rebuild fifteen years of accumulated compromise, including features nobody has used for years and workarounds for constraints the new system will not have.",
-      fix: "Establish usage for every function and ask, for every step, whether it is genuine process or compensating behaviour.",
+      mistake: "Writing down what the old system does and calling it the requirement",
+      why: "You rebuild fifteen years of compromises, including features nobody uses and workarounds for limits the new system will not have.",
+      fix: "Get usage figures for every function, and for every step ask whether it is real process or working around a limitation.",
     },
     {
       mistake: "Scoping only what the system does",
-      why: "The real operation includes spreadsheets, local databases and email approvals. Replace the system alone and all of that scaffolding no longer fits.",
+      why: "The real operation includes spreadsheets, local databases and approvals over email. Replace the system alone and all of that no longer fits.",
       fix: "Ask every team what they keep outside the system and what they download, and treat the answers as requirements.",
     },
     {
-      mistake: "Relying on documentation",
-      why: "It describes an intention from years ago and has not tracked the changes made under pressure since, which are exactly the ones that matter operationally.",
-      fix: "Discover from evidence: usage logs, configuration, scheduled jobs, exception codes, and the code itself where it is readable.",
+      mistake: "Relying on the documentation",
+      why: "It describes an intention from years ago and has not tracked any of the changes made in a hurry since, which are exactly the ones that matter day to day.",
+      fix: "Find out from evidence: usage figures, settings, scheduled jobs, codes in the data, and the code itself where somebody can walk you through it.",
     },
     {
-      mistake: "Missing the undocumented consumers",
-      why: "Extracts, scheduled files and partner reports break silently when the source is retired, and the affected party finds out before you do.",
-      fix: "Trace every outbound file and download, and ask every team rather than only those the project already involves.",
+      mistake: "Missing the people using it that nobody recorded",
+      why: "Exports, scheduled files and partner reports break silently when the source goes away, and whoever is affected finds out before you do.",
+      fix: "Follow every file and download that leaves, and ask every team rather than only the ones already involved.",
     },
     {
-      mistake: "Dropping functionality silently",
-      why: "It is discovered at acceptance testing, where a scope decision looks exactly like a defect and gets treated as one.",
-      fix: "Write an explicit not-carrying-forward list with the affected parties named, and get it accepted in advance.",
+      mistake: "Dropping functions quietly",
+      why: "It gets discovered during testing, where a scope decision looks exactly like a defect and gets treated as one.",
+      fix: "Write a list of what is not being carried forward with the affected people named, and get it accepted beforehand.",
     },
     {
-      mistake: "Leaving coexistence undesigned",
-      why: "The interim state can run for years with two systems holding overlapping data, no agreed source of truth, and manual reconciliation nobody planned for.",
-      fix: "Design it: authority per fact, synchronisation, conflict handling, and an expected duration.",
+      mistake: "Not designing the period where both run",
+      why: "It can go on for years with two systems holding overlapping data, no agreement about which is right, and manual checking nobody planned for.",
+      fix: "Design it properly: which system is right about what, how they stay in step, what happens on a disagreement, and how long.",
     },
     {
-      mistake: "Arguing legacy risk qualitatively",
-      why: "Vague appeals to agility and technical debt lose to revenue projects in every prioritisation, so the replacement stays unfunded until an incident forces it.",
-      fix: "Quantify support expiry dates, patchability, key person dependency and the cost of unavailability.",
+      mistake: "Arguing old-system risk in vague terms",
+      why: "Talk about agility and technical debt loses to revenue projects in every prioritisation, so it stays unfunded until an incident forces it.",
+      fix: "Put numbers on it: support end dates, what cannot be patched, how many people understand it, what a day of downtime costs.",
     },
     {
-      mistake: "Never decommissioning",
-      why: "The programme ends, the old system stays on, and the organisation has achieved a cost increase and two systems to maintain.",
-      fix: "Make retirement a funded, dated deliverable with a named owner and an archive plan.",
+      mistake: "Never switching the old one off",
+      why: "The project ends, the old system stays on, and the business has achieved a cost increase and two systems to look after.",
+      fix: "Make switching off a funded, dated deliverable with a name against it and an archive plan.",
     },
     {
       mistake: "Delivering nothing visible for two years",
-      why: "The programme outlives its sponsor and gets cut in a budget round, regardless of technical merit.",
-      fix: "Sequence something visible early. It also tests the assumptions the rest of the programme depends on.",
+      why: "The project outlives its sponsor and gets cut in a budget round, however good it is technically.",
+      fix: "Sequence something visible early. It also tests the assumptions everything else depends on.",
     },
   ],
 
   bestPractices: [
-    "Establish usage for every function before deciding to rebuild it.",
-    "Scope the operation, not the system: include spreadsheets and manual scaffolding.",
-    "Discover behaviour from evidence rather than documentation.",
+    "Find out what actually gets used before deciding to rebuild anything.",
+    "Scope the operation, not just the system: include the spreadsheets and manual scaffolding.",
+    "Find out what it does from evidence rather than documentation.",
     "Ask what the system stops people doing.",
-    "Separate genuine process from compensating behaviour, step by step.",
-    "Quantify the cost of the legacy position with dates and numbers.",
-    "Trace every outbound extract, file and download to its consumer.",
-    "Choose a replacement strategy explicitly with its risk stated.",
-    "Design the coexistence period as a real design problem.",
-    "Publish an explicit list of what will not be carried forward.",
-    "Sequence something visible early in the programme.",
+    "For every step, separate real process from working around a limitation.",
+    "Put numbers and dates on what the old system costs you.",
+    "Follow every export, file and download to whoever receives it.",
+    "Choose how to do it on purpose, with the risk stated.",
+    "Design the period where both systems run.",
+    "Publish a list of what will not be carried forward.",
+    "Sequence something visible early.",
     "Keep the old system readable well past go-live.",
-    "Fund and date decommissioning as a deliverable with an owner.",
+    "Fund and date the switching off, with an owner.",
   ],
 
   proTips: [
-    "Find the person who has been there longest in an unglamorous role and treat their time as the scarcest resource on the programme. They know which rule was added after which incident, which report three departments quietly depend on, and what was tried in 2015 and failed. In a legacy replacement that knowledge exists nowhere else, and it disappears when they retire.",
-    "Ask what happens on the busiest day of the year and follow that path specifically. Legacy systems accumulate special handling for peak periods, year end and regulatory deadlines, and these are the behaviours least likely to appear in any interview because they happen once a year and everybody has normalised them.",
-    "Get an engineer to walk you through the business rules in one module of the source code for an afternoon. You do not need to read code fluently to follow somebody explaining a conditional. I have learned more about how a business actually operates from two of those sessions than from a month of stakeholder interviews, because the code cannot round its answers.",
-    "When somebody says the new system must do exactly what the old one does, ask them to name the last five real cases where the old behaviour mattered. Sometimes they produce them immediately and you have found a genuine requirement. More often the request turns out to be about familiarity, and that is a different problem with a different solution.",
+    "Find the person who has been there longest in an unglamorous job and treat their time as the scarcest resource on the project. They know which rule was added after which incident, which report three departments quietly depend on, and what was tried in 2015 and failed. That knowledge exists nowhere else and it walks out of the door when they retire.",
+    "Ask what happens on the busiest day of the year and follow that path specifically. Old systems accumulate special handling for peak periods, year end and legal deadlines, and those are the behaviours least likely to come up in an interview because they happen once a year and everybody has stopped noticing them.",
+    "Get an engineer to walk you through the rules in one part of the code for an afternoon. You do not need to read code to follow somebody explaining an if-then. I have learned more about how a business really works from two of those sessions than from a month of interviews, because code cannot round its answers off.",
+    "When somebody says the new system must do exactly what the old one does, ask them to name the last five real cases where the old behaviour mattered. Sometimes they produce them immediately and you have found a genuine requirement. More often it turns out to be about familiarity, which is a different problem with a different answer.",
   ],
 
   businessApplications: [
-    "Core system replacement, where the discovery burden dominates the analysis effort.",
-    "Mainframe and end-of-life platform migration, where the support expiry date is the driving constraint.",
-    "Post-merger consolidation, where two systems do overlapping things differently.",
-    "Cloud migration, where the technical move is simpler and the behavioural discovery is identical.",
-    "Vendor product replacement, where configuration accumulated over years holds the real rules.",
-    "Application estate rationalisation, where decommissioning is the actual objective rather than a closing task.",
+    "Replacing a core system, where the finding-out is most of the analysis effort.",
+    "Moving off a platform that is reaching end of life, where the support date is the driving constraint.",
+    "Bringing two businesses together after a merger, where two systems do overlapping things differently.",
+    "Moving to the cloud, where the technical move is simpler and the finding-out is identical.",
+    "Replacing a bought-in product, where years of accumulated settings hold the real rules.",
+    "Reducing the number of applications, where switching things off is the actual objective rather than a closing task.",
   ],
 
   checklist: [
-    "Legacy position quantified: support dates, patchability, key person dependency, unavailability cost.",
-    "Usage data obtained for every function over at least twelve months.",
-    "Behaviour outside the system inventoried: spreadsheets, databases, email approvals, checklists.",
-    "Rules reverse engineered from configuration, jobs, exception codes and code.",
-    "Peak-period and year-end special handling investigated specifically.",
-    "Every step classified as genuine process or compensating behaviour.",
-    "All outbound extracts, files and downloads traced to consumers.",
-    "Replacement strategy chosen explicitly with risk and elapsed time stated.",
-    "Coexistence designed: authority per fact, synchronisation, conflict handling, duration.",
+    "Numbers on the old system: support dates, what can be patched, key people, cost of downtime.",
+    "Usage figures obtained for every function over at least twelve months.",
+    "What happens outside the system listed: spreadsheets, databases, email approvals, checklists.",
+    "Rules worked out from settings, jobs, codes in the data, and the code itself.",
+    "Peak period and year end special handling investigated specifically.",
+    "Every step marked as real process or working around a limitation.",
+    "All exports, files and downloads followed to whoever receives them.",
+    "Approach chosen on purpose with risk and elapsed time stated.",
+    "Period where both run designed: which is right about what, how they stay in step, how long.",
     "Not-carrying-forward list written, circulated and accepted.",
-    "Something visible sequenced early in the programme.",
-    "Archive and read access plan agreed with a retention period.",
-    "Decommissioning funded, dated and owned.",
+    "Something visible sequenced early.",
+    "Archive and read access agreed with a retention period.",
+    "Switching off funded, dated and owned.",
   ],
 
   faqs: [
     {
       q: "How do we find out what the old system actually does?",
-      a: "From evidence rather than documentation: usage logs, configuration, scheduled jobs, exception codes, transaction data, and the code itself where an engineer can walk you through it. Then confirm with the people who have been there longest.",
+      a: "From evidence rather than documentation: usage figures, settings, scheduled jobs, the codes sitting in the data, and the code itself where somebody can walk you through it. Then confirm with the people who have been there longest.",
     },
     {
-      q: "Should we replace in one move or incrementally?",
-      a: "Incremental strangulation is usually lower risk and longer, and it requires designing coexistence, which is real cost. Big bang is faster and concentrates risk into one weekend. Choose deliberately and state what each option costs rather than inheriting a default.",
+      q: "All at once or bit by bit?",
+      a: "Bit by bit is usually lower risk and takes longer, and it means designing the period where both run, which is real cost. All at once is faster and puts all the risk into one weekend. Choose on purpose and say what each option costs, rather than inheriting a default.",
     },
     {
-      q: "How do we justify a replacement to a finance director?",
-      a: "Quantify the legacy position: support expiry dates, what cannot be patched, how many people understand it, incident history, and the cost of a day of unavailability. Qualitative arguments about agility lose to revenue projects every time.",
+      q: "How do we justify this to a finance director?",
+      a: "Put numbers on the old system: support end dates, what cannot be patched, how many people understand it, incident history, and what a day without it costs. Vague arguments about agility lose to revenue projects every single time.",
     },
     {
-      q: "What do we do about functionality nobody can explain?",
-      a: "Establish its usage first. If it is unused, propose dropping it explicitly and see who objects. If it is used and unexplained, that is a finding worth escalating in its own right, because the organisation is depending on something nobody understands.",
+      q: "What about functions nobody can explain?",
+      a: "Find out how much they get used first. If nobody uses them, propose dropping them and see who objects. If they are used and nobody can explain them, that is worth raising on its own, because the business is depending on something nobody understands.",
     },
     {
       q: "How long should we keep the old system after go-live?",
-      a: "Longer than the plan says. Read-only access or a queryable archive for months, because questions arrive for a long time and some can only be answered from the original. Decommissioning is irreversible and the archive is cheap.",
+      a: "Longer than the plan says. Read-only access or a searchable copy for months, because questions keep coming and some can only be answered from the original. Switching off cannot be undone and the archive is cheap.",
     },
     {
-      q: "The business says the new system must work exactly like the old one. How do I handle that?",
-      a: "Ask for the last five real cases where the specific behaviour mattered. Sometimes that produces a genuine requirement. More often it reveals that the request is about familiarity, which needs training and involvement rather than a rebuilt feature.",
+      q: "The business insists the new system must work exactly like the old one. What do I do?",
+      a: "Ask for the last five real cases where that specific behaviour mattered. Sometimes that produces a genuine requirement. More often it reveals the request is about familiarity, which needs training and involvement rather than a rebuilt feature.",
     },
   ],
 
   tools: [
-    { name: "Function and screen usage logs", what: "Twelve to eighteen months. The evidence that determines what is worth rebuilding and what is a museum.", cost: "Varies" },
-    { name: "An engineer and an afternoon with the code", what: "Where source is readable, the business rules are in it. More productive than a month of interviews.", cost: "Free" },
+    { name: "Usage figures by screen and function", what: "Twelve to eighteen months. The evidence that decides what is worth rebuilding and what is a museum.", cost: "Varies" },
+    { name: "An engineer and an afternoon with the code", what: "Where somebody can walk you through it, the rules are in there. More productive than a month of interviews.", cost: "Free" },
     { name: "A not-carrying-forward list", what: "Everything deliberately dropped, who is affected, what they do instead. Rare and extremely valuable.", cost: "Free" },
-    { name: "A decommissioning plan with an owner and a date", what: "Interfaces, archive, retention, licences, access. Without it the estate grows rather than shrinking.", cost: "Free" },
+    { name: "A switching-off plan with an owner and a date", what: "Connections, archive, retention, licences, access. Without it the number of systems grows rather than shrinks.", cost: "Free" },
   ],
 
   resources: [
@@ -372,13 +372,13 @@ export const guide: Guide = {
   internalLinks: [
     { slug: "planning-a-data-migration", anchor: "moving the data itself", context: "Migration" },
     { slug: "impact-assessment-before-a-change", anchor: "finding everything that depends on it", context: "Discovery" },
-    { slug: "delivering-change-into-a-business", anchor: "the cutover and adoption", context: "Delivery" },
+    { slug: "delivering-change-into-a-business", anchor: "the changeover and getting people using it", context: "Delivery" },
   ],
 
   relatedGuides: ["planning-a-data-migration", "impact-assessment-before-a-change", "delivering-change-into-a-business"],
 
   conclusion: [
-    "Get twelve months of function usage data for the system you are replacing and rank it. The long tail of functions nobody has opened in a year is the scope you were about to rebuild for no reason, and the conversation about dropping it goes very differently when it starts from evidence rather than from opinion.",
+    "Get twelve months of usage figures for the system you are replacing and rank them. The long tail of functions nobody has opened in a year is scope you were about to rebuild for no reason, and the conversation about dropping it goes very differently when it starts from evidence rather than opinion.",
   ],
 };
 

@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "impact-assessment-before-a-change",
-  seoTitle: "Impact Assessment: Finding What a Change Will Break",
+  seoTitle: "Finding Out What a Change Is Going to Break",
   metaDescription:
-    "A systematic sweep for everything a proposed change touches: systems, data, reports, processes, roles, controls, contracts and the teams nobody told.",
-  title: "Impact Assessment Before a Change",
+    "A systematic sweep for everything a change touches: systems, data, reports, processes, people, controls, outside parties, and the team nobody told.",
+  title: "Finding Out What a Change Will Break",
   keywords: [
     "impact assessment",
     "change impact analysis",
@@ -17,343 +17,343 @@ export const guide: Guide = {
   ],
   category: "requirements",
   level: "Intermediate",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
-  readingTime: 16,
+  readingTime: 15,
 
   intro: [
-    "The question that ends most impact assessments is what does this affect, and the honest answer is always more than the person asking expects. Systems have consumers nobody documented. Fields are read by reports nobody maintains. Processes depend on a status code somebody chose eleven years ago. Somewhere there is a spreadsheet that will silently produce wrong numbers on the Monday after your change and nobody will notice for a quarter.",
-    "Impact assessment is unglamorous, it is mostly a search rather than a judgement, and it is one of the highest-value things a Business Analyst does, because the things it finds are precisely the things that would otherwise be found during a live incident.",
-    "This guide is the sweep I run: eight dimensions to check, where the evidence for each one lives, how to trace a data field to everybody who reads it, and how to write the output so that people act on it rather than filing it.",
+    "The question that ends most of these is what does this affect, and the honest answer is always more than whoever asked expects. Systems have people using them that nobody has recorded. Fields get read by reports nobody maintains. A process depends on a status code somebody chose eleven years ago. And somewhere there is a spreadsheet that will start producing wrong numbers on the Monday after your change, and nobody will notice for a quarter.",
+    "This work is unglamorous, it is mostly searching rather than thinking, and it is one of the most valuable things a Business Analyst does. What it finds is exactly the stuff that would otherwise be found during a live incident, at three in the morning, by somebody who has no idea your project exists.",
+    "This guide is the sweep I run. Eight things to check, where to look for evidence of each, how to follow a single field to everybody who reads it, and how to write it up so people act on it rather than filing it.",
   ],
 
   whyItMatters: [
-    "Unassessed impact is how a competent project produces an incident. The change works exactly as designed and something two departments away stops working, because the dependency existed and nobody had a reason to know about it.",
-    "The costs also land unevenly. The project takes the credit for delivering, and the affected team takes the disruption, which is why unassessed impact damages relationships far beyond its technical significance. People remember being broken by somebody else's project for years.",
-    "And it is the analysis that lets a business make an honest go or no-go decision. A change with a known, sized set of impacts can be scheduled, communicated and resourced. A change with unknown impact is a gamble that the organisation has not agreed to take.",
+    "Unchecked knock-on effects are how a perfectly competent project causes an incident. The change works exactly as designed and something two departments away stops working, because a dependency existed and nobody had any reason to know about it.",
+    "The cost also lands unevenly. The project takes the credit for delivering and the affected team takes the disruption, which is why this damages relationships far beyond its technical significance. People remember being broken by somebody else's project for years.",
+    "And it is what lets a business make an honest go or no-go decision. A change with known, sized effects can be scheduled, communicated and resourced. A change with unknown effects is a gamble nobody agreed to take.",
   ],
 
   coreConcepts: [
     {
-      term: "Eight dimensions, run as a checklist",
+      term: "Eight things to check, run as a list",
       explain:
-        "Systems, data, reports, processes, roles and people, controls, external parties, and documents or contracts. Sweep all eight deliberately rather than investigating the ones you find interesting.",
+        "Systems. Data. Reports. Processes. People and their jobs. Controls. Outside parties. And documents or contracts. Go through all eight on purpose rather than investigating whichever one you find interesting.",
       detail:
-        "The reason to use a fixed list is that impact is found by search rather than by insight. Anything you do not check is something you have implicitly declared unaffected, and you will not notice yourself doing it.",
+        "The reason to use a fixed list is that this is a search, not a flash of insight. Anything you do not check is something you have quietly declared unaffected, and you will not notice yourself doing it.",
     },
     {
-      term: "Trace data forward to everybody who reads it",
+      term: "Follow every field forwards to everybody who reads it",
       explain:
-        "For any field you are changing, adding or removing: which systems consume it, which reports use it, which rules depend on it, which exports include it, and which humans read it on a screen.",
+        "For any field you are changing, adding or removing: which systems read it, which reports use it, which rules depend on it, which exports include it, and which people look at it on a screen.",
       detail:
-        "The consumers of a field are almost never documented. Look at integrations, scheduled exports, report definitions, and any file dropped onto a shared drive on a schedule. That last category is where the surprises live.",
+        "Who reads a field is almost never written down anywhere. Look at connections between systems, scheduled exports, report definitions, and any file that gets dropped onto a shared drive on a timer. That last one is where the surprises live.",
     },
     {
-      term: "Changing a value is as dangerous as removing a field",
+      term: "Adding a new value is as risky as removing a field",
       explain:
-        "Adding a new status code, extending a field's length, or making an optional field mandatory all break consumers that assumed the old shape.",
+        "Adding a new status, making a field longer, or making an optional field compulsory all break things downstream that assumed the old shape.",
       detail:
-        "Ask specifically: does anything downstream have a hardcoded list of the permitted values? The answer is usually yes somewhere, and it usually fails silently by filtering the new value out rather than erroring.",
+        "Ask specifically whether anything further down has a fixed list of allowed values written into it. The answer is usually yes somewhere, and it usually fails silently by quietly filtering the new value out rather than complaining.",
     },
     {
-      term: "Reports are the most commonly missed consumer",
+      term: "Reports are what people forget",
       explain:
-        "Every organisation has reports nobody owns, built years ago, still circulated, and still used for decisions. They read fields directly and they break quietly.",
+        "Every business has reports nobody owns, built years ago, still going out, still used to make decisions. They read fields directly and they break without saying anything.",
       detail:
-        "Get the list of scheduled reports and their recipients. Where no list exists, that absence is itself a finding worth raising, because it means nobody can assess the impact of any data change.",
+        "Get the list of scheduled reports and who receives them. If no such list exists, that is a finding on its own, because it means nobody can assess the impact of any data change at all.",
     },
     {
-      term: "Find the shadow consumers",
+      term: "Find the spreadsheets nobody knows about",
       explain:
-        "Spreadsheets pulling an export, a personal database, a team's tracker, an automation somebody built. These are invisible to any technical dependency analysis and they are load-bearing.",
+        "A spreadsheet fed by an export. A personal database. A team's tracker. Something somebody built themselves. None of these show up in any technical analysis and all of them are holding something up.",
       detail:
-        "The way to find them is to ask, without judgement: what do you download, and what do you do with it afterwards? Ask it of every team that touches the process, not only the obvious ones.",
+        "The way to find them is to ask, without any hint of judgement: what do you download, and what do you do with it afterwards? Ask every team that touches the process, not just the obvious ones.",
     },
     {
-      term: "Assess the impact on controls specifically",
+      term: "Check the controls specifically",
       explain:
-        "If a change removes, moves or automates a step that constitutes a control, somebody accountable for that control needs to know before it happens, not afterwards.",
+        "If your change removes, moves or automates a step that exists as a check, the person accountable for that check needs to know beforehand rather than afterwards.",
       detail:
-        "This is the impact most likely to have regulatory consequences and the one least likely to be raised by the people affected, because they may not know the change is happening at all.",
+        "This is the one most likely to have legal consequences and the one least likely to be raised by the people affected, because they may not know the change is happening at all.",
     },
     {
-      term: "Role impact is about what someone can no longer do",
+      term: "For people, ask what they can no longer do",
       explain:
-        "Not just training. Does anybody lose visibility, lose an approval right, gain accountability for something they cannot see, or lose the informal knowledge that made a step work?",
+        "Not just training. Does anybody lose sight of something, lose an approval they had, become accountable for something they cannot see, or lose the informal knowledge that made a step work?",
       detail:
-        "Pay particular attention to cover arrangements. A change that works when everyone is present and fails when one person is on leave will fail within a month.",
+        "Pay particular attention to cover arrangements. A change that works when everybody is in and falls over when one person is on holiday will fall over within a month.",
     },
     {
-      term: "Check the external parties",
+      term: "Check who outside the business is affected",
       explain:
-        "Customers, suppliers, auditors, regulators, partner systems. Anything that receives a file, an interface, a document or a communication from the area you are changing.",
+        "Customers, suppliers, auditors, regulators, partner systems. Anything receiving a file, a document or a message from the area you are changing.",
       detail:
-        "External impacts carry lead times you cannot compress. A supplier needing to change their file format is a three-month conversation, and finding that in week two rather than week ten is the whole value of the exercise.",
+        "These have waiting times you cannot compress. A supplier needing to change their file format is a three-month conversation, and finding that in week two rather than week ten is the whole value of doing this.",
     },
     {
-      term: "Rate impact by consequence and detectability",
+      term: "Rate it two ways: how bad, and how quickly you would notice",
       explain:
-        "How bad is it if this breaks, and how quickly would anybody notice? The second dimension is the one people leave out and it changes the priority completely.",
+        "How bad is it if this breaks, and how long before anybody spots it? The second one gets left out constantly and it changes the priority completely.",
       detail:
-        "A high-consequence impact that fails loudly is manageable. A moderate impact that fails silently and is discovered a quarter later is frequently worse, because by then the wrong numbers have been acted on.",
+        "Something very bad that fails loudly is manageable. Something moderately bad that fails silently and gets found a quarter later is often worse, because by then people have been acting on the wrong numbers.",
     },
     {
-      term: "Name an owner for every impact",
+      term: "Every item needs somebody's name against it",
       explain:
-        "Each identified impact needs a person who will confirm it, decide what to do, and be told when the change happens.",
+        "Each thing you find needs a person who will confirm it, decide what to do, and be told when the change happens.",
       detail:
-        "An impact list with no owners is a document. An impact list where each line has a name against it becomes a set of conversations, which is the only form in which it does anything.",
+        "A list with no names on it is a document. A list where every line has a person against it becomes a set of conversations, which is the only form in which it does anything at all.",
     },
     {
-      term: "Distinguish assessed from assumed",
+      term: "Say which ones you have actually checked",
       explain:
-        "Mark each item as confirmed with the affected team, or assumed by you and not yet checked. Be explicit about which is which.",
+        "Mark each as confirmed with the affected team, or assumed by you and not yet checked. Be plain about which is which.",
       detail:
-        "Every impact assessment has unconfirmed items and pretending otherwise is what makes them dangerous. A visible list of unconfirmed assumptions gets checked. An invisible one does not.",
+        "Every assessment has unchecked items and pretending otherwise is what makes them dangerous. A visible list of unchecked assumptions gets chased. An invisible one does not.",
     },
     {
-      term: "Assess the reverse impact too",
+      term: "Also check what is coming the other way",
       explain:
-        "What else is changing in the same window that might affect you? Other projects, a system upgrade, a policy change, a peak trading period.",
+        "What else is changing in the same window that might affect you? Other projects, a system upgrade, a policy change, your busiest trading period.",
       detail:
-        "Impact assessment is usually run outward only. Running it inward finds collisions, and collisions between two well-run projects are a common and entirely avoidable source of incidents.",
+        "People only ever look outwards from their own change. Looking inwards finds collisions, and collisions between two well-run projects are a common and completely avoidable source of incidents.",
     },
   ],
 
   examples: [
     {
       kind: "illustration",
-      scenario: "The new status code that was silently filtered out.",
+      scenario: "The new status that got quietly filtered out.",
       walkthrough:
-        "A project adds a new order status to handle a case the business had been managing manually. It is tested thoroughly within the ordering system and works correctly. Three weeks after go-live, finance notices that reported order volumes have fallen. A reporting extract built years earlier selects orders by an explicit list of status values. Orders in the new status match none of them and had been dropping out of every report using that extract.",
+        "The problem: three weeks after go-live, finance noticed reported order volumes had dropped and nobody could explain it. What was happening: the project had added a new order status to handle a case the business had been managing by hand. It was tested thoroughly in the ordering system and worked perfectly. But a reporting extract built years earlier picked orders by a fixed list of statuses. Orders in the new status matched none of them and had been silently dropping out of every report using that extract.",
       result:
-        "Nothing errored, nothing alerted, and the numbers were simply wrong for three weeks. This is the characteristic failure mode of data impact: it is silent. Whenever you add a permitted value, the question to ask everywhere downstream is whether anything holds a hardcoded list of the old ones.",
+        "What changed: they fixed the extract and added the check to their standard process. Nothing had errored, nothing had alerted, and the numbers were simply wrong for three weeks. This is the classic shape of a data problem: it is silent. Whenever you add a new allowed value, the question to ask everywhere downstream is whether anything has a fixed list of the old ones written into it.",
     },
     {
       kind: "illustration",
-      scenario: "The spreadsheet holding up a supplier relationship.",
+      scenario: "A spreadsheet holding up a supplier relationship.",
       walkthrough:
-        "A BA assessing the impact of a system replacement asks each team a single question: what do you download from this system, and what do you do with it? A procurement analyst mentions a weekly export she reformats and sends to a key supplier, who uses it to plan their own production. It has run for years, is documented nowhere, and appears in no interface inventory because it is a manual download.",
+        "The problem: a system was being replaced and the project needed to know what depended on it. What was happening: the BA asked every team one question. What do you download from this, and what do you do with it? A procurement analyst mentioned a weekly export she reformats and sends to a key supplier, who uses it to plan their own production. It had been running for years, was written down nowhere, and appeared on no list of connections because it was a manual download.",
       result:
-        "Had it been missed, the supplier would have stopped receiving planning data with no warning. The question that found it takes thirty seconds to ask and has to be asked of every team rather than only the ones the project already involves. Shadow consumers are invisible to technical dependency analysis by definition.",
+        "What changed: it went into the plan properly. Had it been missed, the supplier would have stopped receiving their planning data with no warning at all. The question that found it takes thirty seconds to ask and has to be asked of every team rather than only the ones the project already involves.",
     },
     {
       kind: "illustration",
-      scenario: "Two well-run projects in the same weekend.",
+      scenario: "Two well-run projects, same weekend.",
       walkthrough:
-        "A change is planned for a weekend, fully assessed, with every downstream consumer identified and notified. Separately, an infrastructure team has scheduled a database upgrade for the same weekend, also fully planned. Neither team knows about the other, because each has assessed impact outward from their own change and neither has asked what else is happening.",
+        "The problem: a change was planned for a weekend, fully assessed, with everybody downstream identified and told. What was happening: separately, an infrastructure team had scheduled a database upgrade for the same weekend, also fully planned. Neither team knew about the other, because each had looked outwards from its own change and neither had asked what else was happening.",
       result:
-        "The collision was found late and only because a BA asked what else was in the change calendar for that window. Impact assessment run purely outward misses this entire category. Always check the change calendar and the other active projects for the same period, and treat that as part of the assessment rather than as scheduling.",
+        "What changed: a BA happened to ask what else was in the change calendar for that window and they rescheduled. Looking only outwards misses this whole category. Always check the change calendar and the other live projects for the same period, and treat that as part of the job rather than as scheduling.",
     },
   ],
 
   learningPath: [
     {
-      title: "Define the change precisely",
-      body: "What exactly is changing: which fields, which steps, which rules, which systems, and what stays the same. Vagueness here produces an assessment that misses things by construction.",
+      title: "Say exactly what is changing",
+      body: "Which fields, which steps, which rules, which systems, and what stays the same. Vagueness here produces an assessment that misses things by design.",
       effort: "1 hour",
-      outcome: "A specific change definition that the sweep can be run against.",
+      outcome: "Something specific enough to run the sweep against.",
     },
     {
-      title: "Sweep the eight dimensions",
-      body: "Systems, data, reports, processes, roles, controls, external parties, documents and contracts. Note for each what you would need to check and where the evidence lives.",
+      title: "Run through all eight",
+      body: "Systems, data, reports, processes, people, controls, outside parties, documents and contracts. For each, note what you would need to check and where the evidence lives.",
       effort: "Half a day",
-      outcome: "A candidate impact list produced by search rather than by recall.",
+      outcome: "A candidate list produced by searching rather than by remembering.",
     },
     {
-      title: "Trace every changed field to its consumers",
-      body: "Integrations, exports, report definitions, business rules, and screens people read. Check specifically for hardcoded value lists.",
+      title: "Follow every changed field to whoever reads it",
+      body: "Connections, exports, report definitions, business rules, and screens people look at. Check specifically for fixed lists of allowed values.",
       effort: "1-3 days",
-      outcome: "The data impacts, which are the ones that fail silently.",
+      outcome: "The data effects, which are the ones that fail silently.",
     },
     {
       title: "Ask every team what they download",
-      body: "One question, asked without judgement, of every team touching the area rather than only those already involved. Then ask what they do with it afterwards.",
+      body: "One question, asked without any judgement, of every team touching the area rather than only those already involved. Then ask what they do with it.",
       effort: "1 day",
-      outcome: "The shadow consumers, which no technical analysis will find.",
+      outcome: "The spreadsheets and exports no technical analysis will ever find.",
     },
     {
-      title: "Check controls and external parties",
-      body: "Anything that constitutes a control, and anything that leaves the organisation. Both carry lead times and consequences that internal impacts do not.",
+      title: "Check the controls and the outside parties",
+      body: "Anything that exists as a check, and anything that leaves the business. Both have waiting times and consequences that internal things do not.",
       effort: "Half a day",
-      outcome: "The impacts most likely to have regulatory or contractual consequences.",
+      outcome: "The effects most likely to have legal or contractual consequences.",
     },
     {
-      title: "Run the assessment inward",
-      body: "Check the change calendar and the other active projects for the same window. Look for collisions, shared systems and shared people.",
+      title: "Look at what else is happening that weekend",
+      body: "Check the change calendar and the other live projects for the same window. Look for collisions, shared systems and shared people.",
       effort: "2 hours",
-      outcome: "Collisions found while they can still be rescheduled.",
+      outcome: "Clashes found while they can still be moved.",
     },
     {
-      title: "Rate, assign owners, and confirm",
-      body: "Consequence and detectability for each impact, an owner against every line, and a clear marking of which items are confirmed and which are still assumed.",
+      title: "Rate it, name owners, and confirm",
+      body: "How bad and how quickly noticed for each one, a person against every line, and a clear marking of what is confirmed versus still assumed.",
       effort: "1 day plus follow-up",
-      outcome: "A list that generates conversations rather than a document that gets filed.",
+      outcome: "A list that starts conversations rather than a document that gets filed.",
     },
   ],
 
   exercises: [
     {
-      title: "Trace one field",
+      title: "Follow one field",
       brief:
-        "Pick any single data field in a system you work with. Find every consumer: interfaces, exports, reports, rules and screens. Then ask two teams whether they use it in any way you have not found.",
+        "Pick any single field in a system you work with. Find everybody who uses it: connections, exports, reports, rules and screens. Then ask two teams whether they use it in some way you have not found.",
       success:
-        "You find at least one consumer that does not appear in any documentation, and you can say whether a change to that field would fail loudly or silently.",
+        "You find at least one user that appears in no documentation, and you can say whether changing that field would fail loudly or silently.",
       time: "Half a day",
     },
     {
-      title: "The download question",
+      title: "Ask five teams what they download",
       brief:
         "Ask five teams what they download or export from the systems in your area, and what they do with it afterwards. Ask without any suggestion that they should not be doing it.",
       success:
-        "You have found at least two shadow consumers, and for each you can say what would break if the source changed.",
+        "You have found at least two things nobody knew about, and for each you can say what would break if the source changed.",
       time: "2 hours",
     },
     {
-      title: "Detectability rating",
+      title: "Add a how-quickly-would-we-notice column",
       brief:
-        "Take an existing impact or risk list from any project. Add a column rating how quickly each item would be noticed if it went wrong: immediately, within a day, within a month, or only at period end.",
+        "Take an existing impact or risk list from any project. Add a column rating how fast each item would be spotted if it went wrong: immediately, within a day, within a month, or only at year end.",
       success:
-        "The priority order changes, and you can name at least one item that was rated low priority but would fail silently for a long time.",
+        "The priority order changes, and you can name at least one item rated low that would actually fail silently for a long time.",
       time: "1 hour",
     },
   ],
 
   mistakes: [
     {
-      mistake: "Assessing impact only within the project's own systems",
-      why: "The dependencies that cause incidents are almost always outside the boundary the project drew for itself, which is exactly why nobody has looked at them.",
-      fix: "Run all eight dimensions and trace data outward to every consumer regardless of which team owns it.",
+      mistake: "Only checking inside your own project's systems",
+      why: "The dependencies that cause incidents are nearly always outside the boundary the project drew for itself, which is exactly why nobody has looked at them.",
+      fix: "Run all eight and follow the data outwards to everybody who uses it, regardless of which team owns them.",
     },
     {
       mistake: "Treating adding a value as low risk",
-      why: "Downstream consumers with hardcoded lists filter the new value out silently. Nothing errors and the numbers are simply wrong.",
-      fix: "For every new permitted value, ask each consumer whether it holds an explicit list of the old ones.",
+      why: "Anything downstream with a fixed list quietly filters the new value out. Nothing errors and the numbers are just wrong.",
+      fix: "For every new allowed value, ask each user whether it has a fixed list of the old ones written into it.",
     },
     {
       mistake: "Forgetting reports",
-      why: "Reports are unowned, undocumented, still circulated and still used for decisions. They read fields directly and break without alerting anyone.",
-      fix: "Obtain the scheduled report inventory and recipient list. If none exists, raise that as a finding in its own right.",
+      why: "They are unowned, undocumented, still going out and still used for decisions. They read fields directly and break without alerting anybody.",
+      fix: "Get the list of scheduled reports and their recipients. If it does not exist, raise that as a finding in its own right.",
     },
     {
-      mistake: "Missing shadow consumers",
-      why: "Manual downloads feeding spreadsheets, trackers and external parties appear in no technical inventory, and they are frequently load-bearing.",
+      mistake: "Missing the manual downloads",
+      why: "Spreadsheets, trackers and files sent to outside parties appear on no technical list and they are often holding something important up.",
       fix: "Ask every team what they download and what they do with it, framed as curiosity rather than as an audit.",
     },
     {
-      mistake: "Not checking controls",
-      why: "Removing or automating a control without telling the person accountable for it is how a project creates a regulatory finding, and they usually do not know the change is happening.",
-      fix: "Identify every step that constitutes a control and notify its owner before the design is fixed.",
+      mistake: "Not checking the controls",
+      why: "Removing or automating a check without telling the person accountable for it is how a project creates a compliance problem, and they usually do not even know the change is coming.",
+      fix: "Identify every step that exists as a check and tell its owner before the design is fixed.",
     },
     {
-      mistake: "Rating by consequence alone",
-      why: "A silent failure with moderate consequence can be worse than a loud failure with high consequence, because by the time it is found the wrong data has been acted on for months.",
-      fix: "Rate consequence and detectability separately, and prioritise the silent items deliberately.",
+      mistake: "Rating only by how bad it is",
+      why: "A silent failure of moderate severity can be worse than a loud severe one, because by the time it is found people have been acting on wrong information for months.",
+      fix: "Rate how bad and how quickly noticed separately, and deliberately push the silent ones up.",
     },
     {
-      mistake: "Not distinguishing confirmed from assumed",
-      why: "Every assessment contains unchecked items. Presenting them as findings gives false assurance and the unconfirmed ones never get confirmed.",
-      fix: "Mark each item explicitly, and make closing the assumed ones a tracked task with owners.",
+      mistake: "Not saying what you have actually checked",
+      why: "Every assessment has unchecked items. Presenting them as findings gives false comfort and they never get checked.",
+      fix: "Mark each one, and make chasing down the unchecked ones a tracked task with names against it.",
     },
     {
-      mistake: "Only assessing outward",
-      why: "Two well-planned changes in the same window can collide through a shared system, a shared team or a peak trading period, and neither project will see it.",
-      fix: "Check the change calendar and other active projects for the same window as a standard step.",
+      mistake: "Only looking outwards",
+      why: "Two well-planned changes in the same window can collide through a shared system, a shared team or a busy trading period, and neither project will see it coming.",
+      fix: "Check the change calendar and other live projects for the same window as a standard step.",
     },
   ],
 
   bestPractices: [
-    "Define exactly what is changing before assessing anything.",
-    "Sweep all eight dimensions as a fixed checklist.",
-    "Trace every changed field to all its consumers.",
-    "Check specifically for hardcoded lists of permitted values.",
-    "Obtain the scheduled report inventory and its recipients.",
+    "Say exactly what is changing before assessing anything.",
+    "Run all eight checks as a fixed list.",
+    "Follow every changed field to everybody who uses it.",
+    "Check specifically for fixed lists of allowed values.",
+    "Get the list of scheduled reports and who receives them.",
     "Ask every team what they download and what they do with it.",
-    "Identify every step that constitutes a control and notify its owner.",
-    "Assess role impact in terms of what someone can no longer do.",
-    "Check external parties early because their lead times are long.",
-    "Rate consequence and detectability separately.",
-    "Assign an owner to every impact.",
-    "Mark each item as confirmed or assumed.",
-    "Run the assessment inward against the change calendar as well as outward.",
+    "Identify every step that exists as a check and tell its owner.",
+    "For people, ask what they can no longer do rather than what they need training on.",
+    "Check outside parties early because their waiting times are long.",
+    "Rate how bad and how quickly noticed separately.",
+    "Put a name against every item.",
+    "Say clearly what you have confirmed and what you have assumed.",
+    "Check the change calendar as well as looking outwards.",
   ],
 
   proTips: [
-    "Ask what happened the last time this system was changed. Somebody will remember what broke, and the thing that broke last time is usually still connected in the same undocumented way. Institutional memory of past incidents is the cheapest dependency map available and it lives entirely in people who have been there a while.",
-    "When tracing consumers of a field, look at what leaves the building on a schedule: emailed reports, files dropped to an SFTP location, extracts sent to a partner. Anything on a schedule has a recipient who is depending on it silently, and scheduled things are much easier to enumerate than ad hoc ones.",
-    "Write the impact list so each line reads as a sentence a specific person would care about, rather than as a technical statement. Finance's month-end volume report will exclude orders in the new status is actionable. Status enumeration change affects downstream extracts is not, and it will be skimmed past by exactly the person who needed to read it.",
-    "Keep every impact assessment you produce and reread the previous one before starting a new assessment in the same area. The dependencies you found last time are still there, and about half of an assessment in a familiar area is recall rather than discovery, provided you wrote it down.",
+    "Ask what happened the last time this system was changed. Somebody will remember what broke, and the thing that broke last time is usually still connected in the same undocumented way. What people remember about past incidents is the cheapest map of dependencies available and it lives entirely in people who have been there a while.",
+    "When following a field, look at what leaves the building on a timer: emailed reports, files dropped somewhere for a partner, extracts sent overnight. Anything scheduled has somebody depending on it quietly, and scheduled things are much easier to list than ad hoc ones.",
+    "Write each item as a sentence a specific person would care about, not as a technical statement. Finance's month-end volume report will stop including orders in the new status is something somebody acts on. Status enumeration change affects downstream extracts is not, and it will be skimmed past by exactly the person who needed to read it.",
+    "Keep every one of these you produce and reread the last one before starting a new assessment in the same area. The dependencies you found last time are still there, and about half of an assessment in familiar territory is remembering rather than discovering, as long as you wrote it down.",
   ],
 
   businessApplications: [
-    "System changes and releases, where the assessment determines who needs to be notified and when.",
-    "Data model changes, where silent downstream failure is the characteristic risk.",
-    "Process redesign, where role and control impacts matter more than technical ones.",
-    "Decommissioning, where the whole exercise is finding everything that still depends on the thing being retired.",
-    "Organisational restructures, where the impact is on who holds knowledge and approval rights.",
-    "Policy changes, where the impact runs through documents, contracts and customer communications rather than systems.",
+    "System changes and releases, where this decides who needs telling and when.",
+    "Changes to how data is structured, where silent failure downstream is the characteristic risk.",
+    "Process redesign, where the effect on people's jobs and on checks matters more than the technical side.",
+    "Switching off a system, where the whole job is finding everything that still depends on it.",
+    "Restructures, where the effect is on who holds knowledge and who can approve things.",
+    "Policy changes, where the effect runs through documents, contracts and customer letters rather than systems.",
   ],
 
   checklist: [
-    "Change defined precisely: fields, steps, rules, systems, and what stays the same.",
-    "All eight dimensions swept deliberately.",
-    "Every changed field traced to its consumers.",
-    "Hardcoded permitted-value lists checked downstream.",
-    "Scheduled report inventory and recipients obtained.",
+    "Change described precisely: fields, steps, rules, systems, and what stays the same.",
+    "All eight checks run deliberately.",
+    "Every changed field followed to everybody who uses it.",
+    "Fixed lists of allowed values checked downstream.",
+    "Scheduled report list and recipients obtained.",
     "Every team asked what they download and why.",
-    "Controls identified and their owners notified.",
-    "Role impacts assessed, including cover arrangements.",
-    "External parties identified and their lead times understood.",
-    "Each impact rated for consequence and for detectability.",
-    "An owner named against every impact.",
-    "Confirmed and assumed items clearly distinguished.",
-    "Change calendar checked for collisions in the same window.",
+    "Controls identified and their owners told.",
+    "Effects on people assessed, including cover arrangements.",
+    "Outside parties identified and their waiting times understood.",
+    "Each item rated for how bad and how quickly noticed.",
+    "A name against every item.",
+    "Confirmed and assumed clearly separated.",
+    "Change calendar checked for clashes in the same window.",
   ],
 
   faqs: [
     {
-      q: "How long should an impact assessment take?",
-      a: "For a contained change in a familiar system, a day or two. For a system replacement or a data model change, one to two weeks, most of it spent asking teams what they use rather than reading documentation, which will be incomplete.",
+      q: "How long should this take?",
+      a: "For a contained change in a familiar system, a day or two. For replacing a system or restructuring data, one to two weeks, most of it spent asking teams what they use rather than reading documentation, which will be incomplete.",
     },
     {
-      q: "How do I assess impact when there is no documentation?",
-      a: "That is the normal case. Use the data itself: integration configurations, scheduled jobs, report definitions and export logs. Then ask people. Between those two, you will find far more than any documentation would have contained.",
+      q: "How do I do this when there is no documentation?",
+      a: "That is the normal case. Use the systems themselves: connection settings, scheduled jobs, report definitions and export logs. Then ask people. Between those two you will find far more than any documentation would have held.",
     },
     {
-      q: "Who signs off an impact assessment?",
-      a: "Each impact owner confirms their own line, and the sponsor accepts the aggregate picture including the items still marked as assumed. A single sign-off by a project manager means the assessment was read, not that the impacts were confirmed.",
+      q: "Who signs this off?",
+      a: "Each owner confirms their own line, and the sponsor accepts the overall picture including the things still marked as assumed. One signature from a project manager means it was read, not that anything was confirmed.",
     },
     {
-      q: "What do I do about an impact nobody will own?",
-      a: "Record it, name who ought to own it, and escalate to the sponsor. An unowned impact does not disappear when the assessment is filed. It becomes the incident that nobody expected and everybody could have.",
+      q: "What do I do about something nobody will own?",
+      a: "Write it down, say who ought to own it, and take it to the sponsor. It does not disappear when the assessment gets filed. It becomes the incident that nobody expected and everybody could have.",
     },
     {
-      q: "How do I handle shadow spreadsheets I find?",
-      a: "Treat them as evidence of a real requirement rather than as bad practice, and say so out loud. If your interest reads as enforcement, the remaining ones will not be disclosed, and those are the ones that break.",
+      q: "How do I handle spreadsheets I find?",
+      a: "Treat them as evidence that somebody has a real need, not as bad practice, and say so out loud. If your interest reads as enforcement, the remaining ones will stay hidden, and those are the ones that break.",
     },
     {
-      q: "Is impact assessment the same as risk assessment?",
-      a: "Related and not identical. Impact assessment establishes what the change touches. Risk assessment establishes what could go wrong and how likely it is. The impact list is a major input to the risk one, which is why it should come first.",
+      q: "Is this the same as risk assessment?",
+      a: "Related but not the same. This establishes what the change touches. Risk assessment establishes what could go wrong and how likely it is. What you find here feeds the risk work, which is why it comes first.",
     },
   ],
 
   tools: [
-    { name: "An eight-dimension checklist", what: "Systems, data, reports, processes, roles, controls, external parties, documents and contracts. Run mechanically every time.", cost: "Free" },
-    { name: "The scheduled report and job inventory", what: "Where it exists, the fastest route to downstream consumers. Where it does not, its absence is a finding.", cost: "Varies" },
-    { name: "The change calendar", what: "For the inward assessment. Collisions between two well-planned changes are common and entirely avoidable.", cost: "Varies" },
-    { name: "An impact register with owners", what: "Impact, consequence, detectability, owner, confirmed or assumed. The version that produces conversations rather than filing.", cost: "Free" },
+    { name: "The eight-item checklist", what: "Systems, data, reports, processes, people, controls, outside parties, documents and contracts. Run it every time.", cost: "Free" },
+    { name: "The list of scheduled reports and jobs", what: "Where it exists, the fastest route to everybody using your data. Where it does not, its absence is a finding.", cost: "Varies" },
+    { name: "The change calendar", what: "For checking what else is happening. Clashes between two well-planned changes are common and completely avoidable.", cost: "Varies" },
+    { name: "A list with names against every line", what: "What, how bad, how quickly noticed, owner, confirmed or assumed. The version that produces conversations rather than filing.", cost: "Free" },
   ],
 
   internalLinks: [
-    { slug: "data-requirements-for-analysts", anchor: "tracing data through systems", context: "Data impact" },
-    { slug: "delivering-change-into-a-business", anchor: "acting on what the assessment finds", context: "Delivery" },
-    { slug: "risk-assumptions-and-issues", anchor: "turning impacts into managed risks", context: "Next step" },
+    { slug: "data-requirements-for-analysts", anchor: "following data through systems", context: "Data" },
+    { slug: "delivering-change-into-a-business", anchor: "acting on what you find", context: "Delivery" },
+    { slug: "risk-assumptions-and-issues", anchor: "turning these into managed risks", context: "Next step" },
   ],
 
   relatedGuides: ["data-requirements-for-analysts", "delivering-change-into-a-business", "risk-assumptions-and-issues"],
 
   conclusion: [
-    "Take one field your current change touches and spend an afternoon finding every consumer of it: interfaces, exports, report definitions, rules and screens. Then ask two teams what they download. The consumer you find that appears in no documentation is the one your project would otherwise have broken.",
+    "Take one field your current change touches and spend an afternoon finding everybody who uses it: connections, exports, reports, rules and screens. Then ask two teams what they download. The user you find that appears in no documentation is the one your project would otherwise have broken.",
   ],
 };
 

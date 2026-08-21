@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "capacity-and-volume-analysis",
-  seoTitle: "Capacity and Volume Analysis for Business Analysts",
+  seoTitle: "Do You Actually Need More People? How to Check",
   metaDescription:
-    "Why a team at full utilisation has enormous queues, how to read arrival patterns, and how to size demand properly before anyone asks for more headcount.",
-  title: "Capacity and Volume Analysis",
+    "Why a team that is always busy has a queue that never clears, how to spot work that only exists because something went wrong, and how to check before hiring.",
+  title: "Working Out If You Really Need More People",
   keywords: [
     "capacity analysis",
     "demand and capacity modelling",
@@ -17,342 +17,335 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Advanced",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
-  readingTime: 17,
+  readingTime: 14,
 
   intro: [
-    "There is one piece of counterintuitive arithmetic that explains more operational problems than anything else I know, and almost nobody in a business setting has been shown it. As a team's utilisation approaches one hundred per cent, the time work spends waiting does not rise gradually. It rises without limit.",
-    "This is why a team that is busy ninety-five per cent of the time has queues that seem wildly disproportionate to how close they are to capacity, and why adding a small amount of headcount sometimes produces a dramatic improvement while adding a lot of headcount elsewhere produces almost none. It is also why managers who target high utilisation are, without realising it, targeting long waits.",
-    "This guide covers demand and capacity analysis as a BA actually needs it: how to measure demand properly, why arrival patterns matter more than totals, the utilisation trap, how to size a team without pretending to be an operational researcher, and how to tell a genuine capacity shortage from a batching artefact or a rework problem wearing a capacity costume.",
+    "There is one thing about busy teams that almost nobody has been shown, and it explains a huge amount of what goes wrong in operations. A team that is busy nearly all of the time does not have a slightly longer queue than a team that is busy most of the time. It has a queue several times longer, and one that never fully clears.",
+    "That is why a team running flat out feels like it is drowning even though on paper it is only a little over capacity. It is also why managers who push for everyone to be busy all day are, without meaning to, pushing for customers to wait longer.",
+    "More people is the most common request a Business Analyst gets, and the one least often checked. Sometimes it is right. Often the real cause is rework, or work being held up and released in a lump, or an inbox that means half the queue is invisible. This guide is how to tell the difference before somebody spends a year's salary on the wrong answer.",
   ],
 
   whyItMatters: [
-    "More staff is the most common request a BA receives and the one least often supported by analysis. Sometimes it is right. Frequently the real cause is rework, batching, an intake path that starts the clock late, or work arriving in a pattern that no headcount level can absorb smoothly.",
-    "Getting it wrong is expensive in both directions. Hiring against a batching problem adds permanent cost and leaves the mechanism intact. Refusing a genuine shortage produces backlogs, overtime, quality failures under pressure and eventually people leaving, which makes it worse.",
-    "It also matters for anything you design. A future state that reduces average handling time by a decent margin can still fail if it changes the arrival pattern or adds variability, and variability hurts queues more than average duration does.",
+    "Getting this wrong costs money either way. Hire against a problem that was really about how work arrives and you add permanent cost while leaving the actual cause untouched. Refuse a genuine shortage and you get backlogs, overtime, mistakes made under pressure, and eventually people leaving, which makes it worse.",
+    "It also matters for anything you are designing. A new process that makes each case quicker on average can still fail if it changes when the work arrives, or makes some cases much slower than others. Swings hurt queues more than averages do.",
+    "And it is one of the few places where a bit of counting settles an argument that has been running for months on opinion alone.",
   ],
 
   coreConcepts: [
     {
-      term: "Demand has four dimensions, not one",
+      term: "A team that is always busy will always have a backlog",
       explain:
-        "Volume (how many), mix (of what types), arrival pattern (when they turn up), and variability (how much the first three move about).",
+        "This is the one to understand first. When a team is busy roughly three quarters of the time, work waits a bit. When the same team is busy nearly all of the time, work waits a lot, and any bad day creates a pile that never gets cleared because there is no quiet spell to clear it in.",
       detail:
-        "Most capacity conversations use only volume, which is why they produce the wrong answer. A team receiving the same annual volume in a smooth flow and in weekly spikes needs completely different staffing.",
+        "So a plan that has everyone occupied all day is a plan for permanent backlog. Some slack is not waste. It is the only thing that stops the queue growing forever, and it is worth saying out loud to whoever is setting the targets.",
     },
     {
-      term: "The utilisation trap",
+      term: "How much work arrives matters less than when it arrives",
       explain:
-        "Waiting time rises non-linearly with utilisation. Going from a moderately busy team to a nearly saturated one multiplies queues rather than adding to them, which is why the last few percent of capacity is enormously expensive in customer waiting.",
+        "Two teams can handle exactly the same amount of work in a year and need completely different numbers of people. One gets a steady flow. The other gets almost nothing for three weeks and then everything at once.",
       detail:
-        "The practical consequence: a team planned to be busy essentially all of the time has no capacity to absorb variation, so any bad day creates a backlog that persists rather than clearing. Deliberate slack is not waste, it is what keeps the queue finite.",
+        "So never plan from an annual total. Plot when the work actually turns up: by month, by day of the week, by hour of the day. The shape is what decides the staffing, and the total hides it completely.",
     },
     {
-      term: "Variability is the hidden driver",
+      term: "Some of the work only exists because something went wrong",
       explain:
-        "Two teams with identical average arrival rates and identical average handling times can have completely different queues if one has more variable arrivals or more variable case durations.",
+        "Look at what is arriving and split it in two. Genuine new work, and work that is only there because something earlier failed: chases, corrections, people ringing back, things being redone.",
       detail:
-        "This is why averages mislead so badly here. Always look at the distribution: the spread of handling times matters as much as the mean, and a long tail of difficult cases hurts far more than the tail's size suggests.",
+        "The second pile is not a reason to hire. It is a defect. If a big share of the arriving work is chases and corrections, staffing up to absorb it means paying for that failure every year forever.",
     },
     {
-      term: "Work in progress, throughput and lead time are linked",
+      term: "How to work out the real waiting time in ten minutes",
       explain:
-        "For a stable system, the average number of items in progress equals the average arrival rate multiplied by the average time an item spends in the system. It is definitional arithmetic and it holds regardless of what the process does.",
+        "Count how many things are currently sitting in the queue. Count how many the team finishes in a week. Divide the first by the second. That is roughly how many weeks a new arrival waits.",
       detail:
-        "The practical use: if you know two of the three you can derive the third. Count what is in progress, count what completes per week, and you have average lead time without measuring a single case individually.",
+        "No stopwatches, no tracking individual cases. Just two counts. The answer is almost always several times longer than anyone in the process believes, and it is very hard to argue with because both numbers are countable by anyone.",
     },
     {
-      term: "Measure demand at arrival, not at completion",
+      term: "Averages hide the cases that hurt",
       explain:
-        "Completion data tells you what the team managed to do, which is capped by capacity. Arrival data tells you what turned up, which is what you actually need.",
+        "An average handling time of a few minutes is perfectly consistent with most cases taking two minutes and a handful taking two hours. Those two pictures need completely different staffing and completely different fixes.",
       detail:
-        "Where an intake path does not timestamp arrival, demand is invisible and the queue is unmeasurable. Fixing that instrumentation is frequently the first real recommendation of a capacity analysis.",
+        "So always look at the spread, not just the middle. It is usually the small number of long, awkward cases that eat the team's week, and an average is designed to make them disappear.",
     },
     {
-      term: "Split failure demand from value demand",
+      term: "Headcount is not capacity",
       explain:
-        "Some of the work arriving exists only because something earlier went wrong: chases, corrections, repeat contacts, rework. That is failure demand and it is not a capacity requirement, it is a defect.",
+        "Fourteen people does not mean fourteen people's worth of work. Take off holiday, sickness, training, meetings and admin. Then take off the honest share of the day that is not spent on the actual work, because nobody does case work every hour they are present.",
       detail:
-        "Categorise a sample of arrivals into value and failure. Where failure demand is a large share, staffing to absorb it institutionalises the underlying problem and guarantees the cost recurs every year.",
+        "That last figure is the one people guess at, and they guess high. Measure it. Stating it openly in your calculation is also what stops somebody dismissing the whole thing later.",
     },
     {
-      term: "Capacity is not headcount",
+      term: "Two people can be the real bottleneck in a team of fourteen",
       explain:
-        "Effective capacity is people, multiplied by available hours after leave, training, meetings and administration, multiplied by the proportion of time actually spent on the work, divided by handling time per case.",
+        "A team can have plenty of capacity overall and still have a permanent queue on one type of work, because only two people are trained to do it and both of them have other jobs as well.",
       detail:
-        "The proportion of time spent on the work is the number people guess at and get badly wrong. Measure it rather than assuming, and be honest that nobody produces case work for every hour they are present.",
+        "This is invisible if you compare total headcount against total volume. Always split it by type of work against who can actually do that type. Training two more people is often much cheaper than hiring one.",
     },
     {
-      term: "Skills mix creates queues that headcount totals hide",
+      term: "Work held up and released in a lump looks like a rush",
       explain:
-        "If only two people can handle a case type that represents a meaningful share of volume, the team's overall capacity is irrelevant to those cases.",
+        "If something runs weekly, or approvals get done in a batch at the end of the day, the work arrives as a spike. That spike sets how many people you need, and they are underused in between.",
       detail:
-        "Always analyse capacity by case type against who can actually do it. Specialist bottlenecks are extremely common and completely invisible in a headcount-versus-volume comparison.",
+        "The giveaway is overtime landing on the same day every week or month. That is the release schedule doing it, not the workload. Hiring against it means paying people to keep the schedule the way it is.",
     },
     {
-      term: "Batching creates peaks that look like demand",
+      term: "Predict from what drives the work, not from last year's line",
       explain:
-        "Work held and released together produces a spike. The spike sets the staffing level and the team is underused between spikes.",
+        "Drawing a line through last year's volumes assumes nothing changes. Better to find what actually causes the volume: how many customers, how many orders, a policy change, a marketing campaign, the time of year.",
       detail:
-        "The tell is an overtime pattern that lands on the same day of every cycle. That is an artefact of a release schedule, not a capacity problem, and hiring against it is money spent to preserve the schedule.",
+        "Forecast that instead, and work back to the volume. It stands up better, and it tells you what the business could pull on to reduce the work rather than just absorb it.",
     },
     {
-      term: "Forecast from the driver, not from the trend",
+      term: "A spreadsheet is enough, and it has to carry the backlog forward",
       explain:
-        "Extrapolating last year's volumes assumes nothing changes. Better to find what actually drives the volume: customer count, order count, a policy change, a marketing campaign, a seasonal cycle.",
+        "You do not need special software. Work arriving each week, capacity applied, and whatever is left over rolled into the next week. That last part is what most models miss.",
       detail:
-        "Then forecast the driver and derive the demand. It is more defensible, and it tells you which lever the business could pull to reduce demand rather than absorb it.",
+        "And test it against the worst weeks in your history, not the average one. A model that only balances on average describes a team that will be permanently behind, because a good week's spare capacity is small and a bad week's overflow is large.",
     },
     {
-      term: "Model in a spreadsheet, and model the bad week",
+      term: "Give them a range of options, not one number",
       explain:
-        "You do not need simulation software for most business questions. Arrival rate by day, handling time distribution, available hours, and a queue that carries forward gets you a long way.",
+        "Do not recommend a headcount. Show how long people would wait at several different staffing levels, and let leadership pick.",
       detail:
-        "The important part is testing the bad week rather than the average one. A model that only balances on average describes a system that will be permanently in backlog, because the good weeks cannot repay the bad ones once a queue exists.",
-    },
-    {
-      term: "Present a curve, not a number",
-      explain:
-        "Show how waiting time changes across a range of staffing levels rather than recommending one figure. The shape of that curve is the argument.",
-      detail:
-        "It also lets leadership make the trade-off explicitly: this many people gives this wait, one fewer gives this much worse wait. That is a decision they can own, which a single recommended number is not.",
+        "That turns your work into a decision they own rather than a request they can accept or refuse. It also makes the cost of each service level obvious, which is usually the conversation the business actually needs to have.",
     },
   ],
 
   examples: [
     {
       kind: "illustration",
-      scenario: "The capacity request that was a rework problem.",
+      scenario: "The two extra staff that turned out to be a form field.",
       walkthrough:
-        "A processing team requests two additional staff, supported by a backlog that has grown steadily. The BA categorises a sample of two hundred arriving items into value demand and failure demand. A substantial share turn out to be cases returning for correction, and almost all of those share a single reason: a form field that is optional in the intake system but mandatory for the downstream step.",
+        "The problem: a processing team asked for two more people, and they had a growing backlog to prove it. What was happening: before agreeing, the BA took two hundred items that had arrived and sorted them into genuine new work and work that was only there because something had gone wrong earlier. A large share were cases coming back for correction, and nearly all of those came back for the same reason. A field was optional on the form at the start of the process and required by the team downstream.",
       result:
-        "Making the field mandatory at intake removed most of the returning volume. The team did not need more people, and the arithmetic of hiring would have made the underlying defect permanent while adding annual cost. Categorising arrivals into value and failure demand is a half-day exercise and it should precede every capacity conversation.",
+        "What changed: they made the field required at the point of entry. Most of the returning work disappeared. The team did not need more people, and hiring would have locked in the cost of that defect permanently while hiding it. Splitting arriving work into genuine and failure takes half a day and belongs before every conversation about headcount.",
     },
     {
       kind: "illustration",
-      scenario: "Two people, one bottleneck.",
+      scenario: "Fourteen people, and a queue caused by two of them.",
       walkthrough:
-        "A team of fourteen has a persistent queue on one case category. Overall, capacity comfortably exceeds volume and the headcount analysis shows no shortage. Splitting the analysis by case type against who is trained to handle each reveals that the affected category can only be worked by two people, both of whom also carry general work and one of whom covers the rota at weekends.",
+        "The problem: one category of work was always late, even though the team was not short-staffed overall. What was happening: on paper, capacity comfortably exceeded volume. Splitting it by type of work against who was trained to do each type told a different story. That category could only be handled by two people, both of whom also carried general work, and one of whom covered weekends.",
       result:
-        "The answer was training rather than hiring, and it cost a fraction of a headcount. Aggregate capacity comparisons systematically hide specialist bottlenecks, which is why capacity should always be analysed by case type against the people qualified to do it rather than as one total.",
+        "What changed: they trained two more people, which cost a fraction of a new hire and cleared the queue. Comparing total capacity against total volume will hide this every time. Always split it by type of work and check who is actually able to do it.",
     },
     {
       kind: "illustration",
-      scenario: "The model that balanced on average and failed every month.",
+      scenario: "The plan that balanced on paper and never worked.",
       walkthrough:
-        "A staffing model shows capacity slightly exceeding average demand, and the plan is approved. In practice the team is in backlog continuously. Rebuilding the model with a queue that carries forward, and with the actual week-to-week variation rather than the average, shows what was happening: bad weeks build a backlog that good weeks cannot fully clear, because a good week's spare capacity is small while a bad week's overflow is large.",
+        "The problem: a staffing plan showed capacity slightly ahead of demand, it was approved, and the team was behind from the first month and stayed there. What was happening: the model had been built on average demand. Rebuilding it week by week, carrying the leftover work forward and using the real week-to-week swings, showed exactly what was going on. Bad weeks built up a pile that good weeks could never fully clear, because the spare capacity in a good week was small and the overflow in a bad one was large.",
       result:
-        "Sizing to average demand guarantees a permanent queue in any system with variability, which is every real system. The model has to carry the backlog forward week by week and be tested against the worst weeks in the historical data, not the mean.",
+        "What changed: they planned against the busy weeks rather than the average, and the backlog stopped growing. Planning to average demand guarantees a permanent queue in any real business, because real businesses have busy weeks.",
     },
   ],
 
   learningPath: [
     {
-      title: "Get arrival data, not completion data",
-      body: "Timestamps for when work turned up, by type, for at least twelve months. Where the intake path does not record arrival, establishing that instrumentation is your first recommendation.",
-      effort: "2-5 days including access",
-      outcome: "A measurement of demand rather than of what the team managed to complete.",
+      title: "Get the data on when work arrives, not when it was finished",
+      body: "You want the time things turned up, by type, for at least a year. Finished work is capped by how many people you have, so it tells you what the team managed rather than what came in.",
+      effort: "2-5 days including getting access",
+      outcome: "A measure of actual demand instead of a measure of your own capacity.",
     },
     {
-      title: "Plot the arrival pattern at three resolutions",
-      body: "By month across the year, by day across the week, and by hour across the day. Look for cycles, spikes and anything that lines up with an internal schedule.",
+      title: "Plot when it arrives three ways",
+      body: "By month across the year, by day across the week, by hour across the day. Look for spikes and see whether any of them line up with something internal like a weekly run.",
       effort: "Half a day",
-      outcome: "The pattern that determines staffing, which the annual total completely conceals.",
+      outcome: "The pattern that decides staffing, which an annual total completely hides.",
     },
     {
-      title: "Categorise a sample into value and failure demand",
-      body: "Take two hundred arrivals and classify each: genuine new work, or work existing only because something earlier failed. Record the reason for each failure item.",
+      title: "Split two hundred arrivals into genuine and failure",
+      body: "Go through them by hand. Is this new work, or is it here because something earlier did not work? Write down the reason for each failure item.",
       effort: "1 day",
-      outcome: "The proportion of the apparent capacity requirement that is actually a defect.",
+      outcome: "The share of your apparent staffing problem that is really a defect.",
     },
     {
-      title: "Measure handling time as a distribution",
-      body: "Not an average. Get the spread, and specifically the long tail. Where no data exists, a two-week structured tally by the team will do.",
-      effort: "2 weeks elapsed",
-      outcome: "The variability figure that drives queue behaviour more than the mean does.",
+      title: "Measure how long things take, including the awkward ones",
+      body: "Not an average. You want the spread, especially the long cases. If nobody records it, ask the team to keep a simple tally for two weeks.",
+      effort: "2 weeks of waiting, minutes a day",
+      outcome: "The picture that averages were hiding.",
     },
     {
-      title: "Calculate effective capacity honestly",
-      body: "Headcount, minus leave, training, meetings and administration, times the measured proportion of time actually spent on case work, by case type against who can do it.",
+      title: "Work out honest capacity",
+      body: "Headcount, minus leave, training, meetings and admin, times the real share of time spent on the work, split by type against who can do it.",
       effort: "1 day",
-      outcome: "A capacity figure that will survive being checked, and usually a specialist bottleneck you had not seen.",
+      outcome: "A capacity number that survives being checked, and usually a bottleneck you had not seen.",
     },
     {
-      title: "Build a week-by-week model with a carried-forward queue",
-      body: "Arrivals in, capacity applied, backlog carried to the next week. Run it against the historical bad weeks rather than the average.",
+      title: "Build the week-by-week spreadsheet",
+      body: "Work in, capacity applied, leftovers carried into next week. Run it against your worst historical weeks and check it reproduces the backlog you can actually see.",
       effort: "1-2 days",
-      outcome: "A model that reproduces the backlog you can actually observe, which is the test of whether it is right.",
+      outcome: "A model that matches reality, which is the only test of whether it is right.",
     },
     {
-      title: "Produce the staffing curve and present the trade-off",
-      body: "Waiting time and backlog across a range of staffing levels. Let leadership choose the point on the curve rather than accepting or rejecting a single number.",
+      title: "Present a range and let them choose",
+      body: "Waiting time and backlog at several staffing levels. Not one recommended number.",
       effort: "Half a day",
-      outcome: "A decision the business owns, with the cost of each option visible.",
+      outcome: "A decision the business owns, with the cost of each option in plain sight.",
     },
   ],
 
   exercises: [
     {
-      title: "Derive lead time without measuring it",
+      title: "Work out a waiting time in ten minutes",
       brief:
-        "For any queue in your organisation, count the items currently in progress and the number completed per week. Divide the first by the second to get average lead time in weeks. Then check the figure against a handful of real cases.",
+        "Pick any queue in your business. Count how many things are in it right now. Count how many get finished in a normal week. Divide the first by the second. Then check the answer against a handful of real cases.",
       success:
-        "Your derived figure is close to what the real cases show, and you have a lead time measure that required no case-by-case tracking.",
+        "Your figure is roughly right, and you have a waiting time nobody had to track case by case to produce.",
       time: "1 hour",
     },
     {
-      title: "The failure demand sample",
+      title: "Sort a hundred items into genuine and failure",
       brief:
-        "Take one hundred items that arrived at any team last month. Classify each as genuine new work or work created by an earlier failure. Record the reason for every failure item and group the reasons.",
+        "Take one hundred things that arrived at any team last month. Mark each as genuine new work or work created by an earlier failure. Write down the reason for the failures and group them.",
       success:
-        "You have a failure demand percentage and can name the single largest cause of it.",
+        "You have a percentage and can name the single biggest cause behind it.",
       time: "Half a day",
     },
     {
-      title: "Plot the pattern",
+      title: "Find a spike that you caused",
       brief:
-        "Take twelve months of arrivals for one work type and plot them by month, by day of week, and by hour of day. Mark anything that coincides with an internal schedule such as a batch run or a reporting cycle.",
+        "Take a year of arrivals for one type of work and plot them by month, by day of the week and by hour. Mark anything that lines up with an internal schedule such as a weekly run or a reporting deadline.",
       success:
-        "You can name at least one peak that is created by an internal schedule rather than by customer behaviour.",
+        "You can name at least one peak that your own business creates rather than your customers.",
       time: "2 hours",
     },
   ],
 
   mistakes: [
     {
-      mistake: "Using annual volume as the capacity requirement",
-      why: "It ignores arrival pattern and variability, which are what actually determine queues. Two operations with identical annual volumes can need very different staffing.",
-      fix: "Plot arrivals by month, day and hour, and model week by week with a carried-forward queue.",
+      mistake: "Planning from the annual total",
+      why: "It ignores when the work arrives and how much it swings, which is what actually decides how many people you need. Two businesses with the same yearly volume can need very different teams.",
+      fix: "Plot arrivals by month, day and hour, and model week by week with the leftovers carried forward.",
     },
     {
-      mistake: "Measuring completions instead of arrivals",
-      why: "Completions are capped by capacity, so a saturated team appears to have demand exactly equal to its capacity, which is circular.",
-      fix: "Measure at the point of arrival. Where the intake path has no timestamp, fixing that is the first recommendation.",
+      mistake: "Measuring what got finished instead of what arrived",
+      why: "Finished work is limited by how many people you have. So a stretched team looks like it has exactly as much demand as capacity, which proves nothing.",
+      fix: "Measure at the point work turns up. If nothing records that, getting it recorded is your first recommendation.",
     },
     {
-      mistake: "Targeting high utilisation",
-      why: "Waiting time rises non-linearly as utilisation approaches full, so a team planned to be busy almost all the time is being planned to have long and unstable queues.",
-      fix: "Plan deliberate slack, and show the waiting-time curve so leadership can see what the last few percent of utilisation costs in customer waiting.",
+      mistake: "Aiming for everyone to be busy all day",
+      why: "The busier a team is, the longer work waits, and it gets worse very fast at the top end. Planning for everyone to be occupied all day is planning for a queue that never clears.",
+      fix: "Plan in some slack and show what the last stretch of busyness costs in customer waiting time.",
     },
     {
-      mistake: "Staffing to absorb failure demand",
-      why: "It makes the underlying defect permanent and adds annual cost forever. The work was never a capacity requirement, it was a symptom.",
-      fix: "Categorise arrivals into value and failure demand before any staffing conversation, and fix the largest failure cause first.",
+      mistake: "Hiring to cover work caused by an earlier failure",
+      why: "It makes the defect permanent and adds cost every year. That work was never a staffing need, it was a symptom.",
+      fix: "Split arriving work into genuine and failure before any staffing conversation, and fix the biggest failure cause first.",
     },
     {
-      mistake: "Working from average handling time alone",
-      why: "Variability drives queues at least as strongly as the mean. A team with a long tail of difficult cases behaves very differently from one with consistent durations.",
-      fix: "Capture the distribution, and specifically the tail. Model with variability rather than with a single average.",
+      mistake: "Working from average handling time",
+      why: "Swings hurt queues at least as much as the average does. A team with a handful of very long cases behaves nothing like one where every case is similar.",
+      fix: "Capture the spread, especially the long tail, and build the model with it.",
     },
     {
       mistake: "Comparing total capacity against total volume",
-      why: "It hides specialist bottlenecks. A team can have ample overall capacity and a persistent queue on the one category only two people can handle.",
-      fix: "Analyse capacity by case type against the people qualified to perform it.",
+      why: "It hides the case where only two people can do one type of work. The team looks fine and one queue is permanently late.",
+      fix: "Split capacity by type of work against the people qualified to do it.",
     },
     {
-      mistake: "Assuming productive hours rather than measuring them",
-      why: "Nobody produces case work for every hour they are present, and the assumed figure is always optimistic, which makes the capacity number wrong in a predictable direction.",
-      fix: "Measure the proportion of time actually spent on case work, and state it explicitly in the model.",
+      mistake: "Guessing how much of the day is productive",
+      why: "Nobody does the actual work every hour they are at their desk, and the guess is always generous, which makes the whole calculation wrong in a predictable direction.",
+      fix: "Measure it and put the figure openly in your model.",
     },
     {
-      mistake: "Recommending a single headcount number",
-      why: "It presents a trade-off as a fact, and it invites a negotiation about the number rather than a decision about the service level.",
-      fix: "Present the curve. Show waiting time and backlog across a range of staffing levels and let leadership choose the point.",
+      mistake: "Recommending one headcount number",
+      why: "It turns a trade-off into a demand, and invites an argument about your number instead of a decision about how long customers should wait.",
+      fix: "Show waiting time at a range of staffing levels and let leadership pick the point.",
     },
   ],
 
   bestPractices: [
-    "Measure demand at arrival, never at completion.",
-    "Analyse volume, mix, arrival pattern and variability separately.",
-    "Plot arrivals by month, by day of week and by hour of day.",
-    "Categorise a sample into value demand and failure demand.",
-    "Capture handling time as a distribution, including the tail.",
-    "Calculate effective capacity from measured productive time, not assumed hours.",
-    "Analyse capacity by case type against who is qualified to do it.",
-    "Check overtime patterns against batch and release schedules.",
+    "Measure work when it arrives, never when it is finished.",
+    "Look at how much, what type, when it turns up and how much it swings, separately.",
+    "Plot arrivals by month, day of week and hour of day.",
+    "Split a sample into genuine work and work caused by earlier failures.",
+    "Capture the spread of handling times, not just the average.",
+    "Work out capacity from measured productive time, not assumed hours.",
+    "Split capacity by type of work against who can actually do it.",
+    "Check overtime patterns against internal schedules.",
     "Model week by week with the backlog carried forward.",
-    "Test the model against historical bad weeks, not the average.",
-    "Forecast from the underlying driver rather than extrapolating the trend.",
-    "Present a staffing curve rather than a single recommended number.",
+    "Test the model against your worst weeks, not the average one.",
+    "Forecast from whatever drives the volume rather than last year's line.",
+    "Present a range of staffing levels rather than one number.",
   ],
 
   proTips: [
-    "Ask the team what a bad day looks like and what they stop doing on one. The things they drop under pressure are the steps the organisation has implicitly decided are optional, and that list is both a capacity finding and a risk finding. It also tells you where quality degrades before anybody measures it.",
-    "Before modelling anything, check whether the queue you are analysing is actually visible. In a surprising number of operations a share of the work sits in a shared inbox or on somebody's desk and never enters the system until it is started, which means the official backlog is a measure of what has been picked up rather than what is waiting.",
-    "When somebody says the team is at capacity, ask how long the queue has been growing and plot it. A queue growing steadily means demand exceeds capacity structurally. A queue that oscillates around a level means the system is coping and the complaint is about variation, and those two situations need completely different responses.",
-    "Model what happens if handling time improves by a modest amount versus what happens if variability falls by the same proportion. In most queueing situations the second produces a larger improvement, and showing that changes what the business chooses to work on, usually away from squeezing people and towards standardising the awkward cases.",
+    "Ask the team what a bad day looks like and what they stop doing on one. The things they drop under pressure are the steps the business has quietly decided are optional. That list is a staffing finding and a risk finding at the same time, and it tells you where quality slips before anyone measures it.",
+    "Before you model anything, check whether the queue you are looking at is even visible. In a lot of businesses some of the work sits in a shared inbox or on somebody's desk and only enters the system when they start it, which means the official backlog is a count of what has been picked up rather than what is waiting.",
+    "When somebody says the team is at capacity, ask how long the queue has been growing and plot it. A queue growing steadily means demand genuinely exceeds capacity. A queue that goes up and down around a level means the team is coping and the real complaint is about the swings. Those two need completely different answers.",
+    "Try modelling what happens if you make the awkward cases less awkward, rather than making everyone a bit faster. In most queues, reducing the swings does more than shaving the average, and showing that usually moves the conversation away from squeezing people and towards fixing the messy cases.",
   ],
 
   businessApplications: [
-    "Headcount business cases, where the analysis decides whether the request is a capacity problem or a defect.",
-    "Service level design, where the staffing curve makes the cost of each response target explicit.",
-    "Automation appraisal, where the question is which case types consume capacity rather than which are most annoying.",
-    "Seasonal planning, where arrival pattern analysis determines temporary staffing and its timing.",
-    "Outsourcing decisions, where volume, mix and variability determine whether a fixed-price arrangement is viable.",
-    "Post-implementation review, where a solution that reduced average handling time may have increased variability.",
+    "Requests for more staff, where the analysis decides whether it is a capacity problem or a defect.",
+    "Setting response targets, where a range of staffing levels makes the cost of each promise obvious.",
+    "Deciding what to automate, where the question is which work eats the team's week rather than which is most annoying.",
+    "Seasonal planning, where the arrival pattern decides how many temporary staff and when.",
+    "Outsourcing decisions, where volume and swings decide whether a fixed price is realistic.",
+    "Checking after a change, where something that made each case quicker may have made the swings worse.",
   ],
 
   checklist: [
-    "Arrival timestamps obtained for at least twelve months.",
+    "Arrival times obtained for at least a year.",
     "Arrivals plotted by month, day of week and hour of day.",
-    "Peaks checked against internal batch and release schedules.",
-    "Sample categorised into value and failure demand, with reasons.",
-    "Handling time captured as a distribution including the tail.",
-    "Productive time proportion measured rather than assumed.",
-    "Capacity analysed by case type against qualified staff.",
-    "Specialist bottlenecks identified.",
-    "Week-by-week model built with backlog carried forward.",
-    "Model tested against historical worst weeks.",
-    "Model reproduces the observed backlog before being trusted.",
-    "Demand forecast derived from an underlying driver.",
-    "Staffing curve produced showing waiting time across a range of levels.",
+    "Peaks checked against internal schedules.",
+    "Sample split into genuine work and failure work, with reasons.",
+    "Handling times captured as a spread including the long cases.",
+    "Productive time measured rather than assumed.",
+    "Capacity split by type of work against qualified people.",
+    "Bottlenecks caused by limited training identified.",
+    "Week-by-week model built with leftovers carried forward.",
+    "Model tested against the worst weeks in the data.",
+    "Model reproduces the backlog you can actually observe.",
+    "Forecast built from whatever drives the volume.",
+    "Range of staffing levels presented with waiting times.",
   ],
 
   faqs: [
     {
-      q: "Do I need simulation software for this?",
-      a: "Rarely. A week-by-week spreadsheet model with a carried-forward backlog answers most business questions. Consider simulation when routing between multiple queues and skill groups is the thing being decided, not before.",
+      q: "Do I need special software for this?",
+      a: "Almost never. A week-by-week spreadsheet that carries the leftover work forward answers most business questions. Think about specialist tools only when the decision is about routing work between several queues and skill groups.",
     },
     {
       q: "How much data do I need?",
-      a: "Twelve months of arrival timestamps to see seasonality, and a two-week structured tally for handling times where none is recorded. Less than that and you will mistake a cycle for a trend.",
+      a: "A year of arrival times so you can see the seasons, and a two-week tally by the team for how long things take if nobody records it. With less than a year you will mistake a normal cycle for a trend.",
     },
     {
-      q: "What utilisation should a team be planned at?",
-      a: "It depends on how much variability there is and how much waiting is acceptable, which is why the curve matters more than a target. What is certain is that planning for near-full utilisation plans for long and unstable queues.",
+      q: "How busy should a team be?",
+      a: "It depends how much the workload swings and how long customers can reasonably wait, which is why showing a range beats setting a target. What is certain is that planning for everyone to be busy all day is planning for a queue that never clears.",
     },
     {
-      q: "How do I tell failure demand from genuine demand?",
-      a: "Ask of each item whether it would exist if everything upstream had worked correctly the first time. Chases, corrections, repeat contacts and rework are failure demand. Classify a sample by hand rather than trusting category codes.",
+      q: "How do I tell genuine work from work caused by a failure?",
+      a: "Ask of each item whether it would exist if everything before it had worked first time. Chases, corrections, people ringing back and redone work are all failures. Sort a sample by hand rather than trusting whatever category code was ticked.",
     },
     {
-      q: "The business insists the answer is more people. What do I do?",
-      a: "Do the analysis anyway and present the curve alongside the failure demand percentage. If it turns out they are right, you have strengthened their case with evidence. If they are not, the numbers make the argument rather than you.",
+      q: "The business is certain they need more people. What do I do?",
+      a: "Do the work anyway and show the range alongside the failure work percentage. If they turn out to be right, you have strengthened their case with evidence. If they are not, the numbers make the argument instead of you.",
     },
     {
-      q: "How does this apply to a team doing project work rather than cases?",
-      a: "The same arithmetic holds. Work in progress divided by completion rate gives lead time, and high utilisation still produces long queues. The main difference is that project work has larger, more variable items, which makes the utilisation effect stronger rather than weaker.",
+      q: "Does this apply to a team doing projects rather than cases?",
+      a: "Yes. Count what is in progress, divide by how many finish per month, and you get the same answer. Being permanently busy still produces long queues. The only difference is that project work comes in bigger, more variable lumps, which makes the effect stronger rather than weaker.",
     },
   ],
 
   tools: [
-    { name: "Arrival timestamps from the intake system", what: "The foundation. Where they do not exist, creating them is the first recommendation of the analysis.", cost: "Varies" },
-    { name: "A spreadsheet queue model", what: "Arrivals in, capacity applied, backlog carried forward, week by week. Sufficient for most business questions.", cost: "Varies" },
-    { name: "A two-week handling time tally", what: "Captured by the team, recording the distribution rather than an average.", cost: "Free" },
-    { name: "A skills matrix", what: "Who can handle which case type. The fastest way to find a specialist bottleneck hidden by aggregate capacity figures.", cost: "Free" },
+    { name: "Arrival times from whatever the work comes into", what: "The foundation. If nothing records when work turns up, getting that recorded is the first recommendation.", cost: "Varies" },
+    { name: "A week-by-week spreadsheet", what: "Work in, capacity applied, leftovers carried forward. Enough for almost every business question.", cost: "Varies" },
+    { name: "A two-week tally by the team", what: "How long things actually take, including the awkward ones. Costs minutes a day.", cost: "Free" },
+    { name: "A list of who can do what", what: "The fastest way to find a bottleneck that total headcount figures are hiding.", cost: "Free" },
   ],
 
   internalLinks: [
-    { slug: "where-inefficiency-hides", anchor: "checking whether it is really a capacity problem", context: "Before modelling" },
-    { slug: "mapping-a-business-process", anchor: "the process the demand flows through", context: "Context" },
-    { slug: "writing-a-business-case", anchor: "turning the curve into a funded decision", context: "Next step" },
+    { slug: "where-inefficiency-hides", anchor: "checking whether it is really about capacity", context: "Before modelling" },
+    { slug: "mapping-a-business-process", anchor: "the process the work flows through", context: "Context" },
+    { slug: "writing-a-business-case", anchor: "turning this into a funded decision", context: "Next step" },
   ],
 
   relatedGuides: ["where-inefficiency-hides", "mapping-a-business-process", "writing-a-business-case"],
 
   conclusion: [
-    "Take one queue in your organisation, count what is currently in progress and what completes per week, and divide the first by the second. That single division gives you average lead time in minutes of work, and it is usually several times longer than anyone in the process believes.",
+    "Pick one queue in your business, count what is sitting in it, count how many get finished in a week, and divide. That takes ten minutes and gives you how long work is really waiting, which is usually several times longer than anyone involved believes.",
   ],
 };
 

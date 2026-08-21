@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "root-cause-analysis-in-practice",
-  seoTitle: "Root Cause Analysis in Practice, Without the Theatre",
+  seoTitle: "Finding What Is Actually Causing the Problem",
   metaDescription:
-    "How to find what is actually causing a business problem: the four techniques worth knowing, how to test a cause before believing it, and when to stop digging.",
-  title: "Root Cause Analysis in Practice",
+    "Not a workshop with sticky notes. How to compare where the problem happens against where it does not, test a theory before believing it, and know when to stop digging.",
+  title: "Finding What Is Actually Causing the Problem",
   keywords: [
     "root cause analysis",
     "five whys business analysis",
@@ -17,198 +17,198 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Intermediate",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
-  readingTime: 17,
+  readingTime: 15,
 
   intro: [
-    "Root cause analysis has a reputation problem, and it earned it. Somewhere along the way it became a workshop with sticky notes where a group of people who were not there guess at causes for ninety minutes, produce a fishbone diagram with forty branches, and select whichever branch the most senior person nodded at.",
-    "The real work looks almost nothing like that. It is closer to investigation than to facilitation: you form a candidate explanation, you work out what would have to be true if it were correct, and then you go and check. Most of your time goes on the checking, and most candidate causes die there, which is the whole point.",
-    "What follows is the version I actually use inside businesses. Four techniques that earn their keep, the test that separates a cause from a coincidence, the layers you pass through on the way down, and the judgement call about when to stop, because you can always dig one level further and at some depth the finding stops being actionable.",
+    "Root cause analysis has a bad reputation and it earned it. Somewhere along the way it became a workshop with sticky notes, where a group of people who were not there guess at causes for ninety minutes, produce a diagram with forty branches, and pick whichever branch the most senior person nodded at.",
+    "The real work looks almost nothing like that. It is closer to a police investigation than a workshop. You come up with a theory, you work out what would have to be true if it were right, and then you go and check. Most of your time goes on the checking, and most theories die there. That is the whole point.",
+    "This guide is the version I actually use inside businesses. Four things that work, the test that separates a cause from a coincidence, the layers you pass through on the way down, and the judgement call about when to stop, because you can always dig one level further and at some depth the answer stops being something anybody can act on.",
   ],
 
   whyItMatters: [
-    "The cost of a wrong cause is not zero, it is negative. You spend the budget, the problem persists, and the organisation now believes that area has been dealt with, so the next person to raise it gets less attention than you did.",
-    "There is a compounding effect too. Every fix aimed at the wrong cause adds a system, a step or a control to the operation. Businesses accumulate these for decades, and a great deal of what looks like complexity in an old process is a museum of confidently misdiagnosed problems.",
-    "Doing it well is also the clearest way to demonstrate what a BA is for. Anybody in the room can propose a solution. Establishing which of six plausible explanations is the real one, with evidence, is a different kind of contribution and people notice it.",
+    "Fixing the wrong cause is not neutral, it is worse than doing nothing. You spend the money, the problem carries on, and now the business believes that area has been dealt with, so the next person to raise it gets less attention than you did.",
+    "It also builds up. Every fix aimed at the wrong cause adds a system, a step or a check to the operation. Businesses collect these for decades, and a great deal of what looks like complexity in an old process is really a museum of confidently misdiagnosed problems.",
+    "And doing it well is the clearest demonstration of what a BA is for. Anybody in the room can suggest a solution. Working out which of six plausible explanations is the real one, with evidence, is a different kind of contribution and people notice it.",
   ],
 
   coreConcepts: [
     {
-      term: "A cause is something that, if removed, stops the effect",
+      term: "A cause is something that, if you took it away, would stop the problem",
       explain:
-        "That is the working definition, and it is more demanding than it sounds. Most things offered as causes are conditions that make the problem possible rather than things that make it happen.",
+        "That is the working test, and it is more demanding than it sounds. Most things offered up as causes are conditions that make the problem possible rather than things that make it happen.",
       detail:
-        "Test it out loud: if this were not true, would the problem still occur? A surprising number of candidate causes fail this immediately, and failing it in the room is much cheaper than failing it after a build.",
+        "Try it out loud: if this were not true, would the problem still occur? A surprising number of theories fail immediately, and failing in the room is much cheaper than failing after a build.",
     },
     {
-      term: "Separate the trigger, the condition, and the reason the condition exists",
+      term: "Three different things get called the cause",
       explain:
-        "A late delivery might be triggered by a supplier's system outage, made possible by a condition (no alternative source of the same data), which exists because of a decision (nobody was willing to fund a second feed).",
+        "A delivery is late. The trigger was a supplier's system going down. What made that possible was having no backup source for the same information. And that exists because nobody was willing to pay for a second one.",
       detail:
-        "Fixing the trigger buys you nothing, because the next trigger will be different. Fixing the condition prevents a class of problems. Fixing the decision layer is where change becomes durable and also where it becomes political.",
+        "Fixing the trigger buys you nothing, because next time the trigger will be different. Fixing the condition prevents a whole class of problem. Fixing the decision is where change becomes permanent and also where it becomes political.",
     },
     {
-      term: "Technique one: asking why, properly",
+      term: "Asking why, properly",
       explain:
-        "The famous version is five whys and most of it is theatre, because a single chain of five assumes the problem has exactly one cause and that the first answer at each level is the right one.",
+        "The famous version is five whys and most of it is theatre, because one chain of five assumes there is exactly one cause and that the first answer at each step is right.",
       detail:
-        "Use it as a ladder rather than a ritual. Ask why, then before moving on ask whether there are other answers at this level. You get a small tree rather than a line, and the tree is far more honest. Stop when the answers become decisions somebody made rather than mechanics.",
+        "Use it as a ladder rather than a ritual. Ask why, then before moving on ask whether there is another answer at this level. You end up with a small tree rather than a line, which is far more honest. Stop when the answers become decisions somebody made rather than mechanics.",
     },
     {
-      term: "Technique two: the difference question",
+      term: "Compare where it happens against where it does not",
       explain:
-        "Where the problem occurs and where it does not. Which branch, which product, which shift, which customer type, which time of day. The difference between the affected and unaffected cases contains the cause.",
+        "Which branch, which product, which shift, which customer type, which time of day. The difference between the cases that go wrong and the ones that do not contains the cause.",
       detail:
-        "This is the highest-yield technique in the set and the most underused. If three branches have the problem and two do not, you have a controlled comparison sitting in your own business, for free, and no workshop is required to run it.",
+        "This is the most productive thing on this list and the most underused. If three branches have the problem and two do not, you have a free comparison sitting inside your own business, and no workshop is required to run it.",
     },
     {
-      term: "Technique three: the timeline",
+      term: "Ask when it started",
       explain:
-        "Ask when it started. If the answer is a date, something changed then. If the answer is always, you are looking at a design decision rather than a fault, which is a different investigation entirely.",
+        "If the answer is a date, something changed then. If the answer is always, you are looking at a design decision rather than a fault, which is a completely different investigation.",
       detail:
-        "Then get the change log: releases, policy updates, supplier changes, reorganisations, people leaving. Overlay the problem data on the change data. This one question resolves an embarrassing proportion of investigations in under an hour.",
+        "Then get the list of changes: releases, policy updates, supplier changes, reorganisations, people leaving. Put the problem data next to the change data. This one question settles an embarrassing share of investigations in under an hour.",
     },
     {
-      term: "Technique four: the category sweep",
+      term: "Work through a fixed set of categories",
       explain:
-        "Run through a fixed set of categories so you do not investigate only the one you find most interesting. People, process, data, system, policy, supplier, environment.",
+        "People, process, data, system, policy, supplier, environment. Go through all of them so you do not only investigate whichever one you find interesting.",
       detail:
-        "This is what a fishbone diagram is actually for. Used as a checklist by an analyst it prevents tunnel vision. Used as a group brainstorm it mostly generates plausible-sounding branches nobody intends to check.",
+        "This is what a fishbone diagram is actually for. Used as a checklist by one analyst it stops tunnel vision. Used as a group brainstorm it mostly produces plausible-sounding branches nobody intends to check.",
     },
     {
-      term: "Every candidate cause needs a falsifiable prediction",
+      term: "Every theory needs a prediction you could be wrong about",
       explain:
         "If this cause is real, what else must be true in the data? Write the prediction down before you look. Then go and look.",
       detail:
-        "For example: if the delay is caused by the weekly batch, then cases arriving on a Thursday afternoon should be systematically slower than those arriving on a Monday. That is checkable in an afternoon and it either survives or it does not.",
+        "For example: if the delay is caused by the weekly run, then things arriving on Thursday afternoon should be noticeably slower than things arriving on Monday. That is checkable in an afternoon and it either survives or it does not.",
     },
     {
-      term: "Correlation dressed as cause is the standard failure",
+      term: "Two things moving together is not proof",
       explain:
-        "Two things move together. The third possibility, that something else drives both, is the one people skip, and it is the most common situation in business data.",
+        "Errors go up when volume goes up, so volume looks like the cause. Often the real cause is that a checking step gets skipped under pressure, and volume just makes that visible.",
       detail:
-        "Errors rise when volume rises, so volume looks like the cause. Often the real cause is that the checking step gets skipped under pressure, which volume merely reveals. The distinction matters because hiring more people fixes one story and not the other.",
+        "It matters because the two stories have different answers. Hiring more people fixes one and not the other, and the third possibility, that something else is driving both, is the one people skip.",
     },
     {
-      term: "The layers you pass through",
+      term: "Four layers you pass through",
       explain:
-        "Mechanical (what physically happened), procedural (what the process allowed), informational (what somebody could not see), and structural (what incentive or decision made all of it rational).",
+        "What physically happened. What the process allowed. What somebody could not see. And what made all of it the rational thing to do.",
       detail:
-        "Most investigations stop at mechanical because it is satisfying and concrete. Most durable fixes sit at informational or structural. Notice which layer your finding is in, because it tells you who needs to be in the room for the solution conversation.",
+        "Most investigations stop at the first because it is concrete and satisfying. Most fixes that actually last sit at the third or fourth. Notice which layer your finding is in, because it tells you who needs to be in the room for the solution conversation.",
     },
     {
-      term: "Stop when the next level stops being actionable",
+      term: "Stop when the next level is not something anybody can change",
       explain:
-        "You can keep going until you reach the founding of the company or the state of the market. Depth is not virtue. The right stopping point is the deepest level at which somebody in the organisation can actually change something.",
+        "You can keep going until you reach the founding of the company. Depth is not a virtue. The right place to stop is the deepest level at which somebody in the business can actually do something.",
       detail:
-        "If the honest root cause sits outside your influence, record it explicitly and then work one level up. A deliberate decision to fix a layer above the true cause is engineering. An unnoticed one is waste.",
+        "If the honest cause sits outside anybody's influence, write that down and then work one level up. Deciding on purpose to fix a layer above the real cause is engineering. Doing it without noticing is waste.",
     },
     {
-      term: "Multiple causes are normal, single causes are suspicious",
+      term: "Two or three causes is normal, one is suspicious",
       explain:
-        "Real problems in real operations usually have two or three contributing causes, often with one dominant. A clean single cause is sometimes true and is more often a sign that you stopped at the first satisfying answer.",
+        "Real problems in real businesses usually have a few contributing causes, often with one dominant. A clean single cause is sometimes true and is more often a sign that you stopped at the first satisfying answer.",
       detail:
-        "Where there are several, size each one. Which contributes most of the volume? You will frequently find one cause accounts for the majority of cases and can be fixed cheaply, while the remainder is a long tail that is not worth touching.",
+        "Where there are several, size each one. Which accounts for most of the cases? You will often find one cause covers the majority and can be fixed cheaply, while the rest is a long tail not worth touching.",
     },
     {
-      term: "Never let the analysis become an investigation of a person",
+      term: "Never let it turn into an investigation of a person",
       explain:
-        "The moment the exercise starts feeling like blame, the information stops. People will describe the process correctly and omit the exception that involved them.",
+        "The moment it starts to feel like blame, the information stops. People will describe the process correctly and leave out the exception that involved them.",
       detail:
-        "Say plainly that you are looking for what made the outcome likely, not who did it. And mean it, because if the write-up names an individual once, nobody in that building will tell you anything useful again.",
+        "Say plainly that you are looking for what made the outcome likely, not who did it. And mean it, because if the write-up names one individual, nobody in that building will tell you anything useful again.",
     },
   ],
 
   examples: [
     {
       kind: "illustration",
-      scenario: "The difference question, answered in an afternoon.",
+      scenario: "Sorted out in one afternoon, with no meetings.",
       walkthrough:
-        "A support operation misses its response target on roughly a fifth of tickets. The proposed cause is understaffing and the proposed solution is two more agents. Before agreeing, the BA splits the missed tickets by every attribute available: channel, product, customer tier, time of day, day of week, agent, and originating team. Nearly all of the misses arrive by one channel, an email address that routes into a shared inbox rather than the ticketing system, and are only logged when somebody notices them.",
+        "The problem: a support team was missing its response target on about a fifth of tickets and had asked for two more agents. What was happening: before agreeing, the BA split the missed tickets by every attribute available. Channel, product, customer tier, time of day, day of week, agent, and which team it came from. Nearly all the misses arrived through one channel, an email address feeding a shared inbox rather than the ticketing system, and only got logged when somebody happened to notice them.",
       result:
-        "The cause was not capacity, it was an intake path that started the clock late and made the queue invisible. Two more agents would have improved the number slightly and left the mechanism intact. The whole finding came from splitting the failing cases by every attribute available, which required no interviews and no workshop.",
+        "What changed: they routed that inbox into the ticketing system. The cause was never capacity, it was a way in that started the clock late and made the queue invisible. Two more agents would have improved the number slightly and left the mechanism completely intact. The whole finding came from splitting the failing cases by every attribute available, which needed no interviews and no workshop.",
     },
     {
       kind: "illustration",
-      scenario: "Five whys that stopped one level too early.",
+      scenario: "The investigation that stopped one level too early.",
       walkthrough:
-        "Invoices are being paid late. Why? Approvals are slow. Why? Approvers say they cannot tell which invoices are urgent. Why? The queue shows submission date but not payment due date. The team builds a due date column into the approval screen and declares the investigation closed. Three months later the numbers have barely moved. Asking why once more reveals that most approvers work from an email notification and never open the queue at all, and the notification contains neither date.",
+        "The problem: invoices were being paid late. What was happening: asking why got them to approvals being slow, then to approvers not being able to tell which invoices were urgent, then to the queue showing the submission date but not the payment due date. So the team added a due date column to the approval screen and closed the investigation. Three months later the numbers had barely moved. Asking why once more revealed that most approvers work from an email notification and never open the queue at all, and the notification contained neither date.",
       result:
-        "The mechanical answer was correct and incomplete. The informational layer, which was where people actually looked, had not been examined. When a fix that follows a sound analysis fails to move the metric, the usual explanation is not that the analysis was wrong but that it stopped one layer above the behaviour it needed to change.",
+        "What changed: they put the dates in the notification. The first answer had been correct and incomplete. Nobody had looked at where people actually looked. When a fix that follows sound analysis fails to move the number, the usual explanation is not that the analysis was wrong but that it stopped one layer above the behaviour it needed to change.",
     },
     {
       kind: "illustration",
-      scenario: "The cause that was a decision, not a fault.",
+      scenario: "The cause was a target, not a fault.",
       walkthrough:
-        "A manufacturer has recurring quality failures on one product line. Mechanically, an inspection step is being skipped. Procedurally, the process allows it, because the inspection is recorded on paper collected weekly. Informationally, nobody sees a skipped inspection until the following week. Structurally, the line is measured on units shipped per shift and the inspection is the only step that can be dropped without an immediate consequence.",
+        "The problem: a manufacturer had recurring quality failures on one product line. What was happening: physically, an inspection step was being skipped. The process allowed it, because inspections were recorded on paper collected weekly. Nobody could see a skipped inspection until the following week. And underneath all of that, the line was measured on units shipped per shift, and inspection was the only step that could be dropped without an immediate consequence.",
       result:
-        "Four true statements at four layers, and only the last one explains why this keeps happening on this line and not on others where the same inspection exists. Any fix that leaves the measurement in place is fighting the incentive. This is the point at which root cause analysis stops being an analytical exercise and becomes a conversation with whoever owns the target.",
+        "What changed: four true statements at four levels, and only the last one explains why this kept happening on this line and not on others with the same inspection. Any fix that left the measurement in place would have been fighting the incentive. This is the point where root cause analysis stops being an analytical exercise and becomes a conversation with whoever owns the target.",
     },
   ],
 
   learningPath: [
     {
-      title: "Write the effect as a measured statement",
-      body: "Not the report is slow, but this happens to roughly this many cases per week, of this type, costing this much. Without a measured effect you cannot tell whether your cause explains all of it, some of it, or none of it.",
+      title: "Write the problem down with a number in it",
+      body: "Not the report is slow, but this happens to roughly this many cases a week, of this type, costing this much. Without a measured problem you cannot tell whether your cause explains all of it, some of it, or none of it.",
       effort: "Half a day",
-      outcome: "A baseline that every candidate cause has to account for.",
+      outcome: "A baseline every theory has to account for.",
     },
     {
-      title: "Ask when it started and get the change log",
-      body: "Releases, policy changes, supplier changes, reorganisations, staff departures. Overlay the problem data on the change data and look for the join.",
+      title: "Ask when it started and get the list of changes",
+      body: "Releases, policy changes, supplier changes, reorganisations, leavers. Put the problem data next to the change data and look for where they meet.",
       effort: "2 hours",
-      outcome: "Either a strong candidate cause immediately, or the knowledge that this is a design issue rather than a regression.",
+      outcome: "Either a strong theory immediately, or the knowledge that this is a design issue rather than something that broke.",
     },
     {
-      title: "Split the failing cases against everything you have",
-      body: "Every attribute in the data: product, region, channel, customer type, shift, day, team, value band. You are looking for concentration. Where the problem is not is as informative as where it is.",
+      title: "Split the failing cases every way you can",
+      body: "Every attribute in the data: product, region, channel, customer type, shift, day, team, value band. You are looking for concentration. Where the problem does not happen is as useful as where it does.",
       effort: "1 day",
-      outcome: "A shortlist of differences between affected and unaffected cases, which is the strongest evidence available to you.",
+      outcome: "A shortlist of differences between the cases that fail and the ones that do not, which is the strongest evidence available.",
     },
     {
-      title: "Run a category sweep and build a small tree",
-      body: "People, process, data, system, policy, supplier, environment. For each, ask whether it could contribute, and keep asking why until answers become decisions rather than mechanics. Two or three levels, branching where more than one answer exists.",
+      title: "Go through the categories and build a small tree",
+      body: "People, process, data, system, policy, supplier, environment. For each, ask whether it could contribute, and keep asking why until the answers become decisions rather than mechanics. Two or three levels, branching where there is more than one answer.",
       effort: "Half a day",
-      outcome: "A set of candidate causes that is broad rather than the one you found interesting first.",
+      outcome: "A set of theories that is broad rather than just the one you found interesting first.",
     },
     {
-      title: "Write a prediction for each candidate and test it",
-      body: "If this is the cause, then something specific must be observable in the data. Write it before you look, then check. Most candidates die here, and that is the technique working.",
+      title: "Write a prediction for each theory and test it",
+      body: "If this is the cause, then something specific must show up in the data. Write it before you look, then check. Most theories die here, and that is the method working.",
       effort: "2-3 days",
       outcome: "One or two causes that survived a real test, with the evidence attached.",
     },
     {
-      title: "Size the survivors and name the layer",
-      body: "What share of the measured effect does each surviving cause account for? Which layer does it sit in: mechanical, procedural, informational or structural? That determines who has to be in the room next.",
+      title: "Size what survived and name the layer",
+      body: "What share of the problem does each surviving cause account for? Which layer does it sit in: what happened, what the process allowed, what nobody could see, or what made it rational? That decides who needs to be in the room next.",
       effort: "Half a day",
-      outcome: "A finding that can be acted on, with the right audience identified.",
+      outcome: "A finding somebody can act on, with the right audience identified.",
     },
   ],
 
   exercises: [
     {
-      title: "The negative case study",
+      title: "Look at where it does not happen",
       brief:
-        "Take any recurring problem in your organisation and find the cases where it does not occur. Same process, same period, no failure. List every way those cases differ from the failing ones. Rank the differences by how plausibly each could cause the effect.",
+        "Take any recurring problem in your business and find the cases where it does not occur. Same process, same period, no failure. List every way those cases differ from the failing ones. Rank the differences by how plausibly each could cause it.",
       success:
-        "You have at least three concrete differences and one testable prediction. If you cannot find any unaffected cases, that is itself a finding worth writing down.",
+        "You have at least three concrete differences and one thing you could check. If you cannot find any cases where it does not happen, that is itself worth writing down.",
       time: "3 hours",
     },
     {
-      title: "The prediction ledger",
+      title: "Write your predictions down first",
       brief:
-        "For your current investigation, write each candidate cause on a line with a prediction beside it, before checking anything. Then check them in order of how cheap the check is. Record which survived.",
+        "For whatever you are investigating now, write each theory on a line with a prediction next to it, before checking anything. Then check them starting with whichever is cheapest to check. Record which survive.",
       success:
-        "At least half your candidates are eliminated by evidence rather than by opinion, and you can show somebody the ledger.",
+        "At least half your theories get eliminated by evidence rather than opinion, and you can show somebody the list.",
       time: "Half a day",
     },
     {
-      title: "Layer the last incident",
+      title: "Take an old incident apart",
       brief:
-        "Take any incident report from the last six months, yours or somebody else's. Write the mechanical, procedural, informational and structural account of it in four sentences. Then check which layer the agreed fix addressed.",
+        "Take any incident report from the last six months, yours or somebody else's. Write four sentences: what physically happened, what the process allowed, what nobody could see, and what made it the rational thing to do. Then check which layer the agreed fix addressed.",
       success:
-        "You can say whether the fix will prevent recurrence or only prevent that exact trigger, and you can defend the answer.",
+        "You can say whether that fix prevents it happening again or only prevents that exact trigger, and defend the answer.",
       time: "1 hour",
     },
   ],
@@ -216,130 +216,130 @@ export const guide: Guide = {
   mistakes: [
     {
       mistake: "Running a workshop instead of an investigation",
-      why: "A room of people who were not present generates plausible causes, and plausibility is not evidence. The output feels like progress and commits the organisation to whichever branch the senior person favoured.",
-      fix: "Use group sessions to generate candidates and never to select one. Selection happens against data, after the session, by you.",
+      why: "A room of people who were not there produces plausible causes, and plausible is not evidence. The output feels like progress and commits the business to whichever branch the senior person favoured.",
+      fix: "Use group sessions to come up with theories and never to pick one. Picking happens against data, afterwards, by you.",
     },
     {
       mistake: "Stopping at the first satisfying answer",
-      why: "The first answer is nearly always mechanical, and mechanical fixes prevent that trigger rather than the class of problem. The complaint returns in a different form.",
-      fix: "Ask why at least twice more after you feel finished, and check whether other answers exist at each level rather than following a single chain.",
+      why: "The first answer is nearly always about mechanics, and mechanical fixes prevent that trigger rather than the class of problem. The complaint comes back wearing a different shirt.",
+      fix: "Ask why at least twice more after you feel finished, and check whether there is another answer at each level rather than following one chain.",
     },
     {
-      mistake: "Treating a correlation as the cause",
-      why: "Two things moving together is compatible with three different stories, and the one where a hidden factor drives both is the most common in business data.",
-      fix: "Before accepting a correlation, name what else would be true if it were causal, and go and check that instead of the correlation itself.",
+      mistake: "Treating two things moving together as proof",
+      why: "It is equally consistent with three different stories, and the one where something hidden drives both is the most common in business data.",
+      fix: "Before accepting it, name what else would be true if it were really causing the problem, and go and check that instead.",
     },
     {
       mistake: "Digging past the point of action",
-      why: "Attributing a problem to organisational culture or market conditions is often true and gives nobody anything to do. The analysis becomes an essay.",
-      fix: "Stop at the deepest layer somebody in the business can actually change, and record explicitly if the true cause sits beyond it.",
+      why: "Blaming the culture or the market is often true and gives nobody anything to do. The analysis turns into an essay.",
+      fix: "Stop at the deepest level somebody in the business can change, and say so explicitly if the real cause sits beyond it.",
     },
     {
-      mistake: "Assuming a single cause",
-      why: "Most real problems have two or three contributors. Picking one and fixing it produces a partial improvement that is then read as evidence the analysis was wrong.",
-      fix: "Size each surviving cause against the measured effect. Say what share you expect the fix to remove, before it is implemented.",
+      mistake: "Assuming there is one cause",
+      why: "Most real problems have two or three contributors. Picking one and fixing it gets you a partial improvement, which then gets read as evidence the analysis was wrong.",
+      fix: "Size each surviving cause against the measured problem. Say what share you expect the fix to remove, before it is done.",
     },
     {
-      mistake: "Letting the write-up implicate a person",
-      why: "It ends your access. Everyone in that area learns that talking to you carries a risk, and the next investigation gets a sanitised version of events.",
-      fix: "Write about conditions and decisions, never about individuals. If a person's action was the trigger, describe what made that action likely.",
+      mistake: "Letting the write-up point at a person",
+      why: "It ends your access. Everybody in that area learns that talking to you carries a risk, and the next investigation gets a sanitised version of events.",
+      fix: "Write about conditions and decisions, never individuals. If a person's action was the trigger, describe what made that action likely.",
     },
     {
-      mistake: "Not recording the causes you eliminated",
-      why: "Six months later somebody proposes the theory you already disproved, and without the record the whole argument runs again from the start.",
-      fix: "Keep the ruled-out list with the evidence beside each item. It is often the most reused part of the analysis.",
+      mistake: "Not recording what you ruled out",
+      why: "Six months later somebody proposes the theory you already disproved, and without the record the whole argument runs again from scratch.",
+      fix: "Keep the ruled-out list with the evidence beside each one. It is often the most reused part of the whole analysis.",
     },
   ],
 
   bestPractices: [
-    "Measure the effect before hunting the cause.",
-    "Ask when it started, then get the change log for that period.",
-    "Compare affected cases against unaffected ones. The difference is the cause.",
-    "Use a fixed category sweep so you do not investigate only what interests you.",
-    "Branch when asking why, rather than following a single chain.",
-    "Write a falsifiable prediction for every candidate before checking it.",
-    "Name the layer each finding sits in: mechanical, procedural, informational or structural.",
-    "Size each surviving cause against the measured effect.",
-    "Stop at the deepest actionable level and say so.",
-    "Record the causes you eliminated, with the evidence.",
-    "Keep every write-up about conditions rather than about people.",
+    "Measure the problem before hunting for the cause.",
+    "Ask when it started, then get the list of changes for that period.",
+    "Compare the cases that fail against the ones that do not.",
+    "Work through a fixed set of categories so you do not only look where it interests you.",
+    "Branch when asking why, rather than following one chain.",
+    "Write a prediction for every theory before you check it.",
+    "Name which layer each finding sits in.",
+    "Size each surviving cause against the measured problem.",
+    "Stop at the deepest level anybody can act on, and say so.",
+    "Record what you ruled out, with the evidence.",
+    "Keep every write-up about conditions rather than people.",
   ],
 
   proTips: [
-    "The single most productive question is what happens when it goes wrong, asked of the person who deals with the aftermath rather than the person who caused it. Recovery work is meticulously understood by whoever performs it, and it maps the failure modes far better than any incident log, because the log records what somebody chose to type at the time.",
-    "When a metric improves after your fix, check whether the underlying behaviour changed or only the measurement did. I have seen a queue time drop because work started being logged later, not because it started being done sooner. Always identify one independent signal that would move only if the real thing improved.",
-    "If two of your candidate causes both survive testing, look for a shared parent before treating them as separate. Two mechanisms that appeared at the same time usually have one origin, and fixing the parent is cheaper than fixing both children.",
-    "Write the sentence you expect to say to the sponsor before you finish the analysis, then ask yourself what evidence you would need to say it honestly. This exposes the gap between what you have shown and what you are about to claim, and it takes about four minutes.",
+    "The single most productive question is what happens when it goes wrong, asked of whoever deals with the aftermath rather than whoever caused it. The people who clean up understand the failure modes in detail, far better than any incident log, because a log only records what somebody chose to type at the time.",
+    "When a number improves after your fix, check whether the actual behaviour changed or only the measuring did. I have seen a queue time drop because work started being logged later, not because it started being done sooner. Always find one independent signal that would only move if the real thing improved.",
+    "If two of your theories both survive testing, look for a shared parent before treating them as separate. Two things that appeared at the same time usually have one origin, and fixing the parent is cheaper than fixing both children.",
+    "Write the sentence you expect to say to the sponsor before you finish the analysis, then ask yourself what evidence you would need to say it honestly. That exposes the gap between what you have shown and what you are about to claim, and it takes about four minutes.",
   ],
 
   businessApplications: [
-    "Recurring incidents where the same fix has already been applied more than once.",
-    "Quality problems, where the mechanical cause is usually visible and the structural one explains why it keeps happening here.",
-    "Customer complaint clusters, where the difference question can be run against existing data without interviewing anybody.",
-    "Cost overruns, where the trigger is a specific event and the condition is a control that was never designed for that volume.",
-    "System performance issues that turn out to be process issues, and the reverse, which is more common.",
-    "Post-implementation review when a delivered solution has not moved its target metric.",
+    "Problems that keep coming back after the same fix has already been applied more than once.",
+    "Quality problems, where what physically happened is usually visible and the reason it keeps happening here is not.",
+    "Clusters of customer complaints, where you can compare cases without interviewing anybody.",
+    "Cost overruns, where the trigger is an event and the condition is a check never designed for that volume.",
+    "System performance problems that turn out to be process problems, and the reverse, which is more common.",
+    "Reviewing a solution that has gone live and has not moved the number it was meant to move.",
   ],
 
   checklist: [
-    "Effect stated with a number: how many, how often, what it costs.",
-    "Start date established and compared against a change log.",
+    "Problem stated with a number: how many, how often, what it costs.",
+    "Start date established and compared against a list of changes.",
     "Failing cases split by every available attribute.",
-    "Unaffected cases identified and compared.",
-    "Category sweep completed across people, process, data, system, policy, supplier, environment.",
-    "Why-tree built to at least two levels with branching.",
-    "A written prediction recorded for every candidate cause.",
-    "Predictions tested against data, with results recorded.",
-    "Surviving causes sized against the measured effect.",
+    "Cases where it does not happen identified and compared.",
+    "All categories worked through: people, process, data, system, policy, supplier, environment.",
+    "Why-tree built to at least two levels with branches.",
+    "A written prediction recorded for every theory.",
+    "Predictions checked against data, with results recorded.",
+    "Surviving causes sized against the measured problem.",
     "Layer named for each finding.",
-    "Eliminated causes documented with evidence.",
-    "Write-up reviewed for anything that reads as blame.",
+    "Ruled-out theories written down with evidence.",
+    "Write-up checked for anything that reads as blame.",
   ],
 
   faqs: [
     {
       q: "Is the five whys technique actually useful?",
-      a: "As a habit of asking one more question, yes. As a ritual producing a single five-link chain, no. Real problems branch. Ask whether other answers exist at each level, and stop when answers become decisions rather than mechanics, which is usually at two or three levels.",
+      a: "As a habit of asking one more question, yes. As a ritual producing one chain of five, no. Real problems branch. Ask whether there is another answer at each level, and stop when the answers become decisions rather than mechanics, which is usually two or three levels down.",
     },
     {
       q: "How do I do this when there is no data?",
-      a: "Start the data. Two weeks of structured recording by the people involved, capturing case type, what went wrong and when, will beat months of theorising. Meanwhile use the difference question against whatever cases people can recall in detail.",
+      a: "Start collecting some. Two weeks of the people involved recording what went wrong and when will beat months of theorising. Meanwhile, compare against whatever cases people can remember in detail.",
     },
     {
-      q: "How long should a root cause investigation take?",
-      a: "For a well-bounded operational problem with data available, a week. Most of that is checking rather than thinking. If it is running past three weeks, the effect is probably not defined tightly enough to be explained by anything.",
+      q: "How long should this take?",
+      a: "For a well-defined operational problem with data available, about a week. Most of that is checking rather than thinking. If it runs past three weeks, the problem is probably not defined tightly enough to be explained by anything.",
     },
     {
       q: "What if the sponsor already knows the cause?",
-      a: "Test their theory first and genuinely. It is sometimes right, and testing it earns you the licence to test two others. Refusing to consider it makes the rest of the analysis look like a position rather than an investigation.",
+      a: "Test their theory first and genuinely. It is sometimes right, and testing it earns you the licence to test two others. Refusing to consider it makes the rest of your work look like a position rather than an investigation.",
     },
     {
       q: "The real cause is a manager who will not change. What do I write?",
-      a: "Describe the condition rather than the person: the incentive, the target, the absence of a control. Structural findings can be stated honestly without naming anybody, and stated that way they can actually be discussed in a governance forum.",
+      a: "Describe the condition rather than the person: the incentive, the target, the missing check. Structural findings can be stated honestly without naming anybody, and stated that way they can actually be discussed in a meeting.",
     },
     {
       q: "How certain do I need to be before recommending a fix?",
-      a: "Certain enough to state what share of the measured effect you expect the fix to remove, and to have agreed how that will be checked afterwards. Predicting the size of the improvement in advance is the honest form of confidence.",
+      a: "Certain enough to say what share of the problem you expect the fix to remove, and to have agreed how that will be checked afterwards. Predicting the size of the improvement in advance is the honest form of confidence.",
     },
   ],
 
   tools: [
-    { name: "Query access to case-level data", what: "The difference question needs raw cases, not a summary report. This is the single most valuable access to negotiate.", cost: "Varies" },
-    { name: "A change log", what: "Releases, policy updates, supplier changes, leavers. Frequently held in four places and never in one, which is worth fixing regardless.", cost: "Free" },
-    { name: "A prediction ledger", what: "Candidate cause, prediction, test, result. One page, and it is the artefact that keeps the analysis honest.", cost: "Free" },
+    { name: "Access to the individual cases", what: "Comparing where it happens against where it does not needs raw cases, not a summary report. The most valuable access to negotiate.", cost: "Varies" },
+    { name: "A list of changes", what: "Releases, policy updates, supplier changes, leavers. Usually held in four places and never in one, which is worth fixing anyway.", cost: "Free" },
+    { name: "A theory and prediction list", what: "Theory, prediction, test, result. One page, and it is what keeps the analysis honest.", cost: "Free" },
     { name: "A category checklist", what: "People, process, data, system, policy, supplier, environment. A fishbone used as a checklist rather than a workshop.", cost: "Free" },
   ],
 
   internalLinks: [
     { slug: "symptom-versus-problem", anchor: "checking you are investigating the right thing", context: "Before analysis" },
-    { slug: "thinking-critically-about-evidence", anchor: "reading the numbers sceptically", context: "Testing candidates" },
-    { slug: "designing-the-future-state", anchor: "turning a confirmed cause into a target design", context: "After analysis" },
+    { slug: "thinking-critically-about-evidence", anchor: "reading the numbers sceptically", context: "Testing theories" },
+    { slug: "designing-the-future-state", anchor: "turning a confirmed cause into a design", context: "After analysis" },
   ],
 
   relatedGuides: ["symptom-versus-problem", "thinking-critically-about-evidence", "designing-the-future-state"],
 
   conclusion: [
-    "Take the problem you are working on now and spend an afternoon on the difference question alone: split the failing cases by every attribute in the data and find where the problem does not occur. It requires no meetings and no permission, and it produces stronger evidence than any workshop you could run instead.",
+    "Take the problem you are working on now and spend an afternoon on one thing: split the failing cases by every attribute in the data and find where the problem does not happen. It needs no meetings and no permission, and it produces stronger evidence than any workshop you could run instead.",
   ],
 };
 

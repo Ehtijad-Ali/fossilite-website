@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "risk-assumptions-and-issues",
-  seoTitle: "Risks, Assumptions and Issues: The Analyst's Version",
+  seoTitle: "Risk Registers That Somebody Actually Acts On",
   metaDescription:
-    "Writing risks that describe a mechanism, surfacing the assumptions holding a project up, and running a log people act on rather than review.",
-  title: "Risks, Assumptions and Issues",
+    "Most risk registers are theatre. How to write one that describes a mechanism, find the assumptions holding a project up, and run a list people use rather than review.",
+  title: "Risks and the Assumptions Nobody Wrote Down",
   keywords: [
     "risk management business analyst",
     "raid log",
@@ -17,117 +17,117 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Intermediate",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
-  readingTime: 16,
+  readingTime: 15,
 
   intro: [
-    "Most risk registers are theatre. They contain a dozen entries phrased as categories rather than events, each rated amber, each with a mitigation that says monitor closely, and each reviewed fortnightly by people who have stopped reading them. They exist so that a governance process can be satisfied, and they have never caused anybody to do anything.",
-    "The useful version is different in one specific way: every entry describes a mechanism. Not resource risk but if the two people who understand the pricing rules are both allocated to the migration in March, requirements for phase two will not be ready and the June date fails. You can act on the second and you cannot act on the first, which is the whole difference.",
-    "This guide is the analyst's contribution to this area, which is distinctive. Project managers own the process. What a BA brings is the ability to see the mechanism, to notice the assumptions holding the plan up that nobody has stated, and to convert a vague unease into something specific enough that somebody can be given it.",
+    "Most risk registers are theatre. A dozen entries phrased as categories rather than as things that could happen, each rated amber, each with a plan that says monitor closely, reviewed every fortnight by people who stopped reading them months ago. They exist so a process can be satisfied and they have never caused anybody to do anything.",
+    "The useful version differs in one specific way: every entry describes how it would actually happen. Not resource risk, but if the two people who understand the pricing rules are both put on the migration in March, then the requirements for phase two will not be ready and the June date fails. You can act on the second one and you cannot act on the first, and that is the entire difference.",
+    "What a BA brings here is distinctive. Project managers own the process. What you bring is the ability to see the mechanism, to notice the assumptions holding the plan up that nobody has said out loud, and to turn a vague unease into something specific enough to give somebody.",
   ],
 
   whyItMatters: [
-    "Assumptions are where projects actually fail. Not the risks people listed, but the things everybody took for granted so completely that nobody thought to write them down: that the data exists, that the other team has capacity, that the regulator will accept the approach, that the users will adopt it.",
-    "The BA is unusually well placed to find these, because the assumption is usually embedded in a requirement. Every requirement that depends on a field being populated, a team being available or a rule being stable is an assumption with a specification wrapped around it.",
-    "And the cost curve is steep. An assumption tested in week two costs a query. The same assumption discovered to be false in month five costs a redesign, and in acceptance testing it costs the date.",
+    "Assumptions are where projects actually fail. Not the risks on the list, but the things everybody took so completely for granted that nobody thought to write them down: that the data exists, that the other team has capacity, that the regulator will accept the approach, that people will use it.",
+    "The BA is unusually well placed to find these, because the assumption is usually buried inside a requirement. Every requirement depending on a field being filled in, a team being available or a rule staying put is an assumption with a specification wrapped around it.",
+    "And the cost curve is steep. An assumption checked in week two costs a query. The same assumption found to be false in month five costs a redesign, and in testing it costs the date.",
   ],
 
   coreConcepts: [
     {
-      term: "The four things and why the distinction matters",
+      term: "Four different things, and they need different handling",
       explain:
-        "A risk might happen. An issue has happened. An assumption is something you are proceeding as if true without having confirmed it. A dependency is something you need from somebody else.",
+        "A risk might happen. An issue has happened. An assumption is something you are carrying on as if it were true without having checked. A dependency is something you need from somebody else.",
       detail:
-        "They need different handling. Risks need mitigation, issues need resolution, assumptions need testing, dependencies need a name and a date. Mixing them into one list means everything gets the same treatment, which is usually a fortnightly review and nothing else.",
+        "Risks need something doing to reduce them. Issues need resolving. Assumptions need checking. Dependencies need a name and a date. Put all four in one list and everything gets the same treatment, which is usually a fortnightly review and nothing else.",
     },
     {
       term: "Write risks as a mechanism, in three parts",
       explain:
-        "Because of a cause, an event may occur, leading to a consequence. All three parts, every time, with enough specificity that somebody could act on it.",
+        "Because of this, this might happen, and then this would follow. All three parts, every time, specific enough that somebody could do something about it.",
       detail:
-        "The test: could two people read this and agree on what would have to change to remove it? Resource risk fails that test immediately. A named cause, a described event and a stated consequence passes it.",
+        "The test: could two people read it and agree what would have to change to remove it? Resource risk fails that immediately. A named cause, a described event and a stated consequence passes it.",
     },
     {
-      term: "Assumptions are the most productive category for an analyst",
+      term: "Assumptions are the most productive thing for an analyst to hunt",
       explain:
-        "Go through your requirements and ask, for each, what has to be true for this to work. The data exists. Volumes stay similar. The rule does not change. The team has capacity. Each answer is an assumption.",
+        "Go through your requirements and ask, for each one, what has to be true in the world for this to work. The data exists. Volumes stay similar. The rule does not change. The team has capacity. Every answer is an assumption.",
       detail:
-        "Most of these have never been said aloud, because they are obvious to whoever holds them. Writing them down is what converts them into things somebody can check, and roughly a third get corrected the moment somebody reads them.",
+        "Most of these have never been said out loud, because they are obvious to whoever holds them. Writing them down is what turns them into things somebody can check, and roughly a third get corrected the moment anybody reads them.",
     },
     {
-      term: "Name the killer assumption and test it first",
+      term: "Find the one that would sink it, and check that first",
       explain:
-        "Every project has one assumption that, if false, makes the whole thing pointless rather than merely harder.",
+        "Every project has one assumption that, if wrong, makes the whole thing pointless rather than just harder.",
       detail:
-        "Identify it in the first fortnight and design the cheapest possible test. This single habit has changed the direction of more projects I have worked on than any other analytical technique.",
+        "Name it in the first fortnight and work out the cheapest way to check it. This single habit has changed the direction of more projects I have worked on than any other technique.",
     },
     {
-      term: "Rate by consequence and detectability, not just likelihood",
+      term: "Rate three ways, not two",
       explain:
-        "How bad, how likely, and how quickly would anybody notice? The third dimension is routinely omitted and it changes priority substantially.",
+        "How bad, how likely, and how quickly anybody would notice. That third one gets left out routinely and it changes the priority a lot.",
       detail:
-        "A moderate risk that would go unnoticed for a quarter is frequently worse than a severe one that fails loudly, because by the time it is found the wrong decisions have already been taken on it.",
+        "Something moderately bad that would go unnoticed for a quarter is often worse than something severe that fails loudly, because by the time it is found people have been making decisions on the bad state.",
     },
     {
-      term: "Every entry needs an owner who can actually act",
+      term: "Every entry needs somebody who can actually do something",
       explain:
         "Not the project manager by default, and not a team. A named individual with the authority to do the thing that would reduce the risk.",
       detail:
-        "Where the only person who could act is outside the project, that is itself the finding, and it needs to go to the sponsor rather than sitting in a log with an owner who cannot do anything about it.",
+        "Where the only person who could act sits outside the project, that is itself the finding, and it goes to the sponsor rather than sitting in a list with an owner who cannot do anything about it.",
     },
     {
-      term: "Mitigations must be actions with dates",
+      term: "Monitor closely is not a plan",
       explain:
-        "Monitor closely is not a mitigation. Reduce the probability, reduce the impact, transfer it, or accept it explicitly. Each of those implies a specific action.",
+        "It is not an action, so nothing changes. Either reduce how likely it is, reduce how bad it would be, get somebody else to carry it, or accept it openly.",
       detail:
-        "Accepting a risk deliberately, in writing, with the sponsor's name against it, is a perfectly professional outcome and far better than a mitigation nobody intends to perform.",
+        "Accepting a risk on purpose, in writing, with the sponsor's name against it, is a perfectly professional outcome and far better than a plan nobody intends to carry out.",
     },
     {
-      term: "Dependencies need a name, a date and a confirmation",
+      term: "A dependency needs a name, a date and confirmation",
       explain:
-        "What you need, from whom, by when, and evidence that they know. The third part is what makes it a dependency rather than a hope.",
+        "What you need, from whom, by when, and evidence they know about it. That third part is what makes it a dependency rather than a hope.",
       detail:
-        "An unconfirmed dependency is an assumption wearing a plan's clothing. The confirmation does not have to be formal, it has to exist.",
+        "An unconfirmed dependency is an assumption wearing a plan's clothes. The confirmation does not have to be formal. It has to exist.",
     },
     {
-      term: "Run a pre-mortem before the design is fixed",
+      term: "Ask what would have to happen for this to fail",
       explain:
-        "Ask the group to imagine it is a year from now and this has failed. What happened? People will say things in that frame that they will not say when asked what could go wrong.",
+        "Ask the group to imagine it is a year from now and this went badly. What happened? People say things in that frame they will not say when asked what could go wrong.",
       detail:
-        "It works because it removes the social cost of pessimism. The answers are your risk register, written by the people best placed to know, at the only moment when acting on them is cheap.",
+        "It works because it removes the social cost of being the pessimist. The answers are your risk list, written by the people best placed to know, at the only moment when acting on them is cheap.",
     },
     {
       term: "Watch for the risks nobody will write down",
       explain:
-        "The sponsor may leave. The vendor is in financial difficulty. Two of the teams involved do not get on. These are frequently the largest risks and they are politically awkward.",
+        "The sponsor might leave. The supplier is in financial trouble. Two of the teams involved do not get on. These are often the biggest risks and they are politically awkward.",
       detail:
-        "Phrase them structurally rather than personally: continuity of sponsorship, supplier viability, coordination across teams with different reporting lines. The mechanism can be stated honestly without naming anybody.",
+        "Phrase them as conditions rather than people: whether we keep the same sponsor, whether the supplier stays viable, how well two teams with different bosses coordinate. The mechanism can be described honestly without naming anybody.",
     },
     {
-      term: "Close things, and record why",
+      term: "Close things, and say why",
       explain:
-        "Risks that have passed, assumptions that have been confirmed, issues that have been resolved. A log that only grows stops being read.",
+        "Risks that have passed, assumptions that turned out to be right, issues that got resolved. A list that only ever grows stops being read.",
       detail:
-        "The closure reason matters more than the closure. An assumption confirmed by whom, on what evidence, on what date, is a piece of analysis. Marked closed with no reason is administration.",
+        "The reason matters more than the closing. An assumption confirmed by whom, on what evidence, on what date, is analysis. Marked closed with no reason is admin.",
     },
     {
-      term: "Report the movement, not the list",
+      term: "Report what moved, not the whole list",
       explain:
-        "What is new, what has worsened, what has closed. Nobody reads a list of thirty entries fortnightly, and reproducing it in full trains them not to.",
+        "What is new, what got worse, what closed. Nobody reads a list of thirty entries every fortnight, and reproducing it in full teaches them not to.",
       detail:
-        "Three lines of movement plus the full log available on request gets read. It also makes deterioration visible, which a static list actively conceals.",
+        "Three lines about what moved, with the full list available if anybody wants it, gets read. It also makes things getting worse visible, which a static list actively hides.",
     },
   ],
 
   examples: [
     {
       kind: "documented",
-      scenario: "A high-risk approach without adequate measures to steer by.",
+      scenario: "A high-risk approach with nothing to steer by.",
       walkthrough:
-        "In September 2013 the UK National Audit Office reported on the early implementation of Universal Credit. It found that £425 million had been spent to that point, with over 70% on IT systems and £34 million of IT already written off. The NAO concluded that the Department had been overly ambitious in both the timetable and the scope of the programme, that the programme suffered from weak management, ineffective control and poor governance, and that the Department lacked adequate progress measures despite adopting a high-risk approach never previously used for a programme of that complexity.",
+        "In September 2013 the UK National Audit Office reported on the early implementation of Universal Credit. It found £425 million had been spent to that point, with over 70% of it on IT systems and £34 million of IT already written off. The NAO concluded the Department had been over-ambitious in both timetable and scope, that the programme suffered from weak management, ineffective control and poor governance, and that the Department did not have adequate measures of progress despite taking a high-risk approach never previously used for something that complicated.",
       result:
-        "The phrase worth carrying into any risk practice is the last one. Taking a high-risk approach is sometimes correct. Taking one without the measures that would tell you early whether it is working is what turns a risk into a loss, because there is no point at which anybody can see the mechanism operating in time to change course. A risk register whose entries have no leading indicator attached has the same defect at a smaller scale.",
+        "The phrase worth carrying into any risk work is the last one. Taking a high-risk approach is sometimes right. Taking one without anything that would tell you early whether it is working is what turns a risk into a loss, because there is no point at which anybody can see it happening in time to change course. A risk list whose entries have no early warning signal attached has the same problem on a smaller scale.",
       source: {
         label: "National Audit Office (5 September 2013). Universal Credit: early progress",
         url: "https://www.nao.org.uk/reports/universal-credit-early-progress/",
@@ -137,231 +137,231 @@ export const guide: Guide = {
       kind: "illustration",
       scenario: "The assumption nobody had said out loud.",
       walkthrough:
-        "A BA reviewing a requirements set asks, for each requirement, what has to be true for this to work. One answer is that a customer segment field is populated. Two days of profiling shows it is populated for a small minority of records, and only for customers acquired through one channel during a two-year window.",
+        "The problem: a requirements set had been through review twice and looked solid. What was happening: the BA went through it asking one question of each requirement, what has to be true for this to work. One answer was that a customer segment field is filled in. Two days of checking showed it was filled in for a small minority of records, and only for customers who arrived through one channel during a two-year window.",
       result:
-        "The requirement was not implementable as written. It had passed review twice, because reviewers check whether requirements are clear rather than whether the world they assume is real. Asking what has to be true for each requirement is a mechanical exercise that takes an afternoon and it consistently finds at least one of these.",
+        "What changed: the requirement was not buildable as written and had to be redesigned. It had passed review twice because reviewers check whether requirements are clear, not whether the world they assume actually exists. Asking what has to be true for each one is a mechanical exercise that takes an afternoon and it consistently finds at least one of these.",
     },
     {
       kind: "illustration",
-      scenario: "A pre-mortem that produced the actual risk.",
+      scenario: "The risk that only came out when asked backwards.",
       walkthrough:
-        "Before design was fixed, a BA asked a project group to imagine that a year had passed and the project had failed, then to write down what happened. Among the usual answers, three people independently wrote versions of the same thing: the operations team never had time to test it properly, so it went live untested and the business rejected it.",
+        "The problem: the risk list was full of the usual things and nobody was worried. What was happening: before the design was fixed, the BA asked the group to imagine a year had passed and the project had failed, then write down what happened. Among the usual answers, three people independently wrote versions of the same thing: the operations team never got time to test it properly, so it went live untested and the business rejected it.",
       result:
-        "That risk was not on the register, because raising it directly would have implied criticism of a manager's resourcing. The pre-mortem framing removed the social cost of saying it. Tester availability was escalated and secured in writing eight weeks before acceptance testing, which is not a conversation that would have happened otherwise.",
+        "What changed: tester availability got escalated and secured in writing eight weeks before testing. That risk was not on the register, because raising it directly would have implied criticism of a manager's resourcing. Asking it backwards removed the social cost of saying it, and that is not a conversation that would have happened otherwise.",
     },
   ],
 
   learningPath: [
     {
-      title: "Extract assumptions from your requirements",
-      body: "Go through each requirement and write what has to be true for it to work. Data exists, volumes hold, the rule is stable, the team has capacity, the other system can provide it.",
+      title: "Pull the assumptions out of your requirements",
+      body: "Go through each requirement and write what has to be true for it to work. Data exists, volumes hold, the rule is stable, the team has capacity, the other system can supply it.",
       effort: "Half a day",
-      outcome: "A list of assumptions, most of which have never been stated, roughly a third of which get corrected on first reading.",
+      outcome: "A list of assumptions, most never said out loud, roughly a third of which get corrected on first reading.",
     },
     {
-      title: "Identify and test the killer assumption",
-      body: "The one that would make the project pointless rather than harder. Design the cheapest possible test and run it in the first fortnight.",
+      title: "Find the one that would sink it and check it",
+      body: "The one that would make the project pointless rather than harder. Work out the cheapest way to check it and do that in the first fortnight.",
       effort: "2-3 days",
-      outcome: "Either confidence, or a redirected project while redirection is still cheap.",
+      outcome: "Either confidence, or a redirected project while redirecting is still cheap.",
     },
     {
-      title: "Rewrite the risk register as mechanisms",
-      body: "Because of a cause, an event may occur, leading to a consequence. Rewrite every existing entry in that form and delete the ones that cannot be.",
+      title: "Rewrite the risk list as mechanisms",
+      body: "Because of this, this might happen, and then this would follow. Rewrite every existing entry in that shape and delete the ones that cannot be.",
       effort: "2 hours",
-      outcome: "A register where each entry suggests its own action, and a shorter list.",
+      outcome: "A list where each entry suggests its own action, and a shorter one.",
     },
     {
-      title: "Add detectability to the rating",
-      body: "Alongside consequence and likelihood, record how quickly anybody would notice. Re-sort the register by the combination.",
+      title: "Add how quickly you would notice",
+      body: "Alongside how bad and how likely, record how fast anybody would spot it. Then re-sort the list by the combination.",
       effort: "1 hour",
-      outcome: "The silent risks moved up the list, which is usually where they belong.",
+      outcome: "The quiet risks moved up, which is usually where they belong.",
     },
     {
-      title: "Assign owners who can act",
-      body: "A named individual with authority to do the mitigating thing. Where nobody in the project qualifies, escalate that fact rather than assigning it anyway.",
+      title: "Give every entry to somebody who can act",
+      body: "A named individual with the authority to do the thing. Where nobody in the project qualifies, escalate that fact rather than assigning it anyway.",
       effort: "1 hour plus conversations",
-      outcome: "Entries that generate action rather than review.",
+      outcome: "Entries that produce action rather than review.",
     },
     {
-      title: "Run a pre-mortem before the design is fixed",
-      body: "Ask the group to imagine failure a year out and write what happened, individually and in silence, before anybody speaks. Collect and read them out.",
+      title: "Ask what would have to happen for this to fail",
+      body: "Get the group to imagine failure a year out and write down what happened, individually and silently, before anybody speaks. Then collect and read them out.",
       effort: "1 hour",
       outcome: "The risks people will not raise directly, at the point where acting on them is cheap.",
     },
     {
-      title: "Report movement fortnightly and close things",
-      body: "New, worsened, closed. Three lines. Close confirmed assumptions and passed risks with a reason and a date.",
+      title: "Report what moved and close things",
+      body: "New, worse, closed. Three lines. Close confirmed assumptions and passed risks with a reason and a date.",
       effort: "20 minutes a fortnight",
-      outcome: "A log people read, which is the only kind that works.",
+      outcome: "A list people actually read, which is the only kind that works.",
     },
   ],
 
   exercises: [
     {
-      title: "The what-has-to-be-true sweep",
+      title: "What has to be true?",
       brief:
-        "Take twenty requirements from a current project. For each, write one sentence stating what must be true in the world for it to work. Mark the ones nobody has confirmed.",
+        "Take twenty requirements from a current project. For each, write one sentence saying what must be true in the world for it to work. Mark the ones nobody has checked.",
       success:
-        "You have at least three unconfirmed assumptions and can name the cheapest test for each.",
+        "You have at least three unchecked assumptions and can name the cheapest way to check each.",
       time: "2 hours",
     },
     {
-      title: "Rewrite a register",
+      title: "Rewrite a risk list",
       brief:
-        "Take an existing risk register and rewrite every entry as cause, event and consequence. Delete anything that cannot be expressed that way and see how much is left.",
+        "Take an existing risk register and rewrite every entry as cause, event and consequence. Delete anything that cannot be written that way and see how much is left.",
       success:
-        "The register is materially shorter and every remaining entry suggests a specific action.",
+        "The list is noticeably shorter and every remaining entry suggests something specific to do.",
       time: "1-2 hours",
     },
     {
-      title: "Run a written pre-mortem",
+      title: "Ask it backwards, in writing",
       brief:
-        "In any project meeting, ask everyone to write down, silently and individually, what they would say had gone wrong if this had failed a year from now. Collect and read them out anonymously.",
+        "In any project meeting, ask everybody to write down silently what they would say had gone wrong if this had failed a year from now. Collect and read them out without names.",
       success:
-        "At least one risk emerges that is not on the register, and you can see whether several people wrote versions of the same thing.",
-      time: "20 minutes within an existing meeting",
+        "At least one risk comes out that is not on the list, and you can see whether several people wrote versions of the same thing.",
+      time: "20 minutes inside an existing meeting",
     },
   ],
 
   mistakes: [
     {
       mistake: "Writing risks as categories",
-      why: "Resource risk or technical risk cannot be acted on, because no specific thing would remove it. The entry exists to satisfy a process rather than to change anything.",
-      fix: "Cause, event, consequence, every time, with enough specificity that two people would agree what would remove it.",
+      why: "Resource risk or technical risk cannot be acted on, because there is no specific thing that would remove it. The entry exists to satisfy a process rather than to change anything.",
+      fix: "Cause, event, consequence, every time, specific enough that two people would agree what would remove it.",
     },
     {
       mistake: "Not separating assumptions from risks",
-      why: "Assumptions need testing, not mitigation. Filed as risks they get monitored fortnightly and never checked, which is exactly the wrong treatment.",
-      fix: "Keep them as a distinct list, each with a test and a date, and close them as confirmed or corrected.",
+      why: "Assumptions need checking, not managing. Filed as risks they get reviewed every fortnight and never checked, which is exactly the wrong treatment.",
+      fix: "Keep them as their own list, each with a way to check it and a date, and close them as confirmed or corrected.",
     },
     {
-      mistake: "Mitigations that say monitor closely",
-      why: "It is not an action, so nothing changes, and the entry provides false comfort that the risk is being handled.",
-      fix: "Reduce probability, reduce impact, transfer, or accept explicitly with a named sponsor. All four imply something concrete.",
+      mistake: "Plans that say monitor closely",
+      why: "It is not an action, so nothing changes, and the entry gives false comfort that somebody is handling it.",
+      fix: "Reduce how likely, reduce how bad, transfer it, or accept it openly with a named sponsor. All four mean something concrete.",
     },
     {
-      mistake: "Rating by likelihood and impact only",
-      why: "It ignores how long a problem would go unnoticed, and slow-detection problems are frequently the most damaging because decisions get taken on the bad state.",
-      fix: "Add a detectability rating and re-sort by the combination.",
+      mistake: "Rating only how bad and how likely",
+      why: "It ignores how long something would go unnoticed, and slow-to-notice problems are frequently the most damaging because decisions get made on the bad state.",
+      fix: "Add how quickly you would notice and re-sort by the combination.",
     },
     {
-      mistake: "Assigning owners who cannot act",
-      why: "The entry gets reviewed by somebody with no authority to change anything, which converts risk management into reporting.",
-      fix: "Name an individual who can perform the mitigation, and escalate where nobody in the project can.",
+      mistake: "Giving entries to people who cannot act",
+      why: "It gets reviewed by somebody with no authority to change anything, which turns risk management into reporting.",
+      fix: "Name somebody who can actually do the thing, and escalate where nobody in the project can.",
     },
     {
-      mistake: "Avoiding politically awkward risks",
-      why: "Sponsor continuity, supplier viability and inter-team friction are frequently the largest risks, and leaving them off means the register describes only the comfortable subset.",
-      fix: "State them structurally rather than personally. The mechanism can be honest without naming anybody.",
+      mistake: "Avoiding the awkward risks",
+      why: "Whether the sponsor stays, whether the supplier survives, and how two teams get on are frequently the biggest risks, and leaving them off means the list describes only the comfortable ones.",
+      fix: "State them as conditions rather than about people. The mechanism can be honest without naming anybody.",
     },
     {
-      mistake: "A log that only grows",
-      why: "Once it is long enough to be tedious, nobody reads it, including the entries that matter. Length destroys attention.",
-      fix: "Close passed risks and confirmed assumptions with reasons, and report movement rather than the full list.",
+      mistake: "A list that only grows",
+      why: "Once it is long enough to be tedious, nobody reads any of it, including the three entries that matter.",
+      fix: "Close passed risks and confirmed assumptions with reasons, and report what moved rather than the whole list.",
     },
     {
-      mistake: "Taking a high-risk approach without leading indicators",
+      mistake: "Taking a risky approach with nothing to watch",
       why: "There is no point at which anybody can tell whether it is working while there is still time to change course.",
-      fix: "For every significant risk, name the early signal that would show it materialising, and who is watching for it.",
+      fix: "For every significant risk, name the early signal that would show it happening, and who is watching for it.",
     },
   ],
 
   bestPractices: [
     "Keep risks, issues, assumptions and dependencies as separate lists.",
     "Write every risk as cause, event and consequence.",
-    "Extract assumptions systematically from the requirements.",
-    "Name the killer assumption and test it in the first fortnight.",
-    "Rate for consequence, likelihood and detectability.",
-    "Attach a leading indicator to every significant risk.",
-    "Assign an owner who has authority to act.",
-    "Make mitigations actions with dates, never monitoring.",
-    "Accept risks explicitly and in writing where that is the decision.",
+    "Pull assumptions systematically out of the requirements.",
+    "Name the one that would sink it and check it in the first fortnight.",
+    "Rate how bad, how likely and how quickly you would notice.",
+    "Attach an early warning signal to every significant risk.",
+    "Give every entry to somebody with authority to act.",
+    "Make plans into actions with dates, never monitoring.",
+    "Accept risks openly and in writing where that is the decision.",
     "Confirm dependencies with the other party rather than assuming.",
-    "Run a pre-mortem before the design is fixed.",
-    "State awkward risks structurally rather than personally.",
-    "Close entries with reasons and report movement, not the whole list.",
+    "Ask what would have to happen for this to fail, before the design is fixed.",
+    "State awkward risks as conditions rather than about people.",
+    "Close entries with reasons and report what moved.",
   ],
 
   proTips: [
-    "The most productive question in this whole area is what has to be true for this to work, asked of every requirement in turn. It is mechanical, it takes an afternoon, and it consistently finds something that has passed two rounds of review, because reviewers check whether requirements are clear rather than whether the world they assume actually exists.",
-    "Ask people privately what worries them about the project. The answers you get one to one are different from the ones you get in a meeting, and the gap between the two is a map of what cannot be said in the room. Where several people privately raise the same thing, that is your largest risk regardless of what the register says.",
-    "For every risk you record, write the sentence you would want to be able to point to in six months if it materialises. It focuses the entry on what you actually need somebody to decide now, and it removes the ones you were recording defensively rather than usefully. If the sentence is only there to prove you raised it, you have written a memo rather than a risk.",
-    "Watch for the risk that everybody mentions casually and nobody has written down. In my experience there is usually exactly one of these on any project, it is discussed in corridors, and its absence from the register is the register's most informative feature.",
+    "The most productive question in this whole area is what has to be true for this to work, asked of every requirement in turn. It is mechanical, it takes an afternoon, and it consistently finds something that has already passed two rounds of review, because reviewers check whether requirements are clear rather than whether the world they assume actually exists.",
+    "Ask people privately what worries them about the project. The answers one to one are different from the ones in a meeting, and the gap between them is a map of what cannot be said in the room. Where several people privately raise the same thing, that is your biggest risk whatever the list says.",
+    "For every risk you write down, write the sentence you would want to point at in six months if it happens. It focuses the entry on what you actually need somebody to decide now, and it removes the ones you were recording defensively rather than usefully. If the sentence exists only to prove you raised it, you have written a memo rather than a risk.",
+    "Watch for the risk everybody mentions casually and nobody has written down. There is usually exactly one on any project, it gets discussed in corridors, and its absence from the list is the most informative thing about the list.",
   ],
 
   businessApplications: [
-    "Any project governance forum, where the analyst's contribution is the mechanism rather than the process.",
-    "Business cases, where the critical assumption and its test belong in the document.",
-    "Discovery phases, where identifying and testing the killer assumption is most of the value.",
-    "Vendor selection, where supplier viability and lock-in are the risks least often written down.",
-    "Regulatory programmes, where the assumption about what the regulator will accept is usually the killer one.",
-    "Migration and cutover planning, where detectability matters more than likelihood.",
+    "Any project meeting, where the analyst's contribution is the mechanism rather than the process.",
+    "Business cases, where the assumption that matters most and how you will check it belong in the document.",
+    "Early analysis phases, where finding and checking the one that would sink it is most of the value.",
+    "Choosing a supplier, where whether they stay viable and how hard it is to leave are the risks least often written down.",
+    "Responding to legislation, where the assumption about what the regulator will accept is usually the one that matters.",
+    "Planning a changeover, where how quickly you would notice matters more than how likely it is.",
   ],
 
   checklist: [
-    "Risks, issues, assumptions and dependencies held as separate lists.",
+    "Risks, issues, assumptions and dependencies kept as separate lists.",
     "Every risk written as cause, event and consequence.",
-    "Assumptions extracted from every requirement.",
-    "Killer assumption identified and tested early.",
-    "Consequence, likelihood and detectability rated.",
-    "Leading indicator named for every significant risk.",
-    "Owner named who can actually act.",
-    "Mitigations expressed as actions with dates.",
-    "Accepted risks recorded in writing with a sponsor name.",
+    "Assumptions pulled out of every requirement.",
+    "The one that would sink it named and checked early.",
+    "How bad, how likely and how quickly noticed all rated.",
+    "Early warning signal named for every significant risk.",
+    "An owner named who can actually act.",
+    "Plans written as actions with dates.",
+    "Accepted risks written down with a sponsor's name.",
     "Dependencies confirmed with the other party.",
-    "Pre-mortem run before the design was fixed.",
-    "Politically awkward risks stated structurally.",
-    "Entries closed with reasons; reporting shows movement.",
+    "The what-would-sink-it question asked before the design was fixed.",
+    "Awkward risks stated as conditions.",
+    "Entries closed with reasons and reporting shows what moved.",
   ],
 
   faqs: [
     {
-      q: "Is risk management not the project manager's job?",
-      a: "The process is. What a BA adds is the mechanism: seeing how a risk would actually operate, and finding the assumptions embedded in the requirements. Those two contributions are why a good BA improves a register that a good project manager was already maintaining.",
+      q: "Is this not the project manager's job?",
+      a: "The process is. What a BA adds is the mechanism: seeing how a risk would actually play out, and finding the assumptions buried in the requirements. Those two are why a good BA improves a list a good project manager was already keeping.",
     },
     {
-      q: "How many risks should a register hold?",
-      a: "Few enough that people read them. Ten to fifteen active entries is workable for most projects. Thirty means nobody is reading any of them, including the three that matter.",
+      q: "How many risks should be on a list?",
+      a: "Few enough that people read them. Ten to fifteen active entries works for most projects. Thirty means nobody is reading any of them, including the three that matter.",
     },
     {
-      q: "What do I do about a risk nobody wants to record?",
-      a: "State it structurally rather than personally: continuity of sponsorship, supplier viability, coordination across reporting lines. The mechanism can be described honestly without implying criticism of an individual, and that phrasing usually makes it acceptable.",
+      q: "What do I do about a risk nobody wants to write down?",
+      a: "State it as a condition rather than about a person: whether we keep the same sponsor, whether the supplier stays viable, how two teams with different bosses coordinate. Describing the mechanism honestly without implying criticism usually makes it acceptable.",
     },
     {
-      q: "How do I test an assumption cheaply?",
-      a: "Profile the data, ask the person directly, look at what happened last time, or run a small pilot. Most assumptions can be tested in days rather than weeks, and the temptation to design an elaborate test is usually a way of postponing an uncomfortable answer.",
+      q: "How do I check an assumption cheaply?",
+      a: "Look at the data, ask the person directly, find out what happened last time, or run something small. Most assumptions can be checked in days rather than weeks, and the temptation to design an elaborate check is usually a way of putting off an uncomfortable answer.",
     },
     {
-      q: "When should a risk become an issue?",
-      a: "When it has happened. At that point it stops needing mitigation and starts needing resolution, and it should move lists. Leaving materialised risks in the risk register is how a log becomes fiction.",
+      q: "When does a risk become an issue?",
+      a: "When it has happened. At that point it stops needing prevention and starts needing resolving, and it should move lists. Leaving things that have already happened on the risk list is how a list becomes fiction.",
     },
     {
-      q: "Should I record risks I cannot do anything about?",
-      a: "Yes, once, with an explicit acceptance and a sponsor's name against it. Recording it and accepting it is a decision. Recording it and monitoring it forever is a way of appearing to manage something nobody intends to act on.",
+      q: "Should I write down risks I cannot do anything about?",
+      a: "Yes, once, with an explicit acceptance and a sponsor's name against it. Writing it down and accepting it is a decision. Writing it down and monitoring it forever is a way of appearing to manage something nobody intends to act on.",
     },
   ],
 
   tools: [
-    { name: "Four separate lists", what: "Risks, issues, assumptions, dependencies. Each needs different handling and one combined log guarantees they all get the same treatment.", cost: "Free" },
-    { name: "A cause, event, consequence template", what: "The three-part form that makes a risk actionable. Anything that cannot be written this way is not a risk.", cost: "Free" },
-    { name: "A what-has-to-be-true sweep", what: "One sentence per requirement stating what the world must look like for it to work. An afternoon, and it always finds something.", cost: "Free" },
-    { name: "A written pre-mortem", what: "Twenty minutes inside an existing meeting. Surfaces the risks people will not raise when asked directly.", cost: "Free" },
+    { name: "Four separate lists", what: "Risks, issues, assumptions, dependencies. Each needs different handling and one combined list guarantees they all get the same.", cost: "Free" },
+    { name: "A cause, event, consequence template", what: "The three-part shape that makes a risk actionable. Anything that cannot be written this way is not a risk.", cost: "Free" },
+    { name: "A what-has-to-be-true sweep", what: "One sentence per requirement about what the world must look like for it to work. An afternoon, and it always finds something.", cost: "Free" },
+    { name: "The written failure question", what: "Twenty minutes inside an existing meeting. Surfaces the risks people will not raise when asked directly.", cost: "Free" },
   ],
 
   resources: [
-    { title: "NAO: Universal Credit, early progress", kind: "Docs", note: "Primary source, September 2013. Read for the finding that a high-risk approach was taken without adequate measures to tell whether it was working.", url: "https://www.nao.org.uk/reports/universal-credit-early-progress/" },
+    { title: "NAO: Universal Credit, early progress", kind: "Docs", note: "Primary source, September 2013. Read for the finding that a high-risk approach was taken with nothing adequate to tell them whether it was working.", url: "https://www.nao.org.uk/reports/universal-credit-early-progress/" },
   ],
 
   internalLinks: [
-    { slug: "impact-assessment-before-a-change", anchor: "the impacts that become risks", context: "Input" },
-    { slug: "running-a-discovery-phase", anchor: "testing the killer assumption early", context: "Discovery" },
-    { slug: "delivering-change-into-a-business", anchor: "the risks that concentrate at cutover", context: "Delivery" },
+    { slug: "impact-assessment-before-a-change", anchor: "the things you find that become risks", context: "Input" },
+    { slug: "running-a-discovery-phase", anchor: "checking the one that would sink it, early", context: "Discovery" },
+    { slug: "delivering-change-into-a-business", anchor: "the risks that pile up at changeover", context: "Delivery" },
   ],
 
   relatedGuides: ["impact-assessment-before-a-change", "running-a-discovery-phase", "delivering-change-into-a-business"],
 
   conclusion: [
-    "Take twenty requirements from your current project and write, for each, one sentence saying what has to be true in the world for it to work. Mark the ones nobody has confirmed. That afternoon will produce more useful risk material than any register review you could attend instead.",
+    "Take twenty requirements from your current project and write, for each, one sentence saying what has to be true in the world for it to work. Mark the ones nobody has checked. That afternoon will produce more useful risk material than any review meeting you could attend instead.",
   ],
 };
 

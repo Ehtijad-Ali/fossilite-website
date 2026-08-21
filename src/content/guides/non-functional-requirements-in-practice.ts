@@ -3,10 +3,10 @@ import { PETER_NGUYEN } from "../authors";
 
 export const guide: Guide = {
   slug: "non-functional-requirements-in-practice",
-  seoTitle: "Non-Functional Requirements: The Ones That Sink Projects",
+  seoTitle: "The Requirements Nobody Asks For, and Everyone Assumes",
   metaDescription:
-    "Performance, volume, availability, security, retention and accessibility, elicited with consequence questions and written as numbers somebody can test.",
-  title: "Non-Functional Requirements in Practice",
+    "How fast, how many at once, what happens when it breaks, who is allowed to see it. Nobody requests these and everybody expects them. How to get them out of people.",
+  title: "The Requirements Nobody Asks For",
   keywords: [
     "non-functional requirements",
     "nfr examples",
@@ -17,334 +17,334 @@ export const guide: Guide = {
   ],
   category: "requirements",
   level: "Advanced",
-  updated: "2026-08-21",
+  updated: "2026-08-22",
   author: PETER_NGUYEN,
-  readingTime: 17,
+  readingTime: 15,
 
   intro: [
-    "Nobody asks for non-functional requirements. No stakeholder has ever opened a conversation by saying the system should support four hundred concurrent users with a ninety-fifth percentile response under two seconds. They ask for a screen that shows their orders, and they assume, entirely reasonably, that it will be fast, available, secure and able to cope with their actual volume.",
-    "Those assumptions are the requirements. They are unstated because they are obvious to the person holding them, which is exactly why they are the requirements most often missed and most expensive to add later. Retrofitting performance or security into a system designed without them is not a change request, it is frequently a rebuild.",
-    "This guide is how to get them out of people who do not know they have them. The categories to walk through, the consequence question that converts a vague preference into a defensible number, how to write them so they can be tested, and how to handle the trade-offs, because every non-functional requirement costs something and some of them are in direct conflict.",
+    "Nobody has ever walked up to me and asked for a system that handles four hundred people at once with a response under two seconds. They ask for a screen that shows their orders. And then they assume, perfectly reasonably, that it will be quick, that it will be there when they need it, that the wrong people cannot see it, and that it will cope with the amount of work they actually have.",
+    "Those assumptions are the requirements. They go unsaid because they are obvious to the person holding them, which is exactly why they get missed and exactly why they are so expensive to add later. Making something fast or secure after it has been built is not a change request. It is usually a rebuild.",
+    "So this guide is about getting these out of people who do not know they have them. The list to work through, the one question that turns a vague preference into a number you can defend, how to write them so somebody can actually test them, and how to handle the fact that they cost money and some of them fight each other.",
   ],
 
   whyItMatters: [
-    "Functional defects are visible, arguable and usually cheap to fix. Non-functional failures tend to be systemic: the system is slow for everybody, or unavailable during the busiest hour, or holding data it should have deleted two years ago. They affect every user simultaneously and they cannot be worked around.",
-    "They are also the requirements with the longest lead time to fix. Architecture decisions made in week two determine what performance and availability are achievable, and by the time anybody tests them the decisions are embedded in months of work.",
-    "And they are where regulatory and contractual exposure concentrates. Retention, access control, auditability and recoverability are frequently legal obligations rather than preferences, and they are almost never in the original request.",
+    "Ordinary bugs are visible, arguable and usually cheap to fix. These failures are different. The system is slow for everybody, or unavailable during the busiest hour, or still holding data it should have deleted two years ago. They hit everyone at once and there is no way to work around them.",
+    "They also take the longest to fix. Decisions made in week two about how the thing is built decide what speed and reliability are even possible, and by the time anybody tests it those decisions are buried under months of work.",
+    "And this is where legal trouble tends to concentrate. How long you keep data, who can see it, whether you can prove what happened, and whether you can get back after a failure are frequently obligations rather than preferences. None of them appear in the original request.",
   ],
 
   coreConcepts: [
     {
-      term: "Walk a fixed category list, because nobody volunteers these",
+      term: "Work through a list, because nobody will raise these",
       explain:
-        "Performance, volume and growth, availability, recoverability, security and access, data retention and deletion, accessibility, usability under load, compatibility, maintainability, and observability.",
+        "How fast. How many, now and in three years. How often it can be down. What happens if data is lost. Who can see it. How long you keep it. Whether people with disabilities can use it. What it does when it is struggling. And whether anyone can tell what is going on inside it.",
       detail:
-        "Use it as a script. Any category you do not ask about becomes an assumption made by a technical person with no business context, and their assumption will be reasonable and possibly wrong.",
+        "Use it as a script. Anything you do not ask about becomes an assumption made by a technical person with no business context. Their assumption will be sensible and it might be completely wrong.",
     },
     {
-      term: "The consequence question converts opinion into a number",
+      term: "Ask what happens if it is slow, not how fast it should be",
       explain:
-        "Do not ask how fast it should be. Ask what happens if it takes ten seconds instead of one. What does the user do, what does the customer do, what does it cost?",
+        "Ask how fast and you get a made-up round number. Ask what happens if this takes ten seconds instead of one and you get a real answer with a reason attached.",
       detail:
-        "Speed targets asked for directly are invented, and they cluster on round numbers with no reasoning behind them. Consequences are remembered, they are specific, and they give you a number you can defend when somebody asks why it has to be that fast.",
+        "Consequences are specific and people remember them. Speed targets asked for directly cluster on tidy numbers with nothing behind them, and they collapse the first time somebody says that will cost a lot.",
     },
     {
-      term: "Performance means percentiles, not averages",
+      term: "Averages hide the people having a bad time",
       explain:
-        "An average response time hides the tail. If one request in twenty takes fifteen seconds, the average can look excellent while a meaningful share of users have a bad experience every day.",
+        "If one request in twenty takes fifteen seconds, the average can look excellent while a chunk of your users have a frustrating experience every single day.",
       detail:
-        "Write requirements at the ninety-fifth or ninety-ninth percentile, under a stated concurrent load, for a named operation. All three parts matter: a percentile with no load figure is untestable.",
+        "So write the requirement about the slow ones, not the average. Say which action, how slow the slowest few are allowed to be, and how many people are using it at the time. All three matter, and a speed with no volume attached cannot be tested.",
     },
     {
-      term: "Volume requirements need today, peak and growth",
+      term: "Ask for today, the busiest day, and three years out",
       explain:
-        "Current volume, the peak within that (month end, Monday morning, campaign day), and the expected position in three years.",
+        "How much work now. How much on the busiest day, whether that is month end, Monday morning or a campaign launch. And roughly where it will be in three years.",
       detail:
-        "Peak is the number that sizes the system and it is routinely omitted, so the design is built for the average and falls over on the day that matters most. Get peak from data, not from recollection.",
+        "The busiest day is the number that decides how the thing gets built and it is routinely left out, so the design gets built for an average day and falls over on the one day it really matters. Get it from the data, not from memory.",
     },
     {
-      term: "Availability is a business decision expressed in money",
+      term: "How reliable it needs to be is a money question",
       explain:
-        "Each additional nine of availability costs disproportionately more. The question is not how available should it be but what an hour of downtime costs and when it would hurt most.",
+        "Every extra step up in reliability costs a lot more than the last one. So the question is not how reliable should it be. It is what an hour of it being down actually costs, and when that would hurt most.",
       detail:
-        "Ask about the shape of the day and the year. A system that can be down at three in the morning without consequence and must not be down at nine on a Monday needs a very different design from one with a uniform requirement.",
+        "Ask about the shape of the week and the year. A system that can be off at three in the morning and absolutely must not be off at nine on Monday is a very different thing to build than one that has to be up all the time.",
     },
     {
-      term: "Recoverability has two numbers people confuse",
+      term: "Two different questions about things going wrong",
       explain:
-        "How long can we be down before it is unacceptable, and how much data can we afford to lose. They are separate questions with separate costs and separate technical answers.",
+        "How long can we be down before it is unacceptable, and how much work can we afford to lose. People run these together and they are separate, with separate costs.",
       detail:
-        "Ask the second one concretely: if we restored to this morning's backup, what would have to be re-entered and who would do it? People understand that framing immediately and give useful answers.",
+        "Ask the second one concretely: if we had to go back to this morning's backup, what would people have to type in again, and who would do it? Everybody understands that version and gives you a useful answer.",
     },
     {
-      term: "Retention and deletion are obligations, not preferences",
+      term: "How long you keep things is usually not your choice",
       explain:
-        "How long must this be kept, how long may it be kept, what must be deleted on request, and what must survive deletion for legal reasons.",
+        "How long must this be kept. How long may it be kept. What has to be deleted if somebody asks. And what has to survive that deletion for legal reasons.",
       detail:
-        "These frequently come from legislation or contract rather than from the business, so the source is compliance or legal rather than the stakeholder in front of you. Ask who owns the answer before assuming anybody in the room does.",
+        "These usually come from law or a contract rather than from the person in front of you, so the answer sits with legal or compliance. Ask who owns the answer before assuming anybody in the room does.",
     },
     {
-      term: "Accessibility is a requirement, not a nice to have",
+      term: "Access for people with disabilities is a requirement, not a nice extra",
       explain:
-        "In many jurisdictions and most public sector contexts it is a legal obligation, and in all contexts it is far cheaper to build in than to retrofit.",
+        "In a lot of places it is a legal duty, and everywhere it is far cheaper to build in than to bolt on afterwards.",
       detail:
-        "Name the standard and the conformance level explicitly rather than writing that the system should be accessible, which is untestable and will be interpreted as a preference.",
+        "Name the standard and the level you have to meet. Writing that the system should be accessible cannot be tested and will be read as a preference by whoever is under pressure to ship.",
     },
     {
-      term: "Observability is a business requirement in disguise",
+      term: "Can anyone tell whether it is working?",
       explain:
-        "Can somebody tell whether it is working, how many transactions failed today, and which customer was affected? Without it, incidents are found by customers.",
+        "Can somebody see that it is running, how many things failed today, and which customer was affected? Without that, you find out about problems when a customer rings.",
       detail:
-        "Ask what question the support team will need to answer at nine on a Monday. That question is a requirement, and it is easy to satisfy at design time and painful to add afterwards.",
+        "Ask the support team what they will need to see at nine on a Monday. That question is a requirement, it is easy to build in at the start, and it is painful to add later.",
     },
     {
-      term: "Every non-functional requirement conflicts with another",
+      term: "These fight each other, so show the trade",
       explain:
-        "Security controls slow things down. Availability costs money. Retention increases storage and risk. Auditability adds writes to every transaction.",
+        "Security checks slow things down. Reliability costs money. Keeping data longer means more storage and more risk. Recording everything adds work to every transaction.",
       detail:
-        "Present them as trade-offs with costs rather than as a list of targets. A stakeholder who has seen the cost of the last nine will usually choose a lower one, and that is a decision they should get to make.",
+        "Present them as choices with prices rather than a list of targets. A stakeholder who has seen what the top level costs will usually pick a lower one, and that is a decision they should get to make.",
     },
     {
-      term: "Write them so they can be tested",
+      term: "Write them so somebody can test them",
       explain:
-        "A named operation, a measurable threshold, a stated condition and a measurement method. Anything less is an aspiration that will be declared met by whoever is under pressure to ship.",
+        "Name the action, the number, the conditions and how it gets measured. Anything less is a hope that will be declared met by whoever is trying to hit a date.",
       detail:
-        "The test: could somebody who was not in the conversation run a test and tell you pass or fail? If not, rewrite it. Robust, scalable and performant all fail this test.",
+        "The test: could somebody who was not in the conversation run a check and say pass or fail? Robust, scalable and performant all fail that. If you cannot make it testable, you have found a decision nobody has taken.",
     },
     {
-      term: "Test them early, because they are architectural",
+      term: "Test them early, because they are baked into how it is built",
       explain:
-        "Functional defects can be fixed late. Performance and availability are properties of the design, and by the time a system is complete, changing them means changing the design.",
+        "Ordinary bugs can be fixed late. Speed and reliability come from decisions about the shape of the thing, and by the time it is finished, changing them means changing the shape.",
       detail:
-        "Push for a load test against a realistic data volume as early as something end to end exists, even a rough one. The result is far more useful in week six than in the week before go-live.",
+        "Push for a rough test with realistic amounts of data as soon as anything works end to end. A rough answer in week six is worth far more than a precise one the week before go-live.",
     },
   ],
 
   examples: [
     {
       kind: "illustration",
-      scenario: "The consequence question that produced a real number.",
+      scenario: "The question that produced a number worth defending.",
       walkthrough:
-        "A stakeholder is asked how fast a customer lookup needs to be and says as fast as possible, then two seconds when pressed. The BA asks a different question: what happens if it takes ten seconds? The answer is specific. The lookup happens while a customer is on the phone, the agent fills the silence by asking questions they have already asked, calls get longer, and customers notice being asked twice.",
+        "The problem: nobody could say how fast a customer lookup needed to be. Asked directly, the stakeholder said as fast as possible, then two seconds when pressed. What was happening: the BA asked a different question. What happens if it takes ten seconds? The answer was specific. The lookup happens while a customer is on the phone. The agent fills the silence by asking things they have already asked. Calls get longer and customers notice being asked twice.",
       result:
-        "The requirement that emerged was not a round number plucked from the air. It was tied to the length of a natural pause in a phone conversation, it was defensible when the technical team questioned the cost, and it survived a later conversation about relaxing it. Consequence questions do not just produce numbers, they produce numbers with an argument attached.",
+        "What changed: the requirement stopped being a round number plucked out of the air. It was tied to how long a natural pause in a phone call lasts, which meant it survived the conversation about what it would cost and a later attempt to relax it. Asking about consequences does not just get you a number. It gets you a number with an argument attached.",
     },
     {
       kind: "illustration",
-      scenario: "Average response time hiding a daily failure.",
+      scenario: "Meeting the target and annoying the best customers.",
       walkthrough:
-        "A system meets its stated requirement of an average response under two seconds. Users continue to complain. Plotting the distribution rather than the mean shows a long tail: most requests are fast and a small proportion take much longer. Those slow requests correlate with customers who have many historical orders, which means the organisation's largest accounts have the worst experience every time.",
+        "The problem: a system was meeting its stated target of an average response under two seconds, and users kept complaining. What was happening: the BA looked at the spread instead of the average. Most requests were quick and a small share took far longer. Those slow ones lined up with customers who had a lot of order history, which meant the biggest accounts had the worst experience every single time they were looked up.",
       result:
-        "The requirement had been written as an average, so the system passed while failing the users who mattered most. Percentiles are not a technical nicety. Writing the requirement at the ninety-fifth percentile under a stated load would have caught this before anybody built anything.",
+        "What changed: the requirement was rewritten about the slowest few rather than the average, and the design changed to match. Writing it about the average meant the system could pass while failing the users who mattered most. This is not a technical nicety. It is the difference between a target that means something and one that does not.",
     },
     {
       kind: "illustration",
-      scenario: "The retention requirement nobody in the room owned.",
+      scenario: "Nobody in the room owned the answer.",
       walkthrough:
-        "During specification, a BA asks how long records must be retained and how long they may be retained. Nobody present knows. The business stakeholders assume it is a technical decision, and the technical team assume it is a business one. The BA takes the question to legal and compliance, who provide two different periods for two categories of record, one of which requires deletion on request with a defined exception.",
+        "The problem: during specification the BA asked how long records had to be kept and how long they were allowed to be kept. Nobody present knew. What was happening: the business people assumed it was a technical decision and the technical people assumed it was a business one, so it had never been asked. The BA took it to legal and compliance, who came back with two different periods for two types of record, one of which had to be deleted on request with a defined exception.",
       result:
-        "The design changed as a result, because one category needed to be separable from the other in a way the original data model did not support. Finding it during specification cost a week. Finding it after go-live would have meant a data migration and possibly a regulatory disclosure. When nobody in the room owns a non-functional answer, that is the finding.",
+        "What changed: the design had to change, because one type of record needed to be separable from the other in a way the original data model could not do. Finding this during specification cost a week. Finding it after go-live would have meant moving data and possibly telling a regulator. When nobody in the room owns the answer, that is the finding.",
     },
   ],
 
   learningPath: [
     {
-      title: "Build your category script",
-      body: "Performance, volume, availability, recoverability, security, retention, accessibility, compatibility, maintainability, observability. Write one consequence question for each.",
+      title: "Write your list and a question for each item",
+      body: "Speed, volume, downtime, losing data, who can see it, how long you keep it, accessibility, behaviour under strain, and whether anyone can see what is happening. One consequence question against each.",
       effort: "1 hour",
-      outcome: "A script you can run in any elicitation session so no category is silently skipped.",
+      outcome: "A script you can run in any session so nothing gets quietly skipped.",
     },
     {
-      title: "Get the volume numbers from data",
-      body: "Current transactions per period, the peak within it, and growth over the last three years. Never from recollection, always from the system.",
+      title: "Get the volume numbers from the data",
+      body: "How much now, how much on the busiest day, and how it has grown over three years. Never from memory, always from the system.",
       effort: "Half a day",
-      outcome: "The figures that size the design, including the peak that is usually omitted.",
+      outcome: "The figures that decide how the thing gets built, including the busiest day that usually gets left out.",
     },
     {
-      title: "Run the consequence questions with business stakeholders",
-      body: "What happens if this is slow, unavailable, lost, or wrong. Convert each answer into a threshold with the business reason recorded beside it.",
+      title: "Ask the consequence questions",
+      body: "What happens if this is slow, unavailable, lost, or seen by the wrong person. Turn each answer into a number and write the business reason next to it.",
       effort: "2-3 hours",
-      outcome: "Numbers with arguments attached, which survive later pressure to relax them.",
+      outcome: "Numbers with arguments attached, which survive somebody later saying that is too expensive.",
     },
     {
-      title: "Take retention, security and accessibility to their real owners",
-      body: "Compliance, legal, information security. These answers are rarely held by the business stakeholder and are frequently obligations rather than choices.",
-      effort: "1-2 weeks elapsed",
-      outcome: "Constraints identified before the design assumes otherwise.",
+      title: "Take the legal ones to the people who own them",
+      body: "How long you keep data, who can see it, and accessibility go to compliance, legal and security. These are usually duties rather than choices.",
+      effort: "1-2 weeks of waiting",
+      outcome: "Constraints found before the design assumes otherwise.",
     },
     {
-      title: "Write each one as a testable statement",
-      body: "Named operation, threshold, condition, measurement method. Check each against the question of whether an outsider could run a test and report pass or fail.",
+      title: "Rewrite each one so it can be tested",
+      body: "Action, number, conditions, and how it gets measured. Check each against whether an outsider could run a test and say pass or fail.",
       effort: "Half a day",
-      outcome: "Requirements that can be verified rather than declared met.",
+      outcome: "Requirements that get checked rather than declared met.",
     },
     {
-      title: "Present the trade-offs and their costs",
-      body: "Where two requirements conflict or where a target is expensive, show the cost of each level and let the business choose the point.",
+      title: "Show the trade-offs with prices",
+      body: "Where two of these fight, or where a target is expensive, show what each level costs and let the business pick.",
       effort: "Half a day with technical input",
-      outcome: "Decisions the business owns, rather than targets a technical team quietly downgrades.",
+      outcome: "Decisions the business owns, instead of targets a technical team quietly waters down.",
     },
     {
-      title: "Get an early load test against realistic volume",
-      body: "As soon as anything works end to end, even roughly. Use production-scale data volumes rather than a clean test set.",
+      title: "Get a rough test with realistic data early",
+      body: "As soon as anything works end to end, even roughly. Use realistic amounts of data rather than a tidy little test set.",
       effort: "1-2 days",
-      outcome: "Architectural problems found while the architecture can still change.",
+      outcome: "Problems found while the shape of the thing can still change.",
     },
   ],
 
   exercises: [
     {
-      title: "Consequence questions on a live requirement",
+      title: "Four consequence questions",
       brief:
-        "Take a current functional requirement and ask its stakeholder four consequence questions: what happens if it is slow, if it is unavailable for an hour, if a day of data is lost, and if the wrong person can see it. Record the answers verbatim.",
+        "Take a requirement you are working on and ask its stakeholder four things: what happens if it is slow, if it is unavailable for an hour, if a day of work is lost, and if the wrong person can see it. Write the answers down word for word.",
       success:
-        "You have four numbers with business reasoning attached, and at least one of them surprises you.",
+        "You have four numbers with reasons attached, and at least one of them surprises you.",
       time: "1 hour",
     },
     {
-      title: "Find the tail",
+      title: "Find the slow ones",
       brief:
-        "For any system you can get timing data from, plot the distribution of response times rather than the average. Identify the slowest five per cent and check what those requests have in common.",
+        "For any system you can get timing data from, look at the spread rather than the average. Pick out the slowest five per cent and check what those requests have in common.",
       success:
-        "You can say whether the average is representative, and you can characterise who experiences the slow tail.",
+        "You can say whether the average is telling the truth, and describe who is having the bad experience.",
       time: "2 hours",
     },
     {
-      title: "The untestable sweep",
+      title: "Hunt the untestable words",
       brief:
-        "Search any requirements document for fast, scalable, robust, secure, reliable, user-friendly and highly available. For each, write the testable version or log it as an open decision with an owner.",
+        "Search any requirements document for fast, scalable, robust, secure, reliable, user-friendly and highly available. For each one, write the testable version or log it as a decision nobody has taken.",
       success:
-        "Every occurrence is either converted into something measurable or recorded as a decision nobody has taken.",
+        "Every one is either turned into something measurable or written down as an open decision with a name against it.",
       time: "1 hour",
     },
   ],
 
   mistakes: [
     {
-      mistake: "Waiting for stakeholders to raise these",
-      why: "They will not, because the expectations are invisible to the person holding them. Silence is not the absence of a requirement, it is an unstated one.",
-      fix: "Walk a fixed category list in every elicitation session, whether or not anybody has mentioned the subject.",
+      mistake: "Waiting for stakeholders to bring these up",
+      why: "They will not, because the expectations are invisible to the person holding them. Silence does not mean there is no requirement. It means it is unsaid.",
+      fix: "Work through a fixed list in every session, whether or not anyone has mentioned the subject.",
     },
     {
-      mistake: "Asking directly for a performance target",
-      why: "You get an invented round number with no reasoning, which cannot be defended when the technical cost of meeting it becomes apparent.",
-      fix: "Ask the consequence question instead, then convert the answer into a threshold and record the reason beside it.",
+      mistake: "Asking how fast it should be",
+      why: "You get an invented round number with nothing behind it, which cannot be defended once somebody puts a price on meeting it.",
+      fix: "Ask what happens if it is slow, then turn the answer into a number and keep the reason next to it.",
     },
     {
-      mistake: "Writing performance as an average",
-      why: "Averages hide the tail, so a system can meet the requirement while a meaningful share of users have a bad experience every single day.",
-      fix: "Specify a percentile, under a stated concurrent load, for a named operation.",
+      mistake: "Writing speed as an average",
+      why: "Averages hide the slow ones, so the system can pass its target while a real share of users have a bad time every day.",
+      fix: "Write it about the slowest few, under a stated amount of use, for a named action.",
     },
     {
-      mistake: "Omitting peak volume",
-      why: "The design gets sized for the average and fails on the busiest day, which is the day the business can least tolerate it.",
-      fix: "Get current, peak and three-year growth figures from data, and specify against peak.",
+      mistake: "Leaving out the busiest day",
+      why: "The thing gets built for an average day and falls over on the day the business can least afford it.",
+      fix: "Get today, busiest day and three-year growth from data, and build to the busiest.",
     },
     {
-      mistake: "Treating availability as a target rather than a cost",
-      why: "Each additional nine costs disproportionately more, and a target chosen without seeing the cost is a wish rather than a decision.",
-      fix: "Establish what an hour of downtime costs and when it would hurt most, then present availability levels with their costs.",
+      mistake: "Treating reliability as a target rather than a price",
+      why: "Each step up costs a lot more than the last, and a target picked without seeing the cost is a wish rather than a decision.",
+      fix: "Work out what an hour of downtime costs and when it would hurt, then show what each level of reliability costs.",
     },
     {
-      mistake: "Assuming somebody in the room owns retention and security",
-      why: "Business stakeholders assume it is technical, technical teams assume it is business, and the requirement gets set by default rather than by anybody.",
-      fix: "Take these to compliance, legal and information security explicitly, and treat their answers as constraints.",
+      mistake: "Assuming somebody in the room owns the legal ones",
+      why: "Business people think it is technical, technical people think it is business, and the requirement gets set by default rather than by anyone.",
+      fix: "Take retention, access and accessibility to compliance, legal and security, and treat their answers as fixed.",
     },
     {
-      mistake: "Writing untestable adjectives",
-      why: "Robust, scalable and performant will be declared met by whoever is under pressure to ship, and nobody can prove otherwise.",
-      fix: "Every non-functional requirement needs an operation, a threshold, a condition and a measurement method.",
+      mistake: "Using words nobody can test",
+      why: "Robust and scalable will be declared met by whoever is under pressure to ship, and nobody can prove otherwise.",
+      fix: "Every one needs an action, a number, the conditions, and a way of measuring it.",
     },
     {
-      mistake: "Testing non-functionals at the end",
-      why: "Performance and availability are properties of the architecture. Discovering a problem in the final month means changing decisions embedded in months of work.",
-      fix: "Push for a rough load test against realistic data volumes as soon as anything works end to end.",
+      mistake: "Testing these at the end",
+      why: "Speed and reliability come from decisions about how the thing is built. Finding a problem in the last month means unpicking months of work.",
+      fix: "Push for a rough test with realistic data volumes as soon as anything works end to end.",
     },
   ],
 
   bestPractices: [
-    "Walk a fixed category list in every elicitation session.",
-    "Use consequence questions rather than asking for targets directly.",
-    "Specify performance as a percentile under a stated load for a named operation.",
-    "Capture current volume, peak volume and three-year growth, all from data.",
-    "Express availability in terms of what downtime costs and when it hurts.",
-    "Separate the two recovery questions: how long down, and how much data lost.",
-    "Take retention, security and accessibility to their real owners.",
-    "Name the accessibility standard and conformance level explicitly.",
-    "Ask what the support team will need to see at nine on a Monday.",
-    "Present conflicting requirements as costed trade-offs.",
-    "Write every requirement so an outsider could test it and report pass or fail.",
-    "Get an early load test against production-scale data volumes.",
+    "Work through a fixed list every time.",
+    "Ask what happens if, rather than asking for a target.",
+    "Write speed about the slowest few, under stated usage, for a named action.",
+    "Get today, busiest day and growth, all from data.",
+    "Express reliability in terms of what downtime costs and when it hurts.",
+    "Keep the two recovery questions separate: how long down, and how much lost.",
+    "Take the legal ones to legal, compliance and security.",
+    "Name the accessibility standard and level.",
+    "Ask the support team what they need to see on a Monday morning.",
+    "Show the conflicts as choices with prices.",
+    "Write everything so an outsider could test it and say pass or fail.",
+    "Get a rough test with realistic data volumes early.",
   ],
 
   proTips: [
-    "Ask what the system does when it is under stress, not only how fast it is when it is not. A system that queues gracefully and tells the user what is happening is frequently better than one that is marginally faster and fails opaquely at peak. Degradation behaviour is a business decision and it almost never appears in requirements.",
-    "For anything involving dates, times or retention, ask about the year end and the daylight saving change. I have never regretted asking, and I have several times found that a retention period was being calculated in a way that produced different answers depending on which side of a year boundary a record fell.",
-    "When a technical team says a non-functional target is expensive, ask what would be affordable and what the difference in outcome would be. That converts a refusal into a menu, and the business is usually happy to accept a lower target once they can see the price of the higher one. The mistake is carrying the target back as a demand.",
-    "Write the observability requirements from the support team's perspective by actually asking them what they cannot see today about the current system. It is the fastest way to produce useful non-functional requirements, it costs one conversation, and support teams are almost never consulted during specification.",
+    "Ask what the system should do when it is struggling, not just how fast it is when it is not. Something that slows down gracefully and tells the user what is happening is often better than something marginally faster that just freezes. How it behaves under strain is a business decision and it almost never appears in a requirement.",
+    "For anything to do with dates or how long you keep things, ask about the year end and the clock change. I have never regretted asking, and more than once I have found that a retention period was being worked out in a way that gave different answers depending on which side of a year boundary a record fell.",
+    "When a technical team says a target is expensive, ask what would be affordable and what the difference would look like to a customer. That turns a refusal into a menu, and the business is usually happy with a lower target once they can see the price of the higher one. The mistake is carrying the target back as a demand.",
+    "Write the can-anyone-see-what-is-happening requirements by asking the support team what they cannot see today about the current system. It is the fastest way to get useful ones, it costs one conversation, and support teams are almost never asked anything during specification.",
   ],
 
   businessApplications: [
-    "Customer-facing systems, where response time and availability are commercially visible.",
-    "Regulated environments, where retention, audit and access control are legal obligations rather than preferences.",
-    "Public sector delivery, where accessibility conformance is contractually mandated.",
-    "High-volume operations, where peak sizing rather than average sizing decides whether the design works.",
-    "Vendor selection, where non-functional requirements form part of the evaluation and the contract.",
-    "System replacement, where the old system's implicit non-functional behaviour has to be discovered and stated.",
+    "Anything customers touch, where speed and availability are commercially visible.",
+    "Regulated work, where retention, records and access are legal duties rather than preferences.",
+    "Public sector, where accessibility standards are written into the contract.",
+    "High-volume operations, where building for the busiest day rather than the average decides whether it works.",
+    "Choosing a supplier, where these form part of the evaluation and end up in the contract.",
+    "Replacing a system, where the old one's unspoken behaviour has to be dug out and written down.",
   ],
 
   checklist: [
-    "Category script walked: performance, volume, availability, recoverability, security, retention, accessibility, compatibility, maintainability, observability.",
-    "Consequence question asked for each category.",
-    "Performance specified as a percentile, under load, per named operation.",
-    "Current, peak and growth volumes obtained from data.",
-    "Availability expressed against the cost and timing of downtime.",
+    "Full list worked through: speed, volume, downtime, data loss, access, retention, accessibility, behaviour under strain, visibility.",
+    "Consequence question asked for each.",
+    "Speed written about the slowest few, under stated usage, per action.",
+    "Today, busiest day and growth figures obtained from data.",
+    "Reliability expressed against the cost and timing of downtime.",
     "Both recovery questions answered separately.",
     "Retention and deletion confirmed with legal or compliance.",
-    "Accessibility standard and conformance level named.",
-    "Observability requirements gathered from the support team.",
-    "Degradation behaviour under stress specified.",
-    "Conflicts presented as costed trade-offs and decided by the business.",
-    "Every requirement testable by somebody who was not in the conversation.",
-    "Early load test scheduled against realistic data volumes.",
+    "Accessibility standard and level named.",
+    "Support team asked what they need to be able to see.",
+    "Behaviour under strain specified.",
+    "Conflicts presented as priced choices and decided by the business.",
+    "Everything testable by somebody who was not in the conversation.",
+    "Early test with realistic data volumes scheduled.",
   ],
 
   faqs: [
     {
-      q: "Who owns non-functional requirements, the BA or the architect?",
-      a: "The BA owns establishing what the business needs and why. The architect owns whether and how it can be achieved and at what cost. Left entirely to the architect they become technical assumptions, and left entirely to the BA they become undeliverable wishes.",
+      q: "Who owns these, the BA or the technical architect?",
+      a: "The BA works out what the business needs and why. The architect works out whether it can be done and what it costs. Left entirely to the architect they become technical guesses. Left entirely to the BA they become undeliverable wishes.",
     },
     {
-      q: "How do I write a performance requirement properly?",
-      a: "Name the operation, the percentile, the threshold and the load. For example: customer search returns results within two seconds at the ninety-fifth percentile with two hundred concurrent users, measured against a production-scale dataset.",
+      q: "How do I write a speed requirement properly?",
+      a: "Name the action, how slow the slowest few are allowed to be, and how many people are using it at the time. For example: customer search returns within two seconds for all but the slowest one in twenty, with two hundred people using it, tested against a realistic amount of data.",
     },
     {
-      q: "What availability level should we ask for?",
-      a: "Whatever the business will pay for once they have seen the cost of each level. Start from what an hour of downtime costs and when it would hurt, rather than from a number of nines chosen because it sounds appropriate.",
+      q: "How reliable should we ask for?",
+      a: "Whatever the business will pay for once they have seen what each level costs. Start from what an hour of downtime costs and when it would hurt, rather than from a number that sounds about right.",
     },
     {
-      q: "How do I get security requirements without a security team?",
-      a: "Start from the data: what is held, who may see it, what happens if it leaks, and what obligations attach to it. That produces most of the practical requirements. Where the data is sensitive or regulated, getting specialist input is itself the requirement.",
+      q: "How do I get security requirements with no security team?",
+      a: "Start from the data. What is held, who may see it, what happens if it gets out, and what rules attach to it. That gets you most of the practical answers. Where the data is genuinely sensitive, getting a specialist involved is itself the requirement.",
     },
     {
-      q: "Should non-functional requirements be per feature or system-wide?",
-      a: "Mostly system-wide, with exceptions where a specific operation has a different need. A search users perform constantly and a monthly report have very different performance requirements and should not share one target.",
+      q: "Should these apply to every feature or to the whole system?",
+      a: "Mostly the whole system, with exceptions where something specific needs different treatment. A search people use constantly and a monthly report have very different speed needs and should not share one target.",
     },
     {
       q: "What if the business cannot answer the consequence question?",
-      a: "That is informative. It usually means the consequence is small, in which case a modest target is fine and you have saved money. Record that reasoning, because somebody will later assert that the requirement was critical.",
+      a: "That is useful information. It usually means the consequence is small, so a modest target is fine and you have saved money. Write that reasoning down, because somebody will later insist the requirement was critical.",
     },
   ],
 
   tools: [
-    { name: "A category script with consequence questions", what: "Ten categories, one question each. Prevents silently skipping the requirements nobody volunteers.", cost: "Free" },
-    { name: "Volume data from the current system", what: "Current, peak and growth. Peak is the number that sizes the design and the one usually omitted.", cost: "Varies" },
-    { name: "An early load test against realistic volumes", what: "Run as soon as anything works end to end. Architectural findings while the architecture can still change.", cost: "Varies" },
-    { name: "A trade-off table", what: "Each target with its cost, so the business chooses the level rather than a technical team quietly downgrading it.", cost: "Free" },
+    { name: "A list with a consequence question for each item", what: "Nine or ten things, one question each. Stops you quietly skipping the requirements nobody volunteers.", cost: "Free" },
+    { name: "Volume figures from the current system", what: "Today, busiest day, growth. The busiest day is the one that decides the design and the one usually left out.", cost: "Varies" },
+    { name: "An early rough test with realistic data", what: "Run as soon as anything works end to end. Finds the problems while the shape can still change.", cost: "Varies" },
+    { name: "A trade-off table", what: "Each target with its price, so the business picks the level rather than a technical team quietly lowering it.", cost: "Free" },
   ],
 
   internalLinks: [
-    { slug: "writing-requirements-developers-can-build", anchor: "the functional half of the specification", context: "Specification" },
+    { slug: "writing-requirements-developers-can-build", anchor: "the rest of the specification", context: "Specification" },
     { slug: "capacity-and-volume-analysis", anchor: "getting the volume numbers right", context: "Volume" },
     { slug: "running-user-acceptance-testing", anchor: "testing these before go-live", context: "Verification" },
   ],
@@ -352,7 +352,7 @@ export const guide: Guide = {
   relatedGuides: ["writing-requirements-developers-can-build", "capacity-and-volume-analysis", "running-user-acceptance-testing"],
 
   conclusion: [
-    "Pick one requirement you are working on and ask its stakeholder four consequence questions: what happens if it is slow, unavailable for an hour, missing a day of data, or visible to the wrong person. An hour of that will produce numbers with reasoning attached, which is the only kind that survives the conversation about what they cost.",
+    "Pick one requirement you are working on and ask its stakeholder four questions: what happens if it is slow, unavailable for an hour, missing a day of work, or visible to the wrong person. An hour of that gives you numbers with reasons attached, which is the only kind that survives somebody putting a price on them.",
   ],
 };
 

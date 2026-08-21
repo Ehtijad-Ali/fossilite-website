@@ -20,6 +20,8 @@ export const CATEGORIES: Category[] = [
   { slug: "cybersecurity-basics", name: "Cybersecurity Basics", track: "AI & Engineering", blurb: "The defensive fundamentals every builder and business owner needs." },
 
   // ── Business & Growth ─────────────────────────────────────────────────────
+  { slug: "business-analysis", name: "Business Analysis", track: "Business & Growth", blurb: "Working out what a business actually needs before anyone builds anything." },
+  { slug: "requirements", name: "Requirements & Process", track: "Business & Growth", blurb: "Turning how work really happens into something a team can build against." },
   { slug: "business-strategy", name: "Business Strategy", track: "Business & Growth", blurb: "Choosing what to do, and what to deliberately not do." },
   { slug: "entrepreneurship", name: "Entrepreneurship", track: "Business & Growth", blurb: "Starting something real, with the smallest possible bet up front." },
   { slug: "marketing", name: "Marketing", track: "Business & Growth", blurb: "Getting the right people to find you and understand you fast." },

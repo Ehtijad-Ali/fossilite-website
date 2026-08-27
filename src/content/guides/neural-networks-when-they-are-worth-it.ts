@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "deep-learning",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 15,
 
   intro: [
     "Neural networks get all the attention, and for most business problems they are the wrong answer. That is not a fashionable thing to say and it is what the evidence keeps showing. If your data is a table of customers and orders, something much simpler will usually beat them, cost less to build and be easier to keep running.",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A waste and recycling operator running a sorting facility. Mixed household recycling comes in on a conveyor and has to be separated.",
+    problem:
+      "Contamination. The wrong material in the wrong stream downgrades an entire load, and the sorting was being done by people standing at a belt for eight hours picking things off it. Staff turnover was high, the work was unpleasant, and accuracy fell towards the end of a shift.",
+    analysis: [
+      "Most of the time the honest answer to should we use a neural network is no, and the guide says so repeatedly. This is one of the cases where the answer is yes, and it is worth being clear about why.",
+      "The information here is not rows and columns. It is what an object looks like on a moving belt. There is no table of features to hand a simpler model, and no sensible way to write down in numbers what a contaminated item looks like.",
+      "That is the distinguishing test. When the input is an image, a sound or a piece of language, and the thing you are recognising cannot be reduced to a list of measurements a person could type into a spreadsheet, the heavier approach starts earning its cost.",
+      "The counting still came first. Which contamination types actually cause the downgrades? A small number of item types accounted for most of the value lost, which meant the system did not need to recognise everything, only those.",
+      "Ruled out: more staff. The accuracy problem was not headcount, it was that the task degrades human attention by design. Adding people to it would have reproduced the problem at greater cost.",
+    ],
+    aiApproach: [
+      {
+        step: "Confirm the simpler options genuinely do not apply",
+        detail:
+          "This is a real step and it is usually where the project should stop. Here there was no table of numbers to work from, and existing mechanical and magnetic separation already handled what it could. What remained was visual recognition, which is what this family of methods is actually for.",
+      },
+      {
+        step: "Understand what you are signing up for",
+        detail:
+          "This route needs a lot of labelled examples, hardware to run on, and someone who can maintain it. That cost is the reason the answer is usually no. It is justified here because the alternative is a person doing an unpleasant job badly through no fault of their own.",
+      },
+      {
+        step: "Build the labelled set for the items that matter",
+        detail:
+          "Thousands of images of the belt with the problem items marked. Tedious, unavoidable, and the single biggest determinant of whether it works. Narrowing to the few item types that caused most of the loss made this achievable rather than theoretical.",
+      },
+      {
+        step: "Assist the people, do not replace them",
+        detail:
+          "The first version highlights suspect items for the person on the belt rather than driving a mechanism. That is cheaper, safer, and it generates corrections that improve the next version. It also means a bad day for the system is a bad day for nobody.",
+      },
+      {
+        step: "Test on material from a different season",
+        detail:
+          "What arrives in recycling changes across the year and around holidays. A system tested only on the weeks it was trained on will look far better than it is.",
+      },
+    ],
+    solution: [
+      "Cameras over the belt, with suspect items highlighted on a screen in front of the picker.",
+      "Coverage limited to the item types responsible for most of the downgrades, rather than everything.",
+      "Every correction the picker makes recorded, which is what the next version learns from.",
+      "A weekly report on what is arriving contaminated and from which collection rounds, which fed back into public messaging.",
+      "The people stayed. The job changed from scanning everything to checking what was flagged.",
+    ],
+    impact: [
+      "Attention was pointed at the items that mattered rather than spread across the whole belt, which is a better use of a person than asking them to be a camera.",
+      "The end-of-shift accuracy drop, which was a human attention problem, stopped being the main risk to a load's value.",
+      "The collection round report was an unplanned by-product and turned out to be independently useful.",
+      "The business now has a clear internal example of when this technology is worth it, which has made it easier to say no to the several proposals that were not.",
+    ],
+    whatWouldHaveKilledIt:
+      "Trying to recognise everything. Scoped to all contamination types it would have needed vastly more labelled examples and would have been mediocre at all of them. The other failure would have been going straight to automatic removal: a mechanism acting on a wrong call is expensive and dangerous, and skipping the assisted stage would have removed the corrections the system needed in order to improve.",
+  },
 
   mistakes: [
     {

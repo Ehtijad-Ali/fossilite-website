@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 15,
 
   intro: [
     "Somebody comes to you with a result. We tried the new checkout page on forty customers and twelve of them bought something, against eight out of forty on the old one. That is a fifty per cent improvement. Should we roll it out?",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A twelve-room country hotel. Bookings come from its own website, from two of the big travel sites, and from the phone.",
+    problem:
+      "The owner had signed up to a new booking channel three months earlier. It had produced forty bookings and a commission bill, and the question in front of her was whether to keep it for the year. Forty is not enough to be sure of anything, and the pressure was to decide anyway.",
+    analysis: [
+      "Small numbers are the whole difficulty here. With forty bookings you cannot simply compare average values and declare a winner, because the difference you are looking at could easily be luck.",
+      "The first correction was to the question. She had been asking whether the channel was good. The answer she needed was whether it was better than what the rooms would otherwise have earned, which is a different and harder question because some of those guests would have booked anyway.",
+      "Three years of booking data gave a solid picture of the existing channels: average nightly rate, average length of stay, how often guests ate dinner in the restaurant, and cancellation rate.",
+      "That history is the useful part, and it is what most people throw away. You do not start from nothing when you assess the new channel. You start from a well-founded expectation of how a booking behaves at this hotel, and update it with the forty.",
+      "The forty bookings came in at a lower nightly rate and a longer average stay, and ate in the restaurant more often. Whether those differences were real or noise was exactly the question.",
+    ],
+    aiApproach: [
+      {
+        step: "Start from what you already believe, and say it out loud",
+        detail:
+          "This is the whole idea. You have three years of history telling you what a booking here normally looks like. That is a starting position, and writing it down explicitly is not cheating, it is the thing that stops forty bookings from being read as though they arrived from nowhere.",
+      },
+      {
+        step: "Update it with the new evidence in proportion to its weight",
+        detail:
+          "Forty bookings move your view a bit. Four hundred would move it a lot. The arithmetic handles that proportionality for you, which is precisely what a simple comparison of averages fails to do.",
+      },
+      {
+        step: "Produce a range, not a number",
+        detail:
+          "The output is not the new channel is worth this much per booking. It is: given what we knew and what we have seen, the value is somewhere in this range, and here is how confident we are. A single number invites a confidence nobody has earned.",
+      },
+      {
+        step: "Ask the decision question, not the truth question",
+        detail:
+          "She does not need to know the exact value. She needs to know the chance it is worse than the alternative. That is a question this approach answers directly and most others answer badly.",
+      },
+      {
+        step: "Set a point at which you will look again",
+        detail:
+          "Rather than deciding once, decide with a review at a stated number of further bookings. That is how this way of thinking is supposed to be used, and it removes most of the pressure from the first decision.",
+      },
+    ],
+    solution: [
+      "A written statement of what a normal booking is worth at this hotel, drawn from three years of history.",
+      "That expectation updated with the new channel's forty bookings, giving a range rather than a figure.",
+      "The restaurant spend included, because the channel looked worse on room rate alone and better once dinner was counted.",
+      "A decision to continue with a review at a hundred and fifty bookings, with the number written into the diary.",
+      "The same treatment applied afterwards to the two existing channels, which had never been assessed this way.",
+    ],
+    impact: [
+      "The decision stopped being a coin toss dressed up as analysis, and became a stated range with a stated confidence.",
+      "Counting restaurant spend changed the answer, and that was a consequence of asking what a booking is worth rather than what a room night is worth.",
+      "The review point removed the need to be right first time, which was where all the anxiety had been.",
+      "The habit transferred. The next new supplier, the next marketing spend, got assessed the same way instead of on the first month's figures.",
+    ],
+    whatWouldHaveKilledIt:
+      "Treating the forty bookings as though they were the whole truth. The average nightly rate across forty bookings looked meaningfully lower than the house average, and a straight comparison would have got the channel cancelled. It was well within the range you would expect from forty bookings of ordinary variation. Deciding on a small sample as if it were a large one is the most expensive habit in small business analysis.",
+  },
 
   mistakes: [
     {

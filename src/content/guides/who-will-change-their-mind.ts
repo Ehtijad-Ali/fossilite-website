@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Advanced",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "Most retention programmes work like this. Build something that predicts who is likely to leave, sort the list, call the top of it. It feels obviously right and it is usually the wrong thing to do.",
@@ -197,6 +197,63 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A garden centre with a loyalty scheme. Around forty thousand members, a printed voucher mailing three times a year.",
+    problem:
+      "The spring voucher mailing went to everyone who had spent over a threshold in the previous year. It always produced a good response and the marketing manager was pleased with it. The question nobody had asked was how many of those people were coming in anyway.",
+    analysis: [
+      "This is the trap that catches almost every targeted campaign. Sending vouchers to your best customers produces excellent-looking response rates, because your best customers were going to visit regardless. The voucher discounted a sale that was already coming.",
+      "The right question is not who will respond. It is who will behave differently because we contacted them, which is a harder question and the only one worth answering.",
+      "Answering it needs something most businesses do not have: a group who were deliberately not contacted. Fortunately a previous mailing had accidentally omitted a segment, which gave a usable comparison.",
+      "Splitting customers by what contact actually did to them gives four groups. Those who would come regardless, where the voucher is pure margin given away. Those who come only if contacted, which is the entire value of the campaign. Those who will not come either way, which is wasted print. And a group who respond badly to being contacted.",
+      "That last group is real and it is the one nobody expects. In this case it was a segment of infrequent high-spend customers for whom the mailing appeared to prompt a review of whether they wanted the emails at all, and a proportion unsubscribed.",
+      "The old targeting was concentrating almost entirely on the first group, which is exactly the group where a voucher costs money and changes nothing.",
+    ],
+    aiApproach: [
+      {
+        step: "Predict the difference, not the outcome",
+        detail:
+          "Not will this customer visit, but how much more likely are they to visit if we contact them than if we do not. That comparison is the whole technique and it needs both a contacted and an uncontacted group to learn from.",
+      },
+      {
+        step: "Protect a holdout group permanently",
+        detail:
+          "A randomly chosen group who receive nothing, every campaign, forever. It feels wasteful and it is the only thing that makes any of this measurable. Without it you can measure response and you can never measure effect.",
+      },
+      {
+        step: "Model the contacted and uncontacted separately",
+        detail:
+          "Build a picture of behaviour in each group and take the difference for each customer. The difference is the number that matters, and it is often small even where the raw response rate is large.",
+      },
+      {
+        step: "Find the group that reacts badly",
+        detail:
+          "Look explicitly for customers whose predicted behaviour is worse when contacted. Most analyses never look for this because it is counterintuitive, and excluding those customers is frequently the single most profitable action available.",
+      },
+      {
+        step: "Measure the campaign as a difference",
+        detail:
+          "Compare against the holdout, not against last year. Response rate is not a measure of anything a campaign caused.",
+      },
+    ],
+    solution: [
+      "Vouchers sent to the group whose behaviour actually changes, not the group most likely to respond.",
+      "The customers who react badly to contact removed from the mailing entirely.",
+      "A permanent randomised holdout, small but never skipped.",
+      "The loyal high-spenders who visit regardless moved to a thank-you communication with no discount attached.",
+      "Campaign results reported as the difference against the holdout.",
+    ],
+    impact: [
+      "A smaller mailing went out, which cut print and postage while aiming at the people whose behaviour it could actually change.",
+      "Margin stopped being discounted for customers who were already on their way in, which was the largest single leak and it had been invisible.",
+      "The group who reacted badly stopped being contacted, and the unsubscribe rate fell as a result.",
+      "The measure changed from response rate to incremental effect, which made every future campaign judgeable.",
+    ],
+    whatWouldHaveKilledIt:
+      "Not holding anything back. Without an uncontacted group there is no way to know what the campaign caused, and every mailing gets judged on a response rate that mostly measures how well you identified people who were coming anyway. The pressure to skip the holdout is constant and it comes from exactly the people who most want to prove the campaign worked.",
+  },
 
   mistakes: [
     {

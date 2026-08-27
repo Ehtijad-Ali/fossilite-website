@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 14,
 
   intro: [
     "Somebody presents a model. There is a percentage on the slide. Everybody nods. You have no technical background and you suspect the percentage is not telling you very much, and you are right.",
@@ -197,6 +197,62 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A lettings agency managing about nine hundred properties across a city, collecting rent monthly on behalf of landlords.",
+    problem:
+      "Arrears. The agency wanted to know which tenancies were heading for trouble so it could intervene early, and a supplier had already demonstrated something that was ninety-four percent accurate. The managing director was ready to sign. The number was true and it meant almost nothing.",
+    analysis: [
+      "Start by counting the thing being predicted. Around six percent of tenancies fell into meaningful arrears in a year. That single figure explains everything that followed.",
+      "If six percent go into arrears, then a system that says nobody will go into arrears is ninety-four percent accurate. That is exactly what the demonstrated number described, and it is a system with no value whatsoever.",
+      "So accuracy is the wrong measure whenever the thing you care about is rare, which in business is most of the time. Fraud is rare. Failures are rare. Serious complaints are rare.",
+      "The two questions that do matter. Of the tenancies it flags, how many really do go into arrears? That determines how much wasted effort the team absorbs. And of the ones that go into arrears, how many did it miss? That determines what the whole thing is for.",
+      "There is a trade between those two and it cannot be avoided. Flag more and you catch more and waste more. The agency had to choose where to sit, and that is a business decision about resource and about how an intervention feels to a tenant who was never going to miss a payment.",
+    ],
+    aiApproach: [
+      {
+        step: "Establish what doing nothing scores",
+        detail:
+          "Before evaluating anything, work out what the laziest possible answer achieves. Here it was ninety-four percent. Any result must be compared against that, and a supplier quoting accuracy without it is either careless or hoping you will not ask.",
+      },
+      {
+        step: "Test on a period the model never saw",
+        detail:
+          "Train on earlier tenancies, test on later ones. Scoring a model on the data it learned from is the most common way a flattering number gets produced, and it is not always deliberate.",
+      },
+      {
+        step: "Report the two numbers that describe the trade",
+        detail:
+          "Of those flagged, how many were right. Of those that happened, how many were caught. Always together. Either one alone can be made to look excellent by making the other terrible.",
+      },
+      {
+        step: "Let the business choose the operating point",
+        detail:
+          "The team can handle a certain number of early conversations a month. That capacity, not the arithmetic, sets how many tenancies get flagged. Choosing this is a management decision and handing it to the supplier is how you end up with a system nobody can staff.",
+      },
+      {
+        step: "Check it is not simply finding something you already knew",
+        detail:
+          "An early version was largely detecting tenancies already one payment behind, which the accounts system flags for free. Beating the obvious existing signal is the real bar, and it is a different and much harder question than beating random.",
+      },
+    ],
+    solution: [
+      "The supplier was asked to re-present using the two meaningful numbers on a period the model had not seen.",
+      "The revised picture was considerably less impressive and was still worth having, which is a healthier place to start from.",
+      "The flagging threshold set by how many early conversations the team could actually hold each month.",
+      "A comparison against the existing one-payment-behind flag, so the agency could see what the model added over what it already had.",
+      "Monthly reporting of both numbers, so drift would be visible.",
+    ],
+    impact: [
+      "The agency bought a system it understood, at a threshold it could staff, rather than one that had been sold on a meaningless figure.",
+      "The comparison against the existing flag reframed the purchase: the value was earliness, not detection, and that changed how the intervention was designed.",
+      "The team was not swamped, because the volume was set by their capacity rather than by a default.",
+      "The managing director now asks what the base rate is before looking at any accuracy figure, which will save more money than this project did.",
+    ],
+    whatWouldHaveKilledIt:
+      "Signing on the ninety-four percent. It was a true statement about a system that could have been replaced by a piece of paper saying no. Nobody was lying. Accuracy is simply the wrong measure for rare events and it is quoted constantly because it is the one everybody recognises. The second failure would have been setting a threshold that generated more conversations than the team could hold, which turns a working model into an ignored report within two months.",
+  },
 
   mistakes: [
     {

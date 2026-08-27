@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "A model learns the world as it was during the period it was trained on. Then the world moves and the model does not. That is the whole problem, and it is the single most reliable way for a successful project to become a quiet failure.",
@@ -201,6 +201,63 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A chain of eleven takeaway outlets. Prep quantities are decided each morning for the evening trade.",
+    problem:
+      "A demand model built eighteen months earlier had been good and had quietly stopped being good. Nobody could say when. Waste had crept up, the kitchen managers had started overriding it, and by the time anybody looked at it properly most of them had gone back to guessing.",
+    analysis: [
+      "The first thing to establish is what changed, because a model going stale is always caused by something and the something is usually knowable.",
+      "Three things had changed and each affected it differently. The menu had been revised, with two popular items removed. A competitor had opened near two of the outlets. And delivery platform mix had shifted heavily towards one app.",
+      "The menu change is the clean case. The model was predicting demand for items that no longer existed and had no history for their replacements. That is not drift, that is a broken input, and it should have triggered a rebuild the day the menu changed.",
+      "The competitor is genuine drift. The relationship between day, weather and demand at those two sites simply moved, gradually, over a couple of months.",
+      "The delivery mix is the sneaky one. Orders through the dominant app arrive in a different pattern across the evening, so the totals could be right while the timing was wrong, which is what the kitchen actually experienced.",
+      "The real failure was none of these. It was that nobody was watching. There was no measure being tracked, so the decay was discovered through complaints months after it started.",
+    ],
+    aiApproach: [
+      {
+        step: "Measure the prediction against reality continuously",
+        detail:
+          "Predicted versus actual, tracked weekly from the day it goes live. This is a small piece of reporting and its absence is why this failure is so common. Without it, the first signal is somebody complaining.",
+      },
+      {
+        step: "Watch the inputs as well as the output",
+        detail:
+          "Track whether what is arriving still looks like what it was trained on. The delivery mix shift would have been visible here months before it showed up in the results, because the inputs change before the accuracy does.",
+      },
+      {
+        step: "Tie business changes to model reviews",
+        detail:
+          "A menu change, a new site, a price change, a competitor opening. These are known events and each should force a review. Waiting for the numbers to degrade is choosing to find out late when somebody could have told you in advance.",
+      },
+      {
+        step: "Distinguish a rebuild from a refresh",
+        detail:
+          "The competitor effect needed retraining on recent data. The menu change needed rethinking what the model predicts. Treating both as retrain the model would have fixed one and left the other broken.",
+      },
+      {
+        step: "Read the overrides",
+        detail:
+          "The kitchen managers had been correcting it for months and every correction was a recorded signal that something was wrong. Nobody was reading them. That log is a free early warning system that most businesses collect and never look at.",
+      },
+    ],
+    solution: [
+      "A weekly predicted-versus-actual figure per outlet, on the same report as waste.",
+      "An alert when it drifts past a set band for two consecutive weeks.",
+      "A standing rule that a menu change triggers a review before it goes live, not after.",
+      "Retraining on a rolling recent window so gradual shifts are absorbed automatically.",
+      "The override log reviewed monthly, because it is the earliest signal available.",
+    ],
+    impact: [
+      "The decay became visible in weeks rather than being discovered through complaints months later, which is the whole objective.",
+      "The three causes were separated and treated differently, where a single retrain would have addressed only one of them.",
+      "The kitchen managers regained trust because their overrides were visibly being used, and that mattered more to adoption than the accuracy did.",
+      "The business learned that a model is a thing you maintain rather than a thing you install, which changed how the next one was budgeted.",
+    ],
+    whatWouldHaveKilledIt:
+      "What did nearly kill it: shipping it with no monitoring. A model that works on day one and is not watched will decay, and the only question is whether you notice before your customers do. The second failure was assuming one cause. The menu change was obvious in hindsight and would have been missed entirely by a routine retrain, because retraining does not fix predicting something that no longer exists.",
+  },
 
   mistakes: [
     {

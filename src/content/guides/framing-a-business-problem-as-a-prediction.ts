@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 16,
 
   intro: [
     "Somebody in your business has probably suggested using machine learning for something. Most of the time they are pointing at a real problem and the wrong tool, and working out which is which takes about twenty minutes if you know what to ask.",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "Half a day",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A regional coach and minibus hire company. Fourteen vehicles, school contracts during term time, private hire and day trips the rest of the year.",
+    problem:
+      "The owner had been told by three separate people that he ought to be using AI, and arrived at the meeting to say so. What he actually wanted, when pushed, was this: I want to grow the business and I do not know where the growth is. That is not a prediction problem. It is a wish.",
+    analysis: [
+      "The entire job at this stage is turning a wish into a question with an answer you can look up. Until you can do that there is nothing to build, and nobody should be spending money.",
+      "So the first question is not about data at all. It is: what would you do differently if you knew? He had three answers. Which quotes to chase harder. Whether to buy a fifteenth vehicle. Which school contracts to bid for at renewal.",
+      "Those are three different projects and only one was urgent. Ranking them took an afternoon and stopped the budget going on the wrong one.",
+      "Chasing quotes won. About four hundred quotes went out a year and a minority came back as bookings. Nobody knew which were worth a follow-up call, so follow-up happened whenever somebody had a spare hour.",
+      "Now it is a question with a lookable-up answer: for a quote we sent, did it become a booking, yes or no? Every past quote already has that answer sitting in the system.",
+      "Last check before starting, and the one most often skipped: if we knew, could we act? Yes. One person makes the calls and can only make so many a day, so a ranked list genuinely changes her Monday morning. Had the answer been no, the right decision would have been to stop there.",
+    ],
+    aiApproach: [
+      {
+        step: "State the question in one sentence",
+        detail:
+          "Will this quote convert into a booking? Write it down and make whoever asked for the project agree to the wording. Most failures here are failures of that sentence rather than of any technology.",
+      },
+      {
+        step: "Check the answer exists in your history",
+        detail:
+          "You can only learn from outcomes you can see. Four years of quotes, each either taken up or not. That is what makes it learnable. A question like which customers are happiest has no recorded answer anywhere, so it is a survey problem, not a prediction problem.",
+      },
+      {
+        step: "List only what you knew at the moment of the decision",
+        detail:
+          "This catches people out constantly. You may use the date, the destination, the vehicle size, how the enquiry arrived, whether they had booked before, how fast you replied. Anything recorded afterwards is not allowed. Include it and you get a model that looks superb and predicts nothing.",
+      },
+      {
+        step: "Agree what good enough means before building",
+        detail:
+          "She can make roughly fifteen calls a day. So: if we rank the open quotes and she works down the list, does she win more than working the pile in date order? That is the bar, and it is far lower than perfect.",
+      },
+      {
+        step: "Only now think about the model",
+        detail:
+          "By this point the choice of technique barely matters and something simple will do. Everybody wants to start here, and starting here is the most reliable way to build something nobody uses.",
+      },
+    ],
+    solution: [
+      "A ranked list of open quotes each morning, most likely to convert at the top.",
+      "Beside each one, the two or three things pushing it up or down, so the caller has an opening line.",
+      "The list is fifteen long, because that is how many calls fit in a day. Two hundred would be ignored.",
+      "A note of what happened on every call, which quietly becomes next year's training data.",
+    ],
+    impact: [
+      "Follow-up stopped being whatever sat on top of the pile and became the quotes most likely to be winnable.",
+      "The wish turned into a project small enough to finish. Grow the business is not something anyone can start on a Monday. Rank today's quotes is.",
+      "Two of the three original ideas were parked with written reasons, so they stopped resurfacing in every meeting.",
+      "The exercise produced a reusable test. Every later idea got the same three questions: what decision changes, is the answer already in our history, and could we act on it if we knew.",
+    ],
+    whatWouldHaveKilledIt:
+      "Starting with the technology. Had the first meeting been about which tool to buy, the project would have been about growing the business, which cannot be finished, rather than ranking quotes, which can. The other killer showed up early: a first version accidentally included whether a deposit had been received, which of course predicts booking almost perfectly and tells you precisely nothing.",
+  },
 
   mistakes: [
     {

@@ -76,6 +76,36 @@ export type Example =
       result: string;
     };
 
+/**
+ * An end-to-end case study: one business problem carried from how it presents
+ * to what changed, showing where AI or a model earns its place in the middle.
+ *
+ * Five stages on purpose. Most writing about AI in business skips straight from
+ * the problem to the model, which is the part that matters least and the part a
+ * business owner can do nothing with. The analysis and the rollout are where
+ * these succeed or fail.
+ *
+ * Subject to the same honesty rule as `illustration` examples: the business is
+ * constructed, so `impact` carries NO invented statistics. Describe the shape
+ * of the change, not a percentage nobody measured.
+ */
+export interface CaseStudy {
+  /** The business in a line. Constructed, never a real named company. */
+  business: string;
+  /** The problem in the owner's own words, before anybody has analysed it. */
+  problem: string;
+  /** How a BA breaks it down: what to look at, what to rule out, what to count. */
+  analysis: string[];
+  /** The AI or model approach, one stage at a time. */
+  aiApproach: { step: string; detail: string }[];
+  /** What actually gets put in front of people, and how it changes their day. */
+  solution: string[];
+  /** What changes for the business. Qualitative — see the honesty rule above. */
+  impact: string[];
+  /** What would have made this fail. Never publish a case study without one. */
+  whatWouldHaveKilledIt: string;
+}
+
 /** A mistake plus the correction. Never state a mistake without the fix. */
 export interface Mistake {
   mistake: string;
@@ -228,6 +258,12 @@ export interface Guide {
   bestPractices?: string[];
   /** Longer notes from doing the work. A paragraph each, not one-liners. */
   proTips?: string[];
+  /**
+   * One worked problem, end to end. Placed after the examples because it is the
+   * same material at full length: a reader who only wants the mechanism stops
+   * before it, and a reader who wants to see it done keeps going.
+   */
+  caseStudy?: CaseStudy;
   businessApplications?: string[];
   /** Only where it's genuinely true. Most technical guides have none. */
   lifeApplications?: string[];

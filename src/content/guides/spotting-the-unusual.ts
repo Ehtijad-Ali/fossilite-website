@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "Sometimes you know something is wrong and you cannot describe what wrong looks like. A supplier invoice that is technically valid and somehow not right. A machine that is about to fail in a way it has never failed before. An expenses claim that ticks every box and makes an experienced person uneasy.",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "20 minutes a day for a week",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A care provider running eleven residential homes. Each home has a manager with a purchasing card for food, supplies and small maintenance.",
+    problem:
+      "The finance director had a nagging sense that spend was drifting and no way to check it. Eleven homes, thousands of small transactions a month, and a finance team of three. The existing control was a monthly review of anything over a threshold, which by definition missed everything below it.",
+    analysis: [
+      "The first thing to get straight, and it needed saying repeatedly, is that unusual does not mean wrong. Most unusual transactions have an innocent explanation. The output of this is a question, never an accusation, and if the business cannot hold that line the whole thing becomes corrosive.",
+      "Two years of card transactions were available: amount, date, supplier, category, and which home.",
+      "The threshold control was the wrong shape. Fraud and error do not respect thresholds, and the genuinely odd things were often small. Meanwhile plenty of large transactions were entirely routine and were being reviewed every month for no reason.",
+      "What normal looks like has to be defined per home, not across the group. A large home spends more on food than a small one, and comparing them produces alerts that are just a description of size.",
+      "It also has to be defined per category and per time of year. Heating spend in January is not comparable to heating spend in June, and a system that does not know that will spend every winter crying wolf.",
+    ],
+    aiApproach: [
+      {
+        step: "Learn normal from history rather than setting rules",
+        detail:
+          "Nobody can write down rules for eleven homes across a dozen categories, and if they did the rules would be out of date within months. Instead you let it learn what ordinary looks like for each home and category, and flag the departures.",
+      },
+      {
+        step: "Compare like with like",
+        detail:
+          "Normal is defined within a home, within a category, and with the time of year accounted for. Getting this wrong is the main reason these systems produce alerts nobody acts on, and once people stop trusting the alerts you cannot get that trust back.",
+      },
+      {
+        step: "Look at patterns as well as individual transactions",
+        detail:
+          "A single payment can be unremarkable while a sequence is odd: the same supplier appearing on a new day of the week, a steady drift upward in a routine order, several payments just under a threshold. The pattern cases were the ones that mattered here.",
+      },
+      {
+        step: "Tune the volume to what the team can actually review",
+        detail:
+          "Three people cannot review two hundred alerts a month. Set the sensitivity so it produces a number they can genuinely look at, which is a resourcing decision rather than a technical one. An unreviewed alert has negative value.",
+      },
+      {
+        step: "Record the outcome of every alert",
+        detail:
+          "Explained, corrected, or escalated. That record is what stops it flagging the same recurring thing forever, and it is the only evidence you will have that the system is worth its cost.",
+      },
+    ],
+    solution: [
+      "A weekly list of a manageable number of transactions and patterns to ask about.",
+      "Each one shown with what normal looks like for that home and category, so the reviewer sees why it surfaced.",
+      "A neutral standing form of words for the query, agreed with the home managers in advance.",
+      "An outcome recorded on every item, feeding back so that explained recurring items stop reappearing.",
+      "Home managers were told about the system before it started, which mattered more than any part of the build.",
+    ],
+    impact: [
+      "The largest category of findings was not dishonesty. It was duplicate payments, price rises nobody had noticed, and subscriptions still being paid for services no longer used.",
+      "Reviewing effort moved from everything above a threshold to the things that were actually unusual, which is a better use of three people.",
+      "The drift in routine orders, which was the finance director's original nagging feeling, turned out to be real and to have a mundane cause.",
+      "Because managers were told in advance, the system read as a control rather than as surveillance, which is the difference between it lasting and being quietly killed.",
+    ],
+    whatWouldHaveKilledIt:
+      "Launching it without telling the home managers. The first query would have arrived as an accusation from a system nobody knew existed, and the working relationship would have taken longer to repair than the project took to build. The other reliable failure is producing more alerts than anyone can review, which within two months converts the whole thing into a report that gets filed unopened.",
+  },
 
   mistakes: [
     {

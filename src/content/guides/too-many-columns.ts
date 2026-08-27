@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 14,
 
   intro: [
     "A customer satisfaction survey has sixty questions. Look at the answers and you notice something. People who rate the delivery speed highly also rate the packaging highly, and the tracking, and the driver. Eight questions and one underlying opinion: they are happy with how it arrived.",
@@ -197,6 +197,62 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A drinks bottling plant. One filling line, running several product sizes, with a few hundred sensor readings logged every minute.",
+    problem:
+      "The engineering team wanted to predict line stoppages. They had an enormous quantity of sensor data and every attempt to use it had gone nowhere. The dashboards had four hundred and something readings on them, which meant nobody looked at any of them.",
+    analysis: [
+      "Four hundred columns and a modest number of recorded stoppages is a bad ratio, and it is the core difficulty. With that many measurements and comparatively few events, anything you build will find patterns that are not there.",
+      "The second problem is that the readings are heavily duplicated. A dozen temperature sensors along one section move together almost perfectly. They are twelve columns carrying roughly one piece of information.",
+      "That duplication is what makes reduction the right move here. You are not throwing information away so much as noticing that four hundred readings describe far fewer independent things.",
+      "The counting supported it. A modest number of underlying patterns accounted for the large majority of all the variation across every sensor. In plain terms: the line has a handful of distinct states and four hundred ways of describing them.",
+      "Ruled out: adding more sensors, which was the team's instinct and the standing budget request. The problem was never a shortage of measurement.",
+    ],
+    aiApproach: [
+      {
+        step: "Compress before predicting",
+        detail:
+          "Reduce the several hundred readings to a much smaller set of combined measures that capture most of the variation. The prediction is then built on those, which gives it a fighting chance given how few stoppages there are to learn from.",
+      },
+      {
+        step: "Put the sensors on a comparable scale first",
+        detail:
+          "Pressure in one unit and temperature in another will otherwise let whichever has the largest raw numbers dominate entirely. This step is easy to skip and it invalidates everything downstream.",
+      },
+      {
+        step: "Check what the combined measures represent",
+        detail:
+          "Each one is a weighted blend of original readings, and reading those weights is worth the time. Here the largest was essentially the whole line running warm together, and the second separated one section from the rest. Both were recognisable to the engineers, which is the check that the reduction is describing reality.",
+      },
+      {
+        step: "Accept the loss of direct explanation",
+        detail:
+          "You can no longer say sensor forty-one is the problem, only that a combination shifted. That is a real cost. It was acceptable here because the output triggers an inspection rather than a decision anybody must justify.",
+      },
+      {
+        step: "Watch the compressed measures directly",
+        detail:
+          "The unexpected win. Plotting the handful of combined measures gave an operator view of the line that four hundred gauges never could, and it was useful before any prediction existed.",
+      },
+    ],
+    solution: [
+      "Several hundred readings reduced to a small set of combined measures, updated continuously.",
+      "A stoppage risk prediction built on those rather than on the raw sensors.",
+      "An operator screen showing the handful of measures instead of four hundred gauges.",
+      "An alert when the combined picture moves outside its normal range, which fires before any single sensor breaches its own limit.",
+      "The sensor expansion budget request withdrawn.",
+    ],
+    impact: [
+      "The prediction became possible at all, where every previous attempt had drowned in columns.",
+      "The operator screen turned out to be the more valuable half, and it was a by-product. Four hundred gauges is the same as no gauges.",
+      "Alerts started firing on the combined picture before individual sensors breached limits, which bought time.",
+      "The instinct to buy more sensors was corrected, which saved a recurring budget line.",
+    ],
+    whatWouldHaveKilledIt:
+      "Feeding all four hundred columns into a model with a few dozen stoppages to learn from. It would have found convincing patterns in noise, performed beautifully on history and failed in production, and the failure would have been slow and confusing. The other risk was the scaling step: skipped, the whole thing quietly becomes an analysis of whichever sensors happen to have the biggest numbers.",
+  },
 
   mistakes: [
     {

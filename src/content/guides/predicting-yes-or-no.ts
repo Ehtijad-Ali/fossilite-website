@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 16,
 
   intro: [
     "The second big shape of business question is not how much, it is whether. Will this customer cancel. Will this invoice be paid late. Is this claim fraudulent. Will this applicant repay. Will this machine break this month.",
@@ -191,6 +191,63 @@ export const guide: Guide = {
       time: "45 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A commercial plumbing and heating contractor. Twenty-five staff, working mostly for property managers and main contractors, invoicing on thirty-day terms.",
+    problem:
+      "The owner's version: we are busy, the jobs are profitable on paper, and I am still watching the bank balance every Monday morning wondering whether payroll is going to be tight. I chase invoices when I get a spare hour, which means I chase whatever is at the top of the pile rather than whatever matters.",
+    analysis: [
+      "The first thing to separate is profit from timing. This was not a margin problem. Every job was making money. The money was arriving too late and too unpredictably to be useful, which is a completely different problem with a completely different fix.",
+      "Three years of invoices came out of the accounting package into a spreadsheet. For each one: when it was raised, when it was actually paid, the amount, the customer, the type of job, and whether a purchase order number appeared on it.",
+      "Then just count. What share go past terms, and how far past? The important finding was that the lateness was not spread evenly. It clustered.",
+      "It clustered in two places. A handful of customers were consistently slow regardless of the invoice. And separately, any invoice raised without a purchase order number on it was slow almost regardless of the customer.",
+      "That second one is the useful finding, because it is a cause rather than a description. An invoice with no purchase order cannot be matched at the other end, so it drops out of the customer's own approval run and waits for somebody to chase it manually.",
+      "What got ruled out: that customers were in financial trouble. They were not. The invoices were stuck in an approvals process, which is an administrative problem and a much easier one to solve.",
+    ],
+    aiApproach: [
+      {
+        step: "Write down the exact question",
+        detail:
+          "Not \"will this be paid\". The question is: will this invoice go more than fourteen days past its due date, yes or no? A vague question produces a model nobody can use. This one has an answer you can look up for every historical invoice, which is what makes it trainable at all.",
+      },
+      {
+        step: "Use the accounting system as the dataset",
+        detail:
+          "Everything needed was already in the accounting package and exported to a spreadsheet in an afternoon. Nothing was bought and nothing was integrated until the idea had been shown to work.",
+      },
+      {
+        step: "Build a scorecard rather than a black box",
+        detail:
+          "This is the points-based approach: no purchase order adds points, this customer adds points, an invoice over a certain size adds points. It is less powerful than the fancier options and it is the right choice here, because the credit controller has to be able to tell a customer why they are being called.",
+      },
+      {
+        step: "Test it on invoices it has never seen",
+        detail:
+          "Train on the first two years, test on the third. Scoring it on invoices it learned from tells you nothing, and this is the step that gets skipped most often.",
+      },
+      {
+        step: "Judge it on the right number",
+        detail:
+          "Overall accuracy is misleading here, because most invoices are paid roughly on time and a model that says everything is fine would score well. The two numbers that matter: of the invoices we flag, how many really do go late, and of the ones that go late, how many did we miss? Getting those wrong in either direction has a cost, and the business decides which cost it prefers.",
+      },
+    ],
+    solution: [
+      "Every invoice gets a flag the moment it is raised: expected on time, or expected slow.",
+      "Slow ones get a short courtesy call a week before the due date, confirming the invoice arrived and has been approved. That call is not a chase, and it works far better than one made three weeks later.",
+      "The reason is shown alongside the flag. No purchase order, this customer, this size. The controller knows what to ask about rather than making a general enquiry.",
+      "The scores feed a thirteen-week cash view built on when money is expected to arrive rather than when terms say it should.",
+      "A standing rule that came out of the analysis and needed no model at all: do not raise the invoice until the purchase order number is on it.",
+    ],
+    impact: [
+      "Chasing effort moved to the invoices that were going to need it, and moved to before the due date rather than after, which is the difference between a helpful call and an awkward one.",
+      "The purchase order finding fixed a chunk of the problem upstream and permanently, without any technology involved. That is common and it is worth saying out loud, because the analysis was the valuable part and the model was the thing that made the analysis happen.",
+      "The cash forecast stopped being a straight line drawn from payment terms and started reflecting how customers actually behave.",
+      "The owner gets several weeks of warning before a tight week rather than finding out on the Monday.",
+    ],
+    whatWouldHaveKilledIt:
+      "Using the score to refuse work or put customers on credit hold. It predicts slow payment, not bad debt, and those are different things. A good customer who pays in fifty days is still a good customer, and turning a cash-planning tool into a credit-scoring tool would have cost more in lost work than the whole exercise saved.",
+  },
 
   mistakes: [
     {

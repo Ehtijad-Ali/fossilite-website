@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 15,
 
   intro: [
     "Most model projects that disappoint do not disappoint because somebody chose the wrong method. They disappoint because the data was never going to support what was promised, and nobody checked properly before committing.",
@@ -201,6 +201,62 @@ export const guide: Guide = {
       time: "2 hours",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A family haulage firm. Twenty-two lorries, mostly on regional distribution work, with its own workshop and two mechanics.",
+    problem:
+      "A breakdown at the roadside costs a recovery, a missed delivery, a driver sitting still and sometimes a customer. The owner wanted to predict failures before they happened. It is a good idea and the business was not in a position to do it, and finding that out took two days rather than two quarters.",
+    analysis: [
+      "The check comes before the project, and it is four questions. Is the thing you want to predict recorded? Is the information you would predict from recorded? Is it recorded at the moment you would need to act? And is there enough of it?",
+      "Question one went badly. Breakdowns were recorded, in a paper day book in the workshop, in the mechanics own handwriting, with entries like alternator and back on road Tuesday. There is real information in there and it is not in a form anything can learn from.",
+      "Question two went worse. What would you predict from? Engine hours, fault codes, service intervals, driver, route type, load weight. Some was on the vehicles telematics and being discarded after thirty days. Some was in the service records, also on paper. Load weight was not recorded at all.",
+      "Question three is the one people forget. Even with perfect records, the prediction has to arrive while a lorry is in the yard rather than while it is on a motorway. That constrains what information is allowed in, and it ruled out anything only known after a workshop inspection.",
+      "Question four: twenty-two vehicles and a modest number of breakdowns a year. That is not many examples to learn from, and it meant that even with perfect data the honest answer was to start simple.",
+    ],
+    aiApproach: [
+      {
+        step: "Check before you build, and be willing to stop",
+        detail:
+          "Two days of checking established that the project could not start yet. That is a successful outcome, not a failed one. The alternative was six months of a project quietly discovering the same thing after the money had gone.",
+      },
+      {
+        step: "Fix the recording first, in the cheapest way that works",
+        detail:
+          "The telematics retention setting was changed from thirty days to keeping everything, which took one phone call and cost nothing. That single change was the highest-value action in the whole engagement and it was not a model.",
+      },
+      {
+        step: "Replace the day book with a form, not a system",
+        detail:
+          "A short structured form on a tablet in the workshop: vehicle, date, component, symptom, whether it was roadside or in the yard. Five fields. Anything longer does not get filled in, and a form nobody completes is worse than the day book.",
+      },
+      {
+        step: "Do the useful thing that needs no model",
+        detail:
+          "Even the paper records, typed up for two years, showed that a particular component was failing disproportionately on one part of the fleet. That was actionable immediately and would have been missed entirely if everyone had waited for the model.",
+      },
+      {
+        step: "Set a date to look again",
+        detail:
+          "Eighteen months of properly recorded data was the stated condition for revisiting it. Written down, with a date, so the idea neither disappeared nor kept resurfacing every month.",
+      },
+    ],
+    solution: [
+      "Telematics retention changed from thirty days to indefinite, on day one.",
+      "A five-field workshop form replacing the paper day book.",
+      "Load type captured at dispatch, which was a small change to an existing process.",
+      "Two years of the old day book typed up, which paid for itself through the component finding alone.",
+      "A written revisit date, with the specific condition that had to be met.",
+    ],
+    impact: [
+      "The business avoided spending its budget on a project that could not have worked, which is the outcome nobody puts in a case study and which was worth more than most projects.",
+      "The component finding came out of typing up old paper records, and it changed a maintenance schedule immediately.",
+      "The recording changes cost almost nothing and they are the reason the project is now possible at all.",
+      "The owner understood what the constraint actually was, which meant the next conversation was about data collection instead of about which software to buy.",
+    ],
+    whatWouldHaveKilledIt:
+      "Starting anyway. There was enthusiasm and a budget, and it would have been easy to build something on thirty days of telematics and a typed-up sample of the day book. It would have produced a model that looked plausible on the data it was given and that no mechanic would have trusted, and the failure would have been blamed on the technology rather than on the records.",
+  },
 
   mistakes: [
     {

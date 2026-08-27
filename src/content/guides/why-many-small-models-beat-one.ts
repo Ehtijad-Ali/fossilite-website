@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "There is an old party trick where you ask a hundred people to guess the number of sweets in a jar. Individually most of them are miles out. Average all the guesses together and the answer is often remarkably close, closer than nearly any single person managed.",
@@ -191,6 +191,61 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A mid-sized bakery supplying supermarkets and cafes. Several product lines, three shifts, and a quality check on every batch before it leaves.",
+    problem:
+      "Batches fail quality control and nobody can predict which. A failed batch is thrown away, and worse, a batch that fails at the customer end triggers a complaint and a credit note. The production manager had a long-standing theory involving one particular oven, and the theory had never been tested.",
+    analysis: [
+      "Failure was uncommon, which matters enormously and shaped everything that followed. Most batches are fine, so anything that simply predicts fine every time looks excellent and is worthless.",
+      "The recorded data was better than expected: flour supplier and batch, ambient temperature and humidity in the mixing room, proving time, oven number, shift, operator, and time since the last deep clean.",
+      "Plotting failures against each single factor produced almost nothing. No one thing stood out. That is exactly the situation where a single simple rule fails and where combining many weak signals starts to earn its keep.",
+      "The oven theory did not survive contact with the counting. That oven ran the most batches, so it had the most failures, and it was fine per batch. Correcting that took one afternoon and would have been worth doing even if the rest of the project had been abandoned.",
+      "The real pattern was a combination. Certain flour batches were fine in normal conditions and marginal when the room was humid and the proving time ran at the short end. No single factor was the cause and no single factor could have found it.",
+    ],
+    aiApproach: [
+      {
+        step: "Use many small models rather than one",
+        detail:
+          "Instead of one big decision tree, build hundreds of small ones, each on a random slice of the history and a random subset of the factors, and let them vote. Each individual tree is mediocre. Their combined answer is markedly better, because their mistakes are different from one another and cancel out.",
+      },
+      {
+        step: "Deal with the fact that failure is rare",
+        detail:
+          "Left alone it would learn to say pass every time and be right most of the time. The counting has to be weighted so that missing a failure costs it more than raising a false alarm, and that weighting is a business decision, not a technical one.",
+      },
+      {
+        step: "Ask which factors it is leaning on",
+        detail:
+          "This approach will tell you which inputs are carrying the prediction. That ranking is a useful output in its own right, and it is what finally settled the oven argument with evidence rather than opinion.",
+      },
+      {
+        step: "Judge it on the two numbers that matter",
+        detail:
+          "Of the batches it flags, how many really do fail? And of the failures, how many does it miss? Overall accuracy is meaningless when the thing you care about is rare, and quoting it is the fastest way to mislead a management meeting.",
+      },
+      {
+        step: "Accept you cannot get a simple explanation out of it",
+        detail:
+          "Hundreds of trees voting cannot be printed on a card. That is the trade for the accuracy, and it is acceptable here because the output triggers an extra check rather than a decision anybody has to justify to a customer.",
+      },
+    ],
+    solution: [
+      "A risk flag on each batch as it goes into proving, while there is still time to do something.",
+      "Flagged batches get an additional check before dispatch instead of the sampling regime.",
+      "A weekly list of which conditions are driving the flags, which is what makes it actionable rather than just alarming.",
+      "The humidity finding fed straight into a change in the mixing room that needed no model at all.",
+    ],
+    impact: [
+      "Failures started being caught before dispatch rather than at the customer, which is the difference between waste and a complaint.",
+      "The oven theory was settled, and the money earmarked for replacing it was not spent.",
+      "The combination finding was something no amount of staring at spreadsheets would have produced, because no single column showed anything.",
+      "Extra checking effort went to the batches that warranted it instead of being spread evenly across everything.",
+    ],
+    whatWouldHaveKilledIt:
+      "Reporting accuracy. An early version was ninety-something percent accurate and caught almost no failures, because saying pass every time gets you ninety-something percent when failures are rare. Presented in a meeting without the other two numbers, that would have been declared a success and rolled out, and it would have done nothing whatsoever.",
+  },
 
   mistakes: [
     {

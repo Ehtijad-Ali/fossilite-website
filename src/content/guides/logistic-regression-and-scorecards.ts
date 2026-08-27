@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 16,
 
   intro: [
     "If you have ever been refused credit, quoted an insurance premium, or had an application assessed, there is a good chance the decision came from a points table. Been at your address more than three years, add twelve points. In this age band, add eight. Applied for four other things this month, subtract twenty. Total it up, and above a certain number you are accepted.",
@@ -201,6 +201,63 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A software company selling a scheduling tool to small trade businesses. Fourteen-day free trial, then a monthly subscription.",
+    problem:
+      "Around a thousand trials started each month and a minority converted. Two people did onboarding calls and could reach maybe a fifth of trials. They worked the list alphabetically, which is to say at random.",
+    analysis: [
+      "The decision is narrow and repeated: which trials get a call this week. That is a ranking problem with a hard capacity limit, which is the easiest kind of project to make useful.",
+      "Two years of trials had the outcome recorded, and behaviour during the trial was logged: which features were opened, whether any real data had been entered, how many days they logged in, whether a second user was invited, company size and how they arrived.",
+      "The counting produced one finding that mattered more than the model. Trials that entered real customer data in the first three days converted at a much higher rate than those that did not, and roughly half of all trials never entered any data at all.",
+      "That is not a scoring insight, it is a product insight, and it led to a change in the onboarding flow that was worth more than the ranking.",
+      "Ruled out: company size and traffic source, both of which the marketing team believed strongly in and neither of which carried much once behaviour was included. What people do in the trial swamps who they are.",
+      "The other requirement came from the onboarding team. They needed to know why a trial was ranked highly, because the call opens with a reference to what the customer has been doing. A ranked list with no reasons would have been used for a week.",
+    ],
+    aiApproach: [
+      {
+        step: "Use the approach that produces a points table",
+        detail:
+          "Each factor contributes points and the points add up to a score. Entered real data adds a lot. Invited a second user adds some. Logged in only once subtracts. The result is a table you can print, which is exactly what the team needed.",
+      },
+      {
+        step: "Keep the number of factors small",
+        detail:
+          "Six or seven, not sixty. A scorecard with sixty lines is not explainable and is not a scorecard, it is a black box with extra steps. The small set also survives changes to the product better.",
+      },
+      {
+        step: "Only use what is known at the moment of ranking",
+        detail:
+          "The list is produced on day three of the trial, so only the first three days of behaviour are allowed in. An early version used the full fourteen days and looked wonderful, and it was predicting the past.",
+      },
+      {
+        step: "Rank rather than classify",
+        detail:
+          "The team does not need a yes or no. They need the top two hundred in order, because that is how many calls fit. Framing it as ranking against a capacity avoids an argument about where the cutoff should be.",
+      },
+      {
+        step: "Show the top three contributing factors per trial",
+        detail:
+          "That is what turns the list into a call. The score gets it onto the list and the reasons give the caller an opening sentence.",
+      },
+    ],
+    solution: [
+      "A ranked list of trials each Monday, cut to the number of calls the team can make.",
+      "The three biggest scoring factors displayed for each one.",
+      "The points table itself published internally, so the team could see and argue with the logic.",
+      "The onboarding flow changed to push new trials towards entering real data in the first session, which came out of the analysis rather than the model.",
+      "Call outcomes recorded, feeding the next version.",
+    ],
+    impact: [
+      "The same two people, making the same number of calls, were calling the trials most likely to be winnable rather than the ones nearest the top of the alphabet.",
+      "The real-data finding changed the product, and that was worth more than the ranking. It would not have been found without doing the analysis for the ranking, which is a common and underrated pattern.",
+      "The marketing team's beliefs about company size were tested against evidence for the first time.",
+      "Because the points table was visible, the onboarding team argued with it, which improved it and also meant they trusted it.",
+    ],
+    whatWouldHaveKilledIt:
+      "Using the full fourteen days of behaviour. The first version scored superbly and was worthless, because knowing that somebody used the product heavily for two weeks does not help you decide whom to call on day three. The other failure would have been shipping a bare ranked list: without reasons, the callers have nothing to open with and they revert to their own instincts within a fortnight.",
+  },
 
   mistakes: [
     {

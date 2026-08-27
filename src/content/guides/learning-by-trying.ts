@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "You have five possible subject lines for an email going to a hundred thousand people. The usual approach is to send each to a slice, wait, see which won, and then send the winner to everybody else. That works, and it means four fifths of your test group got something worse than the best option, and you found out too late to do anything about it.",
@@ -197,6 +197,62 @@ export const guide: Guide = {
       time: "20 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "An online retailer of outdoor equipment. Roughly forty thousand visits a week to the site.",
+    problem:
+      "Five different offers for the checkout page and no agreement on which to run. The usual approach was a straight split test over four weeks, which meant sending four fifths of traffic to offers that were probably worse for a month, and the season only lasted eleven weeks.",
+    analysis: [
+      "The cost of a conventional test is the traffic spent on the losing options while you wait for a verdict. That cost is usually invisible because nobody writes it down, and in a short season it is the dominant consideration.",
+      "The decision here is repeated thousands of times a day and the feedback is fast, arriving within minutes. That combination is what makes the alternative approach appropriate. It would be the wrong choice for a decision made once a quarter.",
+      "The tension is genuine and worth stating plainly: you want to learn which offer is best, and you want to earn from the best one while learning. Committing entirely to either is wrong.",
+      "The obvious mistake was already in the plan. Somebody proposed watching the first day and switching everything to the leader. With a day of data the leader is frequently just the lucky one, and locking in early is how you spend a season on the second-best offer.",
+      "Ruled out: a longer test. The season was too short. Getting a clean answer in week nine of an eleven-week season is an academic result.",
+    ],
+    aiApproach: [
+      {
+        step: "Shift traffic gradually instead of splitting it evenly",
+        detail:
+          "Start by showing all five roughly equally. As evidence accumulates, send more traffic to the ones performing better and less to the ones performing worse. Nothing is eliminated outright, because early evidence is weak.",
+      },
+      {
+        step: "Keep sending a little traffic to the laggards",
+        detail:
+          "An offer that looks poor after two hundred visits may be fine. Retaining a small share is what stops an early run of bad luck permanently condemning the best option, and it costs very little.",
+      },
+      {
+        step: "Let the confidence drive the allocation",
+        detail:
+          "The less certain you are about an option, the more worth there is in showing it. As certainty grows, traffic concentrates on its own. There is no moment where somebody has to decide the test is over, which removes the argument entirely.",
+      },
+      {
+        step: "Match the pace to the feedback",
+        detail:
+          "Checkout conversion is known within minutes, so the allocation can update hourly. If the outcome took six weeks to observe this whole approach would be inappropriate, and that is the test for whether to use it.",
+      },
+      {
+        step: "Watch for the ground moving",
+        detail:
+          "An offer that wins in October may lose in December. Because allocation keeps updating, this adapts on its own, which is an advantage over a test that concluded in week four and was then trusted for the rest of the season.",
+      },
+    ],
+    solution: [
+      "All five offers live from day one, with traffic allocation updating hourly.",
+      "A floor beneath every option so nothing is ever fully switched off.",
+      "A weekly readout showing where traffic has settled and how confident that is.",
+      "No end date and no moment of declaring a winner, because neither is needed.",
+      "One offer withdrawn manually after a fortnight, on margin grounds rather than conversion, which is a business decision the system cannot make.",
+    ],
+    impact: [
+      "Traffic concentrated on the better offers within days rather than after four weeks, which in an eleven-week season is most of the value.",
+      "The weakest offers stopped receiving a fifth of traffic each almost immediately.",
+      "The argument about when the test could be called never happened, because there was no cutoff to argue about.",
+      "When shopper behaviour shifted later in the season, the allocation followed it without anybody intervening.",
+    ],
+    whatWouldHaveKilledIt:
+      "Switching everything to the day-one leader. With a few hours of data the leader is usually noise, and the whole season would have run on an offer chosen by luck. The other misuse is applying this where feedback is slow: for a decision whose outcome takes weeks to observe, this approach has nothing to work with and a conventional test is the right tool.",
+  },
 
   mistakes: [
     {

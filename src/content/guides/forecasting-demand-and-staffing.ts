@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 15,
 
   intro: [
     "How many orders will we get next month. How many people do we need on the phones on Saturday. How much stock should we hold in November. These questions look like ordinary predictions and they behave differently, because time is involved.",
@@ -197,6 +197,62 @@ export const guide: Guide = {
       time: "45 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "The contact centre of a regional utility. Around sixty advisers taking calls about billing, meter readings and faults.",
+    problem:
+      "Some days the queue was twenty minutes and complaints followed. Other days advisers sat idle. The rota was built four weeks ahead from last year's same week, adjusted by whatever the planner remembered. Everyone knew it was wrong and nobody had a better method.",
+    analysis: [
+      "Two things were being conflated. How many calls will arrive is a forecasting question. How many people do we roster is a decision that depends on the forecast plus cost, service target and what the staff will accept. Mixing them is why the previous attempts had gone nowhere.",
+      "Call volume was recorded by half hour going back six years, which is an unusually good position to start from.",
+      "The shape was strongly repetitive. Monday is the busiest day, mornings beat afternoons, and the month around bill issue dates dwarfs everything else. Most of the pattern is calendar, which is good news because the calendar is known in advance.",
+      "The spikes were the problem, and they split into two kinds. Predictable ones tied to billing runs and tariff changes, which are on a schedule somebody already has. And genuinely unpredictable ones driven by weather events causing faults.",
+      "That split determined the whole design. You forecast the predictable part and you build a response for the rest, because trying to forecast a storm three weeks out is a waste of effort.",
+    ],
+    aiApproach: [
+      {
+        step: "Separate the repeating pattern from everything else",
+        detail:
+          "The first job is pulling apart the underlying trend, the weekly and daily cycles, and the annual shape. Most of the volume is explained by these, and seeing them separated is immediately useful even before a forecast exists.",
+      },
+      {
+        step: "Feed in the calendar you already have",
+        detail:
+          "Billing run dates, tariff change dates, bank holidays. These are known weeks ahead and they drove the largest predictable spikes. A forecast that ignores a calendar the business already publishes is leaving the easiest accuracy on the table.",
+      },
+      {
+        step: "Forecast a range, because a single line is a lie",
+        detail:
+          "The output is a likely volume plus a realistic high and low. Rostering to the middle guarantees being wrong half the time. The range is what lets the business choose how much cover to buy.",
+      },
+      {
+        step: "Test it the way it will be used",
+        detail:
+          "The rota is set four weeks ahead, so test it forecasting four weeks ahead, repeatedly, across history. Testing at one week ahead produces a flattering number for a forecast nobody can act on.",
+      },
+      {
+        step: "Handle the unpredictable separately",
+        detail:
+          "Storms are not forecastable at four weeks. What is available is a standing arrangement: a group of trained staff who can be called in at short notice, triggered by the weather warning rather than by the model.",
+      },
+    ],
+    solution: [
+      "A four-week-ahead forecast by half hour, given as a range.",
+      "The rota built to the middle of the range with a defined flex either side, rather than to a single number.",
+      "A weekly refresh so the last week before a shift is built on better information.",
+      "A separate short-notice arrangement triggered by weather warnings, entirely outside the forecast.",
+      "Forecast against actual reviewed each month, which is how anybody notices the model going stale.",
+    ],
+    impact: [
+      "The predictable spikes stopped being surprises, because they were on a calendar the business had all along and had never connected to the rota.",
+      "Rostering became a decision about how much cover to buy against a known range, rather than a guess presented as a plan.",
+      "The idle days and the twenty-minute queues both reduced in frequency, because they were largely the same problem from opposite sides.",
+      "The storm response improved by being taken out of the forecast rather than being expected of it.",
+    ],
+    whatWouldHaveKilledIt:
+      "Judging it on the storm days. Every review meeting wanted to talk about the worst week of the year, which was unforecastable and always would be. A forecast is not a promise about the exceptional day, and a business that measures it that way will abandon a tool that was working perfectly well for the other fifty weeks. The other failure would have been rostering to a single number, which converts a decent forecast into a rota that is wrong half the time by construction.",
+  },
 
   mistakes: [
     {

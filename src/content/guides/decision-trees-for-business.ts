@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 16,
 
   intro: [
     "Every business has flowcharts. If the order is over this amount, send it to a manager. If the customer has been with us more than a year, waive the fee. Somebody sat down and wrote those rules based on experience.",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "An independent used car dealership. Around thirty cars on the forecourt, most taken in part exchange against a newer vehicle.",
+    problem:
+      "Every part exchange forces a decision within a day or two: put it through the workshop and sell it on the forecourt, or send it straight to auction. Get it wrong in one direction and you spend money on a car that sits for four months. Get it wrong in the other and you hand a good margin to somebody else. The sales manager decided by eye, and when he was on holiday nobody else would touch it.",
+    analysis: [
+      "The decision was real, repeated, and undocumented, which is the exact shape of thing worth attacking. It happened maybe three hundred times a year and it was held entirely in one man's head.",
+      "So the first job was watching him do it and writing down what he actually looked at. Age, mileage, service history, make, how many of that model were already on the forecourt, the time of year, and what the paintwork looked like.",
+      "Three years of part exchanges were reconstructed from the stock book: what was taken in, what was decided, what was spent, what it sold for, and how long it sat there.",
+      "The counting produced one clear finding nobody had articulated: the losses were almost never on the cars sent to auction. They were on reconditioned cars that sat past ninety days, and those clustered around a particular thing, which was having two of the same model already unsold on the forecourt.",
+      "Ruled out: reconditioning cost overruns. The workshop estimates were reasonably accurate. The problem was choosing the wrong cars to recondition, not the cost of doing it.",
+    ],
+    aiApproach: [
+      {
+        step: "Use the technique that produces a diagram",
+        detail:
+          "This is the case for a decision tree specifically. Not because it is the most accurate option, but because the output is a series of yes-or-no questions you can print on one page and pin up in the office. That is the whole requirement here.",
+      },
+      {
+        step: "Train it on the decisions and their outcomes",
+        detail:
+          "For every past part exchange, what was known at the time and whether the outcome was good. Good was defined up front as sold within ninety days at or above the target margin, because a fuzzy definition of good produces a tree that splits on nothing useful.",
+      },
+      {
+        step: "Keep it deliberately shallow",
+        detail:
+          "Left alone these things grow until every historical car has its own branch, which fits the past perfectly and predicts nothing. Capped at four questions deep, it stayed readable and worked better on cars it had not seen. Shallow is not a compromise here, it is the point.",
+      },
+      {
+        step: "Show it to the person whose judgement it copied",
+        detail:
+          "The sales manager read the tree and agreed with most of it, argued with one branch, and was visibly surprised by the branch about duplicate stock. That conversation is the real test. A tree that the expert cannot recognise is either wrong or has found something, and you need to know which.",
+      },
+      {
+        step: "Check it on the most recent year",
+        detail:
+          "Trained on the older two years, tested on the newest. Whether it would have made better calls than were actually made, on cars it had never seen.",
+      },
+    ],
+    solution: [
+      "A single laminated page: four questions in order, ending in recondition or auction.",
+      "The duplicate stock question built in explicitly, because it was the finding the business did not know it had.",
+      "Anyone on the team can now make the call, including on a Saturday when the manager is not in.",
+      "The recommendation can be overridden, with a one-line reason typed in.",
+      "The overrides get read once a month, because they are where the next version comes from.",
+    ],
+    impact: [
+      "The decision stopped being one person's private knowledge and became something the business owns, which also removed a genuine risk that nobody had costed.",
+      "The specific failure of reconditioning a third identical car stopped happening, because it was now a question on the page rather than something you would only notice if you thought about it.",
+      "Arguments about individual cars got shorter, because they became arguments about which branch applied rather than about instinct.",
+      "New staff got useful within days on a decision that had previously taken a year of watching to learn.",
+    ],
+    whatWouldHaveKilledIt:
+      "Chasing accuracy. A more powerful method would have scored slightly better and produced something nobody could put on a wall, which in this business is worth nothing at all. The other risk was the depth: the first version was allowed to grow freely, matched the historical decisions almost perfectly, and fell apart on the test year. That is the classic failure of this technique and it looks like success right up until you check.",
+  },
 
   mistakes: [
     {

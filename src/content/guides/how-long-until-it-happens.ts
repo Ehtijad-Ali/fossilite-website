@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "Will this customer leave is a useful question. When will this customer leave is a far more useful one, because it tells you not just who to worry about but when to do something and how much they are worth in the meantime.",
@@ -197,6 +197,63 @@ export const guide: Guide = {
       time: "Half a day",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A subscription box company sending a monthly food and drink selection. Around eighteen thousand active subscribers.",
+    problem:
+      "Cancellations. The company had a churn model that predicted whether somebody would cancel and it was not much use, because everybody cancels eventually. What the business needed to know was when, and it had never framed the question that way.",
+    analysis: [
+      "Will they cancel is close to useless as a question, because the honest answer for almost every subscriber is yes, at some point. The useful question is how long they are likely to stay, which is a different shape of answer.",
+      "There is a complication that makes this its own technique. Most subscribers have not cancelled yet. A conventional approach either throws those people away, which discards most of the data, or treats them as never cancelling, which is worse.",
+      "But somebody who has been subscribed for two years and is still here carries real information: they lasted at least two years. Using that partial information properly is the entire point of this family of methods and it is why the ordinary approach fails here.",
+      "Four years of subscription history gave signup date, cancellation date where applicable, acquisition channel, whether they had ever skipped a month, whether they had changed their box size, and complaint history.",
+      "The counting found the shape. Cancellation risk was not constant. It spiked sharply around the third and fourth deliveries, dropped substantially for those who got past that, and rose gently after about eighteen months for a different reason.",
+      "Those are two different problems requiring two different responses, and the single yes-or-no churn model had blended them into one number that pointed at neither.",
+    ],
+    aiApproach: [
+      {
+        step: "Use the people who have not cancelled yet",
+        detail:
+          "This is what distinguishes the technique. A subscriber still active at fourteen months tells you something real even though the ending is unknown. Discarding them would have thrown away most of the customer base.",
+      },
+      {
+        step: "Ask when, not whether",
+        detail:
+          "The output is a survival curve rather than a probability: of subscribers who look like this one, how many are still here at three months, at six, at a year. That is a shape a marketing team can plan against.",
+      },
+      {
+        step: "Look at when the risk is concentrated",
+        detail:
+          "The spike at the third and fourth box was the finding. It is invisible in an overall churn rate and it is the single most actionable thing the analysis produced.",
+      },
+      {
+        step: "Compare groups on the curve, not on a rate",
+        detail:
+          "Acquisition channels that looked similar on annual churn had very different shapes. One brought subscribers who left fast, another brought slow starters who then stayed for years. Comparing a single rate had been hiding that completely.",
+      },
+      {
+        step: "Turn it into expected lifetime value",
+        detail:
+          "Once you have expected duration by group, you can say what a subscriber from each channel is worth, which is what actually decides where the acquisition budget goes.",
+      },
+    ],
+    solution: [
+      "Expected tenure predicted per subscriber rather than a cancel or stay flag.",
+      "A specific intervention built around the third and fourth box, which is where the risk concentrates.",
+      "The eighteen-month rise handled separately, since its cause was range fatigue rather than early disappointment.",
+      "Acquisition channels compared on expected lifetime value instead of on cost per signup.",
+      "Curves reviewed quarterly, because the shape moves when the product changes.",
+    ],
+    impact: [
+      "The intervention could be aimed at the weeks that mattered instead of being spread evenly across the subscriber base, which is a much cheaper way to spend the same effort.",
+      "The channel comparison changed where the acquisition budget went, and it reversed the ranking that cost per signup had produced.",
+      "Two distinct problems were separated, where the old model had averaged them into something that addressed neither.",
+      "The business stopped asking who will churn and started asking how long will they stay, which is a better question and produced better meetings.",
+    ],
+    whatWouldHaveKilledIt:
+      "Keeping the yes-or-no framing. It produced a technically fine model answering a question with no useful action attached, and it had been in place for a year doing nothing. The other error, which the first attempt made, was excluding everybody who had not yet cancelled. That threw away most of the subscriber base and produced a picture based entirely on people who had already left.",
+  },
 
   mistakes: [
     {

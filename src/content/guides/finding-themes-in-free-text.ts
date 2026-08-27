@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 14,
 
   intro: [
     "Almost every business is sitting on a large pile of writing that nobody has read. Complaints, review comments, the free text box at the end of a survey, support ticket descriptions, exit interview notes. Somebody reads a sample when a crisis happens and the rest sits there.",
@@ -197,6 +197,62 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A hotel group with fourteen properties. Reviews arrive from several booking platforms and its own post-stay survey.",
+    problem:
+      "Around two thousand pieces of written feedback a month and nobody reading them. The star ratings were tracked closely and the written comments, which are where the actual information is, were opened only when a general manager wanted ammunition for an argument.",
+    analysis: [
+      "The scores tell you something is wrong. Only the text tells you what. That gap was the whole problem: a property could slide a quarter of a star and nobody could say why for months.",
+      "Reading a sample by hand first is not optional and it is always skipped. Two hundred reviews read manually established roughly what was in there and gave something to check the automated results against.",
+      "The categories the group already used were the wrong ones. Feedback was tagged as room, food, staff or facilities, which is how the business is organised rather than how guests experience a stay. Nothing about the check-in queue at a specific time of day fits into those four boxes.",
+      "Letting the themes emerge from the text rather than assigning them to existing categories is the entire point. It produces the divisions actually present in what people wrote.",
+      "The obvious risk was noise. Hotel reviews are full of words like room, stay, hotel and night, which appear everywhere and separate nothing. The property names had the same problem.",
+    ],
+    aiApproach: [
+      {
+        step: "Let the themes come out of the words",
+        detail:
+          "The method finds groups of words that tend to appear together in the same reviews. It has no idea what they mean. It is finding co-occurrence, and that is both its power and its limit.",
+      },
+      {
+        step: "Strip out the words that appear everywhere",
+        detail:
+          "Hotel, room, stay, night, and every property name. These dominate and produce a theme that is simply the fact that these are hotel reviews. Removing them is what lets the real distinctions surface.",
+      },
+      {
+        step: "Name the themes by reading real reviews",
+        detail:
+          "Ten actual reviews per theme, read by a person. A theme is not a theme until somebody in the business can say what it is. A list of top words is not a finding.",
+      },
+      {
+        step: "Choose how many themes by what can be acted on",
+        detail:
+          "Too few and everything blends into one. Too many and you get thirty overlapping slivers nobody can respond to. The right number is roughly what the operations team could actually run a project against.",
+      },
+      {
+        step: "Count them over time, which is where the value is",
+        detail:
+          "A single snapshot is mildly interesting. The theme rising month on month at one property is the thing that changes what somebody does on Monday.",
+      },
+    ],
+    solution: [
+      "Written feedback assigned to themes automatically each week.",
+      "Themes named by people, not by word lists, and reviewed twice a year.",
+      "A monthly trend per property showing which themes are growing.",
+      "Alerts when a theme rises sharply at one site, which is how a local problem gets caught early.",
+      "Ten real reviews attached to every theme in the report, so nobody has to trust the label.",
+    ],
+    impact: [
+      "The reason behind a falling score became visible in weeks rather than being reconstructed months later.",
+      "A theme about check-in queues at a specific time emerged that fitted none of the four existing categories, and it had been present in the text for a year.",
+      "General managers started reading a themed summary rather than either ignoring the text or cherry-picking from it.",
+      "The group learned which of its problems were group-wide and which were one property, which had been genuinely unclear.",
+    ],
+    whatWouldHaveKilledIt:
+      "Trusting the theme labels without reading the underlying reviews. The method groups words that co-occur and has no understanding at all, so a theme can look coherent from its top words and contain two unrelated things. Somebody has to read ten real reviews per theme. The other failure is presenting a one-off snapshot: the value is entirely in the movement over time, and a single report gets admired once and filed.",
+  },
 
   mistakes: [
     {

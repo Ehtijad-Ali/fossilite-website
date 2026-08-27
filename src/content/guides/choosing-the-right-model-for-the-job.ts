@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 15,
 
   intro: [
     "There are hundreds of approaches and you need to know about six. More usefully, you need five questions that get you to the right family in about ten minutes, and then a way of judging whether the specific choice inside that family matters.",
@@ -273,6 +273,63 @@ WHATEVER YOU CHOOSE
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A twenty-partner accountancy practice. Audit, tax and a growing outsourced bookkeeping arm.",
+    problem:
+      "Four ideas on a whiteboard after an away day, a modest budget, and a managing partner who wanted all four. Predict which clients will leave. Automate sorting the shared inbox. Estimate how long a job will take. Find the clients who could buy a second service.",
+    analysis: [
+      "All four are legitimate. Only one could be first, and the selection criteria that matter are not technical ones.",
+      "The four questions run through the same filter. What shape is the answer? What information exists? Does anybody need it explained? And how much history is there?",
+      "Predicting departures wants a yes or no, has three years of history, needs explaining to a partner who will act on it, and could work. But the decision it feeds was vague. Nobody could say what they would do differently, which is the killer.",
+      "Sorting the inbox wants a category from text, has years of email sitting there already, and needs no explanation. The decision is obvious and immediate: it goes to the right team or it does not.",
+      "Job duration wants a number, has good timesheet history, and would have been useful. It lost on urgency rather than merit.",
+      "The cross-sell idea had the weakest data and the vaguest decision, and it was the one the managing partner was most enthusiastic about. Saying so early, with reasons written down, was the most valuable thing the exercise did.",
+    ],
+    aiApproach: [
+      {
+        step: "Ask what shape the answer takes",
+        detail:
+          "A number, a yes or no, a category, a group, or a ranked list. This single question eliminates most of the options immediately and it is the first thing to establish, before anybody mentions a technique.",
+      },
+      {
+        step: "Ask what information exists and in what form",
+        detail:
+          "Rows and columns point one way. Free text points another. Images point somewhere much more expensive. The inbox project was text, which is a well-trodden and cheap path.",
+      },
+      {
+        step: "Ask whether anybody needs it explained",
+        detail:
+          "A partner phoning a client about leaving needs a reason. An email being routed to the tax team needs none. That question alone rules out whole families of approach and it is a business requirement, not a preference.",
+      },
+      {
+        step: "Ask how much history there is",
+        detail:
+          "Thousands of examples opens most doors. A few hundred means keeping it simple. Twenty means you are writing rules, not building a model, and there is nothing wrong with that.",
+      },
+      {
+        step: "Then ask the question that overrules the other four",
+        detail:
+          "What decision changes, and who makes it? The departure model failed here, and it had the best-looking data of the four. A well-built answer to a question nobody acts on is the most expensive way to produce nothing.",
+      },
+    ],
+    solution: [
+      "The inbox project went first: fastest to build, clearest decision, no explanation needed, and data already sitting there.",
+      "Job duration was scheduled second, with a stated start date so it did not simply drift.",
+      "The departure idea was parked with a written condition: it comes back when somebody can say what a partner would do differently on being told.",
+      "The cross-sell idea was declined outright, with reasons on one page.",
+      "The four questions were written up as the standing test for the next idea, which is how the practice stopped having this argument every away day.",
+    ],
+    impact: [
+      "One project got finished instead of four getting started, which is the single most common failure in this area and it was avoided by an afternoon of structured argument.",
+      "The parked ideas had written conditions rather than being vetoed, so they stopped being raised as grievances.",
+      "The managing partner's favourite idea was declined on stated criteria rather than on politics, which is the only way that conversation goes well.",
+      "The practice now has a reusable filter, and the second time it was applied it took twenty minutes rather than an afternoon.",
+    ],
+    whatWouldHaveKilledIt:
+      "Starting with the most interesting idea rather than the most finishable one. The departure model was the one everyone wanted to talk about and it had no decision attached, so it would have consumed the budget and produced a report. The other failure would have been running all four in parallel with the resource for one, which is how businesses end up with four things at seventy percent and nothing in use.",
+  },
 
   mistakes: [
     {

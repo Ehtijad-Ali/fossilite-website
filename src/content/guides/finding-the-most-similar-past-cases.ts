@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "When an experienced estimator gets a new job in, the first thing they do is think of the last few that looked like it. Similar size, similar customer, similar time of year. Then they think about how those went, and they quote accordingly.",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A commercial fit-out contractor. Offices, clinics and retail units, jobs ranging from a few weeks to several months.",
+    problem:
+      "Estimating. A new enquiry arrives and somebody has to say what it will cost and how long it will take. The estimator with twenty-five years in the trade was very good at it and was retiring in a year. Nobody could say how he did it, including him.",
+    analysis: [
+      "Asked to explain, he said the same thing every time: this one is like the job we did at the dental practice in 2019, but bigger. That is not vagueness. That is the actual method, and it is a method a computer can copy.",
+      "He was not calculating from first principles. He was retrieving the most similar past jobs and adjusting. Recognising that is the whole insight, because it points at a specific and simple technique rather than at a general prediction problem.",
+      "Nine years of completed jobs were on file with quoted cost, final cost, quoted duration, actual duration, floor area, building type, whether it was occupied during works, ceiling height, services complexity and how many trades were involved.",
+      "The counting found something he had not articulated. Occupied buildings ran over far more often than empty ones, and by a fairly consistent amount. He knew this and applied it by feel. It had never been written down and the younger estimators did not know it.",
+      "Ruled out: that a general purpose model was needed. The business wanted to see the comparable jobs, not a number. An estimator defending a price to a client needs to point at something.",
+    ],
+    aiApproach: [
+      {
+        step: "Copy the method rather than replacing it",
+        detail:
+          "Find the handful of past jobs most similar to this one, show them, and base the estimate on what actually happened. That is what he was doing and it is exactly what this technique does, which is why it fitted so naturally.",
+      },
+      {
+        step: "Decide what similar means, with the expert",
+        detail:
+          "Floor area, building type, occupied or empty, number of trades. Getting the definition of similarity right is the entire craft here, and the only person who could get it right was the man retiring. That conversation was the project.",
+      },
+      {
+        step: "Put the measures on a comparable scale",
+        detail:
+          "Floor area runs into thousands and trade count into single figures. Left raw, area dominates and every job looks similar to every other job of the same size. This small detail decides whether the comparables are any good.",
+      },
+      {
+        step: "Show the neighbours, not just the answer",
+        detail:
+          "Five most similar past jobs, with what was quoted, what it cost, and what went wrong. The estimator reads them. That is more useful than a number and it is what makes the tool trusted rather than resented.",
+      },
+      {
+        step: "Test it against his own estimates",
+        detail:
+          "Run it over jobs he priced and compare. It did not beat him. It came close, and it came close without twenty-five years, which was the actual requirement.",
+      },
+    ],
+    solution: [
+      "For a new enquiry, the five most similar completed jobs, with quoted and actual figures side by side.",
+      "A suggested range derived from them, never a single number.",
+      "The occupied-building adjustment made explicit, because it was the largest piece of undocumented knowledge in the business.",
+      "The notes from those past jobs surfaced too, since what went wrong is often more useful than what it cost.",
+      "Built during the estimator's last year, with him correcting the similarity definition as it went.",
+    ],
+    impact: [
+      "Twenty-five years of pattern matching became something the business owns rather than something that walked out of the door at retirement.",
+      "The occupied-building finding was written down for the first time and immediately changed how junior estimators priced.",
+      "New estimators became useful faster, because they could see the comparable jobs rather than having to accumulate them.",
+      "Clients got shown comparable past work when they challenged a price, which turned out to be independently useful in winning jobs.",
+    ],
+    whatWouldHaveKilledIt:
+      "Building it after he left. The similarity definition was the hard part and it existed only in his head, so the same project a year later would have been guesswork dressed up as analysis. The other failure would have been producing a single number: an estimator who cannot see why cannot defend the price, and will go back to his own judgement the first time a client pushes.",
+  },
 
   mistakes: [
     {

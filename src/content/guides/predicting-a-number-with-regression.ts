@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 16,
 
   intro: [
     "There is one kind of question that comes up constantly in business. How much will this cost. How long will this take. How many will we sell. How much is this house worth. All of them want a number back.",
@@ -197,6 +197,63 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A domestic removals firm. Two lorries, a van, six staff, around six hundred house moves a year across one county.",
+    problem:
+      "The owner's version: half our jobs run over and we swallow the difference, and the other half we have quoted too high and lost to somebody cheaper. The quote is a guess made in five minutes on the phone by whoever picks it up.",
+    analysis: [
+      "This is a predicting-a-number problem and the number is hours on site. Everything else follows from it: the price, the crew size, whether a second job fits the same day.",
+      "The first useful finding arrived before any modelling. Different people quoted differently for the same job, and one of them was consistently low. It was the person who had never actually done a removal.",
+      "Three years of jobs sat in the diary and the invoices. For each: quoted hours, actual hours, bedrooms, floor level, lift or no lift, carrying distance from the parking, packing included or not, distance between properties, and the month.",
+      "Plot actual against quoted and the pattern is immediate. The overruns are not random. They cluster on flats above the first floor, on long carries from the van, and on anything involving a piano or a large appliance.",
+      "None of that surprised the crews. All of it was missing from the quoting call, because the person on the phone did not know to ask.",
+      "Ruled out: that the crews were slow. Their hours per box were steady across the three years. The estimate was wrong, not the work.",
+    ],
+    aiApproach: [
+      {
+        step: "Pick the number and check it is honestly recorded",
+        detail:
+          "Hours on site, from the timesheets. Not an invented productivity score. If the thing you want to predict is not already recorded truthfully, fix that first and come back in three months.",
+      },
+      {
+        step: "Start with the version that is just arithmetic",
+        detail:
+          "The simplest form works out what each thing adds. A baseline, plus so much per bedroom, plus so much for a second floor with no lift, plus so much for a long carry. You can print it on a card, and for a business this size that alone would have been worth the exercise.",
+      },
+      {
+        step: "Read the weights, because that is half the value",
+        detail:
+          "The numbers it produces are themselves the finding. Seeing that a long carry adds more time than an extra bedroom changes how the phone call goes, and it does that on day one whether or not anything ever gets automated.",
+      },
+      {
+        step: "Test it against the quotes you actually gave",
+        detail:
+          "Run it over last year and compare its estimate against both the quote and the real hours. The bar is not perfection. The bar is whether it lands closer, more often, than the person on the phone.",
+      },
+      {
+        step: "Read the misses, not the average",
+        detail:
+          "A small average error hides a handful of jobs that were out by most of a day. Sort by size of error and read the worst ten. Here they were all the same thing: customers who had underdescribed what they owned.",
+      },
+    ],
+    solution: [
+      "A short set of questions on the enquiry call, asked in the order the analysis said mattered most.",
+      "An estimate of hours produced while the call is still happening, given as a range rather than a single figure.",
+      "The two biggest drivers displayed next to it, so whoever is quoting can say why it is what it is.",
+      "A flag when the answers resemble the jobs that historically went badly, which triggers a video walkthrough before any price is given.",
+      "Actual hours fed back weekly, which is the part that keeps it honest as the business changes.",
+    ],
+    impact: [
+      "Quoting stopped depending on who answered the phone, which was the largest single source of variation and nobody had spotted it.",
+      "Crews stopped arriving at jobs in the wrong number, because crew size came off the same estimate.",
+      "The worst overruns moved from being discovered on the day to being flagged while the job could still be repriced.",
+      "The owner finally had a real answer to whether the business was underpricing, instead of a feeling formed by the jobs that went badly.",
+    ],
+    whatWouldHaveKilledIt:
+      "Hiding the estimate inside something nobody can explain. The person quoting has to justify a number to a customer standing in front of them, and a figure they cannot defend is a figure they will override within a fortnight. It would also have failed if the timesheets had been optimistic, which they usually are when they feed a bonus. It learns whatever the records say, fiction included.",
+  },
 
   mistakes: [
     {

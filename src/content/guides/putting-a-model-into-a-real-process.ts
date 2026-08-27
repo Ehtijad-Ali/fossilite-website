@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "automation",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 16,
 
   intro: [
     "A model that works is not a model that helps. Between the two sits the part almost everybody underestimates: getting the answer in front of the right person, at the right moment, in a form they will act on, with somebody accountable for what happens next.",
@@ -214,6 +214,63 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A commercial print shop. Business cards through to exhibition graphics, roughly two hundred jobs a week through the studio.",
+    problem:
+      "A model existed that predicted which jobs would need a reprint, and it was reasonably good, and nobody used it. It had been built six months earlier, it lived in a spreadsheet the analyst refreshed on Mondays, and the studio manager had looked at it twice.",
+    analysis: [
+      "The model was not the problem. This is worth stating plainly because in most of these situations somebody proposes improving the model, which addresses nothing.",
+      "Watching the work showed why it was ignored. It arrived weekly, and the decision it informed was made several times a day. By the time a job was being set up, the list was up to five days old.",
+      "It arrived in the wrong place. The studio worked in the job management system all day. The list was in a spreadsheet on a shared drive, which meant remembering it existed and stopping to go and look.",
+      "It said what without why. A job flagged as reprint risk gave the setter nothing to act on. Told that the risk came from a customer-supplied file at low resolution, there is something to do about it.",
+      "And there was no agreed response. Even a setter who saw the flag and believed it had no defined action. Should they stop? Query the customer? Proof it differently? Without an answer, the flag is information rather than instruction.",
+      "The last one is cultural. The studio had never been consulted, so it was something being done to them.",
+    ],
+    aiApproach: [
+      {
+        step: "Deliver at the moment of the decision",
+        detail:
+          "The flag has to appear as the job is set up, not on a weekly list. A prediction available at the wrong time is worth nothing, however accurate. This mattered more than every other change combined.",
+      },
+      {
+        step: "Put it where the work already happens",
+        detail:
+          "Into the job management system, on the screen the setter already has open. Anything that requires opening a second tool will be used for a fortnight and then not.",
+      },
+      {
+        step: "Give the reason alongside the score",
+        detail:
+          "Low resolution supplied file. Unusual stock. Tight colour match to a brand. The reason is what converts a warning into an action, and it was available all along and simply not being shown.",
+      },
+      {
+        step: "Agree the response before switching it on",
+        detail:
+          "For each reason, what the setter should do. Written on one page, agreed with the studio, and short. This took longer than the technical work and it is what determined whether any of it got used.",
+      },
+      {
+        step: "Make it easy to disagree and record it",
+        detail:
+          "A one-click dismiss with a reason. That gives the setter control, which is what makes it feel like a tool rather than a supervisor, and it produces the log that shows where the model is wrong.",
+      },
+    ],
+    solution: [
+      "The flag appears in the job management system at setup, with the reason.",
+      "A one-page agreed response for each reason type, written with the studio.",
+      "A dismiss button with a reason, always available.",
+      "Weekly review of dismissals, which found two reason types that were consistently wrong and got them removed.",
+      "The studio manager presented it to the team rather than the analyst, which was a deliberate choice and it worked.",
+    ],
+    impact: [
+      "A model that had existed for six months and produced nothing started being used, without a single change to the model itself.",
+      "The reasons turned out to be more valuable than the scores, because they pointed at fixes upstream in how files were requested from customers.",
+      "The dismissal log identified where it was wrong within a month, which no amount of offline testing had surfaced.",
+      "The studio treated it as theirs, which is the only version of this that survives contact with a busy week.",
+    ],
+    whatWouldHaveKilledIt:
+      "Improving the model, which was the first suggestion and would have consumed the remaining budget on the one component that was already fine. The other reliable killer is delivering into a separate tool: a dashboard nobody opens is the standard resting place for this kind of work, and it fails so quietly that the project is usually recorded as delivered.",
+  },
 
   mistakes: [
     {

@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "Here is a forecast: we will sell around four hundred of these next week. Here is a question: how many should we order? Those are not the same problem and the second one does not follow from the first.",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A four-surgery dental practice. Around a hundred and twenty appointments a day across NHS and private lists.",
+    problem:
+      "Missed appointments. An empty chair is unrecoverable revenue and the practice manager wanted a model to predict who would not turn up. That is a reasonable request and it is only half a project, which is the thing worth noticing here.",
+    analysis: [
+      "Predicting who will miss is genuinely useful and it changes nothing on its own. The decision is what you do about it, and the two have completely different requirements.",
+      "The prediction side was straightforward. Three years of appointments with attendance recorded, plus how far ahead it was booked, time of day, whether it was a first appointment, previous attendance history, and how the booking was made.",
+      "The decision side was harder and it was where the actual work lay. The options were: send more reminders, phone them, overbook the slot, or shorten the booking window for high-risk patients. Each has a different cost and a different failure.",
+      "Overbooking is the interesting one. If you overbook and both patients arrive, somebody waits and a dentist runs late for the rest of the day. That cost lands on other patients, not on the one who was predicted to miss.",
+      "So the decision depends on more than the prediction. It depends on the cost of each error, what the clinicians will accept, and the practice's tolerance for running late. None of that is in the data and none of it is a modelling question.",
+    ],
+    aiApproach: [
+      {
+        step: "Build the prediction, and stop calling it the project",
+        detail:
+          "A likelihood of missing for each upcoming appointment. This part is ordinary and gets most of the attention it does not deserve.",
+      },
+      {
+        step: "Write down the options and what each costs",
+        detail:
+          "A text is nearly free. A phone call costs staff minutes. Overbooking costs the whole day's schedule if it goes wrong. Shortening the booking window costs some patients an appointment they would have kept. This table is the decision, and it took longer to agree than the model took to build.",
+      },
+      {
+        step: "Match the response to the confidence",
+        detail:
+          "A slight elevation gets an extra reminder. A strong one gets a phone call. Only a very strong one, on a specific type of short appointment, gets considered for overbooking. Using one blunt response for every risk level throws away everything the prediction told you.",
+      },
+      {
+        step: "Check the responses against fairness, not just cost",
+        detail:
+          "The strongest predictor of missing an appointment was having missed one before, which meant the responses would concentrate on a small group of patients. Whether that is acceptable is a practice decision and it had to be made deliberately rather than emerging from the arithmetic.",
+      },
+      {
+        step: "Test the decision, not the prediction",
+        detail:
+          "The question at review is not was the model accurate. It is did the chairs get filled and did the days run to time. Those can move independently of accuracy, and only one of them is what the practice actually wanted.",
+      },
+    ],
+    solution: [
+      "A risk score on every appointment, produced a week ahead.",
+      "A tiered response: extra reminder, then a phone call, then a small amount of overbooking on short appointment types only.",
+      "Overbooking never applied to long or surgical appointments, because the cost of two arrivals is far worse there.",
+      "A rule that no patient is refused a booking on the basis of the score.",
+      "Chair utilisation and clinic overrun both reported weekly, because improving one at the expense of the other is not a win.",
+    ],
+    impact: [
+      "The empty chair problem improved through a set of responses rather than through the prediction, which is the point of the whole distinction.",
+      "The overrun measure caught an early version of the overbooking rule that was filling chairs and making the practice run late, which the utilisation figure alone would have shown as a success.",
+      "The fairness question got asked and answered explicitly instead of being decided by default.",
+      "The practice manager stopped describing the project as the missed appointment model and started describing it as what we do about missed appointments, which changed what got discussed in reviews.",
+    ],
+    whatWouldHaveKilledIt:
+      "Delivering the prediction and calling it done, which happens constantly. A list of patients likely to miss, sent to a practice with no agreed response, produces a fortnight of interest and then nothing. The other failure was nearly made: measuring only chair utilisation, which would have rewarded aggressive overbooking and pushed the cost onto patients sitting in the waiting room.",
+  },
 
   mistakes: [
     {

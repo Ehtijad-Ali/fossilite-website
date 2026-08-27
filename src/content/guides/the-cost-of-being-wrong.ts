@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "Every model is wrong sometimes. That is not a flaw, it is the nature of the thing. What matters is not how often it is wrong but what happens when it is, and that depends entirely on which way the mistake goes.",
@@ -201,6 +201,62 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A domestic heating firm servicing and repairing boilers under annual cover plans. About four thousand plans on the books.",
+    problem:
+      "Predict which boilers will fail so an engineer can be sent before the customer is cold. The technical question was easy. The question nobody had asked was what each kind of mistake costs, and the two mistakes here are wildly unequal.",
+    analysis: [
+      "Two ways to be wrong. Send an engineer to a boiler that was fine, which costs a visit. Or fail to send one and have the boiler fail, which costs an emergency callout, an unhappy customer, and in January a customer who leaves.",
+      "Those are not remotely the same size, and any system tuned to be right as often as possible will treat them as though they are. That is the entire point of this case.",
+      "The costs were worked out with the operations manager rather than estimated. A planned visit has a known cost. An emergency callout in winter has a much higher known cost, including out-of-hours rates.",
+      "Then the part that does not appear in the accounts. A failure during a cold snap has a materially higher chance of the customer not renewing. That is the largest cost in the whole picture and it was not in any system.",
+      "The asymmetry also moves with the season. A failure in July is an inconvenience. The same failure in January is a different event entirely, and a single fixed threshold across the year ignores that.",
+    ],
+    aiApproach: [
+      {
+        step: "Price both mistakes before tuning anything",
+        detail:
+          "Write down what an unnecessary visit costs and what a missed failure costs, in money, agreed with the people who carry the consequence. Until those two numbers exist there is no basis for setting any threshold, and the default is to treat them as equal, which is always wrong.",
+      },
+      {
+        step: "Set the threshold from the costs, not the accuracy",
+        detail:
+          "When missing a failure costs several times an unnecessary visit, the correct threshold is far lower than the one that maximises being right. The system should deliberately over-call, and it will look worse on accuracy while being worth considerably more.",
+      },
+      {
+        step: "Let the threshold move with the season",
+        detail:
+          "The cost of a missed failure is not constant, so the threshold should not be either. Lower in winter, higher in summer. This is a small change and it captures a large part of the available value.",
+      },
+      {
+        step: "Include the cost that is not in the accounts",
+        detail:
+          "The renewal effect was the biggest single term and it lived in nobody system. Estimating it roughly and including it beats leaving it out because it cannot be measured precisely.",
+      },
+      {
+        step: "Report in money, not in percentages",
+        detail:
+          "The review question is what this saved and what it cost, both in pounds. Reporting precision and recall to an operations meeting invites a discussion about the model rather than about the business.",
+      },
+    ],
+    solution: [
+      "A failure risk score per boiler, refreshed monthly.",
+      "A threshold set from the two costs rather than from accuracy, deliberately generating more visits than a balanced setting would.",
+      "A seasonal adjustment, lower in the cold months.",
+      "Proactive visits bundled with the annual service where the timing allowed, which cut the cost of being wrong.",
+      "Monthly reporting in money: visits made, failures avoided, failures missed.",
+    ],
+    impact: [
+      "The system was deliberately tuned to be wrong more often in the cheap direction, which is what a cost-aware threshold means and it needed explaining more than once.",
+      "Bundling proactive visits with scheduled services reduced the cost of a false alarm, which allowed the threshold to go lower still. Reducing the cost of a mistake is an alternative to predicting better and it is usually cheaper.",
+      "The renewal effect entered the conversation for the first time, and it changed where the threshold sat more than any modelling improvement did.",
+      "Reporting in money kept the operations meeting talking about outcomes rather than about the model.",
+    ],
+    whatWouldHaveKilledIt:
+      "Tuning it to be right as often as possible. That setting sends almost nobody, because failures are uncommon, and it would have been defended with a good-looking accuracy figure while delivering nothing. The other near-miss was leaving the renewal cost out on the grounds that it could not be measured accurately. A rough estimate of the largest term beats a precise treatment that omits it.",
+  },
 
   mistakes: [
     {

@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 14,
 
   intro: [
     "Before anybody builds a model, somebody should spend an afternoon writing down the rule an experienced person would use. Chase anything over five hundred pounds that is more than a week overdue. Flag any order going to a new address from an account opened this month.",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "45 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A speciality coffee roaster. Roasts to order for about ninety cafe accounts and a small direct-to-consumer line.",
+    problem:
+      "Green coffee buying. Buy too much and it ages in the warehouse and loses quality. Buy too little and you disappoint a cafe, which in that trade means losing them. The owner had been quoted a substantial sum for a demand forecasting system and asked whether it was worth it.",
+    analysis: [
+      "The honest first question is what happens if we do the simplest possible thing, and it is skipped almost every time because it is not interesting.",
+      "The simplest possible thing here: order enough to cover the last twelve weeks average usage plus a buffer, and reorder when stock falls below the lead time requirement. That is arithmetic. It fits in a spreadsheet.",
+      "Backtested against three years of actual usage, that rule would have avoided almost every stockout and most of the ageing. Not all. Almost.",
+      "Then the question becomes narrow and answerable: what does the remainder look like, and would a model catch it? The remainder was two things. New cafe accounts ramping up, and a seasonal single-origin that behaves unlike everything else.",
+      "Neither of those is a forecasting problem. A new account is known about in advance because somebody signed them. The seasonal line has a known season. Both are calendar facts the business already possessed and had not written into the rule.",
+    ],
+    aiApproach: [
+      {
+        step: "Build the dumb version first and score it properly",
+        detail:
+          "Run the simple rule across three years of history and count what it would have got wrong. This takes an afternoon and it is the benchmark everything else has to beat. Without it, any model looks impressive because there is nothing to compare it to.",
+      },
+      {
+        step: "Look at only the cases the rule missed",
+        detail:
+          "Not the overall performance, the residue. Ten or twenty specific occasions. Read them individually. In this case reading them was enough to identify both causes without any statistics at all.",
+      },
+      {
+        step: "Ask whether the misses are predictable or just known",
+        detail:
+          "This is the distinction that decided it. A new account is not something to predict, it is something the sales side already knows. Building a model to infer a fact somebody in the business could simply tell you is the most avoidable waste in this whole field.",
+      },
+      {
+        step: "Improve the rule rather than replacing it",
+        detail:
+          "Two additions: flag new accounts for manual uplift in their first eight weeks, and treat the seasonal line separately with its own known pattern. Still arithmetic, still on one page, and it closed most of the remaining gap.",
+      },
+      {
+        step: "Write down what would justify a model later",
+        detail:
+          "If the account base triples, or if the range grows past what one person can hold in their head, revisit. Stated as a condition so the decision is not permanent, just current.",
+      },
+    ],
+    solution: [
+      "A reorder rule on one page: twelve-week average, buffer, lead time trigger.",
+      "New accounts flagged for manual uplift during their ramp-up, because somebody already knows they exist.",
+      "The seasonal single-origin handled on its own known calendar.",
+      "A monthly ten-minute check of what the rule would have done against what actually happened.",
+      "A written condition for when to look at something more sophisticated.",
+    ],
+    impact: [
+      "The substantial quote was not spent, and the problem it was going to solve was largely solved by an afternoon of arithmetic.",
+      "The two remaining failure types were identified precisely, and both had causes the business already knew about and had never connected to buying.",
+      "The rule is understood by everyone who uses it, which means it survives the person who built it leaving.",
+      "The monthly check means somebody will notice when the rule stops working, which is the part most spreadsheet solutions lack.",
+    ],
+    whatWouldHaveKilledIt:
+      "Buying the system. It would probably have worked, and it would have been a large cost to beat a spreadsheet by a small margin, in a business where nobody could have maintained it. The other failure is subtler and nearly happened: proposing a model to predict new account ramp-up, when the sales team already knew every new account weeks in advance and simply had not been asked.",
+  },
 
   mistakes: [
     {

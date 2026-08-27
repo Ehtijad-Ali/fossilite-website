@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "business-analysis",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 15,
 
   intro: [
     "Everything else in this area is about predicting. This one is not. It answers a different question entirely: given what you expect to happen, what is the best combination of things to actually do?",
@@ -197,6 +197,63 @@ export const guide: Guide = {
       time: "45 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A commercial cleaning contractor. Around ninety staff cleaning offices, surgeries and small industrial units across a region, mostly early mornings and evenings.",
+    problem:
+      "Building the weekly rota took a supervisor most of two days, and it was still wrong. Somebody would be sent across the region for a forty-minute clean while a colleague drove the opposite way. When she was on leave, nobody else could do it at all.",
+    analysis: [
+      "This is not a prediction problem and that distinction is worth making at the start. Nothing needs forecasting. The demand is contracted and known. The question is purely which combination of assignments is best.",
+      "Three things had to be written down and only the first was easy. What are we trying to make best. What can we change. What can we never break.",
+      "The objective was assumed to be travel time. Pushed on it, the business wanted three things: travel time, consistency of who cleans which site, and fairness of hours across staff. Optimising only the first was the reason two earlier attempts had been rejected.",
+      "Then the constraints, and this took the longest. Some were written down: contracted hours, access windows, keyholder qualifications. Most were not. One site could only be accessed by a named individual because the client insisted. Two staff could not be rostered together. One building's alarm code was held by three people.",
+      "Scoring the current rota first was the step that justified the whole thing. Last month's actual assignments were measured against travel time and against fairness. The travel gap was substantial. That one day of work made the case.",
+      "Ruled out: hiring another supervisor, which was the standing proposal. The two days were being spent on a combinatorial problem that a person cannot do well, not on a workload problem.",
+    ],
+    aiApproach: [
+      {
+        step: "Write down the three ingredients before anything else",
+        detail:
+          "Objective, what can be changed, what cannot be broken. This is almost all the work and none of it is technical. Two earlier attempts had skipped it and gone straight to software.",
+      },
+      {
+        step: "Collect the unwritten rules by going out with the staff",
+        detail:
+          "Two early mornings riding along produced more constraints than a week of meetings. The named-keyholder rule, the two staff who should not be paired, the site where parking makes the first job of the morning impossible. None of it was in any document.",
+      },
+      {
+        step: "Separate the absolute from the strongly preferred",
+        detail:
+          "Contracted hours and access windows are hard. Keeping the same cleaner at the same site is a strong preference. Treating every preference as absolute produces a problem with no solution at all, which is what happened on the first run.",
+      },
+      {
+        step: "Give preferences a cost instead of forbidding them",
+        detail:
+          "Breaking site consistency is allowed and expensive, so it happens only when the alternative is worse. That single change turned an unsolvable problem into a workable rota.",
+      },
+      {
+        step: "Score the current rota to know if it is worth it",
+        detail:
+          "One day of work measuring what the supervisor already achieves. Sometimes an experienced planner is close to the best available and the honest answer is not to bother. Here the gap was large, and knowing that before spending anything is the point.",
+      },
+    ],
+    solution: [
+      "A weekly rota generated in minutes rather than two days.",
+      "An objective combining travel, site consistency and fairness of hours, with weights the business agreed in advance.",
+      "The unwritten constraints built in explicitly, including the named keyholder and the staff pairing rule.",
+      "Full editing by the supervisor, with every change and its reason recorded.",
+      "The recorded changes read monthly, because each one is a constraint that was missed.",
+    ],
+    impact: [
+      "Two days of supervisor time each week went back into supervising, which was the original complaint and was not what the project was sold on.",
+      "The rota stopped being one person's private skill, which removed a real risk that had never been costed.",
+      "Cross-region journeys for short cleans largely stopped, because avoiding them was in the objective rather than in somebody's head.",
+      "The fairness measure surfaced that a few staff had been quietly absorbing the worst runs for a long time, which nobody had noticed.",
+    ],
+    whatWouldHaveKilledIt:
+      "Optimising travel time alone, which is what the first attempt did. It produced a rota that was shorter on the road, changed who cleaned which site every week, and was rejected by staff and clients within a fortnight. The second killer was nearly fatal too: the first run treated site consistency as absolute and returned no possible answer, at which point the instinct is to start deleting rules at random rather than to price them.",
+  },
 
   mistakes: [
     {

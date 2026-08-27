@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "Imagine somebody new in the post room whose only job is to sort incoming letters into four trays. They cannot read properly. What they can do is notice that letters mentioning refund, damaged and returns almost always go in one tray, and letters mentioning invoice, statement and overdue almost always go in another.",
@@ -197,6 +197,62 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A property management company looking after around three thousand rented flats. One shared inbox receives everything.",
+    problem:
+      "Roughly four hundred emails a day arrive into one address. A member of staff spent most of her morning reading each one and forwarding it to repairs, lettings, accounts or the block management team. Urgent repairs sat in the queue behind rent queries because the queue was chronological.",
+    analysis: [
+      "This is a sorting problem, not an understanding problem, and the distinction matters. Nothing here needs to comprehend the email. It needs to put it in one of five trays.",
+      "The training data was already sitting there. Three years of emails, each one already forwarded to a team by a human. Every one of those forwards is a labelled example, created for free as a by-product of doing the job.",
+      "Counting the categories showed the imbalance. Repairs was more than half of everything. Accounts was a fifth. The rest were smaller, and one category, legal and complaints, was rare and by far the most costly to misroute.",
+      "That asymmetry shaped the design. Sending a repair to accounts is a minor annoyance. Sending a formal complaint to the repairs queue starts a clock the company cannot afford to miss.",
+      "The urgency question turned out to be separate from the routing question, and conflating them had been the reason an earlier attempt failed. A gas leak and a request for a new key are both repairs.",
+    ],
+    aiApproach: [
+      {
+        step: "Use the simple word-counting approach first",
+        detail:
+          "It works out which words tend to appear in each category and combines them. It is old, it is cheap, it runs in milliseconds, and for sorting text into a handful of buckets it is very hard to beat by enough to matter. Starting anywhere more elaborate would have been the expensive way to reach the same place.",
+      },
+      {
+        step: "Train on the forwards you already have",
+        detail:
+          "No labelling exercise was needed at all, which is unusual and is why this project was cheap. Three years of human routing decisions were sitting in the sent items.",
+      },
+      {
+        step: "Treat the rare, costly category differently",
+        detail:
+          "Complaints and legal get a deliberately low bar, so anything that might be one is flagged for a human. Over-flagging there costs a few seconds of reading. Under-flagging costs a regulatory deadline, and no accuracy figure captures that.",
+      },
+      {
+        step: "Route the confident ones, queue the rest",
+        detail:
+          "Where it is confident, it routes. Where it is not, it goes to a human with its best two guesses shown. That keeps a person in the loop exactly where the value of a person is highest.",
+      },
+      {
+        step: "Handle urgency as a separate question",
+        detail:
+          "A second, much simpler pass looks for the small set of words that indicate an emergency: gas, leak, flood, no heating, locked out. Deliberately a plain keyword list rather than anything learned, because it must be auditable and adjustable by the operations manager on a Tuesday afternoon.",
+      },
+    ],
+    solution: [
+      "Emails routed to one of five team inboxes on arrival, with the confident majority handled automatically.",
+      "Uncertain ones queued for a human with the two most likely categories offered.",
+      "Anything resembling a complaint or legal matter flagged regardless of confidence.",
+      "A separate keyword-based urgency flag that lifts emergencies to the top of whichever queue they land in.",
+      "Every human correction recorded, which is what the monthly retrain uses.",
+    ],
+    impact: [
+      "The morning sorting job largely disappeared, and the person doing it moved to handling the uncertain queue and the complaints, which is a better use of somebody who knows the business.",
+      "Emergency repairs stopped sitting behind rent queries, and that came from the separate urgency pass rather than from the classifier.",
+      "The complaints category being treated as expensive rather than as one bucket among five was the decision that protected the business.",
+      "The build was cheap because the labelled data already existed, which is worth looking for before assuming a labelling project is needed.",
+    ],
+    whatWouldHaveKilledIt:
+      "Routing everything automatically, including the cases it was unsure about. Confidence varies enormously across these and the uncertain tail is where the expensive mistakes live. The other failure, which an earlier attempt actually made, is treating urgency and category as one problem: it produces a system that gets the routing right and still leaves a gas leak in a queue.",
+  },
 
   mistakes: [
     {

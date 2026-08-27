@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Intermediate",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 13,
+  readingTime: 15,
 
   intro: [
     "If your business data lives in tables, which nearly all business data does, there is a very good chance the best answer is something almost nobody outside a technical team has heard of. It is called XGBoost, and variations of it quietly win most ordinary prediction problems.",
@@ -195,6 +195,62 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "An online clothing retailer. Around a thousand orders a week, most items dispatched from one warehouse, generous returns policy.",
+    problem:
+      "Returns were eating the margin. The owner knew the overall rate and nothing else. Her instinct was to tighten the returns policy, which is the obvious lever and also the one most likely to reduce sales along with returns.",
+    analysis: [
+      "Before touching anything: is this evenly spread or concentrated? It was heavily concentrated. A minority of products and a minority of customers accounted for most of it, and those two groups needed completely different responses.",
+      "On products, the pattern was sizing. Certain lines came back at several times the rate of others, and reading the return reasons showed why. They ran small, and nothing on the product page said so.",
+      "On customers, a small group were ordering the same item in three sizes and returning two, which is a known shopping behaviour rather than a problem, but it needed to be counted separately or it distorted everything else.",
+      "The available information was the ordinary stuff a business already has, sitting in rows and columns: product, size, price, whether it was discounted, the customer's history, how many items in the basket, delivery time, and the month.",
+      "Ruled out early: delivery speed. It correlated with returns, but only because the slow deliveries clustered in a period when a particular problem line was selling well. Following that would have led to spending money on couriers to fix a sizing problem.",
+    ],
+    aiApproach: [
+      {
+        step: "Recognise the shape of the data",
+        detail:
+          "Rows and columns, mostly numbers and categories, a few tens of thousands of examples. This is the boring, extremely common shape, and it is precisely where the boosted-trees family tends to win. It is not where neural networks help, and a lot of money gets wasted assuming otherwise.",
+      },
+      {
+        step: "Build models that correct each other in sequence",
+        detail:
+          "Rather than many independent models voting, each new one focuses on the cases the previous ones got wrong. That sequential correcting is why this approach tends to squeeze more out of ordinary business tables than anything else you can run on a laptop.",
+      },
+      {
+        step: "Predict before dispatch, not after",
+        detail:
+          "The prediction has to be available at a moment when somebody can act. Once the parcel has gone, knowing it will come back is trivia. The cutoff is the point of packing, so only information available by then is allowed in.",
+      },
+      {
+        step: "Do not let it tune itself into memorising",
+        detail:
+          "This family is powerful enough to learn the historical orders rather than the pattern, and it will happily do so. It is held back deliberately and checked against a period it never saw, which is the step that separates a real result from a flattering one.",
+      },
+      {
+        step: "Ask it what is driving the predictions",
+        detail:
+          "It ranks which columns are carrying the weight. Sizing came out at the top by a distance, which pointed at a fix that had nothing to do with any model.",
+      },
+    ],
+    solution: [
+      "A likelihood-of-return score at the moment of packing.",
+      "High-scoring orders get a size guidance note in the box, and the worst product lines got their descriptions rewritten with real measurements.",
+      "A weekly list of lines with an unusually high rate, reviewed by the buyer before reordering.",
+      "The customer group who order multiple sizes deliberately are excluded from the flagging, because they are behaving as intended.",
+      "Nothing is refused, blocked or surcharged. It changes what goes in the box and what gets bought next season.",
+    ],
+    impact: [
+      "The returns problem turned out to be a product description problem for a specific set of lines, which is a cheap fix that would never have been found by looking at the overall rate.",
+      "The policy change was not made, so the sales it would have cost were not lost.",
+      "Buying decisions started including return rate rather than gross sales, which changed what got reordered.",
+      "The courier project was cancelled before it started, on evidence rather than argument.",
+    ],
+    whatWouldHaveKilledIt:
+      "Acting on the delivery time finding. It was a real pattern in the data and it was not the cause, and following it would have meant spending real money on couriers to fix a problem with sizing labels. The other way to lose here is to use a returns score to penalise customers, which turns a merchandising tool into a way of annoying the people who buy the most.",
+  },
 
   mistakes: [
     {

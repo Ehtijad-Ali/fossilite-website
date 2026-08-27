@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 14,
 
   intro: [
     "Every recommendation you have ever seen comes from one of two ideas, and both are simple enough to explain in a sentence.",
@@ -197,6 +197,62 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A distributor of industrial fasteners and consumables. Around eleven hundred trade accounts ordering through a web shop and by phone.",
+    problem:
+      "Order values had been flat for two years while the customer count grew. The obvious move was a recommendation panel on the web shop, and the obvious version of that would have been useless, because half the revenue comes down a telephone line and the products are not interesting to browse. Nobody discovers fasteners for fun.",
+    analysis: [
+      "First correction: this is not a retail discovery problem. Trade customers know what they want. The opportunity is not showing them something new, it is stopping them ordering incompletely and then paying carriage twice.",
+      "The counting found the actual problem. A large number of orders were followed within a fortnight by a small second order from the same account, and the second order was usually a consumable that goes with the first item.",
+      "That is not a preference to be predicted. It is a forgetting problem, and it costs the customer a delivery charge and the distributor a pick and a van slot.",
+      "Two years of order lines gave what was needed: which items appear together in an order, and which items appear in a follow-up shortly after another item.",
+      "Ruled out: discounting. The flat order value was not a price problem. Customers were buying what they meant to buy and coming back for the bit they forgot.",
+    ],
+    aiApproach: [
+      {
+        step: "Predict the gap, not the taste",
+        detail:
+          "The question is which item this customer is likely to need alongside what is in the basket, based on what similar orders have historically contained. Framing it as a completeness check rather than a suggestion is what made it acceptable to trade buyers.",
+      },
+      {
+        step: "Use both kinds of signal",
+        detail:
+          "What goes together in one order, and what tends to follow an order within a fortnight. The second one was where the value was and it is the one most recommendation work ignores, because retail thinking looks at the basket and not at the week after.",
+      },
+      {
+        step: "Respect the customer's own history",
+        detail:
+          "A customer who has never bought a category once in three years should not be shown it. The strongest signal for a trade account is its own repeat pattern, which is more useful and far less annoying than what other accounts do.",
+      },
+      {
+        step: "Cap it hard",
+        detail:
+          "Three suggestions, never more. A panel of twenty is ignored as furniture. This is a constraint chosen for how people behave rather than for what the technique can produce.",
+      },
+      {
+        step: "Measure the right thing",
+        detail:
+          "Not clicks. Whether the second order within a fortnight becomes less common, and whether average order value moves. A recommendation that gets clicked and adds nothing to the order is a distraction that measures as a success.",
+      },
+    ],
+    solution: [
+      "Three suggested lines at the basket stage, framed as commonly ordered with this rather than as recommendations.",
+      "The same three shown on the phone operator's screen while the order is being taken, which is where half the revenue actually is.",
+      "Nothing suggested from a category the account has never bought.",
+      "A reorder prompt for consumables based on that account's own historical interval.",
+      "The follow-up order rate tracked monthly as the actual measure of whether it works.",
+    ],
+    impact: [
+      "The repeat small order within a fortnight, which was costing both sides money, became less frequent.",
+      "The phone operators got the biggest benefit, and that was the part nobody had planned for because everyone had been thinking about the website.",
+      "Customers were saved a second carriage charge, which changed how the change was received.",
+      "Order value moved without a discount, which was the original objective.",
+    ],
+    whatWouldHaveKilledIt:
+      "Building it as a retail-style discovery panel on the web shop only. It would have been ignored by trade buyers who know their part numbers, it would have missed the telephone channel entirely, and it would have been measured on clicks, which would have made it look like a modest success while doing nothing for the business.",
+  },
 
   mistakes: [
     {

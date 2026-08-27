@@ -54,6 +54,7 @@ const SECTIONS = [
   { id: "core-concepts", label: "Core concepts", has: (g: Guide) => !!g.coreConcepts.length },
   { id: "learning-path", label: "Learning path", has: (g: Guide) => !!g.learningPath?.length },
   { id: "examples", label: "Real-world examples", has: (g: Guide) => !!g.examples.length },
+  { id: "case-study", label: "Worked case study", has: (g: Guide) => !!g.caseStudy },
   { id: "mistakes", label: "Common mistakes", has: (g: Guide) => !!g.mistakes.length },
   {
     id: "practice",
@@ -958,6 +959,71 @@ export const GuideDetail: FC = () => {
                 )}
               </Card>
             ))}
+
+            {guide.caseStudy ? (
+              <>
+                <H2 id="case-study" index={num("case-study")} T={T}>Worked case study</H2>
+                <P T={T}>
+                  One problem carried the whole way: how it presents, how it gets broken down,
+                  where a model earns its place, what gets built, and what changes. The business is
+                  constructed rather than a real client, so there are no measured figures here.
+                </P>
+                <Card T={T} accent>
+                  <Label T={T}>The business</Label>
+                  <Typography sx={{ fontSize: "15.5px", lineHeight: 1.8, color: T.primaryText, mb: "20px" }}>
+                    {guide.caseStudy.business}
+                  </Typography>
+                  <Label T={T} tone="bad">01 — The problem as it arrives</Label>
+                  <Typography sx={{ fontSize: "15.5px", lineHeight: 1.8, color: T.secondaryText }}>
+                    {guide.caseStudy.problem}
+                  </Typography>
+                </Card>
+
+                <Card T={T}>
+                  <Label T={T}>02 — Breaking it down</Label>
+                  <H3 T={T}>What the analysis actually looks at</H3>
+                  <Bullets items={guide.caseStudy.analysis} T={T} />
+                </Card>
+
+                <Card T={T}>
+                  <Label T={T}>03 — Where AI comes in</Label>
+                  <H3 T={T}>The approach, one stage at a time</H3>
+                  {guide.caseStudy.aiApproach.map((s, i) => (
+                    <Box key={s.step} sx={{ display: "flex", gap: "16px", mb: "20px" }}>
+                      <Typography sx={{ fontFamily: MONO, fontSize: "12px", color: "#C3A87C", pt: "3px", flexShrink: 0, width: "22px" }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </Typography>
+                      <Box>
+                        <Typography sx={{ fontSize: "15.5px", fontWeight: 600, color: T.headline, mb: "5px" }}>
+                          {s.step}
+                        </Typography>
+                        <Typography sx={{ fontSize: "15px", lineHeight: 1.8, color: T.secondaryText }}>
+                          {s.detail}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  ))}
+                </Card>
+
+                <Card T={T}>
+                  <Label T={T}>04 — What gets built</Label>
+                  <H3 T={T}>What people actually see</H3>
+                  <Bullets items={guide.caseStudy.solution} T={T} />
+                </Card>
+
+                <Card T={T}>
+                  <Label T={T} tone="good">05 — What changes for the business</Label>
+                  <Bullets items={guide.caseStudy.impact} T={T} />
+                </Card>
+
+                <Card T={T}>
+                  <Label T={T} tone="bad">What would have killed it</Label>
+                  <Typography sx={{ fontSize: "15.5px", lineHeight: 1.8, color: T.primaryText }}>
+                    {guide.caseStudy.whatWouldHaveKilledIt}
+                  </Typography>
+                </Card>
+              </>
+            ) : null}
 
             <H2 id="mistakes" index={num("mistakes")} T={T}>Common mistakes</H2>
             {guide.mistakes.map((m) => (

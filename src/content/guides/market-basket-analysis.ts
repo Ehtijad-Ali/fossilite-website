@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "data-science",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 14,
 
   intro: [
     "Take every basket, every order, every job sheet from the last two years and ask a simple question. Which things keep turning up together? Not because anybody planned it, just because that is what customers do.",
@@ -191,6 +191,62 @@ export const guide: Guide = {
       time: "30 minutes",
     },
   ],
+
+  caseStudy: {
+    business:
+      "An independent hardware and DIY shop. One large site, about eleven thousand product lines, till data going back four years.",
+    problem:
+      "The owner rearranged the shop every couple of years based on instinct and on what the reps told him. He wanted to know what actually goes together, and he had a specific worry: he suspected he was discounting things people would have bought anyway.",
+    analysis: [
+      "Four years of till receipts is the entire dataset and it already exists. No collection project, no integration, nothing to buy. This is the cheapest analysis in the whole library to get started on.",
+      "The first pass produces obvious rubbish, and it is important to expect that. The strongest associations were things like paint and paint. Frequently bought together simply reflects the things that sell most.",
+      "So the useful measure is not how often two things appear together. It is whether they appear together more often than you would expect given how often each sells on its own. That single correction is what separates a finding from a description of your bestsellers.",
+      "With that applied, three genuinely useful patterns emerged. A plumbing fitting and a specific sealant, sold in different aisles at opposite ends of the shop. Timber and a particular fixing, where customers frequently returned the next day for the fixing. And a seasonal one around a particular garden product.",
+      "The timber pattern was the valuable one and it was not really about layout. Customers were coming back the next day, which means they got home and could not finish the job.",
+    ],
+    aiApproach: [
+      {
+        step: "Correct for popularity or you learn nothing",
+        detail:
+          "Compare how often two items appear together against how often you would expect them to by chance. Without this you get a ranked list of your bestsellers described as insights, which is the single most common failure of this analysis.",
+      },
+      {
+        step: "Set a floor on how often it must occur",
+        detail:
+          "A pattern appearing in four receipts out of a hundred thousand is noise, however striking it looks. Setting a minimum before you start stops you acting on coincidence.",
+      },
+      {
+        step: "Look for pairs across time, not just within a basket",
+        detail:
+          "What gets bought the next day after something is often more useful than what is in the same basket, because it points at an incomplete purchase. The timber finding came from here and would have been invisible in a same-basket analysis.",
+      },
+      {
+        step: "Ignore anything you cannot act on",
+        detail:
+          "Plenty of true patterns have no available response. The test is whether it changes a layout, a range decision, a prompt at the till or a bundle. If not, it is trivia, and a report full of unactionable truths trains people to stop reading it.",
+      },
+      {
+        step: "Check whether the pattern is just the season",
+        detail:
+          "Two garden items appearing together in July is not a relationship between the items. Run it within seasons before believing anything.",
+      },
+    ],
+    solution: [
+      "The plumbing fitting and its sealant relocated to the same aisle.",
+      "A prompt at the till when timber is scanned without the fixing, phrased as a question rather than an upsell.",
+      "Three bundle offers built from real co-purchase rather than from what the reps were pushing.",
+      "One long-standing discount stopped, because the analysis showed the two items sold together regardless.",
+      "The analysis rerun each quarter, since ranges and seasons move.",
+    ],
+    impact: [
+      "The next-day return trip for a missing fixing became less common, which is a better customer experience and an extra sale in the same visit.",
+      "The owner stopped discounting a pairing that needed no encouragement, which was his original suspicion and it turned out to be correct.",
+      "Layout decisions started coming from receipts rather than from reps, which changed who had influence over the shop floor.",
+      "Several striking-looking patterns were correctly ignored because nothing could be done about them.",
+    ],
+    whatWouldHaveKilledIt:
+      "Acting on raw co-occurrence. The first output was a list of bestsellers dressed up as insight, and rearranging a shop around it would have achieved nothing while looking data-driven. The other trap is the famous story everyone repeats about supermarket purchases, which is almost certainly not true and which sets an expectation of one dramatic revelation. Real findings from this are small, plural and mildly useful, and that is fine.",
+  },
 
   mistakes: [
     {

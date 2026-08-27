@@ -17,9 +17,9 @@ export const guide: Guide = {
   ],
   category: "machine-learning",
   level: "Beginner",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   author: PETER_NGUYEN,
-  readingTime: 12,
+  readingTime: 15,
 
   intro: [
     "Most businesses already have customer groups. Small, medium and large. New and existing. Retail and trade. Somebody decided those categories years ago, usually based on one thing that was easy to measure, and everybody has worked with them ever since.",
@@ -197,6 +197,62 @@ export const guide: Guide = {
       time: "1 hour",
     },
   ],
+
+  caseStudy: {
+    business:
+      "A wholesale bakery supplying cafes, delis and small independent shops across a city. About two hundred and forty accounts.",
+    problem:
+      "Every customer was treated the same way. The same delivery schedule, the same price list, the same monthly email. The owner had a strong sense that this was wrong and no way to describe the differences. When asked to name the customer types he said good ones and difficult ones, which is not a segmentation.",
+    analysis: [
+      "The temptation is to segment by size, because turnover is the easiest number to sort by. That produces three groups called big, medium and small, which everybody already knew and nobody can act on.",
+      "The useful question is different: what makes two customers behave alike? Order frequency, order size, how much it varies week to week, product mix, how much notice they give, how often they change an order after placing it, payment behaviour, and how seasonal they are.",
+      "Two years of order history covered all of that without anybody collecting anything new.",
+      "The point of letting the grouping emerge, rather than defining the groups in advance, is that you get the divisions actually present in the behaviour instead of the ones you assumed. That is the entire value and it is why this is worth doing.",
+      "What emerged did not match turnover at all. One of the most valuable groups was made up of small accounts ordering the same thing every week with no fuss, and one of the least profitable contained several of the largest accounts by revenue.",
+    ],
+    aiApproach: [
+      {
+        step: "Choose behaviour, not identity",
+        detail:
+          "Feed it what customers do, not who they are. Sector and size describe them. Ordering patterns describe how they behave, and behaviour is what you can respond to.",
+      },
+      {
+        step: "Put the measures on a comparable footing",
+        detail:
+          "Order value runs into hundreds and order frequency into single figures. Left as they are, the larger numbers dominate and the grouping becomes a sort by turnover with extra steps. Rescaling first is a small technical detail with a large effect on whether the answer is useful.",
+      },
+      {
+        step: "Do not accept the first number of groups you try",
+        detail:
+          "You have to choose how many groups you want, and there is no correct answer. The real test is whether a group can be described in a sentence and whether the business could do something different for it. Anything else is arithmetic for its own sake.",
+      },
+      {
+        step: "Name them by reading real customers",
+        detail:
+          "Pull ten actual accounts out of each group and look at them. If somebody in the business can say oh, those are the ones who, you have something. If nobody recognises the group, it is not real, however clean it looks on a chart.",
+      },
+      {
+        step: "Check it holds next quarter",
+        detail:
+          "Rerun it on a later period. Groups that dissolve were patterns in one quarter's noise. Groups that survive are worth building a plan around.",
+      },
+    ],
+    solution: [
+      "Five groups, each describable in a sentence, each with a name the sales team recognised.",
+      "The steady weekly group moved to a standing order with a small discount, which cut the admin on both sides.",
+      "The high-variation group got a later cutoff and a different delivery slot, because their problem was notice rather than volume.",
+      "The group containing several large but unprofitable accounts got a pricing conversation, which had never happened because their revenue made them look like good customers.",
+      "New accounts get assigned to a group after eight weeks of ordering.",
+    ],
+    impact: [
+      "The finding that revenue and profitability pointed in different directions changed which accounts the owner chased, and that was the single most valuable output.",
+      "Good ones and difficult ones became five described groups, which meant the sales team could talk about accounts precisely.",
+      "The standing order change removed a repeated weekly task for a whole group of customers.",
+      "The pricing conversation with the large unprofitable accounts happened at all, which it would not have done otherwise.",
+    ],
+    whatWouldHaveKilledIt:
+      "Segmenting by turnover, which is what everybody expects and which would have confirmed what the business already believed while changing nothing. The other failure is treating the groups as fixed truths. They are a description of behaviour in a period, they move, and a business that files them away as permanent customer types will be acting on last year's pattern within a year.",
+  },
 
   mistakes: [
     {

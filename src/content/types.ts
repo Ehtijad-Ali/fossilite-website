@@ -77,6 +77,99 @@ export type Example =
     };
 
 /**
+ * A diagram, authored as data rather than as SVG markup.
+ *
+ * Two reasons it is data. The renderer paints it from theme tokens, so every
+ * figure is correct in light and dark without the author thinking about it; and
+ * a guide file stays readable, because a page of hand-written SVG in the middle
+ * of prose is unreviewable.
+ *
+ * Series colours come from a validated categorical palette. Do NOT introduce
+ * new hues here: the site's own gold and teal accents sit 14 units apart in
+ * normal vision, which is below the legibility floor, and they were rejected
+ * for this use for exactly that reason. Structure is drawn in ink; colour is
+ * only ever spent on something the reader has to tell apart.
+ *
+ * `flow` is the workhorse and answers the question most guides need answered:
+ * what goes in, what the model does, and what somebody does differently as a
+ * result. The rest exist because a specific mechanism is clearer as a picture.
+ */
+export type Diagram =
+  | {
+      kind: "flow";
+      title: string;
+      /** One line under the figure. Say what to notice, not what it depicts. */
+      caption?: string;
+      steps: { label: string; note?: string; tone?: "input" | "model" | "output" }[];
+    }
+  | {
+      kind: "matrix";
+      title: string;
+      caption?: string;
+      /** Row and column headings, e.g. what happened vs what we predicted. */
+      rowLabel: string;
+      colLabel: string;
+      rows: [string, string];
+      cols: [string, string];
+      /** Exactly four, read left to right, top row first. */
+      cells: [MatrixCell, MatrixCell, MatrixCell, MatrixCell];
+    }
+  | {
+      kind: "bars";
+      title: string;
+      caption?: string;
+      /** Values are relative; the axis is deliberately unlabelled unless `unit`. */
+      unit?: string;
+      bars: { label: string; value: number; tone?: "accent" | "muted" | "good" | "bad" }[];
+    }
+  | {
+      kind: "curve";
+      title: string;
+      caption?: string;
+      xLabel: string;
+      yLabel: string;
+      /** Points are 0-100 in both axes; the renderer scales to the frame. */
+      series: {
+        name: string;
+        points: [number, number][];
+        dashed?: boolean;
+        /** A range. `points` is the upper edge and `lower` the bottom one —
+         *  a band filled to the baseline instead would be an area chart
+         *  pretending to be a range. */
+        band?: { lower: [number, number][] };
+      }[];
+      notes?: { x: number; y: number; text: string }[];
+    }
+  | {
+      kind: "scatter";
+      title: string;
+      caption?: string;
+      xLabel: string;
+      yLabel: string;
+      /** Points are 0-100 in both axes. Three groups maximum: past three, the
+       *  categorical palette cannot clear the all-pairs legibility floor. */
+      groups: { name: string; points: [number, number][]; ring?: boolean }[];
+    }
+  | {
+      kind: "tree";
+      title: string;
+      caption?: string;
+      question: string;
+      branches: {
+        answer: string;
+        outcome?: string;
+        question?: string;
+        sub?: { answer: string; outcome: string }[];
+      }[];
+    };
+
+export interface MatrixCell {
+  label: string;
+  note?: string;
+  tone?: "good" | "bad" | "neutral";
+}
+
+/**
  * An end-to-end case study: one business problem carried from how it presents
  * to what changed, showing where AI or a model earns its place in the middle.
  *
@@ -263,6 +356,11 @@ export interface Guide {
    * same material at full length: a reader who only wants the mechanism stops
    * before it, and a reader who wants to see it done keeps going.
    */
+  /**
+   * Figures. Placed after the core concepts, because a diagram is worth more
+   * once the reader has the vocabulary and is worth very little before it.
+   */
+  diagrams?: Diagram[];
   caseStudy?: CaseStudy;
   businessApplications?: string[];
   /** Only where it's genuinely true. Most technical guides have none. */

@@ -99,6 +99,40 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "flow",
+      title: "The removals firm: from a five-minute phone guess to an estimate with a range",
+      caption:
+        "The estimate goes back into the same phone call it came from. A number that arrives after the customer has hung up is worth nothing.",
+      steps: [
+        { label: "Three years of jobs", note: "Quoted hours and actual hours", tone: "input" },
+        { label: "What made them differ", note: "Floor, lift, carry distance, piano" },
+        { label: "Work out what each adds", note: "A baseline plus so much per thing", tone: "model" },
+        { label: "Ask those things on the call", note: "In the order that matters most" },
+        { label: "Hours as a range, live", note: "Plus the two biggest drivers", tone: "output" },
+      ],
+    },
+    {
+      kind: "scatter",
+      title: "Why the overruns were not random",
+      caption:
+        "Each dot is a past job. Anything above the diagonal took longer than quoted. The overruns cluster rather than scatter, and that clustering is what made the problem fixable.",
+      xLabel: "hours quoted",
+      yLabel: "hours actually taken",
+      groups: [
+        {
+          name: "Ground floor, close parking",
+          points: [[12, 14], [20, 19], [26, 28], [34, 33], [42, 44], [50, 48], [58, 60], [66, 64], [74, 76], [30, 31], [46, 45], [62, 63]],
+        },
+        {
+          name: "Upper floor or long carry",
+          points: [[16, 34], [24, 46], [32, 55], [40, 66], [48, 74], [22, 41], [36, 62], [28, 50], [44, 70], [18, 38]],
+        },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

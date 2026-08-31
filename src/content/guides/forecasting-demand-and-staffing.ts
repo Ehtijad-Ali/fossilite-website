@@ -99,6 +99,49 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "curve",
+      title: "Forecast a range, because rostering to a single line is wrong half the time",
+      caption:
+        "The shaded band is what you roster against. The storm in the middle is genuinely unforecastable four weeks out, and expecting the forecast to catch it is how businesses talk themselves out of a tool that was working.",
+      xLabel: "weeks ahead",
+      yLabel: "calls arriving",
+      series: [
+        {
+          name: "Expected range",
+          band: {
+            lower: [[0, 34], [14, 38], [28, 32], [42, 46], [56, 36], [70, 40], [84, 34], [100, 38]],
+          },
+          points: [[0, 58], [14, 62], [28, 55], [42, 70], [56, 60], [70, 64], [84, 58], [100, 62]],
+        },
+        {
+          name: "Forecast",
+          points: [[0, 46], [14, 50], [28, 44], [42, 58], [56, 48], [70, 52], [84, 46], [100, 50]],
+        },
+        {
+          name: "What actually happened",
+          dashed: true,
+          points: [[0, 44], [14, 53], [28, 42], [42, 60], [56, 88], [70, 50], [84, 48], [100, 47]],
+        },
+      ],
+      notes: [{ x: 56, y: 88, text: "storm, not forecastable" }, { x: 42, y: 58, text: "billing run, on a calendar you have" }],
+    },
+    {
+      kind: "flow",
+      title: "The contact centre: separating what you can forecast from what you cannot",
+      caption:
+        "Two outputs, not one. The predictable spikes were on a calendar the business already published and had never connected to the rota.",
+      steps: [
+        { label: "Six years of calls by half hour", note: "Plus the billing calendar", tone: "input" },
+        { label: "Split out the repeating pattern", note: "Trend, week, day, year" },
+        { label: "Forecast four weeks out", note: "Tested at four weeks, not at one", tone: "model" },
+        { label: "Roster to the range", note: "With defined flex either side" },
+        { label: "Storms handled separately", note: "Short-notice cover, triggered by the weather warning", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

@@ -99,6 +99,38 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "matrix",
+      title: "Four groups, and only one of them is worth a voucher",
+      caption:
+        "Ordinary targeting aims at the top-left, because those people respond and the numbers look excellent. They were coming anyway, so the voucher is margin given away. The bottom-right group is the one nobody looks for and excluding them is often the most profitable thing available.",
+      rowLabel: "what they do if we contact them",
+      colLabel: "what they would do anyway",
+      rows: ["They come", "They stay away"],
+      cols: ["Coming anyway", "Not coming anyway"],
+      cells: [
+        { label: "Sure things", note: "Margin given away. Send a thank you, not a discount.", tone: "bad" },
+        { label: "Persuadable", note: "The entire value of the campaign lives here", tone: "good" },
+        { label: "Do not disturb", note: "Contact makes it worse. Some unsubscribed.", tone: "bad" },
+        { label: "Lost causes", note: "Wasted print, but harmless", tone: "neutral" },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The garden centre: measuring what the mailing caused, not who responded",
+      caption:
+        "The holdout is the only thing that makes any of this measurable, and the pressure to skip it is constant. It comes from exactly the people who most want to prove the campaign worked.",
+      steps: [
+        { label: "A group deliberately not contacted", note: "Randomly chosen, every campaign, forever", tone: "input" },
+        { label: "Model contacted and uncontacted apart", note: "Then take the difference for each customer" },
+        { label: "Predict the difference, not the outcome", note: "How much more likely BECAUSE we contacted them", tone: "model" },
+        { label: "Look for the group who react badly", note: "Counterintuitive, and usually never checked" },
+        { label: "Report against the holdout", note: "Response rate measures almost nothing", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

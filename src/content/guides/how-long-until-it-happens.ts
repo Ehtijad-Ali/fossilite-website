@@ -99,6 +99,40 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "curve",
+      title: "Everybody cancels eventually, so when is the only useful question",
+      caption:
+        "Of subscribers who look like this, how many are still here at each point. The steep drop is the third and fourth box, and it is completely invisible in an overall churn rate. Two different problems, needing two different responses.",
+      xLabel: "months subscribed",
+      yLabel: "still subscribed",
+      series: [
+        {
+          name: "Still subscribed",
+          points: [[0, 100], [6, 92], [12, 74], [18, 58], [24, 52], [36, 49], [48, 46], [60, 43], [72, 36], [84, 28], [100, 20]],
+        },
+      ],
+      notes: [
+        { x: 12, y: 74, text: "the third and fourth box" },
+        { x: 72, y: 36, text: "range fatigue, a different cause" },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The subscription box: using the people who have not cancelled yet",
+      caption:
+        "Step two is what makes this its own technique. A subscriber active at fourteen months has not finished their story, and both throwing them away and treating them as never cancelling get the answer badly wrong.",
+      steps: [
+        { label: "Four years of subscriptions", note: "Most of them still running", tone: "input" },
+        { label: "Keep the unfinished ones", note: "They lasted at least this long, which is real information" },
+        { label: "Ask when, not whether", note: "The output is a curve, not a probability", tone: "model" },
+        { label: "Find where the risk concentrates", note: "Two spikes, two different causes" },
+        { label: "Compare channels on expected lifetime", note: "Which reversed the cost-per-signup ranking", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

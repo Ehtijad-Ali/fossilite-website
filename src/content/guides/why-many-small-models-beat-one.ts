@@ -99,6 +99,41 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "flow",
+      title: "The bakery: hundreds of mediocre opinions, one good answer",
+      caption:
+        "Each tree sees a different slice of the history and a different subset of the factors. They are individually unimpressive, and their mistakes point in different directions, which is why the vote beats any one of them.",
+      steps: [
+        { label: "Every batch, three years", note: "Flour, humidity, proving time, oven, shift", tone: "input" },
+        { label: "Weight the rare failures", note: "Or it learns to say pass every time" },
+        { label: "Hundreds of small trees vote", note: "Each on a random slice", tone: "model" },
+        { label: "Risk flag during proving", note: "While there is still time to act" },
+        { label: "Extra check before dispatch", note: "Caught here, not at the customer", tone: "output" },
+      ],
+    },
+    {
+      kind: "scatter",
+      title: "Why no single column found it",
+      caption:
+        "Failures are the ringed points. Look along either axis on its own and the failures are spread through the normal batches. Only the corner where both conditions hold separates them, and no single-factor chart can show that.",
+      xLabel: "humidity in the mixing room",
+      yLabel: "how short the proving time ran",
+      groups: [
+        {
+          name: "Passed",
+          points: [[10, 20], [22, 14], [35, 30], [48, 18], [60, 26], [15, 55], [28, 68], [40, 48], [12, 38], [55, 12], [68, 34], [30, 22], [44, 62], [20, 44], [72, 20], [8, 66], [52, 40], [64, 55], [36, 12], [25, 30]],
+        },
+        {
+          name: "Failed quality control",
+          ring: true,
+          points: [[74, 78], [82, 70], [78, 86], [88, 76], [70, 82], [85, 88], [76, 72]],
+        },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

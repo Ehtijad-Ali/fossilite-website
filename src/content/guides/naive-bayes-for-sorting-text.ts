@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "Route it, queue it, or always show a human",
+      caption:
+        "The rare, expensive category gets a deliberately low bar. Over-flagging there costs seconds of reading; under-flagging costs a regulatory deadline, and no accuracy figure captures that difference.",
+      question: "Could this be a complaint or a legal matter?",
+      branches: [
+        {
+          answer: "Possibly, even faintly",
+          outcome: "Always to a human, regardless of confidence.",
+        },
+        {
+          answer: "No",
+          question: "How confident is the sort?",
+          sub: [
+            { answer: "Confident", outcome: "Route it to the team inbox automatically." },
+            { answer: "Unsure", outcome: "Queue for a human, with the two best guesses shown." },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The property manager: four hundred emails a day, and no labelling project",
+      caption:
+        "Three years of forwards were already labelled data, created for free by somebody doing the job. That is why this was cheap, and it is worth looking for before assuming you need a labelling exercise.",
+      steps: [
+        { label: "Three years of sent forwards", note: "Every one is a labelled example", tone: "input" },
+        { label: "Count which words go with which tray", note: "Old, cheap, and hard to beat for this", tone: "model" },
+        { label: "Confident ones routed", note: "Unsure ones queued for a person" },
+        { label: "Urgency handled separately", note: "A plain keyword list. Gas, leak, flood, no heating." },
+        { label: "Corrections recorded, monthly retrain", note: "Emergencies stop sitting behind rent queries", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

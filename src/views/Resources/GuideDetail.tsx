@@ -18,6 +18,7 @@ import {
   breadcrumbSchema,
 } from "../../hooks/useSeo";
 import { GuideHero } from "./GuidePlate";
+import { GuideDiagram } from "./GuideDiagram";
 
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace';
 const GOLD = "#C3A87C";
@@ -52,6 +53,7 @@ const SECTIONS = [
   { id: "introduction", label: "Introduction", has: () => true },
   { id: "why-it-matters", label: "Why this matters", has: (g: Guide) => !!g.whyItMatters?.length },
   { id: "core-concepts", label: "Core concepts", has: (g: Guide) => !!g.coreConcepts.length },
+  { id: "diagrams", label: "How it works", has: (g: Guide) => !!g.diagrams?.length },
   { id: "learning-path", label: "Learning path", has: (g: Guide) => !!g.learningPath?.length },
   { id: "examples", label: "Real-world examples", has: (g: Guide) => !!g.examples.length },
   { id: "case-study", label: "Worked case study", has: (g: Guide) => !!g.caseStudy },
@@ -898,6 +900,13 @@ export const GuideDetail: FC = () => {
                 )}
               </Card>
             ))}
+
+            {guide.diagrams?.length ? (
+              <>
+                <H2 id="diagrams" index={num("diagrams")} T={T}>How it works</H2>
+                {guide.diagrams.map((d, i) => <GuideDiagram key={i} d={d} />)}
+              </>
+            ) : null}
 
             {guide.learningPath?.length ? (
               <H2 id="learning-path" index={num("learning-path")} T={T}>Step-by-step learning path</H2>

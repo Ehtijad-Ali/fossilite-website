@@ -99,6 +99,38 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "flow",
+      title: "The plumbing contractor: from chasing whatever is on top of the pile",
+      caption:
+        "The call happens before the due date. That timing is the whole design, and it is what turns a chase into a courtesy call.",
+      steps: [
+        { label: "Three years of invoices", note: "Raised date, paid date, PO number", tone: "input" },
+        { label: "Ask one yes or no question", note: "Will this go 14 days past terms?" },
+        { label: "Points-based score", note: "Explainable, because somebody has to justify the call", tone: "model" },
+        { label: "Flag at the moment it is raised", note: "Not three weeks later" },
+        { label: "Courtesy call before it is due", note: "And a 13-week cash view", tone: "output" },
+      ],
+    },
+    {
+      kind: "matrix",
+      title: "The four things that can happen, and only two of them are mistakes",
+      caption:
+        "Overall accuracy blends all four into one number and hides which mistakes you are making. These two errors rarely cost the same, so the business has to say which it would rather have.",
+      rowLabel: "what actually happened",
+      colLabel: "what we predicted",
+      rows: ["Paid late", "Paid on time"],
+      cols: ["Flagged as slow", "Not flagged"],
+      cells: [
+        { label: "Caught it", note: "The courtesy call went out in time", tone: "good" },
+        { label: "Missed it", note: "The invoice went late with no warning", tone: "bad" },
+        { label: "False alarm", note: "A wasted call, and a mildly puzzled customer", tone: "bad" },
+        { label: "Correctly left alone", note: "No effort spent", tone: "good" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

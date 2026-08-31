@@ -99,6 +99,34 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "bars",
+      title: "What ninety-four percent accurate actually described",
+      caption:
+        "Worked arithmetic, not a measurement. If six in a hundred tenancies fall into arrears, then a system that simply says nobody will is right ninety-four times. That was the demonstrated figure. The number was true and the system was worth nothing.",
+      unit: "%",
+      bars: [
+        { label: "Accuracy of a note saying nobody will fall into arrears", value: 94, tone: "bad" },
+        { label: "Accuracy the supplier demonstrated", value: 94, tone: "muted" },
+        { label: "Tenancies that actually do fall into arrears", value: 6, tone: "accent" },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The lettings agency: what to ask before signing anything",
+      caption:
+        "Step one takes five minutes and it is the one nobody does. Any accuracy figure quoted without it is either careless or hoping you will not ask.",
+      steps: [
+        { label: "Count how often the thing happens", note: "This sets what doing nothing scores", tone: "input" },
+        { label: "Test on a period it never saw", note: "Not the data it learned from" },
+        { label: "Report both numbers, always together", note: "Of those flagged, how many right. Of those that happened, how many caught.", tone: "model" },
+        { label: "Beat the obvious existing signal", note: "One payment behind is already free" },
+        { label: "The business picks the threshold", note: "Set by how many calls the team can make", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

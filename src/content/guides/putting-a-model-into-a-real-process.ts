@@ -106,6 +106,35 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "Nobody is using it. Which of these is it?",
+      caption:
+        "It is almost never the model, and improving the model is almost always the first suggestion. In the print shop it was the first two branches at once: a weekly list, in a spreadsheet, informing a decision made several times a day.",
+      question: "Why is the studio ignoring the flag?",
+      branches: [
+        { answer: "It arrives too late", outcome: "Deliver at the moment of the decision. This mattered more than everything else combined." },
+        { answer: "It is in a different tool", outcome: "Put it where the work already happens." },
+        { answer: "It says what but not why", outcome: "Show the reason. That is what turns a warning into an action." },
+        { answer: "There is no agreed response", outcome: "Write one page with the studio. Longer than the technical work." },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The print shop: six months of nothing, fixed without touching the model",
+      caption:
+        "Not one change here is to the model, which was fine the whole time. The dismissal log then found two reason types that were consistently wrong, which no amount of offline testing had surfaced.",
+      steps: [
+        { label: "A good model nobody opened", note: "Weekly spreadsheet on a shared drive", tone: "input" },
+        { label: "Move it to the moment of setup", note: "Not a five-day-old list" },
+        { label: "Put it in the job system", note: "The screen the setter already has open" },
+        { label: "Show the reason beside the score", note: "Low resolution file. Unusual stock." },
+        { label: "One-click dismiss, with a reason", note: "Control for the setter, and a log of where it is wrong", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "documented",

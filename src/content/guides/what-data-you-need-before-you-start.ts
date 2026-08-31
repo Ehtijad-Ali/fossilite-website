@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "Four checks, and stopping at any of them is a good outcome",
+      caption:
+        "Two days of this told the haulier the project could not start yet. That saved the budget, and the cheapest fix in the whole engagement came out of it: one phone call to stop the telematics being deleted after thirty days.",
+      question: "Is the thing you want to predict actually recorded?",
+      branches: [
+        {
+          answer: "Only in a paper day book",
+          outcome: "Not yet. Replace it with a five-field form and set a date to revisit.",
+        },
+        {
+          answer: "Yes, in a system",
+          question: "Is it recorded at the moment you would need to act?",
+          sub: [
+            { answer: "Only known after the fact", outcome: "Useless for deciding. It predicts the past." },
+            { answer: "Known while you can still act", outcome: "Now ask whether there is enough of it to learn from." },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The haulier: two days of checking instead of two quarters of discovering",
+      caption:
+        "The most valuable action here was a phone call about a retention setting. It cost nothing, it is not a model, and without it the project could never have happened.",
+      steps: [
+        { label: "The idea: predict breakdowns", note: "Good idea, wrong moment", tone: "input" },
+        { label: "Check all four questions", note: "Two days, and be willing to stop" },
+        { label: "Stop, and fix the recording", note: "Retention setting changed. One phone call." },
+        { label: "Do what needs no model", note: "Typing up old records found a failing component" },
+        { label: "A written revisit date", note: "Eighteen months of proper records", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "documented",

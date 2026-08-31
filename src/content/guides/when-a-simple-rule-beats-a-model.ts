@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "Read the cases the rule missed, then ask this",
+      caption:
+        "Both of the roaster's remaining failures fell down the right-hand branch. Building a model to infer a fact somebody in the business could simply tell you is the most avoidable waste in this whole field.",
+      question: "The simple rule got these wrong. Why?",
+      branches: [
+        {
+          answer: "Genuinely unpredictable",
+          outcome: "Accept it, or buy a buffer. No model helps here either.",
+        },
+        {
+          answer: "Predictable from data you hold",
+          outcome: "Now a model might be worth it. Score it against the simple rule.",
+        },
+        {
+          answer: "Somebody already knows",
+          outcome: "Not a prediction problem. A new account was signed weeks ago. Ask them.",
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The coffee roaster: how a substantial quote went unspent",
+      caption:
+        "Step one is skipped almost every time because it is not interesting. Without it any model looks impressive, because there is nothing to compare it against.",
+      steps: [
+        { label: "Build the dumb version first", note: "Twelve-week average, buffer, lead time", tone: "input" },
+        { label: "Backtest it over three years", note: "Count exactly what it would have got wrong" },
+        { label: "Read only the misses", note: "Ten or twenty cases, read individually" },
+        { label: "Improve the rule, do not replace it", note: "New accounts flagged, seasonal line separated" },
+        { label: "Write down what would justify a model", note: "So the decision is current, not permanent", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

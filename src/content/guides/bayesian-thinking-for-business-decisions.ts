@@ -99,6 +99,45 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "flow",
+      title: "The hotel: deciding on forty bookings without pretending they are four hundred",
+      caption:
+        "The starting position is the step everybody throws away. Three years of history is what stops forty bookings being read as though they arrived from nowhere.",
+      steps: [
+        { label: "Three years of bookings", note: "What a normal booking is worth here", tone: "input" },
+        { label: "Write that down as a starting view", note: "Explicitly, before seeing the new data" },
+        { label: "Update it with the forty", note: "Forty moves it a bit, four hundred would move it a lot", tone: "model" },
+        { label: "A range, not a number", note: "Plus the chance it is worse than the alternative" },
+        { label: "Continue, review at 150", note: "The date goes in the diary", tone: "output" },
+      ],
+    },
+    {
+      kind: "curve",
+      title: "What more evidence actually does to a belief",
+      caption:
+        "Same underlying truth, three amounts of evidence. The peak barely moves. What changes is the width, and the width is what tells you whether you can act yet.",
+      xLabel: "what a booking is worth",
+      yLabel: "how strongly we believe it",
+      series: [
+        {
+          name: "Before the new channel",
+          dashed: true,
+          points: [[0, 6], [12, 12], [24, 22], [36, 34], [48, 42], [60, 38], [72, 28], [84, 16], [96, 7]],
+        },
+        {
+          name: "After 40 bookings",
+          points: [[8, 3], [20, 10], [32, 28], [44, 52], [52, 60], [62, 50], [74, 26], [86, 9], [96, 3]],
+        },
+        {
+          name: "After 400 bookings",
+          points: [[30, 2], [38, 12], [44, 38], [50, 82], [54, 92], [60, 72], [66, 30], [74, 8], [82, 2]],
+        },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

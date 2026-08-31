@@ -99,6 +99,38 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "matrix",
+      title: "Two ways to be wrong, and they are nowhere near the same size",
+      caption:
+        "Tuned to be right as often as possible, a system treats these two boxes as equal. They are not. The bottom-left costs a visit; the top-right costs an emergency callout in January and sometimes the customer.",
+      rowLabel: "what the boiler did",
+      colLabel: "what we predicted",
+      rows: ["It failed", "It was fine"],
+      cols: ["Sent an engineer", "Sent nobody"],
+      cells: [
+        { label: "Caught before the customer was cold", note: "A planned visit at a known cost", tone: "good" },
+        { label: "Emergency callout", note: "Out-of-hours rate, and a renewal at risk", tone: "bad" },
+        { label: "An unnecessary visit", note: "Cheap, and cheaper still if bundled with the annual service", tone: "bad" },
+        { label: "Correctly left alone", note: "No cost at all", tone: "good" },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The boiler cover firm: setting the threshold from money, not from accuracy",
+      caption:
+        "Reducing the cost of a mistake is an alternative to predicting better, and it is usually cheaper. Bundling proactive visits with scheduled services made false alarms cheap enough to lower the threshold further.",
+      steps: [
+        { label: "Price both mistakes, in money", note: "Agreed with the people who carry the consequence", tone: "input" },
+        { label: "Add the cost that is not in the accounts", note: "The renewal effect was the biggest term" },
+        { label: "Set the threshold from the costs", note: "Deliberately over-call. It will look worse on accuracy.", tone: "model" },
+        { label: "Let it move with the season", note: "Lower in winter, higher in July" },
+        { label: "Report in pounds, not percentages", note: "Keeps the meeting about the business", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "documented",

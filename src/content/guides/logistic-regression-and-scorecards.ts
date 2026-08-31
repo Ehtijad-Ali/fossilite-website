@@ -99,6 +99,36 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "bars",
+      title: "The whole model, printable on one page",
+      caption:
+        "Illustrative points, not measured values. This is the entire output: each factor contributes, the points add up, and the onboarding team can see it, argue with it, and open a call with it. A sixty-line version would be a black box with extra steps.",
+      unit: " pts",
+      bars: [
+        { label: "Entered real customer data in the first three days", value: 40, tone: "accent" },
+        { label: "Invited a second user", value: 22, tone: "accent" },
+        { label: "Opened the scheduling screen", value: 14, tone: "accent" },
+        { label: "Logged in on two or more days", value: 11, tone: "accent" },
+        { label: "Logged in once and never returned", value: 4, tone: "muted" },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The software trials: two people, the same number of calls, a better list",
+      caption:
+        "The cutoff at day three is doing the work. An early version used all fourteen days, scored superbly, and was worthless, because it was describing trials that had already decided.",
+      steps: [
+        { label: "Two years of trials", note: "Outcome recorded, behaviour logged", tone: "input" },
+        { label: "Cut off at day three", note: "The list is produced then, so nothing later is allowed" },
+        { label: "Points add up to a score", note: "Six or seven factors, not sixty", tone: "model" },
+        { label: "Rank to the number of calls", note: "Not a yes or no. A capacity." },
+        { label: "Top three factors shown per trial", note: "The score gets it on the list, the reasons open the call", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "documented",

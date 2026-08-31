@@ -99,6 +99,44 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "scatter",
+      title: "Why sorting by turnover finds nothing",
+      caption:
+        "Sorted by size you get big, medium and small, which everybody already knew. Let the grouping follow behaviour and different divisions appear, including a valuable group of small steady accounts and a demanding group that happens to contain the biggest names.",
+      xLabel: "how often they order",
+      yLabel: "how much the order varies week to week",
+      groups: [
+        {
+          name: "Steady weekly, no fuss",
+          points: [[72, 12], [80, 8], [66, 16], [86, 10], [76, 6], [70, 20], [82, 18], [90, 14]],
+        },
+        {
+          name: "High variation, late notice",
+          points: [[52, 74], [60, 82], [44, 68], [66, 88], [38, 76], [56, 90], [48, 84]],
+        },
+        {
+          name: "Occasional, small",
+          points: [[14, 30], [22, 22], [8, 40], [26, 36], [18, 18], [12, 46], [30, 28]],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The wholesale bakery: from good ones and difficult ones to five named groups",
+      caption:
+        "Step four decides whether any of it is real. If nobody in the business can say oh, those are the ones who, the group is an artefact of the arithmetic however clean the chart looks.",
+      steps: [
+        { label: "Two years of orders", note: "Frequency, size, variation, notice, mix", tone: "input" },
+        { label: "Behaviour, not identity", note: "What they do, not who they are" },
+        { label: "Let the groups emerge", note: "Rather than assuming them in advance", tone: "model" },
+        { label: "Read ten real accounts each", note: "Name them, or discard them" },
+        { label: "A different plan per group", note: "Standing orders, later cutoffs, a pricing talk", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

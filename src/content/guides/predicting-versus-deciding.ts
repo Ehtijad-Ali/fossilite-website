@@ -99,6 +99,41 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "The prediction is one number. The decision is a tiered response.",
+      caption:
+        "One blunt response for every risk level throws away everything the prediction told you. Notice the most aggressive option is fenced to the appointments where being wrong is cheapest.",
+      question: "How likely is this patient to miss?",
+      branches: [
+        { answer: "Slightly elevated", outcome: "An extra reminder. Costs almost nothing." },
+        { answer: "Strongly elevated", outcome: "A phone call. Costs staff minutes." },
+        {
+          answer: "Very high",
+          question: "What kind of appointment is it?",
+          sub: [
+            { answer: "Short check-up", outcome: "Consider overbooking the slot." },
+            { answer: "Long or surgical", outcome: "Never overbook. Two arrivals here wrecks the day." },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The dental practice: where the project actually was",
+      caption:
+        "Box three is the whole project and it is not a modelling task. It took longer to agree than the model took to build, and delivering box two on its own would have produced a fortnight of interest and then nothing.",
+      steps: [
+        { label: "Three years of appointments", note: "Attendance recorded against each", tone: "input" },
+        { label: "Predict who will miss", note: "Ordinary, and not the hard part", tone: "model" },
+        { label: "Price every possible response", note: "Text, call, overbook, shorten the window" },
+        { label: "Match response to confidence", note: "And check it against fairness, not just cost" },
+        { label: "Judge on chairs AND overrun", note: "Improving one by wrecking the other is not a win", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

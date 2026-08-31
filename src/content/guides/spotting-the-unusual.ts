@@ -99,6 +99,41 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "scatter",
+      title: "Unusual does not mean wrong, and normal has to be defined per home",
+      caption:
+        "Ringed points are what gets asked about. Notice they are not simply the biggest payments: a large routine order is normal for a large home, and a modest payment on an odd day is not. Comparing homes against each other would have flagged nothing but size.",
+      xLabel: "how large the payment was",
+      yLabel: "how far it sits from that home's usual pattern",
+      groups: [
+        {
+          name: "Ordinary spend",
+          points: [[10, 12], [24, 8], [38, 16], [52, 10], [66, 14], [80, 9], [90, 18], [16, 20], [44, 6], [58, 22], [72, 12], [30, 14], [86, 7], [20, 10], [62, 18], [48, 20]],
+        },
+        {
+          name: "Worth a question",
+          ring: true,
+          points: [[18, 74], [34, 88], [56, 78], [12, 82], [70, 90], [40, 70]],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The care homes: from a threshold that missed everything below it",
+      caption:
+        "The volume is set by what three people can review, not by the arithmetic. An alert nobody reads has negative value, because it teaches the team to ignore the next one.",
+      steps: [
+        { label: "Two years of card spend", note: "Amount, date, supplier, category, home", tone: "input" },
+        { label: "Learn normal per home", note: "And per category, and per season" },
+        { label: "Flag departures, and sequences", note: "A drifting routine order beats any single payment", tone: "model" },
+        { label: "Tune to what three people can review", note: "A resourcing decision, not a technical one" },
+        { label: "A neutral question, outcome recorded", note: "Managers told before it started", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

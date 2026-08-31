@@ -181,6 +181,38 @@ WHATEVER YOU CHOOSE
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "The filter, in the order that eliminates fastest",
+      caption:
+        "Shape of answer first, because it rules out most options in one question. The last one overrules all the others, and it is the one the accountancy practice's favourite idea failed.",
+      question: "What shape is the answer?",
+      branches: [
+        { answer: "A number", outcome: "Predicting a quantity. Start with the arithmetic version." },
+        { answer: "Yes or no, or a category", outcome: "Sorting. Ask next whether anybody needs it explained." },
+        { answer: "Groups nobody has defined yet", outcome: "Let the grouping emerge from behaviour." },
+        {
+          answer: "A best combination, not a prediction",
+          outcome: "A different family entirely. It needs no history at all.",
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "Four ideas, budget for one, and the criteria that are not technical",
+      caption:
+        "The idea with the best data lost, because nobody could say what a partner would do differently on being told. A well-built answer to a question nobody acts on is the most expensive way to produce nothing.",
+      steps: [
+        { label: "Four ideas on a whiteboard", note: "All of them legitimate", tone: "input" },
+        { label: "Shape of answer, shape of data", note: "Eliminates most options immediately" },
+        { label: "Does anybody need it explained?", note: "A business requirement, not a preference" },
+        { label: "How much history is there?", note: "Twenty examples means write a rule", tone: "model" },
+        { label: "What decision changes, and who makes it?", note: "This overrules the other four", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

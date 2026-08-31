@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "The dealership's part exchange rule, as it came out of the data",
+      caption:
+        "This is the actual output, not a summary of it. That is the whole reason to choose this method here: it fits on a laminated page and a Saturday assistant can follow it.",
+      question: "Is there already an unsold one of this model on the forecourt?",
+      branches: [
+        {
+          answer: "Yes, two or more",
+          outcome: "Auction. This was the branch nobody had articulated.",
+        },
+        {
+          answer: "No, or only one",
+          question: "Is it under the age and mileage threshold with a service history?",
+          sub: [
+            { answer: "Yes", outcome: "Recondition and put it on the forecourt." },
+            { answer: "No", outcome: "Auction, unless the reconditioning quote comes in low." },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "How one man's judgement became something the business owns",
+      caption:
+        "Step four is the one people skip. A tree the expert cannot recognise is either wrong or has found something real, and you need to know which before you print it.",
+      steps: [
+        { label: "Watch him decide", note: "Write down what he looks at", tone: "input" },
+        { label: "Three years of part exchanges", note: "What was decided, what it earned" },
+        { label: "Grow a shallow tree", note: "Capped at four questions deep", tone: "model" },
+        { label: "Show it to him", note: "He agreed with most, argued with one" },
+        { label: "One laminated page", note: "Anyone can decide on a Saturday", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

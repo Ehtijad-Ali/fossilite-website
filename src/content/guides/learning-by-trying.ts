@@ -99,6 +99,46 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "curve",
+      title: "Traffic moves towards what is working, without anybody calling it",
+      caption:
+        "All five run from day one. Traffic concentrates as evidence builds, and nothing is ever switched off completely, so an early run of bad luck cannot permanently condemn the best offer. There is no moment where somebody has to declare the test over.",
+      xLabel: "days into the season",
+      yLabel: "share of traffic",
+      series: [
+        {
+          name: "Offer that turned out best",
+          points: [[0, 20], [6, 24], [14, 36], [24, 52], [36, 64], [50, 71], [70, 74], [100, 76]],
+        },
+        {
+          name: "A middling offer",
+          points: [[0, 20], [6, 22], [14, 20], [24, 17], [36, 15], [50, 13], [70, 12], [100, 11]],
+        },
+        {
+          name: "The day-one leader, which was luck",
+          dashed: true,
+          points: [[0, 20], [6, 30], [14, 22], [24, 14], [36, 9], [50, 7], [70, 6], [100, 5]],
+        },
+      ],
+      notes: [{ x: 6, y: 30, text: "switching everything here would have cost the season" }],
+    },
+    {
+      kind: "flow",
+      title: "The outdoor retailer: five offers and an eleven-week season",
+      caption:
+        "The test for whether this approach fits is in the last box. Checkout conversion is known in minutes. If the outcome took six weeks to observe, this would have nothing to work with and a conventional test would be right.",
+      steps: [
+        { label: "Five offers, all live from day one", note: "Rather than four weeks of even splitting", tone: "input" },
+        { label: "Shift traffic as evidence builds", note: "Gradually, never all at once", tone: "model" },
+        { label: "Keep a floor under the laggards", note: "Two hundred visits is not a verdict" },
+        { label: "Update hourly, because feedback is fast", note: "This is the test for whether to use it at all" },
+        { label: "No end date, no declared winner", note: "It follows the season on its own", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

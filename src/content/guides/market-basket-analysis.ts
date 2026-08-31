@@ -99,6 +99,47 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "Is this finding real, or is it just your bestsellers?",
+      caption:
+        "The first pass produces rubbish and you should expect it. Paint sells with paint. Every branch here except the last one is a way of throwing findings away, which is most of the work.",
+      question: "Do these two appear together more than chance would predict?",
+      branches: [
+        {
+          answer: "No, they are just both popular",
+          outcome: "Discard. This is a description of your bestsellers.",
+        },
+        {
+          answer: "Yes, but only in one season",
+          outcome: "Discard. That is the season, not a relationship between the items.",
+        },
+        {
+          answer: "Yes, but on a handful of receipts",
+          outcome: "Discard. Below the floor is coincidence, however striking.",
+        },
+        {
+          answer: "Yes, and often, all year",
+          outcome: "Now ask the last question: could we actually do anything about it?",
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The hardware shop: four years of receipts and nothing to buy",
+      caption:
+        "The next-day pass is where the value was. Customers returning the following morning for a fixing is an incomplete purchase, and it is invisible to any analysis that only looks inside one basket.",
+      steps: [
+        { label: "Four years of till receipts", note: "Already there. Nothing to collect.", tone: "input" },
+        { label: "Correct for popularity", note: "Or you get a ranked list of bestsellers" },
+        { label: "Look across days, not just baskets", note: "What follows a purchase the next morning", tone: "model" },
+        { label: "Throw away what you cannot act on", note: "True and unactionable is still trivia" },
+        { label: "Move an aisle, prompt at the till", note: "And stop one discount that was never needed", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

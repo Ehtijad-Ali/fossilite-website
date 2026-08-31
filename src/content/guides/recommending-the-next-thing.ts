@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "Should we suggest this at all?",
+      caption:
+        "Trade buyers know their part numbers, so the bar for interrupting them is high. Most of this filter is about what NOT to show, which is the opposite of how retail recommendation is usually built.",
+      question: "Has this account ever bought from this category?",
+      branches: [
+        {
+          answer: "Never, in three years",
+          outcome: "Show nothing. Their own history is the strongest signal you have.",
+        },
+        {
+          answer: "Yes",
+          question: "Is this a completeness gap or a taste guess?",
+          sub: [
+            { answer: "It goes with what is in the basket", outcome: "Suggest it. Framed as commonly ordered with this." },
+            { answer: "It is a different product they might like", outcome: "Leave it. This is not a discovery shop." },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The fastener distributor: a completeness check, not a suggestion",
+      caption:
+        "The phone operator's screen was where most of the value turned out to be, and it was the part nobody had planned for because everyone had been thinking about the website.",
+      steps: [
+        { label: "Two years of order lines", note: "What goes together, and what follows a fortnight later", tone: "input" },
+        { label: "Find the forgetting, not the taste", note: "The second small order is the problem" },
+        { label: "Rank likely gaps", note: "Weighted by this account's own history", tone: "model" },
+        { label: "Three suggestions, never more", note: "Basket screen and phone operator alike" },
+        { label: "Measured on repeat orders", note: "Not on clicks", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

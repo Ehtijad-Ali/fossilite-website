@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "The three questions that turn a wish into a project",
+      caption:
+        "Run any idea down this before anybody costs it. Most stop at the first or the last box, and stopping there is a good outcome rather than a failed one.",
+      question: "What would you do differently if you knew?",
+      branches: [
+        {
+          answer: "Nothing specific",
+          outcome: "Stop. This is a wish, not a project. Go back and find the decision.",
+        },
+        {
+          answer: "A named, repeated decision",
+          question: "Is the answer already recorded in your history?",
+          sub: [
+            { answer: "No outcome recorded", outcome: "Not learnable yet. Start recording it and come back." },
+            { answer: "Yes, for every past case", outcome: "Now ask the last one: if we knew, could we actually act in time?" },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The coach hire firm: from I want to grow to a list of fifteen calls",
+      caption:
+        "Notice how little of this is the model. Four of the five boxes are decisions about the business, and they are the ones that decide whether anything gets used.",
+      steps: [
+        { label: "Four years of quotes", note: "Each one taken up or not", tone: "input" },
+        { label: "Only what you knew when you quoted", note: "Date, destination, vehicle, repeat customer" },
+        { label: "Score each open quote", note: "Likelihood it converts", tone: "model" },
+        { label: "Rank, cut to fifteen", note: "As many calls as fit in a day" },
+        { label: "She calls the top of the list", note: "Not the top of the pile", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

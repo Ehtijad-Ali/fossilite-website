@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "Hard rule or strong preference? Getting this wrong stops it dead.",
+      caption:
+        "The cleaning contractor's first run treated site consistency as absolute and returned no possible answer at all. At that point the instinct is to start deleting rules at random, when the fix is to price them instead.",
+      question: "What happens if we break this rule?",
+      branches: [
+        {
+          answer: "Illegal, or physically impossible",
+          outcome: "A hard constraint. It can never be broken.",
+        },
+        {
+          answer: "Somebody is unhappy, or it costs money",
+          outcome: "A preference. Give it a cost, so it is avoided unless the alternative is worse.",
+        },
+        {
+          answer: "Nothing, really",
+          outcome: "Not a rule. Take it out, it is only shrinking the set of possible answers.",
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The cleaning contractor: two days of rota building, done in minutes",
+      caption:
+        "Step two happens in a van at six in the morning, not in a meeting room. The named keyholder and the two staff who should not be paired appeared in no document anywhere.",
+      steps: [
+        { label: "Score what you do today", note: "One day. It makes the case or saves the money.", tone: "input" },
+        { label: "Collect the unwritten rules", note: "Two early mornings beat a week of meetings" },
+        { label: "Agree what best actually means", note: "Travel AND consistency AND fairness, with weights" },
+        { label: "Work out the best combination", note: "It does not predict and it does not learn", tone: "model" },
+        { label: "The supervisor edits, reasons recorded", note: "Each change is a constraint you missed", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

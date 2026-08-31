@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "flow",
+      title: "The clothing retailer: predicting a return before the parcel leaves",
+      caption:
+        "The cutoff at packing is doing real work. Once the parcel has gone, knowing it will come back is trivia, so only information available by then is allowed in.",
+      steps: [
+        { label: "Ordinary order rows", note: "Product, size, price, basket, history", tone: "input" },
+        { label: "Cut off at the packing bench", note: "Nothing known only afterwards" },
+        { label: "Models correcting each other", note: "Each one works on the last one's mistakes", tone: "model" },
+        { label: "Score at the moment of packing", note: "Plus what drove it" },
+        { label: "Size note in the box", note: "And a rewrite list for the buyer", tone: "output" },
+      ],
+    },
+    {
+      kind: "tree",
+      title: "Is this the boring shape of data, or the expensive one?",
+      caption:
+        "Worth running before anybody proposes a technology. A great deal of money gets spent on the heavy option for problems sitting squarely in the left-hand branch.",
+      question: "What does your information actually look like?",
+      branches: [
+        {
+          answer: "Rows and columns, numbers and categories",
+          outcome: "This family usually wins, and it runs on a laptop. Start here.",
+        },
+        {
+          answer: "Images, audio or long free text",
+          outcome: "Different family, much higher cost. Check the simpler options genuinely do not apply first.",
+        },
+        {
+          answer: "A few dozen rows in a spreadsheet",
+          outcome: "Not enough to learn from. Write a rule and revisit later.",
+        },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "documented",

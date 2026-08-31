@@ -99,6 +99,43 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "tree",
+      title: "Do you actually need one? Usually not.",
+      caption:
+        "The honest answer is no far more often than the industry suggests. This is the test that gets you to yes legitimately, and the recycling plant is one of the few businesses that reaches it.",
+      question: "Can the thing you are recognising be written down as a list of measurements?",
+      branches: [
+        {
+          answer: "Yes, it fits in a spreadsheet",
+          outcome: "Use the ordinary methods. This family adds cost and not accuracy.",
+        },
+        {
+          answer: "No, it is an image, a sound or language",
+          question: "Have you got thousands of labelled examples, and someone to maintain it?",
+          sub: [
+            { answer: "No", outcome: "Not yet. The labelling is the project, and without it nothing works." },
+            { answer: "Yes", outcome: "This is one of the cases where it genuinely earns its cost." },
+          ],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The recycling plant: pointing a person's attention instead of replacing it",
+      caption:
+        "Highlighting for a human rather than driving a mechanism is what made this affordable and safe. It also produces the corrections the next version learns from.",
+      steps: [
+        { label: "Cameras over the belt", note: "Not rows and columns. Pictures.", tone: "input" },
+        { label: "Label only what costs money", note: "The few item types causing the downgrades" },
+        { label: "Recognise those on the belt", note: "The one job this family is genuinely for", tone: "model" },
+        { label: "Highlight on the picker's screen", note: "Assist, do not remove" },
+        { label: "Every correction recorded", note: "Which trains the next version", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

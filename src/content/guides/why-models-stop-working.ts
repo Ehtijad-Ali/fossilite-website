@@ -99,6 +99,45 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "curve",
+      title: "Three different causes, and a routine retrain fixes only one",
+      caption:
+        "The gradual slide is a competitor opening. The cliff is a menu change, and no amount of retraining fixes predicting demand for items that no longer exist. The real failure was that nobody was watching, so all of this was found through complaints months later.",
+      xLabel: "months since it went live",
+      yLabel: "how close the prediction was",
+      series: [
+        {
+          name: "Prediction quality",
+          points: [[0, 86], [8, 88], [16, 85], [24, 82], [32, 70], [40, 62], [48, 58], [56, 56], [62, 55], [64, 26], [72, 24], [84, 22], [100, 20]],
+        },
+        {
+          name: "Where somebody should have looked",
+          dashed: true,
+          points: [[0, 72], [100, 72]],
+        },
+      ],
+      notes: [
+        { x: 32, y: 70, text: "competitor opened, gradual" },
+        { x: 64, y: 26, text: "menu change, a cliff" },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The takeaway chain: making decay visible in weeks rather than months",
+      caption:
+        "The override log was already there. Kitchen managers had been correcting it for months, and every correction was a recorded signal nobody was reading.",
+      steps: [
+        { label: "Predicted against actual, weekly", note: "On the same report as waste", tone: "input" },
+        { label: "Watch the inputs too", note: "They shift before the accuracy does" },
+        { label: "Tie business changes to reviews", note: "A menu change triggers one before it goes live", tone: "model" },
+        { label: "Tell a rebuild from a refresh", note: "One cause needed retraining, one needed rethinking" },
+        { label: "Read the override log monthly", note: "The earliest warning you have, and it is free", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "documented",

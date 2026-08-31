@@ -99,6 +99,46 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "curve",
+      title: "The value is the movement, not the snapshot",
+      caption:
+        "A single report of what people are writing about gets admired once and filed. Counting the same themes month after month is what makes one property's rising problem visible while it is still small.",
+      xLabel: "months",
+      yLabel: "share of reviews mentioning it",
+      series: [
+        {
+          name: "Check-in queue at one property",
+          points: [[0, 12], [14, 14], [28, 18], [42, 26], [56, 38], [70, 52], [84, 64], [100, 71]],
+        },
+        {
+          name: "Breakfast, group-wide",
+          points: [[0, 44], [14, 42], [28, 45], [42, 43], [56, 41], [70, 44], [84, 42], [100, 43]],
+        },
+        {
+          name: "Room cleanliness",
+          dashed: true,
+          points: [[0, 30], [14, 28], [28, 27], [42, 24], [56, 22], [70, 21], [84, 19], [100, 18]],
+        },
+      ],
+      notes: [{ x: 70, y: 52, text: "fits none of the four existing categories" }],
+    },
+    {
+      kind: "flow",
+      title: "The hotel group: two thousand a month and nobody reading them",
+      caption:
+        "Step four is not optional. The method groups words that co-occur and understands nothing, so a theme can look coherent from its top words and contain two unrelated things.",
+      steps: [
+        { label: "Written feedback, several platforms", note: "The scores say something is wrong. Only the text says what.", tone: "input" },
+        { label: "Strip the words that are everywhere", note: "Hotel, room, stay, night, property names" },
+        { label: "Let the themes come out of the words", note: "Rather than forcing them into four existing categories", tone: "model" },
+        { label: "Read ten real reviews per theme", note: "A list of top words is not a finding" },
+        { label: "Count them month on month", note: "Alert when one rises sharply at one site", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

@@ -99,6 +99,45 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "scatter",
+      title: "This one is like the job we did at the dental practice, but bigger",
+      caption:
+        "The ringed point is the new enquiry. The nearest past jobs to it are what the estimator gets shown, along with what each was quoted at and what it actually cost. That is not a summary of his method. It is his method.",
+      xLabel: "floor area",
+      yLabel: "how many trades involved",
+      groups: [
+        {
+          name: "Past jobs",
+          points: [[12, 20], [24, 34], [30, 18], [46, 52], [58, 40], [70, 66], [82, 74], [88, 52], [18, 46], [36, 62], [64, 28], [76, 44], [50, 70], [40, 26], [92, 66], [22, 60]],
+        },
+        {
+          name: "The five most similar",
+          points: [[46, 52], [58, 40], [50, 70], [36, 62], [64, 28]],
+        },
+        {
+          name: "The new enquiry",
+          ring: true,
+          points: [[52, 54]],
+        },
+      ],
+    },
+    {
+      kind: "flow",
+      title: "The fit-out contractor: capturing twenty-five years before it walked out",
+      caption:
+        "The whole project was step two, and only the man retiring could do it. Built a year later it would have been guesswork dressed up as analysis.",
+      steps: [
+        { label: "Nine years of completed jobs", note: "Quoted and actual, cost and duration", tone: "input" },
+        { label: "Define similar, with the expert", note: "This is the craft, and the entire project" },
+        { label: "Retrieve the closest past jobs", note: "Rather than calculating from first principles", tone: "model" },
+        { label: "Show him the five, not a number", note: "Including what went wrong on each" },
+        { label: "A range, plus the occupied-building rule", note: "Written down for the first time", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

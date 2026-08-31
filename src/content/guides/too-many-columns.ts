@@ -99,6 +99,37 @@ export const guide: Guide = {
     },
   ],
 
+  diagrams: [
+    {
+      kind: "curve",
+      title: "Four hundred readings describing a handful of things",
+      caption:
+        "Each step along the bottom is one combined measure. The first few account for most of what varies across every sensor on the line, because a dozen temperature probes along one section move together and are twelve columns carrying one piece of information.",
+      xLabel: "combined measures kept",
+      yLabel: "variation accounted for",
+      series: [
+        {
+          name: "Variation captured",
+          points: [[0, 0], [8, 46], [16, 68], [24, 79], [32, 86], [40, 90], [55, 94], [70, 96], [85, 98], [100, 99]],
+        },
+      ],
+      notes: [{ x: 24, y: 79, text: "the line has a handful of states" }],
+    },
+    {
+      kind: "flow",
+      title: "The bottling plant: why every previous attempt drowned",
+      caption:
+        "Four hundred columns and a few dozen recorded stoppages is a bad ratio. Anything built straight onto the raw sensors finds convincing patterns in noise, performs beautifully on history and fails in production.",
+      steps: [
+        { label: "Several hundred sensor readings", note: "Logged every minute, heavily duplicated", tone: "input" },
+        { label: "Put them on a comparable scale", note: "Or whichever has the biggest numbers wins" },
+        { label: "Compress before predicting", note: "A small set of combined measures", tone: "model" },
+        { label: "Read what each one represents", note: "The largest was the whole line running warm" },
+        { label: "An operator screen, and an alert", note: "Which fires before any single sensor breaches", tone: "output" },
+      ],
+    },
+  ],
+
   examples: [
     {
       kind: "illustration",

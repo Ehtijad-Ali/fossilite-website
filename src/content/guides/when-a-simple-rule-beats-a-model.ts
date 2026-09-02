@@ -21,6 +21,87 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 14,
 
+  brief: {
+    inOneMinute:
+      "Build the dumb version first and score it. Very often it is close enough, and the cases it misses turn out to be things somebody in the business already knew.",
+    problem: {
+      headline: "Quoted a substantial sum for a demand forecasting system",
+      detail:
+        "A speciality coffee roaster buying green coffee for ninety cafe accounts. Buy too much and it ages; buy too little and you lose a cafe.",
+    },
+    wrongApproach: {
+      what: "Buy the system",
+      why: "It would probably have worked, at a large cost, to beat a spreadsheet by a small margin, in a business where nobody could have maintained it.",
+    },
+    rightApproach: {
+      what: "Backtest a rule you can write on one page",
+      why: "Twelve-week average, plus a buffer, reorder at the lead time. Run over three years of history it would have avoided almost every stockout. Then look only at what it missed.",
+    },
+    context: {
+      where: "Stock, reordering, staffing, anywhere a spreadsheet is doing the job today.",
+      decision: "Whether there is enough left on the table to justify a project.",
+      metric: "Stockouts and ageing stock, against what the simple rule already achieves.",
+    },
+    takeaway:
+      "Both remaining failures had causes the business already knew about. A new account is not something to predict; somebody in sales signed them weeks ago.",
+  },
+
+  story: {
+    title: "How a large quote went unspent",
+    caption:
+      "Step one is skipped almost every time because it is not interesting. Without it, any model looks impressive, because nothing is being compared to it.",
+    stages: [
+      { stage: "Problem", label: "A big number on a quote", detail: "And no way to tell whether the problem it solves is worth that." },
+      { stage: "Data", label: "Three years of usage", detail: "Already in the system. Nothing to collect and nothing to buy." },
+      { stage: "Model", label: "The simplest possible rule", detail: "Arithmetic in a spreadsheet, backtested across the whole history." },
+      { stage: "Prediction", label: "It would have avoided nearly everything", detail: "So the question narrows to what is left, which is ten or twenty specific occasions." },
+      { stage: "Decision", label: "Read those misses individually", detail: "New accounts ramping up, and one seasonal line. Both are calendar facts the business already held." },
+      { stage: "Result", label: "Improve the rule instead of replacing it", detail: "Still one page, and a written condition for when something more sophisticated would be justified." },
+    ],
+  },
+
+  calculator: {
+    title: "Is there enough left on the table to justify a project?",
+    intro:
+      "Score the problem before anybody quotes for it. Put in the size of the problem and how much of it a simple spreadsheet rule already handles.",
+    inputs: [
+      { id: "events", label: "Times a month it goes wrong", min: 1, max: 500, step: 1, value: 40 },
+      { id: "cost", label: "What each one costs you", min: 5, max: 2000, step: 5, value: 120, prefix: "\u00a3" },
+      { id: "rule", label: "How much a simple rule already catches", min: 0, max: 100, step: 5, value: 80, suffix: "%", help: "Backtest the dumbest rule you can write. Usually higher than people expect." },
+      { id: "model", label: "How much you think a model would catch", min: 0, max: 100, step: 5, value: 90, suffix: "%" },
+    ],
+    compute: (v) => {
+      const annual = v.events * v.cost * 12;
+      const gap = Math.max(0, (v.model - v.rule) / 100) * annual;
+      const ruleValue = (v.rule / 100) * annual;
+      const worth = gap > 15000 ? "good" : gap > 5000 ? "neutral" : "bad";
+      return {
+        outputs: [
+          {
+            label: "What the remaining gap is worth a year",
+            value: `\u00a3${Math.round(gap).toLocaleString()}`,
+            hero: true,
+            tone: worth,
+            note: gap < 5000
+              ? "Not much. Improve the rule, spend the money elsewhere, and write down what would change your mind."
+              : gap < 15000
+                ? "Marginal. Worth a conversation, and worth being honest about who would maintain it."
+                : "Enough to be worth a proper look. Now check the data actually exists.",
+          },
+          { label: "The whole problem costs", value: `\u00a3${Math.round(annual).toLocaleString()} a year` },
+          {
+            label: "The simple rule already saves",
+            value: `\u00a3${Math.round(ruleValue).toLocaleString()}`,
+            tone: "good",
+            note: "For an afternoon of work in a spreadsheet, which is the comparison every quote should be judged against.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "The honest version of this needs you to actually backtest the simple rule rather than guess at it. That takes an afternoon over your own history, and it is the number the whole decision turns on.",
+  },
+
   intro: [
     "Before anybody builds a model, somebody should spend an afternoon writing down the rule an experienced person would use. Chase anything over five hundred pounds that is more than a week overdue. Flag any order going to a new address from an account opened this month.",
     "Then measure how well that rule would have done against last year. That single number changes every conversation that follows, because it is what any model has to beat, and quite often it is closer than anybody expects.",
@@ -100,6 +181,50 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The coffee roaster: the week that saved a substantial quote",
+      caption:
+        "Step one is skipped almost every time, because it is not interesting. Without it any model looks impressive, since there is nothing to compare it against.",
+      trigger: "Before any quote for a forecasting system is signed",
+      runtime: "About a week, and it may well end the project.",
+      stages: [
+        {
+          actor: "person",
+          label: "Build the dumb version first",
+          detail: "Twelve week average, a buffer, the lead time. An afternoon in a spreadsheet anybody can check.",
+          output: "a rule, on one page",
+        },
+        {
+          actor: "system",
+          label: "Backtest it over three years",
+          detail: "Count exactly what it would have got wrong, and when, rather than arguing about whether it would.",
+          output: "every stockout and every overstock it would have caused",
+        },
+        {
+          actor: "person",
+          label: "Read only the misses, one at a time",
+          detail: "Ten or twenty cases, read individually. A summary of them tells you nothing you can fix.",
+          exception: "A miss nobody can explain is the one that justifies looking further. Set it aside rather than averaging it away.",
+          output: "the reasons, in categories",
+        },
+        {
+          actor: "rule",
+          label: "Improve the rule rather than replacing it",
+          detail: "New accounts flagged separately, and the seasonal line pulled out onto its own.",
+          output: "a better rule, still one page",
+        },
+        {
+          actor: "person",
+          label: "Write down what would justify a model",
+          detail: "So the decision is current rather than permanent, and nobody has to reopen the argument from scratch.",
+          output: "a threshold, and a date to revisit it",
+        },
+      ],
+      loop: "Revisited on the date that was written down, and against the rule as it now stands rather than the one it replaced.",
+      outcome:
+        "A substantial quote goes unspent, and the reordering gets better anyway. Both of those are the same result.",
+    },
     {
       kind: "tree",
       title: "Read the cases the rule missed, then ask this",

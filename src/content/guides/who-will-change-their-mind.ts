@@ -21,6 +21,88 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Targeting the customers most likely to respond produces excellent numbers and often loses money, because most of them were coming anyway. The question is who behaves differently because you contacted them.",
+    problem: {
+      headline: "The campaign always works, and I cannot prove it did anything",
+      detail:
+        "A garden centre with 40,000 loyalty members. The spring voucher goes to everyone who spent over a threshold last year, and the response rate is always good.",
+    },
+    wrongApproach: {
+      what: "Send vouchers to your best customers",
+      why: "They respond well because they were already coming in. The voucher discounted a sale that was on its way, which is margin given away and it measures as a success.",
+    },
+    rightApproach: {
+      what: "Predict the difference contact makes, not the outcome",
+      why: "That needs a group who deliberately get nothing, every campaign, forever. It feels wasteful and it is the only thing that makes any of this measurable.",
+    },
+    context: {
+      where: "Retention offers, discounts, mailings, outbound calling.",
+      decision: "Who to contact, and just as importantly who to leave alone.",
+      metric: "Incremental sales against a holdout, not response rate.",
+    },
+    takeaway:
+      "There is a group whose behaviour gets worse when you contact them. Almost nobody looks for it, and excluding them is often the most profitable single action available.",
+  },
+
+  story: {
+    title: "Four groups, and only one is worth a voucher",
+    caption:
+      "The pressure to skip the holdout is constant, and it comes from exactly the people who most want to prove the campaign worked.",
+    stages: [
+      { stage: "Problem", label: "A campaign that cannot be judged", detail: "Good response rates every year, and no way to know what any of it caused." },
+      { stage: "Data", label: "A group who got nothing", detail: "A previous mailing had accidentally missed a segment, which gave the comparison this needs." },
+      { stage: "Model", label: "Contacted and uncontacted, modelled apart", detail: "Then take the difference for each customer. The difference is the number that matters, and it is often small." },
+      { stage: "Prediction", label: "Four groups", detail: "Coming anyway. Persuadable. Never coming. And the ones who react badly to being contacted." },
+      { stage: "Decision", label: "Send to the persuadable, exclude the rest", detail: "The loyal regulars get a thank you with no discount attached." },
+      { stage: "Result", label: "A smaller mailing, less margin given away", detail: "And unsubscribes fell, because the people who hate being contacted stopped being contacted." },
+    ],
+  },
+
+  calculator: {
+    title: "How much of your discount is going to people who were coming anyway?",
+    intro:
+      "The uncomfortable arithmetic behind a campaign that looks successful. Put in your own mailing and see what the response rate is hiding.",
+    inputs: [
+      { id: "size", label: "How many you contact", min: 100, max: 100000, step: 100, value: 12000 },
+      { id: "resp", label: "Response rate", min: 1, max: 40, step: 1, value: 9, suffix: "%" },
+      { id: "anyway", label: "Of those, how many were coming anyway", min: 0, max: 95, step: 5, value: 65, suffix: "%", help: "Without a holdout group you are guessing at this. That is the point." },
+      { id: "disc", label: "What the offer costs you each time", min: 1, max: 200, step: 1, value: 12, prefix: "\u00a3" },
+    ],
+    compute: (v) => {
+      const responders = v.size * (v.resp / 100);
+      const sureThings = responders * (v.anyway / 100);
+      const persuaded = responders - sureThings;
+      const wasted = sureThings * v.disc;
+      const spent = responders * v.disc;
+      return {
+        outputs: [
+          {
+            label: "Margin given away to people already coming",
+            value: `\u00a3${Math.round(wasted).toLocaleString()}`,
+            hero: true,
+            tone: "bad",
+            note: `Out of \u00a3${Math.round(spent).toLocaleString()} spent on the offer in total.`,
+          },
+          {
+            label: "Customers you actually changed",
+            value: `${Math.round(persuaded).toLocaleString()}`,
+            tone: "good",
+            note: "This is the only group the campaign can honestly claim, and it is the group worth targeting next time.",
+          },
+          {
+            label: "Real cost per persuaded customer",
+            value: persuaded > 0 ? `\u00a3${(spent / persuaded).toFixed(2)}` : "Everybody was coming anyway",
+            note: "Rather than the cost per response, which is the figure that gets reported and flatters everybody.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "The middle slider is the whole problem: without a group who deliberately received nothing, nobody in your business can tell you that number. Holding back a random slice of every campaign is the only way to find out.",
+  },
+
   intro: [
     "Most retention programmes work like this. Build something that predicts who is likely to leave, sort the list, call the top of it. It feels obviously right and it is usually the wrong thing to do.",
     "The people at the very top of that list have frequently already decided. They have looked at alternatives, they may have already tried to cancel, and a friendly call from an account manager is not going to change anything. You are spending your most limited resource on the least persuadable people in your entire customer base.",
@@ -101,7 +183,66 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The retailer: the spring voucher, and the group who got nothing",
+      caption:
+        "The holdout costs you a slice of the campaign and it is the cheapest thing in it. Without it, the response rate reports a discount on a sale that was already coming as a success.",
+      trigger: "Before the spring voucher goes out",
+      runtime: "The holdout runs for the length of the campaign, every campaign.",
+      stages: [
+        {
+          actor: "rule",
+          label: "Hold a group back and send them nothing",
+          detail: "This is the only part of the whole exercise that lets you claim anything caused anything.",
+          output: "a deliberate group who receive no contact at all",
+        },
+        {
+          actor: "system",
+          label: "Send the campaign to everybody else",
+          output: "two groups, otherwise identical",
+        },
+        {
+          actor: "model",
+          label: "Compare behaviour between the groups, not response within one",
+          detail: "Your best customers respond well because they were already coming in. That is not persuasion, it is timing.",
+          output: "who behaved differently because you contacted them",
+        },
+        {
+          actor: "person",
+          label: "Look specifically for the group who got worse",
+          detail: "There is usually one, almost nobody looks for it, and excluding them is often the single most profitable move available.",
+          exception: "A group too small to be confident about stays in the campaign and gets watched, rather than being excluded on a hunch.",
+        },
+        {
+          actor: "rule",
+          label: "Send to the persuadable, thank the regulars, leave the rest alone",
+          output: "a smaller send with a larger effect",
+        },
+      ],
+      loop: "The holdout runs on every campaign, which is what keeps the answer current rather than historic.",
+      outcome:
+        "Response tells you who replied. Only a holdout tells you what you actually caused.",
+    },
+    {
       kind: "matrix",
+      lesson: {
+        problem: "The spring voucher always gets a good response, and nobody can prove it did anything.",
+        wrong: {
+          label: "Target likely responders",
+          why: "Your best customers respond well because they were already coming in. The voucher discounts a sale that was on its way, and the response rate reports it as a success.",
+        },
+        right: {
+          label: "Target who you can change",
+          why: "Compare against a group who deliberately received nothing. Only then can you see which customers behaved differently because you contacted them.",
+        },
+        discovery: "There is a group whose behaviour gets worse when you contact them, and almost nobody looks for it. Excluding them is often the most profitable single move.",
+        decisions: [
+          { tone: "protect", label: "Persuadable customers" },
+          { tone: "monitor", label: "Regulars: thank you, no discount" },
+          { tone: "investigate", label: "The do-not-disturb group" },
+        ],
+        takeaway: "Response tells you who replied. Only a holdout tells you what you caused.",
+      },
       title: "Four groups, and only one of them is worth a voucher",
       caption:
         "Ordinary targeting aims at the top-left, because those people respond and the numbers look excellent. They were coming anyway, so the voucher is margin given away. The bottom-right group is the one nobody looks for and excluding them is often the most profitable thing available.",

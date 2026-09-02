@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Sorting customers by size tells you what you already knew. Letting the groups emerge from how they behave tells you which of your biggest accounts is quietly your worst.",
+    problem: {
+      headline: "Every customer gets treated the same and I know that is wrong",
+      detail:
+        "A wholesale bakery with 240 accounts. Asked to name the customer types, the owner said good ones and difficult ones.",
+    },
+    wrongApproach: {
+      what: "Segment by turnover",
+      why: "It is the easiest number to sort by and it produces three groups called big, medium and small. Everybody already knew that, and nobody can do anything different with it.",
+    },
+    rightApproach: {
+      what: "Group by behaviour and let the divisions appear",
+      why: "Order frequency, how much it varies, notice given, product mix, payment behaviour. What came out did not match turnover at all, which is precisely the point of not deciding the groups in advance.",
+    },
+    context: {
+      where: "Any business with enough customers that they cannot all be known personally.",
+      decision: "Who gets a standing order, a different delivery slot, or a pricing conversation.",
+      metric: "Profit per account, rather than revenue per account.",
+    },
+    takeaway:
+      "One of the most valuable groups was small accounts ordering the same thing every week. One of the least profitable contained several of the largest names.",
+  },
+
+  story: {
+    title: "From good ones and difficult ones to five named groups",
+    caption:
+      "A group is not real until somebody in the business can say oh, those are the ones who. If nobody recognises it, it is arithmetic rather than a finding.",
+    stages: [
+      { stage: "Problem", label: "One approach for 240 different customers", detail: "Same schedule, same price list, same monthly email, and a strong sense that this is wrong." },
+      { stage: "Data", label: "Two years of orders", detail: "Frequency, size, variation week to week, notice given, mix, changes after placing, payment behaviour." },
+      { stage: "Model", label: "Let the grouping emerge", detail: "With the measures rescaled first, or order value swamps everything and the answer becomes a sort by turnover." },
+      { stage: "Prediction", label: "Five groups", detail: "Named by pulling ten real accounts out of each and reading them." },
+      { stage: "Decision", label: "A different plan per group", detail: "Standing orders for the steady ones, a later cutoff for the ones whose problem is notice, a pricing talk for the large unprofitable ones." },
+      { stage: "Result", label: "Revenue and profit stop being confused", detail: "Which changed which accounts the owner chased." },
+    ],
+  },
+
   intro: [
     "Most businesses already have customer groups. Small, medium and large. New and existing. Retail and trade. Somebody decided those categories years ago, usually based on one thing that was easy to measure, and everybody has worked with them ever since.",
     "Clustering does something different. Instead of you deciding the groups, you give it everything you know about your customers and ask which ones naturally resemble each other. It comes back with groups you did not define, and sometimes they cut across the ones you have been using.",
@@ -101,7 +140,78 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The wholesale bakery: the quarterly account review, in an hour",
+      caption:
+        "Step four decides whether any of it is real. If nobody in the business can say oh, those are the ones who, the group is an artefact of the arithmetic and it gets thrown away rather than explained.",
+      trigger: "The first working day of each quarter",
+      runtime: "An hour to run. The output is a meeting, not a dashboard.",
+      stages: [
+        {
+          actor: "system",
+          label: "Two years of orders across all 240 accounts",
+          output: "frequency, order size, variation, notice given, product mix",
+        },
+        {
+          actor: "rule",
+          label: "Measure behaviour, not identity",
+          detail: "Not who they are and not what they turn over. What they actually do, week to week.",
+          output: "five behavioural measures per account",
+        },
+        {
+          actor: "model",
+          label: "Let the groups emerge rather than assuming them",
+          detail: "Sorted by turnover you get big, medium and small, which everybody already knew.",
+          output: "a handful of groups, still unnamed",
+        },
+        {
+          actor: "person",
+          label: "The sales manager reads ten real accounts from each group",
+          detail: "This takes an afternoon and it is the only quality check that matters.",
+          exception: "A group nobody in the business recognises is discarded, not explained. It has told you nothing you can act on.",
+          output: "named groups, or fewer groups",
+        },
+        {
+          actor: "rule",
+          label: "One plan per group, not one plan per account",
+          detail: "Standing orders here, a later cutoff there, a pricing conversation somewhere else.",
+          output: "three or four plans, each with an owner",
+        },
+      ],
+      loop: "Accounts move between groups over the year, and that movement is the early warning the turnover report never gave anybody.",
+      outcome:
+        "Two hundred and forty accounts stop being a list sorted by size and become four groups a small team can actually cover.",
+    },
+    {
       kind: "scatter",
+      lesson: {
+        problem: "Which of our 240 accounts actually need attention this quarter?",
+        wrong: {
+          label: "Rank by turnover",
+          why: "Sorted by size you get big, medium and small. Everybody already knew that, and it says nothing about which accounts are steady, which are demanding, and which are quietly at risk.",
+        },
+        right: {
+          label: "Value and behaviour",
+          why: "The same accounts, grouped by how they actually order. Three groups appear that turnover cannot see, and they need completely different handling.",
+        },
+        discovery: "The biggest accounts are not the safest. Several sit in the high-variation group, and one of the steadiest groups is made of small weekly orders.",
+        decisions: [
+          { tone: "protect", label: "Steady weekly accounts" },
+          { tone: "monitor", label: "High value, unpredictable" },
+          { tone: "investigate", label: "Large but unprofitable" },
+        ],
+        takeaway: "Size tells you value. Behaviour tells you risk.",
+      },
+      naive: {
+        groups: [
+          {
+            name: "All accounts, ranked by turnover",
+            points: [[72, 12], [80, 8], [66, 16], [86, 10], [76, 6], [70, 20], [82, 18], [90, 14], [52, 74], [60, 82], [44, 68], [66, 88], [38, 76], [56, 90], [48, 84], [14, 30], [22, 22], [8, 40], [26, 36], [18, 18], [12, 46], [30, 28]],
+          },
+        ],
+        notes: [{ x: 66, y: 88, text: "biggest account" }],
+      },
+      notes: [{ x: 66, y: 88, text: "biggest, and least predictable" }],
       title: "Why sorting by turnover finds nothing",
       caption:
         "Sorted by size you get big, medium and small, which everybody already knew. Let the grouping follow behaviour and different divisions appear, including a valuable group of small steady accounts and a demanding group that happens to contain the biggest names.",

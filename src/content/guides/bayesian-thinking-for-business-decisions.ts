@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Forty results is not nothing and it is not proof. Start from what three years of history already told you, move that view in proportion to the new evidence, and decide with a range instead of a number.",
+    problem: {
+      headline: "A new channel has produced forty bookings and I have to decide",
+      detail:
+        "A twelve-room country hotel, three months into a new booking channel, holding a commission bill and a decision about the year ahead.",
+    },
+    wrongApproach: {
+      what: "Compare the averages and pick a winner",
+      why: "The forty bookings came in at a lower nightly rate, which looked bad enough to cancel the channel. It was well inside the variation you would expect from forty of anything.",
+    },
+    rightApproach: {
+      what: "Start from what you already believe, then update it",
+      why: "Three years of history says what a booking is normally worth here. Forty new ones move that view a little; four hundred would move it a lot. The arithmetic handles the proportion, which is exactly what comparing averages fails to do.",
+    },
+    context: {
+      where: "New suppliers, new channels, small pilots, any decision on thin evidence.",
+      decision: "Continue, stop, or continue with a review at a stated point.",
+      metric: "Value per booking including everything, not just the headline rate.",
+    },
+    takeaway:
+      "The output is not a number, it is a range plus the chance you are worse off than the alternative. That is the thing a decision actually needs.",
+  },
+
+  story: {
+    title: "Deciding on forty bookings without pretending they are four hundred",
+    caption:
+      "Counting restaurant spend changed the answer. The channel looked worse on room rate alone and better once dinner was included.",
+    stages: [
+      { stage: "Problem", label: "Not enough evidence, and a decision due", detail: "Forty bookings, a commission bill, and pressure to call it either way." },
+      { stage: "Data", label: "Three years of existing bookings", detail: "Rate, length of stay, whether they ate in the restaurant, cancellation rate." },
+      { stage: "Model", label: "Write the starting view down explicitly", detail: "This is the step everybody throws away. It is what stops forty bookings being read as though they arrived from nowhere." },
+      { stage: "Prediction", label: "A range, and a confidence", detail: "Not the channel is worth this much. The value sits somewhere in here, and here is how sure we are." },
+      { stage: "Decision", label: "Continue, review at 150 bookings", detail: "The number goes in the diary, which removes most of the pressure from getting it right first time." },
+      { stage: "Result", label: "The habit transfers", detail: "The next supplier and the next marketing spend get assessed the same way instead of on the first month's figures." },
+    ],
+  },
+
   intro: [
     "Somebody comes to you with a result. We tried the new checkout page on forty customers and twelve of them bought something, against eight out of forty on the old one. That is a fifty per cent improvement. Should we roll it out?",
     "The experienced person in the room says hang on. Twelve against eight, out of forty each. That could easily be luck. And they are right, and what they are doing has a name.",
@@ -101,6 +140,49 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The hotel: forty bookings, a decision due, and a starting view",
+      caption:
+        "The peak barely moves as evidence arrives. What changes is the width, and the width is the part that tells you whether you can act yet.",
+      trigger: "A decision is due on whether to keep a new booking channel",
+      runtime: "An afternoon. Most of it is spent agreeing the starting view.",
+      stages: [
+        {
+          actor: "person",
+          label: "Write down what you already believe, before looking",
+          detail: "Three years of history already says what a booking is worth here. This is the step everybody throws away.",
+          output: "a starting view, in writing, with a range on it",
+        },
+        {
+          actor: "system",
+          label: "Add the forty new bookings",
+          detail: "However thin the evidence is, it is evidence. The question is how much it should move you.",
+          output: "the new data, and nothing else",
+        },
+        {
+          actor: "model",
+          label: "Update the view rather than replacing it",
+          detail: "Forty bookings nudge it. Four hundred would move it properly.",
+          output: "a revised range, and the chance it really is worse",
+        },
+        {
+          actor: "rule",
+          label: "Decide with the range, not with the middle of it",
+          detail: "A difference that sits well inside the ordinary variation of forty things is not a difference yet.",
+          exception: "If the range still covers both answers, the decision is not ready, and the honest output is a date rather than a verdict.",
+        },
+        {
+          actor: "person",
+          label: "Continue, and review at a hundred and fifty bookings",
+          detail: "The date goes in the diary, not in somebody's head.",
+          output: "a review date, and what will be true by then",
+        },
+      ],
+      loop: "Each review starts from the view the last one finished with, which is the entire idea.",
+      outcome:
+        "Small samples do not make you wrong. Treating them as though they were large ones does.",
+    },
+    {
       kind: "flow",
       title: "The hotel: deciding on forty bookings without pretending they are four hundred",
       caption:
@@ -115,6 +197,24 @@ export const guide: Guide = {
     },
     {
       kind: "curve",
+      lesson: {
+        problem: "A new booking channel has produced forty bookings, and a decision is due on the year.",
+        wrong: {
+          label: "Compare the averages",
+          why: "Forty bookings came in at a lower average rate, which looks bad enough to cancel. That difference sits well inside the ordinary variation of any forty things.",
+        },
+        right: {
+          label: "Start from what you know",
+          why: "Three years of history already says what a booking is worth here. Forty new ones nudge that view; four hundred would move it properly.",
+        },
+        discovery: "The peak barely moves as evidence arrives. What changes is the width, and the width is what tells you whether you can act yet.",
+        decisions: [
+          { tone: "monitor", label: "Continue, review at 150 bookings" },
+          { tone: "investigate", label: "Count restaurant spend too" },
+          { tone: "protect", label: "Decide with a range, not a number" },
+        ],
+        takeaway: "Small samples do not make you wrong. Treating them as large ones does.",
+      },
       title: "What more evidence actually does to a belief",
       caption:
         "Same underlying truth, three amounts of evidence. The peak barely moves. What changes is the width, and the width is what tells you whether you can act yet.",

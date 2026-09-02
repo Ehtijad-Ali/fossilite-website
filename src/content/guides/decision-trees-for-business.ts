@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 16,
 
+  brief: {
+    inOneMinute:
+      "Sometimes the most valuable thing a model can produce is not a prediction but a page of yes-or-no questions that anybody in the building can follow.",
+    problem: {
+      headline: "One person makes an expensive decision and nobody else can",
+      detail:
+        "A used car dealership. Every part exchange has to be reconditioned or sent to auction within a day or two, and only the sales manager would touch the decision.",
+    },
+    wrongApproach: {
+      what: "Leave it as experience and hope he does not leave",
+      why: "The decision happens three hundred times a year, it moves real money, and it exists entirely in one man's head. When he is on holiday the business simply guesses.",
+    },
+    rightApproach: {
+      what: "Grow a shallow decision tree and print it",
+      why: "Not the most accurate technique available, and the right one here, because the output is four questions on a laminated page. A more powerful method would score slightly better and produce something nobody can pin to a wall.",
+    },
+    context: {
+      where: "Any repeated operational judgement held by one experienced person.",
+      decision: "Recondition or auction, approve or refer, fix or replace.",
+      metric: "Stock that sells inside ninety days, and a decision that survives somebody leaving.",
+    },
+    takeaway:
+      "Choose the method that fits how the answer gets used. Explainable and slightly less accurate beats accurate and unusable, every time somebody has to act on it in a hurry.",
+  },
+
+  story: {
+    title: "Turning one man's judgement into a page anybody can follow",
+    caption:
+      "The step everyone skips is showing it back to the expert. He agreed with most of it, argued with one branch, and was genuinely surprised by another.",
+    stages: [
+      { stage: "Problem", label: "A decision nobody else can make", detail: "Reconditioning the wrong car ties up money for four months. Auctioning the right one hands the margin to somebody else." },
+      { stage: "Data", label: "Three years of part exchanges", detail: "What came in, what was decided, what was spent, what it sold for, and how long it sat there." },
+      { stage: "Model", label: "A tree, capped at four questions", detail: "Left to grow it gives every historical car its own branch, which fits the past perfectly and predicts nothing." },
+      { stage: "Prediction", label: "Recondition, or auction", detail: "Including a question nobody had articulated: is there already an unsold one of this model on the forecourt?" },
+      { stage: "Decision", label: "Anybody can decide, including on a Saturday", detail: "The recommendation can be overridden with a one-line reason." },
+      { stage: "Result", label: "The knowledge belongs to the business", detail: "And the overrides get read monthly, because each one is a rule the tree has not learned yet." },
+    ],
+  },
+
   intro: [
     "Every business has flowcharts. If the order is over this amount, send it to a manager. If the customer has been with us more than a year, waive the fee. Somebody sat down and wrote those rules based on experience.",
     "A decision tree is the same thing, except the computer worked out the rules by looking at what actually happened. It goes through your history asking, in effect, what single question would best split these cases into the ones that went well and the ones that did not. Then it does the same again inside each branch.",
@@ -100,6 +139,49 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The dealership: a Saturday decision, on one laminated page",
+      caption:
+        "Step four is the one people skip. A tree the expert cannot recognise is either wrong or has found something real, and you need to know which before it goes out to the forecourt.",
+      trigger: "A part exchange is offered, on the forecourt, on a Saturday",
+      runtime: "No system to log into. It is a printed page by the desk.",
+      stages: [
+        {
+          actor: "person",
+          label: "Watch the man who has always made this call",
+          detail: "Write down what he actually looks at, and in what order, before any data is touched.",
+          output: "his questions, in his sequence",
+        },
+        {
+          actor: "system",
+          label: "Three years of part exchanges, with what each one earned",
+          output: "what was decided, and what it made",
+        },
+        {
+          actor: "model",
+          label: "Grow a shallow tree, capped at four questions deep",
+          detail: "Deeper scores better on history and cannot be carried in somebody's head on a busy Saturday.",
+          output: "four questions, in order, with an answer at the end of each path",
+        },
+        {
+          actor: "person",
+          label: "Show it to him",
+          detail: "He agreed with most of it and argued hard with one branch. That argument was the most useful hour of the project.",
+          exception: "A branch the expert cannot recognise gets investigated, not deployed. One of them was wrong. One of them was a real pattern he had never articulated.",
+          output: "one branch corrected, one branch kept and explained",
+        },
+        {
+          actor: "rule",
+          label: "Print it, laminate it, put it where the decision happens",
+          detail: "No login, no tablet, no training day.",
+          output: "anyone on the forecourt can make the call",
+        },
+      ],
+      loop: "Every decision and what it earned goes back in, and the tree is regrown once a year rather than trusted forever.",
+      outcome:
+        "The judgement stops living in one man's head and starts belonging to the business, in a form he actually agrees with.",
+    },
     {
       kind: "tree",
       title: "The dealership's part exchange rule, as it came out of the data",

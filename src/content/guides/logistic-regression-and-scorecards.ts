@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 16,
 
+  brief: {
+    inOneMinute:
+      "A scorecard is a model you can print. Each factor adds points, the points add up, and the person making the call can see exactly why somebody is at the top of the list.",
+    problem: {
+      headline: "A thousand trials a month and two people to call them",
+      detail:
+        "A software company selling scheduling software to trades. The onboarding team worked the list alphabetically, which is to say at random.",
+    },
+    wrongApproach: {
+      what: "Work the list in whatever order it arrives",
+      why: "Two people can reach maybe a fifth of trials. Spending that capacity on alphabetical order wastes most of it, and nobody could say which trials were worth the call.",
+    },
+    rightApproach: {
+      what: "Score on the first three days of behaviour, and show the reasons",
+      why: "Entering real customer data adds a lot. Inviting a second user adds some. Logging in once subtracts. Six or seven factors, printable, and the callers can argue with it, which is what made them trust it.",
+    },
+    context: {
+      where: "Trials, leads, applications, renewals. Anywhere capacity is the constraint.",
+      decision: "Who gets called this week, and what to open the call with.",
+      metric: "Conversions, with the same number of calls being made.",
+    },
+    takeaway:
+      "The analysis found something worth more than the ranking: half of all trials never entered any real data, and fixing that in the product beat any improvement to the list.",
+  },
+
+  story: {
+    title: "Same two people, same number of calls, a better list",
+    caption:
+      "An early version used all fourteen days of trial behaviour, scored superbly, and was worthless. The list is produced on day three.",
+    stages: [
+      { stage: "Problem", label: "Capacity spent at random", detail: "A fifth of trials get a call, chosen alphabetically." },
+      { stage: "Data", label: "Two years of trials", detail: "Outcome recorded, plus which features were opened, whether real data was entered, and whether a second user was invited." },
+      { stage: "Model", label: "Points that add up to a score", detail: "Less powerful than the alternatives and the right choice, because the caller has to explain why they are ringing." },
+      { stage: "Prediction", label: "Ranked, cut to the day's capacity", detail: "Not a yes or no. A list as long as the number of calls that fit." },
+      { stage: "Decision", label: "Call the top, using the reasons", detail: "The score gets a trial onto the list; the reasons give the caller an opening sentence." },
+      { stage: "Result", label: "And a product change", detail: "Push new trials towards entering real data in the first session. That came from the analysis, not the model." },
+    ],
+  },
+
   intro: [
     "If you have ever been refused credit, quoted an insurance premium, or had an application assessed, there is a good chance the decision came from a points table. Been at your address more than three years, add twelve points. In this age band, add eight. Applied for four other things this month, subtract twenty. Total it up, and above a certain number you are accepted.",
     "That table almost always comes from something called logistic regression. It is one of the oldest and least fashionable tools in this whole area, and it is still the workhorse of nearly every industry where somebody has to be told why.",
@@ -101,7 +140,67 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The software company: the same two hundred calls, a better two hundred",
+      caption:
+        "The cutoff at day three is doing all the work. An earlier version used the full fourteen days, scored superbly, and was worthless: it was describing trials that had already decided.",
+      trigger: "Every morning, on trials that reached day three overnight",
+      runtime: "Two minutes. The list is in the CRM before nine.",
+      stages: [
+        {
+          actor: "system",
+          label: "Pull the trials that have just hit day three",
+          output: "what each account did in its first seventy-two hours",
+        },
+        {
+          actor: "rule",
+          label: "Cut off at day three, and mean it",
+          detail: "Nothing that happens later is allowed in, however predictive it looks, because the list is produced now.",
+          output: "only what is knowable at the moment of the decision",
+        },
+        {
+          actor: "model",
+          label: "Points that add up to a score",
+          detail: "Six or seven factors, not sixty. Less powerful than the alternatives, and the caller can see exactly why somebody is near the top.",
+          output: "a score, and the three factors carrying it",
+        },
+        {
+          actor: "rule",
+          label: "Rank to the number of calls, not to a threshold",
+          detail: "Two people, two hundred calls a month. That is the cutoff, and it is a capacity rather than a probability.",
+          output: "today's calls, in order",
+        },
+        {
+          actor: "person",
+          label: "The caller opens with the reasons, not the score",
+          detail: "The score gets a trial onto the list. The reasons open the conversation.",
+          exception: "A trial that entered no real data at all is not called. That is a product problem, and fixing it was worth more than any improvement to the ranking.",
+        },
+      ],
+      loop: "Outcomes are logged and the points are re-fitted quarterly, in a spreadsheet anybody in the business can read.",
+      outcome:
+        "A model somebody can argue with is a model they will actually use, and every caller can say out loud why they are ringing.",
+    },
+    {
       kind: "bars",
+      lesson: {
+        problem: "A thousand free trials a month, and two people who can call about two hundred of them.",
+        wrong: {
+          label: "Work the list in order",
+          why: "Alphabetical, or newest first. Either way the limited calling capacity gets spent at random, and nobody can say which trials were worth the time.",
+        },
+        right: {
+          label: "Points that add up",
+          why: "Each behaviour contributes points, the points make a score, and the score orders the list. It is less powerful than the alternatives, and the caller can see exactly why somebody is near the top.",
+        },
+        discovery: "Half of all trials never entered any real data at all. Fixing that in the product was worth more than any improvement to the ranking.",
+        decisions: [
+          { tone: "protect", label: "Call the top of the list" },
+          { tone: "monitor", label: "Which factors are carrying the score" },
+          { tone: "investigate", label: "Trials that never enter data" },
+        ],
+        takeaway: "A model somebody can argue with is a model they will use.",
+      },
       title: "The whole model, printable on one page",
       caption:
         "Illustrative points, not measured values. This is the entire output: each factor contributes, the points add up, and the onboarding team can see it, argue with it, and open a call with it. A sixty-line version would be a black box with extra steps.",

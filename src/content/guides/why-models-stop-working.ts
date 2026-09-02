@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "A model that worked on day one will decay. The only question is whether you notice before your customers do, and most businesses ship without anything watching.",
+    problem: {
+      headline: "It was good, and it quietly stopped being good",
+      detail:
+        "A chain of eleven takeaways using a demand model to set morning prep. Waste crept up, kitchen managers started overriding it, and nobody could say when it went wrong.",
+    },
+    wrongApproach: {
+      what: "Install it and assume it keeps working",
+      why: "There was no measure being tracked, so the decay was discovered through complaints months after it started. And when it was found, the instinct was one fix for what turned out to be three different causes.",
+    },
+    rightApproach: {
+      what: "Track predicted against actual weekly, and tie business changes to reviews",
+      why: "A competitor opening is gradual drift and needs retraining. A menu change is a broken input and needs rethinking what the model predicts. Retraining fixes one and leaves the other broken.",
+    },
+    context: {
+      where: "Every model that stays in production, which is all of them.",
+      decision: "When to retrain, when to rebuild, and when to stop trusting it.",
+      metric: "Weeks between something breaking and somebody noticing.",
+    },
+    takeaway:
+      "The kitchen managers had been correcting it for months, and every correction was a recorded signal nobody was reading. That log is a free early warning system.",
+  },
+
+  story: {
+    title: "Three causes, and a routine retrain fixes only one",
+    caption:
+      "A model is a thing you maintain, not a thing you install. That changed how the next one was budgeted.",
+    stages: [
+      { stage: "Problem", label: "Waste up, trust gone", detail: "Most kitchen managers had quietly gone back to guessing." },
+      { stage: "Data", label: "What changed in the business", detail: "A menu revision, a competitor opening near two sites, and a shift in which delivery app dominated." },
+      { stage: "Model", label: "Separate drift from breakage", detail: "The competitor is gradual. The menu change is a cliff, and no amount of retraining predicts demand for items that no longer exist." },
+      { stage: "Prediction", label: "Predicted against actual, weekly", detail: "On the same report as waste, with an alert when it drifts past a band for two weeks running." },
+      { stage: "Decision", label: "Menu changes trigger a review before they go live", detail: "Rather than waiting for the numbers to degrade and finding out late." },
+      { stage: "Result", label: "Decay visible in weeks, not months", detail: "And the override log read monthly, because it is the earliest signal available and it is free." },
+    ],
+  },
+
   intro: [
     "A model learns the world as it was during the period it was trained on. Then the world moves and the model does not. That is the whole problem, and it is the single most reliable way for a successful project to become a quiet failure.",
     "The unnerving part is that it does not announce itself. It does not error, it does not stop, it does not produce anything obviously strange. It carries on giving confident answers that are slowly getting worse, and because nobody is checking, everybody carries on acting on them.",
@@ -101,7 +140,73 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The restaurant group: the weekly check that nobody has to remember",
+      caption:
+        "Looked at once a quarter, the numbers seem broadly acceptable every time. Nothing in a snapshot shows you a slide, which is why the decay gets found through customer complaints months later.",
+      trigger: "Every week, automatically, whether anybody asks or not",
+      runtime: "Four minutes. It only sends an email when something has moved.",
+      stages: [
+        {
+          actor: "system",
+          label: "Compare last week's predictions against what actually happened",
+          output: "one error figure per week, plotted against all the others",
+        },
+        {
+          actor: "rule",
+          label: "Watch the shape, not the level",
+          detail: "A gradual drift and a cliff look similar on any single reading and need completely different responses.",
+          output: "a slide you can see, weeks before anybody complains",
+        },
+        {
+          actor: "model",
+          label: "Check what is going in, not only what comes out",
+          detail: "The mix of orders shifting is visible well before the accuracy moves.",
+          output: "an early warning on the inputs themselves",
+        },
+        {
+          actor: "person",
+          label: "Read the override log",
+          detail: "The people using it know it has gone wrong long before any chart does, and they are already working around it.",
+          exception: "A cliff is not a retraining problem. A menu change means the items no longer exist, and retraining on them fixes nothing at all.",
+        },
+        {
+          actor: "rule",
+          label: "Retrain on a drift, rebuild on a cliff",
+          detail: "A competitor opening is a drift. A menu change is a cliff. The automatic response is right for exactly one of them.",
+          output: "the right response, rather than the routine one",
+        },
+      ],
+      loop: "The weekly check never stops, because every model decays and the only question is whether you notice first.",
+      outcome:
+        "The decay gets found in weeks, by you, instead of in months, by a customer.",
+    },
+    {
       kind: "curve",
+      lesson: {
+        problem: "A demand model was good, quietly stopped being good, and nobody could say when.",
+        wrong: {
+          label: "Check it now and then",
+          why: "Looked at once a quarter, the numbers seem broadly acceptable each time. Nothing in a snapshot shows you a slide, so the decay is found through customer complaints months later.",
+        },
+        right: {
+          label: "Track it every week",
+          why: "The same model measured continuously. The slide is obvious, and so is the difference between a gradual drift and a cliff.",
+        },
+        discovery: "Two entirely different failures. A competitor opening caused a slow drift that retraining fixes. A menu change caused a cliff, and retraining fixes nothing there because the items no longer exist.",
+        decisions: [
+          { tone: "monitor", label: "Predicted against actual, weekly" },
+          { tone: "investigate", label: "Any menu or price change" },
+          { tone: "protect", label: "Read the override log" },
+        ],
+        takeaway: "Every model decays. The only question is whether you notice before your customers do.",
+      },
+      naive: {
+        series: [
+          { name: "Quarterly check", points: [[0, 86], [25, 82], [50, 58], [75, 24], [100, 20]] },
+        ],
+        notes: [{ x: 50, y: 58, text: "still looks acceptable" }],
+      },
       title: "Three different causes, and a routine retrain fixes only one",
       caption:
         "The gradual slide is a competitor opening. The cliff is a menu change, and no amount of retraining fixes predicting demand for items that no longer exist. The real failure was that nobody was watching, so all of this was found through complaints months later.",

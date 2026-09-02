@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "A threshold misses everything underneath it. Learn what normal looks like for each site and each season, and the genuinely odd things surface instead of the merely large ones.",
+    problem: {
+      headline: "Things go wrong and we only find out much later",
+      detail:
+        "A care provider with eleven homes, each manager holding a purchasing card. Thousands of small transactions a month and a finance team of three.",
+    },
+    wrongApproach: {
+      what: "Review everything over a set amount",
+      why: "Fraud and error do not respect thresholds. The genuinely odd things were often small, while plenty of large transactions were entirely routine and got reviewed every month for no reason.",
+    },
+    rightApproach: {
+      what: "Learn normal per home, per category, per season",
+      why: "A large home spends more on food than a small one, and heating in January is not heating in June. Compare like with like, or the alerts are just a description of size and everybody stops reading them.",
+    },
+    context: {
+      where: "Expenses, purchasing, equipment monitoring, anywhere volume hides small problems.",
+      decision: "Which handful of transactions get a question this week.",
+      metric: "Duplicate payments, unnoticed price rises and dead subscriptions found.",
+    },
+    takeaway:
+      "Unusual does not mean wrong. The output is a question, never an accusation, and the biggest category of findings was ordinary error rather than dishonesty.",
+  },
+
+  story: {
+    title: "Learning what normal looks like, eleven times over",
+    caption:
+      "The home managers were told before it started. That mattered more to whether it survived than any part of the build.",
+    stages: [
+      { stage: "Problem", label: "A nagging sense that spend is drifting", detail: "No way to check it across eleven homes with a finance team of three." },
+      { stage: "Data", label: "Two years of card transactions", detail: "Amount, date, supplier, category, and which home it belongs to." },
+      { stage: "Model", label: "Learn normal rather than write rules", detail: "Nobody can write rules for eleven homes across a dozen categories, and the rules would be out of date within months." },
+      { stage: "Prediction", label: "Departures, and odd sequences", detail: "A single payment can be unremarkable while a pattern is not: a steady drift upward, several payments just under a limit." },
+      { stage: "Decision", label: "A weekly list the team can actually review", detail: "Volume set by what three people can look at, because an unreviewed alert has negative value." },
+      { stage: "Result", label: "Mostly duplicates, price rises and dead subscriptions", detail: "Not dishonesty, and worth considerably more than the exercise cost." },
+    ],
+  },
+
   intro: [
     "Sometimes you know something is wrong and you cannot describe what wrong looks like. A supplier invoice that is technically valid and somehow not right. A machine that is about to fail in a way it has never failed before. An expenses claim that ticks every box and makes an experienced person uneasy.",
     "You cannot build a model to predict something you cannot give examples of. What you can do is describe what normal looks like in enough detail that anything sitting a long way from normal gets flagged for somebody to look at.",
@@ -101,7 +140,76 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The care home group: Monday morning, eleven homes, three people in finance",
+      caption:
+        "The old process reviewed everything over a threshold, which meant the same large routine invoices every month and nothing underneath them ever. Normal has to be defined per home, or the biggest sites are permanently under suspicion for being big.",
+      trigger: "Every Monday, on last week's card transactions",
+      runtime: "Six minutes across eleven homes.",
+      stages: [
+        {
+          actor: "system",
+          label: "Pull every card payment across the eleven homes",
+          output: "date, home, category, supplier, amount",
+        },
+        {
+          actor: "rule",
+          label: "Define normal per home, per category, per season",
+          detail: "What is ordinary at a ninety bed home in December is not ordinary at a thirty bed one in June.",
+          output: "an expected range for each combination",
+        },
+        {
+          actor: "model",
+          label: "Score how far each payment sits from its own normal",
+          output: "a shortlist of the genuinely odd, at any size",
+          exception: "A supplier with no history has no normal yet. It goes to a watch list for three months rather than being called unusual.",
+        },
+        {
+          actor: "rule",
+          label: "Cap the list at what three people can review",
+          detail: "A list of four hundred items is the same as no list at all.",
+          output: "twenty transactions, ranked",
+        },
+        {
+          actor: "person",
+          label: "Finance asks about twenty things instead of four hundred",
+          detail: "Most turn out to be duplicates, price rises nobody was told about, and subscriptions for services cancelled years ago.",
+          output: "resolved, or a conversation with a supplier",
+        },
+      ],
+      loop: "Every payment marked as fine teaches the system what fine looks like at that particular home.",
+      outcome:
+        "The payments worth asking about are mostly not the large ones, and a threshold can only ever find large.",
+    },
+    {
       kind: "scatter",
+      lesson: {
+        problem: "Eleven care homes, thousands of small card payments, and a finance team of three.",
+        wrong: {
+          label: "Review everything over a threshold",
+          why: "A threshold sorts by size, so the big routine payments get reviewed every month for no reason and everything underneath it is never looked at once.",
+        },
+        right: {
+          label: "Compare against that home's normal",
+          why: "The same payments, measured against what is ordinary for that home, that category and that time of year. Different transactions surface entirely.",
+        },
+        discovery: "The payments worth asking about are mostly not the large ones. Most turned out to be duplicates, unnoticed price rises and subscriptions for services long since cancelled.",
+        decisions: [
+          { tone: "protect", label: "Routine spend, leave it alone" },
+          { tone: "monitor", label: "Drifting regular orders" },
+          { tone: "investigate", label: "Odd for this home" },
+        ],
+        takeaway: "Unusual is not the same as large, and a threshold can only ever find large.",
+      },
+      naive: {
+        groups: [
+          {
+            name: "Sorted by size, threshold at the top",
+            points: [[10, 12], [24, 8], [38, 16], [52, 10], [66, 14], [80, 9], [90, 18], [16, 20], [44, 6], [58, 22], [72, 12], [30, 14], [86, 7], [20, 10], [62, 18], [48, 20], [18, 74], [34, 88], [56, 78], [12, 82], [70, 90], [40, 70]],
+          },
+        ],
+        notes: [{ x: 90, y: 18, text: "the only ones reviewed" }],
+      },
       title: "Unusual does not mean wrong, and normal has to be defined per home",
       caption:
         "Ringed points are what gets asked about. Notice they are not simply the biggest payments: a large routine order is normal for a large home, and a modest payment on an odd day is not. Comparing homes against each other would have flagged nothing but size.",

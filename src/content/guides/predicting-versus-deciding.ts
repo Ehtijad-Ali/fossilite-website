@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "A prediction changes nothing on its own. The project is what you do about it, and that half needs costs, options and a fairness conversation that no model can supply.",
+    problem: {
+      headline: "Empty chairs, and a request for a model to predict no-shows",
+      detail:
+        "A four-surgery dental practice, 120 appointments a day. The manager asked for a prediction, which is a reasonable request and half a project.",
+    },
+    wrongApproach: {
+      what: "Deliver the prediction and call it done",
+      why: "A list of patients likely to miss, sent to a practice with no agreed response, produces a fortnight of interest and then nothing. This happens constantly.",
+    },
+    rightApproach: {
+      what: "Price every response, then match response to confidence",
+      why: "A text is nearly free. A call costs staff minutes. Overbooking costs the whole day if both people turn up. One blunt response for every risk level throws away everything the prediction told you.",
+    },
+    context: {
+      where: "Clinics, salons, restaurants, any booked capacity that goes unused.",
+      decision: "Reminder, phone call, or overbook, and never the same one for everybody.",
+      metric: "Chair utilisation AND clinic overrun, together, because improving one by wrecking the other is not a win.",
+    },
+    takeaway:
+      "The strongest predictor of missing was having missed before, which concentrates every response on a small group. Whether that is acceptable is a practice decision, made deliberately or made by default.",
+  },
+
+  story: {
+    title: "The prediction was the easy half",
+    caption:
+      "An early overbooking rule filled chairs and made the practice run late. Utilisation alone would have shown that as a success.",
+    stages: [
+      { stage: "Problem", label: "Unrecoverable empty appointments", detail: "And a request framed as a modelling problem when it is mostly an operations one." },
+      { stage: "Data", label: "Three years of appointments", detail: "Attendance, how far ahead it was booked, time of day, first visit or not, previous history." },
+      { stage: "Model", label: "A likelihood of missing", detail: "Ordinary, quick, and the part that gets far more attention than it deserves." },
+      { stage: "Prediction", label: "A risk score a week ahead", detail: "Which on its own changes precisely nothing." },
+      { stage: "Decision", label: "A tiered response with prices attached", detail: "Reminder, then a call, then a little overbooking on short appointments only. Never on long or surgical ones." },
+      { stage: "Result", label: "Chairs filled without the day falling apart", detail: "Because both measures were reported, not just the flattering one." },
+    ],
+  },
+
   intro: [
     "Here is a forecast: we will sell around four hundred of these next week. Here is a question: how many should we order? Those are not the same problem and the second one does not follow from the first.",
     "If you order four hundred and demand comes in at three hundred and twenty, you are carrying a hundred you did not need. If demand comes in at five hundred you have turned eighty customers away. The right order quantity depends on what those two outcomes cost you, and the forecast says nothing about that.",
@@ -100,6 +139,47 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The dental practice: the prediction was the easy half",
+      caption:
+        "Step three is the whole project and it is not a modelling task. It took longer to agree than the model took to build, and a practice that skips it ends up with an accurate prediction and no change to anything.",
+      trigger: "Every evening, for appointments seven days out",
+      runtime: "Ten minutes overnight. Reception see it with the morning list.",
+      stages: [
+        {
+          actor: "system",
+          label: "Take next week's appointment book",
+          output: "each appointment, with that patient's attendance history",
+        },
+        {
+          actor: "model",
+          label: "Predict who is likely to miss",
+          detail: "Ordinary, well understood, and genuinely not the hard part.",
+          output: "a likelihood per appointment",
+        },
+        {
+          actor: "rule",
+          label: "Price every possible response, then match it to the confidence",
+          detail: "A text costs almost nothing. Overbooking costs an overrun and an apology. Shortening the window costs a slot.",
+          output: "a different action per band, rather than one action for everybody",
+        },
+        {
+          actor: "person",
+          label: "The practice manager checks it against fairness, not only cost",
+          detail: "A rule that quietly overbooks the same patients every week is a rule somebody will eventually have to defend.",
+          exception: "Anyone flagged three times running gets a phone call from a human rather than a fourth automated text.",
+        },
+        {
+          actor: "system",
+          label: "Judge it on chairs filled AND on overrun, together",
+          detail: "Improving one by wrecking the other is not a win, and reporting only the first is how it gets sold internally.",
+        },
+      ],
+      loop: "Attendance goes back in, so the response tiers get retuned rather than the model getting blamed.",
+      outcome:
+        "Knowing who will miss changes nothing on its own. Deciding what to do at each level of confidence changes the day.",
+    },
     {
       kind: "tree",
       title: "The prediction is one number. The decision is a tiered response.",

@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 14,
 
+  brief: {
+    inOneMinute:
+      "The star rating tells you something is wrong. Only the written comments tell you what. Grouping thousands of them into themes, and counting those themes month by month, is where the value is.",
+    problem: {
+      headline: "Two thousand written reviews a month and nobody reads them",
+      detail:
+        "A hotel group with fourteen properties. Scores were tracked closely; the text was opened only when a manager wanted ammunition.",
+    },
+    wrongApproach: {
+      what: "Tag feedback into the categories the business already uses",
+      why: "Room, food, staff, facilities. That is how the business is organised, not how a guest experiences a stay. Nothing about a check-in queue at a particular time of day fits into those four boxes.",
+    },
+    rightApproach: {
+      what: "Let the themes come out of the words, then have a person name them",
+      why: "The method finds words that occur together and understands nothing at all. A theme is not a theme until somebody has read ten real reviews from it and can say what it is.",
+    },
+    context: {
+      where: "Reviews, survey comments, support tickets, complaints, exit interviews.",
+      decision: "Which problem to fix, at which site, before it spreads.",
+      metric: "How quickly a rising complaint is noticed.",
+    },
+    takeaway:
+      "A single snapshot gets admired once and filed. The value is entirely in watching a theme rise month on month at one property.",
+  },
+
+  story: {
+    title: "The scores say something is wrong; the text says what",
+    caption:
+      "A theme emerged about check-in queues at a specific time that fitted none of the four existing categories, and it had been in the text for a year.",
+    stages: [
+      { stage: "Problem", label: "A score slides and nobody knows why", detail: "The reason takes months to reconstruct, by which point it has spread." },
+      { stage: "Data", label: "Two thousand comments a month", detail: "From several booking platforms and the hotel's own post-stay survey." },
+      { stage: "Model", label: "Group words that occur together", detail: "After stripping the ones that are everywhere: hotel, room, stay, night, and every property name." },
+      { stage: "Prediction", label: "Themes, unnamed", detail: "Which is not yet a finding. Somebody reads ten real reviews per theme and names them." },
+      { stage: "Decision", label: "Act on the one that is rising", detail: "With an alert when a theme climbs sharply at a single site." },
+      { stage: "Result", label: "Reasons visible in weeks", detail: "And the group learns which problems are group-wide and which belong to one property." },
+    ],
+  },
+
   intro: [
     "Almost every business is sitting on a large pile of writing that nobody has read. Complaints, review comments, the free text box at the end of a survey, support ticket descriptions, exit interview notes. Somebody reads a sample when a crisis happens and the rest sits there.",
     "There is a family of techniques for finding the recurring themes in that pile without anybody reading all of it. You give it forty thousand complaints and it comes back with something like: there appear to be nine recurring themes here, and here are the words that characterise each one.",
@@ -101,7 +140,74 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The hotel group: two thousand reviews a month, and four pages that get read",
+      caption:
+        "Step four is not optional. The method groups words that co-occur and understands none of them, so a theme can look perfectly coherent from its top words and fall apart the moment somebody reads the reviews inside it.",
+      trigger: "Monthly, on everything written about the fourteen properties",
+      runtime: "An hour to run. The output is four pages, not a dashboard.",
+      stages: [
+        {
+          actor: "system",
+          label: "Collect written feedback from every platform",
+          output: "two thousand pieces of free text, tagged by property and date",
+        },
+        {
+          actor: "rule",
+          label: "Strip the words that are in everything",
+          detail: "Hotel, room, stay, night, and the property names themselves.",
+          output: "the words that actually separate one review from another",
+        },
+        {
+          actor: "model",
+          label: "Let the themes come out of the words",
+          detail: "Rather than forcing them into the four categories the business already files feedback under.",
+          output: "themes, each with its top words and example reviews",
+        },
+        {
+          actor: "person",
+          label: "Somebody reads ten real reviews per theme",
+          detail: "A list of top words is not a finding, and presenting it as one is how this technique gets a bad name.",
+          exception: "A theme that looks coherent from its words and does not survive reading is dropped before it reaches anybody senior.",
+          output: "named themes, in plain English",
+        },
+        {
+          actor: "system",
+          label: "Count each theme month on month, per property",
+          detail: "The snapshot is close to worthless. The movement is the entire value.",
+          output: "a trend line per theme, per site",
+        },
+      ],
+      loop: "A theme climbing sharply at one property raises a flag, which is something a group average can never do.",
+      outcome:
+        "The score says something is wrong, months late. Only the words say what, and which of the fourteen hotels it is.",
+    },
+    {
       kind: "curve",
+      lesson: {
+        problem: "Two thousand written reviews a month across fourteen hotels, and nobody reads them.",
+        wrong: {
+          label: "Watch the score",
+          why: "The average rating is steady, so nothing looks wrong. A score tells you something has changed; it can never tell you what, and by the time it moves the problem is months old.",
+        },
+        right: {
+          label: "Track the themes",
+          why: "The same feedback grouped into themes and counted month by month. One is climbing steeply at a single property while the group average sits perfectly still.",
+        },
+        discovery: "A theme about check-in queues at one hotel had been rising for a year, and it fitted none of the four categories the business files feedback under.",
+        decisions: [
+          { tone: "investigate", label: "The rising theme, at that site" },
+          { tone: "monitor", label: "Group-wide themes" },
+          { tone: "protect", label: "Themes that are falling" },
+        ],
+        takeaway: "The score says something is wrong. Only the words say what.",
+      },
+      naive: {
+        series: [
+          { name: "Average review score", points: [[0, 62], [20, 61], [40, 63], [60, 62], [80, 61], [100, 62]] },
+        ],
+        notes: [{ x: 40, y: 63, text: "looks fine" }],
+      },
       title: "The value is the movement, not the snapshot",
       caption:
         "A single report of what people are writing about gets admired once and filed. Counting the same themes month after month is what makes one property's rising problem visible while it is still small.",

@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Four questions eliminate most options in an afternoon, and a fifth overrules all of them: what decision changes, and who makes it?",
+    problem: {
+      headline: "Four good ideas, budget for one, and a managing partner who wants all four",
+      detail:
+        "A twenty-partner accountancy practice after an away day. Predict client departures, sort the inbox, estimate job duration, find cross-sell opportunities.",
+    },
+    wrongApproach: {
+      what: "Start with the most interesting idea, or run all four",
+      why: "The departure model was the one everybody wanted to discuss and had no decision attached. Running four in parallel with the resource for one is how businesses end up with four things at seventy percent and nothing in use.",
+    },
+    rightApproach: {
+      what: "Filter on shape of answer, shape of data, explainability, and history",
+      why: "Those four eliminate most options fast. Then ask what somebody would do differently on being told. The idea with the best data lost on that question, which is exactly what should have happened.",
+    },
+    context: {
+      where: "Any organisation with more AI ideas than budget, which is all of them.",
+      decision: "What gets built first, and what gets declined with reasons.",
+      metric: "Projects finished rather than projects started.",
+    },
+    takeaway:
+      "Parked ideas need written conditions, not vetoes. Then they stop being raised as grievances in every meeting.",
+  },
+
+  story: {
+    title: "One project finished instead of four started",
+    caption:
+      "The second time the practice used this filter it took twenty minutes rather than an afternoon.",
+    stages: [
+      { stage: "Problem", label: "Four ideas on a whiteboard", detail: "All legitimate. Only one could go first, and the criteria that matter are not technical." },
+      { stage: "Data", label: "What exists, and in what form", detail: "Rows and columns point one way, free text another, images somewhere much more expensive." },
+      { stage: "Model", label: "Shape of the answer decides most of it", detail: "A number, a yes or no, a category, a group, or a best combination. One question rules out most techniques." },
+      { stage: "Prediction", label: "Does anybody need it explained?", detail: "A partner phoning a client needs a reason. An email being routed does not. That is a requirement, not a preference." },
+      { stage: "Decision", label: "The inbox project goes first", detail: "Fastest to build, clearest decision, no explanation needed, data already sitting there." },
+      { stage: "Result", label: "A reusable filter", detail: "And the managing partner's favourite idea declined on stated criteria rather than on politics." },
+    ],
+  },
+
   intro: [
     "There are hundreds of approaches and you need to know about six. More usefully, you need five questions that get you to the right family in about ten minutes, and then a way of judging whether the specific choice inside that family matters.",
     "The honest position is that the choice of approach matters less than people think. What matters far more is whether you framed the problem right, whether you have decent information, and whether anybody acts on the answer. Teams argue about the choice because it feels like the technical decision, and it is rarely where the project succeeds or fails.",
@@ -182,6 +221,49 @@ WHATEVER YOU CHOOSE
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "Four ideas, budget for one, and half a day to choose",
+      caption:
+        "The idea with the best data lost, because nobody could say what a partner would do differently on being told. A well-built answer to a question nobody was going to act on is the most expensive item on any list.",
+      trigger: "Four ideas on a whiteboard and budget for one",
+      runtime: "Half a day, with the right five people in the room.",
+      stages: [
+        {
+          actor: "person",
+          label: "Write down the shape of the answer for each idea",
+          detail: "A number, a yes or no, a group, a ranking, or a when. Four sentences.",
+          output: "four one-line problem statements",
+        },
+        {
+          actor: "rule",
+          label: "Match that to the shape of the data you actually hold",
+          detail: "This eliminates most of the options inside ten minutes, and it costs nothing.",
+          output: "two survivors instead of four",
+        },
+        {
+          actor: "rule",
+          label: "Ask whether anybody has to have it explained",
+          detail: "A business requirement, not a technical preference. Regulated decisions, and anything a person must justify to a customer's face.",
+          output: "whether an explainable method is compulsory here",
+        },
+        {
+          actor: "system",
+          label: "Count the history",
+          detail: "Twenty past examples means write a rule. Twenty thousand opens other doors.",
+          exception: "Not enough history is not a reason to reach for a cleverer method. It is a reason to start recording properly and put a date in the diary.",
+        },
+        {
+          actor: "person",
+          label: "Name the decision that changes, and who makes it",
+          detail: "This overrules the other four criteria, every time.",
+          output: "one funded idea, and three parked with their reasons written down",
+        },
+      ],
+      loop: "The three parked ideas are re-read each year, because the data position changes and the reasons were recorded rather than remembered.",
+      outcome:
+        "The choice stops being about which method is best and becomes about which question somebody will act on.",
+    },
     {
       kind: "tree",
       title: "The filter, in the order that eliminates fastest",

@@ -21,6 +21,88 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Most of next month is already written in the calendar. Forecast a range rather than a line, and handle the genuinely unpredictable part separately instead of expecting the forecast to catch it.",
+    problem: {
+      headline: "Some days the queue is twenty minutes and some days everyone sits idle",
+      detail:
+        "A utility contact centre with sixty advisers. The rota is built four weeks ahead from last year's same week, adjusted by whatever the planner remembers.",
+    },
+    wrongApproach: {
+      what: "Roster to a single predicted number",
+      why: "A single line is wrong half the time by construction. And previous attempts failed because they mixed two questions: how many calls will arrive, and how many people should we roster, which depend on different things.",
+    },
+    rightApproach: {
+      what: "Forecast a range, and put the storms outside it",
+      why: "Most of the volume is calendar: day of week, time of day, bill issue dates. Those are known weeks ahead. Weather-driven spikes are not forecastable at four weeks, so they get a standby arrangement rather than a prediction.",
+    },
+    context: {
+      where: "Contact centres, hospitality, retail, clinics, field service.",
+      decision: "How many people to roster, four weeks out.",
+      metric: "Queue time and idle time, which are usually the same problem from opposite sides.",
+    },
+    takeaway:
+      "Do not judge a forecast on the worst week of the year. It was never going to catch that, and measuring it that way gets a working tool abandoned.",
+  },
+
+  story: {
+    title: "Separating what you can forecast from what you cannot",
+    caption:
+      "Test it the way it gets used. The rota is set four weeks ahead, so a forecast tested at one week ahead produces a flattering number nobody can act on.",
+    stages: [
+      { stage: "Problem", label: "The rota is a guess with a spreadsheet round it", detail: "Everyone knows it is wrong and nobody has a better method." },
+      { stage: "Data", label: "Six years of calls by half hour", detail: "Plus the billing calendar and tariff change dates the business already publishes." },
+      { stage: "Model", label: "Pull the repeating pattern apart", detail: "Trend, day, week, year. Most of the volume is explained by the calendar, which is the good news." },
+      { stage: "Prediction", label: "A likely volume with a high and a low", detail: "Because rostering to the middle of a range is a decision, and rostering to a line is a mistake." },
+      { stage: "Decision", label: "Roster to the range, with flex", detail: "And a separate short-notice arrangement triggered by weather warnings." },
+      { stage: "Result", label: "The predictable spikes stop being surprises", detail: "They were on a calendar the business had all along and had never connected to the rota." },
+    ],
+  },
+
+  calculator: {
+    title: "What does rostering to a single number cost?",
+    intro:
+      "Being wrong is not symmetric: an idle hour and a missed customer cost different amounts. Put in yours and see which way your rota should lean.",
+    inputs: [
+      { id: "staff", label: "People on a typical shift", min: 2, max: 200, step: 1, value: 24 },
+      { id: "hourly", label: "Cost per person per hour", min: 8, max: 80, step: 1, value: 19, prefix: "\u00a3" },
+      { id: "error", label: "How far out the forecast typically is", min: 5, max: 60, step: 5, value: 25, suffix: "%" },
+      { id: "shortfall", label: "Cost of being short, per person-hour", min: 5, max: 500, step: 5, value: 70, prefix: "\u00a3", help: "Queues, abandoned calls, lost sales, overtime." },
+    ],
+    compute: (v) => {
+      const shifts = 260;
+      const wrongBy = v.staff * (v.error / 100);
+      // Roughly half the time you are over and half under, but the two sides
+      // cost differently, which is the entire point.
+      const overCost = wrongBy * v.hourly * 8 * (shifts / 2);
+      const underCost = wrongBy * v.shortfall * 8 * (shifts / 2);
+      const ratio = v.shortfall / v.hourly;
+      return {
+        outputs: [
+          {
+            label: "Being short costs this much more than being idle",
+            value: `${ratio.toFixed(1)}x`,
+            hero: true,
+            tone: ratio > 2 ? "bad" : "neutral",
+            note: ratio > 2
+              ? "So your rota should sit above the middle of the forecast range, not on it. Deliberate slight overstaffing is the cheaper error."
+              : "Fairly balanced, so rostering near the middle of the range is defensible.",
+          },
+          { label: "Annual cost of overstaffing", value: `\u00a3${Math.round(overCost).toLocaleString()}` },
+          {
+            label: "Annual cost of understaffing",
+            value: `\u00a3${Math.round(underCost).toLocaleString()}`,
+            tone: underCost > overCost ? "bad" : "neutral",
+            note: "The one that does not appear on a payroll report, and therefore the one that gets ignored.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "Assumes 260 shifts a year, eight hours each, and that the forecast is over as often as it is under. The useful output is the ratio at the top, which tells you which way to lean rather than exactly how far.",
+  },
+
   intro: [
     "How many orders will we get next month. How many people do we need on the phones on Saturday. How much stock should we hold in November. These questions look like ordinary predictions and they behave differently, because time is involved.",
     "The difference is that with most predictions each case is independent. This customer's behaviour has nothing to do with that customer's. With anything over time, next week depends on this week, December looks like last December, and there is often a trend running underneath the whole thing.",
@@ -101,7 +183,75 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The contact centre: how next month's rota gets built on a Wednesday",
+      caption:
+        "Two outputs leave this process, not one. The forecast handles what repeats. Storms are handled by standby cover triggered off a weather warning, because they were never forecastable four weeks out and pretending otherwise is how a rota loses trust.",
+      trigger: "Every Wednesday, four weeks before the rota is published",
+      runtime: "Twenty minutes, unattended. The planner opens a finished draft.",
+      stages: [
+        {
+          actor: "system",
+          label: "Pull six years of calls by half hour, plus the billing calendar",
+          detail: "The billing dates were already published inside the business and had never been connected to the rota.",
+          output: "call volume by half hour, and the dates bills go out",
+        },
+        {
+          actor: "model",
+          label: "Separate what repeats from what does not",
+          detail: "Trend, day of week, time of day, time of year. Tested at four weeks out, because that is when the rota is actually built.",
+          output: "a forecast per half hour, with a range around it",
+        },
+        {
+          actor: "rule",
+          label: "Roster to the middle of the range, not to the line",
+          detail: "A single predicted number looks decisive and is wrong half the time by construction.",
+          output: "a staffing level per half hour, plus a defined flex band",
+        },
+        {
+          actor: "person",
+          label: "The planner overlays what the forecast cannot know",
+          detail: "A price change, a marketing send, a product recall.",
+          exception: "Weather is not put through the forecast at all. It triggers short notice cover on its own path, and everybody knows which is which.",
+        },
+        {
+          actor: "system",
+          label: "Publish the rota, and keep the forecast beside the actual",
+          detail: "Last week's error, per half hour, whether anybody asks for it or not.",
+        },
+      ],
+      loop: "Every week the forecast is scored against what happened, so a drift shows up in weeks rather than in complaints.",
+      outcome:
+        "The argument in the planning meeting moves from how many staff we need to which half hours are genuinely uncertain.",
+    },
+    {
       kind: "curve",
+      lesson: {
+        problem: "Some days the queue is twenty minutes. Other days half the floor sits idle.",
+        wrong: {
+          label: "One forecast line",
+          why: "A single predicted number looks decisive and is wrong half the time by construction. Roster to it and you are guaranteed to be over on some days and short on others.",
+        },
+        right: {
+          label: "A range, plus reality",
+          why: "The same forecast with the band you should actually roster against, and what really happened laid over it. Most weeks sit inside the band comfortably.",
+        },
+        discovery: "The big spike was a storm, which was never forecastable four weeks out. The other spike was a billing run, sitting on a calendar the business already publishes.",
+        decisions: [
+          { tone: "protect", label: "Roster to the middle of the range" },
+          { tone: "monitor", label: "Billing run weeks" },
+          { tone: "investigate", label: "Standby cover for weather" },
+        ],
+        takeaway: "A forecast is a range. Rostering to a line is a decision to be wrong half the time.",
+      },
+      naive: {
+        series: [
+          {
+            name: "Forecast",
+            points: [[0, 46], [14, 50], [28, 44], [42, 58], [56, 48], [70, 52], [84, 46], [100, 50]],
+          },
+        ],
+      },
       title: "Forecast a range, because rostering to a single line is wrong half the time",
       caption:
         "The shaded band is what you roster against. The storm in the middle is genuinely unforecastable four weeks out, and expecting the forecast to catch it is how businesses talk themselves out of a tool that was working.",

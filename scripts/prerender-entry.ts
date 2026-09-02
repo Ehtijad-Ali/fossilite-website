@@ -47,6 +47,26 @@ const collections: PrerenderRoute[] = [
     ],
   },
   {
+    // Kept in step with the sitemap by hand: this list and the sitemap's static
+    // routes are separate, so a page added to one and not the other ships with
+    // no baked title or preview card.
+    path: "/resources/problems",
+    title: "Start With the Problem | Fossilite Resource Library",
+    description:
+      "Find the guide by the problem you actually have. Cash tight while busy, customers leaving, forecasts always wrong, drowning in admin. Twelve common business problems, and what each one usually turns out to be.",
+    jsonLd: [
+      collectionSchema(
+        "Start With the Problem",
+        "Twelve common business problems, and the guides that address each one.",
+        "/resources/problems",
+      ),
+      breadcrumbSchema([
+        { name: "Resources", path: "/resources" },
+        { name: "Start with the problem", path: "/resources/problems" },
+      ]),
+    ],
+  },
+  {
     path: "/prompts",
     title: promptsTitle,
     description: promptsDescription,

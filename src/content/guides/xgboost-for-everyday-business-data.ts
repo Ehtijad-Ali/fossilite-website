@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "For ordinary business data in rows and columns, the winning technique is rarely the fashionable one. This family quietly beats almost everything else and runs on a laptop.",
+    problem: {
+      headline: "Returns are eating the margin and we only know the overall rate",
+      detail:
+        "An online clothing retailer, around a thousand orders a week. The owner's instinct was to tighten the returns policy.",
+    },
+    wrongApproach: {
+      what: "Tighten the returns policy",
+      why: "It is the obvious lever and the one most likely to reduce sales along with returns. It also treats the problem as evenly spread, when it was heavily concentrated in a handful of product lines.",
+    },
+    rightApproach: {
+      what: "Score every order before it is packed, then ask what is driving it",
+      why: "Rows and columns, a few tens of thousands of examples. That is exactly where boosted trees win. Sizing came out top by a distance, which pointed at a fix that involved no model at all.",
+    },
+    context: {
+      where: "Any business with transaction data in a normal database.",
+      decision: "What goes in the box, and what the buyer reorders next season.",
+      metric: "Return rate on the worst lines, without touching the policy.",
+    },
+    takeaway:
+      "Match the method to the shape of your data. Rows and columns point here; images and language point somewhere far more expensive, and a lot of money is wasted assuming otherwise.",
+  },
+
+  story: {
+    title: "Finding the returns problem before the parcel leaves",
+    caption:
+      "One pattern was real and not the cause. Delivery speed correlated with returns only because slow deliveries clustered when a problem line was selling well.",
+    stages: [
+      { stage: "Problem", label: "Margin disappearing into returns", detail: "The overall rate is known and nothing else, so every proposed fix is a guess." },
+      { stage: "Data", label: "Ordinary order rows", detail: "Product, size, price, discount, customer history, basket size, delivery time, month." },
+      { stage: "Model", label: "Models correcting each other in turn", detail: "Each new one works on what the previous ones got wrong. Held back deliberately, or it memorises the history instead of learning the pattern." },
+      { stage: "Prediction", label: "A likelihood at the packing bench", detail: "Cut off at packing, because after the parcel has gone the prediction is trivia." },
+      { stage: "Decision", label: "A size note in the box", detail: "And a weekly list of lines with an unusual rate, reviewed before the buyer reorders." },
+      { stage: "Result", label: "A description problem, cheaply fixed", detail: "The policy change was never made, so the sales it would have cost were not lost." },
+    ],
+  },
+
   intro: [
     "If your business data lives in tables, which nearly all business data does, there is a very good chance the best answer is something almost nobody outside a technical team has heard of. It is called XGBoost, and variations of it quietly win most ordinary prediction problems.",
     "The idea behind it is simpler than the name suggests. Build a rough flowchart. Look at what it got wrong. Build a second flowchart whose only job is to fix those mistakes. Look at what is still wrong. Build a third. Keep going, hundreds of times, each one focused on whatever the previous ones are still getting wrong.",
@@ -100,6 +139,48 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The clothing retailer: the decision made at the packing bench",
+      caption:
+        "The cutoff at packing is doing real work. Once the parcel has gone, knowing it will come back is trivia, so only what is known before the box is sealed is allowed anywhere near it.",
+      trigger: "At the packing bench, as the parcel is made up",
+      runtime: "Instant. The packer either sees a note to include or does not.",
+      stages: [
+        {
+          actor: "system",
+          label: "Read the order as it stands at packing",
+          output: "product, size, price, what else is in the basket, this customer's history",
+        },
+        {
+          actor: "rule",
+          label: "Cut off at the bench",
+          detail: "Nothing that is only knowable afterwards goes in, however predictive it looks in testing.",
+          output: "the same facts every time, all of them available before the box is sealed",
+        },
+        {
+          actor: "model",
+          label: "Models correcting each other, in sequence",
+          detail: "Each one works on the mistakes the last one made. It is unglamorous and it is very hard to beat on ordinary rows and columns.",
+          output: "a return likelihood, plus what drove it",
+        },
+        {
+          actor: "person",
+          label: "A size note goes in the box where the risk is about size",
+          detail: "Not a warning to the customer. A helpful line about how this particular style runs.",
+          exception: "A first-time customer with no history gets no note. There is nothing honest to base one on.",
+        },
+        {
+          actor: "rule",
+          label: "The buyer gets a rewrite list, not a report",
+          detail: "The styles where the size note fires most often are the ones with a description problem, and that is a fix with no model in it.",
+          output: "ten product pages to rewrite",
+        },
+      ],
+      loop: "Every return, and every parcel that stayed sold, goes back in.",
+      outcome:
+        "The return gets addressed at the bench, before the carriage is paid twice and before the item comes back unsellable.",
+    },
     {
       kind: "flow",
       title: "The clothing retailer: predicting a return before the parcel leaves",

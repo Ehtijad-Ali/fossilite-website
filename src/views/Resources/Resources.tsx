@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { useSharedTokens } from "../../theme/sharedTokens";
@@ -14,7 +14,7 @@ import {
   searchGuides,
   PROMPTS,
 } from "../../content";
-import type { Guide } from "../../content/types";
+import type { Guide, Track } from "../../content/types";
 import { useSeo, collectionSchema, breadcrumbSchema } from "../../hooks/useSeo";
 import { GuideHero } from "./GuidePlate";
 
@@ -220,6 +220,113 @@ const GuideCard: FC<{ g: Guide; index: number; T: T }> = ({ g, index, T }) => {
 };
 
 /**
+ * The track switch: the primary filter, and the one this page was missing.
+ *
+ * Everything used to be one flat row of thirty-two category pills, which is a
+ * wall rather than a filter. Tracks narrow the library to a field first, and
+ * the category pills below then only offer what is inside it.
+ *
+ * The indicator is measured rather than assumed to be an equal fraction of the
+ * width: "All" and "AI & Engineering" are very different lengths, and equal
+ * segments would leave one cramped and the other swimming. It re-measures on
+ * resize and after fonts load, since a webfont swap changes every width.
+ */
+const TrackSwitch: FC<{
+  value: Track | "all";
+  onChange: (t: Track | "all") => void;
+  counts: Map<string, number>;
+  total: number;
+  T: ReturnType<typeof useSharedTokens>;
+}> = ({ value, onChange, counts, total, T }) => {
+  const options: { key: Track | "all"; label: string; count: number }[] = [
+    { key: "all", label: "All", count: total },
+    ...TRACKS.map((tr) => ({ key: tr as Track | "all", label: tr, count: counts.get(tr) ?? 0 })),
+  ];
+  const activeIdx = Math.max(0, options.findIndex((o) => o.key === value));
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [ind, setInd] = useState({ left: 0, width: 0, ready: false });
+
+  // Layout effect, so the indicator is in place on the first paint rather than
+  // visibly sliding in from zero the moment the page appears.
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = refs.current[activeIdx];
+      if (el) setInd({ left: el.offsetLeft, width: el.offsetWidth, ready: true });
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    // A webfont swapping in changes every label width under the indicator.
+    const fonts = (document as Document & { fonts?: FontFaceSet }).fonts;
+    fonts?.ready?.then(measure).catch(() => {});
+    return () => window.removeEventListener("resize", measure);
+  }, [activeIdx, options.length]);
+
+  return (
+    <Box
+      role="tablist"
+      aria-label="Filter by track"
+      sx={{
+        position: "relative", display: "inline-flex", alignItems: "center", gap: "2px",
+        p: "5px", borderRadius: "13px",
+        border: `0.5px solid ${T.border}`, backgroundColor: T.surfaceSubtle,
+        overflowX: "auto", maxWidth: "100%",
+        "&::-webkit-scrollbar": { display: "none" }, scrollbarWidth: "none",
+      }}
+    >
+      <Box
+        aria-hidden
+        sx={{
+          position: "absolute", top: "5px", bottom: "5px",
+          left: `${ind.left}px`, width: `${ind.width}px`,
+          borderRadius: "9px", backgroundColor: T.cardBg,
+          border: `0.5px solid ${GOLD}66`,
+          boxShadow: T.isDark ? "0 2px 12px rgba(0,0,0,0.35)" : "0 2px 10px rgba(0,25,50,0.08)",
+          opacity: ind.ready ? 1 : 0,
+          transition: "left 0.42s cubic-bezier(0.22,1,0.36,1), width 0.42s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease",
+          pointerEvents: "none",
+        }}
+      />
+      {options.map((o, i) => {
+        const active = o.key === value;
+        return (
+          <Box
+            key={o.key}
+            component="button"
+            type="button"
+            role="tab"
+            aria-selected={active}
+            ref={(el: HTMLButtonElement | null) => { refs.current[i] = el; }}
+            onClick={() => onChange(o.key)}
+            sx={{
+              position: "relative", zIndex: 1, whiteSpace: "nowrap",
+              display: "inline-flex", alignItems: "center", gap: "8px",
+              px: { xs: "13px", md: "17px" }, py: "9px", borderRadius: "9px",
+              border: "none", background: "none", cursor: "pointer", font: "inherit",
+              fontFamily: "Prompt", fontSize: { xs: "12.5px", md: "13.5px" },
+              fontWeight: active ? 600 : 500,
+              color: active ? T.headline : T.secondaryText,
+              transition: "color 0.25s ease",
+              "&:hover": { color: T.primaryText },
+            }}
+          >
+            {o.label}
+            <Box
+              component="span"
+              sx={{
+                fontFamily: MONO, fontSize: "9.5px",
+                color: active ? GOLD : T.mutedText, transition: "color 0.25s ease",
+              }}
+            >
+              {o.count}
+            </Box>
+          </Box>
+        );
+      })}
+    </Box>
+  );
+};
+
+/**
  * The Resource Library index. Also serves /resources/category/:category — the
  * same view scoped to one category, which keeps filtering behaviour identical
  * between the browse and the crawlable category URLs.
@@ -230,17 +337,53 @@ export const Resources: FC = () => {
   const scoped = routeCategory ? categoryBySlug(routeCategory) : undefined;
 
   const [category, setCategory] = useState<string>(routeCategory ?? "all");
+  const [track, setTrack] = useState<Track | "all">("all");
   const [query, setQuery] = useState("");
   const [visible, setVisible] = useState(9);
   const [subEmail, setSubEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
   const cats = useMemo(() => activeCategories(), []);
+  const trackOf = useMemo(() => new Map(cats.map((c) => [c.slug, c.track])), [cats]);
+
+  /** Only the categories inside the chosen track. Thirty-two pills in one flat
+   *  row is not a filter, it is a wall, so the track narrows it first. */
+  const catsInTrack = useMemo(
+    () => (track === "all" ? cats : cats.filter((c) => c.track === track)),
+    [cats, track],
+  );
+
+  const trackCounts = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const g of GUIDES) {
+      const tr = trackOf.get(g.category);
+      if (tr) m.set(tr, (m.get(tr) ?? 0) + 1);
+    }
+    return m;
+  }, [trackOf]);
 
   const filtered = useMemo(() => {
-    const pool = category === "all" ? GUIDES : GUIDES.filter((g) => g.category === category);
+    let pool = GUIDES;
+    if (track !== "all") pool = pool.filter((g) => trackOf.get(g.category) === track);
+    if (category !== "all") pool = pool.filter((g) => g.category === category);
     return searchGuides(query, pool);
-  }, [category, query]);
+  }, [track, category, query, trackOf]);
+
+  /** Landing on /resources/category/:slug should select that category's track
+   *  too, or the pill row would show a category the track filter excludes. */
+  useEffect(() => {
+    if (routeCategory) {
+      const tr = trackOf.get(routeCategory);
+      if (tr) setTrack(tr);
+      setCategory(routeCategory);
+    }
+  }, [routeCategory, trackOf]);
+
+  const pickTrack = (next: Track | "all") => {
+    setTrack(next);
+    setCategory("all");
+    setVisible(9);
+  };
 
   const shown = filtered.slice(0, visible);
   const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(subEmail.trim());
@@ -309,58 +452,124 @@ export const Resources: FC = () => {
         </Box>
       </Box>
 
-      {/* Browse by track — only rendered on the unscoped index */}
+      {/* The other door into the library: by symptom rather than by subject.
+          Sits above the track browse because somebody who does not already know
+          the vocabulary needs it more than the taxonomy. */}
       {!scoped && (
         <Box sx={{ px: { xs: "24px", sm: "48px", lg: "80px" }, pt: { xs: "40px", md: "52px" } }}>
-          <Box sx={{ maxWidth: "1180px", mx: "auto" }}>
-            {TRACKS.map((track) => {
-              const inTrack = cats.filter((c) => c.track === track);
-              if (!inTrack.length) return null;
-              return (
-                <Box key={track} sx={{ mb: "32px" }}>
-                  <Typography sx={{ fontFamily: MONO, fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase", color: T.mutedText, mb: "14px" }}>
-                    {track}
-                  </Typography>
-                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                    {inTrack.map((c) => (
-                      <Box
-                        key={c.slug}
-                        component={Link}
-                        to={`/resources/category/${c.slug}`}
-                        sx={{
-                          display: "inline-flex", alignItems: "center", gap: "8px",
-                          px: "14px", py: "8px", borderRadius: "99px", textDecoration: "none",
-                          border: `0.5px solid ${T.border}`, color: T.secondaryText,
-                          fontSize: "13px", fontFamily: "Prompt",
-                          transition: "border-color 0.2s ease, color 0.2s ease",
-                          "&:hover": { borderColor: "#C3A87C", color: T.primaryText },
-                        }}
-                      >
-                        {c.name}
-                        <Box component="span" sx={{ fontFamily: MONO, fontSize: "10px", color: T.mutedText }}>
-                          {c.count}
-                        </Box>
-                      </Box>
-                    ))}
-                  </Box>
-                </Box>
-              );
-            })}
+          <Box
+            component={Link}
+            to="/resources/problems"
+            sx={{
+              maxWidth: "1180px", mx: "auto", display: "flex", alignItems: "center",
+              justifyContent: "space-between", gap: "24px", flexWrap: "wrap",
+              p: { xs: "22px", md: "28px 32px" }, borderRadius: "16px", textDecoration: "none",
+              border: `0.5px solid ${GOLD}55`,
+              background: T.isDark
+                ? "linear-gradient(120deg, rgba(195,168,124,0.10), rgba(195,168,124,0.02))"
+                : "linear-gradient(120deg, rgba(195,168,124,0.15), rgba(195,168,124,0.03))",
+              transition: "border-color 0.3s ease, transform 0.3s ease",
+              "&:hover": { borderColor: GOLD, transform: "translateY(-2px)" },
+              "&:hover .pb-arrow": { transform: "translateX(4px)" },
+            }}
+          >
+            <Box sx={{ flex: "1 1 420px" }}>
+              <Typography sx={{ fontFamily: MONO, fontSize: "9.5px", letterSpacing: "0.14em", textTransform: "uppercase", color: GOLD, mb: "10px" }}>
+                Not sure where to start?
+              </Typography>
+              <Typography sx={{ fontSize: { xs: "20px", md: "25px" }, fontWeight: 500, fontFamily: FONT_DISPLAY, color: T.headline, lineHeight: 1.2, letterSpacing: "-0.02em", mb: "8px" }}>
+                Start with the problem, not the topic
+              </Typography>
+              <Typography sx={{ fontSize: "14.5px", lineHeight: 1.7, color: T.secondaryText, maxWidth: "56ch" }}>
+                Cash tight while you are busy. Customers leaving. Forecasts always wrong.
+                Twelve problems businesses actually have, and where to read about each.
+              </Typography>
+            </Box>
+            <Typography className="pb-arrow" sx={{ color: GOLD, fontSize: "22px", transition: "transform 0.3s ease", flexShrink: 0 }}>
+              →
+            </Typography>
           </Box>
         </Box>
       )}
 
+      {/* The track browse that used to sit here is gone. It listed all 32
+          categories grouped by track, which the track switch below now does
+          in a fraction of the space and with live filtering rather than a
+          page load per category. The crawlable /resources/category/:slug
+          routes still exist and are still in the sitemap. */}
       {/* Filter + search */}
-      <Box sx={{ px: { xs: "24px", sm: "48px", lg: "80px" }, pt: { xs: "24px", md: "32px" } }}>
-        <Box
-          sx={{
-            maxWidth: "1180px", mx: "auto", display: "flex",
-            flexDirection: { xs: "column", md: "row" }, justifyContent: "space-between",
-            alignItems: { xs: "stretch", md: "center" }, gap: "16px",
-          }}
-        >
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-            {[{ slug: "all", name: "All guides" }, ...cats].map((c) => {
+      <Box sx={{ px: { xs: "24px", sm: "48px", lg: "80px" }, pt: { xs: "28px", md: "40px" } }}>
+        <Box sx={{ maxWidth: "1180px", mx: "auto" }}>
+          <Box
+            sx={{
+              display: "flex", flexDirection: { xs: "column", lg: "row" },
+              justifyContent: "space-between", alignItems: { xs: "stretch", lg: "center" },
+              gap: "18px", mb: "22px",
+            }}
+          >
+            <TrackSwitch
+              value={track}
+              onChange={pickTrack}
+              counts={trackCounts}
+              total={GUIDES.length}
+              T={T}
+            />
+
+            <Box
+              sx={{
+                display: "flex", alignItems: "center", gap: "9px", px: "15px", py: "11px",
+                borderRadius: "11px", border: `0.5px solid ${T.border}`, backgroundColor: T.cardBg,
+                minWidth: { lg: "260px" }, transition: "border-color 0.25s ease",
+                "&:focus-within": { borderColor: GOLD },
+              }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                <circle cx="11" cy="11" r="7" stroke={T.secondaryText} strokeWidth="1.7" />
+                <path d="m20 20-3.2-3.2" stroke={T.secondaryText} strokeWidth="1.7" strokeLinecap="round" />
+              </svg>
+              <Box
+                component="input"
+                value={query}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setQuery(e.target.value); setVisible(9); }}
+                placeholder="Search guides…"
+                sx={{
+                  flex: 1, border: "none", outline: "none", background: "transparent",
+                  color: T.primaryText, fontSize: "13.5px", fontFamily: "Prompt",
+                  "&::placeholder": { color: T.placeholder },
+                }}
+              />
+              {query ? (
+                <Box
+                  component="button"
+                  type="button"
+                  onClick={() => { setQuery(""); setVisible(9); }}
+                  aria-label="Clear search"
+                  sx={{
+                    border: "none", background: "none", cursor: "pointer", p: 0, lineHeight: 1,
+                    color: T.mutedText, fontSize: "15px", "&:hover": { color: GOLD },
+                  }}
+                >
+                  ×
+                </Box>
+              ) : null}
+            </Box>
+          </Box>
+
+          {/* Categories, narrowed to the chosen track. Keyed on the track so the
+              row re-animates when it changes, which makes it obvious that the
+              list underneath is now a different set. */}
+          <Box key={track} sx={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
+            {[
+              {
+                slug: "all",
+                name: track === "all" ? "Everything" : "All of this track",
+                // The track total, NOT `filtered.length` — that already has the
+                // category filter applied, so this pill would count whichever
+                // category happened to be selected.
+                count: track === "all" ? GUIDES.length : (trackCounts.get(track) ?? 0),
+              },
+              ...catsInTrack,
+            ].map((c, i) => {
               const active = category === c.slug;
               return (
                 <Box
@@ -369,44 +578,41 @@ export const Resources: FC = () => {
                   type="button"
                   onClick={() => { setCategory(c.slug); setVisible(9); }}
                   sx={{
-                    px: "15px", py: "8px", borderRadius: "99px", cursor: "pointer",
+                    display: "inline-flex", alignItems: "center", gap: "8px",
+                    px: "14px", py: "8px", borderRadius: "99px", cursor: "pointer",
                     font: "inherit", fontFamily: "Prompt", fontSize: "13px", fontWeight: 500,
                     border: `0.5px solid ${active ? "transparent" : T.border}`,
                     backgroundColor: active ? T.ctaPrimaryBg : "transparent",
                     color: active ? T.ctaPrimaryText : T.secondaryText,
-                    transition: "all 0.2s ease",
-                    "&:hover": active ? {} : { borderColor: "#C3A87C", color: T.primaryText },
+                    animation: `pillIn 420ms cubic-bezier(0.22,1,0.36,1) ${Math.min(i, 10) * 26}ms both`,
+                    "@keyframes pillIn": {
+                      from: { opacity: 0, transform: "translateY(6px)" },
+                      to: { opacity: 1, transform: "none" },
+                    },
+                    transition: "background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease",
+                    "&:hover": active ? {} : { borderColor: GOLD, color: T.primaryText },
                   }}
                 >
                   {c.name}
+                  <Box
+                    component="span"
+                    sx={{
+                      fontFamily: MONO, fontSize: "10px",
+                      color: active ? T.ctaPrimaryText : T.mutedText, opacity: active ? 0.7 : 1,
+                    }}
+                  >
+                    {c.count}
+                  </Box>
                 </Box>
               );
             })}
           </Box>
 
-          <Box
-            sx={{
-              display: "flex", alignItems: "center", gap: "8px", px: "14px", py: "9px",
-              borderRadius: "10px", border: `0.5px solid ${T.border}`, backgroundColor: T.cardBg,
-              minWidth: { md: "230px" }, "&:focus-within": { borderColor: "#C3A87C" },
-            }}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-              <circle cx="11" cy="11" r="7" stroke={T.secondaryText} strokeWidth="1.7" />
-              <path d="m20 20-3.2-3.2" stroke={T.secondaryText} strokeWidth="1.7" strokeLinecap="round" />
-            </svg>
-            <Box
-              component="input"
-              value={query}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setQuery(e.target.value); setVisible(9); }}
-              placeholder="Search guides…"
-              sx={{
-                flex: 1, border: "none", outline: "none", background: "transparent",
-                color: T.primaryText, fontSize: "13.5px", fontFamily: "Prompt",
-                "&::placeholder": { color: T.placeholder },
-              }}
-            />
-          </Box>
+          <Typography sx={{ fontFamily: MONO, fontSize: "10.5px", letterSpacing: "0.1em", textTransform: "uppercase", color: T.mutedText, mt: "20px" }}>
+            {filtered.length} {filtered.length === 1 ? "guide" : "guides"}
+            {track !== "all" ? ` in ${track}` : ""}
+            {query ? ` matching “${query}”` : ""}
+          </Typography>
         </Box>
       </Box>
 

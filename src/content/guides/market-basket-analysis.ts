@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 14,
 
+  brief: {
+    inOneMinute:
+      "Your till data already knows what goes together. The trick is correcting for popularity, or you get a list of your bestsellers dressed up as an insight.",
+    problem: {
+      headline: "I rearrange the shop on instinct and what the reps tell me",
+      detail:
+        "An independent hardware shop, 11,000 lines, four years of receipts. The owner also suspected he was discounting things people would buy anyway.",
+    },
+    wrongApproach: {
+      what: "Look at what appears together most often",
+      why: "The strongest pairs are paint and paint. Frequently bought together mostly reflects what sells most, and rearranging a shop around it achieves nothing while looking data-driven.",
+    },
+    rightApproach: {
+      what: "Compare against what you would expect by chance, and look across days",
+      why: "The valuable finding was not in the basket at all. Customers were coming back the next morning for a fixing, which means they got home and could not finish the job.",
+    },
+    context: {
+      where: "Retail layout, range decisions, bundles, till prompts, web merchandising.",
+      decision: "What sits next to what, and what to stop discounting.",
+      metric: "Basket size, and return trips for a forgotten item.",
+    },
+    takeaway:
+      "Most true patterns have no available response. If it does not change a layout, a range, a prompt or a bundle, it is trivia, and a report full of trivia trains people to stop reading it.",
+  },
+
+  story: {
+    title: "Four years of receipts and nothing to buy",
+    caption:
+      "The famous supermarket story everybody repeats is almost certainly not true. Real findings here are small, plural and mildly useful, which is fine.",
+    stages: [
+      { stage: "Problem", label: "Layout by instinct and sales rep", detail: "Plus a suspicion that one long-standing discount is being given away for nothing." },
+      { stage: "Data", label: "Four years of till receipts", detail: "Already there. No collection project, nothing to integrate, nothing to buy." },
+      { stage: "Model", label: "Correct for popularity", detail: "Do these two appear together more than you would expect given how often each sells alone? Without this you learn nothing." },
+      { stage: "Prediction", label: "Three real patterns, several discarded", detail: "One seasonal coincidence and several true-but-unactionable ones thrown out deliberately." },
+      { stage: "Decision", label: "Move an aisle, prompt at the till", detail: "And stop one discount, because the analysis showed the pair sold together regardless." },
+      { stage: "Result", label: "Fewer wasted return trips", detail: "Better for the customer and an extra sale in the same visit." },
+    ],
+  },
+
   intro: [
     "Take every basket, every order, every job sheet from the last two years and ask a simple question. Which things keep turning up together? Not because anybody planned it, just because that is what customers do.",
     "This is called market basket analysis and it is one of the oldest ideas in the field. It produces statements of the form: when somebody buys this, they also buy that, roughly this often. Thousands of them, automatically, from data you already have.",
@@ -100,6 +139,49 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The hardware shop: four years of receipts already sitting on the till",
+      caption:
+        "The next day pass is where the value was. A customer returning the following morning for a fixing is an incomplete purchase, and it is completely invisible to anything that only looks inside a single basket.",
+      trigger: "Quarterly, on receipts the shop already has",
+      runtime: "Nothing to collect. The data was recorded as a side effect of trading.",
+      stages: [
+        {
+          actor: "system",
+          label: "Read four years of till receipts",
+          output: "every basket, plus what the same customer bought on their next visit",
+        },
+        {
+          actor: "rule",
+          label: "Correct for how popular things already are",
+          detail: "Skip this and you get a ranked list of bestsellers presented as an insight.",
+          output: "pairs that go together more than chance alone explains",
+        },
+        {
+          actor: "model",
+          label: "Look across days, not only inside one basket",
+          detail: "What follows a purchase the next morning, which is the pattern that costs the customer a second trip.",
+          output: "what tends to follow what, and how soon",
+        },
+        {
+          actor: "person",
+          label: "Throw away everything you cannot act on",
+          detail: "True and unactionable is still trivia, and a long report of it is how this work loses its audience.",
+          exception: "A strong pattern with no shelf to move, no prompt to write and no conversation attached is discarded, however good it looks on paper.",
+          output: "three changes, each with a location",
+        },
+        {
+          actor: "rule",
+          label: "Move one aisle, add one till prompt, stop one discount",
+          detail: "One of the discounts was buying a purchase that was already going to happen.",
+          output: "changes a manager can make on a Sunday afternoon",
+        },
+      ],
+      loop: "Next quarter shows whether the return trips fell, which is the only measure that means anything here.",
+      outcome:
+        "The value is not in the discount. It is the customer who no longer has to come back the next morning for the fixing.",
+    },
     {
       kind: "tree",
       title: "Is this finding real, or is it just your bestsellers?",

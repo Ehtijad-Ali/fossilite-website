@@ -21,6 +21,92 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 16,
 
+  brief: {
+    inOneMinute:
+      "Most AI projects fail before anybody writes anything, because the idea was a wish rather than a question. Three questions turn one into the other, and they take an afternoon.",
+    problem: {
+      headline: "I want to grow the business and I do not know where the growth is",
+      detail:
+        "A coach hire company. The owner had been told by three people he should be using AI, and arrived at the meeting to say so.",
+    },
+    wrongApproach: {
+      what: "Start with the technology and work backwards",
+      why: "Grow the business is not something anybody can start on a Monday. A project defined that way cannot be finished, so it consumes the budget and produces a report nobody acts on.",
+    },
+    rightApproach: {
+      what: "Ask what decision would change, then check the answer is in your history",
+      why: "Ranking today's open quotes is something one person can do differently tomorrow morning. Every past quote already records whether it converted, which is what makes it learnable at all.",
+    },
+    context: {
+      where: "Any business with more opportunities than it has time to chase.",
+      decision: "Which fifteen quotes get a follow-up call today.",
+      metric: "Conversion rate on quotes, with no extra calls being made.",
+    },
+    takeaway:
+      "If you cannot say what somebody would do differently on being told, you do not have a project yet. That single question kills more bad ideas than any technical review.",
+  },
+
+  story: {
+    title: "Turning I want to grow into a list of fifteen phone calls",
+    caption:
+      "Four of the six stages here are business decisions. Only one is a model, and by the time you reach it the choice of technique barely matters.",
+    stages: [
+      { stage: "Problem", label: "A wish, not a project", detail: "The owner wants growth. Nobody can start work on that, so nothing happens for two years." },
+      { stage: "Data", label: "Four years of quotes", detail: "Around four hundred a year, each one either taken up or not. The answer is already recorded for every single one." },
+      { stage: "Model", label: "Score the open quotes", detail: "Using only what was known when the quote went out. Anything recorded afterwards is banned, and including it is the most common way to fool yourself." },
+      { stage: "Prediction", label: "Likelihood of converting", detail: "Plus the two or three things pushing each quote up or down the list." },
+      { stage: "Decision", label: "Fifteen calls, in order", detail: "Fifteen because that is how many fit in a day. A list of two hundred would be ignored." },
+      { stage: "Result", label: "The same effort, better aimed", detail: "And two of the three original ideas parked with written reasons, so they stop resurfacing in every meeting." },
+    ],
+  },
+
+  calculator: {
+    title: "Would better targeting actually change anything?",
+    intro:
+      "You only have so many hours to chase things. This works out whether reordering that list is worth a project, before anybody builds one.",
+    inputs: [
+      { id: "opps", label: "Opportunities a month", min: 10, max: 2000, step: 10, value: 400, help: "Quotes, leads, trials, applications." },
+      { id: "capacity", label: "How many you can actually chase", min: 5, max: 500, step: 5, value: 60, help: "Realistically, given the people you have." },
+      { id: "rate", label: "How many convert now", min: 1, max: 60, step: 1, value: 18, suffix: "%" },
+      { id: "value", label: "What one is worth", min: 50, max: 20000, step: 50, value: 1400, prefix: "\u00a3" },
+    ],
+    compute: (v) => {
+      const chased = Math.min(v.capacity, v.opps);
+      const now = chased * (v.rate / 100);
+      // Ranking does not create conversions. It moves the same effort onto
+      // better prospects, so the gain scales with how much of the pool you are
+      // NOT reaching: chase everything already and there is nothing to reorder.
+      const headroom = 1 - chased / v.opps;
+      const uplift = now * headroom * 0.55;
+      const annual = uplift * 12 * v.value;
+      return {
+        outputs: [
+          {
+            label: "Extra wins a year, same effort",
+            value: `About ${Math.round(uplift * 12)}`,
+            hero: true,
+            tone: annual > 20000 ? "good" : annual > 6000 ? "neutral" : "bad",
+            note: `Worth roughly \u00a3${Math.round(annual).toLocaleString()} a year at your figures.`,
+          },
+          {
+            label: "You currently reach",
+            value: `${Math.round((chased / v.opps) * 100)}% of them`,
+            note: headroom < 0.2
+              ? "You already chase nearly everything, so reordering the list has little room to help. The gain here is small by construction."
+              : "Plenty you never reach, which is exactly where ranking earns its keep.",
+          },
+          {
+            label: "Before you build anything, check",
+            value: "Is the outcome recorded?",
+            note: "Every past opportunity needs a yes or no against it. Without that there is nothing to learn from, however good the idea.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "The uplift assumes ranking captures somewhat over half the available headroom, which is a deliberately cautious rule of thumb rather than a measurement. Use it to decide whether to investigate, not to write into a business case.",
+  },
+
   intro: [
     "Somebody in your business has probably suggested using machine learning for something. Most of the time they are pointing at a real problem and the wrong tool, and working out which is which takes about twenty minutes if you know what to ask.",
     "A model does exactly one thing. It looks at things that already happened and guesses what will happen with something new. That is it. It cannot decide, it cannot explain why, and it cannot tell you what you should do about the answer.",
@@ -100,6 +186,48 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The coach hire firm: the seven o'clock list",
+      caption:
+        "Notice how little of this is the model. Four of the five steps are decisions about how the business works, and they are the ones that decide whether anything changes on the phone at nine.",
+      trigger: "Every morning at seven, on the open quote book",
+      runtime: "Four minutes. The list is ready before the office opens.",
+      stages: [
+        {
+          actor: "system",
+          label: "Take every quote still open",
+          output: "the open book, and what was known on the day each was quoted",
+        },
+        {
+          actor: "rule",
+          label: "Use only what you knew at the moment of quoting",
+          detail: "Date, destination, vehicle size, whether they have booked before. Nothing that arrived afterwards, however tempting.",
+          output: "the same columns for every quote, old and new",
+        },
+        {
+          actor: "model",
+          label: "Score how likely each quote is to convert",
+          output: "a likelihood for every open quote",
+          exception: "A destination or vehicle type the firm has never quoted before goes to the bottom with a note, not to the top with a guess.",
+        },
+        {
+          actor: "rule",
+          label: "Cut the list at fifteen",
+          detail: "Not a probability threshold. Fifteen is as many calls as one person gets through in a day.",
+          output: "fifteen names, in order",
+        },
+        {
+          actor: "person",
+          label: "She calls the top of the list, not the top of the pile",
+          detail: "The same fifteen calls she was always going to make, on a different fifteen quotes.",
+          output: "booked, lost, or still deciding, with a reason",
+        },
+      ],
+      loop: "Every won and lost quote goes back in, so the ranking is rebuilt on a book that keeps growing.",
+      outcome:
+        "Nobody works longer hours. The fifteen calls land on the fifteen quotes most likely to move.",
+    },
     {
       kind: "tree",
       title: "The three questions that turn a wish into a project",

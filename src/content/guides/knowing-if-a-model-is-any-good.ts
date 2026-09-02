@@ -21,6 +21,87 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 14,
 
+  brief: {
+    inOneMinute:
+      "Ninety-four percent accurate can describe a system that does nothing at all. Before you believe any accuracy figure, ask how often the thing you care about actually happens.",
+    problem: {
+      headline: "A supplier has quoted us for AI and I cannot judge it",
+      detail:
+        "A lettings agency, shown a system that predicts rent arrears with ninety-four percent accuracy. The managing director was ready to sign.",
+    },
+    wrongApproach: {
+      what: "Judge it on the accuracy figure in the pitch",
+      why: "About six percent of tenancies fall into arrears. So a note saying nobody will fall into arrears is ninety-four percent accurate. The demonstrated number was true and described a system worth nothing.",
+    },
+    rightApproach: {
+      what: "Ask for two numbers instead, and always together",
+      why: "Of the tenancies it flags, how many really do go into arrears. And of the ones that do, how many did it miss. Either number alone can be made to look excellent by making the other terrible.",
+    },
+    context: {
+      where: "Buying any predictive system, or reviewing one you already own.",
+      decision: "Whether to sign, and where to set the threshold once you have.",
+      metric: "Problems caught early, against wasted effort chasing false alarms.",
+    },
+    takeaway:
+      "Whenever the thing you care about is rare, accuracy is the wrong measure and it is the one everybody quotes. Ask what doing nothing would score before you look at anything else.",
+  },
+
+  story: {
+    title: "How a true number described a worthless system",
+    caption:
+      "Nobody was lying. Accuracy is simply the wrong measure for rare events, and it gets quoted constantly because it is the one everybody recognises.",
+    stages: [
+      { stage: "Problem", label: "An impressive number, no way to judge it", detail: "Ninety-four percent accurate at predicting arrears, and a contract on the table." },
+      { stage: "Data", label: "Count how often it happens first", detail: "Six tenancies in a hundred fall into meaningful arrears. That one figure explains everything that follows." },
+      { stage: "Model", label: "Work out what doing nothing scores", detail: "A piece of paper saying no is right ninety-four times out of a hundred. That is the bar the supplier had to beat." },
+      { stage: "Prediction", label: "Re-presented on the two real numbers", detail: "Tested on tenancies the model had never seen, not the ones it learned from." },
+      { stage: "Decision", label: "The agency sets the threshold", detail: "Chosen by how many early conversations the team can actually hold each month, not by the supplier." },
+      { stage: "Result", label: "A system they understand and can staff", detail: "Less impressive on paper, and worth having, which is a much healthier place to start." },
+    ],
+  },
+
+  calculator: {
+    title: "What would that accuracy figure actually mean?",
+    intro:
+      "Put in how often the thing you care about happens, and the accuracy a supplier is quoting. This works out what a system that simply says no would score.",
+    inputs: [
+      { id: "rate", label: "How often it happens", min: 1, max: 50, step: 1, value: 6, suffix: "%", help: "Out of every hundred cases, how many are the thing you want to catch?" },
+      { id: "claimed", label: "Accuracy being claimed", min: 50, max: 100, step: 1, value: 94, suffix: "%" },
+    ],
+    compute: (v) => {
+      const doNothing = 100 - v.rate;
+      const beats = v.claimed - doNothing;
+      return {
+        outputs: [
+          {
+            label: "A note saying it never happens would score",
+            value: `${doNothing}% accurate`,
+            hero: true,
+            tone: beats <= 0 ? "bad" : "neutral",
+            note: "That is the number any real system has to beat, and it is almost never mentioned in a pitch.",
+          },
+          {
+            label: "So the claim beats doing nothing by",
+            value: beats > 0 ? `${beats.toFixed(0)} points` : `${Math.abs(beats).toFixed(0)} points WORSE`,
+            tone: beats <= 0 ? "bad" : beats < 3 ? "bad" : "good",
+            note: beats <= 0
+              ? "The quoted figure is no better than a piece of paper saying no. Ask for the two real numbers instead."
+              : beats < 3
+                ? "Barely anything. Ask what it catches and what it misses before going further."
+                : "Worth a proper look. Now ask for the two numbers that describe the trade.",
+          },
+          {
+            label: "The two numbers to ask for instead",
+            value: "Caught, and missed",
+            note: "Of the cases it flags, how many were real? And of the real ones, how many did it miss? Always both, always on data it has never seen.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "Accuracy counts every correct answer, including all the times it correctly said nothing was wrong. When the thing you care about is rare, that swamps everything else, which is why the figure can be true and useless at the same time.",
+  },
+
   intro: [
     "Somebody presents a model. There is a percentage on the slide. Everybody nods. You have no technical background and you suspect the percentage is not telling you very much, and you are right.",
     "You do not need to understand how any of it works to tell whether a model is any good. You need six questions, all of them in plain English, and the answers will tell you more than the slide does.",
@@ -101,7 +182,69 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The lettings agency: five questions to ask before signing anything",
+      caption:
+        "Step one takes five minutes and almost nobody does it. Any accuracy figure quoted without it is either careless or hoping you will not ask.",
+      trigger: "A supplier puts a contract on the table",
+      runtime: "About an afternoon, and it can end the meeting.",
+      stages: [
+        {
+          actor: "person",
+          label: "Count how often the thing you care about actually happens",
+          detail: "Six tenancies in a hundred fall into arrears. That single number sets what a blank sheet of paper scores.",
+          output: "the base rate, written down before any demonstration",
+        },
+        {
+          actor: "rule",
+          label: "Insist the test period is one the system has never seen",
+          detail: "Not the data it learned from, and not a period the supplier chose after the fact.",
+          output: "a fair test, agreed in advance",
+        },
+        {
+          actor: "model",
+          label: "Ask for both numbers, always together",
+          detail: "Of those it flagged, how many were real. Of those that happened, how many it caught. One without the other is meaningless.",
+          output: "two numbers, rather than one accuracy figure",
+        },
+        {
+          actor: "rule",
+          label: "Beat the obvious free signal",
+          detail: "One payment behind is already sitting in the system and costs nothing at all.",
+          exception: "A system that cannot beat one payment behind is not a system. The meeting ends politely at this step.",
+          output: "a comparison against simply doing the simple thing",
+        },
+        {
+          actor: "person",
+          label: "Set the threshold to your own capacity",
+          detail: "How many conversations the team can genuinely have this month, not how many the supplier would like to report.",
+          output: "a flag rate you can actually staff",
+        },
+      ],
+      loop: "The same five questions get asked at renewal, against the year that has just happened rather than the demonstration.",
+      outcome:
+        "Ninety-four percent accurate stops sounding impressive the moment you know that saying nothing at all scores ninety-four.",
+    },
+    {
       kind: "bars",
+      lesson: {
+        problem: "A supplier is quoting a system that predicts rent arrears, and the contract is on the table.",
+        wrong: {
+          label: "Judge the accuracy",
+          why: "It is the number in every pitch and the one everybody recognises, which is exactly why it gets quoted. It counts every correct answer, including all the times it said nothing was wrong.",
+        },
+        right: {
+          label: "Compare against doing nothing",
+          why: "Work out what a blank piece of paper would score first. Only then does an accuracy figure mean anything at all.",
+        },
+        discovery: "Six tenancies in a hundred fall into arrears, so a note saying nobody will is ninety-four percent accurate. The demonstrated figure was true and described a system worth nothing.",
+        decisions: [
+          { tone: "investigate", label: "Ask what doing nothing scores" },
+          { tone: "monitor", label: "Of those flagged, how many were real" },
+          { tone: "protect", label: "Set the threshold to your capacity" },
+        ],
+        takeaway: "When the thing you care about is rare, accuracy is the wrong measure and the one you will be shown.",
+      },
       title: "What ninety-four percent accurate actually described",
       caption:
         "Worked arithmetic, not a measurement. If six in a hundred tenancies fall into arrears, then a system that simply says nobody will is right ninety-four times. That was the demonstrated figure. The number was true and the system was worth nothing.",

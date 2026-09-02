@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 16,
 
+  brief: {
+    inOneMinute:
+      "A good model nobody uses is worth nothing, and the fix is almost never the model. It is when the answer arrives, where it appears, and whether anybody agreed what to do about it.",
+    problem: {
+      headline: "We built it six months ago and nobody has opened it",
+      detail:
+        "A commercial print shop with a reasonably good model predicting which jobs will need a reprint. It lives in a spreadsheet the analyst refreshes on Mondays.",
+    },
+    wrongApproach: {
+      what: "Improve the model",
+      why: "This was the first suggestion and it addresses nothing. The model was fine the whole time. It would have consumed the remaining budget on the one component that was not broken.",
+    },
+    rightApproach: {
+      what: "Deliver at the moment of the decision, in the tool people already use",
+      why: "The decision happens several times a day and the list was up to five days old. It also said what without why, and nobody had agreed what a flagged job should actually trigger.",
+    },
+    context: {
+      where: "Any model that has been built and is not being used, which is most of them.",
+      decision: "Where the output appears, and what somebody does with it.",
+      metric: "Whether it is being used at all, which is a real metric.",
+    },
+    takeaway:
+      "Not one change here was to the model. The reasons turned out to be more valuable than the scores, because they pointed at fixes upstream.",
+  },
+
+  story: {
+    title: "Six months of nothing, fixed without touching the model",
+    caption:
+      "The dismiss log found two reason types that were consistently wrong within a month. No amount of offline testing had surfaced them.",
+    stages: [
+      { stage: "Problem", label: "It exists and it is ignored", detail: "The studio manager had looked at it twice in six months." },
+      { stage: "Data", label: "Watching the work, not the numbers", detail: "The decision is made several times a day. The list arrives weekly, in a different tool." },
+      { stage: "Model", label: "Unchanged", detail: "It was already good enough. Improving it would have been the expensive way to achieve nothing." },
+      { stage: "Prediction", label: "Now shown at job setup, with the reason", detail: "Low resolution supplied file. Unusual stock. Tight colour match. The reason is what makes it actionable." },
+      { stage: "Decision", label: "One page of agreed responses", detail: "Written with the studio, and it took longer than the technical work." },
+      { stage: "Result", label: "Used, because the studio owns it", detail: "With a one-click dismiss and a reason, which is what makes it a tool rather than a supervisor." },
+    ],
+  },
+
   intro: [
     "A model that works is not a model that helps. Between the two sits the part almost everybody underestimates: getting the answer in front of the right person, at the right moment, in a form they will act on, with somebody accountable for what happens next.",
     "The pattern is depressingly consistent. Months of careful work produce something accurate, it gets delivered as a daily list or a number on a screen, and six months later nothing in the business is measurably different. The model was never the problem.",
@@ -107,6 +146,49 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The print shop: the score arrives at the moment of setup",
+      caption:
+        "Not one change in this workflow is to the model, which was fine the whole time. The dismissal log then found two reason types coming back constantly, and both were fixed in the process rather than in the maths.",
+      trigger: "The moment a job is set up, not at eight on a Monday",
+      runtime: "Inside the screen the setter already has open.",
+      stages: [
+        {
+          actor: "system",
+          label: "A good model that nobody opened",
+          detail: "A weekly spreadsheet on a shared drive. Six months, no uptake, and nothing wrong with the scores in it.",
+          output: "the right answers, arriving at the wrong moment",
+        },
+        {
+          actor: "rule",
+          label: "Move it to the moment of setup",
+          detail: "A five day old list is history. A score at the point of decision is a decision.",
+          output: "the same scores, at the moment they matter",
+        },
+        {
+          actor: "system",
+          label: "Put it in the job system",
+          detail: "No new login, no new tab, no new habit anybody has to form.",
+          output: "one extra line on a screen that was already open",
+        },
+        {
+          actor: "model",
+          label: "Show the reason beside the score",
+          detail: "Low resolution file. Unusual stock. A number somebody can agree or disagree with.",
+          output: "a score with its two reasons attached",
+        },
+        {
+          actor: "person",
+          label: "One click to dismiss, with a reason",
+          detail: "Control for the setter, and a log of exactly where the thing is wrong.",
+          exception: "Two reason types came back again and again in that log. Both were process problems, and both were cheap to fix once anybody could see them.",
+        },
+      ],
+      loop: "The dismissal log is read monthly, and it turned out to be the most useful thing the project produced.",
+      outcome:
+        "A model nobody opens is worth nothing, and the fix is almost never in the model.",
+    },
     {
       kind: "tree",
       title: "Nobody is using it. Which of these is it?",

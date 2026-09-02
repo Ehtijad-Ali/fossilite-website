@@ -21,6 +21,90 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 16,
 
+  brief: {
+    inOneMinute:
+      "When you are guessing a number for a customer, the guess has a shape. Past jobs tell you what each thing adds, and the estimate stops depending on who picked up the phone.",
+    problem: {
+      headline: "Half our jobs run over and the other half we price too high and lose",
+      detail:
+        "A removals firm. The quote is made in five minutes on the phone by whoever answers it, and nobody has ever checked those quotes against what actually happened.",
+    },
+    wrongApproach: {
+      what: "Trust experience and quote from the gut",
+      why: "Different people quote differently for the same job, and the low one was the person who had never done a removal. Nobody had spotted it because nobody was comparing quoted hours against real hours.",
+    },
+    rightApproach: {
+      what: "Work out what each factor adds, from three years of finished jobs",
+      why: "A baseline, plus so much per bedroom, plus so much for a second floor with no lift, plus so much for a long carry. It is arithmetic, it fits on a card, and reading the numbers changes how the phone call goes on day one.",
+    },
+    context: {
+      where: "Quoting, estimating and scheduling in any job-based trade.",
+      decision: "What to charge, how many people to send, and whether a second job fits that day.",
+      metric: "How often jobs land inside the quoted hours.",
+    },
+    takeaway:
+      "Half the value arrives before anything is automated: seeing that a long carry costs more time than an extra bedroom changes what you ask on the phone.",
+  },
+
+  story: {
+    title: "From a five-minute guess to an estimate with a range",
+    caption:
+      "The estimate has to arrive while the customer is still on the phone. A number that appears after they hang up is worth nothing.",
+    stages: [
+      { stage: "Problem", label: "Quotes are a coin toss", detail: "Overruns get swallowed, overpriced jobs get lost, and nobody knows which way the business is leaning." },
+      { stage: "Data", label: "Three years of jobs", detail: "Quoted hours and actual hours, plus bedrooms, floor level, lift, parking distance and what was being moved." },
+      { stage: "Model", label: "What each thing adds", detail: "The simplest possible version. A baseline plus a weight for each factor, printable on a card." },
+      { stage: "Prediction", label: "Hours, as a range", detail: "With the two biggest drivers shown beside it, so whoever is quoting can explain the number." },
+      { stage: "Decision", label: "Price, crew size, and the day's plan", detail: "All three come off the same estimate, so a job no longer gets the wrong number of people." },
+      { stage: "Result", label: "The worst overruns get caught while they can still be repriced", detail: "Rather than being discovered on the morning of the move." },
+    ],
+  },
+
+  calculator: {
+    title: "What are your quoting errors worth?",
+    intro:
+      "Estimating badly costs you twice: on the jobs that overrun, and on the ones you priced out of. Put in your own numbers and see the size of both.",
+    inputs: [
+      { id: "jobs", label: "Jobs quoted a month", min: 5, max: 500, step: 5, value: 50 },
+      { id: "value", label: "Average job value", min: 100, max: 50000, step: 100, value: 900, prefix: "\u00a3" },
+      { id: "over", label: "How many overrun", min: 0, max: 80, step: 1, value: 35, suffix: "%" },
+      { id: "amount", label: "Typical overrun", min: 5, max: 100, step: 5, value: 25, suffix: "%", help: "How far past the quoted hours those jobs go." },
+    ],
+    compute: (v) => {
+      const overJobs = v.jobs * (v.over / 100);
+      const swallowed = overJobs * v.value * (v.amount / 100) * 12;
+      // Estimating badly is symmetric: the same imprecision that overruns some
+      // jobs prices you out of others, and that half is invisible in the accounts.
+      const lostJobs = overJobs * 0.6;
+      const lost = lostJobs * v.value * 12 * 0.25;
+      return {
+        outputs: [
+          {
+            label: "Swallowed on overrunning jobs, a year",
+            value: `\u00a3${Math.round(swallowed).toLocaleString()}`,
+            hero: true,
+            tone: "bad",
+            note: "Work you did and did not charge for.",
+          },
+          {
+            label: "The half you cannot see",
+            value: `About \u00a3${Math.round(lost).toLocaleString()}`,
+            note: "Margin on jobs you priced too high and lost. It never appears in the accounts, which is why businesses only ever fix the overruns.",
+          },
+          {
+            label: "Overrunning jobs a month",
+            value: `${Math.round(overJobs)}`,
+            note: overJobs > 12
+              ? "Enough that the pattern will be readable. Sort last year's jobs by size of error and read the worst ten."
+              : "Few enough that you can read every one of them individually, which is the better approach at this volume.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "The lost-jobs figure is an estimate built on an assumption, not a measurement: that imprecise quoting misses in both directions at roughly similar rates. Treat it as an argument for looking, not as a number for a business case.",
+  },
+
   intro: [
     "There is one kind of question that comes up constantly in business. How much will this cost. How long will this take. How many will we sell. How much is this house worth. All of them want a number back.",
     "The tool for that is called regression, which is an unhelpful name for something quite simple. It looks at lots of past examples where you know both the details and the answer, works out how the details relate to the answer, and then gives you an answer for something new.",
@@ -101,6 +185,48 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The removals firm: pricing a job with the two questions nobody was asking",
+      caption:
+        "The whole gain here came from two lines added to a phone script. The modelling was ordinary. Finding out which two questions to ask was not.",
+      trigger: "A survey is booked, before the quote is sent",
+      runtime: "Instant, inside the quoting screen the estimator already uses.",
+      stages: [
+        {
+          actor: "system",
+          label: "Pull what the surveyor has already typed",
+          output: "volume, distance, and the property details",
+        },
+        {
+          actor: "rule",
+          label: "Ask which floor, and how far from the door to the van",
+          detail: "Two questions added to the script. The overruns were never random; they sat almost entirely on upper floors and long carries.",
+          output: "the two facts that explain most of the difference",
+        },
+        {
+          actor: "model",
+          label: "Predict the hours, not just the price",
+          detail: "Hours are what actually overrun. Price is what happens to hours afterwards.",
+          output: "an estimate, with a range either side of it",
+        },
+        {
+          actor: "person",
+          label: "The estimator sees the range and the three most similar past jobs",
+          detail: "A number on its own gets argued with. Three comparable jobs do not.",
+          exception: "No close match in the whole history means a survey in person, rather than a confident figure produced from nothing like it.",
+          output: "a price he can stand behind",
+        },
+        {
+          actor: "system",
+          label: "Record the actual hours against the estimate",
+          detail: "Quoted against actual, every time, including the ones that went fine.",
+        },
+      ],
+      loop: "Every completed job narrows the range on the next one like it.",
+      outcome:
+        "Overruns stop being bad luck the firm swallows and become a known, quotable surcharge on access.",
+    },
+    {
       kind: "flow",
       title: "The removals firm: from a five-minute phone guess to an estimate with a range",
       caption:
@@ -115,6 +241,32 @@ export const guide: Guide = {
     },
     {
       kind: "scatter",
+      lesson: {
+        problem: "Half our removals run over and we swallow the difference. Which ones, and why?",
+        wrong: {
+          label: "Quoted against actual",
+          why: "A cloud of jobs, some over and some under. It looks like ordinary noise, which is exactly why the business concluded that estimating is just hard and left it there.",
+        },
+        right: {
+          label: "Split by access",
+          why: "The same jobs, separated by whether there was a lift and how far the carry was. The overruns are not scattered at all. They sit almost entirely in one group.",
+        },
+        discovery: "The overruns cluster on upper floors and long carries, which is something the person quoting on the phone was never told to ask about.",
+        decisions: [
+          { tone: "protect", label: "Ground floor jobs, quote as now" },
+          { tone: "monitor", label: "Anything above the first floor" },
+          { tone: "investigate", label: "Jobs with a long carry" },
+        ],
+        takeaway: "If the error looks random, you have not found the column that explains it yet.",
+      },
+      naive: {
+        groups: [
+          {
+            name: "All jobs",
+            points: [[12, 14], [20, 19], [26, 28], [34, 33], [42, 44], [50, 48], [58, 60], [66, 64], [74, 76], [30, 31], [46, 45], [62, 63], [16, 34], [24, 46], [32, 55], [40, 66], [48, 74], [22, 41], [36, 62], [28, 50], [44, 70], [18, 38]],
+          },
+        ],
+      },
       title: "Why the overruns were not random",
       caption:
         "Each dot is a past job. Anything above the diagonal took longer than quoted. The overruns cluster rather than scatter, and that clustering is what made the problem fixable.",

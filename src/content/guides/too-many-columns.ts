@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 14,
 
+  brief: {
+    inOneMinute:
+      "Four hundred sensors do not measure four hundred things. Most of them move together, and squeezing them into a handful of combined measures is what makes prediction possible at all.",
+    problem: {
+      headline: "Enormous quantities of data and every attempt goes nowhere",
+      detail:
+        "A drinks bottling plant logging several hundred sensor readings a minute. The dashboards had four hundred gauges, which meant nobody looked at any of them.",
+    },
+    wrongApproach: {
+      what: "Feed everything in, and ask for more sensors",
+      why: "Four hundred columns against a few dozen recorded stoppages finds convincing patterns in noise. It performs beautifully on history and fails in production, slowly and confusingly.",
+    },
+    rightApproach: {
+      what: "Compress first, then predict",
+      why: "A dozen temperature probes along one section move together almost perfectly. They are twelve columns carrying roughly one piece of information, and a small number of combined measures captured most of what varies.",
+    },
+    context: {
+      where: "Sensors, telemetry, long surveys, anywhere the columns outnumber the events.",
+      decision: "Which machine states warrant an inspection.",
+      metric: "Stoppages predicted, and whether an operator can read the screen at all.",
+    },
+    takeaway:
+      "The unplanned win was the operator screen. A handful of combined measures gave a view of the line that four hundred gauges never could.",
+  },
+
+  story: {
+    title: "Four hundred readings describing a handful of things",
+    caption:
+      "Putting the sensors on a comparable scale first is easy to skip, and skipping it quietly turns the whole thing into an analysis of whichever sensors have the biggest numbers.",
+    stages: [
+      { stage: "Problem", label: "Rich data, no results", detail: "Every previous attempt drowned, and the standing response was to buy more sensors." },
+      { stage: "Data", label: "Hundreds of readings a minute", detail: "Heavily duplicated, in wildly different units." },
+      { stage: "Model", label: "Reduce to a few combined measures", detail: "Which account for most of the variation across every sensor on the line." },
+      { stage: "Prediction", label: "Stoppage risk, built on those", detail: "Which gives it a fighting chance given how few stoppages there are to learn from." },
+      { stage: "Decision", label: "Inspect when the combined picture moves", detail: "The alert fires before any single sensor breaches its own limit, which buys time." },
+      { stage: "Result", label: "A screen an operator can actually read", detail: "And the sensor expansion budget withdrawn, because the problem was never a shortage of measurement." },
+    ],
+  },
+
   intro: [
     "A customer satisfaction survey has sixty questions. Look at the answers and you notice something. People who rate the delivery speed highly also rate the packaging highly, and the tracking, and the driver. Eight questions and one underlying opinion: they are happy with how it arrived.",
     "That happens constantly. Sixty questions are frequently asking about four or five things, dressed up as sixty. The same is true of sensor readings, financial ratios, engagement measures and almost any long list of numbers about the same thing.",
@@ -101,7 +140,67 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The bottling line: four hundred sensors, and the handful of things they are saying",
+      caption:
+        "Step two is a stop, not a step. Four hundred readings against a few dozen recorded stoppages will always find convincing patterns in noise, perform beautifully on history, and fail the week it goes live.",
+      trigger: "Every shift, on the line's sensor feed",
+      runtime: "Continuous, summarised at each changeover.",
+      stages: [
+        {
+          actor: "system",
+          label: "Four hundred sensor readings off the line",
+          output: "four hundred columns, and a few dozen recorded stoppages",
+        },
+        {
+          actor: "rule",
+          label: "Refuse to model four hundred columns against forty events",
+          detail: "This is the discipline that saves the project, and it happens before anybody opens a modelling tool.",
+          output: "a deliberate stop",
+        },
+        {
+          actor: "model",
+          label: "Compress first: find the few things the line is actually doing",
+          detail: "A dozen probes along one section move together almost perfectly. They are twelve columns carrying one piece of information.",
+          output: "a small number of combined measures",
+        },
+        {
+          actor: "person",
+          label: "An engineer names each combined measure in a sentence",
+          detail: "The line only really has a handful of distinct states, and the operators recognised every one of them.",
+          exception: "A combined measure nobody can describe in a sentence does not go on the operator screen, whatever it contributes.",
+          output: "an operator screen with a handful of readings, not four hundred gauges",
+        },
+        {
+          actor: "rule",
+          label: "Only now predict stoppages, on the compressed measures",
+          output: "a warning that still holds up outside the history it learned from",
+        },
+      ],
+      loop: "Before more sensors are bought, the question is whether they add a new measure or another copy of one you already have.",
+      outcome:
+        "More columns than events is not rich data. It is a very convincing way to fool yourself, and it costs a quarter to find out.",
+    },
+    {
       kind: "curve",
+      lesson: {
+        problem: "Hundreds of sensors on the bottling line, and every attempt to predict stoppages goes nowhere.",
+        wrong: {
+          label: "Use every column",
+          why: "Four hundred readings against a few dozen recorded stoppages will always find convincing patterns in noise. It performs beautifully on history and fails in production.",
+        },
+        right: {
+          label: "Compress, then predict",
+          why: "A dozen probes along one section move together almost perfectly. They are twelve columns carrying one piece of information, and combining them makes the problem tractable.",
+        },
+        discovery: "A handful of combined measures account for most of what varies across all four hundred sensors. The line only really has a few distinct states.",
+        decisions: [
+          { tone: "protect", label: "The operator screen, not 400 gauges" },
+          { tone: "monitor", label: "The combined measures" },
+          { tone: "investigate", label: "Before buying more sensors" },
+        ],
+        takeaway: "More columns than events is not rich data. It is a way to fool yourself convincingly.",
+      },
       title: "Four hundred readings describing a handful of things",
       caption:
         "Each step along the bottom is one combined measure. The first few account for most of what varies across every sensor on the line, because a dozen temperature probes along one section move together and are twelve columns carrying one piece of information.",

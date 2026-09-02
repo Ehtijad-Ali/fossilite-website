@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "The honest answer is usually no. There is one clear test for when it is yes, and most businesses proposing this are on the wrong side of it.",
+    problem: {
+      headline: "People stand at a belt for eight hours and accuracy falls by the end",
+      detail:
+        "A recycling operator sorting mixed household waste. The wrong material downgrades an entire load, and the task degrades human attention by design.",
+    },
+    wrongApproach: {
+      what: "Add more people to the line",
+      why: "The problem was never headcount. Asking a person to be a camera for eight hours reproduces the same failure at greater cost, and turnover was already high because the job is unpleasant.",
+    },
+    rightApproach: {
+      what: "Use it only where the input cannot be written down as numbers",
+      why: "There is no table of features describing what a contaminated item looks like on a moving belt. That is the test. When the input is an image, a sound or language, and cannot be reduced to a spreadsheet, this family finally earns its cost.",
+    },
+    context: {
+      where: "Visual inspection, speech, document reading. Genuinely not much else.",
+      decision: "Whether to spend considerably more than the simpler options cost.",
+      metric: "Load quality, and whether a person is doing work a person is good at.",
+    },
+    takeaway:
+      "It was scoped to the few item types causing most of the loss. Scoped to everything it would have needed far more labelled data and been mediocre at all of it.",
+  },
+
+  story: {
+    title: "One of the few cases where the answer is genuinely yes",
+    caption:
+      "The first version highlights for a person rather than driving a mechanism. Cheaper, safer, and it generates the corrections the next version learns from.",
+    stages: [
+      { stage: "Problem", label: "An unpleasant job done badly", detail: "Through no fault of the people doing it. Contamination downgrades whole loads." },
+      { stage: "Data", label: "Pictures, not rows and columns", detail: "Which is the distinguishing test. There is no table of measurements to hand a simpler model." },
+      { stage: "Model", label: "Thousands of labelled images", detail: "Tedious, unavoidable, and the single biggest determinant of whether any of it works." },
+      { stage: "Prediction", label: "Suspect items, recognised on the belt", detail: "Limited to the item types responsible for most of the downgrades." },
+      { stage: "Decision", label: "Highlight it for the picker", detail: "Assist rather than replace. A bad day for the system is a bad day for nobody." },
+      { stage: "Result", label: "Attention pointed where it matters", detail: "Plus a weekly report on which collection rounds arrive contaminated, which nobody had planned for." },
+    ],
+  },
+
   intro: [
     "Neural networks get all the attention, and for most business problems they are the wrong answer. That is not a fashionable thing to say and it is what the evidence keeps showing. If your data is a table of customers and orders, something much simpler will usually beat them, cost less to build and be easier to keep running.",
     "There are situations where they are genuinely the only sensible choice, and they have something specific in common. They involve information where the arrangement carries the meaning. Which pixels are next to which other pixels. Which word came before which other word. How a sound changes over time.",
@@ -100,6 +139,48 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The recycling plant: what the picker sees, and what it never shows",
+      caption:
+        "Highlighting for a human rather than driving a mechanism is what made this affordable and what made it safe. It also produces the corrections that train the next version, at no extra cost.",
+      trigger: "Continuously, while the belt is running",
+      runtime: "Live, on the picker's screen, at belt speed.",
+      stages: [
+        {
+          actor: "system",
+          label: "Cameras over the belt",
+          detail: "Not rows and columns. Pictures, which is the one job this family of methods is genuinely for.",
+          output: "frames, many per second",
+        },
+        {
+          actor: "rule",
+          label: "Label only what actually costs money",
+          detail: "The few item types causing the downgrades, rather than everything that passes.",
+          output: "a small, finishable labelling job instead of an endless one",
+        },
+        {
+          actor: "model",
+          label: "Recognise those items as they pass",
+          output: "a box drawn round the item, on screen",
+          exception: "A poor view, a covered item or an unfamiliar shape shows nothing at all rather than showing a guess. Silence is the safe failure here.",
+        },
+        {
+          actor: "person",
+          label: "The picker sees a highlight and decides",
+          detail: "Assist, do not remove. A smaller promise, and a far easier one to keep.",
+          output: "the item taken, or left",
+        },
+        {
+          actor: "system",
+          label: "Every correction the picker makes is recorded",
+          detail: "Which is also, quietly, how the next version gets its training data.",
+        },
+      ],
+      loop: "The corrections are the training set, so the thing improves by being used rather than by being rebuilt.",
+      outcome:
+        "Nobody was replaced. Attention was pointed, and the plant could afford it.",
+    },
     {
       kind: "tree",
       title: "Do you actually need one? Usually not.",

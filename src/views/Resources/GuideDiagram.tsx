@@ -31,65 +31,13 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useSharedTokens } from "../../theme/sharedTokens";
-import type { Diagram } from "../../content/types";
-
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace';
-const GOLD = "#C3A87C";
-const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
-
-type T = ReturnType<typeof useSharedTokens>;
-
-/** Validated categorical steps. Slots 1-3 clear the all-pairs floors in both modes. */
-const series = (T: T) =>
-  T.isDark ? ["#3987e5", "#d95926", "#199e70"] : ["#2a78d6", "#eb6834", "#1baf7a"];
-
-const toneColor = (T: T, tone?: string) => {
-  const [s1, s2, s3] = series(T);
-  if (tone === "good") return s3;
-  if (tone === "bad") return s2;
-  if (tone === "accent" || tone === "model") return s1;
-  if (tone === "input" || tone === "output") return T.secondaryText;
-  return T.mutedText;
-};
-
-// ─── Motion plumbing ─────────────────────────────────────────────────────────
-
-const useReducedMotion = () => {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const m = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(m.matches);
-    const on = () => setReduced(m.matches);
-    m.addEventListener("change", on);
-    return () => m.removeEventListener("change", on);
-  }, []);
-  return reduced;
-};
-
-/** Fires once, when the figure has scrolled far enough in to be worth watching. */
-const useInView = <E extends HTMLElement>() => {
-  const ref = useRef<E | null>(null);
-  const [seen, setSeen] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || seen) return;
-    if (typeof IntersectionObserver === "undefined") { setSeen(true); return; }
-    const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } },
-      { threshold: 0.25, rootMargin: "0px 0px -60px 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [seen]);
-  return { ref, seen };
-};
-
-/** One place that decides whether a thing has arrived yet, and how late. */
-const enter = (on: boolean, reduced: boolean, i = 0, dist = 10) => ({
-  opacity: on || reduced ? 1 : 0,
-  transform: on || reduced ? "none" : `translateY(${dist}px)`,
-  transition: reduced ? "none" : `opacity 520ms ${EASE} ${i * 70}ms, transform 520ms ${EASE} ${i * 70}ms`,
-});
+import type { Diagram, DiagramLesson } from "../../content/types";
+import {
+  MONO, GOLD, EASE, series, good, bad, toneColor,
+  useReducedMotion, useInView, enter, Figure,
+} from "./figureKit";
+import type { T } from "./figureKit";
+import { GuideWorkflow } from "./GuideWorkflow";
 
 // ─── Shared furniture ────────────────────────────────────────────────────────
 
@@ -117,70 +65,6 @@ const Tip: FC<{ x: number; y: number; title: string; note?: string; T: T }> = ({
     ) : null}
   </Box>
 );
-
-const Figure: FC<{ title: string; caption?: string; T: T; children: React.ReactNode }> = ({
-  title, caption, T, children,
-}) => {
-  const reduced = useReducedMotion();
-  const { ref, seen } = useInView<HTMLDivElement>();
-  return (
-    <Box
-      component="figure"
-      ref={ref}
-      sx={{
-        m: 0, mb: "28px", p: { xs: "18px", md: "26px" },
-        borderRadius: "14px",
-        border: `0.5px solid ${T.border}`,
-        backgroundColor: T.cardBg,
-        boxShadow: T.boxShadow,
-        // Not `overflow: hidden` — tooltips sit above their mark and would be
-        // clipped by the frame. The hairline below is inset, so it needs none.
-        position: "relative",
-        ...enter(seen, reduced, 0, 14),
-      }}
-    >
-      {/* The gold hairline that runs across the top of a plate, drawn in. */}
-      <Box
-        aria-hidden
-        sx={{
-          position: "absolute", top: 0, left: 0, height: "1px",
-          width: seen || reduced ? "100%" : "0%",
-          background: `linear-gradient(90deg, ${GOLD}, ${T.border} 55%, transparent)`,
-          transition: reduced ? "none" : `width 900ms ${EASE} 80ms`,
-        }}
-      />
-      <Typography
-        sx={{
-          fontFamily: MONO, fontSize: "9.5px", letterSpacing: "0.12em",
-          textTransform: "uppercase", color: GOLD, mb: "12px",
-        }}
-      >
-        Figure
-      </Typography>
-      <Typography
-        sx={{
-          fontSize: { xs: "16px", md: "17.5px" }, fontWeight: 600, fontFamily: "Prompt",
-          color: T.headline, mb: "20px", lineHeight: 1.35, letterSpacing: "-0.01em",
-        }}
-      >
-        {title}
-      </Typography>
-      {/* Wide figures scroll inside their own frame; the page never scrolls sideways. */}
-      <Box sx={{ overflowX: "auto", overflowY: "visible" }}>{children}</Box>
-      {caption ? (
-        <Typography
-          component="figcaption"
-          sx={{
-            fontSize: "13.5px", lineHeight: 1.7, color: T.mutedText,
-            mt: "18px", pt: "14px", borderTop: `0.5px solid ${T.border}`,
-          }}
-        >
-          {caption}
-        </Typography>
-      ) : null}
-    </Box>
-  );
-};
 
 const Legend: FC<{
   items: { name: string; color: string; dashed?: boolean; band?: boolean }[];
@@ -216,6 +100,171 @@ const Legend: FC<{
     ))}
   </Box>
 );
+
+// --- The lesson frame -------------------------------------------------------
+// Problem, the wrong view, the switch, the discovery, what to do, the takeaway.
+//
+// A finished chart shows an answer. This shows somebody being wrong first,
+// which is the half that teaches: the reader recognises the naive view as the
+// thing they would have done, and only then sees what it hides. So `wrong` and
+// `right` are two states of the same figure, not two captions.
+
+/** The cross / tick switch. Flipping it changes what is plotted. */
+const ViewToggle: FC<{
+  lesson: DiagramLesson; revealed: boolean; onChange: (r: boolean) => void; T: T;
+}> = ({ lesson, revealed, onChange, T }) => {
+  const opts = [
+    { on: false, mark: "\u2715", label: lesson.wrong.label, col: bad(T) },
+    { on: true, mark: "\u2713", label: lesson.right.label, col: good(T) },
+  ];
+  return (
+    <Box
+      role="tablist"
+      aria-label="Compare the two views"
+      sx={{
+        display: "inline-flex", gap: "4px", p: "4px", borderRadius: "11px",
+        border: `0.5px solid ${T.border}`, backgroundColor: T.surfaceSubtle, mb: "16px",
+        maxWidth: "100%", flexWrap: { xs: "wrap", sm: "nowrap" },
+      }}
+    >
+      {opts.map((o) => {
+        const active = o.on === revealed;
+        return (
+          <Box
+            key={o.label}
+            component="button"
+            type="button"
+            role="tab"
+            aria-selected={active}
+            onClick={() => onChange(o.on)}
+            sx={{
+              display: "inline-flex", alignItems: "center", gap: "8px",
+              px: "14px", py: "9px", borderRadius: "8px", cursor: "pointer",
+              border: `0.5px solid ${active ? `${o.col}88` : "transparent"}`,
+              backgroundColor: active ? T.cardBg : "transparent",
+              font: "inherit", fontSize: "13px", fontWeight: active ? 600 : 500,
+              color: active ? T.headline : T.mutedText,
+              transition: `all 260ms ${EASE}`,
+              "&:hover": { color: T.primaryText },
+            }}
+          >
+            <Box component="span" sx={{ color: o.col, fontWeight: 700, fontSize: "12px" }}>{o.mark}</Box>
+            {o.label}
+          </Box>
+        );
+      })}
+    </Box>
+  );
+};
+
+/** One sentence above the plot. What is going wrong. */
+const ProblemStrip: FC<{ text: string; T: T }> = ({ text, T }) => (
+  <Box sx={{ display: "flex", gap: "11px", alignItems: "stretch", mb: "15px" }}>
+    <Box sx={{ width: "2px", borderRadius: "1px", backgroundColor: GOLD, flexShrink: 0 }} />
+    <Typography sx={{ fontSize: "14.5px", lineHeight: 1.6, color: T.secondaryText }}>{text}</Typography>
+  </Box>
+);
+
+/** Below the plot: why this view misleads, then the discovery and the decision. */
+const LessonFoot: FC<{ lesson: DiagramLesson; revealed: boolean; T: T }> = ({ lesson, revealed, T }) => {
+  const reduced = useReducedMotion();
+  const side = revealed ? lesson.right : lesson.wrong;
+  const col = revealed ? good(T) : bad(T);
+  const chip = (tone: string) => (tone === "protect" ? good(T) : tone === "investigate" ? bad(T) : GOLD);
+  const rise = (delay: number) => ({
+    animation: reduced ? "none" : `lessonIn 440ms ${EASE} ${delay}ms both`,
+    "@keyframes lessonIn": {
+      from: { opacity: 0, transform: "translateY(7px)" },
+      to: { opacity: 1, transform: "none" },
+    },
+  });
+  return (
+    <Box sx={{ mt: "18px" }}>
+      <Box
+        key={String(revealed)}
+        sx={{
+          p: "13px 15px", borderRadius: "10px",
+          border: `0.5px solid ${T.border}`, borderLeft: `2px solid ${col}`,
+          backgroundColor: T.surfaceSubtle, ...rise(0),
+        }}
+      >
+        <Typography sx={{ fontSize: "14px", lineHeight: 1.65, color: T.primaryText }}>{side.why}</Typography>
+      </Box>
+
+      {revealed ? (
+        <>
+          <Box
+            sx={{
+              display: "flex", gap: "11px", alignItems: "flex-start", mt: "14px",
+              p: "14px 16px", borderRadius: "10px",
+              border: `0.5px solid ${GOLD}55`,
+              backgroundColor: T.isDark ? "rgba(195,168,124,0.07)" : "rgba(195,168,124,0.10)",
+              ...rise(90),
+            }}
+          >
+            {/* Drawn rather than an emoji: it inherits the gold and stays crisp. */}
+            <Box
+              aria-hidden
+              component="svg"
+              viewBox="0 0 24 24"
+              sx={{ width: "17px", height: "17px", flexShrink: 0, mt: "2px" }}
+            >
+              <path
+                d="M12 3a6 6 0 0 0-3.3 11v2.2h6.6V14A6 6 0 0 0 12 3Z"
+                fill="none" stroke={GOLD} strokeWidth="1.6" strokeLinejoin="round"
+              />
+              <path d="M9.6 20h4.8" stroke={GOLD} strokeWidth="1.6" strokeLinecap="round" />
+            </Box>
+            <Typography sx={{ fontSize: "14.5px", lineHeight: 1.6, color: T.headline, fontWeight: 500 }}>
+              {lesson.discovery}
+            </Typography>
+          </Box>
+
+          {lesson.decisions?.length ? (
+            <Box sx={{ mt: "16px", ...rise(170) }}>
+              <Typography sx={{ fontFamily: MONO, fontSize: "9px", letterSpacing: "0.14em", textTransform: "uppercase", color: T.mutedText, mb: "9px" }}>
+                So what do you do?
+              </Typography>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                {lesson.decisions.map((d) => (
+                  <Box
+                    key={d.label}
+                    sx={{
+                      display: "inline-flex", alignItems: "center", gap: "9px",
+                      px: "13px", py: "8px", borderRadius: "99px",
+                      border: `0.5px solid ${chip(d.tone)}66`, backgroundColor: T.cardBg,
+                    }}
+                  >
+                    {/* A dot AND the word: never colour alone. */}
+                    <Box sx={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: chip(d.tone), flexShrink: 0 }} />
+                    <Typography sx={{ fontFamily: MONO, fontSize: "9.5px", letterSpacing: "0.1em", textTransform: "uppercase", color: chip(d.tone) }}>
+                      {d.tone}
+                    </Typography>
+                    <Typography sx={{ fontSize: "13px", color: T.primaryText }}>{d.label}</Typography>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+          ) : null}
+
+          <Typography
+            sx={{
+              fontSize: { xs: "15px", md: "16.5px" }, lineHeight: 1.55, color: T.headline,
+              fontWeight: 600, fontFamily: "Prompt", mt: "18px", pt: "15px",
+              borderTop: `0.5px solid ${T.border}`, ...rise(240),
+            }}
+          >
+            {lesson.takeaway}
+          </Typography>
+        </>
+      ) : (
+        <Typography sx={{ fontFamily: MONO, fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: GOLD, mt: "14px" }}>
+          Now switch to {lesson.right.label}
+        </Typography>
+      )}
+    </Box>
+  );
+};
 
 // ─── flow ────────────────────────────────────────────────────────────────────
 // The workhorse. What goes in, what it does, what somebody does differently.
@@ -301,6 +350,7 @@ const Matrix: FC<{ d: Extract<Diagram, { kind: "matrix" }>; T: T }> = ({ d, T })
   const [hover, setHover] = useState<number | null>(null);
   return (
     <Figure title={d.title} caption={d.caption} T={T}>
+      {d.lesson ? <ProblemStrip text={d.lesson.problem} T={T} /> : null}
       <Box ref={ref} sx={{ minWidth: "440px", py: "4px" }}>
         <Typography sx={{ fontFamily: MONO, fontSize: "9.5px", letterSpacing: "0.1em", textTransform: "uppercase", color: T.mutedText, mb: "8px", pl: "128px" }}>
           {d.colLabel}
@@ -359,6 +409,7 @@ const Matrix: FC<{ d: Extract<Diagram, { kind: "matrix" }>; T: T }> = ({ d, T })
           {d.rowLabel} ↓
         </Typography>
       </Box>
+      {d.lesson ? <LessonFoot lesson={d.lesson} revealed T={T} /> : null}
     </Figure>
   );
 };
@@ -372,6 +423,7 @@ const Bars: FC<{ d: Extract<Diagram, { kind: "bars" }>; T: T }> = ({ d, T }) => 
   const max = Math.max(...d.bars.map((b) => b.value), 1);
   return (
     <Figure title={d.title} caption={d.caption} T={T}>
+      {d.lesson ? <ProblemStrip text={d.lesson.problem} T={T} /> : null}
       <Box ref={ref} sx={{ display: "flex", flexDirection: "column", gap: "15px", py: "4px" }}>
         {d.bars.map((b, i) => (
           <Box key={b.label} sx={enter(seen, reduced, i)}>
@@ -395,6 +447,7 @@ const Bars: FC<{ d: Extract<Diagram, { kind: "bars" }>; T: T }> = ({ d, T }) => 
           </Box>
         ))}
       </Box>
+      {d.lesson ? <LessonFoot lesson={d.lesson} revealed T={T} /> : null}
     </Figure>
   );
 };
@@ -438,20 +491,31 @@ const Curve: FC<{ d: Extract<Diagram, { kind: "curve" }>; T: T }> = ({ d, T }) =
   const { ref, seen } = useInView<HTMLDivElement>();
   const [active, setActive] = useState<number | null>(null);
   const [tip, setTip] = useState<{ x: number; y: number; title: string; note?: string } | null>(null);
-  const lines = d.series.map((s, i) => ({ s, i })).filter(({ s }) => !s.band);
+  const [revealed, setRevealed] = useState(!d.naive);
+  const shownSeries = !revealed && d.naive ? d.naive.series : d.series;
+  const shownNotes = !revealed && d.naive ? d.naive.notes : d.notes;
+  const lines = shownSeries.map((s, i) => ({ s, i })).filter(({ s }) => !("band" in s && s.band));
 
   return (
     <Figure title={d.title} caption={d.caption} T={T}>
+      {d.lesson ? <ProblemStrip text={d.lesson.problem} T={T} /> : null}
+      {d.lesson && d.naive ? (
+        <ViewToggle
+          lesson={d.lesson} revealed={revealed}
+          onChange={(r) => { setRevealed(r); setActive(null); setTip(null); }} T={T}
+        />
+      ) : null}
       <Box ref={ref} sx={{ minWidth: "460px", position: "relative" }}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={d.title} style={{ display: "block", overflow: "visible" }}>
           <Axes xLabel={d.xLabel} yLabel={d.yLabel} T={T} on={seen} reduced={reduced} />
-          {d.series.map((s, i) => {
+          {shownSeries.map((s, i) => {
             const col = cols[i % cols.length];
+            const band = "band" in s ? s.band : undefined;
             const path = s.points.map((p, j) => `${j === 0 ? "M" : "L"} ${sx_(p[0])} ${sy_(p[1])}`).join(" ");
             const dim = active != null && active !== i;
-            if (s.band) {
+            if (band) {
               // A real range: down the upper edge, back along the lower one.
-              const back = [...s.band.lower].reverse().map((p) => `L ${sx_(p[0])} ${sy_(p[1])}`).join(" ");
+              const back = [...band.lower].reverse().map((p) => `L ${sx_(p[0])} ${sy_(p[1])}`).join(" ");
               return (
                 <path
                   key={s.name} d={`${path} ${back} Z`} fill={col} stroke="none"
@@ -494,7 +558,7 @@ const Curve: FC<{ d: Extract<Diagram, { kind: "curve" }>; T: T }> = ({ d, T }) =
               />
             )),
           )}
-          {d.notes?.map((n) => (
+          {shownNotes?.map((n) => (
             <g key={n.text} style={{ opacity: seen || reduced ? 1 : 0, transition: reduced ? "none" : `opacity 500ms ${EASE} 900ms` }}>
               <circle cx={sx_(n.x)} cy={sy_(n.y)} r={4} fill={T.cardBg} stroke={T.primaryText} strokeWidth={1.5} />
               <text
@@ -507,15 +571,17 @@ const Curve: FC<{ d: Extract<Diagram, { kind: "curve" }>; T: T }> = ({ d, T }) =
           ))}
         </svg>
         {tip ? <Tip {...tip} T={T} /> : null}
-        {d.series.length > 1 ? (
+        {shownSeries.length > 1 ? (
           <Legend
-            items={d.series.map((s, i) => ({
-              name: s.name, color: cols[i % cols.length], dashed: s.dashed, band: !!s.band,
+            items={shownSeries.map((s, i) => ({
+              name: s.name, color: cols[i % cols.length], dashed: s.dashed,
+              band: "band" in s && !!s.band,
             }))}
             T={T} active={active} onHover={setActive}
           />
         ) : null}
       </Box>
+      {d.lesson ? <LessonFoot lesson={d.lesson} revealed={revealed} T={T} /> : null}
     </Figure>
   );
 };
@@ -528,13 +594,25 @@ const Scatter: FC<{ d: Extract<Diagram, { kind: "scatter" }>; T: T }> = ({ d, T 
   const { ref, seen } = useInView<HTMLDivElement>();
   const [active, setActive] = useState<number | null>(null);
   const [tip, setTip] = useState<{ x: number; y: number; title: string } | null>(null);
+  // Starts on the naive view where there is one, so the reader meets the
+  // mistake before the answer. With no naive state there is nothing to switch.
+  const [revealed, setRevealed] = useState(!d.naive);
+  const shown = !revealed && d.naive ? d.naive.groups : d.groups;
+  const notes = !revealed && d.naive ? d.naive.notes : d.notes;
   let n = 0;
   return (
     <Figure title={d.title} caption={d.caption} T={T}>
+      {d.lesson ? <ProblemStrip text={d.lesson.problem} T={T} /> : null}
+      {d.lesson && d.naive ? (
+        <ViewToggle
+          lesson={d.lesson} revealed={revealed}
+          onChange={(r) => { setRevealed(r); setActive(null); setTip(null); }} T={T}
+        />
+      ) : null}
       <Box ref={ref} sx={{ minWidth: "460px", position: "relative" }}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={d.title} style={{ display: "block", overflow: "visible" }}>
           <Axes xLabel={d.xLabel} yLabel={d.yLabel} T={T} on={seen} reduced={reduced} />
-          {d.groups.map((g, i) => (
+          {shown.map((g, i) => (
             <g key={g.name}>
               {g.points.map((p, j) => {
                 const delay = (n++ % 26) * 26 + 220;
@@ -567,15 +645,27 @@ const Scatter: FC<{ d: Extract<Diagram, { kind: "scatter" }>; T: T }> = ({ d, T 
               ))}
             </g>
           ))}
+          {notes?.map((nt) => (
+            <g key={nt.text} style={{ opacity: seen || reduced ? 1 : 0, transition: reduced ? "none" : `opacity 500ms ${EASE} 800ms` }}>
+              <circle cx={sx_(nt.x)} cy={sy_(nt.y)} r={4} fill={T.cardBg} stroke={T.primaryText} strokeWidth={1.5} />
+              <text
+                x={sx_(nt.x) + (nt.x > 62 ? -9 : 9)} y={sy_(nt.y) - 9} fontSize={11.5}
+                fill={T.primaryText} textAnchor={nt.x > 62 ? "end" : "start"}
+              >
+                {nt.text}
+              </text>
+            </g>
+          ))}
         </svg>
         {tip ? <Tip {...tip} T={T} /> : null}
-        {d.groups.length > 1 ? (
+        {shown.length > 1 ? (
           <Legend
-            items={d.groups.map((g, i) => ({ name: g.name, color: cols[i % cols.length] }))}
+            items={shown.map((g, i) => ({ name: g.name, color: cols[i % cols.length] }))}
             T={T} active={active} onHover={setActive}
           />
         ) : null}
       </Box>
+      {d.lesson ? <LessonFoot lesson={d.lesson} revealed={revealed} T={T} /> : null}
     </Figure>
   );
 };
@@ -664,6 +754,7 @@ const Tree: FC<{ d: Extract<Diagram, { kind: "tree" }>; T: T }> = ({ d, T }) => 
 export const GuideDiagram: FC<{ d: Diagram }> = ({ d }) => {
   const T = useSharedTokens();
   switch (d.kind) {
+    case "workflow": return <GuideWorkflow d={d} />;
     case "flow": return <Flow d={d} T={T} />;
     case "matrix": return <Matrix d={d} T={T} />;
     case "bars": return <Bars d={d} T={T} />;

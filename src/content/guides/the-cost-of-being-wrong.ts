@@ -21,6 +21,110 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "There are two ways to be wrong and they almost never cost the same. Set the threshold from what each mistake costs, not from being right as often as possible.",
+    problem: {
+      headline: "We want to fix boilers before the customer is cold",
+      detail:
+        "A heating firm with 4,000 annual cover plans. The technical question was easy; nobody had asked what each kind of mistake costs.",
+    },
+    wrongApproach: {
+      what: "Tune it to be right as often as possible",
+      why: "That setting sends almost nobody, because failures are uncommon, and it gets defended with a good-looking accuracy figure while delivering nothing at all.",
+    },
+    rightApproach: {
+      what: "Price both mistakes, then deliberately over-call",
+      why: "An unnecessary visit costs a visit. A missed failure in January costs an emergency callout, an unhappy customer, and often the renewal. When the second is several times the first, the right threshold is far lower than the balanced one.",
+    },
+    context: {
+      where: "Maintenance, fraud, safety, credit, quality. Anywhere the two errors differ.",
+      decision: "Where to set the line, and whether it should move with the season.",
+      metric: "Money. Visits made, failures avoided, failures missed, all in pounds.",
+    },
+    takeaway:
+      "Reducing the cost of a mistake is an alternative to predicting better, and it is usually cheaper. Bundling proactive visits with the annual service made false alarms cheap enough to lower the threshold further.",
+  },
+
+  story: {
+    title: "Setting the threshold from money rather than accuracy",
+    caption:
+      "The biggest term was the renewal effect, which lived in nobody's system. A rough estimate of the largest cost beats a precise treatment that leaves it out.",
+    stages: [
+      { stage: "Problem", label: "Cold customers in January", detail: "And an emergency callout rate that makes the whole cover plan look marginal." },
+      { stage: "Data", label: "Two costs, agreed with operations", detail: "What a planned visit costs, and what a failure costs including out-of-hours rates." },
+      { stage: "Model", label: "A failure risk per boiler", detail: "Refreshed monthly. The easy part, and not where the value is." },
+      { stage: "Prediction", label: "A threshold set from the costs", detail: "Deliberately over-calling. It will look worse on accuracy while being worth considerably more." },
+      { stage: "Decision", label: "Lower in winter, higher in July", detail: "Because the cost of a missed failure is not constant, so the line should not be either." },
+      { stage: "Result", label: "Reported in pounds, not percentages", detail: "Which keeps the operations meeting talking about the business rather than about the model." },
+    ],
+  },
+
+  calculator: {
+    title: "Where should your threshold sit?",
+    intro:
+      "Put in what each kind of mistake costs you. The curve shows total cost as the system gets more willing to call something out, and the marker is where your two costs put the best setting.",
+    inputs: [
+      { id: "cheap", label: "Cost of a false alarm", min: 10, max: 500, step: 10, value: 90, prefix: "\u00a3", help: "An unnecessary visit, check or call." },
+      { id: "costly", label: "Cost of missing one", min: 50, max: 5000, step: 50, value: 950, prefix: "\u00a3", help: "The emergency, the complaint, the lost customer." },
+      { id: "events", label: "How many happen a year", min: 5, max: 1000, step: 5, value: 120 },
+    ],
+    compute: (v) => {
+      const ratio = v.costly / v.cheap;
+      // With one error k times dearer than the other, the balance point is not
+      // 50/50. It sits at 1/(1+k), which is why a cost-aware setting deliberately
+      // over-calls and scores worse on plain accuracy.
+      const best = 1 / (1 + ratio);
+      const pts: [number, number][] = [];
+      for (let i = 0; i <= 100; i += 2) {
+        const th = Math.max(0.02, i / 100);
+        // Loosening the threshold trades missed events for false alarms.
+        const missed = v.events * th;
+        const alarms = v.events * (1 / th - 1) * 0.5;
+        pts.push([i, missed * v.costly + alarms * v.cheap]);
+      }
+      const max = Math.max(...pts.map((p) => p[1])) || 1;
+      const scaled = pts.map((p) => [p[0], (p[1] / max) * 100] as [number, number]);
+      const bx = best * 100;
+      const near = scaled.reduce((a, b) => (Math.abs(b[0] - bx) < Math.abs(a[0] - bx) ? b : a));
+      const naive = v.events * 0.5 * v.costly + v.events * 0.5 * v.cheap;
+      const tuned = v.events * best * v.costly + v.events * (1 / Math.max(best, 0.02) - 1) * 0.5 * v.cheap;
+      return {
+        outputs: [
+          {
+            label: "Missing one costs this much more",
+            value: `${ratio.toFixed(1)}x a false alarm`,
+            hero: true,
+            tone: ratio > 3 ? "bad" : "neutral",
+            note: ratio > 3
+              ? "Well out of balance. Tuning this to be right as often as possible would be an expensive mistake."
+              : "Fairly close to balanced, so a conventional setting is defensible here.",
+          },
+          {
+            label: "Roughly where the line should sit",
+            value: `Flag anything above ${(best * 100).toFixed(0)}% risk`,
+            note: "Deliberately lower than the setting that maximises being right. It will look worse on accuracy and be worth more.",
+          },
+          {
+            label: "Against a balanced setting",
+            value: naive > tuned ? `About \u00a3${Math.round(naive - tuned).toLocaleString()} a year` : "Little to gain",
+            tone: naive > tuned ? "good" : "neutral",
+            note: "Very rough, and it moves a lot with your two costs. Treat it as an order of magnitude.",
+          },
+        ],
+        plot: {
+          xLabel: "more willing to call it out",
+          yLabel: "total cost",
+          points: scaled,
+          marker: near,
+          markerLabel: "your best setting",
+        },
+      };
+    },
+    footnote:
+      "A simplified model, deliberately. It assumes loosening the threshold trades missed events for false alarms at a steady rate, which real systems only roughly do. The point is the direction and the size of the gap, not the third decimal place.",
+  },
+
   intro: [
     "Every model is wrong sometimes. That is not a flaw, it is the nature of the thing. What matters is not how often it is wrong but what happens when it is, and that depends entirely on which way the mistake goes.",
     "Flagging a good customer as a fraud risk costs you an awkward phone call. Missing a real fraud costs you the money. Ordering too much stock costs you storage. Ordering too little costs you a customer who goes elsewhere permanently. Those pairs are not remotely equal and the model has no idea.",
@@ -101,7 +205,67 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The heating contractor: the winter round, and why it deliberately over-calls",
+      caption:
+        "Step three is the one that makes this work, and it is not a modelling step. Once a wasted visit and a January failure have prices on them, the threshold stops being a technical setting and becomes a business one.",
+      trigger: "The first Monday of the month, through the winter",
+      runtime: "Runs overnight. The list is on the scheduler's screen at eight.",
+      stages: [
+        {
+          actor: "system",
+          label: "Pull the service history for every boiler on contract",
+          detail: "Age, model, parts fitted, when it was last seen and what was found.",
+          output: "one row per boiler, and there are several thousand",
+        },
+        {
+          actor: "model",
+          label: "Score the chance of a failure in the next sixty days",
+          output: "a likelihood for each boiler",
+          exception: "A model with too little history behind it, or a contract only weeks old, stays on the ordinary service cycle rather than being guessed at.",
+        },
+        {
+          actor: "rule",
+          label: "Set the threshold from what each mistake costs",
+          detail: "A planned visit has a known price. An emergency callout in January costs several times that, and it puts the renewal at risk.",
+          output: "a threshold that sends engineers out more often than accuracy would",
+        },
+        {
+          actor: "person",
+          label: "The scheduler bundles flagged jobs into rounds already going that way",
+          detail: "A visit that adds no travel changes the sum completely, and no model can see the map in her head.",
+          output: "a week of routes, rather than a list of alarms",
+        },
+        {
+          actor: "system",
+          label: "Record which visits found something and which found nothing",
+          detail: "The ones that found nothing are the price of the ones that did. They are not failures.",
+        },
+      ],
+      loop: "Both costs are reviewed each spring, and the threshold moves with them rather than staying where it was set on day one.",
+      outcome:
+        "The system scores worse on accuracy than one tuned to be right as often as possible, on purpose, and it is worth considerably more.",
+    },
+    {
       kind: "matrix",
+      lesson: {
+        problem: "Send an engineer to a boiler that was fine, or miss one that fails in January?",
+        wrong: {
+          label: "Treat both errors alike",
+          why: "Tune it to be right as often as possible and it quietly treats these two boxes as equally bad. Because failures are uncommon, it learns to send almost nobody.",
+        },
+        right: {
+          label: "Price each error",
+          why: "A planned visit has a known cost. An emergency callout in January costs several times that, plus a renewal. Once those two numbers exist, the threshold sets itself.",
+        },
+        discovery: "When one error costs several times the other, the right setting deliberately over-calls. It scores worse on accuracy and is worth considerably more.",
+        decisions: [
+          { tone: "protect", label: "Lower the threshold in winter" },
+          { tone: "monitor", label: "Cost per unnecessary visit" },
+          { tone: "investigate", label: "Bundle visits with the annual service" },
+        ],
+        takeaway: "Being wrong in the cheap direction is not a failure. It is the plan.",
+      },
       title: "Two ways to be wrong, and they are nowhere near the same size",
       caption:
         "Tuned to be right as often as possible, a system treats these two boxes as equal. They are not. The bottom-left costs a visit; the top-right costs an emergency callout in January and sometimes the customer.",

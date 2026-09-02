@@ -13,6 +13,7 @@ const Pricing = lazy(() => import('./views/Pricing/Pricing'))
 const Contact = lazy(() => import('./views/Contact/Contact'))
 const Resources = lazy(() => import('./views/Resources/Resources'))
 const GuideDetail = lazy(() => import('./views/Resources/GuideDetail'))
+const ProblemBrowse = lazy(() => import('./views/Resources/ProblemBrowse'))
 const Prompts = lazy(() => import('./views/Prompts/Prompts'))
 // Business Operating System (POC). Lazy so the marketing site never pays for it.
 const ConsoleLayout = lazy(() => import('./views/Console/ConsoleLayout'))
@@ -57,6 +58,9 @@ function App() {
           <Route path='/resources' element={<Resources />} />
           {/* Category browse reuses the library index, scoped by :category. */}
           <Route path='/resources/category/:category' element={<Resources />} />
+          {/* Ahead of the :slug catch-all below, which would otherwise swallow
+              it and try to resolve "problems" as a guide. */}
+          <Route path='/resources/problems' element={<ProblemBrowse />} />
           <Route path='/resources/:slug' element={<GuideDetail />} />
           <Route path='/prompts' element={<Prompts />} />
           {/* Business Operating System. Its own chrome, so it sits outside the

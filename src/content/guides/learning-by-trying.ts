@@ -21,6 +21,88 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "A four-week test spends four weeks sending most of your traffic to options you suspect are worse. When feedback arrives in minutes, you can learn and earn at the same time.",
+    problem: {
+      headline: "Five offers, an eleven-week season, and a four-week test",
+      detail:
+        "An online outdoor equipment retailer with 40,000 visits a week and no agreement on which checkout offer to run.",
+    },
+    wrongApproach: {
+      what: "Split traffic evenly, then switch to the day-one leader",
+      why: "Two failures at once. An even split spends a month on options that are probably worse, and with a few hours of data the leader is usually just the lucky one.",
+    },
+    rightApproach: {
+      what: "Move traffic gradually towards what is working, and never switch anything off",
+      why: "As evidence builds, more traffic goes to the better performers. A floor stays under the laggards, so an early run of bad luck cannot permanently condemn the best option.",
+    },
+    context: {
+      where: "Web offers, subject lines, layouts, pricing tests, ad creative.",
+      decision: "What to show the next visitor.",
+      metric: "Revenue during the test, not just after it.",
+    },
+    takeaway:
+      "The test for whether this fits: how fast does the outcome arrive? Minutes, and it works. Six weeks, and a conventional test is the right tool.",
+  },
+
+  story: {
+    title: "Learning and earning at the same time",
+    caption:
+      "There is no moment where somebody declares the test over, which removed the argument that usually consumes half the season.",
+    stages: [
+      { stage: "Problem", label: "A short season and no agreement", detail: "Five candidate offers, and the usual method spends a third of the season deciding." },
+      { stage: "Data", label: "Checkout conversion, within minutes", detail: "Fast feedback is the precondition. Without it this whole approach has nothing to work with." },
+      { stage: "Model", label: "Allocate by how uncertain you are", detail: "The less sure you are about an option, the more worth there is in showing it. Certainty concentrates traffic on its own." },
+      { stage: "Prediction", label: "Which offer to show this visitor", detail: "Updated hourly, with a floor beneath every option so nothing is ever fully off." },
+      { stage: "Decision", label: "One offer withdrawn by a human", detail: "On margin grounds rather than conversion, which is a business call the system cannot make." },
+      { stage: "Result", label: "Traffic concentrates in days, not weeks", detail: "And when shopper behaviour shifted later in the season, the allocation followed without anybody intervening." },
+    ],
+  },
+
+  calculator: {
+    title: "What does a conventional test cost you while it runs?",
+    intro:
+      "Splitting traffic evenly means sending most of it to options you suspect are worse. Put in your own test and see what those weeks cost.",
+    inputs: [
+      { id: "visitors", label: "Visitors a week", min: 500, max: 200000, step: 500, value: 40000 },
+      { id: "options", label: "Options being tested", min: 2, max: 8, step: 1, value: 5 },
+      { id: "weeks", label: "Weeks the test would run", min: 1, max: 12, step: 1, value: 4 },
+      { id: "gap", label: "Gap between best and average option", min: 1, max: 50, step: 1, value: 12, suffix: "%", help: "How much better the winner converts than the middle of the pack." },
+      { id: "value", label: "Value of a conversion", min: 1, max: 1000, step: 1, value: 38, prefix: "\u00a3" },
+    ],
+    compute: (v) => {
+      const total = v.visitors * v.weeks;
+      const misdirected = total * ((v.options - 1) / v.options);
+      // Baseline conversion is not asked for; the gap is expressed against a
+      // nominal 3% so the output stays a comparison rather than a forecast.
+      const lost = misdirected * 0.03 * (v.gap / 100) * v.value * 0.5;
+      return {
+        outputs: [
+          {
+            label: "Roughly what the test period costs you",
+            value: `\u00a3${Math.round(lost).toLocaleString()}`,
+            hero: true,
+            tone: lost > 5000 ? "bad" : "neutral",
+            note: "Traffic sent to options that turn out to be worse, while you wait for a verdict.",
+          },
+          {
+            label: "Visits going to non-winning options",
+            value: `${Math.round(misdirected).toLocaleString()}`,
+            note: `Out of ${total.toLocaleString()} over the ${v.weeks} weeks.`,
+          },
+          {
+            label: "Is this the right tool?",
+            value: "Only if feedback is fast",
+            note: "Conversion known in minutes: shifting traffic gradually works. Outcome known in six weeks: run the conventional test and accept the cost.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "Assumes a nominal three percent baseline conversion so the figure stays comparative, and that the winner beats the average by the gap you set. It is meant to show whether the waiting cost is material at your traffic, not to forecast a number.",
+  },
+
   intro: [
     "You have five possible subject lines for an email going to a hundred thousand people. The usual approach is to send each to a slice, wait, see which won, and then send the winner to everybody else. That works, and it means four fifths of your test group got something worse than the best option, and you found out too late to do anything about it.",
     "There is another way. Start by sending each option to a small equal share. As results come in, shift more of the remaining traffic towards whatever is doing well, while still giving the others a chance in case they turn out better than they first looked.",
@@ -101,7 +183,75 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The outdoor retailer: five offers, eleven weeks, no declared winner",
+      caption:
+        "The test for whether this suits you is in step four. Checkout conversion is known in minutes. If the outcome took six weeks to observe, this approach would have nothing to work with.",
+      trigger: "Day one of an eleven week season",
+      runtime: "Updates hourly, for the whole season, with nobody managing it.",
+      stages: [
+        {
+          actor: "system",
+          label: "Five offers, all live from day one",
+          detail: "Rather than four weeks of even splitting, in which four fifths of the traffic goes to options you already suspect are worse.",
+          output: "every visitor sees one of the five",
+        },
+        {
+          actor: "model",
+          label: "Shift traffic towards whatever is performing",
+          detail: "Gradually, and never all at once.",
+          output: "a split that changes hour by hour",
+        },
+        {
+          actor: "rule",
+          label: "Keep a floor under the laggards",
+          detail: "Two hundred visits is not a verdict. The offer leading on day one is usually the lucky one, not the best one.",
+          exception: "An option that has not had a fair hearing keeps its floor, however badly it is currently doing.",
+        },
+        {
+          actor: "rule",
+          label: "Only use this where the feedback is fast",
+          detail: "This is the test for whether to use the approach at all, and it belongs at the start rather than the end.",
+          output: "a yes or a no on the whole method",
+        },
+        {
+          actor: "person",
+          label: "Watch margin, not only conversion",
+          detail: "The offer that converts best is very often the one giving most away.",
+          exception: "A winner that is winning purely on discount gets stopped by a person. The maths will never do that on its own.",
+        },
+      ],
+      loop: "No end date and no declared winner. It follows the season on its own, and the season is what changes.",
+      outcome:
+        "A four week test spends four weeks paying for an answer you could have been earning from the whole time.",
+    },
+    {
       kind: "curve",
+      lesson: {
+        problem: "Five checkout offers, an eleven week season, and no agreement on which to run.",
+        wrong: {
+          label: "Split traffic evenly",
+          why: "Four fifths of a month's traffic goes to options you suspect are worse, and you find out which was best only once the season is nearly over.",
+        },
+        right: {
+          label: "Shift as you learn",
+          why: "All five stay live. Traffic moves towards whatever is performing as evidence accumulates, so you are earning from the winner while you are still learning which it is.",
+        },
+        discovery: "The offer leading on day one was the lucky one, not the best one. Switching everything to it would have run the season on the wrong offer.",
+        decisions: [
+          { tone: "protect", label: "Keep a floor under every option" },
+          { tone: "monitor", label: "Margin, not just conversion" },
+          { tone: "investigate", label: "Only where feedback is fast" },
+        ],
+        takeaway: "A four week test spends four weeks paying for an answer you could have been earning from.",
+      },
+      naive: {
+        series: [
+          { name: "Each of five offers", points: [[0, 20], [25, 20], [50, 20], [75, 20], [100, 20]] },
+          { name: "Verdict arrives", dashed: true, points: [[72, 0], [72, 100]] },
+        ],
+        notes: [{ x: 25, y: 20, text: "four fifths going to losers, for a month" }],
+      },
       title: "Traffic moves towards what is working, without anybody calling it",
       caption:
         "All five run from day one. Traffic concentrates as evidence builds, and nothing is ever switched off completely, so an early run of bad luck cannot permanently condemn the best offer. There is no moment where somebody has to declare the test over.",

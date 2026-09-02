@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "When no single column explains the problem, stop looking for the one cause. Hundreds of weak opinions voting together find combinations that no chart of any single factor can show.",
+    problem: {
+      headline: "Batches fail quality control and nobody can predict which",
+      detail:
+        "A bakery supplying supermarkets. A failed batch is thrown away; one that fails at the customer costs a complaint and a credit note.",
+    },
+    wrongApproach: {
+      what: "Chase the one thing everybody blames",
+      why: "The production manager blamed a particular oven. It ran the most batches, so it had the most failures, and per batch it was fine. Counting settled it in an afternoon and saved the cost of replacing it.",
+    },
+    rightApproach: {
+      what: "Build many small models and let them vote",
+      why: "Each one sees a random slice of the history and a few of the factors. Individually mediocre, and their mistakes point in different directions, so together they find the combination that matters.",
+    },
+    context: {
+      where: "Manufacturing quality, equipment failure, anywhere causes are tangled.",
+      decision: "Which batches get an extra check before they leave.",
+      metric: "Failures caught in-house rather than at the customer.",
+    },
+    takeaway:
+      "The real finding was a combination: a flour batch that was fine normally and marginal when the room was humid and proving ran short. No single column showed anything.",
+  },
+
+  story: {
+    title: "Hundreds of mediocre opinions, one good answer",
+    caption:
+      "Failures were rare, which shaped everything. Left alone the models learn to say pass every time and score brilliantly while catching nothing.",
+    stages: [
+      { stage: "Problem", label: "Waste, and complaints", detail: "Batches fail unpredictably, and the theory everybody holds has never been tested." },
+      { stage: "Data", label: "Every batch, three years", detail: "Flour supplier, room temperature and humidity, proving time, oven, shift, operator, time since deep clean." },
+      { stage: "Model", label: "Many small trees, voting", detail: "Weighted so that missing a failure costs more than raising a false alarm, which is a business decision rather than a technical one." },
+      { stage: "Prediction", label: "A risk flag during proving", detail: "Early enough that somebody can still do something about it." },
+      { stage: "Decision", label: "Flagged batches get an extra check", detail: "Instead of spreading the same checking effort evenly across everything." },
+      { stage: "Result", label: "Failures caught before dispatch", detail: "And the oven theory settled with evidence, so the replacement budget was not spent." },
+    ],
+  },
+
   intro: [
     "There is an old party trick where you ask a hundred people to guess the number of sweets in a jar. Individually most of them are miles out. Average all the guesses together and the answer is often remarkably close, closer than nearly any single person managed.",
     "That is the whole idea behind a random forest, which is one of the most widely used approaches in ordinary business work. Instead of building one careful flowchart, you build hundreds of slightly different ones, each shown a different random slice of the history, and then you let them vote.",
@@ -101,6 +140,48 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The bakery: the nightly check that finally got off the oven",
+      caption:
+        "Every single-factor chart said nothing was wrong, which is exactly how the oven theory survived two years. Only something that weighs several ordinary things at once was ever going to find this.",
+      trigger: "Nightly, on the day's production records",
+      runtime: "Runs while the plant is cold. The report is there at six.",
+      stages: [
+        {
+          actor: "system",
+          label: "Pull the day's batches with the conditions they were made in",
+          output: "flour lot, humidity, proving time, oven, and the quality result",
+        },
+        {
+          actor: "rule",
+          label: "Stop looking for the one cause",
+          detail: "Humidity alone said nothing. Proving time alone said nothing. That was the finding, not the dead end.",
+          output: "all the factors together, rather than one chart at a time",
+        },
+        {
+          actor: "model",
+          label: "Many small models, each working on the last one's mistakes",
+          detail: "No single one of them is clever. What they collectively pick up is a combination no individual factor shows.",
+          output: "a risk score per batch, plus the factors that drove it",
+        },
+        {
+          actor: "person",
+          label: "The production manager sees the combination, not a verdict",
+          detail: "A certain flour was perfectly fine in normal conditions and marginal when the room was humid and proving had run short.",
+          exception: "A batch flagged on a combination the system has never seen before is sampled more heavily, not scrapped.",
+        },
+        {
+          actor: "rule",
+          label: "Sample harder only in the flagged conditions",
+          detail: "The same quality control hours, spent where the failures actually are.",
+          output: "a testing plan that changes with the weather",
+        },
+      ],
+      loop: "Every quality result is another example, and the combinations sharpen through the seasons.",
+      outcome:
+        "The blame moves off one oven and onto a combination of three ordinary things, none of which looked wrong on its own.",
+    },
+    {
       kind: "flow",
       title: "The bakery: hundreds of mediocre opinions, one good answer",
       caption:
@@ -115,6 +196,33 @@ export const guide: Guide = {
     },
     {
       kind: "scatter",
+      lesson: {
+        problem: "Batches fail quality control, and the production manager blames one oven.",
+        wrong: {
+          label: "Look at one factor",
+          why: "Plot failures against humidity alone, or proving time alone, and they sit right through the normal batches. Every single-factor chart says nothing is wrong, which is why the oven theory survived for two years.",
+        },
+        right: {
+          label: "Look at the combination",
+          why: "Both factors at once, and the failures pull into a corner. Certain flour was fine in normal conditions and marginal when the room was humid AND proving ran short.",
+        },
+        discovery: "No column caused this. A combination did, and only something that weighs several factors together was ever going to find it.",
+        decisions: [
+          { tone: "protect", label: "Normal conditions, sample as usual" },
+          { tone: "monitor", label: "Humid days" },
+          { tone: "investigate", label: "Humid AND short proving" },
+        ],
+        takeaway: "When no single column explains it, stop looking for the one cause.",
+      },
+      naive: {
+        groups: [
+          {
+            name: "Every batch, by humidity alone",
+            points: [[10, 46], [22, 50], [35, 44], [48, 52], [60, 48], [15, 54], [28, 42], [40, 56], [12, 48], [55, 46], [68, 52], [30, 44], [44, 50], [20, 54], [72, 46], [8, 50], [52, 44], [64, 52], [36, 48], [25, 46], [74, 50], [82, 46], [78, 52], [88, 48], [70, 44], [85, 50], [76, 54]],
+          },
+        ],
+        notes: [{ x: 82, y: 46, text: "failures hide in here" }],
+      },
       title: "Why no single column found it",
       caption:
         "Failures are the ringed points. Look along either axis on its own and the failures are spread through the normal batches. Only the corner where both conditions hold separates them, and no single-factor chart can show that.",

@@ -21,6 +21,93 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Everybody cancels eventually, so predicting whether is nearly useless. Predicting when tells you where the risk concentrates, and that is something you can aim an intervention at.",
+    problem: {
+      headline: "A churn model that was technically fine and changed nothing",
+      detail:
+        "A subscription box company with 18,000 subscribers. It had a model predicting whether somebody would cancel, and it had been in place a year doing nothing.",
+    },
+    wrongApproach: {
+      what: "Ask whether they will cancel",
+      why: "The honest answer for almost everybody is yes, at some point. It also forced a choice between throwing away everyone who had not cancelled yet, or pretending they never would.",
+    },
+    rightApproach: {
+      what: "Ask how long they will stay, and use the unfinished stories",
+      why: "Somebody subscribed for two years and still here carries real information: they lasted at least two years. Using that properly is what makes this its own technique rather than a broken classification.",
+    },
+    context: {
+      where: "Subscriptions, memberships, contracts, equipment life, staff retention.",
+      decision: "When to intervene, and what an acquisition channel is actually worth.",
+      metric: "Expected tenure, and lifetime value by channel.",
+    },
+    takeaway:
+      "Risk was not constant. It spiked sharply around the third and fourth delivery and rose again at eighteen months for an entirely different reason. Two problems, two responses.",
+  },
+
+  story: {
+    title: "Not whether, but when",
+    caption:
+      "Channels that looked identical on annual churn had very different shapes. One brought people who left fast; another brought slow starters who then stayed for years.",
+    stages: [
+      { stage: "Problem", label: "A model nobody could act on", detail: "It predicted cancellation and offered no moment at which to do anything." },
+      { stage: "Data", label: "Four years, most of them unfinished", detail: "Signup date, cancellation date where there is one, channel, skips, box size changes, complaints." },
+      { stage: "Model", label: "Keep the people still subscribed", detail: "Discarding them would throw away most of the customer base and leave a picture built only from people who already left." },
+      { stage: "Prediction", label: "A curve, not a probability", detail: "Of subscribers who look like this one, how many are still here at three months, six, a year." },
+      { stage: "Decision", label: "Aim at the third and fourth box", detail: "Where the risk actually concentrates, instead of spreading the same effort across everybody." },
+      { stage: "Result", label: "The acquisition budget moves", detail: "Comparing channels on expected lifetime reversed the ranking that cost per signup had produced." },
+    ],
+  },
+
+  calculator: {
+    title: "What is a customer actually worth, and where should you intervene?",
+    intro:
+      "Cancellations are not spread evenly across a customer's life. Put in your own numbers and see what shifting the early drop-off is worth.",
+    inputs: [
+      { id: "monthly", label: "What a customer pays a month", min: 5, max: 1000, step: 5, value: 32, prefix: "\u00a3" },
+      { id: "tenure", label: "Average months they stay", min: 2, max: 120, step: 1, value: 14 },
+      { id: "early", label: "How many leave in the first three months", min: 5, max: 80, step: 5, value: 35, suffix: "%" },
+      { id: "acq", label: "Cost to acquire one", min: 1, max: 500, step: 1, value: 45, prefix: "\u00a3" },
+    ],
+    compute: (v) => {
+      const ltv = v.monthly * v.tenure;
+      const margin = ltv - v.acq;
+      const earlyLoss = v.monthly * 2 * (v.early / 100);
+      // Rescuing a quarter of the early leavers is a deliberately modest target
+      // for an intervention aimed at a known window.
+      const rescued = (v.early / 100) * 0.25;
+      const uplift = rescued * (v.tenure - 2) * v.monthly;
+      return {
+        outputs: [
+          {
+            label: "Lifetime value, before acquisition cost",
+            value: `\u00a3${Math.round(ltv).toLocaleString()}`,
+            hero: true,
+            tone: margin > v.acq * 2 ? "good" : margin > 0 ? "neutral" : "bad",
+            note: margin > 0
+              ? `\u00a3${Math.round(margin).toLocaleString()} after paying to acquire them.`
+              : "You are paying more to acquire them than they are worth. Nothing else matters until that changes.",
+          },
+          {
+            label: "Lost to early leavers, per customer acquired",
+            value: `\u00a3${Math.round(earlyLoss).toLocaleString()}`,
+            tone: "bad",
+            note: "People who never got far enough to be worth having. This is where the risk concentrates.",
+          },
+          {
+            label: "If an early intervention rescues a quarter of them",
+            value: `+\u00a3${Math.round(uplift).toLocaleString()} per customer`,
+            tone: "good",
+            note: "Aimed at the specific weeks where people leave, rather than spread across the whole customer base.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "A flat monthly value and a simple average tenure, which is a simplification of exactly the kind this guide argues against. Use it to size the prize; use a real survival curve to decide when to act.",
+  },
+
   intro: [
     "Will this customer leave is a useful question. When will this customer leave is a far more useful one, because it tells you not just who to worry about but when to do something and how much they are worth in the meantime.",
     "There is a family of techniques built specifically for questions about timing, and it has one property that makes it genuinely different from everything else. It knows how to use the customers who have not left yet.",
@@ -101,7 +188,73 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The subscription box: the monthly run that produces a curve, not a percentage",
+      caption:
+        "Step two is what makes this its own technique. A subscriber still active at fourteen months has not finished their story, and both throwing them away and counting them as cancelled give you the wrong answer.",
+      trigger: "Monthly, on the whole subscriber base",
+      runtime: "Half an hour. The output is a shape, and shapes are what people remember.",
+      stages: [
+        {
+          actor: "system",
+          label: "Take four years of subscriptions, including the ones still running",
+          output: "start date, end date where there is one, and the channel that brought them in",
+        },
+        {
+          actor: "rule",
+          label: "Keep the unfinished ones",
+          detail: "They lasted at least this long, which is real information rather than a missing value.",
+          output: "every subscriber, with how long they have lasted so far",
+        },
+        {
+          actor: "model",
+          label: "Ask when, not whether",
+          detail: "Everybody cancels eventually. When is the only part anybody can do something about.",
+          output: "a curve showing where the risk actually concentrates",
+        },
+        {
+          actor: "person",
+          label: "Find the spikes, and find out why",
+          detail: "One sits around the third and fourth delivery. A gentler second rise at eighteen months has a completely different cause.",
+          exception: "A spike nobody can explain gets investigated before anything is built around it. The shape is a question, not an answer.",
+        },
+        {
+          actor: "rule",
+          label: "Compare acquisition channels on expected lifetime, not cost per signup",
+          detail: "Which reversed the ranking the marketing budget had been built on.",
+          output: "a different channel mix, with the reasoning attached",
+        },
+      ],
+      loop: "Each month of new cancellations sharpens the curve, particularly late in a subscriber's life where the data is thinnest.",
+      outcome:
+        "An average rate tells you how many. A curve tells you when, and when is the only part you can put a person or a phone call against.",
+    },
+    {
       kind: "curve",
+      lesson: {
+        problem: "Subscribers leave, and the churn model tells us who without telling us when.",
+        wrong: {
+          label: "One churn rate",
+          why: "A single flat percentage. It is true, it is the number in every board pack, and it gives nobody a moment at which to actually do something.",
+        },
+        right: {
+          label: "When they leave",
+          why: "The same customers as a curve. Risk is not spread evenly at all, and the shape shows exactly where it concentrates.",
+        },
+        discovery: "The drop is steep around the third and fourth delivery, then flattens. A second, gentler rise at eighteen months has a completely different cause.",
+        decisions: [
+          { tone: "investigate", label: "The third and fourth box" },
+          { tone: "monitor", label: "Range fatigue at 18 months" },
+          { tone: "protect", label: "Anyone past six months" },
+        ],
+        takeaway: "An average rate tells you how many. A curve tells you when, which is the only part you can act on.",
+      },
+      naive: {
+        series: [
+          { name: "Monthly churn rate", points: [[0, 42], [20, 42], [40, 42], [60, 42], [80, 42], [100, 42]] },
+        ],
+        notes: [{ x: 40, y: 42, text: "true, and nothing to act on" }],
+      },
       title: "Everybody cancels eventually, so when is the only useful question",
       caption:
         "Of subscribers who look like this, how many are still here at each point. The steep drop is the third and fourth box, and it is completely invisible in an overall churn rate. Two different problems, needing two different responses.",

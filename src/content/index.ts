@@ -85,3 +85,5 @@ export const searchGuides = (query: string, pool: Guide[] = GUIDES): Guide[] => 
 export * from "./types";
 export * from "./categories";
 export { PROMPTS, promptsForTopic, PROMPT_TOPICS } from "./prompts";
+export { PROBLEMS } from "./problems";
+export type { BusinessProblem } from "./problems";

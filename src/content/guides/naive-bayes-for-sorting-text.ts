@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Sorting text into a handful of trays is an old, cheap, solved problem. And if people have been forwarding email to the right team for years, your training data already exists.",
+    problem: {
+      headline: "Four hundred emails a day into one shared inbox",
+      detail:
+        "A property management company looking after 3,000 flats. Someone spent every morning reading and forwarding, and urgent repairs queued behind rent questions.",
+    },
+    wrongApproach: {
+      what: "Treat urgency and category as one problem",
+      why: "An earlier attempt did exactly that and produced a system that routed correctly and still left a gas leak sitting in a queue. A leak and a request for a new key are both repairs.",
+    },
+    rightApproach: {
+      what: "Sort into trays automatically, and handle urgency separately",
+      why: "Word counting is enough for the routing. Urgency gets a deliberately plain keyword list, because the operations manager has to be able to adjust it on a Tuesday afternoon without asking anybody.",
+    },
+    context: {
+      where: "Shared inboxes, support queues, form submissions, document filing.",
+      decision: "Which team it goes to, and whether it jumps the queue.",
+      metric: "Time to first response on the things that matter.",
+    },
+    takeaway:
+      "The rare, expensive category gets a deliberately low bar. Over-flagging a possible complaint costs seconds of reading; under-flagging costs a regulatory deadline.",
+  },
+
+  story: {
+    title: "Three years of forwards were already a labelled dataset",
+    caption:
+      "This project was cheap because nobody had to label anything. Worth checking for before assuming you need a labelling exercise.",
+    stages: [
+      { stage: "Problem", label: "A morning lost to sorting", detail: "And emergency repairs sitting behind rent queries, because the queue is chronological." },
+      { stage: "Data", label: "Three years of sent forwards", detail: "Every one is a human routing decision, recorded for free as a by-product of doing the job." },
+      { stage: "Model", label: "Which words go with which tray", detail: "Old, fast, and very hard to beat by enough to matter for a handful of categories." },
+      { stage: "Prediction", label: "Confident, or unsure", detail: "Confident ones route themselves. Unsure ones go to a person with the two best guesses shown." },
+      { stage: "Decision", label: "Complaints always see a human", detail: "Regardless of confidence, because that error is the expensive one." },
+      { stage: "Result", label: "The sorter moves to the work that needs judgement", detail: "And a separate keyword pass lifts genuine emergencies to the top of whichever queue they land in." },
+    ],
+  },
+
   intro: [
     "Imagine somebody new in the post room whose only job is to sort incoming letters into four trays. They cannot read properly. What they can do is notice that letters mentioning refund, damaged and returns almost always go in one tray, and letters mentioning invoice, statement and overdue almost always go in another.",
     "After a few thousand letters they get quite good at it, without ever understanding a single sentence. That is essentially what the oldest and simplest approach to sorting text does. It counts which words show up in which pile, and then for a new item it asks which pile these words look most like.",
@@ -100,6 +139,50 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The property manager: what happens to every email as it arrives",
+      caption:
+        "Three years of forwards were already labelled data, created for free by people simply doing their jobs. That is why this was cheap, and it is the first thing to look for before anybody proposes a labelling exercise.",
+      trigger: "Every email that arrives in the shared inbox",
+      runtime: "Immediate. Nobody sorts a tray any more.",
+      stages: [
+        {
+          actor: "system",
+          label: "Three years of sent forwards, already labelled",
+          detail: "Every forward somebody made is a labelled example. Nobody was ever asked to create one.",
+          output: "thousands of examples, at no cost",
+        },
+        {
+          actor: "model",
+          label: "Count which words go with which tray",
+          detail: "Old, cheap, and genuinely hard to beat for this particular job.",
+          output: "a tray, and a confidence in it",
+        },
+        {
+          actor: "rule",
+          label: "Route the confident ones, queue the rest for a person",
+          detail: "A misrouted repair is worse than a slow one, so the unsure ones cost a person a few seconds rather than costing a tenant a week.",
+          exception: "Below the line it goes to a human queue, not to the most likely tray. Being unsure is a valid answer.",
+          output: "most emails routed, a minority held",
+        },
+        {
+          actor: "rule",
+          label: "Handle urgency separately, on a plain keyword list",
+          detail: "Gas, leak, flood, no heating. Not a model, and it must never become one.",
+          output: "emergencies pulled out regardless of which tray they belong in",
+        },
+        {
+          actor: "person",
+          label: "Corrections are recorded as somebody re-files",
+          detail: "The maintenance plan is that people keep doing what they were already doing.",
+          output: "next month's examples, again for free",
+        },
+      ],
+      loop: "Retrained monthly on the corrections, which is the entire ongoing cost.",
+      outcome:
+        "Emergencies stop sitting behind rent queries, and nobody was asked to run a labelling project to make it happen.",
+    },
     {
       kind: "tree",
       title: "Route it, queue it, or always show a human",

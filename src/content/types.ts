@@ -77,6 +77,109 @@ export type Example =
     };
 
 /**
+ * The scannable layer that sits above the long-form guide.
+ *
+ * A reader who wants the whole lesson in a minute reads only this, the story
+ * and the calculator, and leaves. A reader who wants the depth carries on into
+ * the guide below it. Both are legitimate, and before this existed only the
+ * second one was served.
+ *
+ * The wrong/right pair is the load-bearing part. Naming what a business would
+ * normally do, and why it fails, is what makes the right approach land — a
+ * technique introduced without the failure it fixes is just vocabulary.
+ */
+export interface GuideBrief {
+  /** Three lines, at most. The whole point, before anybody has scrolled. */
+  inOneMinute: string;
+  /** The presenting symptom, in the words a business owner would use. */
+  problem: { headline: string; detail: string };
+  /** What most businesses reach for, and why it does not work. */
+  wrongApproach: { what: string; why: string };
+  /** The technique, introduced as the fix rather than as a topic. */
+  rightApproach: { what: string; why: string };
+  /** Where this lands in a real company. */
+  context: { where: string; decision: string; metric: string };
+  /** One or two sentences. The thing to remember if nothing else. */
+  takeaway: string;
+}
+
+/**
+ * The six-stage sequence, played rather than printed: problem, data, model,
+ * prediction, decision, result.
+ *
+ * It advances on its own once, then holds on the last stage and can be stepped
+ * through by hand. It exists to teach the shape every one of these projects
+ * has, which is the thing readers most reliably fail to picture.
+ */
+export interface Story {
+  title: string;
+  caption?: string;
+  /** Exactly six, in order. The stage names are fixed across the library so
+   *  the shape becomes familiar rather than novel each time. */
+  stages: [StoryStage, StoryStage, StoryStage, StoryStage, StoryStage, StoryStage];
+}
+
+export interface StoryStage {
+  /** Problem / Data / Model / Prediction / Decision / Result. */
+  stage: string;
+  label: string;
+  detail: string;
+}
+
+/**
+ * A calculator the reader drives with their own numbers.
+ *
+ * `compute` is a real function rather than an expression string: guide files
+ * are TypeScript that gets compiled into the bundle, so the formula is
+ * type-checked at build time and needs no evaluator at runtime.
+ *
+ * Outputs are computed from what the reader typed, so they are arithmetic on
+ * the reader's own figures and not a claim about anybody's business. That is
+ * what keeps this the right side of the no-invented-statistics rule.
+ */
+export interface Calculator {
+  title: string;
+  /** One line: what to do with it. */
+  intro: string;
+  inputs: CalcInput[];
+  compute: (v: Record<string, number>) => CalcResult;
+  /** Assumptions worth stating, so nobody over-reads the answer. */
+  footnote?: string;
+}
+
+export interface CalcInput {
+  id: string;
+  label: string;
+  min: number;
+  max: number;
+  step: number;
+  /** Starting position. Pick something typical, not a round number. */
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  help?: string;
+}
+
+export interface CalcResult {
+  outputs: {
+    label: string;
+    value: string;
+    tone?: "good" | "bad" | "neutral";
+    note?: string;
+    /** The one figure worth reading first, rendered larger. */
+    hero?: boolean;
+  }[];
+  /** Optional live plot. Points are 0-100 in both axes, like `curve`. */
+  plot?: {
+    xLabel: string;
+    yLabel: string;
+    points: [number, number][];
+    marker?: [number, number];
+    markerLabel?: string;
+  };
+}
+
+/**
  * A diagram, authored as data rather than as SVG markup.
  *
  * Two reasons it is data. The renderer paints it from theme tokens, so every
@@ -94,7 +197,96 @@ export type Example =
  * what goes in, what the model does, and what somebody does differently as a
  * result. The rest exist because a specific mechanism is clearer as a picture.
  */
+/**
+ * The frame that turns a chart into a worked business lesson.
+ *
+ * A finished chart shows an answer. This shows somebody being wrong first, which
+ * is the part that teaches: the reader recognises the naive view as the thing
+ * they would have done, and only then sees what it hides.
+ *
+ * So `wrong` and `right` are not captions. They are two states of the same
+ * figure, and the reader switches between them.
+ *
+ * Everything here is one sentence. If a field needs a paragraph, the figure is
+ * carrying too much and should be split.
+ */
+export interface DiagramLesson {
+  /** What is going wrong, in the business's own words. */
+  problem: string;
+  /** The naive view: the toggle label, and what it misses. */
+  wrong: { label: string; why: string };
+  /** The informed view. */
+  right: { label: string; why: string };
+  /** What the reader has just discovered by switching. */
+  discovery: string;
+  /** What to do about it. Three at most. */
+  decisions?: { tone: "protect" | "monitor" | "investigate"; label: string }[];
+  /** One memorable sentence. */
+  takeaway: string;
+}
+
+/** A short note pinned to a point on the plot, pointing at the insight. */
+export interface PlotNote {
+  x: number;
+  y: number;
+  text: string;
+}
+
+/**
+ * One step of a running workflow.
+ *
+ * `actor` is the field that does the teaching. Most people who are wary of this
+ * work are wary because they cannot see where the machine stops and a person
+ * starts. Naming the actor on every step answers that before it is asked, and
+ * it is why the badge is a word and not only a colour.
+ *
+ * `output` is the thing that physically moves to the next step. Keep it
+ * concrete: a file, a score, a list of forty names. A step whose output cannot
+ * be named is usually two steps, or is not really happening.
+ */
+export interface WorkflowStage {
+  /** Who or what does this. Shown as a word, always, never colour alone. */
+  actor: "system" | "model" | "rule" | "person";
+  /** What happens, in the business's own language. */
+  label: string;
+  /** One line of detail. Why it is done this way, or what it costs. */
+  detail?: string;
+  /** What comes out and travels on. A file, a score, a list. */
+  output?: string;
+  /** Where it goes when this step cannot decide. The honest branch. */
+  exception?: string;
+}
+
+/**
+ * A workflow that plays itself.
+ *
+ * The `flow` figure is a project: how the thing got built, once. This is the
+ * opposite and answers the question that actually decides whether a business
+ * adopts anything, which is what happens on a Monday morning once it is live.
+ *
+ * It runs on its own when it scrolls into view, because the point is that a
+ * reader who reads nothing else can watch it once and know what the guide is
+ * about. That obliges the content to be self-contained: every stage has to make
+ * sense without the surrounding prose.
+ */
+export interface WorkflowDiagram {
+  kind: "workflow";
+  title: string;
+  caption?: string;
+  /** What sets it off. "Every Monday, 07:00", or "The moment a quote is raised". */
+  trigger: string;
+  /** How long the automatic part takes, and what a person does to start it. */
+  runtime?: string;
+  /** Four to seven. Past that nobody watches it to the end. */
+  stages: WorkflowStage[];
+  /** Set when the last stage feeds the first. Drawn as a return arrow. */
+  loop?: string;
+  /** What the business is left holding. One sentence. */
+  outcome: string;
+}
+
 export type Diagram =
+  | WorkflowDiagram
   | {
       kind: "flow";
       title: string;
@@ -106,6 +298,7 @@ export type Diagram =
       kind: "matrix";
       title: string;
       caption?: string;
+      lesson?: DiagramLesson;
       /** Row and column headings, e.g. what happened vs what we predicted. */
       rowLabel: string;
       colLabel: string;
@@ -118,6 +311,7 @@ export type Diagram =
       kind: "bars";
       title: string;
       caption?: string;
+      lesson?: DiagramLesson;
       /** Values are relative; the axis is deliberately unlabelled unless `unit`. */
       unit?: string;
       bars: { label: string; value: number; tone?: "accent" | "muted" | "good" | "bad" }[];
@@ -129,16 +323,12 @@ export type Diagram =
       xLabel: string;
       yLabel: string;
       /** Points are 0-100 in both axes; the renderer scales to the frame. */
-      series: {
-        name: string;
-        points: [number, number][];
-        dashed?: boolean;
-        /** A range. `points` is the upper edge and `lower` the bottom one —
-         *  a band filled to the baseline instead would be an area chart
-         *  pretending to be a range. */
-        band?: { lower: [number, number][] };
-      }[];
-      notes?: { x: number; y: number; text: string }[];
+      lesson?: DiagramLesson;
+      /** What the figure shows BEFORE the reveal. When present, the reader gets
+       *  a toggle and the chart actually changes rather than a caption saying
+       *  it would. */
+      naive?: { series: CurveSeries[]; notes?: PlotNote[] };
+      series: CurveSeries[];      notes?: { x: number; y: number; text: string }[];
     }
   | {
       kind: "scatter";
@@ -146,6 +336,12 @@ export type Diagram =
       caption?: string;
       xLabel: string;
       yLabel: string;
+      lesson?: DiagramLesson;
+      /** The naive view: usually the same points with the distinction removed,
+       *  which is exactly what sorting by one number looks like. */
+      naive?: { groups: { name: string; points: [number, number][]; ring?: boolean }[]; notes?: PlotNote[] };
+      /** Annotations pinned to the plot. Short: they point, they do not explain. */
+      notes?: PlotNote[];
       /** Points are 0-100 in both axes. Three groups maximum: past three, the
        *  categorical palette cannot clear the all-pairs legibility floor. */
       groups: { name: string; points: [number, number][]; ring?: boolean }[];
@@ -162,6 +358,15 @@ export type Diagram =
         sub?: { answer: string; outcome: string }[];
       }[];
     };
+
+/** One line on a curve. A `band` carries its own lower edge so a range is a
+ *  range rather than an area chart pretending to be one. */
+export interface CurveSeries {
+  name: string;
+  points: [number, number][];
+  dashed?: boolean;
+  band?: { lower: [number, number][] };
+}
 
 export interface MatrixCell {
   label: string;
@@ -360,6 +565,16 @@ export interface Guide {
    * Figures. Placed after the core concepts, because a diagram is worth more
    * once the reader has the vocabulary and is worth very little before it.
    */
+  /**
+   * The scannable layer. Rendered above everything else, because a reader who
+   * only has a minute should get the whole lesson rather than the first
+   * quarter of a long one.
+   */
+  brief?: GuideBrief;
+  /** The six-stage animated sequence. Rendered under the brief. */
+  story?: Story;
+  /** A calculator the reader drives with their own figures. */
+  calculator?: Calculator;
   diagrams?: Diagram[];
   caseStudy?: CaseStudy;
   businessApplications?: string[];

@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "This one does not predict anything. Given what you already know, it works out the best combination of things to do, and the usual reason it fails is a rule nobody wrote down.",
+    problem: {
+      headline: "Building the rota takes two days and it is still wrong",
+      detail:
+        "A commercial cleaning contractor with ninety staff across a region. One supervisor builds it, and when she is on leave nobody else can.",
+    },
+    wrongApproach: {
+      what: "Minimise travel time",
+      why: "That is what the first attempt did. It produced a rota that was shorter on the road, changed who cleaned which site every week, and was rejected by staff and clients inside a fortnight.",
+    },
+    rightApproach: {
+      what: "Collect the unwritten rules, then price the preferences",
+      why: "Two early mornings in a van produced more constraints than a week of meetings. And treating site consistency as absolute returned no possible answer at all, so it became expensive rather than forbidden.",
+    },
+    context: {
+      where: "Routing, rotas, allocation, cutting stock, blending, scheduling.",
+      decision: "Who goes where, in what order, this week.",
+      metric: "Travel, fairness and consistency together, with weights the business agreed.",
+    },
+    takeaway:
+      "Score what you already do first. It costs a day, and it either makes the case or tells you your experienced planner is close to the best available.",
+  },
+
+  story: {
+    title: "Two days of rota building, done in minutes",
+    caption:
+      "It does not learn. Give it the rules and the numbers and it works out the answer directly, which also means it will never improve on its own.",
+    stages: [
+      { stage: "Problem", label: "Two days a week, and one person", detail: "Somebody drives across the region for a forty-minute clean while a colleague drives the other way." },
+      { stage: "Data", label: "Contracted hours, access windows, travel times", detail: "Plus the unwritten ones: the named keyholder, the two staff who should not be paired, the site with impossible morning parking." },
+      { stage: "Model", label: "Not a prediction. A best combination.", detail: "No training data needed, because nothing is being learned from history." },
+      { stage: "Prediction", label: "A rota, in minutes", detail: "Against an objective combining travel, consistency and fairness, with weights agreed in advance." },
+      { stage: "Decision", label: "The supervisor edits it", detail: "Every change recorded with a reason, because each one is a constraint that was missed." },
+      { stage: "Result", label: "Two days a week back", detail: "And the rota stops being one person's private skill, which removed a risk nobody had costed." },
+    ],
+  },
+
   intro: [
     "Everything else in this area is about predicting. This one is not. It answers a different question entirely: given what you expect to happen, what is the best combination of things to actually do?",
     "Which vans go to which drops, in what order. Who works which shift. How much of each ingredient goes into the blend. Which projects get funded from a fixed budget. How to cut the sheets to waste the least material. Every one of those has an enormous number of possible answers and one or two that are clearly best.",
@@ -100,6 +139,50 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The cleaning contractor: how the fortnightly rota gets built now",
+      caption:
+        "Step two happens in a van at six in the morning, not in a meeting room. The named keyholder, the two staff who should not be paired and the site that needs the same face every week are the whole problem, and none of them were written down anywhere.",
+      trigger: "Every fortnight, when the rota is built",
+      runtime: "Minutes to solve, against two days by hand.",
+      stages: [
+        {
+          actor: "person",
+          label: "Score what you already do today",
+          detail: "One day of work. It either makes the case or saves you the money.",
+          output: "the current rota's travel, consistency and fairness, as numbers",
+        },
+        {
+          actor: "person",
+          label: "Collect the unwritten rules",
+          detail: "Two early mornings out with the supervisors beat a week of meetings about requirements.",
+          output: "the constraints, written down for the first time",
+        },
+        {
+          actor: "rule",
+          label: "Agree what best actually means, with weights",
+          detail: "Travel and consistency and fairness, and they pull against each other. Somebody has to decide by how much.",
+          output: "one score the business has signed off",
+        },
+        {
+          actor: "model",
+          label: "Work out the best combination",
+          detail: "It does not predict anything and it does not learn anything. It searches, very quickly, through options a person cannot hold in their head.",
+          output: "a draft rota",
+          exception: "If it cannot satisfy every hard constraint it says so and shows which one, rather than quietly breaking the cheapest.",
+        },
+        {
+          actor: "person",
+          label: "The supervisor edits, and every change records a reason",
+          detail: "Each edit is a constraint that was missed, not a supervisor being awkward.",
+          output: "a rota that goes out, and a list of what the model did not know",
+        },
+      ],
+      loop: "Those recorded reasons become next fortnight's constraints, and the number of edits falls each time.",
+      outcome:
+        "The rules that lived only in one supervisor's head now belong to the business, and the rota takes minutes.",
+    },
     {
       kind: "tree",
       title: "Hard rule or strong preference? Getting this wrong stops it dead.",

@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Your best estimator does not calculate from first principles. They remember the most similar past job and adjust. That is a method, and it is one a computer can copy before they retire.",
+    problem: {
+      headline: "The man who prices everything retires next year",
+      detail:
+        "A commercial fit-out contractor. Asked how he estimates, he says: this one is like the dental practice we did in 2019, but bigger.",
+    },
+    wrongApproach: {
+      what: "Wait, then rebuild the knowledge afterwards",
+      why: "Defining what counts as similar was the hard part, and only he could do it. The same project a year later would have been guesswork dressed up as analysis.",
+    },
+    rightApproach: {
+      what: "Retrieve the five most similar past jobs and show them",
+      why: "With what each was quoted at, what it actually cost, and what went wrong. That is more useful than a number, and it is what makes the tool trusted rather than resented by the people who have to defend a price.",
+    },
+    context: {
+      where: "Estimating, quoting, triage, case assessment, claims.",
+      decision: "What to price a new job at, and what to warn the client about.",
+      metric: "Jobs landing inside the estimate, and knowledge surviving a retirement.",
+    },
+    takeaway:
+      "It did not beat him. It came close, without twenty-five years, which was the actual requirement.",
+  },
+
+  story: {
+    title: "Capturing twenty-five years before it walked out of the door",
+    caption:
+      "The counting also found something he had never articulated: occupied buildings run over far more often, by a fairly consistent amount.",
+    stages: [
+      { stage: "Problem", label: "One person, retiring, holding the method", detail: "Nobody could say how he did it, including him." },
+      { stage: "Data", label: "Nine years of completed jobs", detail: "Quoted and actual cost and duration, floor area, building type, occupied or empty, services complexity, trades involved." },
+      { stage: "Model", label: "Copy the method, do not replace it", detail: "Find the handful of most similar past jobs. Defining similar, with him, was the entire project." },
+      { stage: "Prediction", label: "Five comparable jobs and a range", detail: "Never a single number. An estimator who cannot see why cannot defend the price." },
+      { stage: "Decision", label: "Price the new job from what really happened", detail: "Including the notes on what went wrong, which are often more useful than the cost." },
+      { stage: "Result", label: "The knowledge belongs to the business", detail: "And clients get shown comparable past work when they challenge a price, which turned out to help win jobs." },
+    ],
+  },
+
   intro: [
     "When an experienced estimator gets a new job in, the first thing they do is think of the last few that looked like it. Similar size, similar customer, similar time of year. Then they think about how those went, and they quote accordingly.",
     "There is a model that does exactly that and nothing else. Show it a new case and it goes through your history, finds the handful of past cases most like it, and reports what happened to those. It is called nearest neighbours, and of everything in this area it is the easiest to explain to somebody who has never thought about any of it.",
@@ -101,7 +140,78 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The fit-out contractor: pricing an enquiry the way he always did it",
+      caption:
+        "He was never calculating from first principles. He was retrieving similar jobs and adjusting, which is something a computer can copy, and only while he is still in the building.",
+      trigger: "A new enquiry arrives, before anybody prices it",
+      runtime: "Seconds, and it shows its working every time.",
+      stages: [
+        {
+          actor: "system",
+          label: "Nine years of completed jobs",
+          output: "quoted and actual, cost and duration, for every one of them",
+        },
+        {
+          actor: "person",
+          label: "Define similar, sitting next to the estimator",
+          detail: "This is the craft and it was the entire project. Built a year later it would have been guesswork dressed up as analysis.",
+          output: "what makes two jobs comparable, in his words",
+        },
+        {
+          actor: "model",
+          label: "Retrieve the closest past jobs",
+          detail: "Rather than calculating from first principles, which is not what he was doing either.",
+          output: "the five nearest, with what each actually cost",
+          exception: "No close match in nine years means a site visit, not a confident number produced from nothing like it.",
+        },
+        {
+          actor: "person",
+          label: "Show him the five, not a number",
+          detail: "Including what went wrong on each, which is the part that changes a price.",
+          output: "a figure he can defend in a meeting",
+        },
+        {
+          actor: "rule",
+          label: "Quote as a range, plus the occupied building rule",
+          detail: "Written down for the first time in twenty-five years.",
+          output: "a range, and the assumption it rests on",
+        },
+      ],
+      loop: "Every completed job joins the set, so the comparables keep getting closer to whatever comes in next.",
+      outcome:
+        "The average of everything describes nothing. The nearest few describe this one, and they can be shown to a client.",
+    },
+    {
       kind: "scatter",
+      lesson: {
+        problem: "The estimator who prices every job retires next year, and nobody knows how he does it.",
+        wrong: {
+          label: "Average of all past jobs",
+          why: "Price the new enquiry off the average of nine years of work and you get a number that fits nothing. A small clinic and a large office fit-out are averaged into a job that does not exist.",
+        },
+        right: {
+          label: "Its five nearest neighbours",
+          why: "Find the past jobs most like this one, and price from what those actually cost. That is not a summary of his method. It is his method, written down.",
+        },
+        discovery: "He was never calculating from first principles. He was retrieving similar jobs and adjusting, which is something a computer can copy before he leaves.",
+        decisions: [
+          { tone: "protect", label: "Show the five comparables" },
+          { tone: "monitor", label: "Quote as a range, not a number" },
+          { tone: "investigate", label: "New enquiry with no close match" },
+        ],
+        takeaway: "The average of everything describes nothing. The nearest few describe this one.",
+      },
+      naive: {
+        groups: [
+          {
+            name: "Nine years of jobs",
+            points: [[12, 20], [24, 34], [30, 18], [46, 52], [58, 40], [70, 66], [82, 74], [88, 52], [18, 46], [36, 62], [64, 28], [76, 44], [50, 70], [40, 26], [92, 66], [22, 60]],
+          },
+          { name: "The average job", ring: true, points: [[51, 46]] },
+        ],
+        notes: [{ x: 51, y: 46, text: "fits nothing" }],
+      },
       title: "This one is like the job we did at the dental practice, but bigger",
       caption:
         "The ringed point is the new enquiry. The nearest past jobs to it are what the estimator gets shown, along with what each was quoted at and what it actually cost. That is not a summary of his method. It is his method.",

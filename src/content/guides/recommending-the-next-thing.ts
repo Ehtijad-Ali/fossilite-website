@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 14,
 
+  brief: {
+    inOneMinute:
+      "For trade customers, the opportunity is not showing them something new. It is stopping them ordering incompletely and paying carriage twice.",
+    problem: {
+      headline: "Order values are flat while the customer count grows",
+      detail:
+        "A distributor of industrial fasteners with 1,100 trade accounts, half of them ordering by telephone.",
+    },
+    wrongApproach: {
+      what: "Put a recommendation panel on the website",
+      why: "Trade buyers know their part numbers and nobody discovers fasteners for fun. It would also miss the telephone entirely, which is half the revenue, and get measured on clicks.",
+    },
+    rightApproach: {
+      what: "Predict the gap, not the taste",
+      why: "A large number of orders were followed within a fortnight by a small second order for a consumable that goes with the first item. That is forgetting, not preference, and it costs the customer a delivery charge.",
+    },
+    context: {
+      where: "B2B distribution, trade counters, parts and consumables.",
+      decision: "Which three lines to mention while the order is being taken.",
+      metric: "Repeat small orders within a fortnight, and average order value.",
+    },
+    takeaway:
+      "The phone operators got the biggest benefit, and that was the part nobody planned, because everyone had been thinking about the website.",
+  },
+
+  story: {
+    title: "A completeness check, not a suggestion",
+    caption:
+      "Measured on whether the second order stops happening, not on clicks. A recommendation that gets clicked and adds nothing measures as a success.",
+    stages: [
+      { stage: "Problem", label: "Flat order values, growing customers", detail: "And a plan to fix it with discounting, which was not the problem." },
+      { stage: "Data", label: "Two years of order lines", detail: "What appears together in an order, and what follows an order within a fortnight." },
+      { stage: "Model", label: "Rank likely gaps", detail: "Weighted by this account's own history, which is a far stronger signal than what other accounts do." },
+      { stage: "Prediction", label: "Three suggestions, never more", detail: "A panel of twenty is ignored as furniture. The cap is chosen for how people behave." },
+      { stage: "Decision", label: "Shown at the basket and on the phone screen", detail: "Framed as commonly ordered with this, which is what made it acceptable to trade buyers." },
+      { stage: "Result", label: "Fewer second orders, and no discount", detail: "Customers saved a second carriage charge, which changed how the change was received." },
+    ],
+  },
+
   intro: [
     "Every recommendation you have ever seen comes from one of two ideas, and both are simple enough to explain in a sentence.",
     "The first: this thing resembles that thing, so if you liked one you might like the other. Same category, same price bracket, same author, similar description. The second: people who behaved like you also bought this. It does not know anything about the products at all. It knows that customers who bought the same four things you bought tended to buy a fifth.",
@@ -100,6 +139,49 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The fastener distributor: three suggestions, while the order is still open",
+      caption:
+        "The phone operator's screen turned out to be where most of the value was, and it was the part nobody planned for, because everybody assumed this kind of thing belonged on a website.",
+      trigger: "While an order is being placed, on the basket or on the phone",
+      runtime: "Under a second, on the screen the operator already has open.",
+      stages: [
+        {
+          actor: "system",
+          label: "Read the lines already on this order",
+          output: "the basket as it stands, plus this account's two years of history",
+        },
+        {
+          actor: "rule",
+          label: "Look for the forgetting, not the taste",
+          detail: "The problem worth solving is the second small order a fortnight later, with its own carriage on it.",
+          output: "the gaps, rather than the upsells",
+        },
+        {
+          actor: "model",
+          label: "Rank likely gaps, weighted by this account's own ordering",
+          detail: "What is normally on an order like this one, from a customer like this one, and is missing today.",
+          output: "a ranked list of what is not there and usually is",
+          exception: "A brand new account has no history to weight against. It gets nothing rather than a generic guess.",
+        },
+        {
+          actor: "rule",
+          label: "Three suggestions, never more",
+          detail: "A longer list gets ignored for a fortnight and switched off in the third week.",
+          output: "three items, each with the reason it is there",
+        },
+        {
+          actor: "person",
+          label: "The operator sees them mid-call and asks",
+          detail: "Not a prompt to close a sale. A question about whether the job is complete.",
+          output: "added, or declined",
+        },
+      ],
+      loop: "Measured on second orders that no longer needed to happen, not on clicks.",
+      outcome:
+        "The customer stops placing a small follow-up order a fortnight later, and the carriage on it stops being yours.",
+    },
     {
       kind: "tree",
       title: "Should we suggest this at all?",

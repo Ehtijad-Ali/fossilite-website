@@ -21,6 +21,45 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 15,
 
+  brief: {
+    inOneMinute:
+      "Two days of checking can tell you a project cannot start yet. That is a good outcome, and it is far cheaper than six months of discovering the same thing.",
+    problem: {
+      headline: "We want to predict breakdowns and our records are on paper",
+      detail:
+        "A family haulage firm with 22 lorries. A roadside breakdown costs a recovery, a missed delivery and sometimes a customer.",
+    },
+    wrongApproach: {
+      what: "Start building anyway, because there is enthusiasm and a budget",
+      why: "It would have produced something plausible-looking on thirty days of telematics and a typed-up sample of a handwritten day book. No mechanic would have trusted it, and the failure would have been blamed on the technology.",
+    },
+    rightApproach: {
+      what: "Run four checks first, and be willing to stop",
+      why: "Is the outcome recorded? Is the information recorded? Is it available at the moment you would act? Is there enough of it? Question one failed at a paper day book, and stopping there saved the budget.",
+    },
+    context: {
+      where: "Before any predictive project, in any business.",
+      decision: "Start now, start later, or fix the recording first.",
+      metric: "Money not spent on a project that could not have worked.",
+    },
+    takeaway:
+      "The highest-value action in the whole engagement was a phone call changing a data retention setting from thirty days to indefinite. It cost nothing and it is why the project is now possible.",
+  },
+
+  story: {
+    title: "The project that correctly did not start",
+    caption:
+      "Typing up two years of the old paper day book found a component failing disproportionately on one part of the fleet. That was actionable immediately.",
+    stages: [
+      { stage: "Problem", label: "A good idea at the wrong moment", detail: "Predicting breakdowns is worth doing. This business could not do it yet." },
+      { stage: "Data", label: "A paper day book, in handwriting", detail: "Real information, in a form nothing can learn from. Telematics were being deleted after thirty days." },
+      { stage: "Model", label: "No model. Four questions.", detail: "Two days of checking rather than two quarters of discovering." },
+      { stage: "Prediction", label: "Not yet, and here is why", detail: "Even with perfect records, 22 vehicles produce few enough failures that the honest answer is start simple." },
+      { stage: "Decision", label: "Fix the recording, cheaply", detail: "Retention changed on day one. A five-field tablet form replacing the day book. Load type captured at dispatch." },
+      { stage: "Result", label: "A written revisit date", detail: "Eighteen months of proper records, with the condition stated, so the idea neither disappears nor resurfaces monthly." },
+    ],
+  },
+
   intro: [
     "Most model projects that disappoint do not disappoint because somebody chose the wrong method. They disappoint because the data was never going to support what was promised, and nobody checked properly before committing.",
     "The frustrating part is that checking is not hard and it does not need a data scientist. It needs somebody willing to count a few things and ask a few awkward questions, and it takes about a week.",
@@ -100,6 +139,50 @@ export const guide: Guide = {
   ],
 
   diagrams: [
+    {
+      kind: "workflow",
+      title: "The haulier: the four questions, asked before anything is built",
+      caption:
+        "The most valuable action here was a phone call about a retention setting. It cost nothing, there is no model in it, and without it the project would have failed eighteen months later with nobody able to say why.",
+      trigger: "Somebody proposes predicting breakdowns",
+      runtime: "Two days, and it is allowed to end in a no.",
+      stages: [
+        {
+          actor: "person",
+          label: "Ask the four questions before anything is built",
+          detail: "Does the outcome exist in the records. Is it recorded the same way every time. Is it there before the event rather than after. Is there enough of it.",
+          output: "four honest answers, or a stop",
+        },
+        {
+          actor: "system",
+          label: "Check the records rather than taking anybody's word",
+          detail: "A retention setting was quietly deleting the very history the project depended on.",
+          exception: "Be willing to stop at this step. Two days of checking is cheap. Two quarters of discovering is not.",
+          output: "what is actually in the system, as opposed to what people believe is",
+        },
+        {
+          actor: "person",
+          label: "Fix the recording first",
+          detail: "One phone call changed the retention setting. It cost nothing and it is not a model.",
+          output: "eighteen months of proper records, starting from today",
+        },
+        {
+          actor: "rule",
+          label: "Do the things that need no model at all",
+          detail: "Typing up the old paper records found a component failing repeatedly, which nobody had ever joined up.",
+          output: "a fix, with no project attached to it",
+        },
+        {
+          actor: "person",
+          label: "Put a revisit date in writing",
+          detail: "Not never. A date, and what will be true by then.",
+          output: "a diary entry the business will actually honour",
+        },
+      ],
+      loop: "On that date the same four questions get asked again, against records that now exist.",
+      outcome:
+        "The idea was good and the moment was wrong, and the difference between those two is worth two days to establish.",
+    },
     {
       kind: "tree",
       title: "Four checks, and stopping at any of them is a good outcome",

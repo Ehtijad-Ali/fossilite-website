@@ -19,6 +19,7 @@ import {
 } from "../../hooks/useSeo";
 import { GuideHero } from "./GuidePlate";
 import { GuideDiagram } from "./GuideDiagram";
+import { GuideBriefBlock, GuideBriefClose, GuideStory, GuideCalculator } from "./GuideBrief";
 
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace';
 const GOLD = "#C3A87C";
@@ -50,10 +51,14 @@ const Corners: FC<{ color?: string; inset?: string }> = ({ color = GOLD, inset =
 // different names), and "Conclusion" moved ahead of the reference material,
 // because a conclusion printed after "Related guides" reads as a mistake.
 const SECTIONS = [
+  { id: "brief", label: "In one minute", has: (g: Guide) => !!g.brief },
+  { id: "story", label: "How it plays out", has: (g: Guide) => !!g.story },
+  { id: "workflow", label: "How it runs", has: (g: Guide) => !!g.diagrams?.some((d) => d.kind === "workflow") },
+  { id: "calculator", label: "Try your numbers", has: (g: Guide) => !!g.calculator },
   { id: "introduction", label: "Introduction", has: () => true },
   { id: "why-it-matters", label: "Why this matters", has: (g: Guide) => !!g.whyItMatters?.length },
   { id: "core-concepts", label: "Core concepts", has: (g: Guide) => !!g.coreConcepts.length },
-  { id: "diagrams", label: "How it works", has: (g: Guide) => !!g.diagrams?.length },
+  { id: "diagrams", label: "How it works", has: (g: Guide) => !!g.diagrams?.some((d) => d.kind !== "workflow") },
   { id: "learning-path", label: "Learning path", has: (g: Guide) => !!g.learningPath?.length },
   { id: "examples", label: "Real-world examples", has: (g: Guide) => !!g.examples.length },
   { id: "case-study", label: "Worked case study", has: (g: Guide) => !!g.caseStudy },
@@ -564,6 +569,12 @@ export const GuideDetail: FC = () => {
   const links = useMemo(() => (guide ? resolvedInternalLinks(guide) : []), [guide]);
   const prompts = useMemo(() => (guide ? promptsForTopic(guide.slug) : []), [guide]);
 
+  // The workflow is meant to be watched by somebody who will not read on, so it
+  // renders up in the scannable layer. The charts reward attention and stay in
+  // "How it works" further down.
+  const workflows = useMemo(() => guide?.diagrams?.filter((d) => d.kind === "workflow") ?? [], [guide]);
+  const charts = useMemo(() => guide?.diagrams?.filter((d) => d.kind !== "workflow") ?? [], [guide]);
+
   // Computed before the early return so the scroll-spy hook below is never
   // called conditionally.
   const shown = useMemo(
@@ -846,6 +857,53 @@ export const GuideDetail: FC = () => {
             {/* The intro is section 01 in the contents rail, so it needs the
                 same numbered heading as everything else — without it the
                 opening paragraphs float unlabelled and read as a layout bug. */}
+            {/* The scannable layer. A reader with a minute gets the whole
+                lesson here and can stop; the long-form guide begins after the
+                divider below. Ordered exactly as the brief specifies: problem,
+                what goes wrong, what works, the sequence, the calculator, the
+                business context, the takeaway. */}
+            {/* The workflow plays itself, so it belongs with the scannable
+                layer rather than three sections down. The charts reward
+                attention and stay where they are. */}
+            {guide.brief ? (
+              <Box id="brief" sx={{ scrollMarginTop: "120px" }}>
+                <GuideBriefBlock b={guide.brief} />
+              </Box>
+            ) : null}
+            {guide.story ? (
+              <Box id="story" sx={{ scrollMarginTop: "120px" }}>
+                <GuideStory s={guide.story} />
+              </Box>
+            ) : null}
+            {workflows.length ? (
+              <Box id="workflow" sx={{ scrollMarginTop: "120px", mb: "10px" }}>
+                {workflows.map((d, i) => (
+                  <GuideDiagram key={`w${i}`} d={d} />
+                ))}
+              </Box>
+            ) : null}
+            {guide.calculator ? (
+              <Box id="calculator" sx={{ scrollMarginTop: "120px" }}>
+                <GuideCalculator c={guide.calculator} />
+              </Box>
+            ) : null}
+            {guide.brief ? <GuideBriefClose b={guide.brief} /> : null}
+
+            {guide.brief ? (
+              <Box sx={{ display: "flex", alignItems: "center", gap: "16px", mt: "56px", mb: "8px" }}>
+                <Box sx={{ height: "1px", flex: 1, background: `linear-gradient(90deg, transparent, ${T.border})` }} />
+                <Typography
+                  sx={{
+                    fontFamily: MONO, fontSize: "9.5px", letterSpacing: "0.16em",
+                    textTransform: "uppercase", color: T.mutedText, whiteSpace: "nowrap",
+                  }}
+                >
+                  The full guide, if you want the detail
+                </Typography>
+                <Box sx={{ height: "1px", flex: 1, background: `linear-gradient(90deg, ${T.border}, transparent)` }} />
+              </Box>
+            ) : null}
+
             <H2 id="introduction" index={num("introduction")} T={T}>
               Introduction
             </H2>
@@ -901,10 +959,10 @@ export const GuideDetail: FC = () => {
               </Card>
             ))}
 
-            {guide.diagrams?.length ? (
+            {charts.length ? (
               <>
                 <H2 id="diagrams" index={num("diagrams")} T={T}>How it works</H2>
-                {guide.diagrams.map((d, i) => <GuideDiagram key={i} d={d} />)}
+                {charts.map((d, i) => <GuideDiagram key={i} d={d} />)}
               </>
             ) : null}
 

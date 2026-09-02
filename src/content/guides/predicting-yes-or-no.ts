@@ -21,6 +21,92 @@ export const guide: Guide = {
   author: PETER_NGUYEN,
   readingTime: 16,
 
+  brief: {
+    inOneMinute:
+      "Some invoices get paid late and most do not. If you can tell which is which the day you raise them, chasing stops being a job you do when you have a spare hour and starts being three phone calls made before anything is overdue.",
+    problem: {
+      headline: "Busy, profitable on paper, and still watching the bank every Monday",
+      detail:
+        "A plumbing contractor with plenty of work and a cash squeeze that arrives without warning. Invoices go out on thirty-day terms and come back whenever.",
+    },
+    wrongApproach: {
+      what: "Chase everything, starting with whatever is on top of the pile",
+      why: "Effort goes to whichever invoice is nearest to hand rather than to the one about to cause a problem, and the call always happens after it is already late, which is the awkward version of that conversation.",
+    },
+    rightApproach: {
+      what: "Score every invoice the day it is raised, then call the risky ones early",
+      why: "Three years of paid and unpaid invoices show what a slow one looks like. A simple points-based score puts the likely-slow ones at the top of the list a week before they are due, when a call is still a courtesy.",
+    },
+    context: {
+      where:
+        "Any business invoicing on terms: trades, agencies, wholesalers, professional services.",
+      decision: "Which invoices get a call this week, and when that call happens.",
+      metric: "Average days to payment, and how far ahead you can see a tight week coming.",
+    },
+    takeaway:
+      "You are not predicting who will pay. You are deciding who gets a phone call on Tuesday, and that decision has a capacity limit which is what makes the ranking worth having.",
+  },
+
+  story: {
+    title: "From a pile of invoices to three calls before anything is overdue",
+    caption:
+      "Notice that the largest finding needed no model at all: invoices raised without a purchase order number were the slow ones, so the fix was a rule about raising invoices.",
+    stages: [
+      { stage: "Problem", label: "Cash is unpredictable", detail: "Profitable on paper, and the owner cannot see a tight week coming until the Monday it arrives." },
+      { stage: "Data", label: "Three years of invoices", detail: "Raised date, paid date, amount, customer, job type, and whether a purchase order number was on it. All already in the accounting package." },
+      { stage: "Model", label: "A points-based score", detail: "No purchase order adds points. This customer adds points. A large invoice adds points. Chosen because the credit controller has to explain the call." },
+      { stage: "Prediction", label: "Likely slow, or likely fine", detail: "Every invoice flagged at the moment it is raised, with the reason shown beside it." },
+      { stage: "Decision", label: "A courtesy call before the due date", detail: "Not a chase three weeks after. Confirming the invoice arrived and has been approved." },
+      { stage: "Result", label: "Chasing effort lands where it matters", detail: "And a standing rule appears from the analysis: do not raise the invoice until the purchase order number is on it." },
+    ],
+  },
+
+  calculator: {
+    title: "What is late payment actually costing you?",
+    intro:
+      "Put in your own invoicing. This works out how much cash is sitting in invoices that went past terms, and what pulling some of them forward would release.",
+    inputs: [
+      { id: "count", label: "Invoices a month", min: 5, max: 1000, step: 5, value: 90 },
+      { id: "value", label: "Average invoice", min: 100, max: 50000, step: 100, value: 2400, prefix: "\u00a3" },
+      { id: "late", label: "How many go past terms", min: 1, max: 80, step: 1, value: 28, suffix: "%" },
+      { id: "days", label: "Average days late", min: 1, max: 120, step: 1, value: 21 },
+    ],
+    compute: (v) => {
+      const lateCount = v.count * (v.late / 100);
+      const dailyLate = (lateCount * v.value) / 30;
+      const tiedUp = dailyLate * v.days;
+      // Calling before the due date rather than chasing after it typically pulls
+      // back part of the delay, not all of it. A third is a cautious placeholder.
+      const recovered = tiedUp / 3;
+      return {
+        outputs: [
+          {
+            label: "Cash tied up in late invoices at any moment",
+            value: `\u00a3${Math.round(tiedUp).toLocaleString()}`,
+            hero: true,
+            tone: "bad",
+            note: "Money you have earned, sitting in somebody else's account.",
+          },
+          {
+            label: "Late invoices a month",
+            value: `${Math.round(lateCount)} of ${v.count}`,
+            note: lateCount > 30
+              ? "More than one a day. Far too many to chase properly by hand, which is what makes ranking worth having."
+              : "Few enough to work through by hand, if somebody has the time and a sensible order to do it in.",
+          },
+          {
+            label: "If a call before the due date recovers a third",
+            value: `\u00a3${Math.round(recovered).toLocaleString()} freed`,
+            tone: "good",
+            note: "Same number of calls as today. The gain comes from making them earlier and to the right invoices.",
+          },
+        ],
+      };
+    },
+    footnote:
+      "The one-third recovery is a cautious placeholder, not a measurement. Your own figure will depend on why your invoices go late, which is the thing the analysis is for. If most of yours are stuck in a customer approval process, it is usually higher.",
+  },
+
   intro: [
     "The second big shape of business question is not how much, it is whether. Will this customer cancel. Will this invoice be paid late. Is this claim fraudulent. Will this applicant repay. Will this machine break this month.",
     "The tool for that is called classification, and it works the same way as any other kind of learning from history. Show it thousands of past cases where you know how it turned out, and it works out what the ones that went wrong tend to have in common.",
@@ -101,6 +187,49 @@ export const guide: Guide = {
 
   diagrams: [
     {
+      kind: "workflow",
+      title: "The plumbing contractor: what happens every time an invoice is raised",
+      caption:
+        "Watch where the person is. Nothing here removes Sarah from the job. It changes which invoices are in front of her, and it moves the conversation to before the due date rather than three weeks after it.",
+      trigger: "An invoice is raised in the accounts system",
+      runtime: "Scored in under a second. Nobody logs in to start it.",
+      stages: [
+        {
+          actor: "system",
+          label: "The invoice lands, with its six facts attached",
+          detail: "Customer, value, payment terms, whether a purchase order is present, the month, and who signed it off.",
+          output: "one row, built the same way every time",
+        },
+        {
+          actor: "model",
+          label: "Will this go fourteen days past terms?",
+          detail: "One yes or no question, answered as a score out of a hundred.",
+          output: "a score, plus the two facts that pushed it up",
+          exception: "Below the confidence line nothing happens. An invoice the model is unsure about is left to the normal process rather than chased twice.",
+        },
+        {
+          actor: "rule",
+          label: "Only flag as many as the office can actually ring",
+          detail: "The cutoff is set by how many calls fit in a morning, not by a number the model produced.",
+          output: "today's list, longest standing first",
+        },
+        {
+          actor: "person",
+          label: "Sarah rings before the invoice is due",
+          detail: "Not a chase. A check that the paperwork arrived and the purchase order number matches.",
+          output: "the real reason it would have been late, in her words",
+        },
+        {
+          actor: "system",
+          label: "The outcome is written back against the invoice",
+          detail: "Paid on time, paid late, or disputed. Including the ones it never flagged.",
+        },
+      ],
+      loop: "Next month's scores are rebuilt on what Sarah found, which includes the late invoices it missed entirely.",
+      outcome:
+        "The same two people make the same number of calls. They make them on a different set of invoices, a fortnight earlier.",
+    },
+    {
       kind: "flow",
       title: "The plumbing contractor: from chasing whatever is on top of the pile",
       caption:
@@ -115,6 +244,24 @@ export const guide: Guide = {
     },
     {
       kind: "matrix",
+      lesson: {
+        problem: "Which invoices do we chase, and how do we know whether the chasing worked?",
+        wrong: {
+          label: "Judge it on accuracy",
+          why: "One number blends all four boxes together and hides which mistake you are making. Most invoices are paid roughly on time, so a system that flags nothing scores well.",
+        },
+        right: {
+          label: "Count the two errors separately",
+          why: "A missed late invoice and a wasted phone call are both errors and they cost completely different amounts. Which one you would rather have is a business decision.",
+        },
+        discovery: "The two mistakes are not interchangeable. A wasted call costs minutes; a missed invoice costs weeks of cash.",
+        decisions: [
+          { tone: "protect", label: "Flag more when cash is tight" },
+          { tone: "monitor", label: "Wasted calls per week" },
+          { tone: "investigate", label: "Late invoices that were never flagged" },
+        ],
+        takeaway: "Accuracy is one number hiding two very different mistakes.",
+      },
       title: "The four things that can happen, and only two of them are mistakes",
       caption:
         "Overall accuracy blends all four into one number and hides which mistakes you are making. These two errors rarely cost the same, so the business has to say which it would rather have.",

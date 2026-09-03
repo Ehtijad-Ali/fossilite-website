@@ -11,6 +11,7 @@ import {
   activeCategories,
   categoryBySlug,
   categoryName,
+  plateNumber,
   searchGuides,
   PROMPTS,
 } from "../../content";
@@ -40,7 +41,7 @@ const GOLD = "#C3A87C";
  */
 const GuideCard: FC<{ g: Guide; index: number; T: T }> = ({ g, index, T }) => {
   const { ref, visible } = useInView(0.1);
-  const plate = String(index + 1).padStart(2, "0");
+  const plate = plateNumber(g.slug);
 
   return (
     <Box

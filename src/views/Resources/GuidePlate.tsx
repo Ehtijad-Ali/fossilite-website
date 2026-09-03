@@ -1,7 +1,7 @@
 import { FC, useMemo } from "react";
 import { Box, Typography } from "@mui/material";
 import type { Guide } from "../../content/types";
-import { categoryBySlug } from "../../content";
+import { categoryBySlug, plateNumber } from "../../content";
 
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace';
 const GOLD = "#C3A87C";
@@ -137,7 +137,7 @@ export const GuidePlate: FC<{ guide: Guide; height?: Record<string, string> | st
 
   const category = categoryBySlug(guide.category);
   const tint = TRACK_TINT[category?.track ?? ""] ?? GOLD;
-  const plateNo = String((seed % 99) + 1).padStart(2, "0");
+  const plateNo = plateNumber(guide.slug);
 
   return (
     <Box

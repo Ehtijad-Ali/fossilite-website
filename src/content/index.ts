@@ -20,6 +20,29 @@ export const GUIDES: Guide[] = Object.values(modules)
 
 const BY_SLUG = new Map(GUIDES.map((g) => [g.slug, g]));
 
+/**
+ * The catalogue number printed on a guide's specimen plate.
+ *
+ * It has to be stable and unique. "PL." reads as a catalogue reference, and a
+ * reference that renumbers itself when the reader filters the list is not one.
+ * The card used to print its position in the current view, which meant the same
+ * guide showed a different number on every filter and never agreed with the
+ * number drawn into its own artwork.
+ *
+ * Assigned from the slugs sorted alphabetically rather than from GUIDES, which
+ * is ordered by `updated` and so reshuffles every time anything is edited.
+ * Three digits because there are more guides than two digits can hold, and the
+ * old hash squeezed 131 of them into 99 slots: 37 numbers were shared, and five
+ * guides at worst wore the same one.
+ */
+const PLATE_NUMBERS = new Map(
+  GUIDES.map((g) => g.slug)
+    .sort()
+    .map((slug, i) => [slug, String(i + 1).padStart(3, "0")] as const),
+);
+
+export const plateNumber = (slug: string): string => PLATE_NUMBERS.get(slug) ?? "000";
+
 export const guideBySlug = (slug: string): Guide | undefined => BY_SLUG.get(slug);
 
 export const isPublished = (slug: string): boolean => BY_SLUG.has(slug);
